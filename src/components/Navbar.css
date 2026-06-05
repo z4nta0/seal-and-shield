@@ -142,13 +142,14 @@
   display: none;
   flex-direction: column;
   background: var(--navy-dark);
-  padding: 0 2rem 1.5rem;
+  padding: 0 2rem;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease;
 }
 
 .navbar__mobile--open {
+    padding: 0 2rem 1.5rem;
   max-height: 400px;
 }
 
