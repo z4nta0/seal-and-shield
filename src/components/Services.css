@@ -1,0 +1,119 @@
+.services {
+  background: var(--off-white);
+  padding: 7rem 0;
+}
+
+.services__header {
+  max-width: 600px;
+  margin-bottom: 4rem;
+}
+
+.services__intro {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  max-width: 560px;
+}
+
+/* Card grid */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 5rem;
+}
+
+.services__card {
+  background: var(--white);
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--silver-light);
+  border-top: 3px solid var(--blue);
+  transition: box-shadow var(--transition), transform var(--transition);
+  position: relative;
+}
+
+.services__card:hover {
+  box-shadow: 0 12px 40px rgba(15, 30, 69, 0.1);
+  transform: translateY(-4px);
+}
+
+.services__card-icon {
+  font-size: 1.75rem;
+  display: block;
+  margin-bottom: 0.85rem;
+}
+
+.services__card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 0.6rem;
+}
+
+.services__card-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Service area */
+.services__area {
+  background: var(--navy);
+  padding: 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.services__area .section-title { color: var(--white); }
+.services__area .section-label { color: var(--blue-light); }
+
+.services__area-desc {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--silver-light);
+}
+
+.services__area-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.services__area-tag {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  border: 1.5px solid rgba(59, 130, 246, 0.5);
+  padding: 0.55rem 1.25rem;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.services__area-tag:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+@media (max-width: 1024px) {
+  .services__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .services__area {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .services__grid { grid-template-columns: 1fr; }
+}

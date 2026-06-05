@@ -1,0 +1,7 @@
+
+# This command was needed in order for React Router to work properly with Netlify's services
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
