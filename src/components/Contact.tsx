@@ -33,7 +33,17 @@ export default function Contact() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     // Form submission placeholder
-    setSubmitted(true)
+    const myForm = e.target as HTMLFormElement;
+    const formData = new FormData(myForm) as unknown as Record<string, string>;
+
+    fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+    }).catch(error => alert(error));
+    setSubmitted(true);
+    setForm({ name: '', company: '', phone: '', email: '', message: '' });
+    window.setTimeout(() => setSubmitted(false), 6000);
   }
 
   return (
