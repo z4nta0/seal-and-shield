@@ -151,6 +151,7 @@ export default function Contact() {
                   value={form.message} onChange={handleChange}
                 />
               </div>
+              <input type="hidden" name="form-name" value="contactForm" />
               <button type="submit" className="contact__submit">
                 Submit Free Quote Request
               </button>
