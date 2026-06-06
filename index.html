@@ -12,6 +12,59 @@
   </head>
   <body>
     <div id="root"></div>
+    <form hidden name='contactForm' className="contact__form" onSubmit={handleSubmit} noValidate data-netlify="true">
+        <h3 className="contact__form-title">Free Quote Request</h3>
+        <div className="contact__form-row">
+        <div className="contact__field">
+            <label htmlFor="name">Full Name *</label>
+            <input
+            id="name" name="name" type="text" required
+            placeholder="John Smith"
+            value={form.name} onChange={handleChange}
+            />
+        </div>
+        <div className="contact__field">
+            <label htmlFor="company">Company</label>
+            <input
+            id="company" name="company" type="text"
+            placeholder="ABC Business LLC"
+            value={form.company} onChange={handleChange}
+            />
+        </div>
+        </div>
+        <div className="contact__form-row">
+        <div className="contact__field">
+            <label htmlFor="phone">Phone *</label>
+            <input
+            id="phone" name="phone" type="tel" required
+            placeholder="(555) 000-0000"
+            value={form.phone} onChange={handleChange}
+            />
+        </div>
+        <div className="contact__field">
+            <label htmlFor="email">Email</label>
+            <input
+            id="email" name="email" type="email"
+            placeholder="john@example.com"
+            value={form.email} onChange={handleChange}
+            />
+        </div>
+        </div>
+        <div className="contact__field contact__field--full">
+        <label htmlFor="message">Tell us about your roof</label>
+        <textarea
+            id="message" name="message" rows={4}
+            placeholder="Describe your commercial roof, square footage, current issues, or any questions..."
+            value={form.message} onChange={handleChange}
+        />
+        </div>
+        <button type="submit" className="contact__submit">
+        Submit Free Quote Request
+        </button>
+        <p className="contact__form-note">
+        No spam. We'll only contact you regarding your roofing inquiry.
+        </p>
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -95,7 +95,7 @@ export default function Contact() {
               </p>
             </div>
           ) : (
-            <form className="contact__form" onSubmit={handleSubmit} noValidate>
+            <form name='contactForm' className="contact__form" onSubmit={handleSubmit} noValidate data-netlify="true">
               <h3 className="contact__form-title">Free Quote Request</h3>
               <div className="contact__form-row">
                 <div className="contact__field">
