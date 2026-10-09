@@ -24,7 +24,7 @@
 
 
 
-/* #region home */
+/* #region homHerSec */
 
 .homHerSec { /* What: Home Hero Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
 
@@ -68,7 +68,7 @@
 }
 
 
-/* #region home__content */
+/* #region herConDiv */
 
 .herConDiv { /* What: Hero Content Div. Why: The pitch and the logo sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding plus room above and below, layered above the background. */
 
@@ -153,7 +153,7 @@
 }
 
 
-/* #region home__headline */
+/* #region herSloSpa */
 
 .herSloSpa { /* What: Hero Slogan Span. Why: The slogan is the company's promise, the large part of the page's heading. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
 
@@ -194,7 +194,7 @@
 
 }
 
-/* #endregion home__headline */
+/* #endregion herSloSpa */
 
 
 .herLedPar { /* What: Hero Lede Paragraph. Why: A short pitch follows the headline at a comfortable reading width. How: This sets it in light silver with generous leading, capped near 68 characters a line, rising in after the headline. */
@@ -237,7 +237,7 @@
 }
 
 
-/* #region home__actions */
+/* #region herActDiv */
 
 .herActDiv { /* What: Hero Actions Div. Why: The pitch ends with the two next steps side by side. How: This lines the buttons up in a row that wraps when it runs out of room, rising in after the pitch. */
 
@@ -338,11 +338,11 @@
 
 }
 
-/* #endregion home__actions */
+/* #endregion herActDiv */
 
 
 
-/* #region home__right */
+/* #region herRigDiv */
 
 .herRigDiv { /* What: Hero Right Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
 
@@ -382,7 +382,7 @@
 }
 
 
-/* #region home__logo-wrap */
+/* #region herLogDiv */
 
 .herLogDiv { /* What: Hero Logo Div. Why: The ring sits behind the logo, centered on it. How: This positions the two in one centered box. */
 
@@ -494,15 +494,15 @@
 
 }
 
-/* #endregion home__logo-wrap */
+/* #endregion herLogDiv */
 
-/* #endregion home__right */
+/* #endregion herRigDiv */
 
-/* #endregion home__content */
+/* #endregion herConDiv */
 
 
 
-/* #region home__stats */
+/* #region herStaDiv */
 
 .herStaDiv { /* What: Hero Stats Div. Why: Four quick figures close the hero on a band of their own. How: This draws a faintly frosted strip along the hero's bottom with a hairline on top, layered above the background. */
 
@@ -517,7 +517,7 @@
 }
 
 
-/* #region home__stats-inner */
+/* #region staInnDiv */
 
 .staInnDiv { /* What: Stats Inner Div. Why: The figures line up with the page's content width. How: This centers a capped-width row with the container's side padding and lays the four figures out in equal columns. */
 
@@ -546,7 +546,7 @@
 }
 
 
-/* #region home__stat */
+/* #region staIteDiv */
 
 .staIteDiv { /* What: Stat Item Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with their text centered too so a caption that wraps to two lines stays balanced, and a faint divider on its right. */
 
@@ -622,12 +622,12 @@
 
 }
 
-/* #endregion home__stat */
+/* #endregion staIteDiv */
 
-/* #endregion home__stats-inner */
+/* #endregion staInnDiv */
 
-/* #endregion home__stats */
+/* #endregion herStaDiv */
 
-/* #endregion home */
+/* #endregion homHerSec */
 
 

@@ -19,7 +19,7 @@
 
 
 
-/* #region services */
+/* #region homSerSec */
 
 .homSerSec { /* What: Home Services Section. Why: The services sit on a light band apart from the dark hero. How: This fills it with the off-white and gives it generous padding above and below. */
 
@@ -31,7 +31,7 @@
 }
 
 
-/* #region container */
+/* #region pagConDiv */
 
 .pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with side padding, copied from the shared container. */
 
@@ -44,7 +44,7 @@
 }
 
 
-/* #region services__header */
+/* #region serHeaDiv */
 
 .serHeaDiv { /* What: Services Header Div. Why: The section opens by saying what it covers, at a readable width. How: This caps the header at horizontal step 024, never narrower than the p12 rhythm step (about 426px), and leaves room below it. */
 
@@ -118,11 +118,11 @@
 
 }
 
-/* #endregion services__header */
+/* #endregion serHeaDiv */
 
 
 
-/* #region services__grid */
+/* #region serGriDiv */
 
 .serGriDiv { /* What: Services Grid Div. Why: The services read best as a grid of cards. How: This lays the cards out four across with even gaps and leaves room below for the panel. */
 
@@ -162,7 +162,7 @@
 }
 
 
-/* #region services__card */
+/* #region serCarDiv */
 
 .serCarDiv { /* What: Services Card Div. Why: Each service reads as its own white card. How: This draws a white card with a light border and a blue top edge, and eases its lift on hover. */
 
@@ -232,13 +232,13 @@
 
 }
 
-/* #endregion services__card */
+/* #endregion serCarDiv */
 
-/* #endregion services__grid */
+/* #endregion serGriDiv */
 
 
 
-/* #region services__area */
+/* #region serAreDiv */
 
 .serAreDiv { /* What: Services Area Div. Why: The service area stands apart from the cards as a dark panel. How: This fills a padded navy panel and lays its text and tags out in two columns. */
 
@@ -278,7 +278,7 @@
 }
 
 
-/* #region services__area-tags */
+/* #region areTagDiv */
 
 .areTagDiv { /* What: Area Tags Div. Why: Each place the company works gets a quick tag. How: This wraps the tags in rows from the top left. */
 
@@ -329,12 +329,12 @@
 
 }
 
-/* #endregion services__area-tags */
+/* #endregion areTagDiv */
 
-/* #endregion services__area */
+/* #endregion serAreDiv */
 
-/* #endregion container */
+/* #endregion pagConDiv */
 
-/* #endregion services */
+/* #endregion homSerSec */
 
 

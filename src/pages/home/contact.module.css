@@ -22,7 +22,7 @@
 
 
 
-/* #region contact */
+/* #region homConSec */
 
 .homConSec { /* What: Home Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
 
@@ -51,7 +51,7 @@
 
 
 
-/* #region contact__inner */
+/* #region conInnDiv */
 
 .conInnDiv { /* What: Contact Inner Div. Why: The invitation and the quote panel sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding, layered above the glow. */
 
@@ -141,7 +141,7 @@
 
 
 
-/* #region contact__details */
+/* #region conDetDiv */
 
 .conDetDiv { /* What: Contact Details Div. Why: The location, number, and hours read as one list. How: This stacks the three rows with room below the list. */
 
@@ -155,7 +155,7 @@
 }
 
 
-/* #region contact__detail */
+/* #region detRowDiv */
 
 .detRowDiv { /* What: Detail Row Div. Why: Each detail pairs an icon with its text. How: This sets the icon beside the text, top-aligned. */
 
@@ -233,9 +233,9 @@
 
 }
 
-/* #endregion contact__detail */
+/* #endregion detRowDiv */
 
-/* #endregion contact__details */
+/* #endregion conDetDiv */
 
 
 
@@ -280,7 +280,7 @@
 
 
 
-/* #region contact__form-wrap */
+/* #region forWraDiv */
 
 .forWraDiv { /* What: Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
 
@@ -305,7 +305,7 @@
 }
 
 
-/* #region contact__success */
+/* #region forSucDiv */
 
 .forSucDiv { /* What: Form Success Div. Why: The thank-you message should fill the panel the form left. How: This centers the check, heading, and note in a column at least about 321px tall. */
 
@@ -360,7 +360,7 @@
 
 }
 
-/* #endregion contact__success */
+/* #endregion forSucDiv */
 
 
 
@@ -382,7 +382,7 @@
 
 
 
-/* #region contact__form-row */
+/* #region forRowDiv */
 
 .forRowDiv { /* What: Form Row Div. Why: Short fields pair up on wide screens. How: This lays two fields side by side with room below the row. */
 
@@ -409,7 +409,7 @@
 }
 
 
-/* #region contact__field */
+/* #region forFieDiv */
 
 .forFieDiv { /* What: Form Field Div. Why: Each field stacks its label over its control. How: This stacks the two with a small gap. */
 
@@ -490,12 +490,12 @@
 
 }
 
-/* #endregion contact__field */
+/* #endregion forFieDiv */
 
-/* #endregion contact__form-row */
+/* #endregion forRowDiv */
 
 
-/* #region contact__form-error */
+/* #region forErrPar */
 
 .forErrPar { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel. */
 
@@ -516,7 +516,7 @@
 
 }
 
-/* #endregion contact__form-error */
+/* #endregion forErrPar */
 
 
 .forSubBut { /* What: Form Submit Button. Why: The form's main action spans the panel. How: This sets a full-width navy button in the display font, and eases every change between its looks. */
@@ -578,10 +578,10 @@
 
 }
 
-/* #endregion contact__form-wrap */
+/* #endregion forWraDiv */
 
-/* #endregion contact__inner */
+/* #endregion conInnDiv */
 
-/* #endregion contact */
+/* #endregion homConSec */
 
 

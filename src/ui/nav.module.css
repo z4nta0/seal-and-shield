@@ -21,7 +21,7 @@
 
 
 
-/* #region navbar */
+/* #region navBarHed */
 
 .navBarHed { /* What: Navigation Bar Header. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, transparent until the page scrolls, and eases between its two looks. */
 
@@ -61,7 +61,7 @@
 }
 
 
-/* #region navbar__inner */
+/* #region navInnDiv */
 
 .navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents line up with the page's content width. How: This centers a capped-width row with side padding, copied from the shared container, and spreads the brand, links, and menu button across it. */
 
@@ -77,7 +77,7 @@
 }
 
 
-/* #region navbar__brand */
+/* #region navBraAnc */
 
 .navBraAnc { /* What: Navigation Brand Anchor. Why: The mark and the name read as one link. How: This sets the mark beside the name with a small gap. */
 
@@ -100,7 +100,7 @@
 }
 
 
-/* #region navbar__brand-text */
+/* #region braTexSpa */
 
 .braTexSpa { /* What: Brand Text Span. Why: The name and its LLC stack tightly as one block. How: This stacks the two lines with no extra line height. */
 
@@ -138,13 +138,13 @@
 
 }
 
-/* #endregion navbar__brand-text */
+/* #endregion braTexSpa */
 
-/* #endregion navbar__brand */
+/* #endregion navBraAnc */
 
 
 
-/* #region navbar__nav */
+/* #region navLinNav */
 
 .navLinNav { /* What: Navigation Links Nav. Why: Wide screens show the section links and phone button in the bar. How: This lines them up in a row with even gaps. */
 
@@ -267,10 +267,10 @@
 
 }
 
-/* #endregion navbar__nav */
+/* #endregion navLinNav */
 
 
-/* #region navbar__hamburger */
+/* #region navTogBut */
 
 .navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon, hidden until the narrow layout shows it. */
 
@@ -345,13 +345,13 @@
 
 }
 
-/* #endregion navbar__hamburger */
+/* #endregion navTogBut */
 
-/* #endregion navbar__inner */
+/* #endregion navInnDiv */
 
 
 
-/* #region navbar__mobile */
+/* #region navMenDiv */
 
 .navMenDiv { /* What: Navigation Menu Div. Why: Narrow screens show the links and phone number in a panel below the bar. How: This stacks them on the dark navy, collapsed to no height and hidden until the narrow layout shows it. */
 
@@ -453,8 +453,8 @@
 
 }
 
-/* #endregion navbar__mobile */
+/* #endregion navMenDiv */
 
-/* #endregion navbar */
+/* #endregion navBarHed */
 
 

@@ -19,7 +19,7 @@
 
 
 
-/* #region footer */
+/* #region sitFooFoo */
 
 .sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the dark navy and draws a faint line along its top. */
 
@@ -31,7 +31,7 @@
 }
 
 
-/* #region footer__inner */
+/* #region fooInnDiv */
 
 .fooInnDiv { /* What: Footer Inner Div. Why: The footer's columns line up with the page's content width. How: This centers a capped-width row with the container's side padding plus room above and below, and spreads the columns across it, wrapping when they run out of room. */
 
@@ -64,7 +64,7 @@
 }
 
 
-/* #region footer__brand */
+/* #region fooBraDiv */
 
 .fooBraDiv { /* What: Footer Brand Div. Why: The mark, name, and tagline read as one block. How: This sets the mark beside the two lines of text. */
 
@@ -110,11 +110,11 @@
 
 }
 
-/* #endregion footer__brand */
+/* #endregion fooBraDiv */
 
 
 
-/* #region footer__nav */
+/* #region fooLinNav */
 
 .fooLinNav { /* What: Footer Links Nav. Why: Visitors at the bottom of the page can jump back to any section. How: This lines the section buttons up in a row that wraps when it runs out of room. */
 
@@ -163,10 +163,10 @@
 
 }
 
-/* #endregion footer__nav */
+/* #endregion fooLinNav */
 
 
-/* #region footer__contact */
+/* #region fooConDiv */
 
 .fooConDiv { /* What: Footer Contact Div. Why: The phone number and hours close the row on the right. How: This right-aligns the two. */
 
@@ -233,13 +233,13 @@
 
 }
 
-/* #endregion footer__contact */
+/* #endregion fooConDiv */
 
-/* #endregion footer__inner */
+/* #endregion fooInnDiv */
 
 
 
-/* #region footer__bottom */
+/* #region fooBotDiv */
 
 .fooBotDiv { /* What: Footer Bottom Div. Why: The copyright line sits apart from the columns, across the footer's full width. How: This centers it below a fainter hairline with padding around it. */
 
@@ -261,8 +261,8 @@
 
 }
 
-/* #endregion footer__bottom */
+/* #endregion fooBotDiv */
 
-/* #endregion footer */
+/* #endregion sitFooFoo */
 
 
