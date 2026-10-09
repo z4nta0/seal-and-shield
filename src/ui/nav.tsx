@@ -177,7 +177,6 @@ function NavBarCom () : React.JSX.Element {
 		// #endregion onWinScrFun
 
 
-
 		window.addEventListener( 'scroll', onWinScrFun, { passive : true } ); // What: Scroll Listener Registration. Why: The handler has to run as the page scrolls. How: This adds it as a passive listener, which never blocks scrolling.
 
 

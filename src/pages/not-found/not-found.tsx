@@ -115,7 +115,7 @@ function NotFouCom () : React.JSX.Element {
 					<Link
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
-						to={ { hash : 'contact', pathname : '/' } } // What: Contact Section Address. Why: A visitor who came looking for a roofer can still request a quote in one step. How: This navigates to the home page with the contact section's id as the hash, which the home page scrolls to and then clears.
+						to={{ hash : 'contact', pathname : '/' }} // What: Contact Section Address. Why: A visitor who came looking for a roofer can still request a quote in one step. How: This navigates to the home page with the contact section's id as the hash, which the home page scrolls to and then clears.
 					>{ /* What: Quote Request Link. Why: The site's main action stays one step away. How: This opens the home page at the contact section. */ }
 						Get a Free Quote
 					</Link>
