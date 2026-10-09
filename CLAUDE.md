@@ -83,7 +83,13 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
    screen.
 5. **Directory structure**.
 6. **Formatting, naming, and comment passes, CSS modules, and design
-   tokens**, then the horizontal layout decision above.
+   tokens**, then the horizontal layout decision above. The formatting pass
+   on every TypeScript and HTML file, root config files included, was done
+   2026-10-08 (one file per commit, every suite passing with identical
+   screenshots), along with the business name fix, the em dash copy cleanup,
+   self-hosted fonts, and resized logos. Still to come: moving JavaScript
+   lookups off class names onto data-* hooks, the CSS module pass (which
+   also formats every stylesheet), and the design-token pass.
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
 
@@ -133,6 +139,13 @@ the page to settle.
   hero's, contact section's, and footer's gradients (the headline and its
   accents, the stats, the bar's brand and links, the contact details, and
   the footer's links and phone) has to be checked by eye.
+- **The contact form reports success even when sending fails**
+  (found 2026-10-08): forSubFun shows "Message Sent!" without waiting for
+  Netlify's response, and only alerts if the request can't be made at all,
+  so a rejected submission still looks sent. The form also carries
+  noValidate, so its required name and phone fields aren't enforced and an
+  empty form can be sent. Both are behavior changes, left for the user to
+  decide on.
 - **WAVE still reports errors** (2026-10-08): the user ran WebAIM's WAVE
   checker after the accessibility pass and it found errors axe doesn't
   report. They're handled later, with the user.
