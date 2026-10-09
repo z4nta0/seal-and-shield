@@ -146,8 +146,8 @@
 	--att-rin-col : ;                                                                                        /* What: Attention Ring Color. Why: The standard role set includes an attention ring. How: This site doesn't use one, so it stays empty. */
 	--bac-hov-col : ;                                                                                        /* What: Background Hover Color. Why: The standard role set includes a hover overlay. How: This site's hovers use their own colors, so it stays empty. */
 	--bac-inr-col : #0f1e45;                                                                                 /* What: Background Inverse Raised Color. Why: Navy panels and buttons sit a step lighter than the dark bands. How: The service area panel, the info card, and the submit button read it, and shadows cast it. */
-	--bac-inv-col : #080f24;                                                                                 /* What: Background Inverse Color. Why: The bar, hero, contact section, and footer share one darkest navy. How: Those bands read it, with light text on top. */
-	--bac-pag-col : #ffffff;                                                                                 /* What: Background Page Color. Why: The page and its cards sit on white. How: The page, white cards and panels, and white text on dark surfaces read it, at full strength or faded. */
+	--bac-inv-col : #080f24;                                                                                 /* What: Background Inverse Color. Why: The bar, hero, contact section, and footer share one darkest navy. How: Those bands and the page body behind them read it, with light text on top. */
+	--bac-pag-col : #ffffff;                                                                                 /* What: Background Page Color. Why: The light sections and their cards sit on white. How: The About section, white cards and panels, and white text on dark surfaces read it, at full strength or faded. */
 	--bac-sur-col : #f4f6fa;                                                                                 /* What: Background Surface Color. Why: Some bands and fields need a light tint apart from white. How: The services band, the logo panel, and the form fields read it. */
 	--bor-mai-col : #c8d0e0;                                                                                 /* What: Border Main Color. Why: Light dividers and outlines share one pale gray-blue. How: The service cards and form fields draw their borders in it. */
 	--bor-str-col : ;                                                                                        /* What: Border Strong Color. Why: The standard role set includes a stronger border. How: This site doesn't need one, so it stays empty. */
@@ -446,11 +446,11 @@ html { /* What: HTML. Why: One rem should equal the 11px base font size, and in-
 
 }
 
-body { /* What: Body. Why: The page's default text sets the tone everything else inherits. How: This sets the main font one step above the base size, the default text color, a white page, and smooth font rendering. */
+body { /* What: Body. Why: The page's default text sets the tone everything else inherits. How: This sets the main font one step above the base size, the default text color, a dark page behind the sections, and smooth font rendering. */
 
 
 	-webkit-font-smoothing : antialiased;
-	background             : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+	background             : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */ /* What: Dark Page Background. Why: The transparent bar's text sits over the dark hero, and contrast checkers that walk up to the nearest background would otherwise compare it with white. How: Every section paints its own background, so the dark body only shows behind the bar, where it matches the hero, and in an over-scroll bounce, where it matches the dark hero and footer. */
 	color                  : var( --tex-sec-col ); /* Text Secondary Color = #2d3a52 */
 	font-family            : var( --fon-fam-mai ); /* Font Family Main = 'Lato', sans-serif */
 	font-size              : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */

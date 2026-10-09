@@ -45,34 +45,46 @@
 			name='contactForm'
 
 			hidden
-		><!-- What: Netlify Detection Form Element. Why: Netlify finds forms by reading the deployed HTML, and the real contact form only exists once React renders it. How: This hidden, bare copy names the form and each field the React form submits, with no ids or labels, so it never duplicates the real form's. -->
+		><!-- What: Netlify Detection Form Element. Why: Netlify finds forms by reading the deployed HTML, and the real contact form only exists once React renders it. How: This hidden, bare copy names the form and each field the React form submits, with no ids, so it never duplicates the real form's, and an aria-label on each field so accessibility checkers find every control named. -->
 
 
 			<input
 				name='name'
 
 				type='text'
+
+				aria-label='Name'
 			/><!-- What: Name Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the name field, which carries the visitor's name. -->
 
 			<input
 				name='company'
 
 				type='text'
+
+				aria-label='Company'
 			/><!-- What: Company Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the company field, which carries the visitor's company. -->
 
 			<input
 				name='phone'
 
 				type='tel'
+
+				aria-label='Phone'
 			/><!-- What: Phone Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the phone field, which carries the visitor's phone number. -->
 
 			<input
 				name='email'
 
 				type='email'
+
+				aria-label='Email'
 			/><!-- What: Email Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the email field, which carries the visitor's email address. -->
 
-			<textarea name='message'></textarea><!-- What: Message Textarea Element. Why: Netlify records only the fields it finds in this copy. How: This declares the message field, which carries the visitor's description of their roof. -->
+			<textarea
+				name='message'
+
+				aria-label='Message'
+			></textarea><!-- What: Message Textarea Element. Why: Netlify records only the fields it finds in this copy. How: This declares the message field, which carries the visitor's description of their roof. -->
 
 
 		</form>
