@@ -68,8 +68,10 @@ the page to settle.
   review" results are printed and attached to the report rather than failing
   the run.
 - `npm run test:rendering`: compares a full-page screenshot of every state
-  with its baseline in `tests/rendering/baselines/`, with zero tolerance. The
-  footer's year is masked. After an intended visual change, refresh with `npm
+  with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
+  pixel may differ, and the per-pixel color threshold is 0 too, since
+  Playwright's default of 0.2 let a slight color change pass unnoticed
+  (reese-roofing's suite still has that gap). The footer's year is masked. After an intended visual change, refresh with `npm
   run test:rendering -- --update-snapshots` and commit the baselines with it.
   Baselines are captured on Linux.
 - `npm run test:responsive`: measures the home page and the open menu at 19
@@ -80,16 +82,30 @@ the page to settle.
   join in step 7, once the site has the features they check.
 
 ## Known issues
-- **The accessibility suite fails on the existing site** (found 2026-10-08,
-  25 of 45 tests, the same in every run): 24 elements with too little color
-  contrast (the section labels, the Services intro and card text, the About
-  body and values, the form labels and note, and the footer's copyright
-  line), the About values' `h4`s skipping a heading level, the desktop nav
-  and mobile menu landmarks sharing a name, the form fields drawing no
-  visible focus ring in Chromium and WebKit, the closed mobile menu's links
-  still taking keyboard focus on phones while hidden under the bar, and no
-  reduced-motion styles at all (`fadeUp` and the looping `pulseRing` keep
-  playing). The responsive and rendering suites pass.
+- **The hidden Netlify form in `index.html` is pasted JSX** (found
+  2026-10-08): it carries JSX attributes as literal text (`className`,
+  `onSubmit={handleSubmit}`, `value={form.name}`) and repeats the React
+  form's input ids, which axe reports as `duplicate-id-aria` (needs review,
+  critical). Netlify only needs the form's name and each field's `name` to
+  detect it, so it can shrink to bare named fields with no ids or labels.
+  It touches live form detection, so the change waits for the user's go
+  ahead and a test submission after deploying.
+- **Contrast axe can't measure** (needs review, 2026-10-08): text over the
+  hero's, contact section's, and footer's gradients (the headline and its
+  accents, the stats, the bar's brand and links, the contact details, and
+  the footer's links and phone) has to be checked by eye.
+
+## Accessibility pass
+Done 2026-10-08, before the directory move, so steps 5 and 6 run against a
+clean scan (the user chose this over carrying the failures to step 7). The
+suite found 25 failing tests in the existing site, fixed one commit per
+problem: the bar and footer navs got distinct labels, the About values'
+`h4`s became `h3`s, the closed mobile menu became `inert` (its toggle
+reports `aria-expanded`), every transition and animation got a
+reduced-motion variant (with `utils/motion.ts`'s `redMotFun` stopping the
+JavaScript smooth scrolls), the form fields got a focus ring, and the muted
+text, light blue, light-section labels, and footer copyright line were
+adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
 - **`README.md` describes Reese Roofing**, the project this site was copied
   from (its name, placeholder contact details, and file layout). It gets
   rewritten for Seal and Shield once the directory structure settles.
