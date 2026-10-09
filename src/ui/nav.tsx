@@ -7,9 +7,10 @@ import cssModObj from './nav.module.css';           // What: CSS Module Object. 
 import losPngUrl from '../assets/logo-simple.png'; // What: Logo-Simple PNG URL. Why: The bar's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
-import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function. Why: A section link's smooth scroll has to respect the reduced-motion preference. How: navSecFun asks it before choosing the scroll behavior.
-import { useEffect } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position. How: This registers and removes the scroll listener.
-import { useState  } from 'react';              // What: Use State. Why: The bar tracks its scrolled look, the active section, and whether the menu is open. How: This holds each of the three.
+import { useEffect    } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position. How: This registers and removes the scroll listener.
+import { useLocation  } from 'react-router';       // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
+import { useSecLinFun } from './section-link.ts';  // What: Use Section Link Function. Why: Section links have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
+import { useState     } from 'react';              // What: Use State. Why: The bar tracks its scrolled look, the active section, and whether the menu is open. How: This holds each of the three.
 
 // #endregion Imports
 
@@ -23,9 +24,10 @@ import { useState  } from 'react';              // What: Use State. Why: The bar
  * number on wide screens, and a menu button that opens the same links and
  * phone number in a panel below the bar on phones. The bar takes on a solid
  * background once the page scrolls past its top, and the link for whichever
- * section the visitor is reading is marked active. Every section link
- * scrolls to its section in place, smoothly unless the visitor asked for
- * reduced motion, and closes the menu.
+ * section the visitor is reading is marked active on the home page. Every
+ * section link closes the menu and reaches its section through
+ * section-link.ts: in place on the home page, smoothly unless the visitor
+ * asked for reduced motion, or by navigating home from any other page.
  *
  * Sections:
  *  - Constants
@@ -48,21 +50,21 @@ import { useState  } from 'react';              // What: Use State. Why: The bar
  * @summary
  * The section links the bar and the mobile menu both render, in page order.
  * Every row shares one shape, so its fields carry no comments of their own:
- * - `hreStr` (String): Href String, the section's hash, which is also the
- *   link's href and, without its #, the section's id.
+ * - `ideStr` (String): Identifier String, the section's id, which the
+ *   link's href names on the home page's path, e.g. /#about.
  * - `labStr` (String): Label String, the link's visible text and React key.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
 
-const NAV_LIN_ARR = [ // What: Navigation Link Array. Why: The bar and the mobile menu list the same links, so they're defined once. How: Each row pairs a section's hash with the link's label.
+const NAV_LIN_ARR = [ // What: Navigation Link Array. Why: The bar and the mobile menu list the same links, so they're defined once. How: Each row pairs a section's id with the link's label.
 
 
-	{ hreStr : '#home',     labStr : 'Home'     }, // What: Home Link Row. Why: Visitors need a way back to the top. How: This links to the hero section.
-	{ hreStr : '#services', labStr : 'Services' }, // What: Services Link Row. Why: The services are the site's main content. How: This links to the services section.
-	{ hreStr : '#about',    labStr : 'About'    }, // What: About Link Row. Why: Visitors check who they'd be hiring. How: This links to the about section.
-	{ hreStr : '#contact',  labStr : 'Contact'  }  // What: Contact Link Row. Why: The page's goal is a quote request. How: This links to the contact section.
+	{ ideStr : 'home',     labStr : 'Home'     }, // What: Home Link Row. Why: Visitors need a way back to the top. How: This links to the hero section.
+	{ ideStr : 'services', labStr : 'Services' }, // What: Services Link Row. Why: The services are the site's main content. How: This links to the services section.
+	{ ideStr : 'about',    labStr : 'About'    }, // What: About Link Row. Why: Visitors check who they'd be hiring. How: This links to the about section.
+	{ ideStr : 'contact',  labStr : 'Contact'  }  // What: Contact Link Row. Why: The page's goal is a quote request. How: This links to the contact section.
 
 
 ];
@@ -87,12 +89,13 @@ const SEC_IDE_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Section
  * @summary
  * Renders the fixed top bar and its mobile menu. A scroll listener gives the
  * bar its solid scrolled look once the page moves more than 40px, and marks
- * the link of the section the visitor is reading as active: the last section
+ * the link of the section the visitor is reading as active on the home
+ * page: the last section
  * whose top sits within 120px of the top of the screen, which leaves room
  * for the bar itself. The menu button toggles the mobile menu, which is
  * inert while closed, so its links stay out of the focus order and the
  * accessibility tree. Every section link, including the brand, goes through
- * navSecFun, which closes the menu and scrolls to the section.
+ * navSecFun, which closes the menu and reaches the section from any page.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -114,6 +117,8 @@ function NavBarCom () : React.JSX.Element {
 
 	const [ actSecStr, setActSecStr ] = useState( 'home' ); // What: Active Section String And Setter. Why: The link for the section being read is marked active. How: This holds that section's id, starting at the top of the page.
 	const [ barScrBoo, setBarScrBoo ] = useState( false );  // What: Bar Scrolled Boolean And Setter. Why: The bar gains a solid background once the page scrolls. How: This holds whether the page has scrolled past the bar's threshold.
+
+	const isaHomBoo = useLocation().pathname === '/'; // What: Is-A Home Boolean. Why: Only the home page has sections, so no link is active anywhere else. How: This is true when the path is the site's root.
 
 
 	useEffect( () => { // What: Scroll Listener Effect. Why: The bar's look and active link follow the scroll position. How: This registers the scroll handler once and removes it when the bar unmounts.
@@ -193,6 +198,8 @@ function NavBarCom () : React.JSX.Element {
 
 	const [ menOpeBoo, setMenOpeBoo ] = useState( false ); // What: Menu Open Boolean And Setter. Why: The mobile menu opens and closes from its button. How: This holds whether it's open, starting closed.
 
+	const goSecFun = useSecLinFun(); // What: Go Section Function. Why: Each link has to reach its section from any page. How: This scrolls to the section on the home page, or navigates home to it from anywhere else.
+
 
 	// #region navSecFun
 
@@ -201,36 +208,35 @@ function NavBarCom () : React.JSX.Element {
 	 *
 	 * @summary
 	 * Handles a click on any section link, the brand included: stops the
-	 * browser's own jump to the hash, closes the mobile menu, and scrolls to
-	 * the section whose id is the hash without its #. The scroll is smooth
-	 * unless the visitor asked for reduced motion, in which case it jumps.
+	 * browser's own navigation to the link's address, closes the mobile menu,
+	 * and hands the section's id to goSecFun, which scrolls to it on the home
+	 * page, smoothly unless the visitor asked for reduced motion, or navigates
+	 * home to it from any other page.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
 	 * @param cliEveObj - Click Event Object: The link's click event.
-	 * @param hreValStr - Href Value String: The section's hash, e.g. '#about'.
+	 * @param secIdeStr - Section Identifier String: The section's id, e.g.
+	 *                    'about'.
 	 *
 	 * @returns This function does not return anything.
 	 *
 	 * @example
 	 * ```ts
-	 * navSecFun(cliEveObj, '#about') // => void
+	 * navSecFun(cliEveObj, 'about') // => void
 	 * ```
 	 *
 	*/
 
-	const navSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, hreValStr : string ) => { // What: Navigate Section Function. Why: Every section link scrolls in place instead of jumping. How: This cancels the jump, closes the menu, and scrolls to the section.
+	const navSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Navigate Section Function. Why: Every section link reaches its section without a full page load or a hash left in the address. How: This cancels the link's own navigation, closes the menu, and hands the section to goSecFun.
 
 
-		cliEveObj.preventDefault(); // What: Default Jump Cancel. Why: The browser would otherwise jump to the hash instantly and skip the smooth scroll. How: This stops the link's own navigation.
+		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise jump or reload and leave the hash in the address. How: This stops the link's own navigation.
 
 		setMenOpeBoo( false ); // What: Menu Close Call. Why: The menu should get out of the way once a link is chosen. How: This closes it.
 
 
-		const secIdeStr = hreValStr.replace( '#', '' ); // What: Section Identifier String. Why: The section is found by its id. How: This drops the hash's leading #.
-
-
-		document.getElementById( secIdeStr )?.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); // What: Section Scroll Call. Why: The visitor should land on the section they chose. How: This scrolls it into view, jumping instead of gliding under reduced motion.
+		goSecFun( secIdeStr ); // What: Section Go Call. Why: The visitor should land on the section they chose. How: This scrolls to it, or navigates home to it from another page.
 
 
 	};
@@ -257,10 +263,10 @@ function NavBarCom () : React.JSX.Element {
 				<a
 					className={ cssModObj.navBraAnc }
 
-					href='#home'
+					href='/#home'
 
-					onClick={ ( cliEveObj ) => navSecFun( cliEveObj, '#home' ) }
-				>{ /* What: Navigation Brand Anchor Element. Why: The brand doubles as a way back to the top. How: This scrolls to the hero section through navSecFun. */ }
+					onClick={ ( cliEveObj ) => navSecFun( cliEveObj, 'home' ) }
+				>{ /* What: Navigation Brand Anchor Element. Why: The brand doubles as a way back to the top. How: This reaches the hero section through navSecFun, from any page. */ }
 
 
 					<img
@@ -301,11 +307,11 @@ function NavBarCom () : React.JSX.Element {
 
 							className={ cssModObj.navLinAnc }
 
-							data-section-link-active={ actSecStr === linRcdObj.hreStr.replace( '#', '' ) || undefined } // What: Active Section Link Flag. Why: The link for the section being read is highlighted. How: This sets the attribute only when the link's hash, without its #, names the active section, and drops it otherwise.
+							data-section-link-active={ ( isaHomBoo && actSecStr === linRcdObj.ideStr ) || undefined } // What: Active Section Link Flag. Why: The link for the section being read is highlighted. How: This sets the attribute only on the home page when the link names the active section, and drops it otherwise.
 
-							href={ linRcdObj.hreStr }
+							href={ `/#${ linRcdObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, as a real link too. How: This points at the home page with the section's id as the hash.
 
-							onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRcdObj.hreStr ) }
+							onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRcdObj.ideStr ) }
 						>{ /* What: Navigation Link Anchor Element. Why: Each link scrolls to its section. How: This is marked active while its section is being read. */ }
 							{ linRcdObj.labStr }
 						</a>
@@ -364,9 +370,9 @@ function NavBarCom () : React.JSX.Element {
 
 						className={ cssModObj.menLinAnc }
 
-						href={ linRcdObj.hreStr }
+						href={ `/#${ linRcdObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, as a real link too. How: This points at the home page with the section's id as the hash.
 
-						onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRcdObj.hreStr ) }
+						onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRcdObj.ideStr ) }
 					>{ /* What: Menu Link Anchor Element. Why: Each link scrolls to its section. How: This also closes the menu through navSecFun. */ }
 						{ linRcdObj.labStr }
 					</a>
