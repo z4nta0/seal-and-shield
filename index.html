@@ -1,22 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Seal and Shield LLC – Commercial Roofing in Lawrence, Kansas. Full installations, repairs, liquid coatings, TPO, EPDM. Serving all of Kansas and the continental US." />
-    <title>Seal and Shield LLC | Commercial Roofing</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- What: Netlify Form Detection Copy. Why: Netlify finds forms by reading the deployed HTML, and the real contact form only exists once React renders it. How: This hidden, bare copy names the form and each field the React form submits, with no ids or labels, so it never duplicates the real form's. -->
-    <form hidden name='contactForm' data-netlify='true'>
-      <input name='name' type='text' />
-      <input name='company' type='text' />
-      <input name='phone' type='tel' />
-      <input name='email' type='email' />
-      <textarea name='message'></textarea>
-    </form>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!doctype html><!-- What: Document Type Declaration. Why: Browsers render the page in standards mode only with a doctype. How: This declares HTML5. -->
+
+
+
+<html lang='en'><!-- What: Root HTML Element. Why: Screen readers and translation tools need the page's language. How: This marks the document as English. -->
+
+
+	<head><!-- What: Document Head Element. Why: The page's metadata and icon link load before the body paints. How: This holds them in the sections below. -->
+
+
+		<!-- #region Document -->
+
+		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1,024 bytes the browser checks. -->
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' /> <!-- What: Viewport Meta. Why: Phones should lay the site out at device width instead of a zoomed-out desktop width. How: This sets the layout width to the device's and starts at no zoom. -->
+		<title>Seal and Shield LLC | Commercial Roofing</title>                  <!-- What: Page Title Element. Why: The tab, bookmarks, and search listings name the page by its title. How: This pairs the company's name with what it does. -->
+
+		<!-- #endregion Document -->
+
+
+		<!-- #region Search -->
+
+		<meta name='description' content='Seal and Shield LLC – Commercial Roofing in Lawrence, Kansas. Full installations, repairs, liquid coatings, TPO, EPDM. Serving all of Kansas and the continental US.' /> <!-- What: Description Meta. Why: Search listings and link previews show a short summary under the title. How: This sums up the company's services and where it works. -->
+
+		<!-- #endregion Search -->
+
+
+		<!-- #region Icons -->
+
+		<link href='/favicon.png' rel='icon' type='image/png' /> <!-- What: PNG Icon Link. Why: Browsers show the site's mark in tabs and bookmarks. How: This points at the PNG favicon in public/. -->
+
+		<!-- #endregion Icons -->
+
+
+	</head>
+
+
+
+	<body><!-- What: Document Body Element. Why: This holds the site's mount point, the form copy Netlify reads, and the entry script. How: The mount point stays empty until React renders the site into it. -->
+
+
+		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this id. -->
+
+		<form
+			data-netlify='true'
+			name='contactForm'
+
+			hidden
+		><!-- What: Netlify Detection Form Element. Why: Netlify finds forms by reading the deployed HTML, and the real contact form only exists once React renders it. How: This hidden, bare copy names the form and each field the React form submits, with no ids or labels, so it never duplicates the real form's. -->
+
+
+			<input
+				name='name'
+
+				type='text'
+			/><!-- What: Name Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the name field, which carries the visitor's name. -->
+
+			<input
+				name='company'
+
+				type='text'
+			/><!-- What: Company Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the company field, which carries the visitor's company. -->
+
+			<input
+				name='phone'
+
+				type='tel'
+			/><!-- What: Phone Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the phone field, which carries the visitor's phone number. -->
+
+			<input
+				name='email'
+
+				type='email'
+			/><!-- What: Email Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the email field, which carries the visitor's email address. -->
+
+			<textarea name='message'></textarea><!-- What: Message Textarea Element. Why: Netlify records only the fields it finds in this copy. How: This declares the message field, which carries the visitor's description of their roof. -->
+
+
+		</form>
+
+		<script
+			src='/src/main.tsx'
+			type='module'
+		>/* What: Site Module Script Element. Why: This loads the site itself. How: Vite replaces it with the built, hashed bundle at build time. */</script>
+
+
+	</body>
+
+
 </html>
+
+
