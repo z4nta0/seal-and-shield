@@ -237,13 +237,33 @@ function ConSecCom () : React.JSX.Element {
 				<div className='contact__info'>{ /* What: Contact Info Div Element. Why: The left column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button. */ }
 
 
-					<p className='section-label fade-up'>Get In Touch</p>{ /* What: Contact Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+					<p
+						className='section-label'
 
-					<h2 className='section-title light fade-up'>Request a Free<br />Quote Today</h2>{ /* What: Contact Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
+						data-scroll-reveal-block
+					>{ /* What: Contact Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+						Get In Touch
+					</p>
 
-					<div className='divider fade-up' />{ /* What: Contact Divider Div Element. Why: A short rule separates the heading from the invitation. How: This draws it. */ }
+					<h2
+						className='section-title light'
 
-					<p className='contact__info-body fade-up'>{ /* What: Contact Invitation Paragraph Element. Why: The section invites the visitor to get in touch. How: This offers the free inspection and names the area served. */ }
+						data-scroll-reveal-block
+					>{ /* What: Contact Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
+						Request a Free<br />Quote Today
+					</h2>
+
+					<div
+						className='divider'
+
+						data-scroll-reveal-block
+					/>{ /* What: Contact Divider Div Element. Why: A short rule separates the heading from the invitation. How: This draws it. */ }
+
+					<p
+						className='contact__info-body'
+
+						data-scroll-reveal-block
+					>{ /* What: Contact Invitation Paragraph Element. Why: The section invites the visitor to get in touch. How: This offers the free inspection and names the area served. */ }
 						Ready to protect your commercial roof? Reach out to Seal and Shield for
 						a free inspection or quote. We serve Lawrence, Topeka, the Kansas City metro,
 						and beyond.
@@ -251,7 +271,11 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-					<div className='contact__details fade-up'>{ /* What: Contact Details Div Element. Why: Visitors want the location, number, and hours together. How: This lists them as icon and text rows. */ }
+					<div
+						className='contact__details'
+
+						data-scroll-reveal-block
+					>{ /* What: Contact Details Div Element. Why: Visitors want the location, number, and hours together. How: This lists them as icon and text rows. */ }
 
 
 						<div className='contact__detail'>{ /* What: Location Detail Div Element. Why: A local business should say where it is. How: This pairs a pin icon with the town. */ }
@@ -322,7 +346,9 @@ function ConSecCom () : React.JSX.Element {
 
 
 					<a
-						className='contact__phone-btn fade-up'
+						className='contact__phone-btn'
+
+						data-scroll-reveal-block
 
 						href='tel:7853041957'
 					>{ /* What: Contact Phone Button Anchor Element. Why: Calling is the fastest way to get a quote. How: This dials the number on phones, styled as a button. */ }
@@ -334,7 +360,11 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-				<div className='contact__form-wrap fade-up'>{ /* What: Contact Form Wrap Div Element. Why: The form and its thank-you message share one panel. How: This holds whichever is showing, and fades in as one block. */ }
+				<div
+					className='contact__form-wrap'
+
+					data-scroll-reveal-block
+				>{ /* What: Contact Form Wrap Div Element. Why: The form and its thank-you message share one panel. How: This holds whichever is showing, and fades in as one block. */ }
 
 
 					{ forSenBoo ? ( // What: Sent Message Branch. Why: A just-sent form gives way to a thank-you. How: This shows the message while forSenBoo is true.

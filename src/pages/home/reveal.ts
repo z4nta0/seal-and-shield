@@ -15,11 +15,12 @@ import { useRef    } from 'react'; // What: Use Ref. Why: The observer needs the
  *
  * @summary
  * The scroll-triggered fade-in the services, about, and contact sections
- * share. Each of them marks the blocks that should fade in with the fade-up
- * class, which styles.css starts hidden and slightly lowered, and attaches
- * the ref this hook returns. Once a tenth of the section enters the
- * viewport, every fade-up block inside it gains the visible class one after
- * another, on a stagger the section chooses, which fades it up into place.
+ * share. Each of them marks the blocks that should fade in with the
+ * presence-only data-scroll-reveal-block attribute, which styles.css starts
+ * hidden and slightly lowered, and attaches the ref this hook returns. Once a
+ * tenth of the section enters the viewport, every marked block inside it
+ * gains data-scroll-reveal-shown one after another, on a stagger the section
+ * chooses, which fades it up into place.
  *
  * Sections:
  *  - Hooks
@@ -40,13 +41,13 @@ import { useRef    } from 'react'; // What: Use Ref. Why: The observer needs the
  *
  * @summary
  * Watches the section its returned ref is attached to. Whenever at least a
- * tenth of the section is in view, it adds the visible class to each of the
- * section's fade-up blocks in document order, waiting staDelNum
- * milliseconds longer for each block than the one before, so they fade in
- * one after another. The observer keeps watching after the first reveal,
- * so scrolling the section back into view repeats the additions, which
- * change nothing once every block is visible. The observer disconnects when
- * the section unmounts; a block's pending stagger timer still runs.
+ * tenth of the section is in view, it sets data-scroll-reveal-shown on each of
+ * the section's data-scroll-reveal-block blocks in document order, waiting
+ * staDelNum milliseconds longer for each block than the one before, so they
+ * fade in one after another. The observer keeps watching after the first
+ * reveal, so scrolling the section back into view sets the attribute again,
+ * which changes nothing once every block is shown. The observer disconnects
+ * when the section unmounts; a block's pending stagger timer still runs.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -81,10 +82,10 @@ function useRevSecFun ( staDelNum : number ) : React.RefObject< HTMLElement | nu
 				if ( entCurObj.isIntersecting ) { // What: In View Check. Why: Blocks reveal only while the section is in view. How: This skips entries reporting the section leaving.
 
 
-					entCurObj.target.querySelectorAll( '.fade-up' ).forEach( ( fadCurEle, fadIndNum ) => { // What: Fade Block Loop. Why: Each block fades in on its own beat. How: This schedules each fade-up block in document order.
+					entCurObj.target.querySelectorAll( '[data-scroll-reveal-block]' ).forEach( ( fadCurEle, fadIndNum ) => { // What: Fade Block Loop. Why: Each block fades in on its own beat. How: This schedules each block marked data-scroll-reveal-block in document order.
 
 
-						setTimeout( () => fadCurEle.classList.add( 'visible' ), fadIndNum * staDelNum ); // What: Staggered Reveal Timer. Why: The blocks fade in one after another. How: This adds the visible class after the block's place in the order times the stagger.
+						setTimeout( () => fadCurEle.setAttribute( 'data-scroll-reveal-shown', '' ), fadIndNum * staDelNum ); // What: Staggered Reveal Timer. Why: The blocks fade in one after another. How: This sets the block's data-scroll-reveal-shown attribute after its place in the order times the stagger.
 
 
 					} );

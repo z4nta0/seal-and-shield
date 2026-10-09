@@ -104,12 +104,12 @@ const ABO_VAL_ARR = [ // What: About Value Array. Why: The story closes with wha
  * AboSecCom = About Section Component
  *
  * @summary
- * Renders the about section: the logo and info card on the left, the story
- * and values on the right. The left column, each piece of the story, and
- * each value are fade-up blocks, revealed 100ms apart once the section
+ * Renders the about section: the logo and info card on the left, the story and
+ * values on the right. The left column, each piece of the story, and each
+ * value are scroll-reveal blocks, revealed 100ms apart once the section
  * scrolls into view; the values also delay their own fade by 80ms each, so
- * they settle one after another. The logo's light backdrop is decorative
- * and hidden from assistive technology.
+ * they settle one after another. The logo's light backdrop is decorative and
+ * hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -149,7 +149,11 @@ function AboSecCom () : React.JSX.Element {
 				<div className='about__layout'>{ /* What: About Layout Div Element. Why: The logo and details sit beside the story. How: This lays them out in two columns. */ }
 
 
-					<div className='about__visual fade-up'>{ /* What: About Visual Div Element. Why: The left column pairs the logo with the company's key facts. How: This stacks the logo over the info card, and fades in as one block. */ }
+					<div
+						className='about__visual'
+
+						data-scroll-reveal-block
+					>{ /* What: About Visual Div Element. Why: The left column pairs the logo with the company's key facts. How: This stacks the logo over the info card, and fades in as one block. */ }
 
 
 						<div
@@ -227,20 +231,44 @@ function AboSecCom () : React.JSX.Element {
 					<div className='about__text'>{ /* What: About Text Div Element. Why: The right column tells the company's story. How: This stacks the label, heading, story, and values. */ }
 
 
-						<p className='section-label fade-up'>Who We Are</p>{ /* What: About Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+						<p
+							className='section-label'
 
-						<h2 className='section-title fade-up'>About Seal and Shield</h2>{ /* What: About Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
+							data-scroll-reveal-block
+						>{ /* What: About Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+							Who We Are
+						</p>
 
-						<div className='divider fade-up' />{ /* What: About Divider Div Element. Why: A short rule separates the heading from the story. How: This draws it. */ }
+						<h2
+							className='section-title'
 
-						<p className='about__body fade-up'>{ /* What: About Founding Paragraph Element. Why: The story opens with when the company started and why. How: This gives its founding year, mission, and home town. */ }
+							data-scroll-reveal-block
+						>{ /* What: About Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
+							About Seal and Shield
+						</h2>
+
+						<div
+							className='divider'
+
+							data-scroll-reveal-block
+						/>{ /* What: About Divider Div Element. Why: A short rule separates the heading from the story. How: This draws it. */ }
+
+						<p
+							className='about__body'
+
+							data-scroll-reveal-block
+						>{ /* What: About Founding Paragraph Element. Why: The story opens with when the company started and why. How: This gives its founding year, mission, and home town. */ }
 							Seal and Shield LLC was founded in 2024 with a simple mission: provide Kansas businesses
 							with trustworthy, high-quality commercial roofing they can count on for years to come.
 							Based in Lawrence, Kansas, we combine hands-on expertise with premium materials to
 							deliver results that protect your investment.
 						</p>
 
-						<p className='about__body fade-up'>{ /* What: About Conklin Paragraph Element. Why: The Conklin partnership sets the company apart. How: This explains what it gives clients. */ }
+						<p
+							className='about__body'
+
+							data-scroll-reveal-block
+						>{ /* What: About Conklin Paragraph Element. Why: The Conklin partnership sets the company apart. How: This explains what it gives clients. */ }
 							As an authorized Conklin distributor, we have direct access to some of the most
 							advanced commercial roofing coatings available, and we back every job with the
 							kind of craftsmanship and communication that earns long-term relationships.
@@ -257,9 +285,11 @@ function AboSecCom () : React.JSX.Element {
 								<div
 									key={ valRcdObj.titStr }
 
-									className='about__value fade-up'
+									className='about__value'
 
 									style={{ transitionDelay : `${ valIndNum * 80 }ms` }}
+
+									data-scroll-reveal-block
 								>{ /* What: About Value Div Element. Why: Each value reads as its own row. How: This pairs a marker with the value's text, delaying its fade 80ms per row. */ }
 
 

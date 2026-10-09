@@ -89,16 +89,16 @@ ul { list-style: none; }
 }
 
 /* ── Scroll animation ── */
-.fade-up {
+[data-scroll-reveal-block] {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-up { transition: none; }
+  [data-scroll-reveal-block] { transition: none; }
 }
-.fade-up.visible {
+[data-scroll-reveal-block][data-scroll-reveal-shown] {
   opacity: 1;
   transform: translateY(0);
 }

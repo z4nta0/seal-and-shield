@@ -166,7 +166,7 @@ const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of
  * @summary
  * Renders the services section: the header, a card for each row of
  * SER_RCD_ARR, and the service area panel with a tag for each entry of
- * SER_ARE_ARR. Its header, every card, and the area panel are fade-up
+ * SER_ARE_ARR. Its header, every card, and the area panel are scroll-reveal
  * blocks, revealed 80ms apart once the section scrolls into view.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -204,7 +204,11 @@ function SerSecCom () : React.JSX.Element {
 			<div className='container'>{ /* What: Services Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
 
 
-				<div className='services__header fade-up'>{ /* What: Services Header Div Element. Why: The section opens by saying what it covers. How: This holds the label, heading, divider, and intro, and fades in first. */ }
+				<div
+					className='services__header'
+
+					data-scroll-reveal-block
+				>{ /* What: Services Header Div Element. Why: The section opens by saying what it covers. How: This holds the label, heading, divider, and intro, and fades in first. */ }
 
 
 					<p className='section-label'>What We Do</p>{ /* What: Services Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals. */ }
@@ -233,7 +237,9 @@ function SerSecCom () : React.JSX.Element {
 						<div
 							key={ serRcdObj.titStr }
 
-							className='services__card fade-up'
+							className='services__card'
+
+							data-scroll-reveal-block
 						>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, and fades in in turn. */ }
 
 
@@ -254,7 +260,11 @@ function SerSecCom () : React.JSX.Element {
 
 
 
-				<div className='services__area fade-up'>{ /* What: Services Area Div Element. Why: Visitors want to know whether the company works where they are. How: This panel describes the service area beside its tags, and fades in last. */ }
+				<div
+					className='services__area'
+
+					data-scroll-reveal-block
+				>{ /* What: Services Area Div Element. Why: Visitors want to know whether the company works where they are. How: This panel describes the service area beside its tags, and fades in last. */ }
 
 
 					<div className='services__area-text'>{ /* What: Services Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description. */ }
