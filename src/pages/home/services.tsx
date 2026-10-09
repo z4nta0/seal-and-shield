@@ -80,7 +80,7 @@ export default function Services() {
           <h2 className="section-title">Our Services</h2>
           <div className="divider" />
           <p className="services__intro">
-            Seal and Shield LLC is a full-service commercial roofing company.
+            Seal and Shield is a full-service commercial roofing company.
             Whether you need a complete new roof, a targeted repair, or just peace of mind from a professional inspection —
             we have you covered.
           </p>

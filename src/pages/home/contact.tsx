@@ -58,7 +58,7 @@ export default function Contact() {
           <h2 className="section-title light fade-up">Request a Free<br />Quote Today</h2>
           <div className="divider fade-up" />
           <p className="contact__info-body fade-up">
-            Ready to protect your commercial roof? Reach out to Seal and Shield LLC for
+            Ready to protect your commercial roof? Reach out to Seal and Shield for
             a free inspection or quote. We serve Lawrence, Topeka, the Kansas City metro,
             and beyond.
           </p>
@@ -101,7 +101,7 @@ export default function Contact() {
               <span className="contact__success-icon">✓</span>
               <h3 className="contact__success-title">Message Sent!</h3>
               <p className="contact__success-body">
-                Thank you for reaching out. Seal and Shield LLC will be in touch shortly.
+                Thank you for reaching out. Seal and Shield will be in touch shortly.
               </p>
             </div>
           ) : (

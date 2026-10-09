@@ -16,9 +16,13 @@ treatment. The `author` meta names the business itself.
 - **The business name is "Seal and Shield"** (decided 2026-10-08), spelled
   the same way everywhere: never "Seal & Shield". "LLC" is added only where
   the legal name fits, such as the footer's copyright line and the odd
-  sentence of copy. The source still mixes both spellings; it's brought in
-  line once the test suites exist (after step 4), so the change is checked
-  like any other copy change.
+  sentence of copy. Applied 2026-10-08: the bar, About heading, Services
+  intro, and Contact copy say "Seal and Shield"; "LLC" stays in the footer's
+  brand name and copyright line, the About story's founding sentence, and
+  the full logo's alt text (the image itself reads "LLC"); the bar's and
+  footer's small logos have empty alt text, since the brand name sits right
+  beside them. `index.html`'s title and description are rewritten in the SEO
+  pass.
 - **Off-site work for the user** (the Google Business Profile, directory
   listings, reviews) is listed here once the SEO pass reaches it.
 

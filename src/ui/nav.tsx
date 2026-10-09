@@ -48,9 +48,9 @@ export default function Navbar() {
           href="#home"
           onClick={e => { e.preventDefault(); handleNav('#home') }}
         >
-          <img src={logoSimple} alt="Seal and Shield LLC" className="navbar__logo" />
+          <img src={logoSimple} alt="" className="navbar__logo" />
           <span className="navbar__brand-text">
-            <span className="navbar__brand-main">Seal & Shield</span>
+            <span className="navbar__brand-main">Seal and Shield</span>
             <span className="navbar__brand-sub">LLC</span>
           </span>
         </a>

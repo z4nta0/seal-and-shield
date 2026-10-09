@@ -70,7 +70,7 @@ export default function About() {
           {/* Right: Text */}
           <div className="about__text">
             <p className="section-label fade-up">Who We Are</p>
-            <h2 className="section-title fade-up">About Seal &amp; Shield</h2>
+            <h2 className="section-title fade-up">About Seal and Shield</h2>
             <div className="divider fade-up" />
             <p className="about__body fade-up">
               Seal and Shield LLC was founded in 2024 with a simple mission: provide Kansas businesses

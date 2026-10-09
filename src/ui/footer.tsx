@@ -13,9 +13,9 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <img src={logoSimple} alt="Seal and Shield LLC" className="footer__logo" />
+          <img src={logoSimple} alt="" className="footer__logo" />
           <div>
-            <p className="footer__brand-name">Seal &amp; Shield LLC</p>
+            <p className="footer__brand-name">Seal and Shield LLC</p>
             <p className="footer__brand-tagline">Commercial Roofing — Lawrence, Kansas</p>
           </div>
         </div>
