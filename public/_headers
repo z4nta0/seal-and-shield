@@ -12,8 +12,8 @@
 # connect-src, font-src, img-src, and manifest-src need no lines of their
 # own. The directives listed either need a different value than 'self'
 # (frame-src, object-src), are never covered by default-src at all
-# (frame-ancestors, form-action), or just state the default for clarity
-# (base-uri, script-src, style-src). Unlike ease-my-life, style-src needs no
+# (base-uri, frame-ancestors, form-action), or just state the default for
+# clarity (script-src, style-src). Unlike ease-my-life, style-src needs no
 # 'unsafe-inline': the build ships no inline styles, and React sets its few
 # dynamic styles through the DOM, which the policy doesn't restrict. The
 # structured data script the SEO pass adds is a data block that never runs,
