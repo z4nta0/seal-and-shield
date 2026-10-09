@@ -230,9 +230,10 @@ async function waiSetFun ( curPagObj : Page ) : Promise< void > {
  * Opens one state on a page and waits until it's settled: sizes the
  * viewport, loads the path, waits for the web fonts, scrolls through the
  * page so every section's scroll-triggered content has faded in
- * ({@link revPagFun}), runs the state's action if it has one, then waits
- * until the page stays still ({@link waiSetFun}), so a check never measures
- * a heading halfway through its entrance fade or a menu halfway open.
+ * ({@link revPagFun}), waits for every image to decode, runs the state's
+ * action if it has one, then waits until the page stays still
+ * ({@link waiSetFun}), so a check never measures a heading halfway through
+ * its entrance fade or a menu halfway open.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -258,6 +259,8 @@ async function opeStaFun ( curPagObj : Page, staRcdObj : StaRcdTyp ) : Promise< 
 	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until every font face has loaded.
 
 	await revPagFun( curPagObj ); // What: Page Reveal Call. Why: Content that fades in on scroll is invisible until scrolled to. How: This scrolls through the page and back to the top.
+
+	await curPagObj.evaluate( () => Promise.all( Array.from( document.images, ( imaCurEle ) => imaCurEle.decode() ) ) ); // What: Images Decoded Wait. Why: Chromium once drew the large About logo with a slightly different downscale when the screenshot caught it mid-decode under load. How: This waits until every image on the page has finished decoding.
 
 
 
