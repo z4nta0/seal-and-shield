@@ -430,6 +430,8 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every ch
 	test( `${ staRcdObj.ideStr } walks cleanly with the keyboard`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Keyboard Test. Why: Everything has to be usable without a mouse. How: This opens the state under reduced motion and walks it with Tab.
 
 
+		test.slow(); // What: Slow Test Mark. Why: A full walk measures every stop and takes about 11 seconds alone, which ran past the default 30 second timeout in Firefox when every suite shared the machine. How: This triples this test's timeout.
+
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: A smooth scroll or a focus transition still running would be measured halfway. How: This makes the page match prefers-reduced-motion, which turns both off.
 
 		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The walk should start from the state settled. How: This loads and settles it.
