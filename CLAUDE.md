@@ -51,3 +51,14 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
 - **`README.md` describes Reese Roofing**, the project this site was copied
   from (its name, placeholder contact details, and file layout). It gets
   rewritten for Seal and Shield once the directory structure settles.
+- **The logo images are far too heavy** (noted 2026-10-08):
+  `src/assets/logo-full.png` is 3.7 MB and `logo-simple.png` 705 KB, which
+  slows every page load. Remind the user when step 7's SEO pass starts, then
+  resize and compress them (or replace them with SVGs where the artwork
+  allows).
+- **No security headers yet**: `public/_headers` doesn't exist. Step 7
+  raises with the user whether to add ease-my-life's hardening headers
+  (Content-Security-Policy, HSTS, and the rest), adjusted for whatever this
+  site loads from other origins and for its Netlify Forms POST.
+- **Netlify builds with Node 24.x**, set in the site's Netlify settings
+  rather than in the repo.
