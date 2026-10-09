@@ -1,71 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Seal and Shield LLC – Commercial Roofing in Lawrence, Kansas. Full installations, repairs, liquid coatings, TPO, EPDM. Serving all of Kansas and the continental US." />
-    <title>Seal and Shield LLC | Commercial Roofing</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <form hidden name='contactForm' className="contact__form" onSubmit={handleSubmit} noValidate data-netlify="true">
-        <h3 className="contact__form-title">Free Quote Request</h3>
-        <div className="contact__form-row">
-        <div className="contact__field">
-            <label htmlFor="name">Full Name *</label>
-            <input
-            id="name" name="name" type="text" required
-            placeholder="John Smith"
-            value={form.name} onChange={handleChange}
-            />
-        </div>
-        <div className="contact__field">
-            <label htmlFor="company">Company</label>
-            <input
-            id="company" name="company" type="text"
-            placeholder="ABC Business LLC"
-            value={form.company} onChange={handleChange}
-            />
-        </div>
-        </div>
-        <div className="contact__form-row">
-        <div className="contact__field">
-            <label htmlFor="phone">Phone *</label>
-            <input
-            id="phone" name="phone" type="tel" required
-            placeholder="(555) 000-0000"
-            value={form.phone} onChange={handleChange}
-            />
-        </div>
-        <div className="contact__field">
-            <label htmlFor="email">Email</label>
-            <input
-            id="email" name="email" type="email"
-            placeholder="john@example.com"
-            value={form.email} onChange={handleChange}
-            />
-        </div>
-        </div>
-        <div className="contact__field contact__field--full">
-        <label htmlFor="message">Tell us about your roof</label>
-        <textarea
-            id="message" name="message" rows={4}
-            placeholder="Describe your commercial roof, square footage, current issues, or any questions..."
-            value={form.message} onChange={handleChange}
-        >
-        </textarea>
-        </div>
-        <button type="submit" className="contact__submit">
-        Submit Free Quote Request
-        </button>
-        <p className="contact__form-note">
-        No spam. We'll only contact you regarding your roofing inquiry.
-        </p>
-    </form>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!doctype html><!-- What: Document Type Declaration. Why: Browsers render the page in standards mode only with a doctype. How: This declares HTML5. -->
+
+
+
+<html lang='en'><!-- What: Root HTML Element. Why: Screen readers and translation tools need the page's language. How: This marks the document as English. -->
+
+
+	<head><!-- What: Document Head Element. Why: The page's metadata and icon link load before the body paints. How: This holds them in the sections below. -->
+
+
+		<!-- #region Document -->
+
+		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1,024 bytes the browser checks. -->
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' /> <!-- What: Viewport Meta. Why: Phones should lay the site out at device width instead of a zoomed-out desktop width. How: This sets the layout width to the device's and starts at no zoom. -->
+		<title>Seal and Shield LLC | Commercial Roofing</title>                  <!-- What: Page Title Element. Why: The tab, bookmarks, and search listings name the page by its title. How: This pairs the company's name with what it does. -->
+
+		<!-- #endregion Document -->
+
+
+		<!-- #region Search -->
+
+		<meta name='description' content='Seal and Shield LLC – Commercial Roofing in Lawrence, Kansas. Full installations, repairs, liquid coatings, TPO, EPDM. Serving all of Kansas and the continental US.' /> <!-- What: Description Meta. Why: Search listings and link previews show a short summary under the title. How: This sums up the company's services and where it works. -->
+
+		<!-- #endregion Search -->
+
+
+		<!-- #region Icons -->
+
+		<link href='/favicon.png' rel='icon' type='image/png' /> <!-- What: PNG Icon Link. Why: Browsers show the site's mark in tabs and bookmarks. How: This points at the PNG favicon in public/. -->
+
+		<!-- #endregion Icons -->
+
+
+	</head>
+
+
+
+	<body><!-- What: Document Body Element. Why: This holds the site's mount point, the form copy Netlify reads, and the entry script. How: The mount point stays empty until React renders the site into it. -->
+
+
+		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this id. -->
+
+		<form
+			data-netlify='true'
+			name='contactForm'
+
+			hidden
+		><!-- What: Netlify Detection Form Element. Why: Netlify finds forms by reading the deployed HTML, and the real contact form only exists once React renders it. How: This hidden, bare copy names the form and each field the React form submits, with no ids, so it never duplicates the real form's, and an aria-label on each field so accessibility checkers find every control named. -->
+
+
+			<input
+				name='name'
+
+				type='text'
+
+				aria-label='Name'
+			/><!-- What: Name Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the name field, which carries the visitor's name. -->
+
+			<input
+				name='company'
+
+				type='text'
+
+				aria-label='Company'
+			/><!-- What: Company Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the company field, which carries the visitor's company. -->
+
+			<input
+				name='phone'
+
+				type='tel'
+
+				aria-label='Phone'
+			/><!-- What: Phone Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the phone field, which carries the visitor's phone number. -->
+
+			<input
+				name='email'
+
+				type='email'
+
+				aria-label='Email'
+			/><!-- What: Email Input Element. Why: Netlify records only the fields it finds in this copy. How: This declares the email field, which carries the visitor's email address. -->
+
+			<textarea
+				name='message'
+
+				aria-label='Message'
+			></textarea><!-- What: Message Textarea Element. Why: Netlify records only the fields it finds in this copy. How: This declares the message field, which carries the visitor's description of their roof. -->
+
+
+		</form>
+
+		<script
+			src='/src/main.tsx'
+			type='module'
+		>/* What: Site Module Script Element. Why: This loads the site itself. How: Vite replaces it with the built, hashed bundle at build time. */</script>
+
+
+	</body>
+
+
 </html>
+
+

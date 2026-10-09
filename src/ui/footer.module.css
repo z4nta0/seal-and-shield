@@ -1,0 +1,268 @@
+
+
+
+/**
+ * footer.module.css = Site Footer Module
+ *
+ * @summary
+ * Styles for SitFooCom: the dark footer's row of columns (the brand and
+ * tagline, the section buttons, and the phone number and hours), which
+ * stacks into one centered column on screens 768px wide or narrower,
+ * and the copyright line below a hairline. The shared container styles the
+ * columns' row used to borrow from the global stylesheet are copied onto its
+ * own class here, which also retires the !important its vertical padding
+ * needed to beat the container's.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region footer */
+
+.sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the dark navy and draws a faint line along its top. */
+
+
+	background : var( --bac-inv-col );                                                       /* Background Inverse Color = #080f24 */
+	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
+
+
+}
+
+
+/* #region footer__inner */
+
+.fooInnDiv { /* What: Footer Inner Div. Why: The footer's columns line up with the page's content width. How: This centers a capped-width row with the container's side padding plus room above and below, and spreads the columns across it, wrapping when they run out of room. */
+
+
+	align-items     : center;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-p03 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-014 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	justify-content : space-between;
+	margin          : 0 auto;
+	max-width       : var( --con-max-wid );                                                                           /* Container Maximum Width ~= 1,449.365px */
+	padding         : var( --spa-ver-p04 ) var( --gut-sid-pad );                                                      /* Spacing Vertical Base Plus 4 ~= 44.876px, Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+@container app ( max-width : 768px ) { /* What: Narrow Footer Inner Div. Why: The columns don't fit side by side on narrow screens. How: This applies 768px wide and below. */
+
+
+	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The columns read best one above another on a narrow screen. How: This stacks them down the center with a smaller gap. */
+
+
+		align-items    : center;
+		flex-direction : column;
+		gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+	}
+
+
+}
+
+
+/* #region footer__brand */
+
+.fooBraDiv { /* What: Footer Brand Div. Why: The mark, name, and tagline read as one block. How: This sets the mark beside the two lines of text. */
+
+
+	align-items : center;
+	display     : flex;
+	gap         : var( --spa-hor-bas ); /* Spacing Horizontal Base ~= 14.572px */
+
+
+}
+
+.fooLogIma { /* What: Footer Logo Image. Why: The mark should sit at a small, fixed size and step back slightly on the dark band. How: This sizes it to a box about 45px square, scaled to fit, at a touch under full opacity. */
+
+
+	height     : calc( var( --ver-rhy-p04 ) * 1rem ); /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	object-fit : contain;
+	opacity    : 0.9;
+	width      : calc( var( --ver-rhy-p04 ) * 1rem ); /* Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+
+
+}
+
+.braNamPar { /* What: Brand Name Paragraph. Why: The footer names the company by its legal name. How: This sets it in the display font, extra bold and uppercase, in white. */
+
+
+	color          : var( --bac-pag-col );                   /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 800;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em ); /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	text-transform : uppercase;
+
+
+}
+
+.braTagPar { /* What: Brand Tagline Paragraph. Why: The tagline says what the company does and where, quietly. How: This sets it small and silver just below the name. */
+
+
+	color      : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
+	font-size  : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	margin-top : var( --spa-ver-m06 ); /* Spacing Vertical Base Minus 6 ~= 2.696px */
+
+
+}
+
+/* #endregion footer__brand */
+
+
+
+/* #region footer__nav */
+
+.fooLinNav { /* What: Footer Links Nav. Why: Visitors at the bottom of the page can jump back to any section. How: This lines the section buttons up in a row that wraps when it runs out of room. */
+
+
+	display   : flex;
+	flex-wrap : wrap;
+	gap       : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+
+
+}
+
+.fooLinBut { /* What: Footer Link Button. Why: Each button should read like a link in the footer's display style, not a boxed button. How: This drops the button's own background and border and sets its label in small, spaced capitals in light silver. */
+
+
+	background     : none;
+	border         : none;
+	color          : var( --tex-inv-col );                            /* Text Inverse Color = #c8d0e0 */
+	cursor         : pointer;
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 600;
+	letter-spacing : 0.12em;
+	text-transform : uppercase;
+	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.fooLinBut:hover { /* What: Hovered Footer Link Button. Why: The button should respond to the pointer. How: This turns its label white. */
+
+
+	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Link Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.fooLinBut { /* What: Motionless Footer Link Button. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion footer__nav */
+
+
+/* #region footer__contact */
+
+.fooConDiv { /* What: Footer Contact Div. Why: The phone number and hours close the row on the right. How: This right-aligns the two. */
+
+
+	text-align : right;
+
+
+}
+@container app ( max-width : 768px ) { /* What: Narrow Footer Contact Div. Why: Once the columns stack, everything centers. How: This applies 768px wide and below. */
+
+
+	.fooConDiv { /* What: Centered Footer Contact Div. Why: The stacked columns share one center line. How: This centers the phone number and hours. */
+
+
+		text-align : center;
+
+
+	}
+
+
+}
+
+.fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number is the footer's main call to action. How: This sets it on its own line in the bold display font, in light blue. */
+
+
+	color          : var( --acc-lig-col );                            /* Accent Light Color ~= #4488f6 */
+	display        : block;
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 700;
+	letter-spacing : 0.04em;
+	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.fooPhoAnc:hover { /* What: Hovered Footer Phone Anchor. Why: The link should respond to the pointer. How: This turns it white. */
+
+
+	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Phone Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.fooPhoAnc { /* What: Motionless Footer Phone Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.fooHouPar { /* What: Footer Hours Paragraph. Why: Callers should know when someone will answer, without it competing with the number. How: This sets the hours small and silver just below the phone number. */
+
+
+	color      : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
+	font-size  : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	margin-top : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px */
+
+
+}
+
+/* #endregion footer__contact */
+
+/* #endregion footer__inner */
+
+
+
+/* #region footer__bottom */
+
+.fooBotDiv { /* What: Footer Bottom Div. Why: The copyright line sits apart from the columns, across the footer's full width. How: This centers it below a fainter hairline with padding around it. */
+
+
+	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-011-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff, Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
+	padding    : var( --spa-ver-p01 ) var( --gut-sid-pad );                                                      /* Spacing Vertical Base Plus 1 ~= 19.304px, Gutter Side Padding, about 19.304px - 44.876px */
+	text-align : center;
+
+
+}
+
+.fooCopPar { /* What: Footer Copyright Paragraph. Why: The copyright line should be present but quiet. How: This sets it small, slightly spaced, and silver. */
+
+
+	color          : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	letter-spacing : 0.04em;
+
+
+}
+
+/* #endregion footer__bottom */
+
+/* #endregion footer */
+
+

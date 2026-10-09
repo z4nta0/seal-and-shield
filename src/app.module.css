@@ -1,0 +1,26 @@
+
+
+
+/**
+ * app.module.css = App Root Module
+ *
+ * @summary
+ * Styles for AppRooCom: the root wrapper around the page, named as the app
+ * container so each module's layout queries measure the site's own width
+ * rather than the viewport's, the same as reese-roofing.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+.appRooDiv { /* What: App Root Div. Why: Every module's layout breakpoints should measure the site itself, so they keep working if the site is ever embedded or framed. How: This names the wrapper the app container, queried by its inline size. */
+
+
+	container : app / inline-size;
+
+
+}
+
+

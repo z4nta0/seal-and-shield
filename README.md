@@ -1,13 +1,17 @@
-# Reese Roofing
+# Seal and Shield
 
-A single-page marketing site for Reese Roofing — a commercial roofing contractor serving Lawrence, Kansas and the surrounding area.
+The website for Seal and Shield LLC, a commercial roofing contractor based in Lawrence, Kansas, serving Topeka, the Kansas City metro, all of Kansas, and the continental U.S. It's built and maintained by [techgeek.support](https://techgeek.support/), whose portfolio links to it.
+
+Live at [sealandshieldroof.com](https://sealandshieldroof.com/).
 
 ## Stack
 
-- **Node.js** runtime
-- **Vite** dev server / bundler
-- **React 18** + **TypeScript**
-- **React Router v6** (set up for future expansion — currently routes `/` to Home and everything else to a 404)
+- **Node.js** 22.22 or newer (React Router 8 requires it); Netlify builds with Node 24
+- **Vite 8** dev server / bundler
+- **React 19** + **TypeScript 6**
+- **React Router 8** (in place for future pages: the site is one page today)
+- **ESLint 9** with typescript-eslint, and **Playwright** with axe-core for the test suites
+- Deployed on **Netlify**, which serves `index.html` for every path (`public/_redirects`) and receives the contact form through Netlify Forms
 
 ## Getting started
 
@@ -17,6 +21,24 @@ npm run dev
 ```
 
 Open the URL Vite prints (usually `http://localhost:5173`).
+
+## Checks
+
+```bash
+npm run lint       # ESLint across the repo
+npm run typecheck  # TypeScript across src/, the configs, and tests/
+```
+
+## Tests
+
+```bash
+npm test                    # every suite
+npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
+npm run test:rendering      # full-page screenshots of each page state against approved baselines
+npm run test:responsive     # the page and the mobile menu from 320 to 1,920px: no sideways scroll, spill, or overlap
+```
+
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5191, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how the page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
 ## Build
 
@@ -29,35 +51,30 @@ npm run preview
 
 ```
 src/
-├── components/        Reusable UI (Nav, Footer)
-├── sections/          Page sections (Hero, Services, About, Contact)
-├── pages/             Route-level pages (Home, NotFound)
-├── styles/globals.css Design tokens + reset + base typography
-├── App.tsx            React Router setup
+├── assets/            Images and fonts shared by 2+ pages (logo-simple.png, fonts/)
+├── pages/
+│   └── home/          Home page and its sections (hero, services, about, contact), each with its own .module.css, plus reveal.ts and logo-full.png
+├── ui/                Shared components (nav, footer), each with its own .module.css
+├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, and the shared scroll-reveal attributes)
+├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling)
+├── app.tsx            Root component
 └── main.tsx           Entry point
+public/                Files served at fixed addresses: the favicon and Netlify's _redirects
+tests/
+├── accessibility/     axe-core scan and scripted checks
+├── rendering/         screenshot comparisons and their baselines/
+├── responsive/        layout checks across screen widths
+├── support/           the page states the suites visit
+└── playwright.config.ts
 ```
 
 ## Design notes
 
-- **Type pairing:** Fraunces (display serif, optical-size aware) paired with Inter Tight (refined sans). Italic Fraunces accents pull the design together.
-- **Palette:** Warm off-white paper (`#f5f2ec`), deep ink (`#1a1f24`), and a navy accent (`#1f4e7a`) drawn from the logo. Italic display accents and small details (numbered IDs, list bullets, pull quote marks) all use this brand navy so the design feels native to the logo.
-- **Layout:** Editorial grid, generous negative space, hairline dividers, numbered sections (01–04). Hover states are intentional but never showy.
-- **Logo usage:**
-  - The **full logo** (`/public/logo-full.png`) anchors the hero as the primary visual, doubles as a "seal" in the sticky left column of the About section, and appears on a paper-colored signature card in the Contact section.
-  - The **simple mark** (`/public/logo-mark.png`) is used in the nav bar, the footer, and as the favicon (multiple sizes including `.ico`, PNGs at 16/32/192/512, and an Apple touch icon).
+- **Type pairing:** Barlow Condensed for headings, labels, and buttons, with Lato for body text, both self-hosted (`src/assets/fonts/`, declared in `src/styles/fonts.css`), so a visit makes no third-party requests.
+- **Palette:** Deep navy (`#0f1e45`, with a darker `#080f24` for the bar, hero, and footer), a strong blue (`#1e56c8`) for buttons and labels on light sections, a lighter blue (`#4488f6`) for accents on dark sections, and an off-white (`#f4f6fa`) behind the services.
+- **Logo usage:** The **full logo** (`src/pages/home/logo-full.png`) anchors the hero and sits above the company details in the About section. The **simple mark** (`src/assets/logo-simple.png`) is used in the nav bar and the footer.
+- **Motion:** The hero fades in on load, the other sections fade in as they scroll into view, and the hero logo's ring pulses. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion.
 
-## Customization checklist
+## Contact form
 
-When you're ready to make this real, update:
-
-- **Phone number:** `(785) 555-0199` — search the repo for it; appears in Nav, Contact, Footer area
-- **Email:** `hello@reeseroofing.example` — same; appears in Contact and the mailto form action
-- **Address:** placeholder Lawrence, KS 66044 — Contact section
-- **Stats in Hero:** 17+ years, 400+ roofs, etc. — replace with real numbers
-- **Services list:** edit `services` array in `src/sections/Services.tsx`
-- **About copy & quote:** `src/sections/About.tsx`
-- **Form backend:** the form currently uses `mailto:` as a no-backend fallback. To wire up a real backend, replace the `handleSubmit` handler in `src/sections/Contact.tsx` with a `fetch` POST to your endpoint (Formspree, Netlify Forms, your own API, etc.).
-
-## Routing
-
-The router is set up so you can easily add pages later (e.g. `/services/tpo-roofing`, `/projects`, `/blog`) without restructuring. Add a `<Route>` in `src/App.tsx` and a new component under `src/pages/`.
+The form posts to Netlify Forms as `contactForm`. Netlify finds the form by reading the deployed HTML, before React has rendered anything, so `index.html` carries a hidden, bare copy of it with the same name and field names. A field added to or renamed in `src/pages/home/contact.tsx` has to be changed in that copy too, or Netlify won't record it.

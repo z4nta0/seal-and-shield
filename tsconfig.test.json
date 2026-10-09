@@ -3,7 +3,9 @@
 		"allowImportingTsExtensions": true,
 		"erasableSyntaxOnly": true,
 		"lib": [
-			"ES2023"
+			"ES2023",
+			"DOM",
+			"DOM.Iterable"
 		],
 		"module": "ESNext",
 		"moduleDetection": "force",
@@ -16,14 +18,13 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "ES2023",
-		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
 		"types": [
 			"node"
 		],
 		"verbatimModuleSyntax": true
 	},
 	"include": [
-		"eslint.config.ts",
-		"vite.config.ts"
+		"tests"
 	]
 }

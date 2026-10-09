@@ -1,0 +1,368 @@
+
+
+
+/**
+ * about.module.css = About Section Module
+ *
+ * @summary
+ * Styles for AboSecCom: the white section's two columns, the full logo on a
+ * light panel above the navy info card on the left, and the story and the
+ * three values on the right, which stack into one column at 900px wide or
+ * narrower with the left column centered and capped. The shared container,
+ * eyebrow label, section title, and divider styles the section used to borrow
+ * from the global stylesheet are copied in under the same names every module
+ * gives them, along with the text column's adjustment to the label. The phone
+ * value is an anchor that shares the value rule, and its own link rule comes
+ * after that rule on purpose, so its light blue wins.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region about */
+
+.homAboSec { /* What: Home About Section. Why: The company's story sits on a white band between the light services and the dark contact section. How: This fills it white with generous padding above and below. */
+
+
+	background : var( --bac-pag-col );   /* Background Page Color = #ffffff */
+	padding    : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
+
+
+}
+
+
+/* #region container */
+
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with side padding, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : var( --con-max-wid );   /* Container Maximum Width ~= 1,449.365px */
+	padding   : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+
+
+/* #region about__layout */
+
+.aboLayDiv { /* What: About Layout Div. Why: The logo and details sit beside the story. How: This lays them out in two top-aligned columns, the story's a little wider. */
+
+
+	align-items           : start;
+	display               : grid;
+	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-017 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 17 ~= 115.363px @ 1,920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
+	grid-template-columns : 1fr 1.4fr;
+
+
+}
+@container app ( max-width : 900px ) { /* What: Narrow About Layout Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
+
+
+	.aboLayDiv { /* What: Stacked About Layout Div. Why: The details and story read best one above the other. How: This collapses to one column, with a row gap that clears the logo's panel. */
+
+
+		grid-template-columns : 1fr;
+		row-gap               : calc( var( --spa-ver-p04 ) + var( --spa-ver-p03 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Panel-Cleared Row Gap. Why: The logo's light panel reaches below its column, and the heading under it still needs the full gap. How: This adds the panel's own reach to the stacked gap. */
+
+
+	}
+
+
+}
+
+
+/* #region about__visual */
+
+.aboVisDiv { /* What: About Visual Div. Why: The left column pairs the logo with the company's key facts. How: This stacks the logo over the info card, centered, as the positioning context for the logo's light panel. */
+
+
+	align-items    : center;
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	position       : relative;
+
+
+}
+@container app ( max-width : 900px ) { /* What: Narrow About Visual Div. Why: The stacked column shouldn't stretch across the whole screen. How: This applies 900px wide and below. */
+
+
+	.aboVisDiv { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This caps the column at 400px and centers it. */
+
+
+		margin    : 0 auto;
+		max-width : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.596px */
+
+
+	}
+
+
+}
+
+.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, in the off-white behind everything else. */
+
+
+	background : var( --bac-sur-col );              /* Background Surface Color = #f4f6fa */
+	bottom     : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	left       : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	position   : absolute;
+	right      : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	top        : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	z-index    : 0;
+
+
+}
+
+.aboLogIma { /* What: About Logo Image. Why: The full logo anchors the left column and should lift off its panel. How: This sizes it with the screen at horizontal step 021, never narrower than the p09 rhythm step (about 183px), casts a soft navy shadow under it, and layers it above the panel. */
+
+
+	filter   : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 4 ~= 44.876px, Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
+	position : relative;
+	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) );                                                                                             /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
+	z-index  : 1;
+
+
+}
+
+
+
+/* #region about__info-card */
+
+.infCarDiv { /* What: Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
+
+
+	background     : var( --bac-inr-col );                                                                           /* Background Inverse Raised Color = #0f1e45 */
+	display        : flex;
+	flex-direction : column;
+	gap            : 0;
+	padding        : var( --spa-ver-p02 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-014 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	position       : relative;
+	width          : 100%;
+	z-index        : 1;
+
+
+}
+
+
+/* #region about__info-row */
+
+.infRowDiv { /* What: Info Row Div. Why: Each fact pairs its label with its value on one line. How: This spreads the two to either end with a faint divider below. */
+
+
+	align-items     : center;
+	border-bottom   : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
+	display         : flex;
+	justify-content : space-between;
+	padding         : var( --spa-ver-bas ) 0;                                                     /* Spacing Vertical Base ~= 14.572px */
+
+
+}
+.infRowDiv:last-child { /* What: Last Info Row Div. Why: The card ends without a divider. How: This drops the last row's border. */
+
+
+	border-bottom : none;
+
+
+}
+
+.infLabSpa { /* What: Info Label Span. Why: Each value needs a quiet label. How: This sets it small, spaced, uppercase, and silver. */
+
+
+	color          : var( --tex-inm-col );                   /* Text Inverse Muted Color = #8a9ab5 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
+	font-weight    : 600;
+	letter-spacing : calc( var( --cdn-pow-007-rec ) * 1em ); /* Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
+	text-transform : uppercase;
+
+
+}
+
+.infValSpa,
+.infValAnc { /* What: Info Value Span And Anchor. Why: The fact itself is the row's focus, whether it's plain text or the phone link. How: This sets it in the bold display font in white. */
+
+
+	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 700;
+	letter-spacing : 0.03em;
+
+
+}
+
+.infValAnc { /* What: Info Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
+
+
+	color      : var( --acc-lig-col );                            /* Accent Light Color ~= #4488f6 */
+	transition : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.infValAnc:hover { /* What: Hovered Info Value Anchor. Why: The link should respond to the pointer. How: This turns it white. */
+
+
+	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Info Value Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.infValAnc { /* What: Motionless Info Value Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion about__info-row */
+
+/* #endregion about__info-card */
+
+/* #endregion about__visual */
+
+
+
+/* #region about__text */
+
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
+
+
+	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 700;
+	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
+	text-transform : uppercase;
+
+
+}
+.aboTexDiv .eyeLabPar { /* What: Text Column Eyebrow Label Paragraph. Why: Light blue doesn't have enough contrast on the white section. How: This turns the label the deeper blue. */
+
+
+	color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+
+
+}
+
+.secTitHea { /* What: Section Title Heading. Why: The heading leads the story. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
+
+
+	color          : var( --tex-mai-col );                                     /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
+	font-weight    : 800;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	text-transform : uppercase;
+
+
+}
+
+.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the story. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
+
+
+	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
+	height     : calc( var( --ver-rhy-m06 ) * 1rem );         /* Vertical Rhythm Base Minus 6 ~= 2.696px */
+	margin     : var( --spa-ver-bas ) 0 var( --spa-ver-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Vertical Base Plus 2 ~= 25.572px */
+	width      : calc( var( --ver-rhy-p04 ) * 1rem );         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+
+
+}
+
+.aboBodPar { /* What: About Body Paragraph. Why: The story should read comfortably. How: This sets it in the muted text color with generous leading and room below each paragraph. */
+
+
+	color         : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+
+
+}
+
+
+
+/* #region about__values */
+
+.aboValDiv { /* What: About Values Div. Why: The story closes with what the company stands for. How: This stacks the three values with room above the list. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	margin-top     : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+
+
+}
+
+
+/* #region about__value */
+
+.valIteDiv { /* What: Value Item Div. Why: Each value reads as its own row. How: This sets the marker beside the value's text, top-aligned. */
+
+
+	align-items : flex-start;
+	display     : flex;
+	gap         : var( --spa-hor-p01 ); /* Spacing Horizontal Base Plus 1 ~= 19.304px */
+
+
+}
+
+.valMarDiv { /* What: Value Marker Div. Why: A short bar marks each value. How: This draws a 3px blue bar at least about 45px tall that never shrinks. */
+
+
+	background  : var( --acc-mai-col );                /* Accent Main Color = #1e56c8 */
+	flex-shrink : 0;
+	margin-top  : var( --spa-ver-m05 );                /* Spacing Vertical Base Minus 5 ~= 3.572px */
+	min-height  : calc( var( --ver-rhy-p04 ) * 1rem ); /* Vertical Rhythm Base Plus 4 ~= 44.876px */
+	width       : 3px;
+
+
+}
+
+.valTitHea { /* What: Value Title Heading. Why: Each value is named. How: This sets the name in the bold display font, uppercase and navy. */
+
+
+	color          : var( --tex-mai-col );                   /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 700;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em ); /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	margin-bottom  : var( --spa-ver-m04 );                   /* Spacing Vertical Base Minus 4 ~= 4.732px */
+	text-transform : uppercase;
+
+
+}
+
+.valDesPar { /* What: Value Description Paragraph. Why: Each value is explained in a sentence. How: This sets it small in the muted text color with generous leading. */
+
+
+	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+
+
+}
+
+/* #endregion about__value */
+
+/* #endregion about__values */
+
+/* #endregion about__text */
+
+/* #endregion about__layout */
+
+/* #endregion container */
+
+/* #endregion about */
+
+
