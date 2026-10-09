@@ -37,8 +37,8 @@
 
 
 	margin    : 0 auto;
-	max-width : var( --con-max-wid );   /* Container Maximum Width = 1,180px */
-	padding   : 0 var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	max-width : var( --con-max-wid );   /* Container Maximum Width ~= 1,449.365px */
+	padding   : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 
 
 }
@@ -46,11 +46,11 @@
 
 /* #region services__header */
 
-.serHeaDiv { /* What: Services Header Div. Why: The section opens by saying what it covers, at a readable width. How: This caps the header at 600px and leaves room below it. */
+.serHeaDiv { /* What: Services Header Div. Why: The section opens by saying what it covers, at a readable width. How: This caps the header at horizontal step 024, never narrower than the p12 rhythm step (about 426px), and leaves room below it. */
 
 
-	margin-bottom : var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 5 ~= 59.447px */
-	max-width     : 600px;
+	margin-bottom : var( --spa-ver-p05 );                                             /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	max-width     : max( calc( var( --ver-rhy-p12 ) * 1rem ), var( --hor-rhy-024 ) ); /* Vertical Rhythm Base Plus 12 ~= 425.596px, Horizontal Rhythm 24 ~= 825.907px @ 1,920px width */
 
 
 }
@@ -102,7 +102,7 @@
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
 	height     : calc( var( --ver-rhy-m06 ) * 1rem );         /* Vertical Rhythm Base Minus 6 ~= 2.696px */
 	margin     : var( --spa-ver-bas ) 0 var( --spa-ver-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Vertical Base Plus 2 ~= 25.572px */
-	width      : 48px;
+	width      : calc( var( --ver-rhy-p04 ) * 1rem );         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 
 
 }
@@ -128,13 +128,13 @@
 
 
 	display               : grid;
-	gap                   : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	gap                   : var( --spa-ver-p02 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	grid-template-columns : repeat( 4, 1fr );
-	margin-bottom         : var( --spa-ver-p06 );                      /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	margin-bottom         : var( --spa-ver-p06 );                                                                           /* Spacing Vertical Base Plus 6 ~= 78.751px */
 
 
 }
-@media ( max-width : 1024px ) { /* What: Medium Services Grid Div. Why: Four cards across get cramped on medium screens. How: This applies 1,024px wide and below. */
+@container app ( max-width : 1024px ) { /* What: Medium Services Grid Div. Why: Four cards across get cramped on medium screens. How: This applies 1,024px wide and below. */
 
 
 	.serGriDiv { /* What: Two-Column Services Grid Div. Why: The cards read better two across. How: This switches to two columns. */
@@ -147,7 +147,7 @@
 
 
 }
-@media ( max-width : 580px ) { /* What: Narrow Services Grid Div. Why: Two cards across don't fit on phones. How: This applies 580px wide and below. */
+@container app ( max-width : 580px ) { /* What: Narrow Services Grid Div. Why: Two cards across don't fit on phones. How: This applies 580px wide and below. */
 
 
 	.serGriDiv { /* What: Single-Column Services Grid Div. Why: Each card needs the full width on a phone. How: This switches to one column. */
@@ -244,22 +244,22 @@
 
 
 	align-items           : center;
-	background            : var( --bac-inr-col );                      /* Background Inverse Raised Color = #0f1e45 */
+	background            : var( --bac-inr-col );                                                                           /* Background Inverse Raised Color = #0f1e45 */
 	display               : grid;
-	gap                   : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	gap                   : var( --spa-ver-p04 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-015 ), var( --spa-hor-p05 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 5 ~= 59.447px */
 	grid-template-columns : 1fr 1fr;
-	padding               : var( --spa-ver-p05 ) var( --spa-hor-p05 ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 5 ~= 59.447px */
+	padding               : var( --spa-ver-p05 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-016 ), var( --spa-hor-p05 ) ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 16 ~= 87.085px @ 1,920px width, Spacing Horizontal Base Plus 5 ~= 59.447px */
 
 
 }
-@media ( max-width : 768px ) { /* What: Narrow Services Area Div. Why: Two columns don't fit the panel on narrow screens. How: This applies 768px wide and below. */
+@container app ( max-width : 768px ) { /* What: Narrow Services Area Div. Why: Two columns don't fit the panel on narrow screens. How: This applies 768px wide and below. */
 
 
-	.serAreDiv { /* What: Stacked Services Area Div. Why: The text and tags read best one above the other. How: This collapses to one column with tighter padding. */
+	.serAreDiv { /* What: Stacked Services Area Div. Why: The text and tags read best one above the other. How: This collapses to one column with tighter top and bottom padding, while its sides follow the screen. */
 
 
 		grid-template-columns : 1fr;
-		padding               : var( --spa-ver-p04 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+		padding               : var( --spa-ver-p04 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-016 ), var( --spa-hor-p05 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 16 ~= 87.085px @ 1,920px width, Spacing Horizontal Base Plus 5 ~= 59.447px */
 
 
 	}

@@ -39,8 +39,8 @@
 
 
 	margin    : 0 auto;
-	max-width : var( --con-max-wid );   /* Container Maximum Width = 1,180px */
-	padding   : 0 var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	max-width : var( --con-max-wid );   /* Container Maximum Width ~= 1,449.365px */
+	padding   : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 
 
 }
@@ -53,19 +53,19 @@
 
 	align-items           : start;
 	display               : grid;
-	gap                   : var( --spa-ver-p06 ) var( --spa-hor-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 6 ~= 78.751px */
+	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-017 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 17 ~= 115.363px @ 1,920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
 	grid-template-columns : 1fr 1.4fr;
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow About Layout Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
+@container app ( max-width : 900px ) { /* What: Narrow About Layout Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
 
 
 	.aboLayDiv { /* What: Stacked About Layout Div. Why: The details and story read best one above the other. How: This collapses to one column with a smaller gap. */
 
 
-		gap                   : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 		grid-template-columns : 1fr;
+		row-gap               : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 	}
@@ -87,14 +87,14 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow About Visual Div. Why: The stacked column shouldn't stretch across the whole screen. How: This applies 900px wide and below. */
+@container app ( max-width : 900px ) { /* What: Narrow About Visual Div. Why: The stacked column shouldn't stretch across the whole screen. How: This applies 900px wide and below. */
 
 
 	.aboVisDiv { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This caps the column at 400px and centers it. */
 
 
 		margin    : 0 auto;
-		max-width : 400px;
+		max-width : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.596px */
 
 
 	}
@@ -116,26 +116,13 @@
 
 }
 
-.aboLogIma { /* What: About Logo Image. Why: The full logo anchors the left column and should lift off its panel. How: This sizes it to 260px wide, casts a soft navy shadow under it, and layers it above the panel. */
+.aboLogIma { /* What: About Logo Image. Why: The full logo anchors the left column and should lift off its panel. How: This sizes it with the screen at horizontal step 021, never narrower than the p09 rhythm step (about 183px), casts a soft navy shadow under it, and layers it above the panel. */
 
 
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 4 ~= 44.876px, Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	position : relative;
-	width    : 260px;
+	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) );                                                                                             /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
 	z-index  : 1;
-
-
-}
-@media ( max-width : 900px ) { /* What: Narrow About Logo Image. Why: The capped column has less room for the logo. How: This applies 900px wide and below. */
-
-
-	.aboLogIma { /* What: Smaller About Logo Image. Why: The logo should fit the narrower column. How: This sizes it to 200px wide. */
-
-
-		width : 200px;
-
-
-	}
 
 
 }
@@ -147,11 +134,11 @@
 .infCarDiv { /* What: Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
 
 
-	background     : var( --bac-inr-col );                      /* Background Inverse Raised Color = #0f1e45 */
+	background     : var( --bac-inr-col );                                                                           /* Background Inverse Raised Color = #0f1e45 */
 	display        : flex;
 	flex-direction : column;
 	gap            : 0;
-	padding        : var( --spa-ver-p02 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	padding        : var( --spa-ver-p02 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-014 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	position       : relative;
 	width          : 100%;
 	z-index        : 1;
@@ -286,7 +273,7 @@
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
 	height     : calc( var( --ver-rhy-m06 ) * 1rem );         /* Vertical Rhythm Base Minus 6 ~= 2.696px */
 	margin     : var( --spa-ver-bas ) 0 var( --spa-ver-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Vertical Base Plus 2 ~= 25.572px */
-	width      : 48px;
+	width      : calc( var( --ver-rhy-p04 ) * 1rem );         /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 
 
 }

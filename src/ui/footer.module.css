@@ -39,15 +39,15 @@
 	align-items     : center;
 	display         : flex;
 	flex-wrap       : wrap;
-	gap             : var( --spa-ver-p03 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	gap             : var( --spa-ver-p03 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-014 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid );                      /* Container Maximum Width = 1,180px */
-	padding         : var( --spa-ver-p04 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	max-width       : var( --con-max-wid );                                                                           /* Container Maximum Width ~= 1,449.365px */
+	padding         : var( --spa-ver-p04 ) var( --gut-sid-pad );                                                      /* Spacing Vertical Base Plus 4 ~= 44.876px, Gutter Side Padding, about 19.304px - 44.876px */
 
 
 }
-@media ( max-width : 768px ) { /* What: Narrow Footer Inner Div. Why: The columns don't fit side by side on narrow screens. How: This applies 768px wide and below. */
+@container app ( max-width : 768px ) { /* What: Narrow Footer Inner Div. Why: The columns don't fit side by side on narrow screens. How: This applies 768px wide and below. */
 
 
 	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The columns read best one above another on a narrow screen. How: This stacks them on the left with a smaller gap. */
@@ -175,7 +175,7 @@
 
 
 }
-@media ( max-width : 768px ) { /* What: Narrow Footer Contact Div. Why: Once the columns stack, everything lines up on the left. How: This applies 768px wide and below. */
+@container app ( max-width : 768px ) { /* What: Narrow Footer Contact Div. Why: Once the columns stack, everything lines up on the left. How: This applies 768px wide and below. */
 
 
 	.fooConDiv { /* What: Left-Aligned Footer Contact Div. Why: The stacked columns share one left edge. How: This left-aligns the phone number and hours. */
@@ -245,7 +245,7 @@
 
 
 	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-011-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff, Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
-	padding    : var( --spa-ver-p01 ) var( --spa-hor-p03 );                                                      /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	padding    : var( --spa-ver-p01 ) var( --gut-sid-pad );                                                      /* Spacing Vertical Base Plus 1 ~= 19.304px, Gutter Side Padding, about 19.304px - 44.876px */
 	text-align : center;
 
 

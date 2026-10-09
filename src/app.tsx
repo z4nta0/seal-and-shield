@@ -3,6 +3,9 @@
 
 // #region Imports
 
+import cssModObj from './app.module.css'; // What: CSS Module Object. Why: The root wrapper's container styles live in its own module. How: This reads the scoped class name for the root div.
+
+
 import { HomPagCom } from './pages/home/home.tsx'; // What: Home Page Component. Why: The home page holds every section of the site. How: This is rendered as the site's root.
 
 // #endregion Imports
@@ -14,8 +17,9 @@ import { HomPagCom } from './pages/home/home.tsx'; // What: Home Page Component.
  *
  * @summary
  * The site's root component, mounted by main.tsx inside the router. The site
- * has one page so far, so it renders the home page directly; the routes for
- * the home page and a 404 page join here once the 404 page is built.
+ * has one page so far, so it renders the home page directly inside the app
+ * container the layout queries measure; the routes for the home page and a
+ * 404 page join here once the 404 page is built.
  *
  * Sections:
  *  - Components
@@ -36,13 +40,14 @@ import { HomPagCom } from './pages/home/home.tsx'; // What: Home Page Component.
  *
  * @summary
  * The top of the component tree: renders the home page, the only page the
- * site has until the 404 page and its routes arrive.
+ * site has until the 404 page and its routes arrive, inside the app
+ * container that every module's layout queries measure.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.
  *
- * @returns The home page.
+ * @returns The home page inside the app container.
  *
  * @example
  * ```tsx
@@ -54,7 +59,19 @@ import { HomPagCom } from './pages/home/home.tsx'; // What: Home Page Component.
 function AppRooCom () : React.JSX.Element {
 
 
-	return <HomPagCom />; // What: Home Page Return. Why: The site has a single page for now. How: This renders HomPagCom as the whole app.
+	return (
+
+
+		<div className={ cssModObj.appRooDiv }>{ /* What: App Root Div Element. Why: Every module's layout queries measure one shared container. How: This wraps the page in the element named the app container. */ }
+
+
+			<HomPagCom />{ /* What: Home Page Component. Why: The site has a single page for now. How: This renders the home page inside the app container. */ }
+
+
+		</div>
+
+
+	);
 
 
 }

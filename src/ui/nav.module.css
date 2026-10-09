@@ -70,8 +70,8 @@
 	display         : flex;
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid );   /* Container Maximum Width = 1,180px */
-	padding         : 0 var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	max-width       : var( --con-max-wid );   /* Container Maximum Width ~= 1,449.365px */
+	padding         : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 
 
 }
@@ -155,7 +155,7 @@
 
 
 }
-@media ( max-width : 768px ) { /* What: Narrow Navigation Links Nav. Why: The links don't fit the bar on narrow screens, where the menu takes over. How: This applies 768px wide and below. */
+@container app ( max-width : 768px ) { /* What: Narrow Navigation Links Nav. Why: The links don't fit the bar on narrow screens, where the menu takes over. How: This applies 768px wide and below. */
 
 
 	.navLinNav { /* What: Hidden Navigation Links Nav. Why: The menu panel holds the links instead. How: This hides the row. */
@@ -240,7 +240,7 @@
 	font-size      : var( --fon-siz-p01 );                                                                                  /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );                                                                /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
-	padding        : var( --spa-ver-m02 ) var( --spa-hor-p01 );                                                             /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+	padding        : var( --spa-ver-m02 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) );        /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
@@ -285,7 +285,7 @@
 
 
 }
-@media ( max-width : 768px ) { /* What: Narrow Navigation Toggle Button. Why: The menu replaces the links on narrow screens. How: This applies 768px wide and below. */
+@container app ( max-width : 768px ) { /* What: Narrow Navigation Toggle Button. Why: The menu replaces the links on narrow screens. How: This applies 768px wide and below. */
 
 
 	.navTogBut { /* What: Shown Navigation Toggle Button. Why: The button has to appear where the links no longer fit. How: This shows it. */
@@ -306,7 +306,7 @@
 	display    : block;
 	height     : calc( var( --ver-rhy-m07 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-	width      : 26px;
+	width      : calc( var( --ver-rhy-p02 ) * 1rem );                                                                    /* Vertical Rhythm Base Plus 2 ~= 25.572px */
 
 
 }
@@ -361,7 +361,7 @@
 	flex-direction : column;
 	max-height     : 0;
 	overflow       : hidden;
-	padding        : 0 var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	padding        : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
 	transition     : max-height 0.4s ease;   /* What: Panel Height Transition. Why: The panel has to push down as it opens, which a transform can't do, and its content height isn't known, so it eases a capped max-height instead. How: This animates the max-height between 0 and the open cap. */
 
 
@@ -370,11 +370,11 @@
 
 
 	max-height : calc( var( --ver-rhy-p12 ) * 1rem );         /* Vertical Rhythm Base Plus 12 ~= 425.596px */
-	padding    : 0 var( --spa-hor-p03 ) var( --spa-ver-p02 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
+	padding    : 0 var( --gut-sid-pad ) var( --spa-ver-p02 ); /* Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
-@media ( max-width : 768px ) { /* What: Narrow Navigation Menu Div. Why: The panel exists only where the menu does. How: This applies 768px wide and below. */
+@container app ( max-width : 768px ) { /* What: Narrow Navigation Menu Div. Why: The panel exists only where the menu does. How: This applies 768px wide and below. */
 
 
 	.navMenDiv { /* What: Shown Navigation Menu Div. Why: The panel has to be in the layout to open. How: This lays it out as a column, still collapsed until opened. */
