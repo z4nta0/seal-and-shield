@@ -170,7 +170,23 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      card needs a new filename (`og-image-2.png`), since apps cache previews.
      After the deploy, check the live card with a preview checker such as
      opengraph.xyz or Facebook's Sharing Debugger.
-   - Still to come: interaction feedback.
+   - **Interaction feedback: done 2026-10-09.** Every link and button
+     changes color on hover, and the buttons also lift a pixel (the service
+     cards 3px); buttons press in to 0.97 and text links dim. Focus rings
+     ease in from a zero-width outline set once in `styles.css`, drawn in
+     `--foc-rin-col`, which the dark bar, hero, About card, contact
+     section, footer, and 404 page set to the light accent for contrast.
+     The contact form's success panel fades up with its check popping in
+     once, and its error fades in. Everything has a reduced-motion variant.
+     The menu's phone button draws its hover outline as an inset
+     box-shadow, which takes no space, so the closed state looks exactly as
+     before.
+   - **Reveal hooks go on a wrapper** wherever the revealed element has its
+     own hover or press transform: the reveal's global rule sets
+     `transition` and `transform` on the element it marks, which silently
+     cancelled the service cards' lift (in every engine, before this pass)
+     and would have cancelled the Call Now button's. Each card and that
+     button now sit inside a plain reveal div.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
@@ -197,8 +213,14 @@ waiting for the page to settle.
   buttons land on their sections with a clean address; the contact form
   refuses incomplete requests and reports a faked Netlify answer honestly;
   and the 404 page, its buttons, and a section address like /#about lead
-  where they should. reese-roofing's feedback checks join it with the
-  interaction feedback work.
+  where they should. `feedback.spec.ts`, adapted from reese-roofing's,
+  checks that every control in every state has a hover, press, and focus
+  change with a transition, that the focus ring eases in to full width, and
+  that feedback stays without motion under reduced motion. Its two
+  every-control probes are marked slow, since each takes about 28 seconds
+  in Chromium. The open menu state parks the pointer in the bar's corner
+  after tapping the toggle, so the toggle's hover color stays out of every
+  check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
   pixel may differ, and the per-pixel color threshold is 0 too, since

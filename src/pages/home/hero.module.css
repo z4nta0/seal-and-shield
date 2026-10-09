@@ -29,6 +29,8 @@
 .homHerSec { /* What: Home Hero Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
 
 
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+
 	background      : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
 	display         : flex;
 	flex-direction  : column;
@@ -286,7 +288,7 @@
 	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );                                                         /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	padding        : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : all var( --dur-tra-p02 ) var( --mot-sta-eas );                                                  /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -304,6 +306,7 @@
 
 	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 	border-color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transform    : translateY( -1px );;  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -321,6 +324,14 @@
 
 	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
 	border-color : var( --bac-pag-col );                                                /* Background Page Color = #ffffff */
+	transform    : translateY( -1px );;                                                 /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.butBasAnc.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, with the base class chained so it outranks the hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
 
 
 }

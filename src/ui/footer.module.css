@@ -24,6 +24,8 @@
 .sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the dark navy and draws a faint line along its top. */
 
 
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+
 	background : var( --bac-inv-col );                                                       /* Background Inverse Color = #080f24 */
 	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
 
@@ -131,14 +133,14 @@
 
 	background     : none;
 	border         : none;
-	color          : var( --tex-inv-col );                            /* Text Inverse Color = #c8d0e0 */
+	color          : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
 	cursor         : pointer;
-	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
 	letter-spacing : 0.12em;
 	text-transform : uppercase;
-	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -146,6 +148,13 @@
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+.fooLinBut:active { /* What: Pressed Footer Link Button. Why: A press should register before the page scrolls. How: This dims it slightly while it's held, since a text link can't scale. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }
@@ -192,13 +201,13 @@
 .fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number is the footer's main call to action. How: This sets it on its own line in the bold display font, in light blue. */
 
 
-	color          : var( --acc-lig-col );                            /* Accent Light Color ~= #4488f6 */
+	color          : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 	display        : block;
-	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
 	letter-spacing : 0.04em;
-	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -206,6 +215,13 @@
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+.fooPhoAnc:active { /* What: Pressed Footer Phone Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, since a text link can't scale. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }

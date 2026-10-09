@@ -91,7 +91,15 @@ const STA_RCD_ARR : StaRcdTyp[] = [ // What: State Record Array. Why: Every chec
 		patStr : '/',
 		widNum : 390,
 
-		actFun : async ( curPagObj ) => { await curPagObj.getByRole( 'button', { name : 'Toggle menu' } ).click(); }
+		actFun : async ( curPagObj ) => { // What: Menu Open Action. Why: The state shows the menu as a visitor sees it once it's open. How: This taps the toggle, then moves the pointer off it.
+
+
+			await curPagObj.getByRole( 'button', { name : 'Toggle menu' } ).click(); // What: Toggle Click Call. Why: The menu opens only through its toggle. How: This clicks the button.
+
+			await curPagObj.mouse.move( 0, 0 ); // What: Pointer Move Call. Why: A finger lifts after a tap, but Playwright's mouse stays put and would hold the toggle's hover color in every check of this state. How: This parks the pointer on the bar's empty top-left corner.
+
+
+		}
 
 
 	}

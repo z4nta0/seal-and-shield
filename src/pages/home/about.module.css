@@ -134,6 +134,8 @@
 .infCarDiv { /* What: Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
 
 
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+
 	background     : var( --bac-inr-col );                                                                           /* Background Inverse Raised Color = #0f1e45 */
 	display        : flex;
 	flex-direction : column;
@@ -197,8 +199,8 @@
 .infValAnc { /* What: Info Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
 
 
-	color      : var( --acc-lig-col );                            /* Accent Light Color ~= #4488f6 */
-	transition : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transition : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -206,6 +208,13 @@
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+.infValAnc:active { /* What: Pressed Info Value Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, since a text link can't scale. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }

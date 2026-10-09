@@ -27,6 +27,8 @@
 .homConSec { /* What: Home Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
 
 
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+
 	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
 	overflow   : hidden;
 	padding    : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
@@ -207,8 +209,8 @@
 .detValAnc { /* What: Detail Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
 
 
-	color      : var( --acc-lig-col );                            /* Accent Light Color ~= #4488f6 */
-	transition : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transition : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -216,6 +218,13 @@
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+.detValAnc:active { /* What: Pressed Detail Value Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, since a text link can't scale. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }
@@ -252,7 +261,7 @@
 	letter-spacing : calc( var( --cdn-pow-009-rec ) * 1em );                                                         /* Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
 	padding        : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : all var( --dur-tra-p02 ) var( --mot-sta-eas );                                                  /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -261,6 +270,14 @@
 
 	background : transparent;
 	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transform  : translateY( -1px );;  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.conPhoAnc:active { /* What: Pressed Contact Phone Anchor. Why: A press should register before the phone opens. How: This presses it in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
 
 
 }
@@ -285,6 +302,8 @@
 .forWraDiv { /* What: Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
 
 
+	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */ /* What: Panel Focus Ring Color. Why: The white panel needs the main blue ring back, since the light blue falls under 3:1 on white. How: This hands every control in the panel the main blue. */
+
 	background : var( --bac-pag-col );                                                                           /* Background Page Color = #ffffff */
 	padding    : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
@@ -307,33 +326,105 @@
 
 /* #region forSucDiv */
 
-.forSucDiv { /* What: Form Success Div. Why: The thank-you message should fill the panel the form left. How: This centers the check, heading, and note in a column at least about 321px tall. */
+.forSucDiv { /* What: Form Success Div. Why: The thank-you message should fill the panel the form left. How: This rises and fades in once as it replaces the form, and centers the check, heading, and note in a column at least about 321px tall. */
 
 
 	align-items     : center;
+	animation       : forSucDivShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	display         : flex;
 	flex-direction  : column;
-	gap             : var( --spa-ver-bas );                      /* Spacing Vertical Base ~= 14.572px */
+	gap             : var( --spa-ver-bas );                                               /* Spacing Vertical Base ~= 14.572px */
 	justify-content : center;
-	min-height      : calc( var( --ver-rhy-p11 ) * 1rem );       /* Vertical Rhythm Base Plus 11 ~= 321.273px */
-	padding         : var( --spa-ver-p05 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	min-height      : calc( var( --ver-rhy-p11 ) * 1rem );                                /* Vertical Rhythm Base Plus 11 ~= 321.273px */
+	padding         : var( --spa-ver-p05 ) var( --spa-hor-p03 );                          /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-align      : center;
 
 
 }
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the message rise in. How: This applies only when the reduced-motion preference is set. */
 
-.sucIcoSpa { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the check in a blue circle about 59px across in white. */
+
+	.forSucDiv { /* What: Motionless Form Success Div. Why: The message should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you message should arrive rather than snap into the form's place. How: This rises it a little from below and fades it in. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : none;
+
+
+	}
+
+
+}
+
+.sucIcoSpa { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the check in a blue circle about 59px across in white, popping it in once as the message appears. */
 
 
 	align-items     : center;
-	background      : var( --acc-mai-col );                /* Accent Main Color = #1e56c8 */
+	animation       : sucIcoSpaShowPop var( --dur-ani-p03 ) var( --mot-ove-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+	background      : var( --acc-mai-col );                                            /* Accent Main Color = #1e56c8 */
 	border-radius   : 50%;
-	color           : var( --tex-acc-col );                /* Text Accent Color = #ffffff */
+	color           : var( --tex-acc-col );                                            /* Text Accent Color = #ffffff */
 	display         : flex;
-	font-size       : var( --fon-siz-p03 );                /* Font Size Base Plus 3 ~= 25.572px */
-	height          : calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
+	font-size       : var( --fon-siz-p03 );                                            /* Font Size Base Plus 3 ~= 25.572px */
+	height          : calc( var( --ver-rhy-p05 ) * 1rem );                             /* Vertical Rhythm Base Plus 5 ~= 59.447px */
 	justify-content : center;
-	width           : calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+	width           : calc( var( --ver-rhy-p05 ) * 1rem );                             /* Vertical Rhythm Base Plus 5 ~= 59.447px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Success Icon Span. Why: Someone who asked for less motion shouldn't see the check pop. How: This applies only when the reduced-motion preference is set. */
+
+
+	.sucIcoSpa { /* What: Motionless Success Icon Span. Why: The check should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the request as sent. How: This grows the check from a little smaller to full size with a gentle overshoot, once. */
+
+
+	from {
+
+
+		transform : scale( 0.6 );
+
+
+	}
+
+	to {
+
+
+		transform : scale( 1 );
+
+
+	}
 
 
 }
@@ -500,9 +591,46 @@
 .forErrPar { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel. */
 
 
-	color      : var( --err-dar-col ); /* Error Dark Color = #b42318 */
-	font-size  : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	animation  : forErrParShowFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	color      : var( --err-dar-col );                                               /* Error Dark Color = #b42318 */
+	font-size  : var( --fon-siz-p01 );                                               /* Font Size Base Plus 1 ~= 14.572px */
 	text-align : center;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Error Paragraph. Why: Someone who asked for less motion shouldn't see the message rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forErrPar { /* What: Motionless Form Error Paragraph. Why: The message should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This rises it a little from below and fades it in. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m03 ) ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : none;
+
+
+	}
 
 
 }
@@ -511,7 +639,35 @@
 
 
 	text-decoration : underline;
+	transition      : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	white-space     : nowrap;
+
+
+}
+.errLinAnc:hover { /* What: Hovered Error Link Anchor. Why: The link should respond to the pointer. How: This turns it the main blue. */
+
+
+	color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+
+
+}
+.errLinAnc:active { /* What: Pressed Error Link Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, since a text link can't scale. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Error Link Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.errLinAnc { /* What: Motionless Error Link Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -533,7 +689,7 @@
 	margin-bottom  : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
 	padding        : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	text-transform : uppercase;
-	transition     : all var( --dur-tra-p02 ) var( --mot-sta-eas );   /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 	width          : 100%;
 
 
@@ -543,6 +699,14 @@
 
 	background   : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 	border-color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+	transform    : translateY( -1px );;  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.forSubBut:active:not( :disabled ) { /* What: Pressed Form Submit Button. Why: A press should register before the request goes out. How: This presses the button in slightly, unless it's disabled while a request is out. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
 
 
 }

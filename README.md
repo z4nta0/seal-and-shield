@@ -34,7 +34,7 @@ npm run typecheck  # TypeScript across src/, the configs, and tests/
 ```bash
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
-npm run test:interaction    # what the section links, menu, contact form, and 404 page actually do
+npm run test:interaction    # what the section links, menu, contact form, and 404 page do, and that every control gives feedback
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # the pages and the mobile menu from 320 to 1,920px: no sideways scroll, spill, or overlap
 npm run test:seo            # titles, descriptions, canonical, robots, and social tags, structured data, the preview card, icons, robots.txt, and the sitemap
@@ -65,7 +65,7 @@ src/
 public/                Files served at fixed addresses: the favicon and Netlify's _redirects
 tests/
 ├── accessibility/     axe-core scan and scripted checks
-├── interaction/       behavior checks for links, the menu, the form, and the 404 page
+├── interaction/       behavior checks for links, the menu, the form, and the 404 page, plus hover, press, and focus feedback
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout checks across screen widths
 ├── seo/               head tags, structured data, preview card, icon, and crawler file checks

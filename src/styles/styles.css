@@ -486,6 +486,40 @@ ul { /* What: Unordered List. Why: Lists should start without bullets until a mo
 
 }
 
+a,
+button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather than snap, in a ring that suits the section it's in. How: This gives every link and button a zero-width outline in the focus ring color, held a little away from it, ready to grow in on focus. */
+
+
+	outline        : 0 solid var( --foc-rin-col );                                                                                      /* Focus Ring Color = #1e56c8 */ /* What: Zero Width Outline. Why: A zero width stays invisible, even in forced colors mode, until something is focused. How: The focused rule below grows it. */
+	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );                                                                               /* Vertical Rhythm Base Minus 3 ~= 6.268px */
+	transition     : outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+a:focus-visible,
+button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard user has to see where focus is. How: This grows the ring to its full width and draws it in close, so it eases in; every element with its own transition lists the two outline properties so the ease survives. */
+
+
+	outline-offset : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+	outline-width  : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Focus Ring Controls. Why: Someone who asked for less motion should see the ring appear at once. How: This applies only when the reduced-motion preference is set. */
+
+
+	a,
+	button { /* What: Motionless Focus Ring Controls. Why: The ring should simply appear. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
 /* #endregion Base Elements */
 
 
