@@ -103,13 +103,13 @@
 .home__eyebrow { /* What: Hero Eyebrow Paragraph. Why: A short line says what the company is before the headline. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
 
 
-	animation      : fadeUp 0.8s ease both;
-	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
-	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	animation      : fadeUp var( --dur-ani-p06 ) var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */
+	color          : var( --acc-lig-col );                                  /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec );                                  /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                                  /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em ); /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
-	margin-bottom  : var( --spa-ver-p01 );                   /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em );                /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	margin-bottom  : var( --spa-ver-p01 );                                  /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	text-transform : uppercase;
 
 
@@ -157,14 +157,14 @@
 .home__headline { /* What: Hero Headline Heading. Why: The headline is the page's main heading and the company's promise. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
 
 
-	animation      : fadeUp 0.8s 0.1s ease both;
-	color          : var( --bac-pag-col );                                     /* Background Page Color = #ffffff */
-	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : clamp( var( --fon-siz-p06 ), 7vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 6 ~= 59.447px, Font Size Base Plus 8 ~= 104.323px */
+	animation      : fadeUp var( --dur-ani-p06 ) 0.1s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
+	color          : var( --bac-pag-col );                                       /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : clamp( var( --fon-siz-p06 ), 7vw, var( --fon-siz-p08 ) );   /* Font Size Base Plus 6 ~= 59.447px, Font Size Base Plus 8 ~= 104.323px */
 	font-weight    : 800;
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
-	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
-	margin-bottom  : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                     /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	line-height    : var( --ver-rhy-m01 );                                       /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                       /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	text-transform : uppercase;
 
 
@@ -198,12 +198,12 @@
 .home__sub { /* What: Hero Sub Paragraph. Why: A short pitch follows the headline at a comfortable reading width. How: This sets it in light silver with generous leading, capped near 68 characters a line, rising in after the headline. */
 
 
-	animation     : fadeUp 0.8s 0.2s ease both;
-	color         : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
-	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
-	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
-	margin-bottom : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
-	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
+	animation     : fadeUp var( --dur-ani-p06 ) 0.2s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
+	color         : var( --tex-inv-col );                                       /* Text Inverse Color = #c8d0e0 */
+	font-size     : var( --fon-siz-p01 );                                       /* Font Size Base Plus 1 ~= 14.572px */
+	line-height   : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p03 );                                       /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	max-width     : var( --tex-wid-bas );                                       /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -240,10 +240,10 @@
 .home__actions { /* What: Hero Actions Div. Why: The pitch ends with the two next steps side by side. How: This lines the buttons up in a row that wraps when it runs out of room, rising in after the pitch. */
 
 
-	animation : fadeUp 0.8s 0.3s ease both;
+	animation : fadeUp var( --dur-ani-p06 ) 0.3s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
 	display   : flex;
 	flex-wrap : wrap;
-	gap       : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	gap       : var( --spa-ver-bas ) var( --spa-hor-bas );                  /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }
@@ -278,13 +278,13 @@
 
 
 	cursor         : pointer;
-	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-family    : var( --fon-fam-sec );                          /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                          /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );    /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
-	padding        : var( --spa-ver-bas ) var( --spa-hor-p03 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );        /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-p03 );     /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : all var( --transition );                   /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
+	transition     : all var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }
@@ -346,7 +346,7 @@
 
 
 	align-items     : center;
-	animation       : fadeUp 0.9s 0.2s ease both;
+	animation       : fadeUp var( --dur-ani-p06 ) 0.2s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
 	display         : flex;
 	justify-content : center;
 
@@ -393,10 +393,10 @@
 
 }
 
-.home__logo-ring { /* What: Hero Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a faint blue circle about 426px across behind the logo that swells and brightens on a four-second loop. */
+.home__logo-ring { /* What: Hero Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a faint blue circle about 426px across behind the logo that swells and brightens on a loop of about 4.6 seconds. */
 
 
-	animation     : pulseRing 4s ease-in-out infinite;
+	animation     : pulseRing var( --dur-ani-p12 ) var( --mot-sta-eas ) infinite;                                   /* Duration Animation Base Plus 12 ~= 4,610.0ms, Motion Standard Easing = ease */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
 	height        : calc( var( --ver-rhy-p12 ) * 1rem );                                                            /* Vertical Rhythm Base Plus 12 ~= 425.596px */

@@ -209,8 +209,8 @@
 .about__info-link { /* What: About Info Link Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
 
 
-	color      : var( --acc-lig-col );      /* Accent Light Color ~= #4488f6 */
-	transition : color var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
+	color      : var( --acc-lig-col );                            /* Accent Light Color ~= #4488f6 */
+	transition : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }
