@@ -24,8 +24,8 @@
 .footer { /* What: Site Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the dark navy and draws a faint line along its top. */
 
 
-	background : var( --bac-inv-col );                                      /* Background Inverse Color = #080f24 */
-	border-top : 1px solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Background Page Color = #ffffff @ 0.07 opacity */
+	background : var( --bac-inv-col );                                                       /* Background Inverse Color = #080f24 */
+	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
 
 
 }
@@ -39,11 +39,11 @@
 	align-items     : center;
 	display         : flex;
 	flex-wrap       : wrap;
-	gap             : 2rem;
+	gap             : var( --spa-ver-p03 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
-	padding         : 2.5rem 2rem;
+	max-width       : var( --con-max-wid );                      /* Container Maximum Width = 1,180px */
+	padding         : var( --spa-ver-p04 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 }
@@ -55,7 +55,7 @@
 
 		align-items    : flex-start;
 		flex-direction : column;
-		gap            : 1.5rem;
+		gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 	}
@@ -71,18 +71,18 @@
 
 	align-items : center;
 	display     : flex;
-	gap         : 0.85rem;
+	gap         : var( --spa-hor-bas ); /* Spacing Horizontal Base ~= 14.572px */
 
 
 }
 
-.footer__logo { /* What: Footer Logo Image. Why: The mark should sit at a small, fixed size and step back slightly on the dark band. How: This sizes it to a 44px box, scaled to fit, at a touch under full opacity. */
+.footer__logo { /* What: Footer Logo Image. Why: The mark should sit at a small, fixed size and step back slightly on the dark band. How: This sizes it to a box about 45px square, scaled to fit, at a touch under full opacity. */
 
 
-	height     : 44px;
+	height     : calc( var( --ver-rhy-p04 ) * 1rem ); /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	object-fit : contain;
 	opacity    : 0.9;
-	width      : 44px;
+	width      : calc( var( --ver-rhy-p04 ) * 1rem ); /* Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
@@ -90,11 +90,11 @@
 .footer__brand-name { /* What: Footer Brand Name Paragraph. Why: The footer names the company by its legal name. How: This sets it in the display font, extra bold and uppercase, in white. */
 
 
-	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1rem;
+	color          : var( --bac-pag-col );                   /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 800;
-	letter-spacing : 0.06em;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em ); /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
 	text-transform : uppercase;
 
 
@@ -104,8 +104,8 @@
 
 
 	color      : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
-	font-size  : 0.75rem;
-	margin-top : 0.15rem;
+	font-size  : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	margin-top : var( --spa-ver-m06 ); /* Spacing Vertical Base Minus 6 ~= 2.696px */
 
 
 }
@@ -121,7 +121,7 @@
 
 	display   : flex;
 	flex-wrap : wrap;
-	gap       : 1.75rem;
+	gap       : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 
 
 }
@@ -134,7 +134,7 @@
 	color          : var( --tex-inv-col );      /* Text Inverse Color = #c8d0e0 */
 	cursor         : pointer;
 	font-family    : var( --fon-fam-sec );      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.8rem;
+	font-size      : var( --fon-siz-p01 );      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
 	letter-spacing : 0.12em;
 	text-transform : uppercase;
@@ -195,7 +195,7 @@
 	color          : var( --acc-lig-col );      /* Accent Light Color ~= #4488f6 */
 	display        : block;
 	font-family    : var( --fon-fam-sec );      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1.05rem;
+	font-size      : var( --fon-siz-p01 );      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
 	letter-spacing : 0.04em;
 	transition     : color var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
@@ -227,8 +227,8 @@
 
 
 	color      : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
-	font-size  : 0.75rem;
-	margin-top : 0.25rem;
+	font-size  : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	margin-top : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px */
 
 
 }
@@ -244,8 +244,8 @@
 .footer__bottom { /* What: Footer Bottom Div. Why: The copyright line sits apart from the columns, across the footer's full width. How: This centers it below a fainter hairline with padding around it. */
 
 
-	border-top : 1px solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-011-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
-	padding    : 1.1rem 2rem;
+	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-011-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff, Core-Design-Number to the Power of 11 Reciprocal ~= 0.045 */
+	padding    : var( --spa-ver-p01 ) var( --spa-hor-p03 );                                                      /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-align : center;
 
 
@@ -255,7 +255,7 @@
 
 
 	color          : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
-	font-size      : 0.75rem;
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	letter-spacing : 0.04em;
 
 

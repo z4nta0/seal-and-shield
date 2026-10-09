@@ -28,7 +28,7 @@
 
 	background : transparent;
 	left       : 0;
-	padding    : 1.25rem 0;
+	padding    : var( --spa-ver-p01 ) 0;                                                                      /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	position   : fixed;
 	right      : 0;
 	top        : 0;
@@ -40,9 +40,9 @@
 .navbar[data-page-scroll-active] { /* What: Scrolled Navigation Bar Header. Why: Once content slides under the bar, it needs a background to stay readable. How: This turns it solid navy, tightens its padding, and adds a soft shadow while the page is scrolled. */
 
 
-	background : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
+	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
 	box-shadow : 0 2px 24px rgba( 0, 0, 0, 0.35 );
-	padding    : 0.75rem 0;
+	padding    : var( --spa-ver-m01 ) 0; /* Spacing Vertical Base Minus 1 = 11px */
 
 
 }
@@ -70,8 +70,8 @@
 	display         : flex;
 	justify-content : space-between;
 	margin          : 0 auto;
-	max-width       : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
-	padding         : 0 2rem;
+	max-width       : var( --con-max-wid );   /* Container Maximum Width = 1,180px */
+	padding         : 0 var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 }
@@ -84,17 +84,17 @@
 
 	align-items : center;
 	display     : flex;
-	gap         : 0.75rem;
+	gap         : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
 
 
 }
 
-.navbar__logo { /* What: Navigation Logo Image. Why: The mark should sit at a fixed, small size beside the name. How: This sizes it to a 44px box, scaled to fit without cropping. */
+.navbar__logo { /* What: Navigation Logo Image. Why: The mark should sit at a fixed, small size beside the name. How: This sizes it to a box about 45px square, scaled to fit without cropping. */
 
 
-	height     : 44px;
+	height     : calc( var( --ver-rhy-p04 ) * 1rem ); /* Vertical Rhythm Base Plus 4 ~= 44.876px */
 	object-fit : contain;
-	width      : 44px;
+	width      : calc( var( --ver-rhy-p04 ) * 1rem ); /* Vertical Rhythm Base Plus 4 ~= 44.876px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
@@ -107,7 +107,7 @@
 
 	display        : flex;
 	flex-direction : column;
-	line-height    : 1;
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 
 
 }
@@ -117,7 +117,7 @@
 
 	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1.15rem;
+	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 800;
 	letter-spacing : 0.04em;
 	text-transform : uppercase;
@@ -128,11 +128,11 @@
 .navbar__brand-sub { /* What: Navigation Brand Sub Span. Why: The legal suffix completes the brand without competing with the name. How: This sets it small, widely spaced, and silver. */
 
 
-	color          : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.65rem;
+	color          : var( --tex-inm-col );                   /* Text Inverse Muted Color = #8a9ab5 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 400;
-	letter-spacing : 0.3em;
+	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em ); /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
 	text-transform : uppercase;
 
 
@@ -151,7 +151,7 @@
 
 	align-items : center;
 	display     : flex;
-	gap         : 2rem;
+	gap         : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 }
@@ -174,7 +174,7 @@
 
 	color          : var( --tex-inv-col );      /* Text Inverse Color = #c8d0e0 */
 	font-family    : var( --fon-fam-sec );      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.9rem;
+	font-size      : var( --fon-siz-p01 );      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
 	letter-spacing : 0.12em;
 	position       : relative;
@@ -186,16 +186,16 @@
 .navbar__link::after { /* What: Navigation Link Underline. Why: A short line marks the hovered and active links. How: This draws a 2px light blue line under the link, scaled to nothing until it's needed. */
 
 
-	background       : var( --acc-lig-col );          /* Accent Light Color ~= #4488f6 */
-	bottom           : -4px;
+	background       : var( --acc-lig-col );                /* Accent Light Color ~= #4488f6 */
+	bottom           : calc( var( --spa-ver-m05 ) * -1 );   /* Spacing Vertical Base Minus 5 ~= 3.572px */
 	content          : '';
-	height           : 2px;
+	height           : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	left             : 0;
 	position         : absolute;
 	right            : 0;
 	transform        : scaleX( 0 );
 	transform-origin : left;
-	transition       : transform var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
+	transition       : transform var( --transition );       /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }
@@ -234,13 +234,13 @@
 
 
 	background     : var( --acc-mai-col );                                      /* Accent Main Color = #1e56c8 */
-	border         : 2px solid var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
+	border         : var( --bor-wid-lar ) solid var( --acc-mai-col );           /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
 	color          : var( --tex-acc-col );                                      /* Text Accent Color = #ffffff */
 	font-family    : var( --fon-fam-sec );                                      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.9rem;
+	font-size      : var( --fon-siz-p01 );                                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : 0.06em;
-	padding        : 0.55rem 1.25rem;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );                    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	padding        : var( --spa-ver-m02 ) var( --spa-hor-p01 );                 /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	transition     : background var( --transition ), color var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
@@ -280,8 +280,8 @@
 	cursor         : pointer;
 	display        : none;
 	flex-direction : column;
-	gap            : 5px;
-	padding        : 4px;
+	gap            : var( --spa-ver-m04 );                      /* Spacing Vertical Base Minus 4 ~= 4.732px */
+	padding        : var( --spa-ver-m05 ) var( --spa-hor-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
 
 
 }
@@ -304,7 +304,7 @@
 
 	background : var( --bac-pag-col );                                       /* Background Page Color = #ffffff */
 	display    : block;
-	height     : 2px;
+	height     : calc( var( --ver-rhy-m07 ) * 1rem );                        /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	transition : transform var( --transition ), opacity var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 	width      : 26px;
 
@@ -313,7 +313,7 @@
 .navbar__hamburger[aria-expanded='true'] .navbar__hamburger-bar:nth-child( 1 ) { /* What: Open First Menu Bar Span. Why: The open menu's icon should read as a close cross. How: This drops the top bar to the middle and turns it 45 degrees. */
 
 
-	transform : translateY( 7px ) rotate( 45deg );
+	transform : translateY( calc( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) ) rotate( 45deg ); /* Vertical Rhythm Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 4 ~= 4.732px */
 
 
 }
@@ -327,7 +327,7 @@
 .navbar__hamburger[aria-expanded='true'] .navbar__hamburger-bar:nth-child( 3 ) { /* What: Open Third Menu Bar Span. Why: The open menu's icon should read as a close cross. How: This lifts the bottom bar to the middle and turns it the other way. */
 
 
-	transform : translateY( -7px ) rotate( -45deg );
+	transform : translateY( calc( ( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) * -1 ) ) rotate( -45deg ); /* Vertical Rhythm Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 4 ~= 4.732px */
 
 
 }
@@ -356,21 +356,21 @@
 .navbar__mobile { /* What: Navigation Mobile Div. Why: Narrow screens show the links and phone number in a panel below the bar. How: This stacks them on the dark navy, collapsed to no height and hidden until the narrow layout shows it. */
 
 
-	background     : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
+	background     : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
 	display        : none;
 	flex-direction : column;
 	max-height     : 0;
 	overflow       : hidden;
-	padding        : 0 2rem;
-	transition     : max-height 0.4s ease; /* What: Panel Height Transition. Why: The panel has to push down as it opens, which a transform can't do, and its content height isn't known, so it eases a capped max-height instead. How: This animates the max-height between 0 and the open cap. */
+	padding        : 0 var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	transition     : max-height 0.4s ease;   /* What: Panel Height Transition. Why: The panel has to push down as it opens, which a transform can't do, and its content height isn't known, so it eases a capped max-height instead. How: This animates the max-height between 0 and the open cap. */
 
 
 }
 .navbar__mobile[data-mobile-menu-open] { /* What: Open Navigation Mobile Div. Why: The panel should show its links once the menu button opens it. How: This lifts the height cap to fit every link and adds bottom padding. */
 
 
-	max-height : 400px;
-	padding    : 0 2rem 1.5rem;
+	max-height : calc( var( --ver-rhy-p12 ) * 1rem );         /* Vertical Rhythm Base Plus 12 ~= 425.596px */
+	padding    : 0 var( --spa-hor-p03 ) var( --spa-ver-p02 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 }
@@ -404,15 +404,15 @@
 .navbar__mobile-link { /* What: Navigation Mobile Link Anchor. Why: Each link fills a row of the panel. How: This sets it in spaced capitals in light silver with a faint divider below. */
 
 
-	border-bottom  : 1px solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Background Page Color = #ffffff @ 0.07 opacity */
-	color          : var( --tex-inv-col );                                      /* Text Inverse Color = #c8d0e0 */
-	font-family    : var( --fon-fam-sec );                                      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1.1rem;
+	border-bottom  : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
+	color          : var( --tex-inv-col );                                                       /* Text Inverse Color = #c8d0e0 */
+	font-family    : var( --fon-fam-sec );                                                       /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p02 );                                                       /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 600;
-	letter-spacing : 0.1em;
-	padding        : 0.85rem 0;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );                                     /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	padding        : var( --spa-ver-bas ) 0;                                                     /* Spacing Vertical Base ~= 14.572px */
 	text-transform : uppercase;
-	transition     : color var( --transition );                                 /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
+	transition     : color var( --transition );                                                  /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }
@@ -440,14 +440,14 @@
 .navbar__mobile-cta { /* What: Navigation Mobile Phone Anchor. Why: The panel ends with the quickest way to reach the company. How: This sets the number as a full-width blue button below the links. */
 
 
-	background     : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
-	color          : var( --tex-acc-col ); /* Text Accent Color = #ffffff */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1rem;
+	background     : var( --acc-mai-col );                      /* Accent Main Color = #1e56c8 */
+	color          : var( --tex-acc-col );                      /* Text Accent Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : 0.06em;
-	margin-top     : 1.25rem;
-	padding        : 0.85rem;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	margin-top     : var( --spa-ver-p01 );                      /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	text-align     : center;
 
 

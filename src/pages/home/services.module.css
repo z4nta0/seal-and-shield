@@ -24,8 +24,8 @@
 .services { /* What: Services Section. Why: The services sit on a light band apart from the dark hero. How: This fills it with the off-white and gives it generous padding above and below. */
 
 
-	background : var( --bac-sur-col ); /* Background Surface Color = #f4f6fa */
-	padding    : 7rem 0;
+	background : var( --bac-sur-col );   /* Background Surface Color = #f4f6fa */
+	padding    : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
 
 
 }
@@ -37,8 +37,8 @@
 
 
 	margin    : 0 auto;
-	max-width : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
-	padding   : 0 2rem;
+	max-width : var( --con-max-wid );   /* Container Maximum Width = 1,180px */
+	padding   : 0 var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 }
@@ -49,7 +49,7 @@
 .services__header { /* What: Services Header Div. Why: The section opens by saying what it covers, at a readable width. How: This caps the header at 600px and leaves room below it. */
 
 
-	margin-bottom : 4rem;
+	margin-bottom : var( --spa-ver-p05 ); /* Spacing Vertical Base Plus 5 ~= 59.447px */
 	max-width     : 600px;
 
 
@@ -58,11 +58,11 @@
 .section-label { /* What: Section Label Paragraph. Why: A short label sits above each heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared section label. */
 
 
-	color          : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.8rem;
+	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : 0.25em;
+	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	text-transform : uppercase;
 
 
@@ -78,12 +78,12 @@
 .section-title { /* What: Section Title Heading. Why: Each heading leads its part of the section. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
 
 
-	color          : var( --tex-mai-col ); /* Text Main Color = #0f1e45 */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : clamp( 2rem, 4vw, 3rem );
+	color          : var( --tex-mai-col );                                     /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
 	font-weight    : 800;
-	letter-spacing : 0.02em;
-	line-height    : 1.05;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	text-transform : uppercase;
 
 
@@ -96,24 +96,24 @@
 
 }
 
-.divider { /* What: Divider Div. Why: A short rule separates each heading from the text below it. How: This draws a 3rem by 3px blue bar with room above and below, copied from the shared divider. */
+.divider { /* What: Divider Div. Why: A short rule separates each heading from the text below it. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
 
 
-	background : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
-	height     : 3px;
-	margin     : 1rem 0 1.5rem;
-	width      : 3rem;
+	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
+	height     : calc( var( --ver-rhy-m06 ) * 1rem );         /* Vertical Rhythm Base Minus 6 ~= 2.696px */
+	margin     : var( --spa-ver-bas ) 0 var( --spa-ver-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Vertical Base Plus 2 ~= 25.572px */
+	width      : 48px;
 
 
 }
 
-.services__intro { /* What: Services Intro Paragraph. Why: The intro sums up the company at a comfortable reading width. How: This sets it in the muted text color with generous leading, capped at 560px. */
+.services__intro { /* What: Services Intro Paragraph. Why: The intro sums up the company at a comfortable reading width. How: This sets it in the muted text color with generous leading, capped near 68 characters a line. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
-	font-size   : 1.05rem;
-	line-height : 1.8;
-	max-width   : 560px;
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -128,9 +128,9 @@
 
 
 	display               : grid;
-	gap                   : 1.5rem;
+	gap                   : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	grid-template-columns : repeat( 4, 1fr );
-	margin-bottom         : 5rem;
+	margin-bottom         : var( --spa-ver-p06 );                      /* Spacing Vertical Base Plus 6 ~= 78.751px */
 
 
 }
@@ -168,9 +168,9 @@
 
 
 	background : var( --bac-pag-col );                                          /* Background Page Color = #ffffff */
-	border     : 1px solid var( --bor-mai-col );                                /* Border Main Color = #c8d0e0 */
-	border-top : 3px solid var( --acc-mai-col );                                /* Accent Main Color = #1e56c8 */
-	padding    : 2rem 1.75rem;
+	border     : var( --bor-wid-bas ) solid var( --bor-mai-col );               /* Border Width Base ~= 1.160px, Border Main Color = #c8d0e0 */
+	border-top : var( --bor-wid-xla ) solid var( --acc-mai-col );               /* Border Width Extra Large ~= 3.572px, Accent Main Color = #1e56c8 */
+	padding    : var( --spa-ver-p03 ) var( --spa-hor-p02 );                     /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	position   : relative;
 	transition : box-shadow var( --transition ), transform var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
@@ -202,8 +202,8 @@
 
 
 	display       : block;
-	font-size     : 1.75rem;
-	margin-bottom : 0.85rem;
+	font-size     : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
+	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
 }
@@ -213,10 +213,10 @@
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #0f1e45 */
 	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1.1rem;
+	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 700;
 	letter-spacing : 0.04em;
-	margin-bottom  : 0.6rem;
+	margin-bottom  : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	text-transform : uppercase;
 
 
@@ -226,8 +226,8 @@
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
-	font-size   : 0.9rem;
-	line-height : 1.7;
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 
 
 }
@@ -244,11 +244,11 @@
 
 
 	align-items           : center;
-	background            : var( --bac-inr-col ); /* Background Inverse Raised Color = #0f1e45 */
+	background            : var( --bac-inr-col );                      /* Background Inverse Raised Color = #0f1e45 */
 	display               : grid;
-	gap                   : 3rem;
+	gap                   : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	grid-template-columns : 1fr 1fr;
-	padding               : 3.5rem;
+	padding               : var( --spa-ver-p05 ) var( --spa-hor-p05 ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 5 ~= 59.447px */
 
 
 }
@@ -259,7 +259,7 @@
 
 
 		grid-template-columns : 1fr;
-		padding               : 2.5rem 2rem;
+		padding               : var( --spa-ver-p04 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 	}
@@ -271,8 +271,8 @@
 
 
 	color       : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
-	font-size   : 0.95rem;
-	line-height : 1.8;
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 
 
 }
@@ -287,7 +287,7 @@
 	align-items   : flex-start;
 	display       : flex;
 	flex-wrap     : wrap;
-	gap           : 0.75rem;
+	gap           : var( --spa-ver-m01 ) var( --spa-hor-m01 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Minus 1 = 11px */
 
 
 }
@@ -295,15 +295,15 @@
 .services__area-tag { /* What: Services Area Tag Span. Why: Each tag names one place in the display style. How: This sets the name in spaced capitals inside a faint light blue outline, and eases its fill on hover. */
 
 
-	border         : 1.5px solid oklch( from var( --acc-lig-col ) l c h / 0.5 );       /* Accent Light Color = #4488f6 @ 0.5 opacity */
-	color          : var( --bac-pag-col );                                             /* Background Page Color = #ffffff */
-	font-family    : var( --fon-fam-sec );                                             /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.9rem;
+	border         : var( --bor-wid-bas ) solid oklch( from var( --acc-lig-col ) l c h / 0.5 ); /* Border Width Base ~= 1.160px, Accent Light Color = #4488f6 @ 0.5 opacity */
+	color          : var( --bac-pag-col );                                                      /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                                                      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                                                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	letter-spacing : 0.08em;
-	padding        : 0.55rem 1.25rem;
+	letter-spacing : calc( var( --cdn-pow-009-rec ) * 1em );                                    /* Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
+	padding        : var( --spa-ver-m02 ) var( --spa-hor-p01 );                                 /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	text-transform : uppercase;
-	transition     : background var( --transition ), border-color var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
+	transition     : background var( --transition ), border-color var( --transition );          /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }

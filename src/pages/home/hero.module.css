@@ -35,17 +35,17 @@
 	justify-content : center;
 	min-height      : 100vh;
 	overflow        : hidden;
-	padding-top     : 80px;
+	padding-top     : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */
 	position        : relative;
 
 
 }
 
-.home__bg-grid { /* What: Hero Background Grid Div. Why: A faint grid gives the dark band some texture. How: This tiles thin blue lines every 60px across the section, masked to fade out at the top and bottom. */
+.home__bg-grid { /* What: Hero Background Grid Div. Why: A faint grid gives the dark band some texture. How: This tiles thin blue lines about every 59px across the section, masked to fade out at the top and bottom. */
 
 
-	background-image : linear-gradient( oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ), linear-gradient( 90deg, oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ); /* Accent Main Color = #1e56c8 @ 0.07 opacity */
-	background-size  : 60px 60px;
+	background-image : linear-gradient( oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ), linear-gradient( 90deg, oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ); /* Accent Main Color = #1e56c8 @ 0.07 opacity */ /* What: Literal Grid Lines. Why: Each line should draw a crisp single pixel. How: A gradient stop doesn't snap to whole pixels the way a border does, so the lines stay 1px rather than reading the border width. */
+	background-size  : calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
 	inset            : 0;
 	mask-image       : linear-gradient( to bottom, transparent, rgba( 0, 0, 0, 0.6 ) 30%, rgba( 0, 0, 0, 0.6 ) 70%, transparent );
 	position         : absolute;
@@ -75,11 +75,11 @@
 
 	align-items           : center;
 	display               : grid;
-	gap                   : 4rem;
+	gap                   : var( --spa-ver-p05 ) var( --spa-hor-p05 ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 5 ~= 59.447px */
 	grid-template-columns : 1fr 1fr;
 	margin                : 0 auto;
-	max-width             : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
-	padding               : 5rem 2rem;
+	max-width             : var( --con-max-wid );                      /* Container Maximum Width = 1,180px */
+	padding               : var( --spa-ver-p06 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	position              : relative;
 	z-index               : 1;
 
@@ -104,12 +104,12 @@
 
 
 	animation      : fadeUp 0.8s ease both;
-	color          : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.8rem;
+	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	letter-spacing : 0.3em;
-	margin-bottom  : 1.25rem;
+	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em ); /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	margin-bottom  : var( --spa-ver-p01 );                   /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	text-transform : uppercase;
 
 
@@ -127,14 +127,14 @@
 
 
 }
-@keyframes fadeUp { /* What: Fade Up. Why: The hero's opening blocks rise into place as the page loads. How: This moves a block up from 28px below and from transparent to fully shown. */
+@keyframes fadeUp { /* What: Fade Up. Why: The hero's opening blocks rise into place as the page loads. How: This moves a block up from about 26px below and from transparent to fully shown. */
 
 
 	from {
 
 
 		opacity   : 0;
-		transform : translateY( 28px );
+		transform : translateY( var( --spa-ver-p02 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
 
 	}
@@ -158,13 +158,13 @@
 
 
 	animation      : fadeUp 0.8s 0.1s ease both;
-	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : clamp( 3.5rem, 7vw, 6rem );
+	color          : var( --bac-pag-col );                                     /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : clamp( var( --fon-siz-p06 ), 7vw, var( --fon-siz-p08 ) ); /* Font Size Base Plus 6 ~= 59.447px, Font Size Base Plus 8 ~= 104.323px */
 	font-weight    : 800;
-	letter-spacing : 0.02em;
-	line-height    : 0.95;
-	margin-bottom  : 1.5rem;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	text-transform : uppercase;
 
 
@@ -186,8 +186,8 @@
 .home__headline-accent { /* What: Hero Headline Accent Span. Why: The two promise words stand out from the rest of the headline. How: This colors them light blue with a thin darker blue outline. */
 
 
-	-webkit-text-stroke : 1px var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
-	color               : var( --acc-lig-col );     /* Accent Light Color ~= #4488f6 */
+	-webkit-text-stroke : var( --bor-wid-bas ) var( --acc-mai-col ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8 */
+	color               : var( --acc-lig-col );                      /* Accent Light Color ~= #4488f6 */
 
 
 }
@@ -195,15 +195,15 @@
 /* #endregion home__headline */
 
 
-.home__sub { /* What: Hero Sub Paragraph. Why: A short pitch follows the headline at a comfortable reading width. How: This sets it in light silver with generous leading, capped at 480px wide, rising in after the headline. */
+.home__sub { /* What: Hero Sub Paragraph. Why: A short pitch follows the headline at a comfortable reading width. How: This sets it in light silver with generous leading, capped near 68 characters a line, rising in after the headline. */
 
 
 	animation     : fadeUp 0.8s 0.2s ease both;
 	color         : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
-	font-size     : 1.05rem;
-	line-height   : 1.75;
-	margin-bottom : 2.25rem;
-	max-width     : 480px;
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -243,7 +243,7 @@
 	animation : fadeUp 0.8s 0.3s ease both;
 	display   : flex;
 	flex-wrap : wrap;
-	gap       : 1rem;
+	gap       : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }
@@ -278,22 +278,22 @@
 
 
 	cursor         : pointer;
-	font-family    : var( --fon-fam-sec );    /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.95rem;
+	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : 0.1em;
-	padding        : 0.9rem 2rem;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );    /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-p03 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : all var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
+	transition     : all var( --transition );                   /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }
 .home__btn--primary { /* What: Primary Hero Button Anchor. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue with white text. */
 
 
-	background : var( --acc-mai-col );           /* Accent Main Color = #1e56c8 */
-	border     : 2px solid var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
-	color      : var( --tex-acc-col );           /* Text Accent Color = #ffffff */
+	background : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
+	border     : var( --bor-wid-lar ) solid var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
+	color      : var( --tex-acc-col );                            /* Text Accent Color = #ffffff */
 
 
 }
@@ -309,8 +309,8 @@
 
 
 	background : transparent;
-	border     : 2px solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
-	color      : var( --bac-pag-col );                                                          /* Background Page Color = #ffffff */
+	border     : var( --bor-wid-lar ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) ); /* Border Width Large ~= 2.035px, Background Page Color = #ffffff, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	color      : var( --bac-pag-col );                                                                           /* Background Page Color = #ffffff */
 
 
 }
@@ -393,25 +393,25 @@
 
 }
 
-.home__logo-ring { /* What: Hero Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a 420px faint blue circle behind the logo that swells and brightens on a four-second loop. */
+.home__logo-ring { /* What: Hero Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a faint blue circle about 426px across behind the logo that swells and brightens on a four-second loop. */
 
 
 	animation     : pulseRing 4s ease-in-out infinite;
-	border        : 1px solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
+	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
-	height        : 420px;
+	height        : calc( var( --ver-rhy-p12 ) * 1rem );                                                            /* Vertical Rhythm Base Plus 12 ~= 425.596px */
 	position      : absolute;
-	width         : 420px;
+	width         : calc( var( --ver-rhy-p12 ) * 1rem );                                                            /* Vertical Rhythm Base Plus 12 ~= 425.596px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
-.home__logo-ring::before { /* What: Hero Logo Inner Ring. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it 24px inside the outer circle. */
+.home__logo-ring::before { /* What: Hero Logo Inner Ring. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it about 26px inside the outer circle. */
 
 
-	border        : 1px solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
+	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	border-radius : 50%;
 	content       : '';
-	inset         : 24px;
+	inset         : var( --spa-ver-p02 ) var( --spa-hor-p02 );                                                      /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	position      : absolute;
 
 
@@ -419,11 +419,11 @@
 @media ( max-width : 900px ) { /* What: Narrow Hero Logo Ring Div. Why: The logo shrinks on narrower screens, and its ring follows. How: This applies 900px wide and below. */
 
 
-	.home__logo-ring { /* What: Smaller Hero Logo Ring Div. Why: The ring should still frame the smaller logo. How: This shrinks it to 320px. */
+	.home__logo-ring { /* What: Smaller Hero Logo Ring Div. Why: The ring should still frame the smaller logo. How: This shrinks it to about 321px across. */
 
 
-		height : 320px;
-		width  : 320px;
+		height : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */
+		width  : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 	}
@@ -506,8 +506,8 @@
 
 
 	backdrop-filter : blur( 8px );
-	background      : oklch( from var( --bac-pag-col ) l c h / 0.04 );                               /* Background Page Color = #ffffff @ 0.04 opacity */
-	border-top      : 1px solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-009-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
+	background      : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                /* Background Page Color = #ffffff @ 0.04 opacity */
+	border-top      : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-009-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff, Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
 	position        : relative;
 	z-index         : 1;
 
@@ -524,8 +524,8 @@
 	gap                   : 0;
 	grid-template-columns : repeat( 4, 1fr );
 	margin                : 0 auto;
-	max-width             : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
-	padding               : 0 2rem;
+	max-width             : var( --con-max-wid );   /* Container Maximum Width = 1,180px */
+	padding               : 0 var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 }
@@ -563,11 +563,11 @@
 
 
 	align-items    : center;
-	border-right   : 1px solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Background Page Color = #ffffff @ 0.07 opacity */
+	border-right   : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
 	display        : flex;
 	flex-direction : column;
-	gap            : 0.3rem;
-	padding        : 1.75rem 1rem;
+	gap            : var( --spa-ver-m04 );                                                       /* Spacing Vertical Base Minus 4 ~= 4.732px */
+	padding        : var( --spa-ver-p02 ) var( --spa-hor-bas );                                  /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base ~= 14.572px */
 
 
 }
@@ -592,7 +592,7 @@
 	.home__stat:nth-child( 4 ) { /* What: Second Row Hero Stat Div. Why: The second row needs a line between it and the first. How: This draws a faint border along the top of the third and fourth cells. */
 
 
-		border-top : 1px solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Background Page Color = #ffffff @ 0.07 opacity */
+		border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
 
 
 	}
@@ -610,11 +610,11 @@
 .home__stat-value { /* What: Hero Stat Value Span. Why: The figure is the cell's focus. How: This sets it large in the extra bold display font, in white. */
 
 
-	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1.9rem;
+	color          : var( --bac-pag-col );                   /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p04 );                   /* Font Size Base Plus 4 ~= 33.876px */
 	font-weight    : 800;
-	letter-spacing : 0.02em;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
 
 
 }
@@ -622,11 +622,11 @@
 .home__stat-label { /* What: Hero Stat Label Span. Why: The caption says what the figure means without competing with it. How: This sets it small, spaced, uppercase, and silver in the body font. */
 
 
-	color          : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
-	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Lato', sans-serif */
-	font-size      : 0.75rem;
+	color          : var( --tex-inm-col );                   /* Text Inverse Muted Color = #8a9ab5 */
+	font-family    : var( --fon-fam-mai );                   /* Font Family Main = 'Lato', sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 400;
-	letter-spacing : 0.1em;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	text-transform : uppercase;
 
 

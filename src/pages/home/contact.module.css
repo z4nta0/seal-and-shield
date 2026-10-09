@@ -27,9 +27,9 @@
 .contact { /* What: Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
 
 
-	background : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
+	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
 	overflow   : hidden;
-	padding    : 7rem 0;
+	padding    : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
 	position   : relative;
 
 
@@ -58,11 +58,11 @@
 
 	align-items           : start;
 	display               : grid;
-	gap                   : 5rem;
+	gap                   : var( --spa-ver-p06 ) var( --spa-hor-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 6 ~= 78.751px */
 	grid-template-columns : 1fr 1.2fr;
 	margin                : 0 auto;
-	max-width             : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
-	padding               : 0 2rem;
+	max-width             : var( --con-max-wid );                      /* Container Maximum Width = 1,180px */
+	padding               : 0 var( --spa-hor-p03 );                    /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 	position              : relative;
 	z-index               : 1;
 
@@ -74,7 +74,7 @@
 	.contact__inner { /* What: Stacked Contact Inner Div. Why: The invitation and form read best one above the other. How: This collapses to one column with a smaller gap. */
 
 
-		gap                   : 3rem;
+		gap                   : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 		grid-template-columns : 1fr;
 
 
@@ -86,11 +86,11 @@
 .section-label { /* What: Section Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared section label. */
 
 
-	color          : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.8rem;
+	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : 0.25em;
+	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	text-transform : uppercase;
 
 
@@ -99,12 +99,12 @@
 .section-title { /* What: Section Title Heading. Why: The heading states the section's goal. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
 
 
-	color          : var( --tex-mai-col ); /* Text Main Color = #0f1e45 */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : clamp( 2rem, 4vw, 3rem );
+	color          : var( --tex-mai-col );                                     /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
 	font-weight    : 800;
-	letter-spacing : 0.02em;
-	line-height    : 1.05;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	text-transform : uppercase;
 
 
@@ -117,13 +117,13 @@
 
 }
 
-.divider { /* What: Divider Div. Why: A short rule separates the heading from the invitation. How: This draws a 3rem by 3px blue bar with room above and below, copied from the shared divider. */
+.divider { /* What: Divider Div. Why: A short rule separates the heading from the invitation. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
 
 
-	background : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
-	height     : 3px;
-	margin     : 1rem 0 1.5rem;
-	width      : 3rem;
+	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
+	height     : calc( var( --ver-rhy-m06 ) * 1rem );         /* Vertical Rhythm Base Minus 6 ~= 2.696px */
+	margin     : var( --spa-ver-bas ) 0 var( --spa-ver-p02 ); /* Spacing Vertical Base ~= 14.572px, Spacing Vertical Base Plus 2 ~= 25.572px */
+	width      : 48px;
 
 
 }
@@ -132,9 +132,9 @@
 
 
 	color         : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
-	font-size     : 1rem;
-	line-height   : 1.8;
-	margin-bottom : 2.5rem;
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
 
 
 }
@@ -148,8 +148,8 @@
 
 	display        : flex;
 	flex-direction : column;
-	gap            : 1.25rem;
-	margin-bottom  : 2rem;
+	gap            : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	margin-bottom  : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
 
 
 }
@@ -162,7 +162,7 @@
 
 	align-items : flex-start;
 	display     : flex;
-	gap         : 1rem;
+	gap         : var( --spa-hor-bas ); /* Spacing Horizontal Base ~= 14.572px */
 
 
 }
@@ -171,8 +171,8 @@
 
 
 	flex-shrink : 0;
-	font-size   : 1.2rem;
-	margin-top  : 2px;
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	margin-top  : var( --spa-ver-m07 ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
 
 
 }
@@ -180,13 +180,13 @@
 .contact__detail-label { /* What: Contact Detail Label Span. Why: Each value needs a quiet label above it. How: This sets it on its own line, small, spaced, uppercase, and silver. */
 
 
-	color          : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
+	color          : var( --tex-inm-col );                   /* Text Inverse Muted Color = #8a9ab5 */
 	display        : block;
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.7rem;
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 600;
-	letter-spacing : 0.2em;
-	margin-bottom  : 0.15rem;
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	margin-bottom  : var( --spa-ver-m06 );                   /* Spacing Vertical Base Minus 6 ~= 2.696px */
 	text-transform : uppercase;
 
 
@@ -197,7 +197,7 @@
 
 	color     : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 	display   : block;
-	font-size : 0.95rem;
+	font-size : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 
 
 }
@@ -240,17 +240,17 @@
 .contact__phone-btn { /* What: Contact Phone Button Anchor. Why: Calling is the fastest way to get a quote, so the number gets a button. How: This sets it as a solid blue button in the display font, sized to its label, and eases every change between its looks. */
 
 
-	background     : var( --acc-mai-col );           /* Accent Main Color = #1e56c8 */
-	border         : 2px solid var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
-	color          : var( --tex-acc-col );           /* Text Accent Color = #ffffff */
+	background     : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
+	border         : var( --bor-wid-lar ) solid var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
+	color          : var( --tex-acc-col );                            /* Text Accent Color = #ffffff */
 	display        : inline-block;
-	font-family    : var( --fon-fam-sec );           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1rem;
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : 0.08em;
-	padding        : 0.9rem 2rem;
+	letter-spacing : calc( var( --cdn-pow-009-rec ) * 1em );          /* Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-p03 );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : all var( --transition );        /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
+	transition     : all var( --transition );                         /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }
@@ -283,8 +283,8 @@
 .contact__form-wrap { /* What: Contact Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
 
 
-	background : var( --bac-pag-col ); /* Background Page Color = #ffffff */
-	padding    : 2.5rem;
+	background : var( --bac-pag-col );                      /* Background Page Color = #ffffff */
+	padding    : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
@@ -294,7 +294,7 @@
 	.contact__form-wrap { /* What: Tighter Contact Form Wrap Div. Why: The fields need the room on a phone. How: This tightens the panel's padding. */
 
 
-		padding : 1.75rem 1.25rem;
+		padding : var( --spa-ver-p02 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 	}
@@ -305,33 +305,33 @@
 
 /* #region contact__success */
 
-.contact__success { /* What: Contact Success Div. Why: The thank-you message should fill the panel the form left. How: This centers the check, heading, and note in a column at least 320px tall. */
+.contact__success { /* What: Contact Success Div. Why: The thank-you message should fill the panel the form left. How: This centers the check, heading, and note in a column at least about 321px tall. */
 
 
 	align-items     : center;
 	display         : flex;
 	flex-direction  : column;
-	gap             : 1rem;
+	gap             : var( --spa-ver-bas );                      /* Spacing Vertical Base ~= 14.572px */
 	justify-content : center;
-	min-height      : 320px;
-	padding         : 4rem 2rem;
+	min-height      : calc( var( --ver-rhy-p11 ) * 1rem );       /* Vertical Rhythm Base Plus 11 ~= 321.273px */
+	padding         : var( --spa-ver-p05 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-align      : center;
 
 
 }
 
-.contact__success-icon { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the check in a 56px blue circle in white. */
+.contact__success-icon { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the check in a blue circle about 59px across in white. */
 
 
 	align-items     : center;
-	background      : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+	background      : var( --acc-mai-col );                /* Accent Main Color = #1e56c8 */
 	border-radius   : 50%;
-	color           : var( --tex-acc-col ); /* Text Accent Color = #ffffff */
+	color           : var( --tex-acc-col );                /* Text Accent Color = #ffffff */
 	display         : flex;
-	font-size       : 1.5rem;
-	height          : 56px;
+	font-size       : var( --fon-siz-p03 );                /* Font Size Base Plus 3 ~= 25.572px */
+	height          : calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
 	justify-content : center;
-	width           : 56px;
+	width           : calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */ /* What: Mirrored Width. Why: The box has to stay square. How: The width reads the same step as the height, so the two always match. */
 
 
 }
@@ -341,7 +341,7 @@
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #0f1e45 */
 	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1.6rem;
+	font-size      : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
 	font-weight    : 800;
 	text-transform : uppercase;
 
@@ -352,8 +352,8 @@
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
-	font-size   : 0.95rem;
-	line-height : 1.7;
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 
 
 }
@@ -365,14 +365,14 @@
 .contact__form-title { /* What: Form Title Heading. Why: The form needs a clear heading, set off from its fields. How: This sets it in the extra bold display font, uppercase and navy, over a blue rule. */
 
 
-	border-bottom  : 2px solid var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
-	color          : var( --tex-mai-col );           /* Text Main Color = #0f1e45 */
-	font-family    : var( --fon-fam-sec );           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1.3rem;
+	border-bottom  : var( --bor-wid-lar ) solid var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
+	color          : var( --tex-mai-col );                            /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p02 );                            /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 800;
-	letter-spacing : 0.06em;
-	margin-bottom  : 1.75rem;
-	padding-bottom : 1rem;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	margin-bottom  : var( --spa-ver-p02 );                            /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	padding-bottom : var( --spa-ver-bas );                            /* Spacing Vertical Base ~= 14.572px */
 	text-transform : uppercase;
 
 
@@ -386,9 +386,9 @@
 
 
 	display               : grid;
-	gap                   : 1rem;
+	gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	grid-template-columns : 1fr 1fr;
-	margin-bottom         : 1rem;
+	margin-bottom         : var( --spa-ver-bas );                      /* Spacing Vertical Base ~= 14.572px */
 
 
 }
@@ -414,14 +414,14 @@
 
 	display        : flex;
 	flex-direction : column;
-	gap            : 0.4rem;
+	gap            : var( --spa-ver-m03 ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 
 }
 .contact__field--full { /* What: Full Contact Field Div. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
 
 
-	margin-bottom : 1rem;
+	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
 }
@@ -431,7 +431,7 @@
 
 	color          : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
 	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 0.75rem;
+	font-size      : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	font-weight    : 700;
 	letter-spacing : 0.12em;
 	text-transform : uppercase;
@@ -443,13 +443,13 @@
 
 
 	background     : var( --bac-sur-col );                                                                                    /* Background Surface Color = #f4f6fa */
-	border         : 1.5px solid var( --bor-mai-col );                                                                        /* Border Main Color = #c8d0e0 */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                         /* Border Width Base ~= 1.160px, Border Main Color = #c8d0e0 */
 	color          : var( --tex-mai-col );                                                                                    /* Text Main Color = #0f1e45 */
 	font-family    : var( --fon-fam-mai );                                                                                    /* Font Family Main = 'Lato', sans-serif */
-	font-size      : 0.9rem;
+	font-size      : var( --fon-siz-p01 );                                                                                    /* Font Size Base Plus 1 ~= 14.572px */
 	outline        : 0 solid var( --acc-mai-col );                                                                            /* Accent Main Color = #1e56c8 */
-	outline-offset : 6px;
-	padding        : 0.75rem 1rem;
+	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );                                                                     /* Vertical Rhythm Base Minus 3 ~= 6.268px */
+	padding        : var( --spa-ver-m01 ) var( --spa-hor-bas );                                                               /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
 	resize         : vertical;
 	transition     : border-color var( --transition ), outline-offset var( --transition ), outline-width var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
@@ -465,8 +465,8 @@
 .contact__field-control:focus-visible { /* What: Keyboard Focused Contact Field Control. Why: A keyboard user has to see clearly where focus is. How: This grows the ring to 2px and draws it in to 2px from the field. */
 
 
-	outline-offset : 2px;
-	outline-width  : 2px;
+	outline-offset : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+	outline-width  : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
 
 
 }
@@ -495,7 +495,7 @@
 
 
 	color      : var( --err-dar-col ); /* Error Dark Color = #b42318 */
-	font-size  : 0.85rem;
+	font-size  : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	text-align : center;
 
 
@@ -516,18 +516,18 @@
 .contact__submit { /* What: Contact Submit Button. Why: The form's main action spans the panel. How: This sets a full-width navy button in the display font, and eases every change between its looks. */
 
 
-	background     : var( --bac-inr-col );           /* Background Inverse Raised Color = #0f1e45 */
-	border         : 2px solid var( --bac-inr-col ); /* Background Inverse Raised Color = #0f1e45 */
-	color          : var( --bac-pag-col );           /* Background Page Color = #ffffff */
+	background     : var( --bac-inr-col );                            /* Background Inverse Raised Color = #0f1e45 */
+	border         : var( --bor-wid-lar ) solid var( --bac-inr-col ); /* Border Width Large ~= 2.035px, Background Inverse Raised Color = #0f1e45 */
+	color          : var( --bac-pag-col );                            /* Background Page Color = #ffffff */
 	cursor         : pointer;
-	font-family    : var( --fon-fam-sec );           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : 1rem;
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : 0.1em;
-	margin-bottom  : 0.75rem;
-	padding        : 1rem;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );          /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	margin-bottom  : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	text-transform : uppercase;
-	transition     : all var( --transition );        /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
+	transition     : all var( --transition );                         /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 	width          : 100%;
 
 
@@ -566,7 +566,7 @@
 
 
 	color      : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
-	font-size  : 0.75rem;
+	font-size  : var( --fon-siz-bas ); /* Font Size Base = 11px */
 	text-align : center;
 
 
