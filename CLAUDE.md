@@ -47,7 +47,49 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
 
+## Test suites
+Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
+`tests/`, one project per suite and engine in `tests/playwright.config.ts`,
+which starts its own dev server on port 5191 (never the usual 5173) and stops
+it afterwards. Every suite runs in Chromium, Firefox, and WebKit. Results,
+screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
+show-report tests/output/report` opens the HTML report. The states the suites
+visit (the home page at 390px and 1,440px, plus the mobile menu open at
+390px) are listed in `tests/support/states.ts`. Its `opeStaFun` scrolls
+through the page before checking it, since the Services, About, and Contact
+sections only fade their content in once scrolled into view, and skips
+animations that repeat forever (the hero logo's `pulseRing`) when waiting for
+the page to settle.
+- `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
+  checks each state against WCAG 2.2 A and AA plus best practices
+  (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
+  button names, a Tab walk (order, traps, focus on screen, uncovered, and
+  visible), reflow at 320px, and motion under reduced motion. axe's "needs
+  review" results are printed and attached to the report rather than failing
+  the run.
+- `npm run test:rendering`: compares a full-page screenshot of every state
+  with its baseline in `tests/rendering/baselines/`, with zero tolerance. The
+  footer's year is masked. After an intended visual change, refresh with `npm
+  run test:rendering -- --update-snapshots` and commit the baselines with it.
+  Baselines are captured on Linux.
+- `npm run test:responsive`: measures the home page and the open menu at 19
+  widths from 320 to 1,920px (a pixel either side of each breakpoint
+  included), failing on sideways scrolling, an unclipped element past either
+  edge, text spilling its box, or two reachable controls overlapping.
+- `npm test` runs every suite. reese-roofing's interaction and seo suites
+  join in step 7, once the site has the features they check.
+
 ## Known issues
+- **The accessibility suite fails on the existing site** (found 2026-10-08,
+  25 of 45 tests, the same in every run): 24 elements with too little color
+  contrast (the section labels, the Services intro and card text, the About
+  body and values, the form labels and note, and the footer's copyright
+  line), the About values' `h4`s skipping a heading level, the desktop nav
+  and mobile menu landmarks sharing a name, the form fields drawing no
+  visible focus ring in Chromium and WebKit, the closed mobile menu's links
+  still taking keyboard focus on phones while hidden under the bar, and no
+  reduced-motion styles at all (`fadeUp` and the looping `pulseRing` keep
+  playing). The responsive and rendering suites pass.
 - **`README.md` describes Reese Roofing**, the project this site was copied
   from (its name, placeholder contact details, and file layout). It gets
   rewritten for Seal and Shield once the directory structure settles.
