@@ -3,15 +3,13 @@
 
 // #region Imports
 
+import cssModObj from './nav.module.css';           // What: CSS Module Object. Why: The bar is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 import losPngUrl from '../assets/logo-simple.png'; // What: Logo-Simple PNG URL. Why: The bar's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
 import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function. Why: A section link's smooth scroll has to respect the reduced-motion preference. How: navSecFun asks it before choosing the scroll behavior.
 import { useEffect } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position. How: This registers and removes the scroll listener.
 import { useState  } from 'react';              // What: Use State. Why: The bar tracks its scrolled look, the active section, and whether the menu is open. How: This holds each of the three.
-
-
-import './nav.css'; // What: Navigation Stylesheet Import. Why: The bar, its links, and the mobile menu are styled in their own stylesheet. How: This is imported purely for its side effect.
 
 // #endregion Imports
 
@@ -246,14 +244,18 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<header className={ ` navbar   ${ barScrBoo ? 'navbar--scrolled' : '' } ` }>{ /* What: Navigation Bar Header Element. Why: The bar and its mobile menu form the page's banner. How: This holds both, gaining the scrolled modifier once the page moves. */ }
+		<header
+			className={ cssModObj.navbar }
+
+			data-page-scroll-active={ barScrBoo || undefined }
+		>{ /* What: Navigation Bar Header Element. Why: The bar and its mobile menu form the page's banner. How: This holds both, and carries data-page-scroll-active while the page is scrolled, which turns the bar solid. */ }
 
 
-			<div className='navbar__inner container'>{ /* What: Navigation Inner Div Element. Why: The bar's contents line up with the page's content width. How: This spaces the brand, links, and menu button across the container. */ }
+			<div className={ cssModObj.navbarInner }>{ /* What: Navigation Inner Div Element. Why: The bar's contents line up with the page's content width. How: This spaces the brand, links, and menu button across a centered, capped-width row. */ }
 
 
 				<a
-					className='navbar__brand'
+					className={ cssModObj.navbarBrand }
 
 					href='#home'
 
@@ -262,19 +264,19 @@ function NavBarCom () : React.JSX.Element {
 
 
 					<img
-						className='navbar__logo'
+						className={ cssModObj.navbarLogo }
 
 						src={ losPngUrl }
 
 						alt=''
 					/>{ /* What: Navigation Logo Image Element. Why: The bar's brand opens with the simple mark. How: Its alt text is empty, since the brand name sits right beside it. */ }
 
-					<span className='navbar__brand-text'>{ /* What: Navigation Brand Span Element. Why: The name and its LLC stack as one block beside the mark. How: This holds the two lines. */ }
+					<span className={ cssModObj.navbarBrandText }>{ /* What: Navigation Brand Span Element. Why: The name and its LLC stack as one block beside the mark. How: This holds the two lines. */ }
 
 
-						<span className='navbar__brand-main'>Seal and Shield</span>{ /* What: Navigation Brand Main Span Element. Why: The company's name is the brand's main line. How: This shows it in the display font. */ }
+						<span className={ cssModObj.navbarBrandMain }>Seal and Shield</span>{ /* What: Navigation Brand Main Span Element. Why: The company's name is the brand's main line. How: This shows it in the display font. */ }
 
-						<span className='navbar__brand-sub'>LLC</span>{ /* What: Navigation Brand Sub Span Element. Why: The legal suffix completes the brand without competing with the name. How: This shows it small beneath the name. */ }
+						<span className={ cssModObj.navbarBrandSub }>LLC</span>{ /* What: Navigation Brand Sub Span Element. Why: The legal suffix completes the brand without competing with the name. How: This shows it small beneath the name. */ }
 
 
 					</span>
@@ -283,7 +285,7 @@ function NavBarCom () : React.JSX.Element {
 				</a>
 
 				<nav
-					className='navbar__nav'
+					className={ cssModObj.navbarNav }
 
 					aria-label='Main'
 				>{ /* What: Navigation Main Nav Element. Why: Wide screens show the section links and phone number in the bar. How: This labels the landmark Main, telling it apart from the footer's. */ }
@@ -295,7 +297,9 @@ function NavBarCom () : React.JSX.Element {
 						<a
 							key={ linRcdObj.labStr }
 
-							className={ ` navbar__link   ${ actSecStr === linRcdObj.hreStr.replace( '#', '' ) ? 'navbar__link--active' : '' } ` }
+							className={ cssModObj.navbarLink }
+
+							data-section-link-active={ actSecStr === linRcdObj.hreStr.replace( '#', '' ) || undefined } // What: Active Section Link Flag. Why: The link for the section being read is highlighted. How: This sets the attribute only when the link's hash, without its #, names the active section, and drops it otherwise.
 
 							href={ linRcdObj.hreStr }
 
@@ -308,7 +312,7 @@ function NavBarCom () : React.JSX.Element {
 					))}
 
 					<a
-						className='navbar__cta'
+						className={ cssModObj.navbarCta }
 
 						href='tel:7853041957'
 					>{ /* What: Navigation Phone Anchor Element. Why: Calling is the fastest way to reach the company. How: This dials its number on phones. */ }
@@ -319,7 +323,7 @@ function NavBarCom () : React.JSX.Element {
 				</nav>
 
 				<button
-					className={ ` navbar__hamburger   ${ menOpeBoo ? 'open' : '' } ` }
+					className={ cssModObj.navbarHamburger }
 
 					aria-expanded={ menOpeBoo }
 					aria-label='Toggle menu'
@@ -328,11 +332,11 @@ function NavBarCom () : React.JSX.Element {
 				>{ /* What: Navigation Menu Button Element. Why: Phones reach the section links through a menu. How: This toggles the mobile menu and reports whether it's open. */ }
 
 
-					<span />{ /* What: Menu Bar Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three. */ }
+					<span className={ cssModObj.navbarHamburgerBar } />{ /* What: Menu Bar Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three, crossed by the button's aria-expanded state. */ }
 
-					<span />{ /* What: Menu Bar Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three. */ }
+					<span className={ cssModObj.navbarHamburgerBar } />{ /* What: Menu Bar Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three, crossed by the button's aria-expanded state. */ }
 
-					<span />{ /* What: Menu Bar Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three. */ }
+					<span className={ cssModObj.navbarHamburgerBar } />{ /* What: Menu Bar Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three, crossed by the button's aria-expanded state. */ }
 
 
 				</button>
@@ -342,10 +346,12 @@ function NavBarCom () : React.JSX.Element {
 
 
 			<div
-				className={ ` navbar__mobile   ${ menOpeBoo ? 'navbar__mobile--open' : '' } ` }
+				className={ cssModObj.navbarMobile }
+
+				data-mobile-menu-open={ menOpeBoo || undefined }
 
 				inert={ !menOpeBoo } // What: Closed Menu Inert Flag. Why: The closed menu only collapses to zero height, so its links would otherwise still take keyboard focus while hidden. How: This makes the menu inert whenever it's closed.
-			>{ /* What: Navigation Mobile Div Element. Why: Phones show the section links and phone number in a panel below the bar. How: This opens and closes with the menu button. */ }
+			>{ /* What: Navigation Mobile Div Element. Why: Phones show the section links and phone number in a panel below the bar. How: This opens and closes with the menu button, carrying data-mobile-menu-open while it's open. */ }
 
 
 				{ NAV_LIN_ARR.map( ( linRcdObj ) => ( // What: Menu Link Map. Why: Each section gets a link in the mobile menu. How: This renders one anchor per row.
@@ -354,7 +360,7 @@ function NavBarCom () : React.JSX.Element {
 					<a
 						key={ linRcdObj.labStr }
 
-						className='navbar__mobile-link'
+						className={ cssModObj.navbarMobileLink }
 
 						href={ linRcdObj.hreStr }
 
@@ -367,7 +373,7 @@ function NavBarCom () : React.JSX.Element {
 				))}
 
 				<a
-					className='navbar__mobile-cta'
+					className={ cssModObj.navbarMobileCta }
 
 					href='tel:7853041957'
 				>{ /* What: Navigation Mobile Phone Anchor Element. Why: Calling is the fastest way to reach the company. How: This dials its number from the menu. */ }

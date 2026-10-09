@@ -1,0 +1,460 @@
+
+
+
+/**
+ * nav.module.css = Navigation Bar Module
+ *
+ * @summary
+ * Styles for NavBarCom: the fixed top bar, transparent at the top of the
+ * page and solid once it scrolls, with the brand, the section links and
+ * phone button on wide screens, and on screens 768px wide or narrower the
+ * menu button and the panel of links it opens below the bar. The shared
+ * container styles the bar's inner row used to borrow from the global
+ * stylesheet are copied onto its own class here. The bar's states are
+ * attributes rather than classes: data-page-scroll-active on the bar,
+ * data-section-link-active on the link for the section being read,
+ * aria-expanded on the menu button, and data-mobile-menu-open on the panel.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region navbar */
+
+.navbar { /* What: Navigation Bar Header. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, transparent until the page scrolls, and eases between its two looks. */
+
+
+	background : transparent;
+	left       : 0;
+	padding    : 1.25rem 0;
+	position   : fixed;
+	right      : 0;
+	top        : 0;
+	transition : background var(--transition), padding var(--transition), box-shadow var(--transition);
+	z-index    : 1000;
+
+
+}
+.navbar[data-page-scroll-active] { /* What: Scrolled Navigation Bar Header. Why: Once content slides under the bar, it needs a background to stay readable. How: This turns it solid navy, tightens its padding, and adds a soft shadow while the page is scrolled. */
+
+
+	background : var(--navy-dark);
+	box-shadow : 0 2px 24px rgba(0,0,0,0.35);
+	padding    : 0.75rem 0;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Bar Header. Why: Someone who asked for less motion shouldn't see the bar animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navbar { /* What: Motionless Navigation Bar Header. Why: The scrolled look should simply switch on. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+
+/* #region navbar__inner */
+
+.navbar__inner { /* What: Navigation Inner Div. Why: The bar's contents line up with the page's content width. How: This centers a capped-width row with side padding, copied from the shared container, and spreads the brand, links, and menu button across it. */
+
+
+	align-items     : center;
+	display         : flex;
+	justify-content : space-between;
+	margin          : 0 auto;
+	max-width       : var(--max-w);
+	padding         : 0 2rem;
+
+
+}
+
+
+/* #region navbar__brand */
+
+.navbar__brand { /* What: Navigation Brand Anchor. Why: The mark and the name read as one link. How: This sets the mark beside the name with a small gap. */
+
+
+	align-items : center;
+	display     : flex;
+	gap         : 0.75rem;
+
+
+}
+
+.navbar__logo { /* What: Navigation Logo Image. Why: The mark should sit at a fixed, small size beside the name. How: This sizes it to a 44px box, scaled to fit without cropping. */
+
+
+	height     : 44px;
+	object-fit : contain;
+	width      : 44px;
+
+
+}
+
+
+/* #region navbar__brand-text */
+
+.navbar__brand-text { /* What: Navigation Brand Text Span. Why: The name and its LLC stack tightly as one block. How: This stacks the two lines with no extra line height. */
+
+
+	display        : flex;
+	flex-direction : column;
+	line-height    : 1;
+
+
+}
+
+.navbar__brand-main { /* What: Navigation Brand Main Span. Why: The company's name is the brand's main line. How: This sets it in the display font, extra bold and uppercase, in white. */
+
+
+	color          : var(--white);
+	font-family    : var(--font-display);
+	font-size      : 1.15rem;
+	font-weight    : 800;
+	letter-spacing : 0.04em;
+	text-transform : uppercase;
+
+
+}
+
+.navbar__brand-sub { /* What: Navigation Brand Sub Span. Why: The legal suffix completes the brand without competing with the name. How: This sets it small, widely spaced, and silver. */
+
+
+	color          : var(--silver);
+	font-family    : var(--font-display);
+	font-size      : 0.65rem;
+	font-weight    : 400;
+	letter-spacing : 0.3em;
+	text-transform : uppercase;
+
+
+}
+
+/* #endregion navbar__brand-text */
+
+/* #endregion navbar__brand */
+
+
+
+/* #region navbar__nav */
+
+.navbar__nav { /* What: Navigation Main Nav. Why: Wide screens show the section links and phone button in the bar. How: This lines them up in a row with even gaps. */
+
+
+	align-items : center;
+	display     : flex;
+	gap         : 2rem;
+
+
+}
+@media ( max-width : 768px ) { /* What: Narrow Navigation Main Nav. Why: The links don't fit the bar on narrow screens, where the menu takes over. How: This applies 768px wide and below. */
+
+
+	.navbar__nav { /* What: Hidden Navigation Main Nav. Why: The menu panel holds the links instead. How: This hides the row. */
+
+
+		display : none;
+
+
+	}
+
+
+}
+
+.navbar__link { /* What: Navigation Link Anchor. Why: Each link names a section in the bar's display style. How: This sets it in small, spaced capitals in light silver, positioned so its underline can sit beneath it. */
+
+
+	color          : var(--silver-light);
+	font-family    : var(--font-display);
+	font-size      : 0.9rem;
+	font-weight    : 600;
+	letter-spacing : 0.12em;
+	position       : relative;
+	text-transform : uppercase;
+	transition     : color var(--transition);
+
+
+}
+.navbar__link::after { /* What: Navigation Link Underline. Why: A short line marks the hovered and active links. How: This draws a 2px light blue line under the link, scaled to nothing until it's needed. */
+
+
+	background       : var(--blue-light);
+	bottom           : -4px;
+	content          : '';
+	height           : 2px;
+	left             : 0;
+	position         : absolute;
+	right            : 0;
+	transform        : scaleX(0);
+	transform-origin : left;
+	transition       : transform var(--transition);
+
+
+}
+.navbar__link:hover,
+.navbar__link[data-section-link-active] { /* What: Hovered And Active Navigation Link Anchor. Why: The link under the pointer and the link for the section being read should stand out. How: This turns their text white. */
+
+
+	color : var(--white);
+
+
+}
+.navbar__link[data-section-link-active]::after,
+.navbar__link:hover::after { /* What: Hovered And Active Navigation Link Underline. Why: The underline completes the highlight. How: This grows the line to its full width from the left. */
+
+
+	transform : scaleX(1);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navbar__link,
+	.navbar__link::after { /* What: Motionless Navigation Link Anchor. Why: The color and underline should simply switch. How: This turns both transitions off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.navbar__cta { /* What: Navigation Phone Anchor. Why: Calling is the fastest way in, so the number gets a button of its own. How: This sets it as a solid blue button in the display font. */
+
+
+	background     : var(--blue);
+	border         : 2px solid var(--blue);
+	color          : var(--white);
+	font-family    : var(--font-display);
+	font-size      : 0.9rem;
+	font-weight    : 700;
+	letter-spacing : 0.06em;
+	padding        : 0.55rem 1.25rem;
+	transition     : background var(--transition), color var(--transition);
+
+
+}
+.navbar__cta:hover { /* What: Hovered Navigation Phone Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text. */
+
+
+	background : transparent;
+	color      : var(--blue-light);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Phone Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navbar__cta { /* What: Motionless Navigation Phone Anchor. Why: The hover look should simply switch on. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion navbar__nav */
+
+
+/* #region navbar__hamburger */
+
+.navbar__hamburger { /* What: Navigation Menu Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon, hidden until the narrow layout shows it. */
+
+
+	background     : none;
+	border         : none;
+	cursor         : pointer;
+	display        : none;
+	flex-direction : column;
+	gap            : 5px;
+	padding        : 4px;
+
+
+}
+@media ( max-width : 768px ) { /* What: Narrow Navigation Menu Button. Why: The menu replaces the links on narrow screens. How: This applies 768px wide and below. */
+
+
+	.navbar__hamburger { /* What: Shown Navigation Menu Button. Why: The button has to appear where the links no longer fit. How: This shows it. */
+
+
+		display : flex;
+
+
+	}
+
+
+}
+
+.navbar__hamburger-bar { /* What: Menu Bar Span. Why: Three bars draw the menu icon. How: This draws each as a thin white line that can turn and fade into a cross. */
+
+
+	background : var(--white);
+	display    : block;
+	height     : 2px;
+	transition : transform var(--transition), opacity var(--transition);
+	width      : 26px;
+
+
+}
+.navbar__hamburger[aria-expanded='true'] .navbar__hamburger-bar:nth-child( 1 ) { /* What: Open First Menu Bar Span. Why: The open menu's icon should read as a close cross. How: This drops the top bar to the middle and turns it 45 degrees. */
+
+
+	transform : translateY(7px) rotate(45deg);
+
+
+}
+.navbar__hamburger[aria-expanded='true'] .navbar__hamburger-bar:nth-child( 2 ) { /* What: Open Second Menu Bar Span. Why: The cross only needs two lines. How: This fades the middle bar out. */
+
+
+	opacity : 0;
+
+
+}
+.navbar__hamburger[aria-expanded='true'] .navbar__hamburger-bar:nth-child( 3 ) { /* What: Open Third Menu Bar Span. Why: The open menu's icon should read as a close cross. How: This lifts the bottom bar to the middle and turns it the other way. */
+
+
+	transform : translateY(-7px) rotate(-45deg);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Bar Span. Why: Someone who asked for less motion shouldn't see the icon animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navbar__hamburger-bar { /* What: Motionless Menu Bar Span. Why: The icon should simply switch to a cross. How: This turns the transitions off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion navbar__hamburger */
+
+/* #endregion navbar__inner */
+
+
+
+/* #region navbar__mobile */
+
+.navbar__mobile { /* What: Navigation Mobile Div. Why: Narrow screens show the links and phone number in a panel below the bar. How: This stacks them on the dark navy, collapsed to no height and hidden until the narrow layout shows it. */
+
+
+	background     : var(--navy-dark);
+	display        : none;
+	flex-direction : column;
+	max-height     : 0;
+	overflow       : hidden;
+	padding        : 0 2rem;
+	transition     : max-height 0.4s ease; /* What: Panel Height Transition. Why: The panel has to push down as it opens, which a transform can't do, and its content height isn't known, so it eases a capped max-height instead. How: This animates the max-height between 0 and the open cap. */
+
+
+}
+.navbar__mobile[data-mobile-menu-open] { /* What: Open Navigation Mobile Div. Why: The panel should show its links once the menu button opens it. How: This lifts the height cap to fit every link and adds bottom padding. */
+
+
+	max-height : 400px;
+	padding    : 0 2rem 1.5rem;
+
+
+}
+@media ( max-width : 768px ) { /* What: Narrow Navigation Mobile Div. Why: The panel exists only where the menu does. How: This applies 768px wide and below. */
+
+
+	.navbar__mobile { /* What: Shown Navigation Mobile Div. Why: The panel has to be in the layout to open. How: This lays it out as a column, still collapsed until opened. */
+
+
+		display : flex;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Mobile Div. Why: Someone who asked for less motion shouldn't see the panel slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navbar__mobile { /* What: Motionless Navigation Mobile Div. Why: The panel should simply open and close. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.navbar__mobile-link { /* What: Navigation Mobile Link Anchor. Why: Each link fills a row of the panel. How: This sets it in spaced capitals in light silver with a faint divider below. */
+
+
+	border-bottom  : 1px solid rgba(255,255,255,0.07);
+	color          : var(--silver-light);
+	font-family    : var(--font-display);
+	font-size      : 1.1rem;
+	font-weight    : 600;
+	letter-spacing : 0.1em;
+	padding        : 0.85rem 0;
+	text-transform : uppercase;
+	transition     : color var(--transition);
+
+
+}
+.navbar__mobile-link:hover { /* What: Hovered Navigation Mobile Link Anchor. Why: The link should respond to the pointer. How: This turns its text white. */
+
+
+	color : var(--white);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Mobile Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navbar__mobile-link { /* What: Motionless Navigation Mobile Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.navbar__mobile-cta { /* What: Navigation Mobile Phone Anchor. Why: The panel ends with the quickest way to reach the company. How: This sets the number as a full-width blue button below the links. */
+
+
+	background     : var(--blue);
+	color          : var(--white);
+	font-family    : var(--font-display);
+	font-size      : 1rem;
+	font-weight    : 700;
+	letter-spacing : 0.06em;
+	margin-top     : 1.25rem;
+	padding        : 0.85rem;
+	text-align     : center;
+
+
+}
+
+/* #endregion navbar__mobile */
+
+/* #endregion navbar */
+
+
