@@ -546,7 +546,7 @@
 
 /* #region home__stat */
 
-.staIteDiv { /* What: Stat Item Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with a faint divider on its right. */
+.staIteDiv { /* What: Stat Item Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with their text centered too so a caption that wraps to two lines stays balanced, and a faint divider on its right. */
 
 
 	align-items    : center;
@@ -555,6 +555,7 @@
 	flex-direction : column;
 	gap            : var( --spa-ver-m04 );                                                       /* Spacing Vertical Base Minus 4 ~= 4.732px */
 	padding        : var( --spa-ver-p02 ) var( --spa-hor-bas );                                  /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base ~= 14.572px */
+	text-align     : center;
 
 
 }
