@@ -151,13 +151,14 @@ reduced-motion variant (with `utils/motion.ts`'s `redMotFun` stopping the
 JavaScript smooth scrolls), the form fields got a focus ring, and the muted
 text, light blue, light-section labels, and footer copyright line were
 adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
-- **The logo images are far too heavy** (noted 2026-10-08):
-  `src/assets/logo-full.png` is 3.7 MB and `logo-simple.png` 705 KB, which
-  slows every page load. Remind the user when step 7's SEO pass starts, then
-  resize and compress them (or replace them with SVGs where the artwork
-  allows). The oversized full logo also makes Chromium's downscale of it
-  slightly nondeterministic under load, which is why the rendering suite
-  has a retry.
+- **The logos were resized on 2026-10-08** (at the user's go-ahead, ahead
+  of step 7): `logo-full.png` went from 4763x4640 (3.7 MB, about 88 MB
+  decoded) to 968x943 (299 KB), at least 2x its largest display and 3x the
+  phone hero, and `logo-simple.png` from 1210x1025 (705 KB) to 157x133
+  (24 KB), over 3x its 44px box, each at a width that keeps the original
+  aspect ratio to within 0.005px so no layout moved. The oversized full logo
+  had made Chromium's draw of it nondeterministic under a full test run.
+  Converting them to SVG or WebP is still open for step 7's SEO pass.
 - **No security headers yet**: `public/_headers` doesn't exist. Step 7
   raises with the user whether to add ease-my-life's hardening headers
   (Content-Security-Policy, HSTS, and the rest), adjusted for whatever this
