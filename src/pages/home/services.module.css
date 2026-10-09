@@ -1,0 +1,340 @@
+
+
+
+/**
+ * services.module.css = Services Section Module
+ *
+ * @summary
+ * Styles for SerSecCom: the light section with its header, the grid of
+ * service cards that lift on hover (four across, then two at 1,024px wide or
+ * narrower, then one at 580px), and the navy service area panel with its
+ * hoverable area tags, which stacks into one column at 768px. The shared
+ * container, section label, section title, and divider styles the section
+ * used to borrow from the global stylesheet are copied onto those same class
+ * names here, along with the header's and panel's own adjustments to them.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region services */
+
+.services { /* What: Services Section. Why: The services sit on a light band apart from the dark hero. How: This fills it with the off-white and gives it generous padding above and below. */
+
+
+	background : var(--off-white);
+	padding    : 7rem 0;
+
+
+}
+
+
+/* #region container */
+
+.container { /* What: Services Container Div. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with side padding, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : var(--max-w);
+	padding   : 0 2rem;
+
+
+}
+
+
+/* #region services__header */
+
+.services__header { /* What: Services Header Div. Why: The section opens by saying what it covers, at a readable width. How: This caps the header at 600px and leaves room below it. */
+
+
+	margin-bottom : 4rem;
+	max-width     : 600px;
+
+
+}
+
+.section-label { /* What: Section Label Paragraph. Why: A short label sits above each heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared section label. */
+
+
+	color          : var(--blue-light);
+	font-family    : var(--font-display);
+	font-size      : 0.8rem;
+	font-weight    : 700;
+	letter-spacing : 0.25em;
+	text-transform : uppercase;
+
+
+}
+.services__header .section-label { /* What: Header Section Label Paragraph. Why: Light blue doesn't have enough contrast on the light section. How: This turns the header's label the deeper blue. */
+
+
+	color : var(--blue);
+
+
+}
+
+.section-title { /* What: Section Title Heading. Why: Each heading leads its part of the section. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
+
+
+	color          : var(--navy);
+	font-family    : var(--font-display);
+	font-size      : clamp(2rem, 4vw, 3rem);
+	font-weight    : 800;
+	letter-spacing : 0.02em;
+	line-height    : 1.05;
+	text-transform : uppercase;
+
+
+}
+.services__area .section-title { /* What: Area Section Title Heading. Why: Navy text would vanish on the navy panel. How: This turns the panel's heading white. */
+
+
+	color : var(--white);
+
+
+}
+
+.divider { /* What: Divider Div. Why: A short rule separates each heading from the text below it. How: This draws a 3rem by 3px blue bar with room above and below, copied from the shared divider. */
+
+
+	background : var(--blue);
+	height     : 3px;
+	margin     : 1rem 0 1.5rem;
+	width      : 3rem;
+
+
+}
+
+.services__intro { /* What: Services Intro Paragraph. Why: The intro sums up the company at a comfortable reading width. How: This sets it in the muted text color with generous leading, capped at 560px. */
+
+
+	color       : var(--text-muted);
+	font-size   : 1.05rem;
+	line-height : 1.8;
+	max-width   : 560px;
+
+
+}
+
+/* #endregion services__header */
+
+
+
+/* #region services__grid */
+
+.services__grid { /* What: Services Grid Div. Why: The services read best as a grid of cards. How: This lays the cards out four across with even gaps and leaves room below for the panel. */
+
+
+	display               : grid;
+	gap                   : 1.5rem;
+	grid-template-columns : repeat(4, 1fr);
+	margin-bottom         : 5rem;
+
+
+}
+@media ( max-width : 1024px ) { /* What: Medium Services Grid Div. Why: Four cards across get cramped on medium screens. How: This applies 1,024px wide and below. */
+
+
+	.services__grid { /* What: Two-Column Services Grid Div. Why: The cards read better two across. How: This switches to two columns. */
+
+
+		grid-template-columns : repeat(2, 1fr);
+
+
+	}
+
+
+}
+@media ( max-width : 580px ) { /* What: Narrow Services Grid Div. Why: Two cards across don't fit on phones. How: This applies 580px wide and below. */
+
+
+	.services__grid { /* What: Single-Column Services Grid Div. Why: Each card needs the full width on a phone. How: This switches to one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region services__card */
+
+.services__card { /* What: Services Card Div. Why: Each service reads as its own white card. How: This draws a white card with a light border and a blue top edge, and eases its lift on hover. */
+
+
+	background : var(--white);
+	border     : 1px solid var(--silver-light);
+	border-top : 3px solid var(--blue);
+	padding    : 2rem 1.75rem;
+	position   : relative;
+	transition : box-shadow var(--transition), transform var(--transition);
+
+
+}
+.services__card:hover { /* What: Hovered Services Card Div. Why: The card under the pointer should come forward. How: This lifts it 4px and casts a soft navy shadow. */
+
+
+	box-shadow : 0 12px 40px rgba(15, 30, 69, 0.1);
+	transform  : translateY(-4px);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Services Card Div. Why: Someone who asked for less motion shouldn't see the cards animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.services__card { /* What: Motionless Services Card Div. Why: The hover look should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.services__card-icon { /* What: Services Card Icon Span. Why: An icon helps a visitor scan the grid. How: This shows the emoji large on its own line above the title. */
+
+
+	display       : block;
+	font-size     : 1.75rem;
+	margin-bottom : 0.85rem;
+
+
+}
+
+.services__card-title { /* What: Services Card Title Heading. Why: Each card names its service. How: This sets the title in the bold display font, uppercase and navy. */
+
+
+	color          : var(--navy);
+	font-family    : var(--font-display);
+	font-size      : 1.1rem;
+	font-weight    : 700;
+	letter-spacing : 0.04em;
+	margin-bottom  : 0.6rem;
+	text-transform : uppercase;
+
+
+}
+
+.services__card-desc { /* What: Services Card Description Paragraph. Why: Visitors want to know what the service involves. How: This sets the description small in the muted text color with generous leading. */
+
+
+	color       : var(--text-muted);
+	font-size   : 0.9rem;
+	line-height : 1.7;
+
+
+}
+
+/* #endregion services__card */
+
+/* #endregion services__grid */
+
+
+
+/* #region services__area */
+
+.services__area { /* What: Services Area Div. Why: The service area stands apart from the cards as a dark panel. How: This fills a padded navy panel and lays its text and tags out in two columns. */
+
+
+	align-items           : center;
+	background            : var(--navy);
+	display               : grid;
+	gap                   : 3rem;
+	grid-template-columns : 1fr 1fr;
+	padding               : 3.5rem;
+
+
+}
+@media ( max-width : 768px ) { /* What: Narrow Services Area Div. Why: Two columns don't fit the panel on narrow screens. How: This applies 768px wide and below. */
+
+
+	.services__area { /* What: Stacked Services Area Div. Why: The text and tags read best one above the other. How: This collapses to one column with tighter padding. */
+
+
+		grid-template-columns : 1fr;
+		padding               : 2.5rem 2rem;
+
+
+	}
+
+
+}
+
+.services__area-desc { /* What: Area Description Paragraph. Why: The tags need a sentence of context on the dark panel. How: This sets it in light silver with generous leading. */
+
+
+	color       : var(--silver-light);
+	font-size   : 0.95rem;
+	line-height : 1.8;
+
+
+}
+
+
+/* #region services__area-tags */
+
+.services__area-tags { /* What: Area Tags Div. Why: Each place the company works gets a quick tag. How: This wraps the tags in rows from the top left. */
+
+
+	align-content : flex-start;
+	align-items   : flex-start;
+	display       : flex;
+	flex-wrap     : wrap;
+	gap           : 0.75rem;
+
+
+}
+
+.services__area-tag { /* What: Services Area Tag Span. Why: Each tag names one place in the display style. How: This sets the name in spaced capitals inside a faint light blue outline, and eases its fill on hover. */
+
+
+	border         : 1.5px solid rgba(59, 130, 246, 0.5);
+	color          : var(--white);
+	font-family    : var(--font-display);
+	font-size      : 0.9rem;
+	font-weight    : 600;
+	letter-spacing : 0.08em;
+	padding        : 0.55rem 1.25rem;
+	text-transform : uppercase;
+	transition     : background var(--transition), border-color var(--transition);
+
+
+}
+.services__area-tag:hover { /* What: Hovered Services Area Tag Span. Why: The tag under the pointer should respond. How: This fills it solid blue. */
+
+
+	background   : var(--blue);
+	border-color : var(--blue);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Services Area Tag Span. Why: Someone who asked for less motion shouldn't see the tags animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.services__area-tag { /* What: Motionless Services Area Tag Span. Why: The hover fill should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion services__area-tags */
+
+/* #endregion services__area */
+
+/* #endregion container */
+
+/* #endregion services */
+
+
