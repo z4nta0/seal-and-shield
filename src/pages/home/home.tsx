@@ -5,10 +5,10 @@
 
 import About    from './about.tsx';    // What: About. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
 import Contact  from './contact.tsx';  // What: Contact. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
-import Home     from './hero.tsx';     // What: Home. Why: The page opens with the headline and pitch. How: This hero section is rendered first inside main.
 import Services from './services.tsx'; // What: Services. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
 
 
+import { HerSecCom } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
 import { NavBarCom } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
 import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: Every page ends with the shared footer. How: This is rendered below main.
 
@@ -77,7 +77,7 @@ function HomPagCom () : React.JSX.Element {
 			<main>{ /* What: Home Main Element. Why: The four sections are the page's main content. How: This wraps them in the main landmark, in reading order. */ }
 
 
-				<Home />{ /* What: Home. Why: The page opens with the headline and pitch. How: This renders the hero section first. */ }
+				<HerSecCom />{ /* What: Hero Section Component. Why: The page opens with the headline and pitch. How: This renders the hero first. */ }
 
 
 
