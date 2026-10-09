@@ -143,9 +143,6 @@ reduced-motion variant (with `utils/motion.ts`'s `redMotFun` stopping the
 JavaScript smooth scrolls), the form fields got a focus ring, and the muted
 text, light blue, light-section labels, and footer copyright line were
 adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
-- **`README.md` describes Reese Roofing**, the project this site was copied
-  from (its name, placeholder contact details, and file layout). It gets
-  rewritten for Seal and Shield once the directory structure settles.
 - **The logo images are far too heavy** (noted 2026-10-08):
   `src/assets/logo-full.png` is 3.7 MB and `logo-simple.png` 705 KB, which
   slows every page load. Remind the user when step 7's SEO pass starts, then
