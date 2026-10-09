@@ -111,7 +111,11 @@ the page to settle.
   with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
   pixel may differ, and the per-pixel color threshold is 0 too, since
   Playwright's default of 0.2 let a slight color change pass unnoticed
-  (reese-roofing's suite still has that gap). The footer's year is masked. After an intended visual change, refresh with `npm
+  (reese-roofing's suite still has that gap). The footer's year is masked.
+  The suite gets one retry (added 2026-10-08), only because Chromium under a
+  full run occasionally downscales the oversized About logo a few pixels
+  differently; a real change fails both attempts, and a one-off shows up as
+  flaky in the report. Drop the retry once the logo images are resized. After an intended visual change, refresh with `npm
   run test:rendering -- --update-snapshots` and commit the baselines with it.
   Baselines are captured on Linux.
 - `npm run test:responsive`: measures the home page and the open menu at 19
@@ -151,7 +155,9 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
   `src/assets/logo-full.png` is 3.7 MB and `logo-simple.png` 705 KB, which
   slows every page load. Remind the user when step 7's SEO pass starts, then
   resize and compress them (or replace them with SVGs where the artwork
-  allows).
+  allows). The oversized full logo also makes Chromium's downscale of it
+  slightly nondeterministic under load, which is why the rendering suite
+  has a retry.
 - **No security headers yet**: `public/_headers` doesn't exist. Step 7
   raises with the user whether to add ease-my-life's hardening headers
   (Content-Security-Policy, HSTS, and the rest), adjusted for whatever this

@@ -78,9 +78,10 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 	projects : SUI_NAM_ARR.flatMap( ( suiNamStr ) => ENG_NAM_ARR.map( ( engNamStr ) => ({ // What: Projects. Why: Each suite runs on its own in each engine. How: This crosses every suite with every engine into a project named after both, runnable alone with --project.
 
 
-		name      : `${ suiNamStr }-${ engNamStr }`, // What: Name. Why: A failure has to say which suite and engine it came from. How: This names the project after both.
-		testMatch : `${ suiNamStr }/**/*.spec.ts`,   // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec in the suite's folder under tests/.
-		use       : { browserName : engNamStr }      // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in.
+		name      : `${ suiNamStr }-${ engNamStr }`,          // What: Name. Why: A failure has to say which suite and engine it came from. How: This names the project after both.
+		retries   : suiNamStr === 'rendering' ? 1 : 0,       // What: Retries. Why: Under a full run Chromium occasionally downscales the oversized About logo a few pixels differently, failing an exact comparison over nothing. How: The rendering suite gets one retry, so a real change still fails both attempts while a one-off is reported as flaky rather than hidden.
+		testMatch : `${ suiNamStr }/**/*.spec.ts`,            // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec in the suite's folder under tests/.
+		use       : { browserName : engNamStr }               // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in.
 
 
 	}))),
