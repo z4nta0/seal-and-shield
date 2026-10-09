@@ -51,11 +51,11 @@ npm run preview
 
 ```
 src/
-├── assets/            Images shared by 2+ pages (logo-simple.png)
+├── assets/            Images and fonts shared by 2+ pages (logo-simple.png, fonts/)
 ├── pages/
 │   └── home/          Home page and its sections (hero, services, about, contact), each with its own .css, plus logo-full.png
 ├── ui/                Shared components (nav, footer), each with its own .css
-├── styles/            styles.css (design tokens and base element styles)
+├── styles/            fonts.css (@font-face) + styles.css (design tokens and base element styles)
 ├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling)
 ├── app.tsx            Root component
 └── main.tsx           Entry point
@@ -70,7 +70,7 @@ tests/
 
 ## Design notes
 
-- **Type pairing:** Barlow Condensed for headings, labels, and buttons, with Lato for body text, both loaded from Google Fonts.
+- **Type pairing:** Barlow Condensed for headings, labels, and buttons, with Lato for body text, both self-hosted (`src/assets/fonts/`, declared in `src/styles/fonts.css`), so a visit makes no third-party requests.
 - **Palette:** Deep navy (`#0f1e45`, with a darker `#080f24` for the bar, hero, and footer), a strong blue (`#1e56c8`) for buttons and labels on light sections, a lighter blue (`#4488f6`) for accents on dark sections, and an off-white (`#f4f6fa`) behind the services.
 - **Logo usage:** The **full logo** (`src/pages/home/logo-full.png`) anchors the hero and sits above the company details in the About section. The **simple mark** (`src/assets/logo-simple.png`) is used in the nav bar and the footer.
 - **Motion:** The hero fades in on load, the other sections fade in as they scroll into view, and the hero logo's ring pulses. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion.

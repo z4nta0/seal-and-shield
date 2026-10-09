@@ -1,0 +1,87 @@
+
+
+
+/**
+ * fonts.css = Fonts
+ *
+ * @summary
+ * The site's self-hosted fonts: Barlow Condensed for display text (headings,
+ * labels, buttons, and stats) and Lato for body text, replacing the Google
+ * Fonts stylesheet and preconnect links index.html used to load, so a visit
+ * makes no requests to a third party. Each file is the same latin subset
+ * Google served, one static file per weight the stylesheets use (Barlow
+ * Condensed at 400, 600, 700, and 800, and Lato at 400; Google also sent
+ * Lato at 300 and 700, which nothing used), with the same swap behavior, so
+ * fallback text shows until a file arrives. The latin subset covers every
+ * character the site's copy uses except its emoji and check mark, which
+ * neither font has, so those keep rendering from a system font as before.
+ * The files live in src/assets/fonts/ and are pulled in through url(), so
+ * Vite fingerprints them.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+@font-face { /* What: Barlow Condensed Regular Font Face. Why: Barlow Condensed is the display font, and its regular weight sets the small LLC beside the bar's brand name. How: This loads its latin file at weight 400, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Barlow Condensed';
+	font-style   : normal;
+	font-weight  : 400;
+	src          : url( '../assets/fonts/barlow-condensed-latin-400-normal.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Barlow Condensed Semibold Font Face. Why: Barlow Condensed sets the hero's eyebrow, the bar's and footer's links, the detail labels, and the service area tags at its semibold weight. How: This loads its latin file at weight 600, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Barlow Condensed';
+	font-style   : normal;
+	font-weight  : 600;
+	src          : url( '../assets/fonts/barlow-condensed-latin-600-normal.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Barlow Condensed Bold Font Face. Why: Barlow Condensed sets the section labels, buttons, card and value titles, form labels, and phone links at its bold weight. How: This loads its latin file at weight 700, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Barlow Condensed';
+	font-style   : normal;
+	font-weight  : 700;
+	src          : url( '../assets/fonts/barlow-condensed-latin-700-normal.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Barlow Condensed Extra Bold Font Face. Why: Barlow Condensed sets the headings, the hero's stats, and the brand names at its extra bold weight. How: This loads its latin file at weight 800, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Barlow Condensed';
+	font-style   : normal;
+	font-weight  : 800;
+	src          : url( '../assets/fonts/barlow-condensed-latin-800-normal.woff2' ) format( 'woff2' );
+
+
+}
+
+@font-face { /* What: Lato Regular Font Face. Why: Lato is the body font for paragraphs, form fields, and the rest of the running text, all at its regular weight. How: This loads its latin file at weight 400, showing fallback text until it arrives. */
+
+
+	font-display : swap;
+	font-family  : 'Lato';
+	font-style   : normal;
+	font-weight  : 400;
+	src          : url( '../assets/fonts/lato-latin-400-normal.woff2' ) format( 'woff2' );
+
+
+}
+
+
