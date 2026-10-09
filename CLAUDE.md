@@ -180,12 +180,11 @@ waiting for the page to settle.
   measures against white. WAVE's remaining contrast flags on the About and
   Contact text are false positives: those blocks sit at opacity 0 until the
   scroll reveal reaches them, and WAVE counts opacity. Scroll to the bottom
-  of the page before running WAVE so every block has faded in. Its flags on
-  the contact details' small labels (Location, Phone, Business Hours) are
-  false positives too: measured against the lightest pixel actually behind
-  them, glow included, they clear 6.5:1 in all three engines at phone and
-  desktop widths, and axe passes them. WAVE most likely misreads the
-  section's radial-gradient glow, which sits behind them.
+  of the page before running WAVE so every block has faded in. The last
+  flags sat on the contact details' emoji icons, which inherited the body's
+  dark slate text color; emoji draw in their own colors, so it never showed,
+  but checkers measured it against the navy. The icon span now carries the
+  section's light text color instead.
 
 ## Accessibility pass
 Done 2026-10-08, before the directory move, so steps 5 and 6 run against a

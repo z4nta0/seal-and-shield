@@ -170,6 +170,7 @@
 .detIcoSpa { /* What: Detail Icon Span. Why: An icon helps a visitor scan the rows. How: This sets the emoji a little larger, nudged down to line up with the label, and never shrinks it. */
 
 
+	color       : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */ /* What: Checker Text Color. Why: Emoji draw in their own colors, but contrast checkers still measure the inherited dark slate against the navy. How: This gives the span the section's light text color, which never shows on screen. */
 	flex-shrink : 0;
 	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	margin-top  : var( --spa-ver-m07 ); /* Spacing Vertical Base Minus 7 ~= 2.035px */
