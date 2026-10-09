@@ -3,8 +3,9 @@
 
 // #region Imports
 
-import { useEffect } from 'react'; // What: Use Effect. Why: The section is observed once it mounts and released when it unmounts. How: This runs the observer setup and its cleanup.
-import { useRef    } from 'react'; // What: Use Ref. Why: The observer needs the section's element. How: This creates the ref the section attaches.
+import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Function. Why: Someone who asked for less motion shouldn't see the blocks arrive one by one. How: The reveal asks it before staggering the blocks.
+import { useEffect } from 'react';                 // What: Use Effect. Why: The section is observed once it mounts and released when it unmounts. How: This runs the observer setup and its cleanup.
+import { useRef    } from 'react';                 // What: Use Ref. Why: The observer needs the section's element. How: This creates the ref the section attaches.
 
 // #endregion Imports
 
@@ -44,10 +45,11 @@ import { useRef    } from 'react'; // What: Use Ref. Why: The observer needs the
  * tenth of the section is in view, it sets data-scroll-reveal-shown on each of
  * the section's data-scroll-reveal-block blocks in document order, waiting
  * staDelNum milliseconds longer for each block than the one before, so they
- * fade in one after another. The observer keeps watching after the first
- * reveal, so scrolling the section back into view sets the attribute again,
- * which changes nothing once every block is shown. The observer disconnects
- * when the section unmounts; a block's pending stagger timer still runs.
+ * fade in one after another, or all at once when the visitor asked for reduced
+ * motion. The observer keeps watching after the first reveal, so scrolling the
+ * section back into view sets the attribute again, which changes nothing once
+ * every block is shown. The observer disconnects when the section unmounts; a
+ * block's pending stagger timer still runs.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -85,7 +87,7 @@ function useRevSecFun ( staDelNum : number ) : React.RefObject< HTMLElement | nu
 					entCurObj.target.querySelectorAll( '[data-scroll-reveal-block]' ).forEach( ( fadCurEle, fadIndNum ) => { // What: Fade Block Loop. Why: Each block fades in on its own beat. How: This schedules each block marked data-scroll-reveal-block in document order.
 
 
-						setTimeout( () => fadCurEle.setAttribute( 'data-scroll-reveal-shown', '' ), fadIndNum * staDelNum ); // What: Staggered Reveal Timer. Why: The blocks fade in one after another. How: This sets the block's data-scroll-reveal-shown attribute after its place in the order times the stagger.
+						setTimeout( () => fadCurEle.setAttribute( 'data-scroll-reveal-shown', '' ), redMotFun() ? 0 : fadIndNum * staDelNum ); // What: Staggered Reveal Timer. Why: The blocks fade in one after another, unless the visitor asked for reduced motion. How: This sets the block's data-scroll-reveal-shown attribute after its place in the order times the stagger, or right away under reduced motion.
 
 
 					} );

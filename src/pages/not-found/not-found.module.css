@@ -36,7 +36,7 @@
 .nofConMai { /* What: Not-Found Content Main. Why: The message should sit centered on a dark band like the hero's, clear of the fixed bar. How: This grows to fill the space above the footer, centers its column, and pads along the gutters and below the fixed bar, clearing the bar's own height plus a full spacing step so the gap holds on short screens. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
 
 	align-items     : center;
 	background      : var( --bac-inv-col );                                                                          /* Background Inverse Color = #080f24 */
@@ -64,6 +64,9 @@
 
 }
 
+
+/* #region nofTitHea */
+
 .nofTitHea { /* What: Not-Found Title Heading. Why: The heading states the problem in the site's display style. How: This sets it large, extra bold, uppercase, and white, scaling with the screen between two font size steps. */
 
 
@@ -87,6 +90,9 @@
 
 
 }
+
+/* #endregion nofTitHea */
+
 
 .nofLedPar { /* What: Not-Found Lede Paragraph. Why: The explanation should read comfortably on the dark band. How: This sets it in light silver with generous leading, capped near 68 characters a line. */
 
@@ -142,7 +148,7 @@
 
 	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 	border-color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
-	transform    : translateY( -1px );;  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+	transform    : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -160,7 +166,7 @@
 
 	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
 	border-color : var( --bac-pag-col );                                                /* Background Page Color = #ffffff */
-	transform    : translateY( -1px );;                                                 /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+	transform    : translateY( -1px );                                                  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }

@@ -35,6 +35,10 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
 
 // #region Constants
 
+const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of Kansas', 'Continental U.S.' ]; // What: Service Area Array. Why: The service area panel tags every place the company works. How: Each entry is a tag's text and React key, from home outward.
+
+
+
 // #region SER_RCD_ARR
 
 /**
@@ -148,10 +152,6 @@ const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists ev
 
 // #endregion SER_RCD_ARR
 
-
-
-const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of Kansas', 'Continental U.S.' ]; // What: Service Area Array. Why: The service area panel tags every place the company works. How: Each entry is a tag's text and React key, from home outward.
-
 // #endregion Constants
 
 
@@ -166,8 +166,9 @@ const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of
  * @summary
  * Renders the services section: the header, a card for each row of
  * SER_RCD_ARR, and the service area panel with a tag for each entry of
- * SER_ARE_ARR. Its header, every card, and the area panel are scroll-reveal
- * blocks, revealed 80ms apart once the section scrolls into view.
+ * SER_ARE_ARR. Its header, each card's grid cell, and the area panel are
+ * scroll-reveal blocks, revealed 80ms apart once the section scrolls into
+ * view.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

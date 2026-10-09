@@ -90,7 +90,7 @@
 @container app ( max-width : 900px ) { /* What: Narrow About Visual Div. Why: The stacked column shouldn't stretch across the whole screen. How: This applies 900px wide and below. */
 
 
-	.aboVisDiv { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This caps the column at 400px and centers it. */
+	.aboVisDiv { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This caps the column at about 426px and centers it. */
 
 
 		margin    : 0 auto;
@@ -134,7 +134,7 @@
 .infCarDiv { /* What: Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
 
 	background     : var( --bac-inr-col );                                                                           /* Background Inverse Raised Color = #0f1e45 */
 	display        : flex;
@@ -276,7 +276,7 @@
 
 }
 
-.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the story. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
+.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the story. How: This draws an about 45px by about 2.7px blue bar with room above and below, copied from the shared divider. */
 
 
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */

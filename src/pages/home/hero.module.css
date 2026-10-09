@@ -29,7 +29,7 @@
 .homHerSec { /* What: Home Hero Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
 
 	background      : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
 	display         : flex;
@@ -68,6 +68,7 @@
 
 
 }
+
 
 
 /* #region herConDiv */
@@ -306,7 +307,7 @@
 
 	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 	border-color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
-	transform    : translateY( -1px );;  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+	transform    : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -324,7 +325,7 @@
 
 	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
 	border-color : var( --bac-pag-col );                                                /* Background Page Color = #ffffff */
-	transform    : translateY( -1px );;                                                 /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+	transform    : translateY( -1px );                                                  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -414,12 +415,12 @@
 	animation     : logRinDivLoopPulse var( --dur-ani-p12 ) var( --mot-sta-eas ) infinite;                          /* Duration Animation Base Plus 12 ~= 4,610.0ms, Motion Standard Easing = ease */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
-	inset         : calc( var( --log-rin-off ) * -1 );                                                              /* Logo Ring Offset, about 3.572px, or 33.876px in the stacked hero */
+	inset         : calc( var( --log-rin-off ) * -1 );                                                              /* Logo Ring Offset, about -3.572px, or -33.876px in the stacked hero */
 	position      : absolute;
 
 
 }
-.logRinDiv::before { /* What: Hero Logo Inner Ring. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it about 26px inside the outer circle. */
+.logRinDiv::before { /* What: Logo Ring Div Inner Circle. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it about 26px inside the outer circle. */
 
 
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
@@ -463,7 +464,7 @@
 	100% {
 
 
-		opacity   : 0.6;
+		opacity   : var( --cdn-pow-002-rec ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 		transform : scale( 1 );
 
 

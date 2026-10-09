@@ -77,8 +77,9 @@ function NotFouCom () : React.JSX.Element {
 			<title>Page Not Found | Seal and Shield</title>{ /* What: Page Title Element. Why: A visitor's tab and history should say the address they tried doesn't exist. How: React 19 moves this title into the head ahead of index.html's own, and takes it out again when the page leaves, so the home page's title applies once more. */ }
 
 			<meta
-				content='noindex'
 				name='robots'
+
+				content='noindex'
 			/>{ /* What: Robots Meta Element. Why: The host answers every unknown path with the site and a 200 status, so search engines would otherwise index this page under every mistyped address. How: React 19 moves this into the head while the page is shown, telling crawlers not to index it. */ }
 
 

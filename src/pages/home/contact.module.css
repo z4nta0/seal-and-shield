@@ -27,7 +27,7 @@
 .homConSec { /* What: Home Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
 
 	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
 	overflow   : hidden;
@@ -119,7 +119,7 @@
 
 }
 
-.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the invitation. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
+.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the invitation. How: This draws an about 45px by about 2.7px blue bar with room above and below, copied from the shared divider. */
 
 
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
@@ -270,7 +270,7 @@
 
 	background : transparent;
 	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
-	transform  : translateY( -1px );;  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+	transform  : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -302,7 +302,7 @@
 .forWraDiv { /* What: Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
 
 
-	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */ /* What: Panel Focus Ring Color. Why: The white panel needs the main blue ring back, since the light blue falls under 3:1 on white. How: This hands every control in the panel the main blue. */
+	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */ /* What: Focus Ring Color For The Panel. Why: The white panel needs the main blue ring back, since the light blue falls under 3:1 on white. How: This hands every control in the panel the main blue. */
 
 	background : var( --bac-pag-col );                                                                           /* Background Page Color = #ffffff */
 	padding    : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
@@ -413,7 +413,7 @@
 	from {
 
 
-		transform : scale( 0.6 );
+		transform : scale( var( --cdn-pow-002-rec ) ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 
 
 	}
@@ -452,7 +452,6 @@
 }
 
 /* #endregion forSucDiv */
-
 
 
 .forTitHea { /* What: Form Title Heading. Why: The form needs a clear heading, set off from its fields. How: This sets it in the extra bold display font, uppercase and navy, over a blue rule. */
@@ -586,6 +585,7 @@
 /* #endregion forRowDiv */
 
 
+
 /* #region forErrPar */
 
 .forErrPar { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel, with the same space below it as above, between the message field and the button. */
@@ -700,7 +700,7 @@
 
 	background   : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 	border-color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
-	transform    : translateY( -1px );;  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+	transform    : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -715,7 +715,7 @@
 
 
 	cursor  : progress;
-	opacity : 0.7;
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }

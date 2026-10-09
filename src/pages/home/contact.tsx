@@ -169,7 +169,7 @@ function ConSecCom () : React.JSX.Element {
 			const netResObj = await fetch( '/', { // What: Netlify Response Object. Why: Netlify Forms records a post to the site's own address carrying the form's name, and its answer says whether it did. How: This posts the fields URL-encoded and waits for the answer.
 
 
-				body    : new URLSearchParams( forValObj ).toString(),             // What: Body. Why: Netlify reads the fields as a URL-encoded string. How: This encodes every name and value pair.
+				body    : new URLSearchParams( forValObj ).toString(),              // What: Body. Why: Netlify reads the fields as a URL-encoded string. How: This encodes every name and value pair.
 				headers : { 'Content-Type' : 'application/x-www-form-urlencoded' }, // What: Headers. Why: The body's format has to be declared. How: This marks it as URL-encoded form data.
 				method  : 'POST'                                                    // What: Method. Why: A form submission is a post. How: This sends it as one.
 
@@ -415,7 +415,6 @@ function ConSecCom () : React.JSX.Element {
 							<h3 className={ cssModObj.forTitHea }>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
 
 
-
 							<div className={ cssModObj.forRowDiv }>{ /* What: Name Company Row Div Element. Why: Short fields pair up on wide screens. How: This holds the name and company fields side by side. */ }
 
 
@@ -480,7 +479,6 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-
 							<div className={ cssModObj.forRowDiv }>{ /* What: Phone Email Row Div Element. Why: Short fields pair up on wide screens. How: This holds the phone and email fields side by side. */ }
 
 
@@ -543,7 +541,6 @@ function ConSecCom () : React.JSX.Element {
 
 
 							</div>
-
 
 
 							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Message Field Div Element. Why: The message needs the form's full width. How: This holds the message field across both columns. */ }
