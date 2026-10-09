@@ -29,7 +29,7 @@
 .home { /* What: Hero Home Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
 
 
-	background      : var(--navy-dark);
+	background      : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
 	display         : flex;
 	flex-direction  : column;
 	justify-content : center;
@@ -44,10 +44,10 @@
 .home__bg-grid { /* What: Hero Background Grid Div. Why: A faint grid gives the dark band some texture. How: This tiles thin blue lines every 60px across the section, masked to fade out at the top and bottom. */
 
 
-	background-image : linear-gradient(rgba(30, 86, 200, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 86, 200, 0.07) 1px, transparent 1px);
+	background-image : linear-gradient( oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ), linear-gradient( 90deg, oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ); /* Accent Main Color = #1e56c8 @ 0.07 opacity */
 	background-size  : 60px 60px;
 	inset            : 0;
-	mask-image       : linear-gradient(to bottom, transparent, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.6) 70%, transparent);
+	mask-image       : linear-gradient( to bottom, transparent, rgba( 0, 0, 0, 0.6 ) 30%, rgba( 0, 0, 0, 0.6 ) 70%, transparent );
 	position         : absolute;
 
 
@@ -56,7 +56,7 @@
 .home__bg-gradient { /* What: Hero Background Gradient Div. Why: A soft blue glow draws the eye toward the logo. How: This places an oversized radial glow off the top right corner that ignores the pointer. */
 
 
-	background     : radial-gradient(ellipse at 70% 40%, rgba(30, 86, 200, 0.22) 0%, transparent 65%);
+	background     : radial-gradient( ellipse at 70% 40%, oklch( from var( --acc-mai-col ) l c h / 0.22 ) 0%, transparent 65% ); /* Accent Main Color = #1e56c8 @ 0.22 opacity */
 	height         : 120%;
 	pointer-events : none;
 	position       : absolute;
@@ -78,7 +78,7 @@
 	gap                   : 4rem;
 	grid-template-columns : 1fr 1fr;
 	margin                : 0 auto;
-	max-width             : var(--max-w);
+	max-width             : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
 	padding               : 5rem 2rem;
 	position              : relative;
 	z-index               : 1;
@@ -104,8 +104,8 @@
 
 
 	animation      : fadeUp 0.8s ease both;
-	color          : var(--blue-light);
-	font-family    : var(--font-display);
+	color          : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 0.8rem;
 	font-weight    : 600;
 	letter-spacing : 0.3em;
@@ -134,7 +134,7 @@
 
 
 		opacity   : 0;
-		transform : translateY(28px);
+		transform : translateY( 28px );
 
 
 	}
@@ -143,7 +143,7 @@
 
 
 		opacity   : 1;
-		transform : translateY(0);
+		transform : translateY( 0 );
 
 
 	}
@@ -158,9 +158,9 @@
 
 
 	animation      : fadeUp 0.8s 0.1s ease both;
-	color          : var(--white);
-	font-family    : var(--font-display);
-	font-size      : clamp(3.5rem, 7vw, 6rem);
+	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : clamp( 3.5rem, 7vw, 6rem );
 	font-weight    : 800;
 	letter-spacing : 0.02em;
 	line-height    : 0.95;
@@ -186,8 +186,8 @@
 .home__headline-accent { /* What: Hero Headline Accent Span. Why: The two promise words stand out from the rest of the headline. How: This colors them light blue with a thin darker blue outline. */
 
 
-	-webkit-text-stroke : 1px var(--blue);
-	color               : var(--blue-light);
+	-webkit-text-stroke : 1px var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+	color               : var( --acc-lig-col );     /* Accent Light Color ~= #4488f6 */
 
 
 }
@@ -199,7 +199,7 @@
 
 
 	animation     : fadeUp 0.8s 0.2s ease both;
-	color         : var(--silver-light);
+	color         : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
 	font-size     : 1.05rem;
 	line-height   : 1.75;
 	margin-bottom : 2.25rem;
@@ -278,30 +278,30 @@
 
 
 	cursor         : pointer;
-	font-family    : var(--font-display);
+	font-family    : var( --fon-fam-sec );    /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 0.95rem;
 	font-weight    : 700;
 	letter-spacing : 0.1em;
 	padding        : 0.9rem 2rem;
 	text-transform : uppercase;
-	transition     : all var(--transition);
+	transition     : all var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }
 .home__btn--primary { /* What: Primary Hero Button Anchor. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue with white text. */
 
 
-	background : var(--blue);
-	border     : 2px solid var(--blue);
-	color      : var(--white);
+	background : var( --acc-mai-col );           /* Accent Main Color = #1e56c8 */
+	border     : 2px solid var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+	color      : var( --tex-acc-col );           /* Text Accent Color = #ffffff */
 
 
 }
 .home__btn--primary:hover { /* What: Hovered Primary Hero Button Anchor. Why: The button should respond to the pointer. How: This lightens its fill and border to the lighter blue. */
 
 
-	background   : var(--blue-light);
-	border-color : var(--blue-light);
+	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	border-color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 
 
 }
@@ -309,16 +309,16 @@
 
 
 	background : transparent;
-	border     : 2px solid rgba(255,255,255,0.3);
-	color      : var(--white);
+	border     : 2px solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	color      : var( --bac-pag-col );                                                          /* Background Page Color = #ffffff */
 
 
 }
 .home__btn--secondary:hover { /* What: Hovered Secondary Hero Button Anchor. Why: The button should respond to the pointer. How: This firms its outline to white and adds a faint fill. */
 
 
-	background   : rgba(255,255,255,0.06);
-	border-color : var(--white);
+	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	border-color : var( --bac-pag-col );                                                /* Background Page Color = #ffffff */
 
 
 }
@@ -397,7 +397,7 @@
 
 
 	animation     : pulseRing 4s ease-in-out infinite;
-	border        : 1px solid rgba(30, 86, 200, 0.25);
+	border        : 1px solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
 	height        : 420px;
 	position      : absolute;
@@ -408,7 +408,7 @@
 .home__logo-ring::before { /* What: Hero Logo Inner Ring. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it 24px inside the outer circle. */
 
 
-	border        : 1px solid rgba(30, 86, 200, 0.15);
+	border        : 1px solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	border-radius : 50%;
 	content       : '';
 	inset         : 24px;
@@ -451,7 +451,7 @@
 
 
 		opacity   : 0.6;
-		transform : scale(1);
+		transform : scale( 1 );
 
 
 	}
@@ -460,7 +460,7 @@
 
 
 		opacity   : 1;
-		transform : scale(1.04);
+		transform : scale( 1.04 );
 
 
 	}
@@ -471,9 +471,9 @@
 .home__logo { /* What: Hero Logo Image. Why: The full logo anchors the hero and should float above its glow. How: This sizes it with the screen between 280px and 420px wide, casts a soft blue shadow under it, and layers it above the ring. */
 
 
-	filter   : drop-shadow(0 20px 60px rgba(30, 86, 200, 0.4));
+	filter   : drop-shadow( 0 20px 60px oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	position : relative;
-	width    : clamp(280px, 38vw, 420px);
+	width    : clamp( 280px, 38vw, 420px );
 	z-index  : 1;
 
 
@@ -484,7 +484,7 @@
 	.home__logo { /* What: Smaller Hero Logo Image. Why: The logo should fit the narrower column. How: This sizes it with the screen between 200px and 300px wide. */
 
 
-		width : clamp(200px, 55vw, 300px);
+		width : clamp( 200px, 55vw, 300px );
 
 
 	}
@@ -505,9 +505,9 @@
 .home__stats { /* What: Hero Stats Div. Why: Four quick figures close the hero on a band of their own. How: This draws a faintly frosted strip along the hero's bottom with a hairline on top, layered above the background. */
 
 
-	backdrop-filter : blur(8px);
-	background      : rgba(255,255,255,0.04);
-	border-top      : 1px solid rgba(255,255,255,0.08);
+	backdrop-filter : blur( 8px );
+	background      : oklch( from var( --bac-pag-col ) l c h / 0.04 );                               /* Background Page Color = #ffffff @ 0.04 opacity */
+	border-top      : 1px solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-009-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
 	position        : relative;
 	z-index         : 1;
 
@@ -522,9 +522,9 @@
 
 	display               : grid;
 	gap                   : 0;
-	grid-template-columns : repeat(4, 1fr);
+	grid-template-columns : repeat( 4, 1fr );
 	margin                : 0 auto;
-	max-width             : var(--max-w);
+	max-width             : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
 	padding               : 0 2rem;
 
 
@@ -535,7 +535,7 @@
 	.home__stats-inner { /* What: Two-Column Hero Stats Inner Div. Why: The figures read better two by two. How: This switches to two columns. */
 
 
-		grid-template-columns : repeat(2, 1fr);
+		grid-template-columns : repeat( 2, 1fr );
 
 
 	}
@@ -548,7 +548,7 @@
 	.home__stats-inner { /* What: Two-Column Hero Stats Inner Div. Why: The figures read best two by two on the smallest screens too. How: This sets two columns again, which the 900px query already does. */
 
 
-		grid-template-columns : repeat(2, 1fr);
+		grid-template-columns : repeat( 2, 1fr );
 
 
 	}
@@ -563,7 +563,7 @@
 
 
 	align-items    : center;
-	border-right   : 1px solid rgba(255,255,255,0.07);
+	border-right   : 1px solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Background Page Color = #ffffff @ 0.07 opacity */
 	display        : flex;
 	flex-direction : column;
 	gap            : 0.3rem;
@@ -592,7 +592,7 @@
 	.home__stat:nth-child( 4 ) { /* What: Second Row Hero Stat Div. Why: The second row needs a line between it and the first. How: This draws a faint border along the top of the third and fourth cells. */
 
 
-		border-top : 1px solid rgba(255,255,255,0.07);
+		border-top : 1px solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Background Page Color = #ffffff @ 0.07 opacity */
 
 
 	}
@@ -610,8 +610,8 @@
 .home__stat-value { /* What: Hero Stat Value Span. Why: The figure is the cell's focus. How: This sets it large in the extra bold display font, in white. */
 
 
-	color          : var(--white);
-	font-family    : var(--font-display);
+	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 1.9rem;
 	font-weight    : 800;
 	letter-spacing : 0.02em;
@@ -622,8 +622,8 @@
 .home__stat-label { /* What: Hero Stat Label Span. Why: The caption says what the figure means without competing with it. How: This sets it small, spaced, uppercase, and silver in the body font. */
 
 
-	color          : var(--silver);
-	font-family    : var(--font-body);
+	color          : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
+	font-family    : var( --fon-fam-mai ); /* Font Family Main = 'Lato', sans-serif */
 	font-size      : 0.75rem;
 	font-weight    : 400;
 	letter-spacing : 0.1em;

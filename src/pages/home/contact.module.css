@@ -27,7 +27,7 @@
 .contact { /* What: Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
 
 
-	background : var(--navy-dark);
+	background : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
 	overflow   : hidden;
 	padding    : 7rem 0;
 	position   : relative;
@@ -38,7 +38,7 @@
 .contact__bg { /* What: Contact Background Div. Why: A soft blue glow sets the section off from the white one above. How: This places an oversized radial glow off the bottom left corner that ignores the pointer. */
 
 
-	background     : radial-gradient(ellipse at 30% 70%, rgba(30, 86, 200, 0.18) 0%, transparent 60%);
+	background     : radial-gradient( ellipse at 30% 70%, oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-006-rec ) ) 0%, transparent 60% ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
 	bottom         : -30%;
 	height         : 80%;
 	left           : -10%;
@@ -61,7 +61,7 @@
 	gap                   : 5rem;
 	grid-template-columns : 1fr 1.2fr;
 	margin                : 0 auto;
-	max-width             : var(--max-w);
+	max-width             : var( --con-max-wid ); /* Container Maximum Width = 1,180px */
 	padding               : 0 2rem;
 	position              : relative;
 	z-index               : 1;
@@ -86,8 +86,8 @@
 .section-label { /* What: Section Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared section label. */
 
 
-	color          : var(--blue-light);
-	font-family    : var(--font-display);
+	color          : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 0.8rem;
 	font-weight    : 700;
 	letter-spacing : 0.25em;
@@ -99,9 +99,9 @@
 .section-title { /* What: Section Title Heading. Why: The heading states the section's goal. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
 
 
-	color          : var(--navy);
-	font-family    : var(--font-display);
-	font-size      : clamp(2rem, 4vw, 3rem);
+	color          : var( --tex-mai-col ); /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : clamp( 2rem, 4vw, 3rem );
 	font-weight    : 800;
 	letter-spacing : 0.02em;
 	line-height    : 1.05;
@@ -112,7 +112,7 @@
 .section-title.light { /* What: Light Section Title Heading. Why: Navy text would vanish on the dark section. How: This turns the heading white, keeping the shared modifier's two-class specificity. */
 
 
-	color : var(--white);
+	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 
 
 }
@@ -120,7 +120,7 @@
 .divider { /* What: Divider Div. Why: A short rule separates the heading from the invitation. How: This draws a 3rem by 3px blue bar with room above and below, copied from the shared divider. */
 
 
-	background : var(--blue);
+	background : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 	height     : 3px;
 	margin     : 1rem 0 1.5rem;
 	width      : 3rem;
@@ -131,7 +131,7 @@
 .contact__info-body { /* What: Contact Invitation Paragraph. Why: The invitation should read comfortably on the dark band. How: This sets it in light silver with generous leading and room below. */
 
 
-	color         : var(--silver-light);
+	color         : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
 	font-size     : 1rem;
 	line-height   : 1.8;
 	margin-bottom : 2.5rem;
@@ -180,9 +180,9 @@
 .contact__detail-label { /* What: Contact Detail Label Span. Why: Each value needs a quiet label above it. How: This sets it on its own line, small, spaced, uppercase, and silver. */
 
 
-	color          : var(--silver);
+	color          : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
 	display        : block;
-	font-family    : var(--font-display);
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 0.7rem;
 	font-weight    : 600;
 	letter-spacing : 0.2em;
@@ -195,7 +195,7 @@
 .contact__detail-value { /* What: Contact Detail Value Span. Why: The detail itself is the row's focus. How: This sets it on its own line in white. */
 
 
-	color     : var(--white);
+	color     : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 	display   : block;
 	font-size : 0.95rem;
 
@@ -205,15 +205,15 @@
 .contact__detail-link { /* What: Contact Detail Link Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
 
 
-	color      : var(--blue-light);
-	transition : color var(--transition);
+	color      : var( --acc-lig-col );      /* Accent Light Color ~= #4488f6 */
+	transition : color var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }
 .contact__detail-link:hover { /* What: Hovered Contact Detail Link Anchor. Why: The link should respond to the pointer. How: This turns it white. */
 
 
-	color : var(--white);
+	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 
 
 }
@@ -240,17 +240,17 @@
 .contact__phone-btn { /* What: Contact Phone Button Anchor. Why: Calling is the fastest way to get a quote, so the number gets a button. How: This sets it as a solid blue button in the display font, sized to its label, and eases every change between its looks. */
 
 
-	background     : var(--blue);
-	border         : 2px solid var(--blue);
-	color          : var(--white);
+	background     : var( --acc-mai-col );           /* Accent Main Color = #1e56c8 */
+	border         : 2px solid var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+	color          : var( --tex-acc-col );           /* Text Accent Color = #ffffff */
 	display        : inline-block;
-	font-family    : var(--font-display);
+	font-family    : var( --fon-fam-sec );           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 1rem;
 	font-weight    : 700;
 	letter-spacing : 0.08em;
 	padding        : 0.9rem 2rem;
 	text-transform : uppercase;
-	transition     : all var(--transition);
+	transition     : all var( --transition );        /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }
@@ -258,7 +258,7 @@
 
 
 	background : transparent;
-	color      : var(--blue-light);
+	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 
 
 }
@@ -283,7 +283,7 @@
 .contact__form-wrap { /* What: Contact Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
 
 
-	background : var(--white);
+	background : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 	padding    : 2.5rem;
 
 
@@ -324,9 +324,9 @@
 
 
 	align-items     : center;
-	background      : var(--blue);
+	background      : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 	border-radius   : 50%;
-	color           : var(--white);
+	color           : var( --tex-acc-col ); /* Text Accent Color = #ffffff */
 	display         : flex;
 	font-size       : 1.5rem;
 	height          : 56px;
@@ -339,8 +339,8 @@
 .contact__success-title { /* What: Success Title Heading. Why: The message needs a clear heading. How: This sets it large in the extra bold display font, uppercase and navy. */
 
 
-	color          : var(--navy);
-	font-family    : var(--font-display);
+	color          : var( --tex-mai-col ); /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 1.6rem;
 	font-weight    : 800;
 	text-transform : uppercase;
@@ -351,7 +351,7 @@
 .contact__success-body { /* What: Success Body Paragraph. Why: The visitor should know what happens next. How: This sets the note in the muted text color with generous leading. */
 
 
-	color       : var(--text-muted);
+	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
 	font-size   : 0.95rem;
 	line-height : 1.7;
 
@@ -365,9 +365,9 @@
 .contact__form-title { /* What: Form Title Heading. Why: The form needs a clear heading, set off from its fields. How: This sets it in the extra bold display font, uppercase and navy, over a blue rule. */
 
 
-	border-bottom  : 2px solid var(--blue);
-	color          : var(--navy);
-	font-family    : var(--font-display);
+	border-bottom  : 2px solid var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+	color          : var( --tex-mai-col );           /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-sec );           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 1.3rem;
 	font-weight    : 800;
 	letter-spacing : 0.06em;
@@ -429,8 +429,8 @@
 .contact__field-label { /* What: Contact Field Label. Why: Every field needs a visible label in the form's display style. How: This sets it small, spaced, uppercase, and in the muted text color. */
 
 
-	color          : var(--text-muted);
-	font-family    : var(--font-display);
+	color          : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 0.75rem;
 	font-weight    : 700;
 	letter-spacing : 0.12em;
@@ -442,23 +442,23 @@
 .contact__field-control { /* What: Contact Field Control. Why: Every input and the message box share one look, and focus has to show clearly. How: This sets them on the off-white with a light border, lets the message box grow taller, and holds a zero-width blue outline 6px out, easing it and the border in on focus. */
 
 
-	background     : var(--off-white);
-	border         : 1.5px solid var(--silver-light);
-	color          : var(--navy);
-	font-family    : var(--font-body);
+	background     : var( --bac-sur-col );                                                                                    /* Background Surface Color = #f4f6fa */
+	border         : 1.5px solid var( --bor-mai-col );                                                                        /* Border Main Color = #c8d0e0 */
+	color          : var( --tex-mai-col );                                                                                    /* Text Main Color = #0f1e45 */
+	font-family    : var( --fon-fam-mai );                                                                                    /* Font Family Main = 'Lato', sans-serif */
 	font-size      : 0.9rem;
-	outline        : 0 solid var(--blue);
+	outline        : 0 solid var( --acc-mai-col );                                                                            /* Accent Main Color = #1e56c8 */
 	outline-offset : 6px;
 	padding        : 0.75rem 1rem;
 	resize         : vertical;
-	transition     : border-color var(--transition), outline-offset var(--transition), outline-width var(--transition);
+	transition     : border-color var( --transition ), outline-offset var( --transition ), outline-width var( --transition ); /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 
 
 }
 .contact__field-control:focus { /* What: Focused Contact Field Control. Why: The field being typed in should stand out. How: This turns its border blue. */
 
 
-	border-color : var(--blue);
+	border-color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 
 
 }
@@ -494,7 +494,7 @@
 .contact__form-error { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel. */
 
 
-	color      : #b42318;
+	color      : var( --err-dar-col ); /* Error Dark Color = #b42318 */
 	font-size  : 0.85rem;
 	text-align : center;
 
@@ -516,18 +516,18 @@
 .contact__submit { /* What: Contact Submit Button. Why: The form's main action spans the panel. How: This sets a full-width navy button in the display font, and eases every change between its looks. */
 
 
-	background     : var(--navy);
-	border         : 2px solid var(--navy);
-	color          : var(--white);
+	background     : var( --bac-inr-col );           /* Background Inverse Raised Color = #0f1e45 */
+	border         : 2px solid var( --bac-inr-col ); /* Background Inverse Raised Color = #0f1e45 */
+	color          : var( --bac-pag-col );           /* Background Page Color = #ffffff */
 	cursor         : pointer;
-	font-family    : var(--font-display);
+	font-family    : var( --fon-fam-sec );           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : 1rem;
 	font-weight    : 700;
 	letter-spacing : 0.1em;
 	margin-bottom  : 0.75rem;
 	padding        : 1rem;
 	text-transform : uppercase;
-	transition     : all var(--transition);
+	transition     : all var( --transition );        /* Transition = 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ) */
 	width          : 100%;
 
 
@@ -535,8 +535,8 @@
 .contact__submit:hover { /* What: Hovered Contact Submit Button. Why: The button should respond to the pointer. How: This turns its fill and border blue. */
 
 
-	background   : var(--blue);
-	border-color : var(--blue);
+	background   : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
+	border-color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 
 
 }
@@ -565,7 +565,7 @@
 .contact__form-note { /* What: Form Note Paragraph. Why: The no-spam promise should be present but quiet. How: This centers it small in the muted text color. */
 
 
-	color      : var(--text-muted);
+	color      : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
 	font-size  : 0.75rem;
 	text-align : center;
 

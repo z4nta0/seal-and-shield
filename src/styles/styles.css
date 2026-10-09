@@ -27,21 +27,137 @@
 
 /* #region Tokens */
 
-:root { /* What: Root Tokens. Why: Every module reads the site's colors, fonts, layout width, and motion from one place. How: This defines them as custom properties on the root element, grouped into sections. */
+:root { /* What: Root Tokens. Why: Every module reads the site's core design numbers, colors, fonts, layout width, and motion from one place. How: This defines them as custom properties on the root element, grouped into sections. */
+
+
+	/* #region Core Design Numbers */
+
+	/**
+	 * styles.css = Core Design Numbers
+	 *
+	 * @summary
+	 * The core design number, also known as the "plastic ratio" (also commonly
+	 * denoted as ρ (rho) and sometimes called the radiant number or the
+	 * fundamental ratio), is used as a base scaling factor throughout the
+	 * design system. The adjective plastic does not refer to the artificial
+	 * material, but to the formative and sculptural qualities of this ratio,
+	 * as in plastic arts meaning something that can be given a
+	 * three-dimensional shape. This is because the characteristic ratios of
+	 * the number, 3/4 and 1/7, relate to the limits of human perception in
+	 * comparing one physical size to another. It is considered the
+	 * three-dimensional equivalent of the ubiquitous golden ratio. I
+	 * previously used said golden ratio as a base scaling factor, but found
+	 * that, because of its larger number, it did not have enough nuance for
+	 * the many values that a design system needs, i.e., numbers scaled up or
+	 * down too quickly.
+	 *
+	 * I know a lot of what I just said seems abstract, or even silly, but a
+	 * core number is required for a design system. So it might as well be
+	 * based on something perceptually meaningful, or even just fun.
+	 *
+	 * Plastic Ratio = <https://en.wikipedia.org/wiki/Plastic_ratio>
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	*/
+
+	--cor-des-num : calc( ( pow( 108 + 12 * sqrt( 69 ), 1 / 3 ) + pow( 108 - 12 * sqrt( 69 ), 1 / 3 ) ) / 6 ); /* What: Core Design Number ~= 1.325. Why: This is the "plastic ratio" and it is the core design number derived from the stated formula. How: As you can see, this formula is quite a bit more complex than the formula for the golden ratio, but it is still not too difficult once you break it down into its constituent parts. */
+
+
+	--cdn-pow-000 : calc( pow( var( --cor-des-num ), 0 ) );  /* What: Core-Design-Number to the Power of 0 ~= 1. Why: Sometimes the zeroth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 0, which for any number is always 1. */
+	--cdn-pow-001 : calc( pow( var( --cor-des-num ), 1 ) );  /* What: Core-Design-Number to the Power of 1 ~= 1.325. Why: Sometimes the first power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 1, which for any number is always the number itself. */
+	--cdn-pow-002 : calc( pow( var( --cor-des-num ), 2 ) );  /* What: Core-Design-Number to the Power of 2 ~= 1.755. Why: Sometimes the square of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 2. */
+	--cdn-pow-003 : calc( pow( var( --cor-des-num ), 3 ) );  /* What: Core-Design-Number to the Power of 3 ~= 2.325. Why: Sometimes the cube of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 3. */
+	--cdn-pow-004 : calc( pow( var( --cor-des-num ), 4 ) );  /* What: Core-Design-Number to the Power of 4 ~= 3.080. Why: Sometimes the fourth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 4. */
+	--cdn-pow-005 : calc( pow( var( --cor-des-num ), 5 ) );  /* What: Core-Design-Number to the Power of 5 ~= 4.080. Why: Sometimes the fifth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 5. */
+	--cdn-pow-006 : calc( pow( var( --cor-des-num ), 6 ) );  /* What: Core-Design-Number to the Power of 6 ~= 5.404. Why: Sometimes the sixth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 6. */
+	--cdn-pow-007 : calc( pow( var( --cor-des-num ), 7 ) );  /* What: Core-Design-Number to the Power of 7 ~= 7.159. Why: Sometimes the seventh power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 7. */
+	--cdn-pow-008 : calc( pow( var( --cor-des-num ), 8 ) );  /* What: Core-Design-Number to the Power of 8 ~= 9.484. Why: Sometimes the eighth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 8. */
+	--cdn-pow-009 : calc( pow( var( --cor-des-num ), 9 ) );  /* What: Core-Design-Number to the Power of 9 ~= 12.564. Why: Sometimes the ninth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 9. */
+	--cdn-pow-010 : calc( pow( var( --cor-des-num ), 10 ) ); /* What: Core-Design-Number to the Power of 10 ~= 16.643. Why: Sometimes the tenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 10. */
+	--cdn-pow-011 : calc( pow( var( --cor-des-num ), 11 ) ); /* What: Core-Design-Number to the Power of 11 ~= 22.047. Why: Sometimes the eleventh power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 11. */
+	--cdn-pow-012 : calc( pow( var( --cor-des-num ), 12 ) ); /* What: Core-Design-Number to the Power of 12 ~= 29.207. Why: Sometimes the twelfth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 12. */
+	--cdn-pow-013 : calc( pow( var( --cor-des-num ), 13 ) ); /* What: Core-Design-Number to the Power of 13 ~= 38.691. Why: Sometimes the thirteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 13. */
+	--cdn-pow-014 : calc( pow( var( --cor-des-num ), 14 ) ); /* What: Core-Design-Number to the Power of 14 ~= 51.254. Why: Sometimes the fourteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 14. */
+	--cdn-pow-015 : calc( pow( var( --cor-des-num ), 15 ) ); /* What: Core-Design-Number to the Power of 15 ~= 67.897. Why: Sometimes the fifteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 15. */
+	--cdn-pow-016 : calc( pow( var( --cor-des-num ), 16 ) ); /* What: Core-Design-Number to the Power of 16 ~= 89.945. Why: Sometimes the sixteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 16. */
+	--cdn-pow-017 : calc( pow( var( --cor-des-num ), 17 ) ); /* What: Core-Design-Number to the Power of 17 ~= 119.151. Why: Sometimes the seventeenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 17. */
+	--cdn-pow-018 : calc( pow( var( --cor-des-num ), 18 ) ); /* What: Core-Design-Number to the Power of 18 ~= 157.842. Why: Sometimes the eighteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 18. */
+	--cdn-pow-019 : calc( pow( var( --cor-des-num ), 19 ) ); /* What: Core-Design-Number to the Power of 19 ~= 209.096. Why: Sometimes the nineteenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 19. */
+	--cdn-pow-020 : calc( pow( var( --cor-des-num ), 20 ) ); /* What: Core-Design-Number to the Power of 20 ~= 276.993. Why: Sometimes the twentieth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 20. */
+	--cdn-pow-021 : calc( pow( var( --cor-des-num ), 21 ) ); /* What: Core-Design-Number to the Power of 21 ~= 366.937. Why: Sometimes the twenty-first power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 21. */
+	--cdn-pow-022 : calc( pow( var( --cor-des-num ), 22 ) ); /* What: Core-Design-Number to the Power of 22 ~= 486.088. Why: Sometimes the twenty-second power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 22. */
+	--cdn-pow-023 : calc( pow( var( --cor-des-num ), 23 ) ); /* What: Core-Design-Number to the Power of 23 ~= 643.930. Why: Sometimes the twenty-third power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 23. */
+	--cdn-pow-024 : calc( pow( var( --cor-des-num ), 24 ) ); /* What: Core-Design-Number to the Power of 24 ~= 853.026. Why: Sometimes the twenty-fourth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 24. */
+	--cdn-pow-025 : calc( pow( var( --cor-des-num ), 25 ) ); /* What: Core-Design-Number to the Power of 25 ~= 1,130.019. Why: Sometimes the twenty-fifth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 25. */
+	--cdn-pow-026 : calc( pow( var( --cor-des-num ), 26 ) ); /* What: Core-Design-Number to the Power of 26 ~= 1,496.956. Why: Sometimes the twenty-sixth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 26. */
+	--cdn-pow-027 : calc( pow( var( --cor-des-num ), 27 ) ); /* What: Core-Design-Number to the Power of 27 ~= 1,983.044. Why: Sometimes the twenty-seventh power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 27. */
+
+
+	--cdn-pow-001-neg : calc( var( --cdn-pow-001 ) * -1 ); /* What: Core-Design-Number to the Power of 1 Negative ~= -1.325. Why: Sometimes the negative (additive inverse) of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 1, which for any number is always the number itself, and then multiplies said number by negative 1. */
+	--cdn-pow-002-neg : calc( var( --cdn-pow-002 ) * -1 ); /* What: Core-Design-Number to the Power of 2 Negative ~= -1.755. Why: Sometimes the negative (additive inverse) of the square of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 2, and then multiplies said number by negative 1. */
+	--cdn-pow-003-neg : calc( var( --cdn-pow-003 ) * -1 ); /* What: Core-Design-Number to the Power of 3 Negative ~= -2.325. Why: Sometimes the negative (additive inverse) of the cube of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 3, and then multiplies said number by negative 1. */
+	--cdn-pow-004-neg : calc( var( --cdn-pow-004 ) * -1 ); /* What: Core-Design-Number to the Power of 4 Negative ~= -3.080. Why: Sometimes the negative (additive inverse) of the fourth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 4, and then multiplies said number by negative 1. */
+	--cdn-pow-005-neg : calc( var( --cdn-pow-005 ) * -1 ); /* What: Core-Design-Number to the Power of 5 Negative ~= -4.080. Why: Sometimes the negative (additive inverse) of the fifth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 5, and then multiplies said number by negative 1. */
+	--cdn-pow-006-neg : calc( var( --cdn-pow-006 ) * -1 ); /* What: Core-Design-Number to the Power of 6 Negative ~= -5.404. Why: Sometimes the negative (additive inverse) of the sixth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 6, and then multiplies said number by negative 1. */
+	--cdn-pow-007-neg : calc( var( --cdn-pow-007 ) * -1 ); /* What: Core-Design-Number to the Power of 7 Negative ~= -7.159. Why: Sometimes the negative (additive inverse) of the seventh power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 7, and then multiplies said number by negative 1. */
+	--cdn-pow-008-neg : calc( var( --cdn-pow-008 ) * -1 ); /* What: Core-Design-Number to the Power of 8 Negative ~= -9.484. Why: Sometimes the negative (additive inverse) of the eighth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 8, and then multiplies said number by negative 1. */
+	--cdn-pow-009-neg : calc( var( --cdn-pow-009 ) * -1 ); /* What: Core-Design-Number to the Power of 9 Negative ~= -12.564. Why: Sometimes the negative (additive inverse) of the ninth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 9, and then multiplies said number by negative 1. */
+	--cdn-pow-010-neg : calc( var( --cdn-pow-010 ) * -1 ); /* What: Core-Design-Number to the Power of 10 Negative ~= -16.643. Why: Sometimes the negative (additive inverse) of the tenth power of the core design number is needed for scaling, literal number or percentage. How: This takes the core design number to the power of 10, and then multiplies said number by negative 1. */
+
+
+	--cdn-pow-001-rec : calc( 1 / var( --cdn-pow-001 ) ); /* What: Core-Design-Number to the Power of 1 Reciprocal ~= 0.755. Why: Sometimes the reciprocal of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 1, which for any number is always the number itself. */
+	--cdn-pow-002-rec : calc( 1 / var( --cdn-pow-002 ) ); /* What: Core-Design-Number to the Power of 2 Reciprocal ~= 0.570. Why: Sometimes the reciprocal of the square of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 2. */
+	--cdn-pow-003-rec : calc( 1 / var( --cdn-pow-003 ) ); /* What: Core-Design-Number to the Power of 3 Reciprocal ~= 0.430. Why: Sometimes the reciprocal of the cube of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 3. */
+	--cdn-pow-004-rec : calc( 1 / var( --cdn-pow-004 ) ); /* What: Core-Design-Number to the Power of 4 Reciprocal ~= 0.325. Why: Sometimes the reciprocal of the fourth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 4. */
+	--cdn-pow-005-rec : calc( 1 / var( --cdn-pow-005 ) ); /* What: Core-Design-Number to the Power of 5 Reciprocal ~= 0.245. Why: Sometimes the reciprocal of the fifth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 5. */
+	--cdn-pow-006-rec : calc( 1 / var( --cdn-pow-006 ) ); /* What: Core-Design-Number to the Power of 6 Reciprocal ~= 0.185. Why: Sometimes the reciprocal of the sixth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 6. */
+	--cdn-pow-007-rec : calc( 1 / var( --cdn-pow-007 ) ); /* What: Core-Design-Number to the Power of 7 Reciprocal ~= 0.140. Why: Sometimes the reciprocal of the seventh power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 7. */
+	--cdn-pow-008-rec : calc( 1 / var( --cdn-pow-008 ) ); /* What: Core-Design-Number to the Power of 8 Reciprocal ~= 0.105. Why: Sometimes the reciprocal of the eighth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 8. */
+	--cdn-pow-009-rec : calc( 1 / var( --cdn-pow-009 ) ); /* What: Core-Design-Number to the Power of 9 Reciprocal ~= 0.080. Why: Sometimes the reciprocal of the ninth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 9. */
+	--cdn-pow-010-rec : calc( 1 / var( --cdn-pow-010 ) ); /* What: Core-Design-Number to the Power of 10 Reciprocal ~= 0.060. Why: Sometimes the reciprocal of the tenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 10. */
+	--cdn-pow-011-rec : calc( 1 / var( --cdn-pow-011 ) ); /* What: Core-Design-Number to the Power of 11 Reciprocal ~= 0.045. Why: Sometimes the reciprocal of the eleventh power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 11. */
+	--cdn-pow-012-rec : calc( 1 / var( --cdn-pow-012 ) ); /* What: Core-Design-Number to the Power of 12 Reciprocal ~= 0.034. Why: Sometimes the reciprocal of the twelfth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 12. */
+	--cdn-pow-013-rec : calc( 1 / var( --cdn-pow-013 ) ); /* What: Core-Design-Number to the Power of 13 Reciprocal ~= 0.026. Why: Sometimes the reciprocal of the thirteenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 13. */
+	--cdn-pow-014-rec : calc( 1 / var( --cdn-pow-014 ) ); /* What: Core-Design-Number to the Power of 14 Reciprocal ~= 0.020. Why: Sometimes the reciprocal of the fourteenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 14. */
+	--cdn-pow-015-rec : calc( 1 / var( --cdn-pow-015 ) ); /* What: Core-Design-Number to the Power of 15 Reciprocal ~= 0.015. Why: Sometimes the reciprocal of the fifteenth power of the core design number is needed for scaling, literal number or percentage. How: This divides one by the core design number to the power of 15. */
+
+	/* #endregion Core Design Numbers */
+
 
 
 	/* #region Color Tokens */
 
-	--blue         : #1e56c8; /* What: Blue = #1e56c8. Why: Buttons, rules, and labels on light sections need the brand's strong blue. How: Modules read it for fills, borders, and accents. */
-	--blue-light   : #4488f6; /* What: Blue Light = #4488f6. Why: Accents on dark sections need a lighter blue that stays readable. How: Modules read it for links, labels, and highlights on navy, where it clears 4.7:1. */
-	--navy         : #0f1e45; /* What: Navy = #0f1e45. Why: Headings on light sections and the darker panels share the brand's navy. How: Modules read it for heading text and panel fills. */
-	--navy-dark    : #080f24; /* What: Navy Dark = #080f24. Why: The bar, hero, contact section, and footer sit on the darkest navy. How: Modules read it for those bands' backgrounds. */
-	--off-white    : #f4f6fa; /* What: Off White = #f4f6fa. Why: The services band and form fields need a light tint apart from pure white. How: Modules read it for those backgrounds. */
-	--silver       : #8a9ab5; /* What: Silver = #8a9ab5. Why: Quiet labels and captions on dark bands need a soft gray-blue. How: Modules read it for that small secondary text. */
-	--silver-light : #c8d0e0; /* What: Silver Light = #c8d0e0. Why: Body text and links on dark bands need a light gray-blue, and light borders a pale one. How: Modules read it for that text and those borders. */
-	--text-body    : #2d3a52; /* What: Text Body = #2d3a52. Why: The page's default text color should be a dark slate rather than pure black. How: The body sets it, and every element inherits it unless a module overrides it. */
-	--text-muted   : #616e88; /* What: Text Muted = #616e88. Why: Secondary text on light sections should step back without failing contrast. How: Modules read it for descriptions, labels, and notes, where it clears 4.7:1 on the off-white. */
-	--white        : #ffffff; /* What: White = #ffffff. Why: White text on dark bands and white surfaces share one value. How: Modules read it for that text and those fills. */
+	--acc-lig-col : oklch( from var( --acc-mai-col ) calc( l + 0.149 ) calc( c - 0.009 ) calc( h - 2.65 ) ); /* What: Accent Light Color. Why: Accents, links, and highlights on the dark bands need a lighter blue that stays readable there. How: This lightens the main accent, with a slight shift in chroma and hue, to #4488f6, which clears 4.7:1 on the navy panels. */
+	--acc-mai-col : #1e56c8;                                                                                 /* What: Accent Main Color. Why: Buttons, rules, and labels on light sections share the brand's strong blue. How: Fills, borders, and accents read it. */
+	--acc-sec-col : ;                                                                                        /* What: Accent Secondary Color. Why: The standard role set includes a second accent. How: This site has no second accent, so it stays empty. */
+	--acc-tin-col : ;                                                                                        /* What: Accent Tint Color. Why: The standard role set includes a pale accent tint. How: This site doesn't use one, so it stays empty. */
+	--att-rin-col : ;                                                                                        /* What: Attention Ring Color. Why: The standard role set includes an attention ring. How: This site doesn't use one, so it stays empty. */
+	--bac-hov-col : ;                                                                                        /* What: Background Hover Color. Why: The standard role set includes a hover overlay. How: This site's hovers use their own colors, so it stays empty. */
+	--bac-inr-col : #0f1e45;                                                                                 /* What: Background Inverse Raised Color. Why: Navy panels and buttons sit a step lighter than the dark bands. How: The service area panel, the info card, and the submit button read it, and shadows cast it. */
+	--bac-inv-col : #080f24;                                                                                 /* What: Background Inverse Color. Why: The bar, hero, contact section, and footer share one darkest navy. How: Those bands read it, with light text on top. */
+	--bac-pag-col : #ffffff;                                                                                 /* What: Background Page Color. Why: The page and its cards sit on white. How: The page, white cards and panels, and white text on dark surfaces read it, at full strength or faded. */
+	--bac-sur-col : #f4f6fa;                                                                                 /* What: Background Surface Color. Why: Some bands and fields need a light tint apart from white. How: The services band, the logo panel, and the form fields read it. */
+	--bor-mai-col : #c8d0e0;                                                                                 /* What: Border Main Color. Why: Light dividers and outlines share one pale gray-blue. How: The service cards and form fields draw their borders in it. */
+	--bor-str-col : ;                                                                                        /* What: Border Strong Color. Why: The standard role set includes a stronger border. How: This site doesn't need one, so it stays empty. */
+	--err-dar-col : #b42318;                                                                                 /* What: Error Dark Color. Why: Error text needs a red that reads clearly on white. How: The contact form's error message reads it, clearing 6.5:1 on the white panel. */
+	--err-mai-col : ;                                                                                        /* What: Error Main Color. Why: The standard role set includes the error family. How: This site only shows error text, so it stays empty. */
+	--err-tin-col : ;                                                                                        /* What: Error Tint Color. Why: The standard role set includes the error family. How: This site only shows error text, so it stays empty. */
+	--foc-rin-col : var( --acc-mai-col );                                                                    /* What: Focus Ring Color. Why: Keyboard focus needs one ring color that stands out, kept apart from the accent so it can change on its own. How: The form fields draw their focus ring in it. */
+	--scr-mai-col : ;                                                                                        /* What: Scrim Main Color. Why: The standard role set includes a scrim. How: This site has no overlays to dim behind, so it stays empty. */
+	--sha-mai-col : var( --bac-inr-col );                                                                    /* What: Shadow Main Color. Why: Shadows on the light sections cast one soft navy rather than pure black. How: Shadows read it with their own alpha through relative color syntax. */
+	--suc-dar-col : ;                                                                                        /* What: Success Dark Color. Why: The standard role set includes the success family. How: This site's thank-you message uses the accent, so it stays empty. */
+	--suc-mai-col : ;                                                                                        /* What: Success Main Color. Why: The standard role set includes the success family. How: This site's thank-you message uses the accent, so it stays empty. */
+	--suc-tin-col : ;                                                                                        /* What: Success Tint Color. Why: The standard role set includes the success family. How: This site's thank-you message uses the accent, so it stays empty. */
+	--tex-acc-col : var( --bac-pag-col );                                                                    /* What: Text Accent Color. Why: Text on a blue button has to stay readable. How: This reads the page white, and every blue-filled button's label reads it. */
+	--tex-inm-col : #8a9ab5;                                                                                 /* What: Text Inverse Muted Color. Why: Quiet labels and captions on the dark bands should recede. How: The brand suffix, stat captions, info and detail labels, and the footer's small text read it. */
+	--tex-inv-col : #c8d0e0;                                                                                 /* What: Text Inverse Color. Why: Body text and links on the dark bands read in a light gray-blue rather than pure white. How: The bar's and footer's links, the hero pitch, and the dark sections' paragraphs read it. */
+	--tex-mai-col : #0f1e45;                                                                                 /* What: Text Main Color. Why: Headings and titles on the light sections share the brand's navy. How: Section titles, card and value titles, and the form's headings read it. */
+	--tex-mut-col : #616e88;                                                                                 /* What: Text Muted Color. Why: Descriptions, labels, and notes on the light sections should recede without failing contrast. How: Those read it, clearing 4.7:1 on the off-white surface. */
+	--tex-sec-col : #2d3a52;                                                                                 /* What: Text Secondary Color. Why: The page's default text should be a dark slate rather than full navy. How: The body sets it, and text without a color of its own inherits it. */
+	--war-dar-col : ;                                                                                        /* What: Warning Dark Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
+	--war-mai-col : ;                                                                                        /* What: Warning Main Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
+	--war-tin-col : ;                                                                                        /* What: Warning Tint Color. Why: The standard role set includes the warning family. How: This site has no warnings to show, so it stays empty. */
 
 	/* #endregion Color Tokens */
 
@@ -49,8 +165,8 @@
 
 	/* #region Font Family Tokens */
 
-	--font-body    : 'Lato', sans-serif;             /* What: Font Body. Why: Paragraphs and form fields read in one clean sans serif. How: This names Lato, self-hosted in fonts.css, falling back to the system sans serif. */
-	--font-display : 'Barlow Condensed', sans-serif; /* What: Font Display. Why: Headings, labels, buttons, and figures share a condensed display face. How: This names Barlow Condensed, self-hosted in fonts.css, falling back to the system sans serif. */
+	--fon-fam-mai : 'Lato', sans-serif;             /* What: Font Family Main. Why: Paragraphs and form fields read in one clean sans serif. How: This names Lato, self-hosted in fonts.css, falling back to the system sans serif. */
+	--fon-fam-sec : 'Barlow Condensed', sans-serif; /* What: Font Family Secondary. Why: Headings, labels, buttons, and figures share a condensed display face. How: This names Barlow Condensed, self-hosted in fonts.css, falling back to the system sans serif. */
 
 	/* #endregion Font Family Tokens */
 
@@ -58,7 +174,7 @@
 
 	/* #region Layout Tokens */
 
-	--max-w : 1180px; /* What: Max Width = 1180px. Why: Content should stop widening on large screens. How: Every section's container caps its width with it. */
+	--con-max-wid : 1180px; /* What: Container Maximum Width. Why: Content should stop widening on large screens. How: Every section's container caps its width with it; its value waits on the horizontal layout decision. */
 
 	/* #endregion Layout Tokens */
 
@@ -66,7 +182,7 @@
 
 	/* #region Motion Tokens */
 
-	--transition : 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* What: Transition = 0.3s with a standard ease. Why: Hovers and state changes across the site should move at one shared pace. How: Modules pass it as each transition's duration and easing. */
+	--transition : 0.3s cubic-bezier( 0.4, 0, 0.2, 1 ); /* What: Transition = 0.3s with a standard ease. Why: Hovers and state changes across the site move at one shared pace. How: Modules pass it as each transition's duration and easing, until the duration and easing tokens replace it. */
 
 	/* #endregion Motion Tokens */
 
@@ -117,9 +233,9 @@ body { /* What: Body. Why: The page's default text sets the tone everything else
 
 
 	-webkit-font-smoothing : antialiased;
-	background             : var(--white);
-	color                  : var(--text-body);
-	font-family            : var(--font-body);
+	background             : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+	color                  : var( --tex-sec-col ); /* Text Secondary Color = #2d3a52 */
+	font-family            : var( --fon-fam-mai ); /* Font Family Main = 'Lato', sans-serif */
 
 
 }
@@ -160,7 +276,7 @@ ul { /* What: Unordered List. Why: Lists should start without bullets until a mo
 
 
 	opacity    : 0;
-	transform  : translateY(32px);
+	transform  : translateY( 32px );
 	transition : opacity 0.7s ease, transform 0.7s ease;
 
 
@@ -169,7 +285,7 @@ ul { /* What: Unordered List. Why: Lists should start without bullets until a mo
 
 
 	opacity   : 1;
-	transform : translateY(0);
+	transform : translateY( 0 );
 
 
 }
