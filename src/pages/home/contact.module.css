@@ -1,0 +1,581 @@
+
+
+
+/**
+ * contact.module.css = Contact Section Module
+ *
+ * @summary
+ * Styles for ConSecCom: the dark closing section with its soft blue glow, the
+ * invitation, contact details, and call button on the left, and the white
+ * quote panel on the right, holding either the request form or its thank-you
+ * message. The columns stack at 900px wide or narrower, and the form's paired
+ * fields stack and the panel's padding tightens at 520px. Each form control
+ * eases its focus ring in from a zero-width outline. The shared container,
+ * section label, section title, and divider styles the section used to borrow
+ * from the global stylesheet are copied onto those same class names here. The
+ * phone detail's link rule comes after the value rule on purpose: the anchor
+ * carries both classes, and the link's light blue wins by coming later.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region contact */
+
+.contact { /* What: Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
+
+
+	background : var(--navy-dark);
+	overflow   : hidden;
+	padding    : 7rem 0;
+	position   : relative;
+
+
+}
+
+.contact__bg { /* What: Contact Background Div. Why: A soft blue glow sets the section off from the white one above. How: This places an oversized radial glow off the bottom left corner that ignores the pointer. */
+
+
+	background     : radial-gradient(ellipse at 30% 70%, rgba(30, 86, 200, 0.18) 0%, transparent 60%);
+	bottom         : -30%;
+	height         : 80%;
+	left           : -10%;
+	pointer-events : none;
+	position       : absolute;
+	width          : 60%;
+
+
+}
+
+
+
+/* #region contact__inner */
+
+.contact__inner { /* What: Contact Inner Div. Why: The invitation and the quote panel sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding, layered above the glow. */
+
+
+	align-items           : start;
+	display               : grid;
+	gap                   : 5rem;
+	grid-template-columns : 1fr 1.2fr;
+	margin                : 0 auto;
+	max-width             : var(--max-w);
+	padding               : 0 2rem;
+	position              : relative;
+	z-index               : 1;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Contact Inner Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
+
+
+	.contact__inner { /* What: Stacked Contact Inner Div. Why: The invitation and form read best one above the other. How: This collapses to one column with a smaller gap. */
+
+
+		gap                   : 3rem;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+.section-label { /* What: Section Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared section label. */
+
+
+	color          : var(--blue-light);
+	font-family    : var(--font-display);
+	font-size      : 0.8rem;
+	font-weight    : 700;
+	letter-spacing : 0.25em;
+	text-transform : uppercase;
+
+
+}
+
+.section-title { /* What: Section Title Heading. Why: The heading states the section's goal. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
+
+
+	color          : var(--navy);
+	font-family    : var(--font-display);
+	font-size      : clamp(2rem, 4vw, 3rem);
+	font-weight    : 800;
+	letter-spacing : 0.02em;
+	line-height    : 1.05;
+	text-transform : uppercase;
+
+
+}
+.section-title.light { /* What: Light Section Title Heading. Why: Navy text would vanish on the dark section. How: This turns the heading white, keeping the shared modifier's two-class specificity. */
+
+
+	color : var(--white);
+
+
+}
+
+.divider { /* What: Divider Div. Why: A short rule separates the heading from the invitation. How: This draws a 3rem by 3px blue bar with room above and below, copied from the shared divider. */
+
+
+	background : var(--blue);
+	height     : 3px;
+	margin     : 1rem 0 1.5rem;
+	width      : 3rem;
+
+
+}
+
+.contact__info-body { /* What: Contact Invitation Paragraph. Why: The invitation should read comfortably on the dark band. How: This sets it in light silver with generous leading and room below. */
+
+
+	color         : var(--silver-light);
+	font-size     : 1rem;
+	line-height   : 1.8;
+	margin-bottom : 2.5rem;
+
+
+}
+
+
+
+/* #region contact__details */
+
+.contact__details { /* What: Contact Details Div. Why: The location, number, and hours read as one list. How: This stacks the three rows with room below the list. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : 1.25rem;
+	margin-bottom  : 2rem;
+
+
+}
+
+
+/* #region contact__detail */
+
+.contact__detail { /* What: Contact Detail Div. Why: Each detail pairs an icon with its text. How: This sets the icon beside the text, top-aligned. */
+
+
+	align-items : flex-start;
+	display     : flex;
+	gap         : 1rem;
+
+
+}
+
+.contact__detail-icon { /* What: Contact Detail Icon Span. Why: An icon helps a visitor scan the rows. How: This sets the emoji a little larger, nudged down to line up with the label, and never shrinks it. */
+
+
+	flex-shrink : 0;
+	font-size   : 1.2rem;
+	margin-top  : 2px;
+
+
+}
+
+.contact__detail-label { /* What: Contact Detail Label Span. Why: Each value needs a quiet label above it. How: This sets it on its own line, small, spaced, uppercase, and silver. */
+
+
+	color          : var(--silver);
+	display        : block;
+	font-family    : var(--font-display);
+	font-size      : 0.7rem;
+	font-weight    : 600;
+	letter-spacing : 0.2em;
+	margin-bottom  : 0.15rem;
+	text-transform : uppercase;
+
+
+}
+
+.contact__detail-value { /* What: Contact Detail Value Span. Why: The detail itself is the row's focus. How: This sets it on its own line in white. */
+
+
+	color     : var(--white);
+	display   : block;
+	font-size : 0.95rem;
+
+
+}
+
+.contact__detail-link { /* What: Contact Detail Link Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
+
+
+	color      : var(--blue-light);
+	transition : color var(--transition);
+
+
+}
+.contact__detail-link:hover { /* What: Hovered Contact Detail Link Anchor. Why: The link should respond to the pointer. How: This turns it white. */
+
+
+	color : var(--white);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Detail Link Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.contact__detail-link { /* What: Motionless Contact Detail Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion contact__detail */
+
+/* #endregion contact__details */
+
+
+
+.contact__phone-btn { /* What: Contact Phone Button Anchor. Why: Calling is the fastest way to get a quote, so the number gets a button. How: This sets it as a solid blue button in the display font, sized to its label, and eases every change between its looks. */
+
+
+	background     : var(--blue);
+	border         : 2px solid var(--blue);
+	color          : var(--white);
+	display        : inline-block;
+	font-family    : var(--font-display);
+	font-size      : 1rem;
+	font-weight    : 700;
+	letter-spacing : 0.08em;
+	padding        : 0.9rem 2rem;
+	text-transform : uppercase;
+	transition     : all var(--transition);
+
+
+}
+.contact__phone-btn:hover { /* What: Hovered Contact Phone Button Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text. */
+
+
+	background : transparent;
+	color      : var(--blue-light);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Phone Button Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.contact__phone-btn { /* What: Motionless Contact Phone Button Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+
+
+/* #region contact__form-wrap */
+
+.contact__form-wrap { /* What: Contact Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
+
+
+	background : var(--white);
+	padding    : 2.5rem;
+
+
+}
+@media ( max-width : 520px ) { /* What: Narrow Contact Form Wrap Div. Why: The panel's padding eats too much of a phone's width. How: This applies 520px wide and below. */
+
+
+	.contact__form-wrap { /* What: Tighter Contact Form Wrap Div. Why: The fields need the room on a phone. How: This tightens the panel's padding. */
+
+
+		padding : 1.75rem 1.25rem;
+
+
+	}
+
+
+}
+
+
+/* #region contact__success */
+
+.contact__success { /* What: Contact Success Div. Why: The thank-you message should fill the panel the form left. How: This centers the check, heading, and note in a column at least 320px tall. */
+
+
+	align-items     : center;
+	display         : flex;
+	flex-direction  : column;
+	gap             : 1rem;
+	justify-content : center;
+	min-height      : 320px;
+	padding         : 4rem 2rem;
+	text-align      : center;
+
+
+}
+
+.contact__success-icon { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the check in a 56px blue circle in white. */
+
+
+	align-items     : center;
+	background      : var(--blue);
+	border-radius   : 50%;
+	color           : var(--white);
+	display         : flex;
+	font-size       : 1.5rem;
+	height          : 56px;
+	justify-content : center;
+	width           : 56px;
+
+
+}
+
+.contact__success-title { /* What: Success Title Heading. Why: The message needs a clear heading. How: This sets it large in the extra bold display font, uppercase and navy. */
+
+
+	color          : var(--navy);
+	font-family    : var(--font-display);
+	font-size      : 1.6rem;
+	font-weight    : 800;
+	text-transform : uppercase;
+
+
+}
+
+.contact__success-body { /* What: Success Body Paragraph. Why: The visitor should know what happens next. How: This sets the note in the muted text color with generous leading. */
+
+
+	color       : var(--text-muted);
+	font-size   : 0.95rem;
+	line-height : 1.7;
+
+
+}
+
+/* #endregion contact__success */
+
+
+
+.contact__form-title { /* What: Form Title Heading. Why: The form needs a clear heading, set off from its fields. How: This sets it in the extra bold display font, uppercase and navy, over a blue rule. */
+
+
+	border-bottom  : 2px solid var(--blue);
+	color          : var(--navy);
+	font-family    : var(--font-display);
+	font-size      : 1.3rem;
+	font-weight    : 800;
+	letter-spacing : 0.06em;
+	margin-bottom  : 1.75rem;
+	padding-bottom : 1rem;
+	text-transform : uppercase;
+
+
+}
+
+
+
+/* #region contact__form-row */
+
+.contact__form-row { /* What: Contact Form Row Div. Why: Short fields pair up on wide screens. How: This lays two fields side by side with room below the row. */
+
+
+	display               : grid;
+	gap                   : 1rem;
+	grid-template-columns : 1fr 1fr;
+	margin-bottom         : 1rem;
+
+
+}
+@media ( max-width : 520px ) { /* What: Narrow Contact Form Row Div. Why: Two fields side by side are too cramped on a phone. How: This applies 520px wide and below. */
+
+
+	.contact__form-row { /* What: Stacked Contact Form Row Div. Why: Each field needs the full width on a phone. How: This switches to one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region contact__field */
+
+.contact__field { /* What: Contact Field Div. Why: Each field stacks its label over its control. How: This stacks the two with a small gap. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : 0.4rem;
+
+
+}
+.contact__field--full { /* What: Full Contact Field Div. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
+
+
+	margin-bottom : 1rem;
+
+
+}
+
+.contact__field-label { /* What: Contact Field Label. Why: Every field needs a visible label in the form's display style. How: This sets it small, spaced, uppercase, and in the muted text color. */
+
+
+	color          : var(--text-muted);
+	font-family    : var(--font-display);
+	font-size      : 0.75rem;
+	font-weight    : 700;
+	letter-spacing : 0.12em;
+	text-transform : uppercase;
+
+
+}
+
+.contact__field-control { /* What: Contact Field Control. Why: Every input and the message box share one look, and focus has to show clearly. How: This sets them on the off-white with a light border, lets the message box grow taller, and holds a zero-width blue outline 6px out, easing it and the border in on focus. */
+
+
+	background     : var(--off-white);
+	border         : 1.5px solid var(--silver-light);
+	color          : var(--navy);
+	font-family    : var(--font-body);
+	font-size      : 0.9rem;
+	outline        : 0 solid var(--blue);
+	outline-offset : 6px;
+	padding        : 0.75rem 1rem;
+	resize         : vertical;
+	transition     : border-color var(--transition), outline-offset var(--transition), outline-width var(--transition);
+
+
+}
+.contact__field-control:focus { /* What: Focused Contact Field Control. Why: The field being typed in should stand out. How: This turns its border blue. */
+
+
+	border-color : var(--blue);
+
+
+}
+.contact__field-control:focus-visible { /* What: Keyboard Focused Contact Field Control. Why: A keyboard user has to see clearly where focus is. How: This grows the ring to 2px and draws it in to 2px from the field. */
+
+
+	outline-offset : 2px;
+	outline-width  : 2px;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Field Control. Why: Someone who asked for less motion should see the focus ring simply appear. How: This applies only when the reduced-motion preference is set. */
+
+
+	.contact__field-control { /* What: Motionless Contact Field Control. Why: The border and ring should switch at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion contact__field */
+
+/* #endregion contact__form-row */
+
+
+/* #region contact__form-error */
+
+.contact__form-error { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel. */
+
+
+	color      : #b42318;
+	font-size  : 0.85rem;
+	text-align : center;
+
+
+}
+
+.contact__form-error-link { /* What: Form Error Link Anchor. Why: The phone number in the message has to read as a link and stay in one piece. How: This underlines it and keeps it from breaking across lines. */
+
+
+	text-decoration : underline;
+	white-space     : nowrap;
+
+
+}
+
+/* #endregion contact__form-error */
+
+
+.contact__submit { /* What: Contact Submit Button. Why: The form's main action spans the panel. How: This sets a full-width navy button in the display font, and eases every change between its looks. */
+
+
+	background     : var(--navy);
+	border         : 2px solid var(--navy);
+	color          : var(--white);
+	cursor         : pointer;
+	font-family    : var(--font-display);
+	font-size      : 1rem;
+	font-weight    : 700;
+	letter-spacing : 0.1em;
+	margin-bottom  : 0.75rem;
+	padding        : 1rem;
+	text-transform : uppercase;
+	transition     : all var(--transition);
+	width          : 100%;
+
+
+}
+.contact__submit:hover { /* What: Hovered Contact Submit Button. Why: The button should respond to the pointer. How: This turns its fill and border blue. */
+
+
+	background   : var(--blue);
+	border-color : var(--blue);
+
+
+}
+.contact__submit:disabled { /* What: Disabled Contact Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This dims it and shows the progress cursor. */
+
+
+	cursor  : progress;
+	opacity : 0.7;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.contact__submit { /* What: Motionless Contact Submit Button. Why: The hover look should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.contact__form-note { /* What: Form Note Paragraph. Why: The no-spam promise should be present but quiet. How: This centers it small in the muted text color. */
+
+
+	color      : var(--text-muted);
+	font-size  : 0.75rem;
+	text-align : center;
+
+
+}
+
+/* #endregion contact__form-wrap */
+
+/* #endregion contact__inner */
+
+/* #endregion contact */
+
+

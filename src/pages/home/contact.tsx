@@ -3,11 +3,11 @@
 
 // #region Imports
 
+import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+
+
 import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 80ms per block.
 import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's fields and whether it was just sent. How: This holds both.
-
-
-import './contact.css'; // What: Contact Stylesheet Import. Why: The section's background, details, and quote form are styled in their own stylesheet. How: This is imported purely for its side effect.
 
 // #endregion Imports
 
@@ -219,26 +219,26 @@ function ConSecCom () : React.JSX.Element {
 
 			id='contact'
 
-			className='contact'
+			className={ cssModObj.contact }
 		>{ /* What: Contact Section Element. Why: The page ends where visitors reach the company. How: Its id, kept as is because it's a link target, is where the Contact link and the hero's quote button scroll to. */ }
 
 
 			<div
-				className='contact__bg'
+				className={ cssModObj.contactBg }
 
 				aria-hidden='true'
 			/>{ /* What: Contact Background Div Element. Why: A soft accent sets the section off from the one above. How: This is decorative and hidden from assistive technology. */ }
 
 
 
-			<div className='container contact__inner'>{ /* What: Contact Inner Div Element. Why: The invitation and the form sit side by side. How: This lays them out in two columns within the content width. */ }
+			<div className={ cssModObj.contactInner }>{ /* What: Contact Inner Div Element. Why: The invitation and the form sit side by side. How: This lays them out in two columns within the content width. */ }
 
 
-				<div className='contact__info'>{ /* What: Contact Info Div Element. Why: The left column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button. */ }
+				<div>{ /* What: Contact Info Div Element. Why: The left column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button. */ }
 
 
 					<p
-						className='section-label'
+						className={ cssModObj.sectionLabel }
 
 						data-scroll-reveal-block
 					>{ /* What: Contact Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
@@ -246,7 +246,7 @@ function ConSecCom () : React.JSX.Element {
 					</p>
 
 					<h2
-						className='section-title light'
+						className={` ${ cssModObj.sectionTitle }   ${ cssModObj.light } `}
 
 						data-scroll-reveal-block
 					>{ /* What: Contact Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
@@ -254,13 +254,13 @@ function ConSecCom () : React.JSX.Element {
 					</h2>
 
 					<div
-						className='divider'
+						className={ cssModObj.divider }
 
 						data-scroll-reveal-block
 					/>{ /* What: Contact Divider Div Element. Why: A short rule separates the heading from the invitation. How: This draws it. */ }
 
 					<p
-						className='contact__info-body'
+						className={ cssModObj.contactInfoBody }
 
 						data-scroll-reveal-block
 					>{ /* What: Contact Invitation Paragraph Element. Why: The section invites the visitor to get in touch. How: This offers the free inspection and names the area served. */ }
@@ -272,23 +272,23 @@ function ConSecCom () : React.JSX.Element {
 
 
 					<div
-						className='contact__details'
+						className={ cssModObj.contactDetails }
 
 						data-scroll-reveal-block
 					>{ /* What: Contact Details Div Element. Why: Visitors want the location, number, and hours together. How: This lists them as icon and text rows. */ }
 
 
-						<div className='contact__detail'>{ /* What: Location Detail Div Element. Why: A local business should say where it is. How: This pairs a pin icon with the town. */ }
+						<div className={ cssModObj.contactDetail }>{ /* What: Location Detail Div Element. Why: A local business should say where it is. How: This pairs a pin icon with the town. */ }
 
 
-							<span className='contact__detail-icon'>📍</span>{ /* What: Location Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a pin. */ }
+							<span className={ cssModObj.contactDetailIcon }>📍</span>{ /* What: Location Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a pin. */ }
 
 							<div>{ /* What: Location Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className='contact__detail-label'>Location</span>{ /* What: Location Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.contactDetailLabel }>Location</span>{ /* What: Location Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className='contact__detail-value'>Lawrence, Kansas</span>{ /* What: Location Value Span Element. Why: This is the detail itself. How: This shows the town. */ }
+								<span className={ cssModObj.contactDetailValue }>Lawrence, Kansas</span>{ /* What: Location Value Span Element. Why: This is the detail itself. How: This shows the town. */ }
 
 
 							</div>
@@ -297,18 +297,18 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className='contact__detail'>{ /* What: Phone Detail Div Element. Why: The phone number is the quickest way in. How: This pairs a phone icon with a dialing link. */ }
+						<div className={ cssModObj.contactDetail }>{ /* What: Phone Detail Div Element. Why: The phone number is the quickest way in. How: This pairs a phone icon with a dialing link. */ }
 
 
-							<span className='contact__detail-icon'>📞</span>{ /* What: Phone Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a phone. */ }
+							<span className={ cssModObj.contactDetailIcon }>📞</span>{ /* What: Phone Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a phone. */ }
 
 							<div>{ /* What: Phone Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className='contact__detail-label'>Phone</span>{ /* What: Phone Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.contactDetailLabel }>Phone</span>{ /* What: Phone Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
 								<a
-									className='contact__detail-value contact__detail-link'
+									className={` ${ cssModObj.contactDetailValue }   ${ cssModObj.contactDetailLink } `}
 
 									href='tel:7853041957'
 								>{ /* What: Phone Value Anchor Element. Why: Visitors can call straight from the details. How: This dials the number on phones. */ }
@@ -322,17 +322,17 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className='contact__detail'>{ /* What: Hours Detail Div Element. Why: Callers should know when someone will answer. How: This pairs a clock icon with the hours. */ }
+						<div className={ cssModObj.contactDetail }>{ /* What: Hours Detail Div Element. Why: Callers should know when someone will answer. How: This pairs a clock icon with the hours. */ }
 
 
-							<span className='contact__detail-icon'>🕐</span>{ /* What: Hours Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a clock. */ }
+							<span className={ cssModObj.contactDetailIcon }>🕐</span>{ /* What: Hours Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a clock. */ }
 
 							<div>{ /* What: Hours Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className='contact__detail-label'>Business Hours</span>{ /* What: Hours Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.contactDetailLabel }>Business Hours</span>{ /* What: Hours Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className='contact__detail-value'>Monday – Friday, 8 a.m. – 5 p.m.</span>{ /* What: Hours Value Span Element. Why: This is the detail itself. How: This shows the weekday hours. */ }
+								<span className={ cssModObj.contactDetailValue }>Monday – Friday, 8 a.m. – 5 p.m.</span>{ /* What: Hours Value Span Element. Why: This is the detail itself. How: This shows the weekday hours. */ }
 
 
 							</div>
@@ -346,7 +346,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 					<a
-						className='contact__phone-btn'
+						className={ cssModObj.contactPhoneBtn }
 
 						data-scroll-reveal-block
 
@@ -361,7 +361,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 				<div
-					className='contact__form-wrap'
+					className={ cssModObj.contactFormWrap }
 
 					data-scroll-reveal-block
 				>{ /* What: Contact Form Wrap Div Element. Why: The form and its thank-you message share one panel. How: This holds whichever is showing, and fades in as one block. */ }
@@ -370,14 +370,14 @@ function ConSecCom () : React.JSX.Element {
 					{ forSenBoo ? ( // What: Sent Message Branch. Why: A just-sent form gives way to a thank-you. How: This shows the message while forSenBoo is true.
 
 
-						<div className='contact__success'>{ /* What: Contact Success Div Element. Why: The visitor should know the form went through. How: This stacks a check, a heading, and a note. */ }
+						<div className={ cssModObj.contactSuccess }>{ /* What: Contact Success Div Element. Why: The visitor should know the form went through. How: This stacks a check, a heading, and a note. */ }
 
 
-							<span className='contact__success-icon'>✓</span>{ /* What: Success Icon Span Element. Why: A check mark signals success at a glance. How: This shows it large. */ }
+							<span className={ cssModObj.contactSuccessIcon }>✓</span>{ /* What: Success Icon Span Element. Why: A check mark signals success at a glance. How: This shows it large. */ }
 
-							<h3 className='contact__success-title'>Message Sent!</h3>{ /* What: Success Title Heading Element. Why: The message needs a clear heading. How: This is the panel's h3. */ }
+							<h3 className={ cssModObj.contactSuccessTitle }>Message Sent!</h3>{ /* What: Success Title Heading Element. Why: The message needs a clear heading. How: This is the panel's h3. */ }
 
-							<p className='contact__success-body'>{ /* What: Success Body Paragraph Element. Why: The visitor should know what happens next. How: This says the company will be in touch. */ }
+							<p className={ cssModObj.contactSuccessBody }>{ /* What: Success Body Paragraph Element. Why: The visitor should know what happens next. How: This says the company will be in touch. */ }
 								Thank you for reaching out. Seal and Shield will be in touch shortly.
 							</p>
 
@@ -389,8 +389,6 @@ function ConSecCom () : React.JSX.Element {
 
 
 						<form
-							className='contact__form'
-
 							data-netlify='true'
 							name='contactForm'
 
@@ -398,20 +396,28 @@ function ConSecCom () : React.JSX.Element {
 						>{ /* What: Contact Form Element. Why: Visitors request a free quote here. How: Its name, contactForm, matches the hidden copy Netlify reads, the browser checks the required fields before submitting, and forSubFun sends it. */ }
 
 
-							<h3 className='contact__form-title'>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
+							<h3 className={ cssModObj.contactFormTitle }>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
 
 
 
-							<div className='contact__form-row'>{ /* What: Name Company Row Div Element. Why: Short fields pair up on wide screens. How: This holds the name and company fields side by side. */ }
+							<div className={ cssModObj.contactFormRow }>{ /* What: Name Company Row Div Element. Why: Short fields pair up on wide screens. How: This holds the name and company fields side by side. */ }
 
 
-								<div className='contact__field'>{ /* What: Name Field Div Element. Why: Each field stacks its label over its input. How: This holds the name field. */ }
+								<div className={ cssModObj.contactField }>{ /* What: Name Field Div Element. Why: Each field stacks its label over its input. How: This holds the name field. */ }
 
 
-									<label htmlFor='conNamInp'>Full Name *</label>{ /* What: Name Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
+									<label
+										className={ cssModObj.contactFieldLabel }
+
+										htmlFor='conNamInp'
+									>{ /* What: Name Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
+										Full Name *
+									</label>
 
 									<input
 										id='conNamInp'
+
+										className={ cssModObj.contactFieldControl }
 
 										name='name'
 
@@ -426,13 +432,21 @@ function ConSecCom () : React.JSX.Element {
 
 								</div>
 
-								<div className='contact__field'>{ /* What: Company Field Div Element. Why: Each field stacks its label over its input. How: This holds the company field. */ }
+								<div className={ cssModObj.contactField }>{ /* What: Company Field Div Element. Why: Each field stacks its label over its input. How: This holds the company field. */ }
 
 
-									<label htmlFor='conComInp'>Company</label>{ /* What: Company Label Element. Why: Every field needs a visible label. How: This names the field. */ }
+									<label
+										className={ cssModObj.contactFieldLabel }
+
+										htmlFor='conComInp'
+									>{ /* What: Company Label Element. Why: Every field needs a visible label. How: This names the field. */ }
+										Company
+									</label>
 
 									<input
 										id='conComInp'
+
+										className={ cssModObj.contactFieldControl }
 
 										name='company'
 
@@ -451,16 +465,24 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-							<div className='contact__form-row'>{ /* What: Phone Email Row Div Element. Why: Short fields pair up on wide screens. How: This holds the phone and email fields side by side. */ }
+							<div className={ cssModObj.contactFormRow }>{ /* What: Phone Email Row Div Element. Why: Short fields pair up on wide screens. How: This holds the phone and email fields side by side. */ }
 
 
-								<div className='contact__field'>{ /* What: Phone Field Div Element. Why: Each field stacks its label over its input. How: This holds the phone field. */ }
+								<div className={ cssModObj.contactField }>{ /* What: Phone Field Div Element. Why: Each field stacks its label over its input. How: This holds the phone field. */ }
 
 
-									<label htmlFor='conPhoInp'>Phone *</label>{ /* What: Phone Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
+									<label
+										className={ cssModObj.contactFieldLabel }
+
+										htmlFor='conPhoInp'
+									>{ /* What: Phone Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
+										Phone *
+									</label>
 
 									<input
 										id='conPhoInp'
+
+										className={ cssModObj.contactFieldControl }
 
 										name='phone'
 
@@ -475,13 +497,21 @@ function ConSecCom () : React.JSX.Element {
 
 								</div>
 
-								<div className='contact__field'>{ /* What: Email Field Div Element. Why: Each field stacks its label over its input. How: This holds the email field. */ }
+								<div className={ cssModObj.contactField }>{ /* What: Email Field Div Element. Why: Each field stacks its label over its input. How: This holds the email field. */ }
 
 
-									<label htmlFor='conEmaInp'>Email</label>{ /* What: Email Label Element. Why: Every field needs a visible label. How: This names the field. */ }
+									<label
+										className={ cssModObj.contactFieldLabel }
+
+										htmlFor='conEmaInp'
+									>{ /* What: Email Label Element. Why: Every field needs a visible label. How: This names the field. */ }
+										Email
+									</label>
 
 									<input
 										id='conEmaInp'
+
+										className={ cssModObj.contactFieldControl }
 
 										name='email'
 
@@ -500,13 +530,21 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-							<div className='contact__field contact__field--full'>{ /* What: Message Field Div Element. Why: The message needs the form's full width. How: This holds the message field across both columns. */ }
+							<div className={` ${ cssModObj.contactField }   ${ cssModObj.contactFieldFull } `}>{ /* What: Message Field Div Element. Why: The message needs the form's full width. How: This holds the message field across both columns. */ }
 
 
-								<label htmlFor='conMesTex'>Tell us about your roof</label>{ /* What: Message Label Element. Why: Every field needs a visible label. How: This invites the visitor to describe the job. */ }
+								<label
+									className={ cssModObj.contactFieldLabel }
+
+									htmlFor='conMesTex'
+								>{ /* What: Message Label Element. Why: Every field needs a visible label. How: This invites the visitor to describe the job. */ }
+									Tell us about your roof
+								</label>
 
 								<textarea
 									id='conMesTex'
+
+									className={ cssModObj.contactFieldControl }
 
 									name='message'
 
@@ -531,18 +569,18 @@ function ConSecCom () : React.JSX.Element {
 
 
 								<p
-									className='contact__form-error'
+									className={ cssModObj.contactFormError }
 
 									role='alert'
 								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the request didn't go through and what to do next. How: Its alert role has screen readers announce it the moment it appears. */ }
-									Sorry, your request didn't go through. Please try again, or call us at <a href='tel:7853041957'>(785) 304-1957</a>.
+									Sorry, your request didn't go through. Please try again, or call us at <a className={ cssModObj.contactFormErrorLink } href='tel:7853041957'>(785) 304-1957</a>.
 								</p>
 
 
 							) }
 
 							<button
-								className='contact__submit'
+								className={ cssModObj.contactSubmit }
 
 								disabled={ senProBoo }
 								type='submit'
@@ -550,7 +588,7 @@ function ConSecCom () : React.JSX.Element {
 								{ senProBoo ? 'Sending...' : 'Submit Free Quote Request' }{ /* What: Submit Label Expression. Why: The button should say when it's busy. How: This reads Sending... while a submission is out. */ }
 							</button>
 
-							<p className='contact__form-note'>{ /* What: Form Note Paragraph Element. Why: Visitors worry about what happens to their details. How: This promises no spam. */ }
+							<p className={ cssModObj.contactFormNote }>{ /* What: Form Note Paragraph Element. Why: Visitors worry about what happens to their details. How: This promises no spam. */ }
 								No spam. We'll only contact you regarding your roofing inquiry.
 							</p>
 
