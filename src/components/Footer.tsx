@@ -1,11 +1,12 @@
 import logoSimple from '../assets/logo-simple.png'
+import { redMotFun } from '../utils/motion.ts'
 import './Footer.css'
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(id)?.scrollIntoView({ behavior: redMotFun() ? 'auto' : 'smooth' })
   }
 
   return (

@@ -79,6 +79,10 @@
   transition: color var(--transition);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .about__info-link { transition: none; }
+}
+
 .about__info-link:hover { color: var(--white); }
 
 /* Text col */

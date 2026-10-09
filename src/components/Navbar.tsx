@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import logoSimple from '../assets/logo-simple.png'
+import { redMotFun } from '../utils/motion.ts'
 import './Navbar.css'
 
 const NAV_LINKS = [
@@ -35,7 +36,7 @@ export default function Navbar() {
   const handleNav = (href: string) => {
     setMenuOpen(false)
     const id = href.replace('#', '')
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(id)?.scrollIntoView({ behavior: redMotFun() ? 'auto' : 'smooth' })
   }
 
   return (

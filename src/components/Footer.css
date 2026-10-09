@@ -61,6 +61,10 @@
   transition: color var(--transition);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .footer__link { transition: none; }
+}
+
 .footer__link:hover { color: var(--white); }
 
 .footer__contact {
@@ -75,6 +79,10 @@
   letter-spacing: 0.04em;
   transition: color var(--transition);
   display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__phone { transition: none; }
 }
 
 .footer__phone:hover { color: var(--white); }

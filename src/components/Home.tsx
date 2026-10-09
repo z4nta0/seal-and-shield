@@ -1,4 +1,5 @@
 import logo from '../assets/logo-full.png'
+import { redMotFun } from '../utils/motion.ts'
 import './Home.css'
 
 const STATS = [
@@ -35,7 +36,7 @@ export default function Home() {
               className="home__btn home__btn--primary"
               onClick={e => {
                 e.preventDefault()
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                document.getElementById('contact')?.scrollIntoView({ behavior: redMotFun() ? 'auto' : 'smooth' })
               }}
             >
               Get a Free Quote
@@ -45,7 +46,7 @@ export default function Home() {
               className="home__btn home__btn--secondary"
               onClick={e => {
                 e.preventDefault()
-                document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })
+                document.getElementById('services')?.scrollIntoView({ behavior: redMotFun() ? 'auto' : 'smooth' })
               }}
             >
               Our Services

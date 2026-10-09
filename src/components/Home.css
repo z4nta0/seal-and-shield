@@ -55,6 +55,10 @@
   animation: fadeUp 0.8s ease both;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .home__eyebrow { animation: none; }
+}
+
 .home__headline {
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 7vw, 6rem);
@@ -65,6 +69,10 @@
   letter-spacing: 0.02em;
   margin-bottom: 1.5rem;
   animation: fadeUp 0.8s 0.1s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__headline { animation: none; }
 }
 
 .home__headline-accent {
@@ -81,11 +89,19 @@
   animation: fadeUp 0.8s 0.2s ease both;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .home__sub { animation: none; }
+}
+
 .home__actions {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   animation: fadeUp 0.8s 0.3s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__actions { animation: none; }
 }
 
 .home__btn {
@@ -97,6 +113,10 @@
   padding: 0.9rem 2rem;
   transition: all var(--transition);
   cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__btn { transition: none; }
 }
 
 .home__btn--primary {
@@ -129,6 +149,10 @@
   animation: fadeUp 0.9s 0.2s ease both;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .home__right { animation: none; }
+}
+
 .home__logo-wrap {
   position: relative;
   display: flex;
@@ -143,6 +167,10 @@
   border-radius: 50%;
   border: 1px solid rgba(30, 86, 200, 0.25);
   animation: pulseRing 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__logo-ring { animation: none; }
 }
 
 .home__logo-ring::before {

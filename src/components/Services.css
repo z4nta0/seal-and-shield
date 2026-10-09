@@ -32,6 +32,10 @@
   position: relative;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .services__card { transition: none; }
+}
+
 .services__card:hover {
   box-shadow: 0 12px 40px rgba(15, 30, 69, 0.1);
   transform: translateY(-4px);
@@ -96,6 +100,10 @@
   border: 1.5px solid rgba(59, 130, 246, 0.5);
   padding: 0.55rem 1.25rem;
   transition: background var(--transition), border-color var(--transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__area-tag { transition: none; }
 }
 
 .services__area-tag:hover {

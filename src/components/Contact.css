@@ -73,6 +73,10 @@
   transition: color var(--transition);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .contact__detail-link { transition: none; }
+}
+
 .contact__detail-link:hover { color: var(--white); }
 
 .contact__phone-btn {
@@ -87,6 +91,10 @@
   padding: 0.9rem 2rem;
   border: 2px solid var(--blue);
   transition: all var(--transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__phone-btn { transition: none; }
 }
 
 .contact__phone-btn:hover {
@@ -151,6 +159,11 @@
   transition: border-color var(--transition);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .contact__field input,
+  .contact__field textarea { transition: none; }
+}
+
 .contact__field input:focus,
 .contact__field textarea:focus {
   border-color: var(--blue);
@@ -170,6 +183,10 @@
   cursor: pointer;
   transition: all var(--transition);
   margin-bottom: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__submit { transition: none; }
 }
 
 .contact__submit:hover {
