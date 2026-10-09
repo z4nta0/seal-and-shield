@@ -1,6 +1,6 @@
-import logo from '../assets/logo-full.png'
-import { redMotFun } from '../utils/motion.ts'
-import './Home.css'
+import logo from './logo-full.png'
+import { redMotFun } from '../../utils/motion.ts'
+import './hero.css'
 
 const STATS = [
   { value: '100%',    label: 'Commercial Focus'    },

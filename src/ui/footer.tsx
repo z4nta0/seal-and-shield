@@ -1,6 +1,6 @@
 import logoSimple from '../assets/logo-simple.png'
 import { redMotFun } from '../utils/motion.ts'
-import './Footer.css'
+import './footer.css'
 
 export default function Footer() {
   const year = new Date().getFullYear()

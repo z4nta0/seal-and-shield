@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { type FormEvent } from 'react'
-import './Contact.css'
+import './contact.css'
 
 export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null)

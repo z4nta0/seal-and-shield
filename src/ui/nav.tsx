@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import logoSimple from '../assets/logo-simple.png'
 import { redMotFun } from '../utils/motion.ts'
-import './Navbar.css'
+import './nav.css'
 
 const NAV_LINKS = [
   { label: 'Home',     href: '#home'     },

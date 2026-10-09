@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import './Services.css'
+import './services.css'
 
 const SERVICES = [
   {

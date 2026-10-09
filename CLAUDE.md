@@ -28,6 +28,42 @@ rules, the choice between the vertical rhythm and the plastic-ratio viewport
 steps waits until the rest of the design system and tokens are applied; then
 the current numbers are compared with both options and the user decides.
 
+## Directory structure
+Decided 2026-10-08, matching reese-roofing's adaptation of the user-level
+"### Directory structure" layout to a website with routes rather than a web
+app with tabs.
+```
+src/
+  main.tsx               entry point
+  app.tsx                root component (the routes join it in step 7)
+  assets/                images used by 2 or more pages (logo-simple.png)
+  pages/
+    home/                the home page, its sections, and logo-full.png
+  ui/                    components used by 2 or more pages (nav, footer)
+  styles/                global CSS only (styles.css)
+  utils/                 app-agnostic helpers (motion.ts)
+```
+Outside `src/`: `tests/` holds the Playwright suites (see "## Test
+suites").
+- **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
+  and a component only that page uses (the hero, services, about, and
+  contact sections) lives in that folder. The 404 page joins as
+  `pages/not-found/` in step 7.
+- **A page's main file is named after its folder, with no prefix**
+  (`pages/home/home.tsx`), the same as reese-roofing.
+- **The bar and footer live in `ui/`** as `nav.tsx` and `footer.tsx`, since
+  the 404 page will use them too.
+- **Component names were left alone in the move**: the hero section's file
+  is `hero.tsx` but its component is still `Home`, and the others keep
+  `Navbar`, `Footer`, `Services`, `About`, and `Contact` until step 6's
+  naming pass. Only the new `HomPagCom` (the page that composes them) and
+  the rewritten `AppRooCom` follow the naming rules already.
+- **Stylesheet order**: `main.tsx` imports `styles/styles.css` after the app,
+  so the global sheet still loads after every component's CSS, as it did
+  before the move. The component files now load in `home.tsx`'s
+  alphabetical import order; no class is styled in two component files, so
+  that order doesn't decide any rule.
+
 ## Cleanup plan
 Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
 6; step 7 adds new features.
