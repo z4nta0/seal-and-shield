@@ -9,7 +9,7 @@ const VALUES = [
   },
   {
     title: 'Quality',
-    desc: 'We use premium materials — Conklin-certified products — and back our work with professional craftsmanship.'
+    desc: 'We use premium materials (Conklin-certified products) and back our work with professional craftsmanship.'
   },
   {
     title: 'Reliability',
@@ -80,7 +80,7 @@ export default function About() {
             </p>
             <p className="about__body fade-up">
               As an authorized Conklin distributor, we have direct access to some of the most
-              advanced commercial roofing coatings available — and we back every job with the
+              advanced commercial roofing coatings available, and we back every job with the
               kind of craftsmanship and communication that earns long-term relationships.
             </p>
 

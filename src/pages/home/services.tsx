@@ -5,7 +5,7 @@ const SERVICES = [
   {
     icon: '🏗️',
     title: 'Full Roof Installation',
-    desc: 'Complete commercial roof installations built to last. We handle every phase — from tear-off and substrate prep to final coating application.',
+    desc: 'Complete commercial roof installations built to last. We handle every phase, from tear-off and substrate prep to final coating application.',
   },
   {
     icon: '🔧',
@@ -25,17 +25,17 @@ const SERVICES = [
   {
     icon: '💧',
     title: 'Conklin Liquid Coatings',
-    desc: 'As an authorized Conklin distributor, we specialize in high-performance liquid roof coatings — seamless, reflective, and built for the Kansas climate.',
+    desc: 'As an authorized Conklin distributor, we specialize in high-performance liquid roof coatings: seamless, reflective, and built for the Kansas climate.',
   },
   {
     icon: '🛡️',
     title: 'TPO & EPDM Roofing',
-    desc: 'We install both TPO (thermoplastic polyolefin) and EPDM rubber roofing membranes — durable, low-maintenance solutions for flat and low-slope commercial roofs.',
+    desc: 'We install both TPO (thermoplastic polyolefin) and EPDM rubber roofing membranes: durable, low-maintenance solutions for flat and low-slope commercial roofs.',
   },
   {
     icon: '🌀',
     title: 'Spray Foam Sealing',
-    desc: 'Closed-cell spray polyurethane foam provides excellent insulation and a seamless moisture barrier — perfect for problem areas and penetrations.',
+    desc: 'Closed-cell spray polyurethane foam provides excellent insulation and a seamless moisture barrier, perfect for problem areas and penetrations.',
   },
   {
     icon: '📋',
@@ -81,7 +81,7 @@ export default function Services() {
           <div className="divider" />
           <p className="services__intro">
             Seal and Shield is a full-service commercial roofing company.
-            Whether you need a complete new roof, a targeted repair, or just peace of mind from a professional inspection —
+            Whether you need a complete new roof, a targeted repair, or just peace of mind from a professional inspection,
             we have you covered.
           </p>
         </div>
@@ -103,7 +103,7 @@ export default function Services() {
             <h3 className="section-title">Service Area</h3>
             <div className="divider" />
             <p className="services__area-desc">
-              Based in Lawrence, Kansas, Seal and Shield serves businesses across all of Kansas —
+              Based in Lawrence, Kansas, Seal and Shield serves businesses across all of Kansas,
               including Topeka, Lawrence, and the greater Kansas City metro area.
               We're also willing to travel anywhere in the continental United States for the right project.
             </p>

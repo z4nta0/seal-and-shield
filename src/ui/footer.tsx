@@ -16,7 +16,7 @@ export default function Footer() {
           <img src={logoSimple} alt="" className="footer__logo" />
           <div>
             <p className="footer__brand-name">Seal and Shield LLC</p>
-            <p className="footer__brand-tagline">Commercial Roofing — Lawrence, Kansas</p>
+            <p className="footer__brand-tagline">Commercial Roofing in Lawrence, Kansas</p>
           </div>
         </div>
 

@@ -26,7 +26,7 @@ export default function Home() {
             <span className="home__headline-accent">Shield.</span>
           </h1>
           <p className="home__sub">
-            Protecting Kansas businesses with premium roofing solutions —
+            Protecting Kansas businesses with premium roofing solutions,
             from Conklin liquid coatings to full commercial installations.
             Trusted, reliable, and built to last.
           </p>
