@@ -35,9 +35,64 @@
 
 		<!-- #region Icons -->
 
-		<link href='/favicon.png' rel='icon' type='image/png' /> <!-- What: PNG Icon Link. Why: Browsers show the site's mark in tabs and bookmarks. How: This points at the PNG favicon in public/. -->
+		<!--
+			index.html = Icons Section
+
+			@summary
+			The root favicon.ico comes first, holding the 16, 32, and 48px
+			sizes for older browsers, then the PNG sizes from smallest to
+			largest. All of them are rendered from design/icons/mark.png by
+			npm run icons. The order is the browser's order of preference, so
+			it stays as written rather than alphabetical.
+
+			@author z4nta0 <https://github.com/z4nta0>
+
+		-->
+
+
+
+		<link href='/favicon.ico'         rel='icon' sizes='any' />                      <!-- What: ICO Icon Link. Why: Older browsers read only a .ico favicon. How: This points at the root favicon.ico, which also answers the request browsers make for it on their own. -->
+		<link href='/favicon-16x16.png'   rel='icon' sizes='16x16'   type='image/png' /> <!-- What: Small PNG Icon Link. Why: Small tab icons look crisper drawn at their own size. How: This offers the 16px PNG. -->
+		<link href='/favicon-32x32.png'   rel='icon' sizes='32x32'   type='image/png' /> <!-- What: Medium PNG Icon Link. Why: Most browsers pick a 32px tab icon. How: This offers the 32px PNG. -->
+		<link href='/favicon-192x192.png' rel='icon' sizes='192x192' type='image/png' /> <!-- What: Large PNG Icon Link. Why: Some browsers and Android pick a large icon for shortcuts and tab previews. How: This offers the 192px PNG. -->
+		<link href='/favicon-512x512.png' rel='icon' sizes='512x512' type='image/png' /> <!-- What: Extra Large PNG Icon Link. Why: High-density screens and app launchers can ask for a bigger icon still. How: This offers the 512px PNG. -->
 
 		<!-- #endregion Icons -->
+
+
+		<!-- #region Home Screen -->
+
+		<link href='/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180' /> <!-- What: Apple Touch Icon Link. Why: iOS draws the home screen icon, and some apps the icon beside a shared link, from this link. How: This points at the 180px touch icon on a solid white square. -->
+
+		<!-- #endregion Home Screen -->
+
+
+		<!-- #region Open Graph -->
+
+		<meta property='og:description'  content='Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.' /> <!-- What: Open Graph Description Meta. Why: A shared link shows a summary under its title. How: This repeats the page's description, which already fits the 125 characters phones show. -->
+		<meta property='og:image'        content='https://sealandshieldroof.com/og-image.png' />                             <!-- What: Open Graph Image Meta. Why: A shared link shows a preview image. How: This points at the 1,200x630 card in public/, by its absolute address. -->
+		<meta property='og:image:alt'    content='Seal and Shield logo above the words Commercial Roofing, Lawrence, KS.' /> <!-- What: Open Graph Image Alt Meta. Why: Screen readers on social sites read the preview image's description. How: This describes what the card shows. -->
+		<meta property='og:image:height' content='630' />                                                                    <!-- What: Open Graph Image Height Meta. Why: Sites can lay out the preview before the image loads. How: This gives the card's height. -->
+		<meta property='og:image:type'   content='image/png' />                                                              <!-- What: Open Graph Image Type Meta. Why: Some apps check an image's type before fetching it. How: This names PNG. -->
+		<meta property='og:image:width'  content='1200' />                                                                   <!-- What: Open Graph Image Width Meta. Why: Sites can lay out the preview before the image loads. How: This gives the card's width. -->
+		<meta property='og:locale'       content='en_US' />                                                                  <!-- What: Open Graph Locale Meta. Why: Sites can tell which language the page is in. How: This names US English. -->
+		<meta property='og:site_name'    content='Seal and Shield' />                                                        <!-- What: Open Graph Site Name Meta. Why: Previews show which site a link belongs to. How: This names the company the way the site does everywhere. -->
+		<meta property='og:title'        content='Commercial Roofing in Lawrence, KS | Seal and Shield' />                   <!-- What: Open Graph Title Meta. Why: A shared link shows a title. How: This matches the page title. -->
+		<meta property='og:type'         content='website' />                                                                <!-- What: Open Graph Type Meta. Why: Sites shape a preview by what kind of page it is. How: This marks it a website. -->
+		<meta property='og:url'          content='https://sealandshieldroof.com/' />                                         <!-- What: Open Graph URL Meta. Why: Shares from any address should count as one page. How: This names the live address, matching the canonical link. -->
+
+		<!-- #endregion Open Graph -->
+
+
+		<!-- #region Twitter Card -->
+
+		<meta name='twitter:card'        content='summary_large_image' /> <!-- What: Twitter Card Meta. Why: X and similar sites pick a preview layout from this tag. How: This asks for the large image layout, which suits the 1,200x630 card. -->
+		<meta name='twitter:description' content='Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.' /> <!-- What: Twitter Description Meta. Why: The preview shows a summary. How: This repeats the page's description. -->
+		<meta name='twitter:image'       content='https://sealandshieldroof.com/og-image.png' />                                                                                 <!-- What: Twitter Image Meta. Why: The preview shows an image. How: This points at the same card as Open Graph. -->
+		<meta name='twitter:image:alt'   content='Seal and Shield logo above the words Commercial Roofing, Lawrence, KS.' />                                                     <!-- What: Twitter Image Alt Meta. Why: Screen readers read the preview image's description. How: This repeats the Open Graph alt text. -->
+		<meta name='twitter:title'       content='Commercial Roofing in Lawrence, KS | Seal and Shield' />                                                                       <!-- What: Twitter Title Meta. Why: The preview shows a title. How: This matches the page title. -->
+
+		<!-- #endregion Twitter Card -->
 
 
 		<!-- #region Structured Data -->
@@ -50,6 +105,8 @@
 				"legalName": "Seal and Shield LLC",
 				"url": "https://sealandshieldroof.com/",
 				"telephone": "+1-785-304-1957",
+				"logo": "https://sealandshieldroof.com/favicon-512x512.png",
+				"image": "https://sealandshieldroof.com/og-image.png",
 				"description": "Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.",
 				"foundingDate": "2024",
 				"address": {
@@ -95,7 +152,7 @@
 					}
 				]
 			}
-		</script><!-- What: Business Structured Data Script. Why: Search engines read JSON-LD to show a local business's details, and every detail has to match what the page shows. How: This describes the company as a RoofingContractor with its name, legal name, live address, phone, Lawrence city with no street address, weekday 8 to 5 hours, founding year, and the five service areas the Services section lists. -->
+		</script><!-- What: Business Structured Data Script. Why: Search engines read JSON-LD to show a local business's details, and every detail has to match what the page shows. How: This describes the company as a RoofingContractor with its name, legal name, live address, phone, logo, preview image, Lawrence city with no street address, weekday 8 to 5 hours, founding year, and the five service areas the Services section lists. -->
 
 		<!-- #endregion Structured Data -->
 

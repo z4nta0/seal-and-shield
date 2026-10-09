@@ -91,7 +91,9 @@ src/
   utils/                 app-agnostic helpers (motion.ts)
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test
-suites").
+suites"), and `design/` holds source artwork that isn't served, with the
+scripts that render it into `public/`: `design/og-image/` (the social
+preview card) and `design/icons/` (the favicon set).
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
   and a component only that page uses (the hero, services, about, and
   contact sections) lives in that folder. The 404 page is
@@ -156,7 +158,19 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      arrives with and then clears it, as asked for the same day.
    - **Security headers, WebP logos, and SEO: done 2026-10-09**, as recorded
      under "Kind of site" and "Known issues".
-   - Still to come: social previews and interaction feedback.
+   - **Social previews: done 2026-10-09.** The 1,200x630 card
+     (`public/og-image.png`, 270 KB) shows the logo over "Commercial
+     Roofing" and "Lawrence, KS" on the hero's navy, grid, and glow, inside
+     the center square; it's rendered by `npm run og-image` from
+     `design/og-image/card.html`, which reads the site's own fonts and
+     tokens. The Open Graph and Twitter tags match the page's title and
+     description, and the favicon set (ICO, 16 to 512px PNGs, and a 180px
+     Apple touch icon on white) is rendered by `npm run icons` from
+     `design/icons/mark.png`, the old 1,210px `public/favicon.png`. A changed
+     card needs a new filename (`og-image-2.png`), since apps cache previews.
+     After the deploy, check the live card with a preview checker such as
+     opengraph.xyz or Facebook's Sharing Debugger.
+   - Still to come: interaction feedback.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
@@ -199,8 +213,9 @@ waiting for the page to settle.
   edge, text spilling its box, or two reachable controls overlapping.
 - `npm run test:seo`: checks each route's title, description, author,
   canonical, robots, and single h1; that the structured data's every claim
-  appears on the page; and that robots.txt and the sitemap say what they
-  should. The social preview tags join it with the social previews.
+  appears on the page; that the social tags are complete and match the page,
+  the card is a 1,200x630 PNG under 300 KB, and every linked icon is served at
+  its size; and that robots.txt and the sitemap say what they should.
 - `npm test` runs every suite.
 
 ## Known issues
