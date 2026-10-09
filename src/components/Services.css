@@ -74,6 +74,8 @@
 }
 
 .services__area .section-title { color: var(--white); }
+.services__header .section-label { color: var(--blue); }
+
 .services__area .section-label { color: var(--blue-light); }
 
 .services__area-desc {

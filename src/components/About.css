@@ -86,6 +86,8 @@
 .about__info-link:hover { color: var(--white); }
 
 /* Text col */
+.about__text .section-label { color: var(--blue); }
+
 .about__body {
   font-size: 1rem;
   line-height: 1.85;
