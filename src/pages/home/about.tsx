@@ -3,13 +3,11 @@
 
 // #region Imports
 
-import lofPngUrl from './logo-full.png'; // What: Logo-Full PNG URL. Why: The about section's left column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import lofPngUrl from './logo-full.png';    // What: Logo-Full PNG URL. Why: The about section's left column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
 import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 100ms per block.
-
-
-import './about.css'; // What: About Stylesheet Import. Why: The section's two-column layout, info card, and values are styled in their own stylesheet. How: This is imported purely for its side effect.
 
 // #endregion Imports
 
@@ -139,31 +137,31 @@ function AboSecCom () : React.JSX.Element {
 
 			id='about'
 
-			className='about'
+			className={ cssModObj.about }
 		>{ /* What: About Section Element. Why: The page's third section introduces the company. How: Its id, kept as is because it's a link target, is where the About link scrolls to. */ }
 
 
-			<div className='container'>{ /* What: About Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
+			<div className={ cssModObj.container }>{ /* What: About Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
 
 
-				<div className='about__layout'>{ /* What: About Layout Div Element. Why: The logo and details sit beside the story. How: This lays them out in two columns. */ }
+				<div className={ cssModObj.aboutLayout }>{ /* What: About Layout Div Element. Why: The logo and details sit beside the story. How: This lays them out in two columns. */ }
 
 
 					<div
-						className='about__visual'
+						className={ cssModObj.aboutVisual }
 
 						data-scroll-reveal-block
 					>{ /* What: About Visual Div Element. Why: The left column pairs the logo with the company's key facts. How: This stacks the logo over the info card, and fades in as one block. */ }
 
 
 						<div
-							className='about__logo-bg'
+							className={ cssModObj.aboutLogoBg }
 
 							aria-hidden='true'
 						/>{ /* What: About Logo Background Div Element. Why: A light panel sets the logo off from the page. How: This is decorative and hidden from assistive technology. */ }
 
 						<img
-							className='about__logo'
+							className={ cssModObj.aboutLogo }
 
 							src={ lofPngUrl }
 
@@ -171,36 +169,36 @@ function AboSecCom () : React.JSX.Element {
 						/>{ /* What: About Logo Image Element. Why: The full logo anchors the left column. How: Its alt text repeats the name the image shows. */ }
 
 
-						<div className='about__info-card'>{ /* What: About Info Card Div Element. Why: Visitors want the company's key facts at a glance. How: This lists them as label and value rows. */ }
+						<div className={ cssModObj.aboutInfoCard }>{ /* What: About Info Card Div Element. Why: Visitors want the company's key facts at a glance. How: This lists them as label and value rows. */ }
 
 
-							<div className='about__info-row'>{ /* What: Founded Info Row Div Element. Why: The founding year shows how long the company has been at it. How: This pairs the label with 2024. */ }
+							<div className={ cssModObj.aboutInfoRow }>{ /* What: Founded Info Row Div Element. Why: The founding year shows how long the company has been at it. How: This pairs the label with 2024. */ }
 
 
-								<span className='about__info-label'>Founded</span>{ /* What: Founded Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.aboutInfoLabel }>Founded</span>{ /* What: Founded Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className='about__info-value'>2024</span>{ /* What: Founded Value Span Element. Why: This is the fact itself. How: This shows the year. */ }
-
-
-							</div>
-
-							<div className='about__info-row'>{ /* What: Based In Info Row Div Element. Why: A local business should say where it's based. How: This pairs the label with Lawrence. */ }
-
-
-								<span className='about__info-label'>Based In</span>{ /* What: Based In Label Span Element. Why: Each value needs its label. How: This names the row. */ }
-
-								<span className='about__info-value'>Lawrence, KS</span>{ /* What: Based In Value Span Element. Why: This is the fact itself. How: This shows the town. */ }
+								<span className={ cssModObj.aboutInfoValue }>2024</span>{ /* What: Founded Value Span Element. Why: This is the fact itself. How: This shows the year. */ }
 
 
 							</div>
 
-							<div className='about__info-row'>{ /* What: Phone Info Row Div Element. Why: The phone number belongs with the company's details. How: This pairs the label with a dialing link. */ }
+							<div className={ cssModObj.aboutInfoRow }>{ /* What: Based In Info Row Div Element. Why: A local business should say where it's based. How: This pairs the label with Lawrence. */ }
 
 
-								<span className='about__info-label'>Phone</span>{ /* What: Phone Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.aboutInfoLabel }>Based In</span>{ /* What: Based In Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+
+								<span className={ cssModObj.aboutInfoValue }>Lawrence, KS</span>{ /* What: Based In Value Span Element. Why: This is the fact itself. How: This shows the town. */ }
+
+
+							</div>
+
+							<div className={ cssModObj.aboutInfoRow }>{ /* What: Phone Info Row Div Element. Why: The phone number belongs with the company's details. How: This pairs the label with a dialing link. */ }
+
+
+								<span className={ cssModObj.aboutInfoLabel }>Phone</span>{ /* What: Phone Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
 								<a
-									className='about__info-value about__info-link'
+									className={` ${ cssModObj.aboutInfoValue }   ${ cssModObj.aboutInfoLink } `}
 
 									href='tel:7853041957'
 								>{ /* What: Phone Value Anchor Element. Why: Visitors reading the details can call straight away. How: This dials the number on phones. */ }
@@ -210,12 +208,12 @@ function AboSecCom () : React.JSX.Element {
 
 							</div>
 
-							<div className='about__info-row'>{ /* What: Hours Info Row Div Element. Why: Callers should know when someone will answer. How: This pairs the label with the business hours. */ }
+							<div className={ cssModObj.aboutInfoRow }>{ /* What: Hours Info Row Div Element. Why: Callers should know when someone will answer. How: This pairs the label with the business hours. */ }
 
 
-								<span className='about__info-label'>Hours</span>{ /* What: Hours Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.aboutInfoLabel }>Hours</span>{ /* What: Hours Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className='about__info-value'>8 a.m. – 5 p.m.</span>{ /* What: Hours Value Span Element. Why: This is the fact itself. How: This shows the hours. */ }
+								<span className={ cssModObj.aboutInfoValue }>8 a.m. – 5 p.m.</span>{ /* What: Hours Value Span Element. Why: This is the fact itself. How: This shows the hours. */ }
 
 
 							</div>
@@ -228,11 +226,11 @@ function AboSecCom () : React.JSX.Element {
 
 
 
-					<div className='about__text'>{ /* What: About Text Div Element. Why: The right column tells the company's story. How: This stacks the label, heading, story, and values. */ }
+					<div className={ cssModObj.aboutText }>{ /* What: About Text Div Element. Why: The right column tells the company's story. How: This stacks the label, heading, story, and values. */ }
 
 
 						<p
-							className='section-label'
+							className={ cssModObj.sectionLabel }
 
 							data-scroll-reveal-block
 						>{ /* What: About Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
@@ -240,7 +238,7 @@ function AboSecCom () : React.JSX.Element {
 						</p>
 
 						<h2
-							className='section-title'
+							className={ cssModObj.sectionTitle }
 
 							data-scroll-reveal-block
 						>{ /* What: About Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
@@ -248,13 +246,13 @@ function AboSecCom () : React.JSX.Element {
 						</h2>
 
 						<div
-							className='divider'
+							className={ cssModObj.divider }
 
 							data-scroll-reveal-block
 						/>{ /* What: About Divider Div Element. Why: A short rule separates the heading from the story. How: This draws it. */ }
 
 						<p
-							className='about__body'
+							className={ cssModObj.aboutBody }
 
 							data-scroll-reveal-block
 						>{ /* What: About Founding Paragraph Element. Why: The story opens with when the company started and why. How: This gives its founding year, mission, and home town. */ }
@@ -265,7 +263,7 @@ function AboSecCom () : React.JSX.Element {
 						</p>
 
 						<p
-							className='about__body'
+							className={ cssModObj.aboutBody }
 
 							data-scroll-reveal-block
 						>{ /* What: About Conklin Paragraph Element. Why: The Conklin partnership sets the company apart. How: This explains what it gives clients. */ }
@@ -276,7 +274,7 @@ function AboSecCom () : React.JSX.Element {
 
 
 
-						<div className='about__values'>{ /* What: About Values Div Element. Why: The story closes with what the company stands for. How: This lists the three values. */ }
+						<div className={ cssModObj.aboutValues }>{ /* What: About Values Div Element. Why: The story closes with what the company stands for. How: This lists the three values. */ }
 
 
 							{ ABO_VAL_ARR.map( ( valRcdObj, valIndNum ) => ( // What: Value Map. Why: Each value gets its own row. How: This renders one row per value, passing its position for the fade delay.
@@ -285,7 +283,7 @@ function AboSecCom () : React.JSX.Element {
 								<div
 									key={ valRcdObj.titStr }
 
-									className='about__value'
+									className={ cssModObj.aboutValue }
 
 									style={{ transitionDelay : `${ valIndNum * 80 }ms` }}
 
@@ -294,7 +292,7 @@ function AboSecCom () : React.JSX.Element {
 
 
 									<div
-										className='about__value-marker'
+										className={ cssModObj.aboutValueMarker }
 
 										aria-hidden='true'
 									/>{ /* What: About Value Marker Div Element. Why: A short bar marks each value. How: This is decorative and hidden from assistive technology. */ }
@@ -302,9 +300,9 @@ function AboSecCom () : React.JSX.Element {
 									<div>{ /* What: About Value Text Div Element. Why: The title and sentence stack beside the marker. How: This holds the two. */ }
 
 
-										<h3 className='about__value-title'>{ valRcdObj.titStr }</h3>{ /* What: About Value Title Heading Element. Why: Each value is named. How: This is the value's h3. */ }
+										<h3 className={ cssModObj.aboutValueTitle }>{ valRcdObj.titStr }</h3>{ /* What: About Value Title Heading Element. Why: Each value is named. How: This is the value's h3. */ }
 
-										<p className='about__value-desc'>{ valRcdObj.desStr }</p>{ /* What: About Value Description Paragraph Element. Why: Each value is explained in a sentence. How: This shows it beneath the title. */ }
+										<p className={ cssModObj.aboutValueDesc }>{ valRcdObj.desStr }</p>{ /* What: About Value Description Paragraph Element. Why: Each value is explained in a sentence. How: This shows it beneath the title. */ }
 
 
 									</div>

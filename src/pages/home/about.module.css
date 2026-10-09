@@ -1,0 +1,380 @@
+
+
+
+/**
+ * about.module.css = About Section Module
+ *
+ * @summary
+ * Styles for AboSecCom: the white section's two columns, the full logo on a
+ * light panel above the navy info card on the left, and the story and the
+ * three values on the right, which stack into one column at 900px wide or
+ * narrower with the left column centered and capped. The shared container,
+ * section label, section title, and divider styles the section used to
+ * borrow from the global stylesheet are copied onto those same class names
+ * here, along with the text column's adjustment to the label. The phone
+ * row's link rule comes after the value rule on purpose: the anchor carries
+ * both classes, and the link's light blue wins by coming later.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region about */
+
+.about { /* What: About Section. Why: The company's story sits on a white band between the light services and the dark contact section. How: This fills it white with generous padding above and below. */
+
+
+	background : var(--white);
+	padding    : 7rem 0;
+
+
+}
+
+
+/* #region container */
+
+.container { /* What: About Container Div. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with side padding, copied from the shared container. */
+
+
+	margin    : 0 auto;
+	max-width : var(--max-w);
+	padding   : 0 2rem;
+
+
+}
+
+
+/* #region about__layout */
+
+.about__layout { /* What: About Layout Div. Why: The logo and details sit beside the story. How: This lays them out in two top-aligned columns, the story's a little wider. */
+
+
+	align-items           : start;
+	display               : grid;
+	gap                   : 5rem;
+	grid-template-columns : 1fr 1.4fr;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow About Layout Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
+
+
+	.about__layout { /* What: Stacked About Layout Div. Why: The details and story read best one above the other. How: This collapses to one column with a smaller gap. */
+
+
+		gap                   : 3rem;
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region about__visual */
+
+.about__visual { /* What: About Visual Div. Why: The left column pairs the logo with the company's key facts. How: This stacks the logo over the info card, centered, as the positioning context for the logo's light panel. */
+
+
+	align-items    : center;
+	display        : flex;
+	flex-direction : column;
+	gap            : 2rem;
+	position       : relative;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow About Visual Div. Why: The stacked column shouldn't stretch across the whole screen. How: This applies 900px wide and below. */
+
+
+	.about__visual { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This caps the column at 400px and centers it. */
+
+
+		margin    : 0 auto;
+		max-width : 400px;
+
+
+	}
+
+
+}
+
+.about__logo-bg { /* What: About Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching 2rem beyond its top and sides, in the off-white behind everything else. */
+
+
+	background : var(--off-white);
+	bottom     : 0;
+	left       : -2rem;
+	position   : absolute;
+	right      : -2rem;
+	top        : -2rem;
+	z-index    : 0;
+
+
+}
+
+.about__logo { /* What: About Logo Image. Why: The full logo anchors the left column and should lift off its panel. How: This sizes it to 260px wide, casts a soft navy shadow under it, and layers it above the panel. */
+
+
+	filter   : drop-shadow(0 12px 40px rgba(15, 30, 69, 0.15));
+	position : relative;
+	width    : 260px;
+	z-index  : 1;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow About Logo Image. Why: The capped column has less room for the logo. How: This applies 900px wide and below. */
+
+
+	.about__logo { /* What: Smaller About Logo Image. Why: The logo should fit the narrower column. How: This sizes it to 200px wide. */
+
+
+		width : 200px;
+
+
+	}
+
+
+}
+
+
+
+/* #region about__info-card */
+
+.about__info-card { /* What: About Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
+
+
+	background     : var(--navy);
+	display        : flex;
+	flex-direction : column;
+	gap            : 0;
+	padding        : 1.75rem 2rem;
+	position       : relative;
+	width          : 100%;
+	z-index        : 1;
+
+
+}
+
+
+/* #region about__info-row */
+
+.about__info-row { /* What: About Info Row Div. Why: Each fact pairs its label with its value on one line. How: This spreads the two to either end with a faint divider below. */
+
+
+	align-items     : center;
+	border-bottom   : 1px solid rgba(255,255,255,0.07);
+	display         : flex;
+	justify-content : space-between;
+	padding         : 0.85rem 0;
+
+
+}
+.about__info-row:last-child { /* What: Last About Info Row Div. Why: The card ends without a divider. How: This drops the last row's border. */
+
+
+	border-bottom : none;
+
+
+}
+
+.about__info-label { /* What: About Info Label Span. Why: Each value needs a quiet label. How: This sets it small, spaced, uppercase, and silver. */
+
+
+	color          : var(--silver);
+	font-family    : var(--font-display);
+	font-size      : 0.75rem;
+	font-weight    : 600;
+	letter-spacing : 0.15em;
+	text-transform : uppercase;
+
+
+}
+
+.about__info-value { /* What: About Info Value Span. Why: The fact itself is the row's focus. How: This sets it in the bold display font in white. */
+
+
+	color          : var(--white);
+	font-family    : var(--font-display);
+	font-size      : 1rem;
+	font-weight    : 700;
+	letter-spacing : 0.03em;
+
+
+}
+
+.about__info-link { /* What: About Info Link Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
+
+
+	color      : var(--blue-light);
+	transition : color var(--transition);
+
+
+}
+.about__info-link:hover { /* What: Hovered About Info Link Anchor. Why: The link should respond to the pointer. How: This turns it white. */
+
+
+	color : var(--white);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion About Info Link Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.about__info-link { /* What: Motionless About Info Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion about__info-row */
+
+/* #endregion about__info-card */
+
+/* #endregion about__visual */
+
+
+
+/* #region about__text */
+
+.section-label { /* What: Section Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared section label. */
+
+
+	color          : var(--blue-light);
+	font-family    : var(--font-display);
+	font-size      : 0.8rem;
+	font-weight    : 700;
+	letter-spacing : 0.25em;
+	text-transform : uppercase;
+
+
+}
+.about__text .section-label { /* What: Text Column Section Label Paragraph. Why: Light blue doesn't have enough contrast on the white section. How: This turns the label the deeper blue. */
+
+
+	color : var(--blue);
+
+
+}
+
+.section-title { /* What: Section Title Heading. Why: The heading leads the story. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
+
+
+	color          : var(--navy);
+	font-family    : var(--font-display);
+	font-size      : clamp(2rem, 4vw, 3rem);
+	font-weight    : 800;
+	letter-spacing : 0.02em;
+	line-height    : 1.05;
+	text-transform : uppercase;
+
+
+}
+
+.divider { /* What: Divider Div. Why: A short rule separates the heading from the story. How: This draws a 3rem by 3px blue bar with room above and below, copied from the shared divider. */
+
+
+	background : var(--blue);
+	height     : 3px;
+	margin     : 1rem 0 1.5rem;
+	width      : 3rem;
+
+
+}
+
+.about__body { /* What: About Body Paragraph. Why: The story should read comfortably. How: This sets it in the muted text color with generous leading and room below each paragraph. */
+
+
+	color         : var(--text-muted);
+	font-size     : 1rem;
+	line-height   : 1.85;
+	margin-bottom : 1.25rem;
+
+
+}
+
+
+
+/* #region about__values */
+
+.about__values { /* What: About Values Div. Why: The story closes with what the company stands for. How: This stacks the three values with room above the list. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : 1.25rem;
+	margin-top     : 2rem;
+
+
+}
+
+
+/* #region about__value */
+
+.about__value { /* What: About Value Div. Why: Each value reads as its own row. How: This sets the marker beside the value's text, top-aligned. */
+
+
+	align-items : flex-start;
+	display     : flex;
+	gap         : 1.25rem;
+
+
+}
+
+.about__value-marker { /* What: About Value Marker Div. Why: A short bar marks each value. How: This draws a 3px blue bar at least 48px tall that never shrinks. */
+
+
+	background  : var(--blue);
+	flex-shrink : 0;
+	margin-top  : 4px;
+	min-height  : 48px;
+	width       : 3px;
+
+
+}
+
+.about__value-title { /* What: About Value Title Heading. Why: Each value is named. How: This sets the name in the bold display font, uppercase and navy. */
+
+
+	color          : var(--navy);
+	font-family    : var(--font-display);
+	font-size      : 1rem;
+	font-weight    : 700;
+	letter-spacing : 0.06em;
+	margin-bottom  : 0.3rem;
+	text-transform : uppercase;
+
+
+}
+
+.about__value-desc { /* What: About Value Description Paragraph. Why: Each value is explained in a sentence. How: This sets it small in the muted text color with generous leading. */
+
+
+	color       : var(--text-muted);
+	font-size   : 0.9rem;
+	line-height : 1.7;
+
+
+}
+
+/* #endregion about__value */
+
+/* #endregion about__values */
+
+/* #endregion about__text */
+
+/* #endregion about__layout */
+
+/* #endregion container */
+
+/* #endregion about */
+
+
