@@ -82,18 +82,19 @@ the page to settle.
   join in step 7, once the site has the features they check.
 
 ## Known issues
-- **The hidden Netlify form in `index.html` is pasted JSX** (found
-  2026-10-08): it carries JSX attributes as literal text (`className`,
-  `onSubmit={handleSubmit}`, `value={form.name}`) and repeats the React
-  form's input ids, which axe reports as `duplicate-id-aria` (needs review,
-  critical). Netlify only needs the form's name and each field's `name` to
-  detect it, so it can shrink to bare named fields with no ids or labels.
-  It touches live form detection, so the change waits for the user's go
-  ahead and a test submission after deploying.
+- **Test the contact form after the last deploy** (reminder for the user,
+  2026-10-08): the hidden Netlify detection copy of the form in `index.html`
+  was pasted JSX that repeated the React form's input ids, and it was
+  rebuilt as a bare form with only the form's name and each field's `name`.
+  Once all the cleanup steps are finished and deployed, remind the user to
+  send a test submission and confirm it arrives in Netlify's Forms tab.
 - **Contrast axe can't measure** (needs review, 2026-10-08): text over the
   hero's, contact section's, and footer's gradients (the headline and its
   accents, the stats, the bar's brand and links, the contact details, and
   the footer's links and phone) has to be checked by eye.
+- **WAVE still reports errors** (2026-10-08): the user ran WebAIM's WAVE
+  checker after the accessibility pass and it found errors axe doesn't
+  report. They're handled later, with the user.
 
 ## Accessibility pass
 Done 2026-10-08, before the directory move, so steps 5 and 6 run against a
