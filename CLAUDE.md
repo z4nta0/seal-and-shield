@@ -27,18 +27,27 @@ treatment. The `author` meta names the business itself.
   listings, reviews) is listed here once the SEO pass reaches it.
 
 ## Horizontal layout
-Open as of 2026-10-08. Per "Width is decided per project" in the user-level
-rules, the choice between the vertical rhythm and the plastic-ratio viewport
-steps waits until the rest of the design system and tokens are applied; then
-the current numbers are compared with both options and the user decides. The
-tokens are applied as of 2026-10-09, and these horizontal sizes are still
-literal, waiting on the decision: the content cap `--con-max-wid` (1,180px),
-the services header (600px), the stacked about column (400px), the about
-logo (260px, 200px narrow), the hero logo (`clamp( 280px, 38vw, 420px )`,
-`clamp( 200px, 55vw, 300px )` narrow), the section dividers (48px), the value
-markers (3px), and the menu toggle's lines (26px). Square boxes (the bar and
-footer logos, the hero ring, the success icon) mirror their height's
-vertical rhythm step instead.
+Decided 2026-10-09, after comparing both options from the user-level "Width
+is decided per project" rule: reese-roofing's method, applied in `45b71d0`.
+It's on trial, so the user may reverse it; `git revert 45b71d0` restores the
+vertical-rhythm layout and its baselines in one step.
+- **Fluid (horizontal rhythm)**: layout values only. The page gutter
+  (`--gut-sid-pad`, reese-roofing's own), the column gaps between section
+  columns, panel and button side padding, and the footer's column gap are
+  each a `clamp()` of a `--hor-rhy-*` step between two `--spa-hor-*` steps.
+  The logos and the services header take `max()` of a rhythm-step floor and
+  a horizontal step, since their columns already cap them.
+- **Fixed (rem steps)**: everything inside a component: small gaps, card,
+  field, and tag padding, the heading rules, and the menu lines. The 3px
+  value markers stay literal, since no step lands within 10%.
+- **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as
+  reese-roofing, also on trial.
+- **Hero ring**: follows the logo at a fixed offset (`--log-rin-off`), the
+  way reese-roofing's oval follows its logo, so it never falls behind a
+  growing logo.
+- **Breakpoints**: 1,024, 900, 768, 580, and 520px, measured against the
+  `app` container on AppRooCom's root element; the 480px query, which
+  repeated the 900px one, was dropped.
 
 ## Directory structure
 Decided 2026-10-08, matching reese-roofing's adaptation of the user-level
@@ -47,7 +56,8 @@ app with tabs.
 ```
 src/
   main.tsx               entry point
-  app.tsx                root component (the routes join it in step 7)
+  app.tsx                root component and the app container (the routes
+                         join it in step 7)
   assets/                images used by 2 or more pages (logo-simple.png)
   pages/
     home/                the home page, its sections, and logo-full.png
@@ -107,8 +117,8 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
    with font sizes, line heights, letter spacing, spacing, borders, and
    heights on their nearest steps and the ledes capped at Lato's measured
    68-character width); durations and easing; elevation shadows; and every
-   class and keyframe renamed to the three-segment rule. Still to come: the
-   horizontal layout decision above.
+   class and keyframe renamed to the three-segment rule. The horizontal
+   layout above followed the same day.
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
 
