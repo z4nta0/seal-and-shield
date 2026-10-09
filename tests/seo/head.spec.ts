@@ -247,7 +247,17 @@ test( 'every icon the head links to is served at its size', async ( { page : cur
 
 
 
-		if ( icoSizStr === 'any' ) { expect( icoBufObj.readUInt16LE( 2 ) ).toBe( 1 ); continue; } // What: ICO Header Guard. Why: favicon.ico isn't a PNG and has no single size. How: This checks its header marks it an icon file and moves on.
+		if ( icoSizStr === 'any' ) { // What: ICO Header Guard. Why: favicon.ico isn't a PNG and has no single size. How: This checks its header marks it an icon file and moves on.
+
+
+			expect( icoBufObj.readUInt16LE( 2 ) ).toBe( 1 ); // What: ICO Type Assertion. Why: The file has to be a real icon file. How: This checks its header's type field reads 1.
+
+
+
+			continue; // What: ICO Skip. Why: The PNG size check below doesn't apply to it. How: This moves on to the next icon.
+
+
+		}
 
 
 

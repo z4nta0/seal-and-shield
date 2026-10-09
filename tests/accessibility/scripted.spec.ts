@@ -200,17 +200,17 @@ type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges
  * stoInfFun = Stop Information Function
  *
  * @summary
- * Runs inside the page after each Tab press and describes the focused stop,
- * or returns null once focus has left the page: onto the body, to nothing,
- * or out of the document entirely. (Firefox does none of these after its
- * last stop; keyProFun catches it there instead, when focus stays on the
- * same stop.) The focus indicator is judged by blurring the
- * stop for a moment and comparing the styles a focus indicator usually
- * changes (outline, shadow, border, background, color, and underline), then
- * focusing it again so the walk continues from it. Coverage is judged by
- * asking which element sits at the stop's center: anything other than the
- * stop or one of its own descendants means the stop is hidden behind it.
- * Passed to Playwright's evaluate, so it can't read anything from this file.
+ * Runs inside the page after each Tab press and describes the focused stop, or
+ * returns null once focus has left the page: onto the body, to nothing, or out
+ * of the document entirely. (Firefox does none of these after its last stop;
+ * keyProFun catches it there instead, when focus stays on the same stop.) The
+ * focus indicator is judged by blurring the stop for a moment and comparing
+ * the styles a focus indicator usually changes (outline, shadow, border,
+ * background, color, and underline), then focusing it again so the walk
+ * continues from it. Coverage is judged by asking which element sits at the
+ * stop's center: anything other than the stop or one of its own descendants
+ * means the stop is hidden behind it. Passed to Playwright's evaluate, so it
+ * can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

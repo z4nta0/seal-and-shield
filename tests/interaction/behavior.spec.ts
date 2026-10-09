@@ -43,7 +43,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
 // #region Constants
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
-const PHO_VIE_OBJ = { height : 844, width : 390 };  // What: Phone Viewport Object. Why: The mobile menu exists only on small screens. How: This is the phone size the menu checks use.
+const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The mobile menu exists only on small screens. How: This is the phone size the menu checks use.
 
 // #endregion Constants
 
