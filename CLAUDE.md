@@ -13,9 +13,12 @@ rule it gets the local SEO treatment (`LocalBusiness` structured data as
 `RoofingContractor`, one consistent name, address, and phone, and the city in
 the title, description, and headings where it reads naturally), not the demo
 treatment. The `author` meta names the business itself.
-- **The name isn't consistent yet**: the source uses both "Seal and Shield
-  LLC" and "Seal & Shield". Which one is canonical is settled with the user
-  during the SEO pass, then used everywhere.
+- **The business name is "Seal and Shield"** (decided 2026-10-08), spelled
+  the same way everywhere: never "Seal & Shield". "LLC" is added only where
+  the legal name fits, such as the footer's copyright line and the odd
+  sentence of copy. The source still mixes both spellings; it's brought in
+  line once the test suites exist (after step 4), so the change is checked
+  like any other copy change.
 - **Off-site work for the user** (the Google Business Profile, directory
   listings, reviews) is listed here once the SEO pass reaches it.
 
