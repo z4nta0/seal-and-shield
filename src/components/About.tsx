@@ -90,7 +90,7 @@ export default function About() {
                 <div key={v.title} className="about__value fade-up" style={{ transitionDelay: `${i * 80}ms` }}>
                   <div className="about__value-marker" aria-hidden="true" />
                   <div>
-                    <h4 className="about__value-title">{v.title}</h4>
+                    <h3 className="about__value-title">{v.title}</h3>
                     <p className="about__value-desc">{v.desc}</p>
                   </div>
                 </div>
