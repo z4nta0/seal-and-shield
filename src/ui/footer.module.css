@@ -7,7 +7,7 @@
  * @summary
  * Styles for SitFooCom: the dark footer's row of columns (the brand and
  * tagline, the section buttons, and the phone number and hours), which
- * stacks into one left-aligned column on screens 768px wide or narrower,
+ * stacks into one centered column on screens 768px wide or narrower,
  * and the copyright line below a hairline. The shared container styles the
  * columns' row used to borrow from the global stylesheet are copied onto its
  * own class here, which also retires the !important its vertical padding
@@ -50,10 +50,10 @@
 @container app ( max-width : 768px ) { /* What: Narrow Footer Inner Div. Why: The columns don't fit side by side on narrow screens. How: This applies 768px wide and below. */
 
 
-	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The columns read best one above another on a narrow screen. How: This stacks them on the left with a smaller gap. */
+	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The columns read best one above another on a narrow screen. How: This stacks them down the center with a smaller gap. */
 
 
-		align-items    : flex-start;
+		align-items    : center;
 		flex-direction : column;
 		gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 
@@ -175,13 +175,13 @@
 
 
 }
-@container app ( max-width : 768px ) { /* What: Narrow Footer Contact Div. Why: Once the columns stack, everything lines up on the left. How: This applies 768px wide and below. */
+@container app ( max-width : 768px ) { /* What: Narrow Footer Contact Div. Why: Once the columns stack, everything centers. How: This applies 768px wide and below. */
 
 
-	.fooConDiv { /* What: Left-Aligned Footer Contact Div. Why: The stacked columns share one left edge. How: This left-aligns the phone number and hours. */
+	.fooConDiv { /* What: Centered Footer Contact Div. Why: The stacked columns share one center line. How: This centers the phone number and hours. */
 
 
-		text-align : left;
+		text-align : center;
 
 
 	}
