@@ -121,6 +121,13 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
    layout above followed the same day.
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
+   - **404 links into sections** (asked for 2026-10-09): the 404 page links
+     back with `/#contact` and the like, per the user-level rule, but the
+     site scrolls to sections in JavaScript and keeps the URL free of
+     hashes. So when the home page loads with a hash, it scrolls to that
+     section once React has rendered it, then clears the hash with
+     `history.replaceState`, so the URL ends up as clean as everywhere
+     else.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
@@ -168,9 +175,12 @@ waiting for the page to settle.
   hero's, contact section's, and footer's gradients (the headline and its
   accents, the stats, the bar's brand and links, the contact details, and
   the footer's links and phone) has to be checked by eye.
-- **WAVE still reports errors** (2026-10-08): the user ran WebAIM's WAVE
-  checker after the accessibility pass and it found errors axe doesn't
-  report. They're handled later, with the user.
+- **WAVE reports** (2026-10-09): the hidden Netlify form's fields now carry
+  aria-labels, and the body is dark so the transparent bar's text no longer
+  measures against white. WAVE's remaining contrast flags on the About and
+  Contact text are false positives: those blocks sit at opacity 0 until the
+  scroll reveal reaches them, and WAVE counts opacity. Scroll to the bottom
+  of the page before running WAVE so every block has faded in.
 
 ## Accessibility pass
 Done 2026-10-08, before the directory move, so steps 5 and 6 run against a
