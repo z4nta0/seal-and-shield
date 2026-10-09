@@ -75,6 +75,7 @@ export default function Navbar() {
         <button
           className={`navbar__hamburger ${menuOpen ? 'open' : ''}`}
           onClick={() => setMenuOpen(o => !o)}
+          aria-expanded={menuOpen}
           aria-label="Toggle menu"
         >
           <span /><span /><span />
@@ -82,7 +83,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`navbar__mobile ${menuOpen ? 'navbar__mobile--open' : ''}`}>
+      <div className={`navbar__mobile ${menuOpen ? 'navbar__mobile--open' : ''}`} inert={!menuOpen}>
         {NAV_LINKS.map(link => (
           <a
             key={link.label}
