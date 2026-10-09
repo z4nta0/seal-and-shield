@@ -41,7 +41,8 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
 
 // #region Constants
 
-const MAX_DIF_NUM = 0; // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it once hid the nav links moving. How: This fails a comparison on any differing pixel.
+const MAX_DIF_NUM = 0; // What: Maximum Difference Number. Why: Each engine renders a state identically from run to run on the machine that captured its baseline, and even a small tolerance can hide a real change, as it once hid the nav links moving. How: This fails a comparison when even one pixel differs, with PIX_THR_NUM deciding what counts as differing.
+const PIX_THR_NUM = 0; // What: Pixel Threshold Number. Why: Playwright otherwise treats a pixel whose color moved by less than 0.2 of its color space as unchanged, which let a contrast fix's slightly darker text pass as identical. How: This counts any change to a pixel's color at all as a difference.
 
 // #endregion Constants
 
@@ -60,7 +61,7 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every pa
 		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
 
 
-		await expect( curPagObj ).toHaveScreenshot( `${ staRcdObj.ideStr }.png`, { animations : 'disabled', fullPage : true, mask : [ curPagObj.getByRole( 'contentinfo' ).getByText( /©/ ) ], maxDiffPixelRatio : MAX_DIF_NUM } ); // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline.
+		await expect( curPagObj ).toHaveScreenshot( `${ staRcdObj.ideStr }.png`, { animations : 'disabled', fullPage : true, mask : [ curPagObj.getByRole( 'contentinfo' ).getByText( /©/ ) ], maxDiffPixelRatio : MAX_DIF_NUM, threshold : PIX_THR_NUM } ); // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline pixel for pixel, color for color.
 
 
 	} );
