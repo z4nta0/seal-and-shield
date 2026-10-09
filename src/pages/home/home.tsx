@@ -7,8 +7,10 @@ import About    from './about.tsx';        // What: About. Why: The page tells t
 import Contact  from './contact.tsx';      // What: Contact. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
 import Footer   from '../../ui/footer.tsx'; // What: Footer. Why: Every page ends with the shared footer. How: This is rendered below main.
 import Home     from './hero.tsx';         // What: Home. Why: The page opens with the headline and pitch. How: This hero section is rendered first inside main.
-import Navbar   from '../../ui/nav.tsx';    // What: Navbar. Why: Every page starts with the shared top bar. How: This is rendered above main.
 import Services from './services.tsx';     // What: Services. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
+
+
+import { NavBarCom } from '../../ui/nav.tsx'; // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
 
 // #endregion Imports
 
@@ -41,7 +43,7 @@ import Services from './services.tsx';     // What: Services. Why: The page list
  * HomPagCom = Home Page Component
  *
  * @summary
- * Renders the whole home page: Navbar, a main element holding the hero,
+ * Renders the whole home page: NavBarCom, a main element holding the hero,
  * services, about, and contact sections in the order a visitor reads them,
  * and Footer. Each section's id is the target of the bar's and footer's
  * section links.
@@ -68,7 +70,7 @@ function HomPagCom () : React.JSX.Element {
 		<>{ /* What: Home Page Fragment. Why: The bar, main content, and footer sit side by side with no wrapper of their own. How: This groups them without adding an element. */ }
 
 
-			<Navbar />{ /* What: Navbar. Why: The page starts with the shared top bar. How: This renders it above the content. */ }
+			<NavBarCom />{ /* What: Navigation Bar Component. Why: The page starts with the shared top bar. How: This renders it above the content. */ }
 
 
 
