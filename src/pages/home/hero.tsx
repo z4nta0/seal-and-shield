@@ -170,13 +170,22 @@ function HerSecCom () : React.JSX.Element {
 				<div>{ /* What: Hero Left Div Element. Why: The pitch reads first. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, with no styling of its own. */ }
 
 
-					<p className={ cssModObj.eyeLabPar }>Commercial Roofing Specialists</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short line says what the company is before the headline. How: This sits above the headline in small capitals. */ }
+					<h1>{ /* What: Hero Title Heading Element. Why: The page's main heading should carry what the company does and where, the words local searches look for, as well as its promise. How: This holds the two-line eyebrow and the slogan, each styled as its own block, so the heading reads as one while looking as it always has. */ }
 
-					<h1 className={ cssModObj.herTitHea }>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading and the company's promise. How: Its two accent words take the light blue. */ }
-						Built to<br />
-						<span className={ cssModObj.titAccSpa }>Seal.</span>{ /* What: Seal Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
-						Built to<br />
-						<span className={ cssModObj.titAccSpa }>Shield.</span>{ /* What: Shield Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
+
+						<span className={ cssModObj.eyeLabSpa }>{ /* What: Eyebrow Label Span Element. Why: A short label says what the company is and where before the slogan. How: This sets the specialty and the city on two lines in small capitals. */ }
+							Commercial Roofing Specialists<br />
+							Lawrence, KS
+						</span>
+
+						<span className={ cssModObj.herSloSpa }>{ /* What: Hero Slogan Span Element. Why: The slogan is the company's promise, set large. How: Its two accent words take the light blue. */ }
+							Built to<br />
+							<span className={ cssModObj.titAccSpa }>Seal.</span>{ /* What: Seal Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
+							Built to<br />
+							<span className={ cssModObj.titAccSpa }>Shield.</span>{ /* What: Shield Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
+						</span>
+
+
 					</h1>
 
 					<p className={ cssModObj.herLedPar }>{ /* What: Hero Lede Paragraph Element. Why: A short pitch follows the headline. How: This names the company's range of work and its promise. */ }

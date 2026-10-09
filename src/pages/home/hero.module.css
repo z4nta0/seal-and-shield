@@ -100,11 +100,12 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short line says what the company is before the headline. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A short label says what the company is and where, at the start of the page's heading. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
 
 
 	animation      : blockEnterFadeIn var( --dur-ani-p06 ) var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */
 	color          : var( --acc-lig-col );                                            /* Accent Light Color ~= #4488f6 */
+	display        : block;
 	font-family    : var( --fon-fam-sec );                                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
@@ -114,10 +115,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Eyebrow Label Paragraph. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Eyebrow Label Span. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.eyeLabPar { /* What: Motionless Eyebrow Label Paragraph. Why: The eyebrow should simply be there. How: This turns the entrance animation off. */
+	.eyeLabSpa { /* What: Motionless Eyebrow Label Span. Why: The eyebrow should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -154,11 +155,12 @@
 
 /* #region home__headline */
 
-.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's main heading and the company's promise. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
+.herSloSpa { /* What: Hero Slogan Span. Why: The slogan is the company's promise, the large part of the page's heading. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
 
 
 	animation      : blockEnterFadeIn var( --dur-ani-p06 ) 0.1s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
 	color          : var( --bac-pag-col );                                                 /* Background Page Color = #ffffff */
+	display        : block;
 	font-family    : var( --fon-fam-sec );                                                 /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : clamp( var( --fon-siz-p06 ), 7vw, var( --fon-siz-p08 ) );             /* Font Size Base Plus 6 ~= 59.447px, Font Size Base Plus 8 ~= 104.323px */
 	font-weight    : 800;
@@ -169,10 +171,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Title Heading. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Slogan Span. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herTitHea { /* What: Motionless Hero Title Heading. Why: The headline should simply be there. How: This turns the entrance animation off. */
+	.herSloSpa { /* What: Motionless Hero Slogan Span. Why: The slogan should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;

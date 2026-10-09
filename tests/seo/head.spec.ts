@@ -73,6 +73,8 @@ test( 'the home page names the city, the services, and the business', async ( { 
 
 	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 ); // What: Single Heading Assertion. Why: One h1 tells search engines and screen readers what the page is about. How: This checks there's exactly one.
 
+	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toContainText( 'Lawrence, KS' ); // What: Heading City Assertion. Why: Search engines weigh the main heading's words, and local searches look for the city. How: This checks the h1 names it.
+
 
 } );
 

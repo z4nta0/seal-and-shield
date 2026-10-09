@@ -30,9 +30,10 @@ treatment. The `author` meta names the business itself.
   Seal and Shield") and description name the services and the city, the head
   carries the author, canonical, and theme color tags and RoofingContractor
   structured data matching the page's phone, city, weekday hours, and five
-  service areas, and robots.txt and sitemap.xml are in `public/`. The headings
-  were left as written; working the city into one (the hero's eyebrow, say)
-  is a copy change for the user to decide.
+  service areas, and robots.txt and sitemap.xml are in `public/`. At the
+  user's choice, the hero's h1 now holds the eyebrow, with "Lawrence, KS" on
+  its own second line, as well as the slogan, so the page's main heading
+  names the specialty and the city while looking as it did.
 - **Social accounts**: none were provided, so no `twitter:site` or `sameAs`
   links. The user is asking the company; add any real ones when they arrive.
 - **Off-site work for the user**, which helps local search more than
