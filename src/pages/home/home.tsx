@@ -3,10 +3,8 @@
 
 // #region Imports
 
-import Contact from './contact.tsx'; // What: Contact. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
-
-
 import { AboSecCom } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
+import { ConSecCom } from './contact.tsx';       // What: Contact Section Component. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
 import { HerSecCom } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
 import { NavBarCom } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
 import { SerSecCom } from './services.tsx';      // What: Services Section Component. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
@@ -89,7 +87,7 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-				<Contact />{ /* What: Contact. Why: The page ends where visitors reach the company. How: This renders the contact section last. */ }
+				<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach the company. How: This renders the contact section last. */ }
 
 
 			</main>
