@@ -57,16 +57,13 @@ suites").
   (`pages/home/home.tsx`), the same as reese-roofing.
 - **The bar and footer live in `ui/`** as `nav.tsx` and `footer.tsx`, since
   the 404 page will use them too.
-- **Component names were left alone in the move**: the hero section's file
-  is `hero.tsx` but its component is still `Home`, and the others keep
-  `Navbar`, `Footer`, `Services`, `About`, and `Contact` until step 6's
-  naming pass. Only the new `HomPagCom` (the page that composes them) and
-  the rewritten `AppRooCom` follow the naming rules already.
+- **Component names** follow the naming rules since the formatting pass:
+  `NavBarCom`, `SitFooCom`, `HerSecCom`, `SerSecCom`, `AboSecCom`,
+  `ConSecCom`, `HomPagCom`, and `AppRooCom`.
 - **Stylesheet order**: `main.tsx` imports `styles/styles.css` after the app,
-  so the global sheet still loads after every component's CSS, as it did
-  before the move. The component files now load in `home.tsx`'s
-  alphabetical import order; no class is styled in two component files, so
-  that order doesn't decide any rule.
+  so the global sheet loads after every component's module. Since the module
+  pass, every class is scoped to its own module, so no rule depends on that
+  order.
 
 ## Cleanup plan
 Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
@@ -87,9 +84,18 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
    on every TypeScript and HTML file, root config files included, was done
    2026-10-08 (one file per commit, every suite passing with identical
    screenshots), along with the business name fix, the em dash copy cleanup,
-   self-hosted fonts, and resized logos. Still to come: moving JavaScript
-   lookups off class names onto data-* hooks, the CSS module pass (which
-   also formats every stylesheet), and the design-token pass.
+   self-hosted fonts, and resized logos. The hook and CSS module passes were
+   done 2026-10-09: the scroll reveal finds its blocks by the
+   data-scroll-reveal-block role attribute and marks them with
+   data-scroll-reveal-shown (both styled in styles.css's Body State region),
+   every component's styles live in its own formatted .module.css with
+   class names kept verbatim, state classes became attributes
+   (data-page-scroll-active, data-section-link-active,
+   data-mobile-menu-open, and the menu button's aria-expanded), and the
+   shared container, section label, section title, and divider classes were
+   copied into each module that used them. Still to come: the design-token
+   pass, which renames the classes, custom properties, and keyframes and
+   fits every value to the scale.
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
 

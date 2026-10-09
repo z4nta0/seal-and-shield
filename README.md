@@ -53,9 +53,9 @@ npm run preview
 src/
 ├── assets/            Images and fonts shared by 2+ pages (logo-simple.png, fonts/)
 ├── pages/
-│   └── home/          Home page and its sections (hero, services, about, contact), each with its own .css, plus logo-full.png
-├── ui/                Shared components (nav, footer), each with its own .css
-├── styles/            fonts.css (@font-face) + styles.css (design tokens and base element styles)
+│   └── home/          Home page and its sections (hero, services, about, contact), each with its own .module.css, plus reveal.ts and logo-full.png
+├── ui/                Shared components (nav, footer), each with its own .module.css
+├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, and the shared scroll-reveal attributes)
 ├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling)
 ├── app.tsx            Root component
 └── main.tsx           Entry point
