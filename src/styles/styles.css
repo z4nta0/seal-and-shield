@@ -1,104 +1,192 @@
-/* ── Design Tokens ── */
-:root {
-  --navy:       #0f1e45;
-  --navy-dark:  #080f24;
-  --navy-mid:   #1a2f5e;
-  --blue:       #1e56c8;
-  --blue-light: #4488f6;
-  --silver:     #8a9ab5;
-  --silver-light: #c8d0e0;
-  --white:      #ffffff;
-  --off-white:  #f4f6fa;
-  --text-body:  #2d3a52;
-  --text-muted: #616e88;
 
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-body:    'Lato', sans-serif;
 
-  --section-pad: 6rem 2rem;
-  --max-w: 1180px;
-  --radius: 4px;
 
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/**
+ * styles.css = Global Styles
+ *
+ * @summary
+ * The site's one global stylesheet, holding only what can't belong to a
+ * single component: the design tokens every module reads, the reset and base
+ * element styles every page relies on, and the scroll-reveal attributes the
+ * services, about, and contact sections share. Every component's own styles
+ * are in its CSS module, and each transition and animation turns itself off
+ * for reduced motion there; only the page's smooth scrolling and the scroll
+ * reveal are handled here. The tokens keep their original names and values
+ * until the design-token pass renames them and fits them to the scale.
+ *
+ * Sections:
+ *  - Tokens
+ *  - Base Elements
+ *  - Body State
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region Tokens */
+
+:root { /* What: Root Tokens. Why: Every module reads the site's colors, fonts, layout width, and motion from one place. How: This defines them as custom properties on the root element, grouped into sections. */
+
+
+	/* #region Color Tokens */
+
+	--blue         : #1e56c8; /* What: Blue = #1e56c8. Why: Buttons, rules, and labels on light sections need the brand's strong blue. How: Modules read it for fills, borders, and accents. */
+	--blue-light   : #4488f6; /* What: Blue Light = #4488f6. Why: Accents on dark sections need a lighter blue that stays readable. How: Modules read it for links, labels, and highlights on navy, where it clears 4.7:1. */
+	--navy         : #0f1e45; /* What: Navy = #0f1e45. Why: Headings on light sections and the darker panels share the brand's navy. How: Modules read it for heading text and panel fills. */
+	--navy-dark    : #080f24; /* What: Navy Dark = #080f24. Why: The bar, hero, contact section, and footer sit on the darkest navy. How: Modules read it for those bands' backgrounds. */
+	--off-white    : #f4f6fa; /* What: Off White = #f4f6fa. Why: The services band and form fields need a light tint apart from pure white. How: Modules read it for those backgrounds. */
+	--silver       : #8a9ab5; /* What: Silver = #8a9ab5. Why: Quiet labels and captions on dark bands need a soft gray-blue. How: Modules read it for that small secondary text. */
+	--silver-light : #c8d0e0; /* What: Silver Light = #c8d0e0. Why: Body text and links on dark bands need a light gray-blue, and light borders a pale one. How: Modules read it for that text and those borders. */
+	--text-body    : #2d3a52; /* What: Text Body = #2d3a52. Why: The page's default text color should be a dark slate rather than pure black. How: The body sets it, and every element inherits it unless a module overrides it. */
+	--text-muted   : #616e88; /* What: Text Muted = #616e88. Why: Secondary text on light sections should step back without failing contrast. How: Modules read it for descriptions, labels, and notes, where it clears 4.7:1 on the off-white. */
+	--white        : #ffffff; /* What: White = #ffffff. Why: White text on dark bands and white surfaces share one value. How: Modules read it for that text and those fills. */
+
+	/* #endregion Color Tokens */
+
+
+
+	/* #region Font Family Tokens */
+
+	--font-body    : 'Lato', sans-serif;             /* What: Font Body. Why: Paragraphs and form fields read in one clean sans serif. How: This names Lato, self-hosted in fonts.css, falling back to the system sans serif. */
+	--font-display : 'Barlow Condensed', sans-serif; /* What: Font Display. Why: Headings, labels, buttons, and figures share a condensed display face. How: This names Barlow Condensed, self-hosted in fonts.css, falling back to the system sans serif. */
+
+	/* #endregion Font Family Tokens */
+
+
+
+	/* #region Layout Tokens */
+
+	--max-w : 1180px; /* What: Max Width = 1180px. Why: Content should stop widening on large screens. How: Every section's container caps its width with it. */
+
+	/* #endregion Layout Tokens */
+
+
+
+	/* #region Motion Tokens */
+
+	--transition : 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* What: Transition = 0.3s with a standard ease. Why: Hovers and state changes across the site should move at one shared pace. How: Modules pass it as each transition's duration and easing. */
+
+	/* #endregion Motion Tokens */
+
+
 }
 
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* #endregion Tokens */
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
+
+
+/* #region Base Elements */
+
+*,
+*::before,
+*::after { /* What: Universal Reset. Why: Every element should size by its border box and start without the browser's margins and padding. How: This applies to every element and its pseudo-elements. */
+
+
+	box-sizing : border-box;
+	margin     : 0;
+	padding    : 0;
+
+
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+html { /* What: HTML. Why: The root font size sets what a rem means, and in-page links should glide to their sections. How: This fixes the root at 16px and turns on smooth scrolling. */
+
+
+	font-size       : 16px;
+	scroll-behavior : smooth;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion HTML. Why: Someone who asked for less motion shouldn't see the page glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	html { /* What: Instant Scrolling HTML. Why: In-page links should jump straight to their sections. How: This turns smooth scrolling off. */
+
+
+		scroll-behavior : auto;
+
+
+	}
+
+
 }
 
-body {
-  font-family: var(--font-body);
-  color: var(--text-body);
-  background: var(--white);
-  -webkit-font-smoothing: antialiased;
+body { /* What: Body. Why: The page's default text sets the tone everything else inherits. How: This sets the body font, the default text color, a white page, and smooth font rendering. */
+
+
+	-webkit-font-smoothing : antialiased;
+	background             : var(--white);
+	color                  : var(--text-body);
+	font-family            : var(--font-body);
+
+
 }
 
-img { display: block; max-width: 100%; }
+img { /* What: Image. Why: Images shouldn't leave inline gaps or overflow their containers. How: This makes them blocks capped at their container's width. */
 
-a { text-decoration: none; color: inherit; }
 
-ul { list-style: none; }
+	display   : block;
+	max-width : 100%;
 
-/* ── Utility ── */
-.container {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 2rem;
+
 }
 
-.section-label {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--blue-light);
+a { /* What: Anchor. Why: Links should look like their surroundings until a module styles them. How: This drops the underline and inherits the text color. */
+
+
+	color           : inherit;
+	text-decoration : none;
+
+
 }
 
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  line-height: 1.05;
-  color: var(--navy);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+ul { /* What: Unordered List. Why: Lists should start without bullets until a module styles them. How: This clears the list style. */
+
+
+	list-style : none;
+
+
 }
 
-.section-title.light {
-  color: var(--white);
+/* #endregion Base Elements */
+
+
+
+/* #region Body State */
+
+[data-scroll-reveal-block] { /* What: Scroll Reveal Block. Why: The services, about, and contact sections fade their blocks in as they scroll into view, a role shared across three modules. How: This starts every block marked by the reveal hook transparent and 32px low, ready to ease into place. */
+
+
+	opacity    : 0;
+	transform  : translateY(32px);
+	transition : opacity 0.7s ease, transform 0.7s ease;
+
+
+}
+[data-scroll-reveal-block][data-scroll-reveal-shown] { /* What: Shown Scroll Reveal Block. Why: A block the reveal hook has reached should be fully in place. How: This brings it to full opacity at its own position once the hook sets data-scroll-reveal-shown. */
+
+
+	opacity   : 1;
+	transform : translateY(0);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Scroll Reveal Block. Why: Someone who asked for less motion shouldn't see blocks slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	[data-scroll-reveal-block] { /* What: Motionless Scroll Reveal Block. Why: A block should simply appear when the hook reaches it. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
 }
 
-.divider {
-  width: 3rem;
-  height: 3px;
-  background: var(--blue);
-  margin: 1rem 0 1.5rem;
-}
+/* #endregion Body State */
 
-.divider.center {
-  margin: 1rem auto 1.5rem;
-}
 
-/* ── Scroll animation ── */
-[data-scroll-reveal-block] {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-scroll-reveal-block] { transition: none; }
-}
-[data-scroll-reveal-block][data-scroll-reveal-shown] {
-  opacity: 1;
-  transform: translateY(0);
-}
