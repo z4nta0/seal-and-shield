@@ -21,10 +21,33 @@ treatment. The `author` meta names the business itself.
   brand name and copyright line, the About story's founding sentence, and
   the full logo's alt text (the image itself reads "LLC"); the bar's and
   footer's small logos have empty alt text, since the brand name sits right
-  beside them. `index.html`'s title and description are rewritten in the SEO
-  pass.
-- **Off-site work for the user** (the Google Business Profile, directory
-  listings, reviews) is listed here once the SEO pass reaches it.
+  beside them.
+- **No street address** (decided 2026-10-09): the company has no business
+  address, only the owner's home, which stays off the site. The page shows
+  Lawrence, Kansas, and the structured data gives only the city, region, and
+  country to match.
+- **SEO done 2026-10-09**: the title ("Commercial Roofing in Lawrence, KS |
+  Seal and Shield") and description name the services and the city, the head
+  carries the author, canonical, and theme color tags and RoofingContractor
+  structured data matching the page's phone, city, weekday hours, and five
+  service areas, and robots.txt and sitemap.xml are in `public/`. The headings
+  were left as written; working the city into one (the hero's eyebrow, say)
+  is a copy change for the user to decide.
+- **Social accounts**: none were provided, so no `twitter:site` or `sameAs`
+  links. The user is asking the company; add any real ones when they arrive.
+- **Off-site work for the user**, which helps local search more than
+  anything on the page:
+  - **Google Business Profile**: set it up as a service-area business with
+    the address hidden and Lawrence, Topeka, the Kansas City metro, and
+    Kansas as service areas; use the same name ("Seal and Shield"), phone,
+    hours, and website address as the site.
+  - **Google Search Console and Bing Webmaster Tools**: verify the domain and
+    submit https://sealandshieldroof.com/sitemap.xml.
+  - **Directory listings**: Apple Business Connect, Bing Places, Yelp, the
+    BBB, Angi, Nextdoor, the Lawrence Chamber of Commerce, and Conklin's
+    contractor locator, each with the identical name, phone, and city.
+  - **Reviews**: ask finished-job customers for Google reviews; the site
+    shows none and claims none in its structured data.
 
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
@@ -130,7 +153,9 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      and its own title and noindex tag. Every section link works from it
      through `ui/section-link.ts`, and the home page scrolls to a hash it
      arrives with and then clears it, as asked for the same day.
-   - Still to come: SEO, social previews, and interaction feedback.
+   - **Security headers, WebP logos, and SEO: done 2026-10-09**, as recorded
+     under "Kind of site" and "Known issues".
+   - Still to come: social previews and interaction feedback.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
@@ -171,8 +196,11 @@ waiting for the page to settle.
   menu at 19 widths from 320 to 1,920px (a pixel either side of each breakpoint
   included), failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, or two reachable controls overlapping.
-- `npm test` runs every suite. reese-roofing's seo suite joins with the SEO
-  pass.
+- `npm run test:seo`: checks each route's title, description, author,
+  canonical, robots, and single h1; that the structured data's every claim
+  appears on the page; and that robots.txt and the sitemap say what they
+  should. The social preview tags join it with the social previews.
+- `npm test` runs every suite.
 
 ## Known issues
 - **Test the contact form after the last deploy** (reminder for the user,
@@ -225,9 +253,14 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
   at 3x zoom) and the simple mark lossless (21 KB, down from 24 KB), since
   lossy WebP showed on its fine detail and Chromium's lossless encoder made
   the full logo larger than its PNG.
-- **No security headers yet**: `public/_headers` doesn't exist. Step 7
-  raises with the user whether to add ease-my-life's hardening headers
-  (Content-Security-Policy, HSTS, and the rest), adjusted for whatever this
-  site loads from other origins and for its Netlify Forms POST.
+- **Security headers** (added 2026-10-09 at the user's go-ahead):
+  `public/_headers` sends a strict Content-Security-Policy (only the site's
+  own files and form post, no inline styles), HSTS without preload, and the
+  usual hardening headers. Netlify applies it only once deployed, so it was
+  checked by serving the production build with the headers attached in the
+  browser: no violations in any engine while every page, font, image, the
+  menu, and the form worked. After the deploy, securityheaders.com should
+  grade the live site. Anything later added from another origin (analytics,
+  a map, an embedded review widget) needs its origin added to the policy.
 - **Netlify builds with Node 24.x**, set in the site's Netlify settings
   rather than in the repo.
