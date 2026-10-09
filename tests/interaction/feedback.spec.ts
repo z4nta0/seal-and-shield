@@ -26,7 +26,7 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * and transition its focus ring's outline, and the first keyboard stop has to
  * draw that ring at full width once it has eased in. Under reduced motion
  * every control keeps its hover change but transitions nothing. Real clicks
- * are blocked during the checks, so pressing a link or the menu's rows
+ * are blocked during the checks, so pressing a link or the menu's links
  * never navigates or closes anything mid-check.
  *
  * Sections:
@@ -50,57 +50,6 @@ const SET_WAI_NUM = 400; // What: Settle Wait Number. Why: Each look is read onc
 
 // #region Helpers
 
-// #region sigEleFun
-
-/**
- * sigEleFun = Signature Element Function
- *
- * @summary
- * Runs inside the page and describes how a control looks right now, as one
- * string of the styles feedback usually changes (color, background, border
- * color, transform, and opacity) for the control and every element inside
- * it, so a change to its arrow or its label counts as the control's own.
- * Passed to Playwright's evaluate, so it can't read anything from this file.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param eleCurEle - Element Current Element: The control to describe.
- *
- * @returns The control's look, as one string to compare.
- *
- * @example
- * ```ts
- * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),none,1,...|...'
- * ```
- *
-*/
-
-function sigEleFun ( eleCurEle : Element ) : string {
-
-
-	const sigStyFun = ( sigCurEle : Element ) => { // What: Signature Style Function. Why: Each element's look is read the same way. How: This joins one element's feedback styles into one string.
-
-
-		const styCurObj = getComputedStyle( sigCurEle ); // What: Style Current Object. Why: The element's styles are read as they're drawn now. How: This reads its computed styles.
-
-
-
-		return [ styCurObj.color, styCurObj.backgroundColor, styCurObj.borderColor, styCurObj.transform, styCurObj.opacity ].join( ',' ); // What: Element Signature Return. Why: One element's look compares as one string. How: This joins its feedback styles.
-
-
-	};
-
-
-
-	return [ eleCurEle, ...eleCurEle.querySelectorAll( '*' ) ].map( sigStyFun ).join( '|' ); // What: Signature Return. Why: Two looks compare as one string. How: This joins the signatures of the control and everything inside it.
-
-
-}
-
-// #endregion sigEleFun
-
-
-
 // #region cliBloFun
 
 /**
@@ -108,8 +57,8 @@ function sigEleFun ( eleCurEle : Element ) : string {
  *
  * @summary
  * Runs inside the page and cancels every click before anything handles it,
- * so pressing a control during a check never follows a link, opens a mail
- * app, or closes the menu. It listens on the document in the capture
+ * so pressing a control during a check never follows a link, starts a phone
+ * call, or closes the menu. It listens on the document in the capture
  * phase, ahead of React's own listener on the app's root, and both prevents
  * the click's default and stops it from going any further. Passed to
  * Playwright's evaluate, so it can't read anything from this file.
@@ -154,9 +103,10 @@ function cliBloFun () : void {
  *
  * @summary
  * Collects every control a visitor can reach on the page as it stands: each
- * link and button that's visible, not taken out of the tab order with
- * tabindex -1, and not inside inert content (the closed mobile menu). Handles are taken once, so restyling while the
- * checks scroll (the nav bar's scrolled look) can't shift the list.
+ * link and button that's visible, not taken out of the tab order with tabindex
+ * -1, and not inside inert content (the closed mobile menu). Handles are taken
+ * once, so restyling while the checks scroll (the nav bar's scrolled look)
+ * can't shift the list.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -192,12 +142,63 @@ async function conLisFun ( curPagObj : Page ) : Promise< ElementHandle< Element 
 
 
 
-	return conHanArr;
+	return conHanArr; // What: Control Handle Return. Why: The checks probe each control in turn. How: This hands back every reachable control's handle.
 
 
 }
 
 // #endregion conLisFun
+
+
+
+// #region sigEleFun
+
+/**
+ * sigEleFun = Signature Element Function
+ *
+ * @summary
+ * Runs inside the page and describes how a control looks right now, as one
+ * string of the styles feedback usually changes (color, background, border
+ * color, transform, and opacity) for the control and every element inside
+ * it, so a change to its icon lines or its label counts as the control's own.
+ * Passed to Playwright's evaluate, so it can't read anything from this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param eleCurEle - Element Current Element: The control to describe.
+ *
+ * @returns The control's look, as one string to compare.
+ *
+ * @example
+ * ```ts
+ * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),none,1,...|...'
+ * ```
+ *
+*/
+
+function sigEleFun ( eleCurEle : Element ) : string {
+
+
+	const sigStyFun = ( sigCurEle : Element ) => { // What: Signature Style Function. Why: Each element's look is read the same way. How: This joins one element's feedback styles into one string.
+
+
+		const styCurObj = getComputedStyle( sigCurEle ); // What: Style Current Object. Why: The element's styles are read as they're drawn now. How: This reads its computed styles.
+
+
+
+		return [ styCurObj.color, styCurObj.backgroundColor, styCurObj.borderColor, styCurObj.transform, styCurObj.opacity ].join( ',' ); // What: Element Signature Return. Why: One element's look compares as one string. How: This joins its feedback styles.
+
+
+	};
+
+
+
+	return [ eleCurEle, ...eleCurEle.querySelectorAll( '*' ) ].map( sigStyFun ).join( '|' ); // What: Signature Return. Why: Two looks compare as one string. How: This joins the signatures of the control and everything inside it.
+
+
+}
+
+// #endregion sigEleFun
 
 
 
@@ -294,7 +295,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 
-	return proLisArr;
+	return proLisArr; // What: Problem List Return. Why: The test prints whatever was found. How: This hands back every problem collected.
 
 
 }

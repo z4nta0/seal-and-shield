@@ -58,11 +58,11 @@ src/
 │   ├── home/          Home page and its sections (hero, services, about, contact), each with its own .module.css, plus reveal.ts and logo-full.webp
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
 ├── ui/                Shared components (nav, footer), each with its own .module.css, and section-link.ts (section links that work from any page)
-├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, and the shared scroll-reveal attributes)
-├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling)
-├── app.tsx            Root component and the route table
+├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, the shared focus ring, and the shared scroll-reveal attributes)
+├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling and the scroll reveal)
+├── app.tsx            Root component and the route table, with app.module.css (the app container)
 └── main.tsx           Entry point
-public/                Files served at fixed addresses: the favicon and Netlify's _redirects
+public/                Files served at fixed addresses: the icons, the social card, robots.txt, sitemap.xml, and Netlify's _headers and _redirects
 tests/
 ├── accessibility/     axe-core scan and scripted checks
 ├── interaction/       behavior checks for links, the menu, the form, and the 404 page, plus hover, press, and focus feedback

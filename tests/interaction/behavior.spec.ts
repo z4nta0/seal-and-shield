@@ -51,130 +51,6 @@ const PHO_VIE_OBJ = { height : 844, width : 390 };  // What: Phone Viewport Obje
 
 // #region Helpers
 
-// #region opeRouFun
-
-/**
- * opeRouFun = Open Route Function
- *
- * @summary
- * Opens one route at one viewport size, ready to be used: it turns on
- * reduced motion so in-page scrolling jumps rather than glides, sizes the
- * viewport, loads the path, and waits for the web fonts, so positions read
- * afterwards are final.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param curPagObj - Current Page Object: The page to open the route on.
- * @param patStr    - Path String: The route to load.
- * @param vieSizObj - Viewport Size Object: {@link DES_VIE_OBJ} or
- *                    {@link PHO_VIE_OBJ}.
- *
- * @returns This function does not return anything.
- *
- * @example
- * ```ts
- * opeRouFun(page, '/', DES_VIE_OBJ) // => void
- * ```
- *
-*/
-
-async function opeRouFun ( curPagObj : Page, patStr : string, vieSizObj : { height : number, width : number } ) : Promise< void > {
-
-
-	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Scrolling should land at once, so its target can be read right away. How: This makes the page match prefers-reduced-motion, which turns smooth scrolling off.
-
-	await curPagObj.setViewportSize( vieSizObj ); // What: Viewport Size Call. Why: The bar's links and the menu depend on the width. How: This sizes the page before it loads.
-
-	await curPagObj.goto( patStr ); // What: Route Load Call. Why: Each check starts from a fresh load. How: This opens the path on the suite's dev server.
-
-	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Positions measured before the fonts load would shift. How: This waits until every font face has loaded.
-
-
-}
-
-// #endregion opeRouFun
-
-
-
-// #region secTopFun
-
-/**
- * secTopFun = Section Top Function
- *
- * @summary
- * Reads how far an element's top edge sits below the top of the viewport,
- * in pixels, so a check can tell whether a link scrolled its section to the
- * top of the screen. Zero means the section starts right at the top. An
- * element that isn't on the page yet reads as infinitely far away, so a
- * polling check keeps waiting for it rather than failing outright.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param curPagObj - Current Page Object: The page to measure.
- * @param ideStr    - Identifier String: The id of the element to measure.
- *
- * @returns The element's top edge, in pixels from the viewport's top.
- *
- * @example
- * ```ts
- * secTopFun(page, 'services') // => 0
- * ```
- *
-*/
-
-async function secTopFun ( curPagObj : Page, ideStr : string ) : Promise< number > {
-
-
-	return curPagObj.evaluate( ( secIdeStr ) => document.getElementById( secIdeStr )?.getBoundingClientRect().top ?? Infinity, ideStr ); // What: Section Top Return. Why: A check compares where the section landed with the top of the screen. How: This reads the element's top edge inside the page, or Infinity while it isn't there yet.
-
-
-}
-
-// #endregion secTopFun
-
-
-
-// #region arrSecFun
-
-/**
- * arrSecFun = Arrival Section Function
- *
- * @summary
- * Waits until the visitor has landed on a home page section: the address is
- * the bare root, with no hash left in it, and the section's top edge sits
- * within a pixel of the top of the screen. Both are polled, since a link
- * from another page renders the home page and scrolls a moment after the
- * click.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param curPagObj - Current Page Object: The page to check.
- * @param ideStr    - Identifier String: The id of the section the visitor
- *                    should land on.
- *
- * @returns This function does not return anything.
- *
- * @example
- * ```ts
- * arrSecFun(page, 'contact') // => void
- * ```
- *
-*/
-
-async function arrSecFun ( curPagObj : Page, ideStr : string ) : Promise< void > {
-
-
-	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ ); // What: Clean Address Assertion. Why: Section links keep the address free of hashes, even when they come from another page. How: This waits until the URL is the bare root.
-
-	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, ideStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section they chose. How: This waits until its top edge sits within a pixel of the viewport's top.
-
-
-}
-
-// #endregion arrSecFun
-
-
-
 // #region fakNetFun
 
 /**
@@ -225,12 +101,137 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 
 
-	return posCouObj;
+	return posCouObj; // What: Post Count Return. Why: Each test checks how many requests went out. How: This hands back the counter the route handler updates.
 
 
 }
 
 // #endregion fakNetFun
+
+
+
+// #region opeRouFun
+
+/**
+ * opeRouFun = Open Route Function
+ *
+ * @summary
+ * Opens one route at one viewport size, ready to be used: it turns on
+ * reduced motion so in-page scrolling jumps rather than glides, sizes the
+ * viewport, loads the path, and waits for the web fonts, so positions read
+ * afterwards are final.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to open the route on.
+ * @param rouPatStr - Route Path String: The route to load.
+ * @param vieSizObj - Viewport Size Object: {@link DES_VIE_OBJ} or
+ *                    {@link PHO_VIE_OBJ}.
+ *
+ * @returns This function does not return anything.
+ *
+ * @example
+ * ```ts
+ * opeRouFun(page, '/', DES_VIE_OBJ) // => void
+ * ```
+ *
+*/
+
+async function opeRouFun ( curPagObj : Page, rouPatStr : string, vieSizObj : { height : number, width : number } ) : Promise< void > {
+
+
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Scrolling should land at once, so its target can be read right away. How: This makes the page match prefers-reduced-motion, which turns smooth scrolling off.
+
+	await curPagObj.setViewportSize( vieSizObj ); // What: Viewport Size Call. Why: The bar's links and the menu depend on the width. How: This sizes the page before it loads.
+
+	await curPagObj.goto( rouPatStr ); // What: Route Load Call. Why: Each check starts from a fresh load. How: This opens the path on the suite's dev server.
+
+	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Positions measured before the fonts load would shift. How: This waits until every font face has loaded.
+
+
+}
+
+// #endregion opeRouFun
+
+
+
+// #region secTopFun
+
+/**
+ * secTopFun = Section Top Function
+ *
+ * @summary
+ * Reads how far an element's top edge sits below the top of the viewport,
+ * in pixels, so a check can tell whether a link scrolled its section to the
+ * top of the screen. Zero means the section starts right at the top. An
+ * element that isn't on the page yet reads as infinitely far away, so a
+ * polling check keeps waiting for it rather than failing outright.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to measure.
+ * @param secIdeStr - Section Identifier String: The id of the element to
+ *                    measure.
+ *
+ * @returns The element's top edge, in pixels from the viewport's top.
+ *
+ * @example
+ * ```ts
+ * secTopFun(page, 'services') // => 0
+ * ```
+ *
+*/
+
+async function secTopFun ( curPagObj : Page, secIdeStr : string ) : Promise< number > {
+
+
+	return curPagObj.evaluate( ( tarIdeStr ) => document.getElementById( tarIdeStr )?.getBoundingClientRect().top ?? Infinity, secIdeStr ); // What: Section Top Return. Why: A check compares where the section landed with the top of the screen. How: This reads the element's top edge inside the page, or Infinity while it isn't there yet.
+
+
+}
+
+// #endregion secTopFun
+
+
+
+// #region arrSecFun
+
+/**
+ * arrSecFun = Arrival Section Function
+ *
+ * @summary
+ * Waits until the visitor has landed on a home page section: the address is
+ * the bare root, with no hash left in it, and the section's top edge sits
+ * within a pixel of the top of the screen. Both are polled, since a link
+ * from another page renders the home page and scrolls a moment after the
+ * click.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to check.
+ * @param secIdeStr - Section Identifier String: The id of the section the
+ *                    visitor should land on.
+ *
+ * @returns This function does not return anything.
+ *
+ * @example
+ * ```ts
+ * arrSecFun(page, 'contact') // => void
+ * ```
+ *
+*/
+
+async function arrSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< void > {
+
+
+	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ ); // What: Clean Address Assertion. Why: Section links keep the address free of hashes, even when they come from another page. How: This waits until the URL is the bare root.
+
+	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section they chose. How: This waits until its top edge sits within a pixel of the viewport's top.
+
+
+}
+
+// #endregion arrSecFun
 
 // #endregion Helpers
 
@@ -240,18 +241,18 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 // #region Home Page Navigation Checks
 
-for ( const [ labStr, ideStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
+for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
 
 
-	test( `the ${ labStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the address and the section's position.
+	test( `the ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the address and the section's position.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
 
-		await curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { exact : true, name : labStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
+		await curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
 
-		await arrSecFun( curPagObj, ideStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+		await arrSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 
 
 	} );
@@ -457,26 +458,26 @@ test( 'Return Home leads to the home page', async ( { page : curPagObj } ) => { 
 
 
 
-for ( const [ labStr, ideStr, locKeyStr ] of [ [ 'Get a Free Quote', 'contact', 'main' ], [ 'About', 'about', 'bar' ], [ 'Services', 'services', 'footer' ] ] ) { // What: Way Home Loop. Why: The 404 page's own quote button, the bar's links, and the footer's buttons all have to reach their home page sections from it. How: This declares one test per kind of control, naming where to find it.
+for ( const [ conLabStr, secIdeStr, locKeyStr ] of [ [ 'Get a Free Quote', 'contact', 'main' ], [ 'About', 'about', 'bar' ], [ 'Services', 'services', 'footer' ] ] ) { // What: Way Home Loop. Why: The 404 page's own quote button, the bar's links, and the footer's buttons all have to reach their home page sections from it. How: This declares one test per kind of control, naming where to find it.
 
 
-	test( `the 404 page's ${ locKeyStr } ${ labStr } control leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Test. Why: A section control on the 404 page has no section to scroll to, so it has to go home first. How: This clicks it and checks where the visitor lands.
+	test( `the 404 page's ${ locKeyStr } ${ conLabStr } control leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Test. Why: A section control on the 404 page has no section to scroll to, so it has to go home first. How: This clicks it and checks where the visitor lands.
 
 
 		await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: These controls are checked from the 404 page. How: This opens it.
 
 
 		const conLocObj = locKeyStr === 'main' // What: Control Locator Object. Why: Each kind of control lives in a different part of the page. How: This finds the quote link in the page's content, the link in the bar, or the button in the footer.
-			? curPagObj.getByRole( 'main' ).getByRole( 'link', { name : labStr } )                                   // What: Quote Link Locator. Why: The page's own button is in its main content. How: This finds it by its label.
+			? curPagObj.getByRole( 'main' ).getByRole( 'link', { name : conLabStr } )                                   // What: Quote Link Locator. Why: The page's own button is in its main content. How: This finds it by its label.
 			: locKeyStr === 'bar'                                                                                    // What: Bar Check. Why: The bar and the footer hold different kinds of controls. How: This picks the bar's link next.
-				? curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { name : labStr } )      // What: Bar Link Locator. Why: The bar's section links are links. How: This finds one by its label.
-				: curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'button', { name : labStr } ); // What: Footer Button Locator. Why: The footer's section controls are buttons. How: This finds one by its label.
+				? curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { name : conLabStr } )      // What: Bar Link Locator. Why: The bar's section links are links. How: This finds one by its label.
+				: curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'button', { name : conLabStr } ); // What: Footer Button Locator. Why: The footer's section controls are buttons. How: This finds one by its label.
 
 
 		await conLocObj.click(); // What: Control Click Call. Why: This is the action under test. How: This clicks the control.
 
 
-		await arrSecFun( curPagObj, ideStr ); // What: Section Arrival Check. Why: The visitor should land on the home page's section with a clean address. How: This waits for both.
+		await arrSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the home page's section with a clean address. How: This waits for both.
 
 
 	} );

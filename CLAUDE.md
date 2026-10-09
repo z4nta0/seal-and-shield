@@ -230,7 +230,7 @@ waiting for the page to settle.
   --update-snapshots` and commit the baselines with it. Baselines are
   captured on Linux.
 - `npm run test:responsive`: measures the home page, the 404 page, and the open
-  menu at 19 widths from 320 to 1,920px (a pixel either side of each breakpoint
+  menu at 18 widths from 320 to 1,920px (a pixel either side of each breakpoint
   included), failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, or two reachable controls overlapping.
 - `npm run test:seo`: checks each route's title, description, author,

@@ -94,8 +94,8 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 		languageOptions : { // What: Language Options. Why: These files are TypeScript with JSX. How: This sets the TypeScript parser and turns on JSX parsing.
 
 
-			parser        : tseslint.parser,                   // What: Parser. Why: ESLint's default parser can't read TypeScript. How: This sets typescript-eslint's parser.
-			parserOptions : { ecmaFeatures : { jsx : true } }, // What: Parser Options. Why: These files contain JSX. How: This turns on JSX parsing.
+			parser        : tseslint.parser,                  // What: Parser. Why: ESLint's default parser can't read TypeScript. How: This sets typescript-eslint's parser.
+			parserOptions : { ecmaFeatures : { jsx : true } } // What: Parser Options. Why: These files contain JSX. How: This turns on JSX parsing.
 
 
 		},

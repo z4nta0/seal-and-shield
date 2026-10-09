@@ -13,14 +13,15 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * states.ts = States
  *
  * @summary
- * The page states the accessibility and rendering suites visit, and the
- * helper that opens one; the responsive suite opens its own widths through
- * the same helper. A state is a page at a width, sometimes with something
- * opened on it: the home page and the 404 page at phone and desktop
- * widths, and the mobile menu open on a phone. opeStaFun sizes the viewport, loads the page, waits
- * for the fonts, scrolls through the page so its scroll-triggered content
- * fades in, runs the state's own action, such as opening the menu, and then
- * waits for the page to stay still so nothing is measured mid-fade.
+ * The page states the accessibility, interaction, and rendering suites visit,
+ * and the helper that opens one; the responsive suite opens its own widths
+ * through the same helper. A state is a page at a width, sometimes with
+ * something opened on it: the home page and the 404 page at phone and desktop
+ * widths, and the mobile menu open on a phone. opeStaFun sizes the viewport,
+ * loads the page, waits for the fonts, scrolls through the page so its
+ * scroll-triggered content fades in, runs the state's own action, such as
+ * opening the menu, and then waits for the page to stay still so nothing is
+ * measured mid-fade.
  *
  * Sections:
  *  - Types
@@ -62,8 +63,9 @@ type StaRcdTyp = { // What: State Record Type. Why: Every check reads the same d
  * @summary
  * Every state the checks visit: the home page and the 404 page each at a
  * phone width (390px) and a desktop width (1,440px), plus the mobile menu
- * open at the phone width, since the menu is only reachable there. Every row shares the
- * {@link StaRcdTyp} shape, so its fields carry no comments of their own:
+ * open at the phone width, since the menu is only reachable there. Every row
+ * shares the {@link StaRcdTyp} shape, so its fields carry no comments of their
+ * own:
  * - `actFun` (Function): Action Function, run after the page loads to open
  *   something on it, such as the menu. Only the menu row has one.
  * - `heiNum` (Number): Height Number, the viewport height in CSS pixels.
@@ -153,7 +155,7 @@ async function revPagFun ( curPagObj : Page ) : Promise< void > {
 
 			window.scrollTo( { behavior : 'instant', top : scrTopNum } ); // What: Scroll Step Call. Why: The next stretch of the page has to come into view. How: This jumps straight to the step's position, skipping any smooth scrolling.
 
-			await new Promise( ( resFun ) => setTimeout( resFun, 100 ) ); // What: Step Pause Wait. Why: A section's scroll observer reports on its own schedule, not the moment the page moves. How: This waits 100ms before the next step.
+			await new Promise( ( resProFun ) => setTimeout( resProFun, 100 ) ); // What: Step Pause Wait. Why: A section's scroll observer reports on its own schedule, not the moment the page moves. How: This waits 100ms before the next step.
 
 
 		}

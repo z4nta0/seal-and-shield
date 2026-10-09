@@ -115,12 +115,9 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The structured data lives on the home page. How: This loads the root path.
 
 
-	const ldjTexStr = await curPagObj.locator( 'script[type="application/ld+json"]' ).textContent() ?? '{}'; // What: Linked-Data-JSON Text String. Why: The structured data is read as written in the page. How: This reads the script's text, or an empty object if it's missing.
-
+	const ldjTexStr = await curPagObj.locator( 'script[type="application/ld+json"]' ).textContent() ?? '{}';                                                           // What: Linked-Data-JSON Text String. Why: The structured data is read as written in the page. How: This reads the script's text, or an empty object if it's missing.
 	const ldjDatObj = JSON.parse( ldjTexStr ); // What: Linked-Data-JSON Data Object. Why: Each field is checked on its own. How: This parses the text into an object.
-
-	const pagTexStr = await curPagObj.locator( 'body' ).textContent() ?? ''; // What: Page Text String. Why: Every claim has to appear on the page. How: This reads the page's text as written, before CSS uppercases any of it.
-
+	const pagTexStr = await curPagObj.locator( 'body' ).textContent() ?? '';                                                                                           // What: Page Text String. Why: Every claim has to appear on the page. How: This reads the page's text as written, before CSS uppercases any of it.
 	const telHreArr = await curPagObj.locator( 'a[href^="tel:"]' ).evaluateAll( ( ancEleArr ) => ancEleArr.map( ( ancCurEle ) => ancCurEle.getAttribute( 'href' ) ) ); // What: Telephone Href Array. Why: The structured data's phone has to be the number the page's call links dial. How: This collects every call link's address.
 
 
@@ -132,7 +129,10 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 
 	expect( telHreArr.length ).toBeGreaterThan( 0 ); // What: Call Link Presence Assertion. Why: A phone in the data is only honest if the page offers it. How: This checks the page has call links.
 
+
 	for ( const telHreStr of telHreArr ) expect( telHreStr?.replace( /\D/g, '' ) ).toBe( ldjDatObj.telephone.replace( /\D/g, '' ).replace( /^1/, '' ) ); // What: Phone Match Assertion. Why: Every call link and the data must dial the same number. How: This compares their digits, dropping the data's leading country code.
+
+
 
 	expect( pagTexStr ).toContain( '(785) 304-1957' ); // What: Phone Shown Assertion. Why: The number in the data has to be visible on the page. How: This checks the page shows it.
 
@@ -147,6 +147,7 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 	expect( pagTexStr ).toContain( 'Monday – Friday, 8 a.m. – 5 p.m.' ); // What: Hours Shown Assertion. Why: The hours in the data have to be visible on the page. How: This checks the page shows them.
 
 	expect( ldjDatObj.areaServed ).toHaveLength( 5 ); // What: Service Area Count Assertion. Why: The data should list exactly the service areas the page lists. How: This checks there are five.
+
 
 	for ( const areNamStr of [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of Kansas', 'Continental U.S.' ] ) expect( pagTexStr ).toContain( areNamStr ); // What: Service Areas Shown Assertion. Why: Each area in the data has to appear on the page. How: This checks every one of the Services section's area tags.
 
@@ -187,7 +188,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 	const socTagArr = await curPagObj.locator( 'meta[property^="og:"], meta[name^="twitter:"]' ).evaluateAll( ( tagEleArr ) => tagEleArr.map( ( tagCurEle ) => [ tagCurEle.getAttribute( 'property' ) || tagCurEle.getAttribute( 'name' ) || '', tagCurEle.getAttribute( 'content' ) || '' ] ) ); // What: Social Tag Array. Why: Every social tag is checked by its key and value. How: This reads each Open Graph and Twitter tag as a key and content pair.
-	const socTagObj = Object.fromEntries( socTagArr );                                                                                                                                                                                                                                                          // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
+	const socTagObj = Object.fromEntries( socTagArr ); // What: Social Tag Object. Why: Tags are easier to check by key. How: This turns the pairs into an object.
 
 
 	expect( Object.keys( socTagObj ) ).toEqual( expect.arrayContaining( SOC_KEY_ARR ) ); // What: Complete Tags Assertion. Why: A missing tag leaves part of the card blank. How: This checks every required key is present, allowing optional extras.
@@ -205,12 +206,11 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 
-test( 'the social preview image is a 1200x630 png under 300 KB', async ( { request : reqConObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card small enough for WhatsApp. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
+test( 'the social preview image is a 1,200x630 PNG under 300 KB', async ( { request : reqConObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card small enough for WhatsApp. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
 
 
 	const imaResObj = await reqConObj.get( '/og-image.png' ); // What: Image Response Object. Why: The image has to exist where the tags point. How: This fetches it from the site.
-
-	const pngBufObj = await imaResObj.body(); // What: PNG Buffer Object. Why: The image's size is written in its header. How: This reads the response bytes.
+	const pngBufObj = await imaResObj.body();                 // What: PNG Buffer Object. Why: The image's size is written in its header. How: This reads the response bytes.
 
 
 	expect( imaResObj.headers()[ 'content-type' ] ).toBe( 'image/png' ); // What: PNG Type Assertion. Why: The tags promise a PNG. How: This checks the served type.
@@ -235,15 +235,16 @@ test( 'every icon the head links to is served at its size', async ( { page : cur
 
 	expect( icoLinArr.length ).toBe( 6 ); // What: Icon Count Assertion. Why: The set is the ICO, four PNG sizes, and the Apple touch icon. How: This checks all six are linked.
 
+
 	for ( const [ icoHreStr, icoSizStr ] of icoLinArr ) { // What: Icon Check Loop. Why: Every linked icon has to be real. How: This fetches each one in turn.
 
 
 		const icoResObj = await reqConObj.get( icoHreStr ); // What: Icon Response Object. Why: The icon has to exist where its link points. How: This fetches it.
-
-		const icoBufObj = await icoResObj.body(); // What: Icon Buffer Object. Why: A PNG's size is written in its header. How: This reads the bytes.
+		const icoBufObj = await icoResObj.body();           // What: Icon Buffer Object. Why: A PNG's size is written in its header. How: This reads the bytes.
 
 
 		expect( icoResObj.ok() ).toBe( true ); // What: Icon Served Assertion. Why: A missing icon falls through to the app's HTML. How: This checks the file is served.
+
 
 
 		if ( icoSizStr === 'any' ) { expect( icoBufObj.readUInt16LE( 2 ) ).toBe( 1 ); continue; } // What: ICO Header Guard. Why: favicon.ico isn't a PNG and has no single size. How: This checks its header marks it an icon file and moves on.
@@ -268,8 +269,7 @@ test( 'robots.txt lets crawlers in and names the sitemap', async ( { request : r
 
 
 	const robResObj = await reqConObj.get( '/robots.txt' ); // What: Robots Response Object. Why: The file is read the way a crawler reads it. How: This fetches it from the site.
-
-	const robTexStr = await robResObj.text(); // What: Robots Text String. Why: The rules are checked as written. How: This reads the response body.
+	const robTexStr = await robResObj.text();               // What: Robots Text String. Why: The rules are checked as written. How: This reads the response body.
 
 
 	expect( robResObj.ok() ).toBe( true ); // What: Robots Served Assertion. Why: A missing robots.txt would fall through to the app. How: This checks the file is served.
@@ -289,8 +289,7 @@ test( 'the sitemap lists the home page alone', async ( { request : reqConObj } )
 
 
 	const sitResObj = await reqConObj.get( '/sitemap.xml' ); // What: Sitemap Response Object. Why: The file is read the way a crawler reads it. How: This fetches it from the site.
-
-	const sitTexStr = await sitResObj.text(); // What: Sitemap Text String. Why: Its entries are checked as written. How: This reads the response body.
+	const sitTexStr = await sitResObj.text();                // What: Sitemap Text String. Why: Its entries are checked as written. How: This reads the response body.
 
 
 	expect( sitResObj.ok() ).toBe( true ); // What: Sitemap Served Assertion. Why: A missing sitemap would fall through to the app. How: This checks the file is served.

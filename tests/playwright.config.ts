@@ -37,11 +37,6 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
 
 // #region Constants
 
-const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: The dev server must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
-const SER_URL_STR = 'http://localhost:5191';                           // What: Server URL String. Why: Every suite opens the site from the same dev server. How: This is the address Playwright waits on and every page's baseURL.
-
-
-
 const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all three engines. How: Each entry is a Playwright browser name, crossed with each suite into one project apiece. // What: Type Assertion Note. Why: Each name has to type as one of Playwright's browser names, not a plain string. How: The closing as const keeps each entry's literal type for the projects' browserName.
 
 
@@ -51,6 +46,11 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 
 ] as const;
+
+
+
+const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: The dev server must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
+const SER_URL_STR = 'http://localhost:5191';                           // What: Server URL String. Why: Every suite opens the site from the same dev server. How: This is the address Playwright waits on and every page's baseURL.
 
 
 
