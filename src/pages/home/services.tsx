@@ -237,17 +237,21 @@ function SerSecCom () : React.JSX.Element {
 						<div
 							key={ serRcdObj.titStr }
 
-							className={ cssModObj.serCarDiv }
-
 							data-scroll-reveal-block
-						>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, and fades in in turn. */ }
+						>{ /* What: Card Reveal Div Element. Why: Each card fades in in turn, but the reveal's own transition and transform would override the card's hover lift and shadow. How: This grid cell carries the reveal hook around the card instead of on it. */ }
 
 
-							<span className={ cssModObj.carIcoSpa }>{ serRcdObj.icoStr }</span>{ /* What: Card Icon Span Element. Why: An icon helps a visitor scan the grid. How: This shows the service's emoji. */ }
+							<div className={ cssModObj.serCarDiv }>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, filling its grid cell. */ }
 
-							<h3 className={ cssModObj.carTitHea }>{ serRcdObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This is the card's h3. */ }
 
-							<p className={ cssModObj.carDesPar }>{ serRcdObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Visitors want to know what the service involves. How: This describes it. */ }
+								<span className={ cssModObj.carIcoSpa }>{ serRcdObj.icoStr }</span>{ /* What: Card Icon Span Element. Why: An icon helps a visitor scan the grid. How: This shows the service's emoji. */ }
+
+								<h3 className={ cssModObj.carTitHea }>{ serRcdObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This is the card's h3. */ }
+
+								<p className={ cssModObj.carDesPar }>{ serRcdObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Visitors want to know what the service involves. How: This describes it. */ }
+
+
+							</div>
 
 
 						</div>

@@ -357,15 +357,19 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-					<a
-						className={ cssModObj.conPhoAnc }
+					<div data-scroll-reveal-block>{ /* What: Phone Reveal Div Element. Why: The call button fades in with the column, but the reveal's own transition and transform would override the button's hover and press feedback. How: This carries the reveal hook around the button instead of on it. */ }
 
-						data-scroll-reveal-block
 
-						href='tel:7853041957'
-					>{ /* What: Contact Phone Anchor Element. Why: Calling is the fastest way to get a quote. How: This dials the number on phones, styled as a button. */ }
-						Call Now: (785) 304-1957
-					</a>
+						<a
+							className={ cssModObj.conPhoAnc }
+
+							href='tel:7853041957'
+						>{ /* What: Contact Phone Anchor Element. Why: Calling is the fastest way to get a quote. How: This dials the number on phones, styled as a button. */ }
+							Call Now: (785) 304-1957
+						</a>
+
+
+					</div>
 
 
 				</div>

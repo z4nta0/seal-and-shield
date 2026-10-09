@@ -164,23 +164,24 @@
 
 /* #region serCarDiv */
 
-.serCarDiv { /* What: Services Card Div. Why: Each service reads as its own white card. How: This draws a white card with a light border and a blue top edge, and eases its lift on hover. */
+.serCarDiv { /* What: Services Card Div. Why: Each service reads as its own white card. How: This draws a white card with a light border and a blue top edge, filling its grid cell, and eases its lift on hover. */
 
 
 	background : var( --bac-pag-col );                                                                                      /* Background Page Color = #ffffff */
 	border     : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                           /* Border Width Base ~= 1.160px, Border Main Color = #c8d0e0 */
 	border-top : var( --bor-wid-xla ) solid var( --acc-mai-col );                                                           /* Border Width Extra Large ~= 3.572px, Accent Main Color = #1e56c8 */
+	height     : 100%; /* What: Full Cell Height. Why: Cards in a row should match in height now that each sits inside its own reveal cell. How: This fills the cell the grid stretches to the row's tallest card. */
 	padding    : var( --spa-ver-p03 ) var( --spa-hor-p02 );                                                                 /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	position   : relative;
 	transition : box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }
-.serCarDiv:hover { /* What: Hovered Services Card Div. Why: The card under the pointer should come forward. How: This lifts it 4px and casts a soft navy shadow. */
+.serCarDiv:hover { /* What: Hovered Services Card Div. Why: The card under the pointer should come forward. How: This lifts it 3px, the most the interaction rule allows, and casts a soft navy shadow. */
 
 
 	box-shadow : var( --ele-med-sha ); /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
-	transform  : translateY( -4px );
+	transform  : translateY( -3px );
 
 
 }
