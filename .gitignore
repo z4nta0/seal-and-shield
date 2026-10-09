@@ -6,6 +6,7 @@
 *.sln
 *.suo
 *.sw?
+*:Zone.Identifier
 .DS_Store
 .idea
 .vscode/*
