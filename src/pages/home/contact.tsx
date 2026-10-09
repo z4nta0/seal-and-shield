@@ -323,10 +323,8 @@ function ConSecCom () : React.JSX.Element {
 							data-netlify='true'
 							name='contactForm'
 
-							noValidate
-
 							onSubmit={ forSubFun }
-						>{ /* What: Contact Form Element. Why: Visitors request a free quote here. How: Its name, contactForm, matches the hidden copy Netlify reads, and forSubFun sends it. */ }
+						>{ /* What: Contact Form Element. Why: Visitors request a free quote here. How: Its name, contactForm, matches the hidden copy Netlify reads, the browser checks the required fields before submitting, and forSubFun sends it. */ }
 
 
 							<h3 className='contact__form-title'>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
