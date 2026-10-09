@@ -281,7 +281,11 @@ function ConSecCom () : React.JSX.Element {
 						<div className={ cssModObj.detRowDiv }>{ /* What: Location Detail Div Element. Why: A local business should say where it is. How: This pairs a pin icon with the town. */ }
 
 
-							<span className={ cssModObj.detIcoSpa }>📍</span>{ /* What: Location Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a pin. */ }
+							<span
+								className={ cssModObj.detIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Location Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a pin, hidden from screen readers since the label beside it already says what the row is. */ }📍</span>
 
 							<div>{ /* What: Location Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
@@ -300,7 +304,11 @@ function ConSecCom () : React.JSX.Element {
 						<div className={ cssModObj.detRowDiv }>{ /* What: Phone Detail Div Element. Why: The phone number is the quickest way in. How: This pairs a phone icon with a dialing link. */ }
 
 
-							<span className={ cssModObj.detIcoSpa }>📞</span>{ /* What: Phone Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a phone. */ }
+							<span
+								className={ cssModObj.detIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Phone Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a phone, hidden from screen readers since the label beside it already says what the row is. */ }📞</span>
 
 							<div>{ /* What: Phone Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
@@ -325,7 +333,11 @@ function ConSecCom () : React.JSX.Element {
 						<div className={ cssModObj.detRowDiv }>{ /* What: Hours Detail Div Element. Why: Callers should know when someone will answer. How: This pairs a clock icon with the hours. */ }
 
 
-							<span className={ cssModObj.detIcoSpa }>🕐</span>{ /* What: Hours Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a clock. */ }
+							<span
+								className={ cssModObj.detIcoSpa }
+
+								aria-hidden='true'
+							>{ /* What: Hours Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a clock, hidden from screen readers since the label beside it already says what the row is. */ }🕐</span>
 
 							<div>{ /* What: Hours Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 

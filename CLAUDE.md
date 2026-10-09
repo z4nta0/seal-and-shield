@@ -184,7 +184,11 @@ waiting for the page to settle.
   flags sat on the contact details' emoji icons, which inherited the body's
   dark slate text color; emoji draw in their own colors, so it never showed,
   but checkers measured it against the navy. The icon span now carries the
-  section's light text color instead.
+  section's light text color instead. Those icons are also hidden from screen
+  readers, since the label beside each says what the row is. WAVE's five
+  "redundant link" alerts on the phone numbers (the bar, About, Contact
+  twice, and the footer) are kept on purpose: the check only compares
+  addresses, and each number sits where a visitor may want to call.
 
 ## Accessibility pass
 Done 2026-10-08, before the directory move, so steps 5 and 6 run against a
