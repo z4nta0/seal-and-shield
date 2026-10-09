@@ -299,6 +299,7 @@
 
 	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                     /* What: Container Maximum Width. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: Every section's container, the bar, and the footer cap their width at a 1,920px viewport divided by the core design number, about 1,449.4px, the same cap as reese-roofing, so below that width only the gutter limits it. */
 	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) ); /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen within sensible bounds. How: Every container, the bar, the menu, and the footer pad their sides with horizontal step 016, held between the p01 and p04 horizontal spacing steps, about 19.304px to 44.876px, the same gutter as reese-roofing. */
+	--nav-bar-hei : calc( var( --spa-ver-p01 ) * 2 + var( --ver-rhy-p04 ) * 1rem );            /* What: Navigation Bar Height. Why: The fixed bar sits over the top of every page, so content that starts below it has to clear its height. How: This adds the bar's top and bottom padding to its logo's height, about 83.484px, the bar's height at the top of the page. */
 
 	/* #endregion Layout Tokens */
 
