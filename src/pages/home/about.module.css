@@ -61,11 +61,11 @@
 @container app ( max-width : 900px ) { /* What: Narrow About Layout Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
 
 
-	.aboLayDiv { /* What: Stacked About Layout Div. Why: The details and story read best one above the other. How: This collapses to one column with a smaller gap. */
+	.aboLayDiv { /* What: Stacked About Layout Div. Why: The details and story read best one above the other. How: This collapses to one column, with a row gap that clears the logo's panel. */
 
 
 		grid-template-columns : 1fr;
-		row-gap               : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+		row-gap               : calc( var( --spa-ver-p04 ) + var( --spa-ver-p03 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Panel-Cleared Row Gap. Why: The logo's light panel reaches below its column, and the heading under it still needs the full gap. How: This adds the panel's own reach to the stacked gap. */
 
 
 	}
@@ -102,11 +102,11 @@
 
 }
 
-.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond its top and sides, in the off-white behind everything else. */
+.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, in the off-white behind everything else. */
 
 
 	background : var( --bac-sur-col );              /* Background Surface Color = #f4f6fa */
-	bottom     : 0;
+	bottom     : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
 	left       : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 	position   : absolute;
 	right      : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
