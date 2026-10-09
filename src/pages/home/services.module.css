@@ -179,7 +179,7 @@
 .services__card:hover { /* What: Hovered Services Card Div. Why: The card under the pointer should come forward. How: This lifts it 4px and casts a soft navy shadow. */
 
 
-	box-shadow : 0 12px 40px oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-008-rec ) ); /* Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	box-shadow : var( --ele-med-sha ); /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
 	transform  : translateY( -4px );
 
 

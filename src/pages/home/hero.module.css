@@ -471,7 +471,7 @@
 .home__logo { /* What: Hero Logo Image. Why: The full logo anchors the hero and should float above its glow. How: This sizes it with the screen between 280px and 420px wide, casts a soft blue shadow under it, and layers it above the ring. */
 
 
-	filter   : drop-shadow( 0 20px 60px oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+	filter   : drop-shadow( 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ); /* Vertical Rhythm Base Plus 1 ~= 19.304px, Vertical Rhythm Base Plus 5 ~= 59.447px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	position : relative;
 	width    : clamp( 280px, 38vw, 420px );
 	z-index  : 1;
@@ -505,7 +505,7 @@
 .home__stats { /* What: Hero Stats Div. Why: Four quick figures close the hero on a band of their own. How: This draws a faintly frosted strip along the hero's bottom with a hairline on top, layered above the background. */
 
 
-	backdrop-filter : blur( 8px );
+	backdrop-filter : blur( calc( var( --ver-rhy-m02 ) * 1rem ) );                                                    /* Vertical Rhythm Base Minus 2 ~= 8.304px */
 	background      : oklch( from var( --bac-pag-col ) l c h / 0.04 );                                                /* Background Page Color = #ffffff @ 0.04 opacity */
 	border-top      : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-009-rec ) ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff, Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
 	position        : relative;

@@ -119,7 +119,7 @@
 .about__logo { /* What: About Logo Image. Why: The full logo anchors the left column and should lift off its panel. How: This sizes it to 260px wide, casts a soft navy shadow under it, and layers it above the panel. */
 
 
-	filter   : drop-shadow( 0 12px 40px oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
+	filter   : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 4 ~= 44.876px, Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	position : relative;
 	width    : 260px;
 	z-index  : 1;
