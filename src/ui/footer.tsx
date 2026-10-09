@@ -18,9 +18,9 @@ import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Func
  *
  * @summary
  * The site's footer: the brand and tagline, a button for each section that
- * takes the visitor to it from any page, the phone number and business hours, and the copyright
- * line with the current year. Its nav landmark is labelled Footer, telling
- * it apart from the bar's.
+ * takes the visitor to it from any page, the phone number and business
+ * hours, and the copyright line with the current year. Its nav landmark is
+ * labelled Footer, telling it apart from the bar's.
  *
  * Sections:
  *  - Constants
@@ -52,8 +52,8 @@ const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer 
  * Renders the footer. Each section button reaches its section through
  * section-link.ts, scrolling in place on the home page, smoothly unless the
  * visitor asked for reduced motion, or navigating home from any other page,
- * and is labelled with the section's id capitalized. The copyright line reads the current year each
- * time the footer renders, so it never goes stale.
+ * and is labelled with the section's id capitalized. The copyright line reads
+ * the current year each time the footer renders, so it never goes stale.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -75,7 +75,7 @@ function SitFooCom () : React.JSX.Element {
 
 
 
-	const goSecFun = useSecLinFun(); // What: Go Section Function. Why: Each section button takes the visitor to its section from any page. How: This scrolls to the section on the home page, or navigates home to it from anywhere else.
+	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: Each section button takes the visitor to its section from any page. How: This scrolls to the section on the home page, or navigates home to it from anywhere else.
 
 
 
@@ -115,7 +115,6 @@ function SitFooCom () : React.JSX.Element {
 				</div>
 
 
-
 				<nav
 					className={ cssModObj.fooLinNav }
 
@@ -131,8 +130,8 @@ function SitFooCom () : React.JSX.Element {
 
 							className={ cssModObj.fooLinBut }
 
-							onClick={ () => goSecFun( secIdeStr ) }
-						>{ /* What: Footer Link Button Element. Why: Each button scrolls to its section. How: This calls goSecFun with the section's id. */ }
+							onClick={ () => visSecFun( secIdeStr ) }
+						>{ /* What: Footer Link Button Element. Why: Each button scrolls to its section. How: This calls visSecFun with the section's id. */ }
 							{ secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) }{ /* What: Section Label Expression. Why: The button names its section. How: This capitalizes the section id's first letter. */ }
 						</button>
 
@@ -188,7 +187,7 @@ function SitFooCom () : React.JSX.Element {
 
 // #region Exports
 
-export { SitFooCom }; // What: Named Exports. Why: The home page renders the footer below its content. How: This exports SitFooCom.
+export { SitFooCom }; // What: Named Exports. Why: Every page renders the footer below its content. How: This exports SitFooCom.
 
 // #endregion Exports
 

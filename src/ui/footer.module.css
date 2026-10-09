@@ -24,7 +24,7 @@
 .sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the dark navy and draws a faint line along its top. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Section Focus Ring Color. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
 
 	background : var( --bac-inv-col );                                                       /* Background Inverse Color = #080f24 */
 	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */

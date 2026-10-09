@@ -72,7 +72,7 @@ function HomPagCom () : React.JSX.Element {
 
 	const { hash : hasValStr } = useLocation(); // What: Hash Value String. Why: A section link from another page arrives with its section's id as the hash. How: This reads the hash, e.g. #contact, or an empty string.
 
-	const navFunObj = useNavigate(); // What: Navigate Function Object. Why: The hash should be cleared once the page has used it. How: This is the router's navigate function.
+	const navRouFun = useNavigate(); // What: Navigate Router Function. Why: The hash should be cleared once the page has used it. How: This is the router's navigate function.
 
 
 	useEffect( () => { // What: Hash Arrival Effect. Why: A visitor arriving from a section link should land on that section, with no hash left in the address. How: This jumps to the section the hash names, then replaces the address with one without it.
@@ -84,10 +84,10 @@ function HomPagCom () : React.JSX.Element {
 
 		document.getElementById( hasValStr.slice( 1 ) )?.scrollIntoView( { behavior : 'instant' } ); // What: Arrival Scroll Call. Why: The visitor should land on the section, as a normal link arrival would. How: This jumps to the element the hash names, without the html element's smooth scrolling, since gliding down from the top of a freshly loaded page would be slow.
 
-		void navFunObj( { hash : '' }, { replace : true } ); // What: Hash Clear Call. Why: The address should stay as clean as it does for in-page links. How: This replaces the current history entry with the same path and no hash; void marks the returned promise as deliberately unawaited.
+		void navRouFun( { hash : '' }, { replace : true } ); // What: Hash Clear Call. Why: The address should stay as clean as it does for in-page links. How: This replaces the current history entry with the same path and no hash; void marks the returned promise as deliberately unawaited.
 
 
-	}, [ hasValStr, navFunObj ] ); // What: Effect Dependency Array. Why: Each new hash has to be handled once. How: hasValStr changes when a section link arrives, and navFunObj is listed because the effect calls it, though it stays the same between renders.
+	}, [ hasValStr, navRouFun ] ); // What: Effect Dependency Array. Why: Each new hash has to be handled once. How: hasValStr changes when a section link arrives, and navRouFun is listed because the effect calls it, though it stays the same between renders.
 
 
 

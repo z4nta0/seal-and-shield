@@ -69,7 +69,7 @@ function AppRooCom () : React.JSX.Element {
 		<div className={ cssModObj.appRooDiv }>{ /* What: App Root Div Element. Why: Every module's layout queries measure one shared container. How: This wraps the routes in the element named the app container. */ }
 
 
-			<Routes>{ /* What: Routes. Why: Only one page should render for any path. How: This renders the first route below whose path matches. */ }
+			<Routes>{ /* What: Page Routes. Why: Only one page should render for any path. How: This renders the first route below whose path matches. */ }
 
 
 				<Route

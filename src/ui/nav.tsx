@@ -7,10 +7,10 @@ import cssModObj from './nav.module.css';           // What: CSS Module Object. 
 import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The bar's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
-import { useEffect    } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position. How: This registers and removes the scroll listener.
-import { useLocation  } from 'react-router';       // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
-import { useSecLinFun } from './section-link.ts';  // What: Use Section Link Function. Why: Section links have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
-import { useState     } from 'react';              // What: Use State. Why: The bar tracks its scrolled look, the active section, and whether the menu is open. How: This holds each of the three.
+import { useEffect    } from 'react';             // What: Use Effect. Why: The bar listens to the page's scroll position. How: This registers and removes the scroll listener.
+import { useLocation  } from 'react-router';      // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
+import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Function. Why: Section links have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
+import { useState     } from 'react';             // What: Use State. Why: The bar tracks its scrolled look, the active section, and whether the menu is open. How: This holds each of the three.
 
 // #endregion Imports
 
@@ -89,13 +89,13 @@ const SEC_IDE_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Section
  * @summary
  * Renders the fixed top bar and its mobile menu. A scroll listener gives the
  * bar its solid scrolled look once the page moves more than 40px, and marks
- * the link of the section the visitor is reading as active on the home
- * page: the last section
- * whose top sits within 120px of the top of the screen, which leaves room
- * for the bar itself. The menu button toggles the mobile menu, which is
- * inert while closed, so its links stay out of the focus order and the
- * accessibility tree. Every section link, including the brand, goes through
- * navSecFun, which closes the menu and reaches the section from any page.
+ * the link of the section the visitor is reading as active on the home page:
+ * the last section whose top sits within 120px of the top of the screen, which
+ * leaves room for the bar itself. The menu button toggles the mobile menu,
+ * which is inert while closed, so its links stay out of the focus order and
+ * the accessibility tree. Every section link, including the brand, goes
+ * through navSecFun, which closes the menu and reaches the section from any
+ * page.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -198,7 +198,7 @@ function NavBarCom () : React.JSX.Element {
 
 	const [ menOpeBoo, setMenOpeBoo ] = useState( false ); // What: Menu Open Boolean And Setter. Why: The mobile menu opens and closes from its button. How: This holds whether it's open, starting closed.
 
-	const goSecFun = useSecLinFun(); // What: Go Section Function. Why: Each link has to reach its section from any page. How: This scrolls to the section on the home page, or navigates home to it from anywhere else.
+	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: Each link has to reach its section from any page. How: This scrolls to the section on the home page, or navigates home to it from anywhere else.
 
 
 	// #region navSecFun
@@ -209,7 +209,7 @@ function NavBarCom () : React.JSX.Element {
 	 * @summary
 	 * Handles a click on any section link, the brand included: stops the
 	 * browser's own navigation to the link's address, closes the mobile menu,
-	 * and hands the section's id to goSecFun, which scrolls to it on the home
+	 * and hands the section's id to visSecFun, which scrolls to it on the home
 	 * page, smoothly unless the visitor asked for reduced motion, or navigates
 	 * home to it from any other page.
 	 *
@@ -228,7 +228,7 @@ function NavBarCom () : React.JSX.Element {
 	 *
 	*/
 
-	const navSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Navigate Section Function. Why: Every section link reaches its section without a full page load or a hash left in the address. How: This cancels the link's own navigation, closes the menu, and hands the section to goSecFun.
+	const navSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Navigate Section Function. Why: Every section link reaches its section without a full page load or a hash left in the address. How: This cancels the link's own navigation, closes the menu, and hands the section to visSecFun.
 
 
 		cliEveObj.preventDefault(); // What: Default Navigation Cancel. Why: The browser would otherwise jump or reload and leave the hash in the address. How: This stops the link's own navigation.
@@ -236,7 +236,7 @@ function NavBarCom () : React.JSX.Element {
 		setMenOpeBoo( false ); // What: Menu Close Call. Why: The menu should get out of the way once a link is chosen. How: This closes it.
 
 
-		goSecFun( secIdeStr ); // What: Section Go Call. Why: The visitor should land on the section they chose. How: This scrolls to it, or navigates home to it from another page.
+		visSecFun( secIdeStr ); // What: Section Visit Call. Why: The visitor should land on the section they chose. How: This scrolls to it, or navigates home to it from another page.
 
 
 	};
@@ -279,7 +279,7 @@ function NavBarCom () : React.JSX.Element {
 						alt=''
 					/>{ /* What: Navigation Logo Image Element. Why: The bar's brand opens with the simple mark. How: Its alt text is empty, since the brand name sits right beside it. */ }
 
-					<span className={ cssModObj.braTexSpa }>{ /* What: Navigation Brand Span Element. Why: The name and its LLC stack as one block beside the mark. How: This holds the two lines. */ }
+					<span className={ cssModObj.braTexSpa }>{ /* What: Brand Text Span Element. Why: The name and its LLC stack as one block beside the mark. How: This holds the two lines. */ }
 
 
 						<span className={ cssModObj.braMaiSpa }>Seal and Shield</span>{ /* What: Brand Main Span Element. Why: The company's name is the brand's main line. How: This shows it in the display font. */ }
@@ -408,7 +408,7 @@ function NavBarCom () : React.JSX.Element {
 
 // #region Exports
 
-export { NavBarCom }; // What: Named Exports. Why: The home page renders the bar above its content. How: This exports NavBarCom.
+export { NavBarCom }; // What: Named Exports. Why: Every page renders the bar above its content. How: This exports NavBarCom.
 
 // #endregion Exports
 

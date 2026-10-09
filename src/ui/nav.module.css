@@ -26,32 +26,52 @@
 .navBarHed { /* What: Navigation Bar Header. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, transparent until the page scrolls, and eases between its two looks. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Bar Focus Ring Color. Why: The main blue ring falls under 3:1 on the bar's navy. How: This hands every control in the bar and menu the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Bar. Why: The main blue ring falls under 3:1 on the bar's navy. How: This hands every control in the bar and menu the lighter blue ring. */
 
 	background : transparent;
 	left       : 0;
-	padding    : var( --spa-ver-p01 ) 0; /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding    : var( --spa-ver-p01 ) 0;                                                                                  /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	position   : fixed;
 	right      : 0;
 	top        : 0;
-	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-	z-index    : 1000;
+	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Padding Transition. Why: The bar really gets shorter as it tightens, and a scale transform would squash its logo and links instead. How: This eases the padding itself, a layout property, since no compositor version produces the same effect. */
+	z-index    : 2; /* What: Bar Layer. Why: The bar has to pass over the hero, about, and contact layers raised to 1 as the page scrolls beneath it. How: This puts it one level above them, the lowest value that clears them. */
 
 
 }
-.navBarHed[data-page-scroll-active] { /* What: Scrolled Navigation Bar Header. Why: Once content slides under the bar, it needs a background to stay readable. How: This turns it solid navy, tightens its padding, and adds a soft shadow while the page is scrolled. */
+.navBarHed[data-page-scroll-active] { /* What: Scrolled Navigation Bar Header. Why: Once content slides under the bar, it needs a background to stay readable. How: This turns it solid navy and tightens its padding while the page is scrolled, as its shadow layer fades in below. */
 
 
 	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
-	box-shadow : var( --ele-med-sha );   /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
 	padding    : var( --spa-ver-m01 ) 0; /* Spacing Vertical Base Minus 1 = 11px */
+
+
+}
+.navBarHed::after { /* What: Navigation Bar Header Shadow. Why: The scrolled bar casts a soft shadow onto the page, which should fade in without repainting it every frame. How: This holds the shadow on a layer the size of the bar, hidden until the page scrolls, and fades it in through opacity. */
+
+
+	box-shadow     : var( --ele-med-sha );                              /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	content        : '';
+	inset          : 0;
+	opacity        : 0;
+	pointer-events : none;
+	position       : absolute;
+	transition     : opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.navBarHed[data-page-scroll-active]::after { /* What: Scrolled Navigation Bar Header Shadow. Why: Content sliding under the bar should look like it passes beneath it. How: This shows the shadow while the page is scrolled. */
+
+
+	opacity : 1;
 
 
 }
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Bar Header. Why: Someone who asked for less motion shouldn't see the bar animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navBarHed { /* What: Motionless Navigation Bar Header. Why: The scrolled look should simply switch on. How: This turns the transition off. */
+	.navBarHed,
+	.navBarHed::after { /* What: Motionless Navigation Bar Header. Why: The scrolled look and its shadow should simply switch on. How: This turns both transitions off. */
 
 
 		transition : none;
