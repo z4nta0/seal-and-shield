@@ -176,6 +176,17 @@
   outline-width: 2px;
 }
 
+.contact__form-error {
+  font-size: 0.85rem;
+  color: #b42318;
+  text-align: center;
+}
+
+.contact__form-error a {
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
 .contact__submit {
   width: 100%;
   font-family: var(--font-display);
@@ -199,6 +210,11 @@
 .contact__submit:hover {
   background: var(--blue);
   border-color: var(--blue);
+}
+
+.contact__submit:disabled {
+  cursor: progress;
+  opacity: 0.7;
 }
 
 .contact__form-note {

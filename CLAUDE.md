@@ -139,13 +139,6 @@ the page to settle.
   hero's, contact section's, and footer's gradients (the headline and its
   accents, the stats, the bar's brand and links, the contact details, and
   the footer's links and phone) has to be checked by eye.
-- **The contact form reports success even when sending fails**
-  (found 2026-10-08): forSubFun shows "Message Sent!" without waiting for
-  Netlify's response, and only alerts if the request can't be made at all,
-  so a rejected submission still looks sent. The form also carries
-  noValidate, so its required name and phone fields aren't enforced and an
-  empty form can be sent. Both are behavior changes, left for the user to
-  decide on.
 - **WAVE still reports errors** (2026-10-08): the user ran WebAIM's WAVE
   checker after the accessibility pass and it found errors axe doesn't
   report. They're handled later, with the user.

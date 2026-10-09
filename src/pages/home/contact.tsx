@@ -55,10 +55,11 @@ const EMP_FOR_OBJ = { company : '', email : '', message : '', name : '', phone :
  * @summary
  * Renders the contact section. The form's fields are controlled by
  * forDatObj, whose keys match each field's name attribute, so one change
- * handler serves all five. Submitting posts the form's fields to Netlify
- * Forms, then shows the thank-you message right away and brings the empty
- * form back six seconds later. The background accent is decorative and
- * hidden from assistive technology.
+ * handler serves all five. The browser checks the required fields before
+ * submitting, then forSubFun posts the fields to Netlify Forms and shows the
+ * thank-you message only once Netlify confirms it, or an error message that
+ * keeps the fields filled in if it doesn't. The background accent is
+ * decorative and hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -80,6 +81,8 @@ function ConSecCom () : React.JSX.Element {
 
 	const [ forSenBoo, setForSenBoo ] = useState( false );       // What: Form Sent Boolean And Setter. Why: The form gives way to a thank-you message once sent. How: This holds whether the message is showing.
 	const [ forDatObj, setForDatObj ] = useState( EMP_FOR_OBJ ); // What: Form Data Object And Setter. Why: The fields are controlled, so the form can empty itself once sent. How: This holds every field's current value, keyed by its name.
+	const [ forErrBoo, setForErrBoo ] = useState( false );       // What: Form Error Boolean And Setter. Why: A visitor whose request didn't go through has to be told, with their details kept for a retry. How: This holds whether the error message is showing.
+	const [ senProBoo, setSenProBoo ] = useState( false );       // What: Send Progress Boolean And Setter. Why: The button shouldn't send the same request twice while the first is still on its way. How: This holds whether a submission is waiting on Netlify's answer.
 
 
 	// #region fieChaFun
@@ -116,12 +119,18 @@ function ConSecCom () : React.JSX.Element {
 	 * forSubFun = Form Submit Function
 	 *
 	 * @summary
-	 * Handles the form's submit: stops the browser's own page-reloading
-	 * submit, posts the form's fields to Netlify Forms as URL-encoded data,
-	 * whose form-name field tells Netlify which form they belong to, and
-	 * alerts the error if the request can't be made at all. Without waiting
-	 * for the response, it shows the thank-you message, empties the fields,
-	 * and brings the form back six seconds later.
+	 * Handles the form's submit once the browser's own validation has passed
+	 * (Full Name and Phone are required, and Email has to look like an
+	 * address): stops the page-reloading submit, hides any earlier error, and
+	 * posts the form's fields to Netlify Forms as URL-encoded data, whose
+	 * form-name field tells Netlify which form they belong to. While the
+	 * request is out, the submit button is disabled and its label says
+	 * Sending... instead. Only an OK answer from Netlify counts as sent: then
+	 * the thank-you message shows, the fields empty, and the form comes back
+	 * six seconds later. A request that fails outright, or one Netlify
+	 * rejects, keeps the visitor's details in place and shows the error
+	 * message instead, so they can try again or call; a request that fails
+	 * outright is also logged to the console.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -131,12 +140,12 @@ function ConSecCom () : React.JSX.Element {
 	 *
 	 * @example
 	 * ```ts
-	 * forSubFun(subEveObj) // => void
+	 * forSubFun(subEveObj) // => Promise<void>
 	 * ```
 	 *
 	*/
 
-	const forSubFun = ( subEveObj : React.SubmitEvent< HTMLFormElement > ) => { // What: Form Submit Function. Why: The form sends its fields without leaving the page. How: This posts them to Netlify Forms and shows the thank-you message.
+	const forSubFun = async ( subEveObj : React.SubmitEvent< HTMLFormElement > ) => { // What: Form Submit Function. Why: The form sends its fields without leaving the page, and only reports success once Netlify confirms it. How: This posts them to Netlify Forms, then shows the thank-you message or the error message depending on the answer.
 
 
 		subEveObj.preventDefault(); // What: Default Submit Cancel. Why: A normal submit would reload the page. How: This stops it, so the fetch below sends the fields instead.
@@ -145,23 +154,55 @@ function ConSecCom () : React.JSX.Element {
 		const forCurEle = subEveObj.target as HTMLFormElement;                              // What: Form Current Element. Why: The fields are read from the form itself. How: This is the element the submit event fired on. // What: Type Assertion Note. Why: An event's target types as a plain EventTarget. How: A submit event always fires on its form element.
 		const forValObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Value Object. Why: Netlify expects the form's fields as name and value pairs. How: This reads every named field, form-name included. // What: Type Assertion Note. Why: URLSearchParams doesn't accept a FormData in TypeScript's types. How: Every field in this form holds text, so its entries read as plain string pairs.
 
-
-		fetch( '/', { // What: Netlify Submission Call. Why: Netlify Forms records a post to the site's own address carrying the form's name. How: This posts the fields URL-encoded, and alerts the error if the request fails outright.
-
-
-			body    : new URLSearchParams( forValObj ).toString(),             // What: Body. Why: Netlify reads the fields as a URL-encoded string. How: This encodes every name and value pair.
-			headers : { 'Content-Type' : 'application/x-www-form-urlencoded' }, // What: Headers. Why: The body's format has to be declared. How: This marks it as URL-encoded form data.
-			method  : 'POST'                                                    // What: Method. Why: A form submission is a post. How: This sends it as one.
+		let senOkaBoo = false; // What: Send Okay Boolean. Why: Only a confirmed submission should show the thank-you message. How: This starts false and turns true only when Netlify answers OK.
 
 
-		} ).catch( ( errCatObj ) => alert( errCatObj ) );
+		setForErrBoo( false ); // What: Error Message Hide Call. Why: A new attempt shouldn't keep showing the last one's error. How: This hides the error message.
+
+		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the request is on its way, and shouldn't send it twice. How: This disables the button and switches its label to say Sending... instead.
 
 
-		setForSenBoo( true ); // What: Sent Message Show Call. Why: The visitor should see that the form went. How: This swaps the form for the thank-you message.
 
-		setForDatObj( EMP_FOR_OBJ ); // What: Form Reset Call. Why: The form should come back empty. How: This restores every field to blank.
+		try {
 
-		window.setTimeout( () => setForSenBoo( false ), 6000 ); // What: Form Return Timer. Why: A visitor may want to send another request. How: This brings the form back after six seconds.
+
+			const netResObj = await fetch( '/', { // What: Netlify Response Object. Why: Netlify Forms records a post to the site's own address carrying the form's name, and its answer says whether it did. How: This posts the fields URL-encoded and waits for the answer.
+
+
+				body    : new URLSearchParams( forValObj ).toString(),             // What: Body. Why: Netlify reads the fields as a URL-encoded string. How: This encodes every name and value pair.
+				headers : { 'Content-Type' : 'application/x-www-form-urlencoded' }, // What: Headers. Why: The body's format has to be declared. How: This marks it as URL-encoded form data.
+				method  : 'POST'                                                    // What: Method. Why: A form submission is a post. How: This sends it as one.
+
+
+			} );
+
+
+			senOkaBoo = netResObj.ok; // What: Send Okay Update. Why: Netlify can answer with an error, which still counts as a failed submission. How: This records whether the answer's status was in the 200s.
+
+
+		}
+
+		catch ( errCatObj ) { console.warn( errCatObj ); } // What: Network Failure Catch. Why: A request that can't be made at all, such as when the visitor is offline, should still be visible to anyone debugging. How: This logs the error and leaves senOkaBoo false.
+
+
+
+		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This re-enables the button and restores its label.
+
+
+
+		if ( senOkaBoo ) { // What: Sent Check. Why: Only a confirmed submission is reported as sent. How: This shows the thank-you message, empties the fields, and schedules the form's return.
+
+
+			setForSenBoo( true ); // What: Sent Message Show Call. Why: The visitor should see that the form went. How: This swaps the form for the thank-you message.
+
+			setForDatObj( EMP_FOR_OBJ ); // What: Form Reset Call. Why: The form should come back empty. How: This restores every field to blank.
+
+			window.setTimeout( () => setForSenBoo( false ), 6000 ); // What: Form Return Timer. Why: A visitor may want to send another request. How: This brings the form back after six seconds.
+
+
+		}
+
+		else setForErrBoo( true ); // What: Error Message Show Call. Why: A failed submission must not look sent. How: This shows the error message and keeps every field as the visitor filled it in.
 
 
 	};
@@ -456,12 +497,27 @@ function ConSecCom () : React.JSX.Element {
 								value='contactForm'
 							/>{ /* What: Form Name Input Element. Why: Netlify matches a posted submission to its form by this field. How: This posts contactForm along with the visitor's fields. */ }
 
+							{ forErrBoo && ( // What: Error Message Check. Why: A failed submission has to be explained. How: This shows the error message while forErrBoo is true.
+
+
+								<p
+									className='contact__form-error'
+
+									role='alert'
+								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the request didn't go through and what to do next. How: Its alert role has screen readers announce it the moment it appears. */ }
+									Sorry, your request didn't go through. Please try again, or call us at <a href='tel:7853041957'>(785) 304-1957</a>.
+								</p>
+
+
+							) }
+
 							<button
 								className='contact__submit'
 
+								disabled={ senProBoo }
 								type='submit'
-							>{ /* What: Contact Submit Button Element. Why: The visitor sends the request here. How: This submits the form through forSubFun. */ }
-								Submit Free Quote Request
+							>{ /* What: Contact Submit Button Element. Why: The visitor sends the request here. How: This submits the form through forSubFun, and is disabled while a submission is on its way. */ }
+								{ senProBoo ? 'Sending...' : 'Submit Free Quote Request' }{ /* What: Submit Label Expression. Why: The button should say when it's busy. How: This reads Sending... while a submission is out. */ }
 							</button>
 
 							<p className='contact__form-note'>{ /* What: Form Note Paragraph Element. Why: Visitors worry about what happens to their details. How: This promises no spam. */ }
