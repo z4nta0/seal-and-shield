@@ -260,7 +260,7 @@ async function opeStaFun ( curPagObj : Page, staRcdObj : StaRcdTyp ) : Promise< 
 
 	await revPagFun( curPagObj ); // What: Page Reveal Call. Why: Content that fades in on scroll is invisible until scrolled to. How: This scrolls through the page and back to the top.
 
-	await curPagObj.evaluate( () => Promise.all( Array.from( document.images, ( imaCurEle ) => imaCurEle.decode() ) ) ); // What: Images Decoded Wait. Why: Chromium once drew the large About logo with a slightly different downscale when the screenshot caught it mid-decode under load. How: This waits until every image on the page has finished decoding.
+	await curPagObj.evaluate( () => Promise.all( Array.from( document.images, ( imaCurEle ) => imaCurEle.decode() ) ) ); // What: Images Decoded Wait. Why: A check shouldn't measure or capture the page before its images are drawn. How: This waits until every image on the page has finished decoding.
 
 
 
