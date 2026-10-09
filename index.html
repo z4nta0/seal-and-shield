@@ -12,16 +12,25 @@
 
 		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1,024 bytes the browser checks. -->
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' /> <!-- What: Viewport Meta. Why: Phones should lay the site out at device width instead of a zoomed-out desktop width. How: This sets the layout width to the device's and starts at no zoom. -->
-		<title>Seal and Shield LLC | Commercial Roofing</title>                  <!-- What: Page Title Element. Why: The tab, bookmarks, and search listings name the page by its title. How: This pairs the company's name with what it does. -->
+		<title>Commercial Roofing in Lawrence, KS | Seal and Shield</title>      <!-- What: Page Title Element. Why: The tab, bookmarks, and search listings name the page by its title, and local searches look for the service and the city. How: This names what the company does and where, then the company. -->
 
 		<!-- #endregion Document -->
 
 
 		<!-- #region Search -->
 
-		<meta name='description' content='Seal and Shield LLC – Commercial Roofing in Lawrence, Kansas. Full installations, repairs, liquid coatings, TPO, EPDM. Serving all of Kansas and the continental US.' /> <!-- What: Description Meta. Why: Search listings and link previews show a short summary under the title. How: This sums up the company's services and where it works. -->
+		<meta name='author'      content='Seal and Shield LLC' />      <!-- What: Author Meta. Why: Search engines and link preview inspectors look for who a page belongs to, and on a real business's site that's the business itself. How: This names the company by its legal name. -->
+		<link href='https://sealandshieldroof.com/' rel='canonical' /> <!-- What: Canonical Link. Why: Netlify also serves the site at deploy preview and netlify.app addresses, which should all count as one page. How: This names the live address as the page's own. -->
+		<meta name='description' content='Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.' /> <!-- What: Description Meta. Why: Search listings show a short summary under the title, and it should name the city and the services people search for. How: This sums up the company's main services and where it's based, in about 120 characters so phones show it whole. -->
 
 		<!-- #endregion Search -->
+
+
+		<!-- #region Web App -->
+
+		<meta name='theme-color' content='#080f24' /> <!-- What: Theme Color Meta. Why: Mobile browsers tint their chrome around the page, and Discord edges its link previews in this color. How: This sets it to the dark navy of the bar and hero. -->
+
+		<!-- #endregion Web App -->
 
 
 		<!-- #region Icons -->
@@ -29,6 +38,66 @@
 		<link href='/favicon.png' rel='icon' type='image/png' /> <!-- What: PNG Icon Link. Why: Browsers show the site's mark in tabs and bookmarks. How: This points at the PNG favicon in public/. -->
 
 		<!-- #endregion Icons -->
+
+
+		<!-- #region Structured Data -->
+
+		<script type='application/ld+json'>
+			{
+				"@context": "https://schema.org",
+				"@type": "RoofingContractor",
+				"name": "Seal and Shield",
+				"legalName": "Seal and Shield LLC",
+				"url": "https://sealandshieldroof.com/",
+				"telephone": "+1-785-304-1957",
+				"description": "Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.",
+				"foundingDate": "2024",
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": "Lawrence",
+					"addressRegion": "KS",
+					"addressCountry": "US"
+				},
+				"openingHoursSpecification": [
+					{
+						"@type": "OpeningHoursSpecification",
+						"dayOfWeek": [
+							"Monday",
+							"Tuesday",
+							"Wednesday",
+							"Thursday",
+							"Friday"
+						],
+						"opens": "08:00",
+						"closes": "17:00"
+					}
+				],
+				"areaServed": [
+					{
+						"@type": "City",
+						"name": "Lawrence, KS"
+					},
+					{
+						"@type": "City",
+						"name": "Topeka, KS"
+					},
+					{
+						"@type": "Place",
+						"name": "Kansas City metro area"
+					},
+					{
+						"@type": "State",
+						"name": "Kansas"
+					},
+					{
+						"@type": "Place",
+						"name": "Continental United States"
+					}
+				]
+			}
+		</script><!-- What: Business Structured Data Script. Why: Search engines read JSON-LD to show a local business's details, and every detail has to match what the page shows. How: This describes the company as a RoofingContractor with its name, legal name, live address, phone, Lawrence city with no street address, weekday 8 to 5 hours, founding year, and the five service areas the Services section lists. -->
+
+		<!-- #endregion Structured Data -->
 
 
 	</head>

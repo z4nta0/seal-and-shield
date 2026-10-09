@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'><!-- What: URL Set Element. Why: Search engines read the sitemap to find every page worth indexing. How: This holds one entry per indexable page, in the sitemaps.org format. -->
+
+
+	<url><!-- What: Home URL Element. Why: The home page is the site's only indexable page, since the 404 page carries noindex. How: This lists it by its canonical address. -->
+
+
+		<loc>https://sealandshieldroof.com/</loc><!-- What: Home Location Element. Why: The entry has to name the page's address. How: This gives the canonical address, matching the page's canonical link. -->
+
+
+	</url>
+
+
+</urlset>
