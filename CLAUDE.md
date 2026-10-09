@@ -112,12 +112,9 @@ the page to settle.
   pixel may differ, and the per-pixel color threshold is 0 too, since
   Playwright's default of 0.2 let a slight color change pass unnoticed
   (reese-roofing's suite still has that gap). The footer's year is masked.
-  The suite gets one retry (added 2026-10-08), only because Chromium under a
-  full run occasionally downscales the oversized About logo a few pixels
-  differently; a real change fails both attempts, and a one-off shows up as
-  flaky in the report. Drop the retry once the logo images are resized. After an intended visual change, refresh with `npm
-  run test:rendering -- --update-snapshots` and commit the baselines with it.
-  Baselines are captured on Linux.
+  After an intended visual change, refresh with `npm run test:rendering --
+  --update-snapshots` and commit the baselines with it. Baselines are
+  captured on Linux.
 - `npm run test:responsive`: measures the home page and the open menu at 19
   widths from 320 to 1,920px (a pixel either side of each breakpoint
   included), failing on sideways scrolling, an unclipped element past either
@@ -157,7 +154,8 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
   phone hero, and `logo-simple.png` from 1210x1025 (705 KB) to 157x133
   (24 KB), over 3x its 44px box, each at a width that keeps the original
   aspect ratio to within 0.005px so no layout moved. The oversized full logo
-  had made Chromium's draw of it nondeterministic under a full test run.
+  had made Chromium's draw of it nondeterministic under a full test run,
+  which a short-lived rendering retry covered until the resize removed it.
   Converting them to SVG or WebP is still open for step 7's SEO pass.
 - **No security headers yet**: `public/_headers` doesn't exist. Step 7
   raises with the user whether to add ease-my-life's hardening headers
