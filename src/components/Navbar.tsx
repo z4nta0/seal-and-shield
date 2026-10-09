@@ -55,7 +55,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="navbar__nav">
+        <nav className="navbar__nav" aria-label="Main">
           {NAV_LINKS.map(link => (
             <a
               key={link.label}

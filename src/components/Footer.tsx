@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav className="footer__nav">
+        <nav className="footer__nav" aria-label="Footer">
           {['home','services','about','contact'].map(id => (
             <button key={id} className="footer__link" onClick={() => scrollTo(id)}>
               {id.charAt(0).toUpperCase() + id.slice(1)}
