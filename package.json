@@ -10,6 +10,7 @@
 		"preview": "vite preview",
 		"test": "playwright test --config tests/playwright.config.ts",
 		"test:accessibility": "playwright test --config tests/playwright.config.ts --project \"accessibility-*\"",
+		"test:interaction": "playwright test --config tests/playwright.config.ts --project \"interaction-*\"",
 		"test:rendering": "playwright test --config tests/playwright.config.ts --project \"rendering-*\"",
 		"test:responsive": "playwright test --config tests/playwright.config.ts --project \"responsive-*\"",
 		"typecheck": "tsc -b"

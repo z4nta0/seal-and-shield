@@ -18,8 +18,8 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * in all three of Playwright's engines (Chromium, Firefox, and WebKit), one
  * project per suite and engine, since a check that passes in one engine
  * proves nothing about the others. The suites are accessibility, which the
- * pre-commit check runs, rendering, and responsive.
- * Playwright starts the Vite dev server on port 5191 for the run and stops it
+ * pre-commit check runs, interaction, rendering, and responsive. Playwright
+ * starts the Vite dev server on port 5191 for the run and stops it
  * afterwards, so a dev server already running on the usual 5173 is never
  * touched. Reports and failure screenshots land in tests/output, which git
  * ignores, while the rendering suite's approved screenshots live in
@@ -58,6 +58,7 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 
 
 	'accessibility', // What: Accessibility Suite. Why: The pre-commit accessibility scan runs from here. How: This names tests/accessibility.
+	'interaction',   // What: Interaction Suite. Why: What the site's controls actually do is checked from here. How: This names tests/interaction.
 	'rendering',     // What: Rendering Suite. Why: Each page state is compared with its approved screenshot from here. How: This names tests/rendering.
 	'responsive'     // What: Responsive Suite. Why: Each page is measured across screen widths from here. How: This names tests/responsive.
 
