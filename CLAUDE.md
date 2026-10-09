@@ -34,8 +34,9 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
 1. **Project setup**: this file, and the Windows `:Zone.Identifier` download
    files removed from the repo and ignored.
 2. **Dependency upgrades**, one major version at a time with a build check
-   after each: Vite 8 with `@vitejs/plugin-react` 6, React 19, React Router 7,
-   then TypeScript 6.0 (the newest `typescript-eslint` supports).
+   after each: Vite 8 with `@vitejs/plugin-react` 6, React 19, React Router 8
+   (the single `react-router` package, replacing `react-router-dom`), then
+   TypeScript 6.0 (the newest `typescript-eslint` supports).
 3. **ESLint**, set up from ease-my-life's `eslint.config.ts`.
 4. **Playwright and axe** in all three engines, with baseline screenshots
    taken before anything moves, so later steps can prove nothing changed on
