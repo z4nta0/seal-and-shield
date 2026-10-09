@@ -56,12 +56,13 @@ app with tabs.
 ```
 src/
   main.tsx               entry point
-  app.tsx                root component and the app container (the routes
-                         join it in step 7)
+  app.tsx                root component, the app container, and the routes
   assets/                images used by 2 or more pages (logo-simple.png)
   pages/
     home/                the home page, its sections, and logo-full.png
+    not-found/           the 404 page
   ui/                    components used by 2 or more pages (nav, footer)
+                         and section-link.ts
   styles/                global CSS only (styles.css)
   utils/                 app-agnostic helpers (motion.ts)
 ```
@@ -69,15 +70,18 @@ Outside `src/`: `tests/` holds the Playwright suites (see "## Test
 suites").
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
   and a component only that page uses (the hero, services, about, and
-  contact sections) lives in that folder. The 404 page joins as
-  `pages/not-found/` in step 7.
+  contact sections) lives in that folder. The 404 page is
+  `pages/not-found/`.
 - **A page's main file is named after its folder, with no prefix**
   (`pages/home/home.tsx`), the same as reese-roofing.
 - **The bar and footer live in `ui/`** as `nav.tsx` and `footer.tsx`, since
-  the 404 page will use them too.
+  the 404 page uses them too. Their section links go through
+  `ui/section-link.ts`, which scrolls in place on the home page and
+  navigates home with the section's id as the hash from any other page;
+  the home page jumps to that section on arrival and clears the hash.
 - **Component names** follow the naming rules since the formatting pass:
   `NavBarCom`, `SitFooCom`, `HerSecCom`, `SerSecCom`, `AboSecCom`,
-  `ConSecCom`, `HomPagCom`, and `AppRooCom`.
+  `ConSecCom`, `HomPagCom`, `NotFouCom`, and `AppRooCom`.
 - **Stylesheet order**: `main.tsx` imports `styles/styles.css` after the app,
   so the global sheet loads after every component's module. Since the module
   pass, every class is scoped to its own module, so no rule depends on that
@@ -121,13 +125,12 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
    layout above followed the same day.
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
-   - **404 links into sections** (asked for 2026-10-09): the 404 page links
-     back with `/#contact` and the like, per the user-level rule, but the
-     site scrolls to sections in JavaScript and keeps the URL free of
-     hashes. So when the home page loads with a hash, it scrolls to that
-     section once React has rendered it, then clears the hash with
-     `history.replaceState`, so the URL ends up as clean as everywhere
-     else.
+   - **404 page: done 2026-10-09.** It has the shared bar and footer, a
+     Return Home button, a Get a Free Quote button to the contact section,
+     and its own title and noindex tag. Every section link works from it
+     through `ui/section-link.ts`, and the home page scrolls to a hash it
+     arrives with and then clears it, as asked for the same day.
+   - Still to come: SEO, social previews, and interaction feedback.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
@@ -136,10 +139,10 @@ which starts its own dev server on port 5191 (never the usual 5173) and stops
 it afterwards. Every suite runs in Chromium, Firefox, and WebKit. Results,
 screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states the suites
-visit (the home page at 390px and 1,440px, plus the mobile menu open at
-390px) are listed in `tests/support/states.ts`. Its `opeStaFun` scrolls
-through the page before checking it, since the Services, About, and Contact
-sections only fade their content in once scrolled into view, and skips
+visit (the home page and the 404 page at 390px and 1,440px, plus the mobile
+menu open at 390px) are listed in `tests/support/states.ts`. Its `opeStaFun`
+scrolls through the page before checking it, since the Services, About, and
+Contact sections only fade their content in once scrolled into view, and skips
 animations that repeat forever (the hero logo's `logRinDivLoopPulse`) when
 waiting for the page to settle.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
@@ -149,6 +152,13 @@ waiting for the page to settle.
   visible), reflow at 320px, and motion under reduced motion. axe's "needs
   review" results are printed and attached to the report rather than failing
   the run.
+- `npm run test:interaction`: checks what the controls do, under reduced
+  motion so scrolls land at once. The bar's links, brand, menu, and footer
+  buttons land on their sections with a clean address; the contact form
+  refuses incomplete requests and reports a faked Netlify answer honestly;
+  and the 404 page, its buttons, and a section address like /#about lead
+  where they should. reese-roofing's feedback checks join it with the
+  interaction feedback work.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
   pixel may differ, and the per-pixel color threshold is 0 too, since
@@ -157,12 +167,12 @@ waiting for the page to settle.
   After an intended visual change, refresh with `npm run test:rendering --
   --update-snapshots` and commit the baselines with it. Baselines are
   captured on Linux.
-- `npm run test:responsive`: measures the home page and the open menu at 19
-  widths from 320 to 1,920px (a pixel either side of each breakpoint
+- `npm run test:responsive`: measures the home page, the 404 page, and the open
+  menu at 19 widths from 320 to 1,920px (a pixel either side of each breakpoint
   included), failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, or two reachable controls overlapping.
-- `npm test` runs every suite. reese-roofing's interaction and seo suites
-  join in step 7, once the site has the features they check.
+- `npm test` runs every suite. reese-roofing's seo suite joins with the SEO
+  pass.
 
 ## Known issues
 - **Test the contact form after the last deploy** (reminder for the user,
