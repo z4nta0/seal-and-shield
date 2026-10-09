@@ -93,7 +93,9 @@ function SitFooCom () : React.JSX.Element {
 					<img
 						className={ cssModObj.fooLogIma }
 
+						height={ 133 }
 						src={ losPngUrl }
+						width={ 157 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 						alt=''
 					/>{ /* What: Footer Logo Image Element. Why: The footer's brand opens with the simple mark. How: Its alt text is empty, since the brand name sits right beside it. */ }

@@ -458,10 +458,11 @@ body { /* What: Body. Why: The page's default text sets the tone everything else
 
 }
 
-img { /* What: Image. Why: Images shouldn't leave inline gaps or overflow their containers. How: This makes them blocks capped at their container's width. */
+img { /* What: Image. Why: Images shouldn't leave inline gaps or overflow their containers, or take their height attribute as a fixed size. How: This makes them blocks capped at their container's width, with their height following their width, so the width and height attributes only reserve their aspect ratio. */
 
 
 	display   : block;
+	height    : auto;
 	max-width : 100%;
 
 
