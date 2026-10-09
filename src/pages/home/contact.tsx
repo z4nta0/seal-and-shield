@@ -1,30 +1,14 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
+import { useRevSecFun } from './reveal.ts'
 import { type FormEvent } from 'react'
 import './contact.css'
 
 export default function Contact() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRevSecFun( 80 )
   const [submitted, setSubmitted] = useState(false)
   const [form, setForm] = useState({
     name: '', company: '', phone: '', email: '', message: ''
   })
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.fade-up').forEach((el, i) => {
-              setTimeout(() => el.classList.add('visible'), i * 80)
-            })
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))

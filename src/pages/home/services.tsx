@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useRevSecFun } from './reveal.ts'
 import './services.css'
 
 const SERVICES = [
@@ -53,24 +53,7 @@ const AREAS = [
 ]
 
 export default function Services() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.fade-up').forEach((el, i) => {
-              setTimeout(() => el.classList.add('visible'), i * 80)
-            })
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+  const sectionRef = useRevSecFun( 80 )
 
   return (
     <section id="services" className="services" ref={sectionRef}>

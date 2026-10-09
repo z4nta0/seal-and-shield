@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useRevSecFun } from './reveal.ts'
 import logo from './logo-full.png'
 import './about.css'
 
@@ -18,24 +18,7 @@ const VALUES = [
 ]
 
 export default function About() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.fade-up').forEach((el, i) => {
-              setTimeout(() => el.classList.add('visible'), i * 100)
-            })
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+  const sectionRef = useRevSecFun( 100 )
 
   return (
     <section id="about" className="about" ref={sectionRef}>
