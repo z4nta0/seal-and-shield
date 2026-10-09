@@ -1,0 +1,268 @@
+
+
+
+/**
+ * footer.module.css = Site Footer Module
+ *
+ * @summary
+ * Styles for SitFooCom: the dark footer's row of columns (the brand and
+ * tagline, the section buttons, and the phone number and hours), which
+ * stacks into one left-aligned column on screens 768px wide or narrower,
+ * and the copyright line below a hairline. The shared container styles the
+ * columns' row used to borrow from the global stylesheet are copied onto its
+ * own class here, which also retires the !important its vertical padding
+ * needed to beat the container's.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region footer */
+
+.footer { /* What: Site Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the dark navy and draws a faint line along its top. */
+
+
+	background : var(--navy-dark);
+	border-top : 1px solid rgba(255,255,255,0.07);
+
+
+}
+
+
+/* #region footer__inner */
+
+.footer__inner { /* What: Footer Inner Div. Why: The footer's columns line up with the page's content width. How: This centers a capped-width row with the container's side padding plus room above and below, and spreads the columns across it, wrapping when they run out of room. */
+
+
+	align-items     : center;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : 2rem;
+	justify-content : space-between;
+	margin          : 0 auto;
+	max-width       : var(--max-w);
+	padding         : 2.5rem 2rem;
+
+
+}
+@media ( max-width : 768px ) { /* What: Narrow Footer Inner Div. Why: The columns don't fit side by side on narrow screens. How: This applies 768px wide and below. */
+
+
+	.footer__inner { /* What: Stacked Footer Inner Div. Why: The columns read best one above another on a narrow screen. How: This stacks them on the left with a smaller gap. */
+
+
+		align-items    : flex-start;
+		flex-direction : column;
+		gap            : 1.5rem;
+
+
+	}
+
+
+}
+
+
+/* #region footer__brand */
+
+.footer__brand { /* What: Footer Brand Div. Why: The mark, name, and tagline read as one block. How: This sets the mark beside the two lines of text. */
+
+
+	align-items : center;
+	display     : flex;
+	gap         : 0.85rem;
+
+
+}
+
+.footer__logo { /* What: Footer Logo Image. Why: The mark should sit at a small, fixed size and step back slightly on the dark band. How: This sizes it to a 44px box, scaled to fit, at a touch under full opacity. */
+
+
+	height     : 44px;
+	object-fit : contain;
+	opacity    : 0.9;
+	width      : 44px;
+
+
+}
+
+.footer__brand-name { /* What: Footer Brand Name Paragraph. Why: The footer names the company by its legal name. How: This sets it in the display font, extra bold and uppercase, in white. */
+
+
+	color          : var(--white);
+	font-family    : var(--font-display);
+	font-size      : 1rem;
+	font-weight    : 800;
+	letter-spacing : 0.06em;
+	text-transform : uppercase;
+
+
+}
+
+.footer__brand-tagline { /* What: Footer Brand Tagline Paragraph. Why: The tagline says what the company does and where, quietly. How: This sets it small and silver just below the name. */
+
+
+	color      : var(--silver);
+	font-size  : 0.75rem;
+	margin-top : 0.15rem;
+
+
+}
+
+/* #endregion footer__brand */
+
+
+
+/* #region footer__nav */
+
+.footer__nav { /* What: Footer Navigation Nav. Why: Visitors at the bottom of the page can jump back to any section. How: This lines the section buttons up in a row that wraps when it runs out of room. */
+
+
+	display   : flex;
+	flex-wrap : wrap;
+	gap       : 1.75rem;
+
+
+}
+
+.footer__link { /* What: Footer Link Button. Why: Each button should read like a link in the footer's display style, not a boxed button. How: This drops the button's own background and border and sets its label in small, spaced capitals in light silver. */
+
+
+	background     : none;
+	border         : none;
+	color          : var(--silver-light);
+	cursor         : pointer;
+	font-family    : var(--font-display);
+	font-size      : 0.8rem;
+	font-weight    : 600;
+	letter-spacing : 0.12em;
+	text-transform : uppercase;
+	transition     : color var(--transition);
+
+
+}
+.footer__link:hover { /* What: Hovered Footer Link Button. Why: The button should respond to the pointer. How: This turns its label white. */
+
+
+	color : var(--white);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Link Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.footer__link { /* What: Motionless Footer Link Button. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion footer__nav */
+
+
+/* #region footer__contact */
+
+.footer__contact { /* What: Footer Contact Div. Why: The phone number and hours close the row on the right. How: This right-aligns the two. */
+
+
+	text-align : right;
+
+
+}
+@media ( max-width : 768px ) { /* What: Narrow Footer Contact Div. Why: Once the columns stack, everything lines up on the left. How: This applies 768px wide and below. */
+
+
+	.footer__contact { /* What: Left-Aligned Footer Contact Div. Why: The stacked columns share one left edge. How: This left-aligns the phone number and hours. */
+
+
+		text-align : left;
+
+
+	}
+
+
+}
+
+.footer__phone { /* What: Footer Phone Anchor. Why: The phone number is the footer's main call to action. How: This sets it on its own line in the bold display font, in light blue. */
+
+
+	color          : var(--blue-light);
+	display        : block;
+	font-family    : var(--font-display);
+	font-size      : 1.05rem;
+	font-weight    : 700;
+	letter-spacing : 0.04em;
+	transition     : color var(--transition);
+
+
+}
+.footer__phone:hover { /* What: Hovered Footer Phone Anchor. Why: The link should respond to the pointer. How: This turns it white. */
+
+
+	color : var(--white);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Phone Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.footer__phone { /* What: Motionless Footer Phone Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.footer__hours { /* What: Footer Hours Paragraph. Why: Callers should know when someone will answer, without it competing with the number. How: This sets the hours small and silver just below the phone number. */
+
+
+	color      : var(--silver);
+	font-size  : 0.75rem;
+	margin-top : 0.25rem;
+
+
+}
+
+/* #endregion footer__contact */
+
+/* #endregion footer__inner */
+
+
+
+/* #region footer__bottom */
+
+.footer__bottom { /* What: Footer Bottom Div. Why: The copyright line sits apart from the columns, across the footer's full width. How: This centers it below a fainter hairline with padding around it. */
+
+
+	border-top : 1px solid rgba(255,255,255,0.05);
+	padding    : 1.1rem 2rem;
+	text-align : center;
+
+
+}
+
+.footer__copyright { /* What: Footer Copyright Paragraph. Why: The copyright line should be present but quiet. How: This sets it small, slightly spaced, and silver. */
+
+
+	color          : var(--silver);
+	font-size      : 0.75rem;
+	letter-spacing : 0.04em;
+
+
+}
+
+/* #endregion footer__bottom */
+
+/* #endregion footer */
+
+
