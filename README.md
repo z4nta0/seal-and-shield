@@ -52,9 +52,9 @@ npm run preview
 
 ```
 src/
-├── assets/            Images and fonts shared by 2+ pages (logo-simple.png, fonts/)
+├── assets/            Images and fonts shared by 2+ pages (logo-simple.webp, fonts/)
 ├── pages/
-│   ├── home/          Home page and its sections (hero, services, about, contact), each with its own .module.css, plus reveal.ts and logo-full.png
+│   ├── home/          Home page and its sections (hero, services, about, contact), each with its own .module.css, plus reveal.ts and logo-full.webp
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
 ├── ui/                Shared components (nav, footer), each with its own .module.css, and section-link.ts (section links that work from any page)
 ├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, and the shared scroll-reveal attributes)
@@ -75,7 +75,7 @@ tests/
 
 - **Type pairing:** Barlow Condensed for headings, labels, and buttons, with Lato for body text, both self-hosted (`src/assets/fonts/`, declared in `src/styles/fonts.css`), so a visit makes no third-party requests.
 - **Palette:** Deep navy (`#0f1e45`, with a darker `#080f24` for the bar, hero, and footer), a strong blue (`#1e56c8`) for buttons and labels on light sections, a lighter blue (`#4488f6`) for accents on dark sections, and an off-white (`#f4f6fa`) behind the services.
-- **Logo usage:** The **full logo** (`src/pages/home/logo-full.png`) anchors the hero and sits above the company details in the About section. The **simple mark** (`src/assets/logo-simple.png`) is used in the nav bar and the footer.
+- **Logo usage:** The **full logo** (`src/pages/home/logo-full.webp`) anchors the hero and sits above the company details in the About section. The **simple mark** (`src/assets/logo-simple.webp`) is used in the nav bar and the footer.
 - **Motion:** The hero fades in on load, the other sections fade in as they scroll into view, and the hero logo's ring pulses. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion.
 
 ## Contact form

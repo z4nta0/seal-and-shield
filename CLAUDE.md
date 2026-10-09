@@ -57,9 +57,9 @@ app with tabs.
 src/
   main.tsx               entry point
   app.tsx                root component, the app container, and the routes
-  assets/                images used by 2 or more pages (logo-simple.png)
+  assets/                images used by 2 or more pages (logo-simple.webp)
   pages/
-    home/                the home page, its sections, and logo-full.png
+    home/                the home page, its sections, and logo-full.webp
     not-found/           the 404 page
   ui/                    components used by 2 or more pages (nav, footer)
                          and section-link.ts
@@ -219,7 +219,12 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
   aspect ratio to within 0.005px so no layout moved. The oversized full logo
   had made Chromium's draw of it nondeterministic under a full test run,
   which a short-lived rendering retry covered until the resize removed it.
-  Converting them to SVG or WebP is still open for step 7's SEO pass.
+  On 2026-10-09 both became WebP, encoded through Chromium's canvas since no
+  other encoder was installed: the full logo at 0.95 quality (60 KB, down
+  from 299 KB, averaging 0.6 of 255 off the PNG with no difference visible
+  at 3x zoom) and the simple mark lossless (21 KB, down from 24 KB), since
+  lossy WebP showed on its fine detail and Chromium's lossless encoder made
+  the full logo larger than its PNG.
 - **No security headers yet**: `public/_headers` doesn't exist. Step 7
   raises with the user whether to add ease-my-life's hardening headers
   (Content-Security-Policy, HSTS, and the rest), adjusted for whatever this

@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './footer.module.css';        // What: CSS Module Object. Why: The footer is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import losPngUrl from '../assets/logo-simple.png'; // What: Logo-Simple PNG URL. Why: The footer's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
+import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The footer's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
 import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Function. Why: Section buttons have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
@@ -95,7 +95,7 @@ function SitFooCom () : React.JSX.Element {
 						className={ cssModObj.fooLogIma }
 
 						height={ 133 }
-						src={ losPngUrl }
+						src={ losWebUrl }
 						width={ 157 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 						alt=''

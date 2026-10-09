@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './nav.module.css';           // What: CSS Module Object. Why: The bar is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import losPngUrl from '../assets/logo-simple.png'; // What: Logo-Simple PNG URL. Why: The bar's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
+import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The bar's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
 import { useEffect    } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position. How: This registers and removes the scroll listener.
@@ -273,7 +273,7 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.navLogIma }
 
 						height={ 133 }
-						src={ losPngUrl }
+						src={ losWebUrl }
 						width={ 157 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 						alt=''

@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import lofPngUrl from './logo-full.png';   // What: Logo-Full PNG URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
 import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Function. Why: The hero's buttons scroll smoothly, which has to respect the reduced-motion preference. How: scrSecFun asks it before choosing the scroll behavior.
@@ -231,7 +231,7 @@ function HerSecCom () : React.JSX.Element {
 							className={ cssModObj.herLogIma }
 
 							height={ 943 }
-							src={ lofPngUrl }
+							src={ lofWebUrl }
 							width={ 968 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 							alt='Seal and Shield LLC Logo'
