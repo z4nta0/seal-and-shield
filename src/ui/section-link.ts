@@ -54,7 +54,7 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  *
  * @example
  * ```ts
- * useSecLinFun()('about') // => void
+ * useSecLinFun() // => visSecFun, the function a section link calls with an id
  * ```
  *
 */

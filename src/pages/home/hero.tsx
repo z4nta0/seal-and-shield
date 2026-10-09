@@ -37,8 +37,6 @@ import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Functi
 
 // #region Constants
 
-// #region HER_STA_ARR
-
 /**
  * HER_STA_ARR = Hero Stat Array
  *
@@ -63,8 +61,6 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 
 
 ];
-
-// #endregion HER_STA_ARR
 
 // #endregion Constants
 

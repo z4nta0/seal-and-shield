@@ -251,7 +251,7 @@
 
 
 	background       : var( --acc-lig-col );                                /* Accent Light Color ~= #4488f6 */
-	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= 3.572px */
+	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= -3.572px */
 	content          : '';
 	height           : calc( var( --ver-rhy-m07 ) * 1rem );                 /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	left             : 0;
@@ -326,9 +326,8 @@
 
 
 	background : transparent;
-	box-shadow : inset 0 0 0 var( --bor-wid-lar ) var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */ /* What: Outline Ring. Why: The emptied button stays outlined, but a real border would make it taller than it was. How: This draws the outline inside the box, appearing at once beneath the fading fill. */
-	color      : var( --acc-lig-col );                                  /* Accent Light Color ~= #4488f6 */
-	transform  : translateY( -1px );                                    /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transform  : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -441,7 +440,7 @@
 .navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 3 ) { /* What: Open Third Toggle Line Span. Why: The open menu's icon should read as a close cross. How: This lifts the bottom bar to the middle and turns it the other way. */
 
 
-	transform : translateY( calc( ( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) * -1 ) ) rotate( -45deg ); /* Vertical Rhythm Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 4 ~= 4.732px */
+	transform : translateY( calc( ( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) * -1 ) ) rotate( -45deg ); /* Vertical Rhythm Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 4 ~= -4.732px */
 
 
 }

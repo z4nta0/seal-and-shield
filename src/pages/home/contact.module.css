@@ -540,11 +540,11 @@
 	color          : var( --tex-mai-col );                            /* Text Main Color = #0f1e45 */
 	font-family    : var( --fon-fam-mai );                            /* Font Family Main = 'Lato', sans-serif */
 	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
-	outline        : 0 solid var( --acc-mai-col );                    /* Accent Main Color = #1e56c8 */
+	outline        : 0 solid var( --foc-rin-col );                    /* Focus Ring Color = #1e56c8 */
 	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );             /* Vertical Rhythm Base Minus 3 ~= 6.268px */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-bas );       /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
 	resize         : vertical;
-	transition     : border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-width var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -676,6 +676,8 @@
 /* #endregion forErrPar */
 
 
+/* #region forSubBut */
+
 .forSubBut { /* What: Form Submit Button. Why: The form's main action spans the panel. How: This sets a full-width navy button in the display font, and eases every change between its looks. */
 
 
@@ -690,12 +692,12 @@
 	margin-bottom  : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
 	padding        : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	text-transform : uppercase;
-	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 	width          : 100%;
 
 
 }
-.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This turns its fill and border blue. */
+.forSubBut:hover:not( :disabled ) { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer, but not while a request is out. How: This turns its fill and border blue and lifts it, only while the button can be used. */
 
 
 	background   : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
@@ -711,7 +713,7 @@
 
 
 }
-.forSubBut:disabled { /* What: Disabled Form Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This dims it and shows the progress cursor. */
+.forSubBut:disabled { /* What: Disabled Form Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This fades it dimmer and shows the progress cursor. */
 
 
 	cursor  : progress;
@@ -732,6 +734,51 @@
 
 
 }
+
+.subLabSpa { /* What: Submit Label Span. Why: The button's label should change visibly when a request goes out, not just swap. How: This fades each new label in once, as the label remounts under a new key. */
+
+
+	animation : subLabSpaSwapFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ); /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Submit Label Span. Why: Someone who asked for less motion shouldn't see the label fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.subLabSpa { /* What: Motionless Submit Label Span. Why: The new label should simply appear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that cross-fades reads as a response to the press. How: This fades the new label up from transparent. */
+
+
+	from {
+
+
+		opacity : 0;
+
+
+	}
+
+	to {
+
+
+		opacity : 1;
+
+
+	}
+
+
+}
+
+/* #endregion forSubBut */
+
 
 .forNotPar { /* What: Form Note Paragraph. Why: The no-spam promise should be present but quiet. How: This centers it small in the muted text color. */
 

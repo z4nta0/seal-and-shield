@@ -42,8 +42,6 @@ import { useState     } from 'react';             // What: Use State. Why: The b
 
 // #region Constants
 
-// #region NAV_LIN_ARR
-
 /**
  * NAV_LIN_ARR = Navigation Link Array
  *
@@ -68,8 +66,6 @@ const NAV_LIN_ARR = [ // What: Navigation Link Array. Why: The bar and the mobil
 
 
 ];
-
-// #endregion NAV_LIN_ARR
 
 
 
@@ -119,6 +115,7 @@ function NavBarCom () : React.JSX.Element {
 	const [ barScrBoo, setBarScrBoo ] = useState( false );  // What: Bar Scrolled Boolean And Setter. Why: The bar gains a solid background once the page scrolls. How: This holds whether the page has scrolled past the bar's threshold.
 
 	const isaHomBoo = useLocation().pathname === '/'; // What: Is-A Home Boolean. Why: Only the home page has sections, so no link is active anywhere else. How: This is true when the path is the site's root.
+
 
 
 	useEffect( () => { // What: Scroll Listener Effect. Why: The bar's look and active link follow the scroll position. How: This registers the scroll handler once and removes it when the bar unmounts.

@@ -179,7 +179,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 		return finCanObj.toDataURL( 'image/png' ).split( ',' )[ 1 ]; // What: PNG Data Return. Why: The bytes have to leave the page as text. How: This encodes the canvas as a PNG and returns its base64 part.
 
 
-	}, [ SOU_B64_STR, icoSizNum, icoOpaBoo ] as const ); // What: Drawing Arguments. Why: The page can't read this script's variables. How: This hands the mark's data, the target size, and the opaque flag into the page.
+	}, [ SOU_B64_STR, icoSizNum, icoOpaBoo ] as const ); // What: Drawing Arguments. Why: The page can't read this script's variables. How: This hands the mark's data, the target size, and the opaque flag into the page. // What: Type Assertion Note. Why: Without it the array widens to one mixed type, so the page function's destructured parameters lose their own types. How: as const keeps it a readonly tuple, so each parameter is typed by its position.
 
 
 
