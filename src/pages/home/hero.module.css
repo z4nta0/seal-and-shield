@@ -1,0 +1,643 @@
+
+
+
+/**
+ * hero.module.css = Hero Section Module
+ *
+ * @summary
+ * Styles for HerSecCom: the full-height dark opening section with its faint
+ * grid and blue glow, the two-column content row (the eyebrow, headline,
+ * pitch, and buttons beside the full logo and its pulsing ring), and the
+ * frosted stats bar along its bottom. On screens 900px wide or narrower the
+ * row becomes one centered column with the logo first and the stats wrap
+ * into two by two. The opening blocks rise and fade in once as the page
+ * loads through fadeUp, and the logo's ring pulses through pulseRing; both
+ * keyframes live here, since only the hero plays them, and both stop under
+ * reduced motion. The shared container styles the content and stats rows
+ * used to borrow from the global stylesheet are copied onto their own
+ * classes, which also retires the !important the content row's vertical
+ * padding needed to beat the container's.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region home */
+
+.home { /* What: Hero Home Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
+
+
+	background      : var(--navy-dark);
+	display         : flex;
+	flex-direction  : column;
+	justify-content : center;
+	min-height      : 100vh;
+	overflow        : hidden;
+	padding-top     : 80px;
+	position        : relative;
+
+
+}
+
+.home__bg-grid { /* What: Hero Background Grid Div. Why: A faint grid gives the dark band some texture. How: This tiles thin blue lines every 60px across the section, masked to fade out at the top and bottom. */
+
+
+	background-image : linear-gradient(rgba(30, 86, 200, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 86, 200, 0.07) 1px, transparent 1px);
+	background-size  : 60px 60px;
+	inset            : 0;
+	mask-image       : linear-gradient(to bottom, transparent, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.6) 70%, transparent);
+	position         : absolute;
+
+
+}
+
+.home__bg-gradient { /* What: Hero Background Gradient Div. Why: A soft blue glow draws the eye toward the logo. How: This places an oversized radial glow off the top right corner that ignores the pointer. */
+
+
+	background     : radial-gradient(ellipse at 70% 40%, rgba(30, 86, 200, 0.22) 0%, transparent 65%);
+	height         : 120%;
+	pointer-events : none;
+	position       : absolute;
+	right          : -10%;
+	top            : -20%;
+	width          : 70%;
+
+
+}
+
+
+/* #region home__content */
+
+.home__content { /* What: Hero Content Div. Why: The pitch and the logo sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding plus room above and below, layered above the background. */
+
+
+	align-items           : center;
+	display               : grid;
+	gap                   : 4rem;
+	grid-template-columns : 1fr 1fr;
+	margin                : 0 auto;
+	max-width             : var(--max-w);
+	padding               : 5rem 2rem;
+	position              : relative;
+	z-index               : 1;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Content Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
+
+
+	.home__content { /* What: Stacked Hero Content Div. Why: The pitch and logo read best in one centered column there. How: This collapses the grid to one column and centers its text. */
+
+
+		grid-template-columns : 1fr;
+		text-align            : center;
+
+
+	}
+
+
+}
+
+.home__eyebrow { /* What: Hero Eyebrow Paragraph. Why: A short line says what the company is before the headline. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
+
+
+	animation      : fadeUp 0.8s ease both;
+	color          : var(--blue-light);
+	font-family    : var(--font-display);
+	font-size      : 0.8rem;
+	font-weight    : 600;
+	letter-spacing : 0.3em;
+	margin-bottom  : 1.25rem;
+	text-transform : uppercase;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Eyebrow Paragraph. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.home__eyebrow { /* What: Motionless Hero Eyebrow Paragraph. Why: The eyebrow should simply be there. How: This turns the entrance animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes fadeUp { /* What: Fade Up. Why: The hero's opening blocks rise into place as the page loads. How: This moves a block up from 28px below and from transparent to fully shown. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY(28px);
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : translateY(0);
+
+
+	}
+
+
+}
+
+
+/* #region home__headline */
+
+.home__headline { /* What: Hero Headline Heading. Why: The headline is the page's main heading and the company's promise. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
+
+
+	animation      : fadeUp 0.8s 0.1s ease both;
+	color          : var(--white);
+	font-family    : var(--font-display);
+	font-size      : clamp(3.5rem, 7vw, 6rem);
+	font-weight    : 800;
+	letter-spacing : 0.02em;
+	line-height    : 0.95;
+	margin-bottom  : 1.5rem;
+	text-transform : uppercase;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Headline Heading. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.home__headline { /* What: Motionless Hero Headline Heading. Why: The headline should simply be there. How: This turns the entrance animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.home__headline-accent { /* What: Hero Headline Accent Span. Why: The two promise words stand out from the rest of the headline. How: This colors them light blue with a thin darker blue outline. */
+
+
+	-webkit-text-stroke : 1px var(--blue);
+	color               : var(--blue-light);
+
+
+}
+
+/* #endregion home__headline */
+
+
+.home__sub { /* What: Hero Sub Paragraph. Why: A short pitch follows the headline at a comfortable reading width. How: This sets it in light silver with generous leading, capped at 480px wide, rising in after the headline. */
+
+
+	animation     : fadeUp 0.8s 0.2s ease both;
+	color         : var(--silver-light);
+	font-size     : 1.05rem;
+	line-height   : 1.75;
+	margin-bottom : 2.25rem;
+	max-width     : 480px;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Sub Paragraph. Why: The stacked column is centered. How: This applies 900px wide and below. */
+
+
+	.home__sub { /* What: Centered Hero Sub Paragraph. Why: The capped paragraph should sit in the middle of the centered column. How: This centers it with automatic side margins. */
+
+
+		margin-inline : auto;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Sub Paragraph. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.home__sub { /* What: Motionless Hero Sub Paragraph. Why: The pitch should simply be there. How: This turns the entrance animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region home__actions */
+
+.home__actions { /* What: Hero Actions Div. Why: The pitch ends with the two next steps side by side. How: This lines the buttons up in a row that wraps when it runs out of room, rising in after the pitch. */
+
+
+	animation : fadeUp 0.8s 0.3s ease both;
+	display   : flex;
+	flex-wrap : wrap;
+	gap       : 1rem;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Actions Div. Why: The stacked column is centered. How: This applies 900px wide and below. */
+
+
+	.home__actions { /* What: Centered Hero Actions Div. Why: The buttons should sit in the middle of the centered column. How: This centers the row. */
+
+
+		justify-content : center;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Actions Div. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.home__actions { /* What: Motionless Hero Actions Div. Why: The buttons should simply be there. How: This turns the entrance animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.home__btn { /* What: Hero Button Anchor. Why: Both hero buttons share one shape and type. How: This sets their spaced, uppercase label and padding, and eases every change between their looks. */
+
+
+	cursor         : pointer;
+	font-family    : var(--font-display);
+	font-size      : 0.95rem;
+	font-weight    : 700;
+	letter-spacing : 0.1em;
+	padding        : 0.9rem 2rem;
+	text-transform : uppercase;
+	transition     : all var(--transition);
+
+
+}
+.home__btn--primary { /* What: Primary Hero Button Anchor. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue with white text. */
+
+
+	background : var(--blue);
+	border     : 2px solid var(--blue);
+	color      : var(--white);
+
+
+}
+.home__btn--primary:hover { /* What: Hovered Primary Hero Button Anchor. Why: The button should respond to the pointer. How: This lightens its fill and border to the lighter blue. */
+
+
+	background   : var(--blue-light);
+	border-color : var(--blue-light);
+
+
+}
+.home__btn--secondary { /* What: Secondary Hero Button Anchor. Why: The services link is the quieter second option. How: This leaves it unfilled with white text and a faint white outline. */
+
+
+	background : transparent;
+	border     : 2px solid rgba(255,255,255,0.3);
+	color      : var(--white);
+
+
+}
+.home__btn--secondary:hover { /* What: Hovered Secondary Hero Button Anchor. Why: The button should respond to the pointer. How: This firms its outline to white and adds a faint fill. */
+
+
+	background   : rgba(255,255,255,0.06);
+	border-color : var(--white);
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Button Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.home__btn { /* What: Motionless Hero Button Anchor. Why: The hover looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion home__actions */
+
+
+
+/* #region home__right */
+
+.home__right { /* What: Hero Right Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
+
+
+	align-items     : center;
+	animation       : fadeUp 0.9s 0.2s ease both;
+	display         : flex;
+	justify-content : center;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Right Div. Why: In the stacked column the logo leads. How: This applies 900px wide and below. */
+
+
+	.home__right { /* What: Leading Hero Right Div. Why: The logo should sit above the pitch once the columns stack. How: This moves it first in the grid's order. */
+
+
+		order : -1;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Right Div. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.home__right { /* What: Motionless Hero Right Div. Why: The logo should simply be there. How: This turns the entrance animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region home__logo-wrap */
+
+.home__logo-wrap { /* What: Hero Logo Wrap Div. Why: The ring sits behind the logo, centered on it. How: This positions the two in one centered box. */
+
+
+	align-items     : center;
+	display         : flex;
+	justify-content : center;
+	position        : relative;
+
+
+}
+
+.home__logo-ring { /* What: Hero Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a 420px faint blue circle behind the logo that swells and brightens on a four-second loop. */
+
+
+	animation     : pulseRing 4s ease-in-out infinite;
+	border        : 1px solid rgba(30, 86, 200, 0.25);
+	border-radius : 50%;
+	height        : 420px;
+	position      : absolute;
+	width         : 420px;
+
+
+}
+.home__logo-ring::before { /* What: Hero Logo Inner Ring. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it 24px inside the outer circle. */
+
+
+	border        : 1px solid rgba(30, 86, 200, 0.15);
+	border-radius : 50%;
+	content       : '';
+	inset         : 24px;
+	position      : absolute;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Logo Ring Div. Why: The logo shrinks on narrower screens, and its ring follows. How: This applies 900px wide and below. */
+
+
+	.home__logo-ring { /* What: Smaller Hero Logo Ring Div. Why: The ring should still frame the smaller logo. How: This shrinks it to 320px. */
+
+
+		height : 320px;
+		width  : 320px;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Logo Ring Div. Why: A looping pulse is exactly the motion someone who asked for less shouldn't see. How: This applies only when the reduced-motion preference is set. */
+
+
+	.home__logo-ring { /* What: Motionless Hero Logo Ring Div. Why: The ring should stay still. How: This turns the pulse off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes pulseRing { /* What: Pulse Ring. Why: The logo's ring breathes slowly to draw the eye. How: This swells the ring slightly and brightens it at the halfway point, then settles it back. */
+
+
+	0%,
+	100% {
+
+
+		opacity   : 0.6;
+		transform : scale(1);
+
+
+	}
+
+	50% {
+
+
+		opacity   : 1;
+		transform : scale(1.04);
+
+
+	}
+
+
+}
+
+.home__logo { /* What: Hero Logo Image. Why: The full logo anchors the hero and should float above its glow. How: This sizes it with the screen between 280px and 420px wide, casts a soft blue shadow under it, and layers it above the ring. */
+
+
+	filter   : drop-shadow(0 20px 60px rgba(30, 86, 200, 0.4));
+	position : relative;
+	width    : clamp(280px, 38vw, 420px);
+	z-index  : 1;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Logo Image. Why: The stacked column has less room for the logo. How: This applies 900px wide and below. */
+
+
+	.home__logo { /* What: Smaller Hero Logo Image. Why: The logo should fit the narrower column. How: This sizes it with the screen between 200px and 300px wide. */
+
+
+		width : clamp(200px, 55vw, 300px);
+
+
+	}
+
+
+}
+
+/* #endregion home__logo-wrap */
+
+/* #endregion home__right */
+
+/* #endregion home__content */
+
+
+
+/* #region home__stats */
+
+.home__stats { /* What: Hero Stats Div. Why: Four quick figures close the hero on a band of their own. How: This draws a faintly frosted strip along the hero's bottom with a hairline on top, layered above the background. */
+
+
+	backdrop-filter : blur(8px);
+	background      : rgba(255,255,255,0.04);
+	border-top      : 1px solid rgba(255,255,255,0.08);
+	position        : relative;
+	z-index         : 1;
+
+
+}
+
+
+/* #region home__stats-inner */
+
+.home__stats-inner { /* What: Hero Stats Inner Div. Why: The figures line up with the page's content width. How: This centers a capped-width row with the container's side padding and lays the four figures out in equal columns. */
+
+
+	display               : grid;
+	gap                   : 0;
+	grid-template-columns : repeat(4, 1fr);
+	margin                : 0 auto;
+	max-width             : var(--max-w);
+	padding               : 0 2rem;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Stats Inner Div. Why: Four columns get cramped on narrower screens. How: This applies 900px wide and below. */
+
+
+	.home__stats-inner { /* What: Two-Column Hero Stats Inner Div. Why: The figures read better two by two. How: This switches to two columns. */
+
+
+		grid-template-columns : repeat(2, 1fr);
+
+
+	}
+
+
+}
+@media ( max-width : 480px ) { /* What: Narrowest Hero Stats Inner Div. Why: The smallest screens keep the two-by-two layout. How: This applies 480px wide and below. */
+
+
+	.home__stats-inner { /* What: Two-Column Hero Stats Inner Div. Why: The figures read best two by two on the smallest screens too. How: This sets two columns again, which the 900px query already does. */
+
+
+		grid-template-columns : repeat(2, 1fr);
+
+
+	}
+
+
+}
+
+
+/* #region home__stat */
+
+.home__stat { /* What: Hero Stat Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with a faint divider on its right. */
+
+
+	align-items    : center;
+	border-right   : 1px solid rgba(255,255,255,0.07);
+	display        : flex;
+	flex-direction : column;
+	gap            : 0.3rem;
+	padding        : 1.75rem 1rem;
+
+
+}
+.home__stat:last-child { /* What: Last Hero Stat Div. Why: The row ends without a divider. How: This drops the last cell's right border. */
+
+
+	border-right : none;
+
+
+}
+@media ( max-width : 900px ) { /* What: Narrow Hero Stat Div. Why: The two-by-two grid needs its dividers redrawn. How: This applies 900px wide and below. */
+
+
+	.home__stat:nth-child( 2 ) { /* What: Second Hero Stat Div. Why: The second cell now ends the first row. How: This drops its right border. */
+
+
+		border-right : none;
+
+
+	}
+	.home__stat:nth-child( 3 ),
+	.home__stat:nth-child( 4 ) { /* What: Second Row Hero Stat Div. Why: The second row needs a line between it and the first. How: This draws a faint border along the top of the third and fourth cells. */
+
+
+		border-top : 1px solid rgba(255,255,255,0.07);
+
+
+	}
+	.home__stat:nth-child( 4 ) { /* What: Fourth Hero Stat Div. Why: The fourth cell ends the second row. How: This drops its right border. */
+
+
+		border-right : none;
+
+
+	}
+
+
+}
+
+.home__stat-value { /* What: Hero Stat Value Span. Why: The figure is the cell's focus. How: This sets it large in the extra bold display font, in white. */
+
+
+	color          : var(--white);
+	font-family    : var(--font-display);
+	font-size      : 1.9rem;
+	font-weight    : 800;
+	letter-spacing : 0.02em;
+
+
+}
+
+.home__stat-label { /* What: Hero Stat Label Span. Why: The caption says what the figure means without competing with it. How: This sets it small, spaced, uppercase, and silver in the body font. */
+
+
+	color          : var(--silver);
+	font-family    : var(--font-body);
+	font-size      : 0.75rem;
+	font-weight    : 400;
+	letter-spacing : 0.1em;
+	text-transform : uppercase;
+
+
+}
+
+/* #endregion home__stat */
+
+/* #endregion home__stats-inner */
+
+/* #endregion home__stats */
+
+/* #endregion home */
+
+

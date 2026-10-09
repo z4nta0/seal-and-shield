@@ -3,13 +3,11 @@
 
 // #region Imports
 
-import lofPngUrl from './logo-full.png'; // What: Logo-Full PNG URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
+import lofPngUrl from './logo-full.png';   // What: Logo-Full PNG URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
 import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Function. Why: The hero's buttons scroll smoothly, which has to respect the reduced-motion preference. How: scrSecFun asks it before choosing the scroll behavior.
-
-
-import './hero.css'; // What: Hero Stylesheet Import. Why: The hero's layout, background, buttons, logo, and stats bar are styled in their own stylesheet. How: This is imported purely for its side effect.
 
 // #endregion Imports
 
@@ -148,50 +146,50 @@ function HerSecCom () : React.JSX.Element {
 		<section
 			id='home'
 
-			className='home'
+			className={ cssModObj.home }
 		>{ /* What: Hero Home Section Element. Why: The page opens with the headline, pitch, and logo. How: Its id, kept as is because it's the bar's link target, is where the Home link and brand scroll to. */ }
 
 
 			<div
-				className='home__bg-grid'
+				className={ cssModObj.homeBgGrid }
 
 				aria-hidden='true'
 			/>{ /* What: Hero Background Grid Div Element. Why: A faint grid gives the dark hero some texture. How: This is decorative and hidden from assistive technology. */ }
 
 			<div
-				className='home__bg-gradient'
+				className={ cssModObj.homeBgGradient }
 
 				aria-hidden='true'
 			/>{ /* What: Hero Background Gradient Div Element. Why: A soft glow draws the eye toward the logo. How: This is decorative and hidden from assistive technology. */ }
 
 
 
-			<div className='home__content container'>{ /* What: Hero Content Div Element. Why: The hero's text and logo line up with the page's content width. How: This lays them out in two columns. */ }
+			<div className={ cssModObj.homeContent }>{ /* What: Hero Content Div Element. Why: The hero's text and logo line up with the page's content width. How: This lays them out in two columns. */ }
 
 
-				<div className='home__left'>{ /* What: Hero Left Div Element. Why: The pitch reads first. How: This stacks the eyebrow, headline, pitch, and buttons. */ }
+				<div>{ /* What: Hero Left Div Element. Why: The pitch reads first. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, with no styling of its own. */ }
 
 
-					<p className='home__eyebrow'>Commercial Roofing Specialists</p>{ /* What: Hero Eyebrow Paragraph Element. Why: A short line says what the company is before the headline. How: This sits above the headline in small capitals. */ }
+					<p className={ cssModObj.homeEyebrow }>Commercial Roofing Specialists</p>{ /* What: Hero Eyebrow Paragraph Element. Why: A short line says what the company is before the headline. How: This sits above the headline in small capitals. */ }
 
-					<h1 className='home__headline'>{ /* What: Hero Headline Heading Element. Why: The headline is the page's main heading and the company's promise. How: Its two accent words take the light blue. */ }
+					<h1 className={ cssModObj.homeHeadline }>{ /* What: Hero Headline Heading Element. Why: The headline is the page's main heading and the company's promise. How: Its two accent words take the light blue. */ }
 						Built to<br />
-						<span className='home__headline-accent'>Seal.</span>{ /* What: Seal Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
+						<span className={ cssModObj.homeHeadlineAccent }>Seal.</span>{ /* What: Seal Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
 						Built to<br />
-						<span className='home__headline-accent'>Shield.</span>{ /* What: Shield Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
+						<span className={ cssModObj.homeHeadlineAccent }>Shield.</span>{ /* What: Shield Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
 					</h1>
 
-					<p className='home__sub'>{ /* What: Hero Sub Paragraph Element. Why: A short pitch follows the headline. How: This names the company's range of work and its promise. */ }
+					<p className={ cssModObj.homeSub }>{ /* What: Hero Sub Paragraph Element. Why: A short pitch follows the headline. How: This names the company's range of work and its promise. */ }
 						Protecting Kansas businesses with premium roofing solutions,
 						from Conklin liquid coatings to full commercial installations.
 						Trusted, reliable, and built to last.
 					</p>
 
-					<div className='home__actions'>{ /* What: Hero Actions Div Element. Why: The pitch ends with the two next steps. How: This sets the two buttons side by side. */ }
+					<div className={ cssModObj.homeActions }>{ /* What: Hero Actions Div Element. Why: The pitch ends with the two next steps. How: This sets the two buttons side by side. */ }
 
 
 						<a
-							className='home__btn home__btn--primary'
+							className={` ${ cssModObj.homeBtn }   ${ cssModObj.homeBtnPrimary } `}
 
 							href='#contact'
 
@@ -201,7 +199,7 @@ function HerSecCom () : React.JSX.Element {
 						</a>
 
 						<a
-							className='home__btn home__btn--secondary'
+							className={` ${ cssModObj.homeBtn }   ${ cssModObj.homeBtnSecondary } `}
 
 							href='#services'
 
@@ -217,20 +215,20 @@ function HerSecCom () : React.JSX.Element {
 				</div>
 
 
-				<div className='home__right'>{ /* What: Hero Right Div Element. Why: The logo balances the pitch. How: This centers the logo and its ring. */ }
+				<div className={ cssModObj.homeRight }>{ /* What: Hero Right Div Element. Why: The logo balances the pitch. How: This centers the logo and its ring. */ }
 
 
-					<div className='home__logo-wrap'>{ /* What: Hero Logo Wrap Div Element. Why: The ring sits behind the logo. How: This stacks the two in one box. */ }
+					<div className={ cssModObj.homeLogoWrap }>{ /* What: Hero Logo Wrap Div Element. Why: The ring sits behind the logo. How: This stacks the two in one box. */ }
 
 
 						<div
-							className='home__logo-ring'
+							className={ cssModObj.homeLogoRing }
 
 							aria-hidden='true'
 						/>{ /* What: Hero Logo Ring Div Element. Why: A slow pulse around the logo adds a little life. How: This is decorative, hidden from assistive technology, and still under reduced motion. */ }
 
 						<img
-							className='home__logo'
+							className={ cssModObj.homeLogo }
 
 							src={ lofPngUrl }
 
@@ -248,10 +246,10 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-			<div className='home__stats'>{ /* What: Hero Stats Div Element. Why: Four quick figures close the hero. How: This draws the bar along the hero's bottom. */ }
+			<div className={ cssModObj.homeStats }>{ /* What: Hero Stats Div Element. Why: Four quick figures close the hero. How: This draws the bar along the hero's bottom. */ }
 
 
-				<div className='container home__stats-inner'>{ /* What: Hero Stats Inner Div Element. Why: The figures line up with the page's content width. How: This lays the four out in a row. */ }
+				<div className={ cssModObj.homeStatsInner }>{ /* What: Hero Stats Inner Div Element. Why: The figures line up with the page's content width. How: This lays the four out in a row. */ }
 
 
 					{ HER_STA_ARR.map( ( staRcdObj ) => ( // What: Stat Map. Why: Each figure gets its own cell. How: This renders one cell per row.
@@ -260,13 +258,13 @@ function HerSecCom () : React.JSX.Element {
 						<div
 							key={ staRcdObj.labStr }
 
-							className='home__stat'
+							className={ cssModObj.homeStat }
 						>{ /* What: Hero Stat Div Element. Why: Each figure reads with its caption. How: This stacks the two. */ }
 
 
-							<span className='home__stat-value'>{ staRcdObj.valStr }</span>{ /* What: Hero Stat Value Span Element. Why: The figure is the cell's focus. How: This shows it large. */ }
+							<span className={ cssModObj.homeStatValue }>{ staRcdObj.valStr }</span>{ /* What: Hero Stat Value Span Element. Why: The figure is the cell's focus. How: This shows it large. */ }
 
-							<span className='home__stat-label'>{ staRcdObj.labStr }</span>{ /* What: Hero Stat Label Span Element. Why: The caption says what the figure means. How: This shows it small beneath. */ }
+							<span className={ cssModObj.homeStatLabel }>{ staRcdObj.labStr }</span>{ /* What: Hero Stat Label Span Element. Why: The caption says what the figure means. How: This shows it small beneath. */ }
 
 
 						</div>
