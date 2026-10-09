@@ -3,13 +3,13 @@
 
 // #region Imports
 
-import About    from './about.tsx';    // What: About. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
-import Contact  from './contact.tsx';  // What: Contact. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
-import Services from './services.tsx'; // What: Services. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
+import About   from './about.tsx';   // What: About. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
+import Contact from './contact.tsx'; // What: Contact. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
 
 
 import { HerSecCom } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
 import { NavBarCom } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
+import { SerSecCom } from './services.tsx';      // What: Services Section Component. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
 import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: Every page ends with the shared footer. How: This is rendered below main.
 
 // #endregion Imports
@@ -81,7 +81,7 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-				<Services />{ /* What: Services. Why: Visitors see what the company does next. How: This renders the services second. */ }
+				<SerSecCom />{ /* What: Services Section Component. Why: Visitors see what the company does next. How: This renders the services second. */ }
 
 
 
