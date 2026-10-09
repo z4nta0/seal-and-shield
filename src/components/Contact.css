@@ -154,9 +154,10 @@
   background: var(--off-white);
   border: 1.5px solid var(--silver-light);
   padding: 0.75rem 1rem;
-  outline: none;
+  outline: 0 solid var(--blue);
+  outline-offset: 6px;
   resize: vertical;
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), outline-offset var(--transition), outline-width var(--transition);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -167,6 +168,12 @@
 .contact__field input:focus,
 .contact__field textarea:focus {
   border-color: var(--blue);
+}
+
+.contact__field input:focus-visible,
+.contact__field textarea:focus-visible {
+  outline-offset: 2px;
+  outline-width: 2px;
 }
 
 .contact__submit {
