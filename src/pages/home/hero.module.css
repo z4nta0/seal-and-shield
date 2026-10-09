@@ -9,14 +9,14 @@
  * grid and blue glow, the two-column content row (the eyebrow, headline,
  * pitch, and buttons beside the full logo and its pulsing ring), and the
  * frosted stats bar along its bottom. On screens 900px wide or narrower the
- * row becomes one centered column with the logo first and the stats wrap
- * into two by two. The opening blocks rise and fade in once as the page
- * loads through fadeUp, and the logo's ring pulses through pulseRing; both
- * keyframes live here, since only the hero plays them, and both stop under
- * reduced motion. The shared container styles the content and stats rows
- * used to borrow from the global stylesheet are copied onto their own
- * classes, which also retires the !important the content row's vertical
- * padding needed to beat the container's.
+ * row becomes one centered column with the logo first and the stats wrap into
+ * two by two. The opening blocks rise and fade in once as the page loads
+ * through blockEnterFadeIn, and the logo's ring pulses through
+ * logRinDivLoopPulse; both keyframes live here, since only the hero plays
+ * them, and both stop under reduced motion. The shared container styles the
+ * content and stats rows used to borrow from the global stylesheet are copied
+ * onto their own classes, which also retires the !important the content row's
+ * vertical padding needed to beat the container's.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -26,7 +26,7 @@
 
 /* #region home */
 
-.home { /* What: Hero Home Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
+.homHerSec { /* What: Home Hero Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
 
 
 	background      : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
@@ -41,7 +41,7 @@
 
 }
 
-.home__bg-grid { /* What: Hero Background Grid Div. Why: A faint grid gives the dark band some texture. How: This tiles thin blue lines about every 59px across the section, masked to fade out at the top and bottom. */
+.herGriDiv { /* What: Hero Grid Div. Why: A faint grid gives the dark band some texture. How: This tiles thin blue lines about every 59px across the section, masked to fade out at the top and bottom. */
 
 
 	background-image : linear-gradient( oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ), linear-gradient( 90deg, oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ); /* Accent Main Color = #1e56c8 @ 0.07 opacity */ /* What: Literal Grid Lines. Why: Each line should draw a crisp single pixel. How: A gradient stop doesn't snap to whole pixels the way a border does, so the lines stay 1px rather than reading the border width. */
@@ -53,7 +53,7 @@
 
 }
 
-.home__bg-gradient { /* What: Hero Background Gradient Div. Why: A soft blue glow draws the eye toward the logo. How: This places an oversized radial glow off the top right corner that ignores the pointer. */
+.herGraDiv { /* What: Hero Gradient Div. Why: A soft blue glow draws the eye toward the logo. How: This places an oversized radial glow off the top right corner that ignores the pointer. */
 
 
 	background     : radial-gradient( ellipse at 70% 40%, oklch( from var( --acc-mai-col ) l c h / 0.22 ) 0%, transparent 65% ); /* Accent Main Color = #1e56c8 @ 0.22 opacity */
@@ -70,7 +70,7 @@
 
 /* #region home__content */
 
-.home__content { /* What: Hero Content Div. Why: The pitch and the logo sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding plus room above and below, layered above the background. */
+.herConDiv { /* What: Hero Content Div. Why: The pitch and the logo sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding plus room above and below, layered above the background. */
 
 
 	align-items           : center;
@@ -88,7 +88,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Hero Content Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
 
 
-	.home__content { /* What: Stacked Hero Content Div. Why: The pitch and logo read best in one centered column there. How: This collapses the grid to one column and centers its text. */
+	.herConDiv { /* What: Stacked Hero Content Div. Why: The pitch and logo read best in one centered column there. How: This collapses the grid to one column and centers its text. */
 
 
 		grid-template-columns : 1fr;
@@ -100,10 +100,10 @@
 
 }
 
-.home__eyebrow { /* What: Hero Eyebrow Paragraph. Why: A short line says what the company is before the headline. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short line says what the company is before the headline. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
 
 
-	animation      : fadeUp var( --dur-ani-p06 ) var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */
+	animation      : blockEnterFadeIn var( --dur-ani-p06 ) var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */
 	color          : var( --acc-lig-col );                                  /* Accent Light Color ~= #4488f6 */
 	font-family    : var( --fon-fam-sec );                                  /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                                  /* Font Size Base Plus 1 ~= 14.572px */
@@ -114,10 +114,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Eyebrow Paragraph. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Eyebrow Label Paragraph. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.home__eyebrow { /* What: Motionless Hero Eyebrow Paragraph. Why: The eyebrow should simply be there. How: This turns the entrance animation off. */
+	.eyeLabPar { /* What: Motionless Eyebrow Label Paragraph. Why: The eyebrow should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -127,7 +127,7 @@
 
 
 }
-@keyframes fadeUp { /* What: Fade Up. Why: The hero's opening blocks rise into place as the page loads. How: This moves a block up from about 26px below and from transparent to fully shown. */
+@keyframes blockEnterFadeIn { /* What: Block Enter Fade In. Why: The hero's opening blocks rise into place as the page loads. How: This moves a block up from about 26px below and from transparent to fully shown. */
 
 
 	from {
@@ -154,10 +154,10 @@
 
 /* #region home__headline */
 
-.home__headline { /* What: Hero Headline Heading. Why: The headline is the page's main heading and the company's promise. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
+.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's main heading and the company's promise. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
 
 
-	animation      : fadeUp var( --dur-ani-p06 ) 0.1s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
+	animation      : blockEnterFadeIn var( --dur-ani-p06 ) 0.1s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
 	color          : var( --bac-pag-col );                                       /* Background Page Color = #ffffff */
 	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : clamp( var( --fon-siz-p06 ), 7vw, var( --fon-siz-p08 ) );   /* Font Size Base Plus 6 ~= 59.447px, Font Size Base Plus 8 ~= 104.323px */
@@ -169,10 +169,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Headline Heading. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Title Heading. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.home__headline { /* What: Motionless Hero Headline Heading. Why: The headline should simply be there. How: This turns the entrance animation off. */
+	.herTitHea { /* What: Motionless Hero Title Heading. Why: The headline should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -183,7 +183,7 @@
 
 }
 
-.home__headline-accent { /* What: Hero Headline Accent Span. Why: The two promise words stand out from the rest of the headline. How: This colors them light blue with a thin darker blue outline. */
+.titAccSpa { /* What: Title Accent Span. Why: The two promise words stand out from the rest of the headline. How: This colors them light blue with a thin darker blue outline. */
 
 
 	-webkit-text-stroke : var( --bor-wid-bas ) var( --acc-mai-col ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8 */
@@ -195,10 +195,10 @@
 /* #endregion home__headline */
 
 
-.home__sub { /* What: Hero Sub Paragraph. Why: A short pitch follows the headline at a comfortable reading width. How: This sets it in light silver with generous leading, capped near 68 characters a line, rising in after the headline. */
+.herLedPar { /* What: Hero Lede Paragraph. Why: A short pitch follows the headline at a comfortable reading width. How: This sets it in light silver with generous leading, capped near 68 characters a line, rising in after the headline. */
 
 
-	animation     : fadeUp var( --dur-ani-p06 ) 0.2s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
+	animation     : blockEnterFadeIn var( --dur-ani-p06 ) 0.2s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
 	color         : var( --tex-inv-col );                                       /* Text Inverse Color = #c8d0e0 */
 	font-size     : var( --fon-siz-p01 );                                       /* Font Size Base Plus 1 ~= 14.572px */
 	line-height   : var( --ver-rhy-p01 );                                       /* Vertical Rhythm Base Plus 1 ~= 1.755 */
@@ -207,10 +207,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Hero Sub Paragraph. Why: The stacked column is centered. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Hero Lede Paragraph. Why: The stacked column is centered. How: This applies 900px wide and below. */
 
 
-	.home__sub { /* What: Centered Hero Sub Paragraph. Why: The capped paragraph should sit in the middle of the centered column. How: This centers it with automatic side margins. */
+	.herLedPar { /* What: Centered Hero Lede Paragraph. Why: The capped paragraph should sit in the middle of the centered column. How: This centers it with automatic side margins. */
 
 
 		margin-inline : auto;
@@ -220,10 +220,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Sub Paragraph. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Lede Paragraph. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.home__sub { /* What: Motionless Hero Sub Paragraph. Why: The pitch should simply be there. How: This turns the entrance animation off. */
+	.herLedPar { /* What: Motionless Hero Lede Paragraph. Why: The pitch should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -237,10 +237,10 @@
 
 /* #region home__actions */
 
-.home__actions { /* What: Hero Actions Div. Why: The pitch ends with the two next steps side by side. How: This lines the buttons up in a row that wraps when it runs out of room, rising in after the pitch. */
+.herActDiv { /* What: Hero Actions Div. Why: The pitch ends with the two next steps side by side. How: This lines the buttons up in a row that wraps when it runs out of room, rising in after the pitch. */
 
 
-	animation : fadeUp var( --dur-ani-p06 ) 0.3s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
+	animation : blockEnterFadeIn var( --dur-ani-p06 ) 0.3s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
 	display   : flex;
 	flex-wrap : wrap;
 	gap       : var( --spa-ver-bas ) var( --spa-hor-bas );                  /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
@@ -250,7 +250,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Hero Actions Div. Why: The stacked column is centered. How: This applies 900px wide and below. */
 
 
-	.home__actions { /* What: Centered Hero Actions Div. Why: The buttons should sit in the middle of the centered column. How: This centers the row. */
+	.herActDiv { /* What: Centered Hero Actions Div. Why: The buttons should sit in the middle of the centered column. How: This centers the row. */
 
 
 		justify-content : center;
@@ -263,7 +263,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Actions Div. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.home__actions { /* What: Motionless Hero Actions Div. Why: The buttons should simply be there. How: This turns the entrance animation off. */
+	.herActDiv { /* What: Motionless Hero Actions Div. Why: The buttons should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -274,7 +274,7 @@
 
 }
 
-.home__btn { /* What: Hero Button Anchor. Why: Both hero buttons share one shape and type. How: This sets their spaced, uppercase label and padding, and eases every change between their looks. */
+.butBasAnc { /* What: Button Base Anchor. Why: Both hero buttons share one shape and type. How: This sets their spaced, uppercase label and padding, and eases every change between their looks. */
 
 
 	cursor         : pointer;
@@ -288,7 +288,7 @@
 
 
 }
-.home__btn--primary { /* What: Primary Hero Button Anchor. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue with white text. */
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue with white text. */
 
 
 	background : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
@@ -297,7 +297,7 @@
 
 
 }
-.home__btn--primary:hover { /* What: Hovered Primary Hero Button Anchor. Why: The button should respond to the pointer. How: This lightens its fill and border to the lighter blue. */
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lightens its fill and border to the lighter blue. */
 
 
 	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
@@ -305,7 +305,7 @@
 
 
 }
-.home__btn--secondary { /* What: Secondary Hero Button Anchor. Why: The services link is the quieter second option. How: This leaves it unfilled with white text and a faint white outline. */
+.butBasAnc--secondary { /* What: Secondary Button Base Anchor. Why: The services link is the quieter second option. How: This leaves it unfilled with white text and a faint white outline. */
 
 
 	background : transparent;
@@ -314,7 +314,7 @@
 
 
 }
-.home__btn--secondary:hover { /* What: Hovered Secondary Hero Button Anchor. Why: The button should respond to the pointer. How: This firms its outline to white and adds a faint fill. */
+.butBasAnc--secondary:hover { /* What: Hovered Secondary Button Base Anchor. Why: The button should respond to the pointer. How: This firms its outline to white and adds a faint fill. */
 
 
 	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
@@ -322,10 +322,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Button Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.home__btn { /* What: Motionless Hero Button Anchor. Why: The hover looks should simply switch. How: This turns the transition off. */
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover looks should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -342,11 +342,11 @@
 
 /* #region home__right */
 
-.home__right { /* What: Hero Right Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
+.herRigDiv { /* What: Hero Right Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
 
 
 	align-items     : center;
-	animation       : fadeUp var( --dur-ani-p06 ) 0.2s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
+	animation       : blockEnterFadeIn var( --dur-ani-p06 ) 0.2s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
 	display         : flex;
 	justify-content : center;
 
@@ -355,7 +355,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Hero Right Div. Why: In the stacked column the logo leads. How: This applies 900px wide and below. */
 
 
-	.home__right { /* What: Leading Hero Right Div. Why: The logo should sit above the pitch once the columns stack. How: This moves it first in the grid's order. */
+	.herRigDiv { /* What: Leading Hero Right Div. Why: The logo should sit above the pitch once the columns stack. How: This moves it first in the grid's order. */
 
 
 		order : -1;
@@ -368,7 +368,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Right Div. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.home__right { /* What: Motionless Hero Right Div. Why: The logo should simply be there. How: This turns the entrance animation off. */
+	.herRigDiv { /* What: Motionless Hero Right Div. Why: The logo should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -382,7 +382,7 @@
 
 /* #region home__logo-wrap */
 
-.home__logo-wrap { /* What: Hero Logo Wrap Div. Why: The ring sits behind the logo, centered on it. How: This positions the two in one centered box. */
+.herLogDiv { /* What: Hero Logo Div. Why: The ring sits behind the logo, centered on it. How: This positions the two in one centered box. */
 
 
 	align-items     : center;
@@ -393,10 +393,10 @@
 
 }
 
-.home__logo-ring { /* What: Hero Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a faint blue circle about 426px across behind the logo that swells and brightens on a loop of about 4.6 seconds. */
+.logRinDiv { /* What: Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a faint blue circle about 426px across behind the logo that swells and brightens on a loop of about 4.6 seconds. */
 
 
-	animation     : pulseRing var( --dur-ani-p12 ) var( --mot-sta-eas ) infinite;                                   /* Duration Animation Base Plus 12 ~= 4,610.0ms, Motion Standard Easing = ease */
+	animation     : logRinDivLoopPulse var( --dur-ani-p12 ) var( --mot-sta-eas ) infinite;                                   /* Duration Animation Base Plus 12 ~= 4,610.0ms, Motion Standard Easing = ease */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
 	height        : calc( var( --ver-rhy-p12 ) * 1rem );                                                            /* Vertical Rhythm Base Plus 12 ~= 425.596px */
@@ -405,7 +405,7 @@
 
 
 }
-.home__logo-ring::before { /* What: Hero Logo Inner Ring. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it about 26px inside the outer circle. */
+.logRinDiv::before { /* What: Hero Logo Inner Ring. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it about 26px inside the outer circle. */
 
 
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
@@ -416,10 +416,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Hero Logo Ring Div. Why: The logo shrinks on narrower screens, and its ring follows. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Logo Ring Div. Why: The logo shrinks on narrower screens, and its ring follows. How: This applies 900px wide and below. */
 
 
-	.home__logo-ring { /* What: Smaller Hero Logo Ring Div. Why: The ring should still frame the smaller logo. How: This shrinks it to about 321px across. */
+	.logRinDiv { /* What: Smaller Logo Ring Div. Why: The ring should still frame the smaller logo. How: This shrinks it to about 321px across. */
 
 
 		height : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */
@@ -430,10 +430,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Logo Ring Div. Why: A looping pulse is exactly the motion someone who asked for less shouldn't see. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Logo Ring Div. Why: A looping pulse is exactly the motion someone who asked for less shouldn't see. How: This applies only when the reduced-motion preference is set. */
 
 
-	.home__logo-ring { /* What: Motionless Hero Logo Ring Div. Why: The ring should stay still. How: This turns the pulse off. */
+	.logRinDiv { /* What: Motionless Logo Ring Div. Why: The ring should stay still. How: This turns the pulse off. */
 
 
 		animation : none;
@@ -443,7 +443,7 @@
 
 
 }
-@keyframes pulseRing { /* What: Pulse Ring. Why: The logo's ring breathes slowly to draw the eye. How: This swells the ring slightly and brightens it at the halfway point, then settles it back. */
+@keyframes logRinDivLoopPulse { /* What: Logo Ring Div Loop Pulse. Why: The logo's ring breathes slowly to draw the eye. How: This swells the ring slightly and brightens it at the halfway point, then settles it back. */
 
 
 	0%,
@@ -468,7 +468,7 @@
 
 }
 
-.home__logo { /* What: Hero Logo Image. Why: The full logo anchors the hero and should float above its glow. How: This sizes it with the screen between 280px and 420px wide, casts a soft blue shadow under it, and layers it above the ring. */
+.herLogIma { /* What: Hero Logo Image. Why: The full logo anchors the hero and should float above its glow. How: This sizes it with the screen between 280px and 420px wide, casts a soft blue shadow under it, and layers it above the ring. */
 
 
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ); /* Vertical Rhythm Base Plus 1 ~= 19.304px, Vertical Rhythm Base Plus 5 ~= 59.447px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
@@ -481,7 +481,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Hero Logo Image. Why: The stacked column has less room for the logo. How: This applies 900px wide and below. */
 
 
-	.home__logo { /* What: Smaller Hero Logo Image. Why: The logo should fit the narrower column. How: This sizes it with the screen between 200px and 300px wide. */
+	.herLogIma { /* What: Smaller Hero Logo Image. Why: The logo should fit the narrower column. How: This sizes it with the screen between 200px and 300px wide. */
 
 
 		width : clamp( 200px, 55vw, 300px );
@@ -502,7 +502,7 @@
 
 /* #region home__stats */
 
-.home__stats { /* What: Hero Stats Div. Why: Four quick figures close the hero on a band of their own. How: This draws a faintly frosted strip along the hero's bottom with a hairline on top, layered above the background. */
+.herStaDiv { /* What: Hero Stats Div. Why: Four quick figures close the hero on a band of their own. How: This draws a faintly frosted strip along the hero's bottom with a hairline on top, layered above the background. */
 
 
 	backdrop-filter : blur( calc( var( --ver-rhy-m02 ) * 1rem ) );                                                    /* Vertical Rhythm Base Minus 2 ~= 8.304px */
@@ -517,7 +517,7 @@
 
 /* #region home__stats-inner */
 
-.home__stats-inner { /* What: Hero Stats Inner Div. Why: The figures line up with the page's content width. How: This centers a capped-width row with the container's side padding and lays the four figures out in equal columns. */
+.staInnDiv { /* What: Stats Inner Div. Why: The figures line up with the page's content width. How: This centers a capped-width row with the container's side padding and lays the four figures out in equal columns. */
 
 
 	display               : grid;
@@ -529,10 +529,10 @@
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Hero Stats Inner Div. Why: Four columns get cramped on narrower screens. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Stats Inner Div. Why: Four columns get cramped on narrower screens. How: This applies 900px wide and below. */
 
 
-	.home__stats-inner { /* What: Two-Column Hero Stats Inner Div. Why: The figures read better two by two. How: This switches to two columns. */
+	.staInnDiv { /* What: Two-Column Stats Inner Div. Why: The figures read better two by two. How: This switches to two columns. */
 
 
 		grid-template-columns : repeat( 2, 1fr );
@@ -542,10 +542,10 @@
 
 
 }
-@media ( max-width : 480px ) { /* What: Narrowest Hero Stats Inner Div. Why: The smallest screens keep the two-by-two layout. How: This applies 480px wide and below. */
+@media ( max-width : 480px ) { /* What: Narrowest Stats Inner Div. Why: The smallest screens keep the two-by-two layout. How: This applies 480px wide and below. */
 
 
-	.home__stats-inner { /* What: Two-Column Hero Stats Inner Div. Why: The figures read best two by two on the smallest screens too. How: This sets two columns again, which the 900px query already does. */
+	.staInnDiv { /* What: Two-Column Stats Inner Div. Why: The figures read best two by two on the smallest screens too. How: This sets two columns again, which the 900px query already does. */
 
 
 		grid-template-columns : repeat( 2, 1fr );
@@ -559,7 +559,7 @@
 
 /* #region home__stat */
 
-.home__stat { /* What: Hero Stat Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with a faint divider on its right. */
+.staIteDiv { /* What: Stat Item Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with a faint divider on its right. */
 
 
 	align-items    : center;
@@ -571,32 +571,32 @@
 
 
 }
-.home__stat:last-child { /* What: Last Hero Stat Div. Why: The row ends without a divider. How: This drops the last cell's right border. */
+.staIteDiv:last-child { /* What: Last Stat Item Div. Why: The row ends without a divider. How: This drops the last cell's right border. */
 
 
 	border-right : none;
 
 
 }
-@media ( max-width : 900px ) { /* What: Narrow Hero Stat Div. Why: The two-by-two grid needs its dividers redrawn. How: This applies 900px wide and below. */
+@media ( max-width : 900px ) { /* What: Narrow Stat Item Div. Why: The two-by-two grid needs its dividers redrawn. How: This applies 900px wide and below. */
 
 
-	.home__stat:nth-child( 2 ) { /* What: Second Hero Stat Div. Why: The second cell now ends the first row. How: This drops its right border. */
+	.staIteDiv:nth-child( 2 ) { /* What: Second Stat Item Div. Why: The second cell now ends the first row. How: This drops its right border. */
 
 
 		border-right : none;
 
 
 	}
-	.home__stat:nth-child( 3 ),
-	.home__stat:nth-child( 4 ) { /* What: Second Row Hero Stat Div. Why: The second row needs a line between it and the first. How: This draws a faint border along the top of the third and fourth cells. */
+	.staIteDiv:nth-child( 3 ),
+	.staIteDiv:nth-child( 4 ) { /* What: Second Row Stat Item Div. Why: The second row needs a line between it and the first. How: This draws a faint border along the top of the third and fourth cells. */
 
 
 		border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
 
 
 	}
-	.home__stat:nth-child( 4 ) { /* What: Fourth Hero Stat Div. Why: The fourth cell ends the second row. How: This drops its right border. */
+	.staIteDiv:nth-child( 4 ) { /* What: Fourth Stat Item Div. Why: The fourth cell ends the second row. How: This drops its right border. */
 
 
 		border-right : none;
@@ -607,7 +607,7 @@
 
 }
 
-.home__stat-value { /* What: Hero Stat Value Span. Why: The figure is the cell's focus. How: This sets it large in the extra bold display font, in white. */
+.staValSpa { /* What: Stat Value Span. Why: The figure is the cell's focus. How: This sets it large in the extra bold display font, in white. */
 
 
 	color          : var( --bac-pag-col );                   /* Background Page Color = #ffffff */
@@ -619,7 +619,7 @@
 
 }
 
-.home__stat-label { /* What: Hero Stat Label Span. Why: The caption says what the figure means without competing with it. How: This sets it small, spaced, uppercase, and silver in the body font. */
+.staLabSpa { /* What: Stat Label Span. Why: The caption says what the figure means without competing with it. How: This sets it small, spaced, uppercase, and silver in the body font. */
 
 
 	color          : var( --tex-inm-col );                   /* Text Inverse Muted Color = #8a9ab5 */

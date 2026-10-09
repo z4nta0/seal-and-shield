@@ -110,8 +110,8 @@ visit (the home page at 390px and 1,440px, plus the mobile menu open at
 390px) are listed in `tests/support/states.ts`. Its `opeStaFun` scrolls
 through the page before checking it, since the Services, About, and Contact
 sections only fade their content in once scrolled into view, and skips
-animations that repeat forever (the hero logo's `pulseRing`) when waiting for
-the page to settle.
+animations that repeat forever (the hero logo's `logRinDivLoopPulse`) when
+waiting for the page to settle.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and

@@ -81,17 +81,17 @@ function SitFooCom () : React.JSX.Element {
 	return (
 
 
-		<footer className={ cssModObj.footer }>{ /* What: Site Footer Element. Why: The page ends with the company's details and a way back to each section. How: This holds the footer's columns and its copyright line. */ }
+		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: The page ends with the company's details and a way back to each section. How: This holds the footer's columns and its copyright line. */ }
 
 
-			<div className={ cssModObj.footerInner }>{ /* What: Footer Inner Div Element. Why: The footer's columns line up with the page's content width. How: This lays out the brand, the section buttons, and the contact details across a centered, capped-width row. */ }
+			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's columns line up with the page's content width. How: This lays out the brand, the section buttons, and the contact details across a centered, capped-width row. */ }
 
 
-				<div className={ cssModObj.footerBrand }>{ /* What: Footer Brand Div Element. Why: The mark, name, and tagline read as one block. How: This sets the mark beside the two lines of text. */ }
+				<div className={ cssModObj.fooBraDiv }>{ /* What: Footer Brand Div Element. Why: The mark, name, and tagline read as one block. How: This sets the mark beside the two lines of text. */ }
 
 
 					<img
-						className={ cssModObj.footerLogo }
+						className={ cssModObj.fooLogIma }
 
 						src={ losPngUrl }
 
@@ -101,9 +101,9 @@ function SitFooCom () : React.JSX.Element {
 					<div>{ /* What: Footer Brand Text Div Element. Why: The name and tagline stack beside the mark. How: This holds the two lines. */ }
 
 
-						<p className={ cssModObj.footerBrandName }>Seal and Shield LLC</p>{ /* What: Footer Brand Name Paragraph Element. Why: The footer names the company by its legal name. How: This shows it in the display font. */ }
+						<p className={ cssModObj.braNamPar }>Seal and Shield LLC</p>{ /* What: Brand Name Paragraph Element. Why: The footer names the company by its legal name. How: This shows it in the display font. */ }
 
-						<p className={ cssModObj.footerBrandTagline }>Commercial Roofing in Lawrence, Kansas</p>{ /* What: Footer Brand Tagline Paragraph Element. Why: The tagline says what the company does and where. How: This shows it beneath the name. */ }
+						<p className={ cssModObj.braTagPar }>Commercial Roofing in Lawrence, Kansas</p>{ /* What: Brand Tagline Paragraph Element. Why: The tagline says what the company does and where. How: This shows it beneath the name. */ }
 
 
 					</div>
@@ -114,10 +114,10 @@ function SitFooCom () : React.JSX.Element {
 
 
 				<nav
-					className={ cssModObj.footerNav }
+					className={ cssModObj.fooLinNav }
 
 					aria-label='Footer'
-				>{ /* What: Footer Navigation Nav Element. Why: Visitors at the bottom of the page can jump back to any section. How: This labels the landmark Footer, telling it apart from the bar's. */ }
+				>{ /* What: Footer Links Nav Element. Why: Visitors at the bottom of the page can jump back to any section. How: This labels the landmark Footer, telling it apart from the bar's. */ }
 
 
 					{ FOO_SEC_ARR.map( ( secIdeStr ) => ( // What: Section Button Map. Why: Each section gets a button. How: This renders one button per section id.
@@ -126,7 +126,7 @@ function SitFooCom () : React.JSX.Element {
 						<button
 							key={ secIdeStr }
 
-							className={ cssModObj.footerLink }
+							className={ cssModObj.fooLinBut }
 
 							onClick={ () => scrSecFun( secIdeStr ) }
 						>{ /* What: Footer Link Button Element. Why: Each button scrolls to its section. How: This calls scrSecFun with the section's id. */ }
@@ -139,18 +139,18 @@ function SitFooCom () : React.JSX.Element {
 
 				</nav>
 
-				<div className={ cssModObj.footerContact }>{ /* What: Footer Contact Div Element. Why: The phone number and hours close the footer's columns. How: This stacks the two. */ }
+				<div className={ cssModObj.fooConDiv }>{ /* What: Footer Contact Div Element. Why: The phone number and hours close the footer's columns. How: This stacks the two. */ }
 
 
 					<a
-						className={ cssModObj.footerPhone }
+						className={ cssModObj.fooPhoAnc }
 
 						href='tel:7853041957'
 					>{ /* What: Footer Phone Anchor Element. Why: Calling is the fastest way to reach the company. How: This dials its number on phones. */ }
 						(785) 304-1957
 					</a>
 
-					<p className={ cssModObj.footerHours }>Mon – Fri &nbsp;|&nbsp; 8 a.m. – 5 p.m.</p>{ /* What: Footer Hours Paragraph Element. Why: Callers should know when someone will answer. How: This lists the weekday business hours. */ }
+					<p className={ cssModObj.fooHouPar }>Mon – Fri &nbsp;|&nbsp; 8 a.m. – 5 p.m.</p>{ /* What: Footer Hours Paragraph Element. Why: Callers should know when someone will answer. How: This lists the weekday business hours. */ }
 
 
 				</div>
@@ -160,10 +160,10 @@ function SitFooCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.footerBottom }>{ /* What: Footer Bottom Div Element. Why: The copyright line sits apart from the columns, across the footer's full width. How: This holds it below a hairline. */ }
+			<div className={ cssModObj.fooBotDiv }>{ /* What: Footer Bottom Div Element. Why: The copyright line sits apart from the columns, across the footer's full width. How: This holds it below a hairline. */ }
 
 
-				<p className={ cssModObj.footerCopyright }>© { curYeaNum } Seal and Shield LLC. All rights reserved. Lawrence, Kansas.</p>{ /* What: Footer Copyright Paragraph Element. Why: The copyright line names the year and the company's legal name. How: This prints the current year read on each render. */ }
+				<p className={ cssModObj.fooCopPar }>© { curYeaNum } Seal and Shield LLC. All rights reserved. Lawrence, Kansas.</p>{ /* What: Footer Copyright Paragraph Element. Why: The copyright line names the year and the company's legal name. How: This prints the current year read on each render. */ }
 
 
 			</div>

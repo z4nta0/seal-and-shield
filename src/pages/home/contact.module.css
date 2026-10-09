@@ -11,10 +11,10 @@
  * message. The columns stack at 900px wide or narrower, and the form's paired
  * fields stack and the panel's padding tightens at 520px. Each form control
  * eases its focus ring in from a zero-width outline. The shared container,
- * section label, section title, and divider styles the section used to borrow
- * from the global stylesheet are copied onto those same class names here. The
- * phone detail's link rule comes after the value rule on purpose: the anchor
- * carries both classes, and the link's light blue wins by coming later.
+ * eyebrow label, section title, and divider styles the section used to borrow
+ * from the global stylesheet are copied in under the same names every module
+ * gives them. The phone detail is an anchor that shares the value rule, and
+ * its own link rule comes after that rule on purpose, so its light blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -24,7 +24,7 @@
 
 /* #region contact */
 
-.contact { /* What: Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
+.homConSec { /* What: Home Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
 
 
 	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
@@ -35,7 +35,7 @@
 
 }
 
-.contact__bg { /* What: Contact Background Div. Why: A soft blue glow sets the section off from the white one above. How: This places an oversized radial glow off the bottom left corner that ignores the pointer. */
+.conBacDiv { /* What: Contact Background Div. Why: A soft blue glow sets the section off from the white one above. How: This places an oversized radial glow off the bottom left corner that ignores the pointer. */
 
 
 	background     : radial-gradient( ellipse at 30% 70%, oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-006-rec ) ) 0%, transparent 60% ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
@@ -53,7 +53,7 @@
 
 /* #region contact__inner */
 
-.contact__inner { /* What: Contact Inner Div. Why: The invitation and the quote panel sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding, layered above the glow. */
+.conInnDiv { /* What: Contact Inner Div. Why: The invitation and the quote panel sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding, layered above the glow. */
 
 
 	align-items           : start;
@@ -71,7 +71,7 @@
 @media ( max-width : 900px ) { /* What: Narrow Contact Inner Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
 
 
-	.contact__inner { /* What: Stacked Contact Inner Div. Why: The invitation and form read best one above the other. How: This collapses to one column with a smaller gap. */
+	.conInnDiv { /* What: Stacked Contact Inner Div. Why: The invitation and form read best one above the other. How: This collapses to one column with a smaller gap. */
 
 
 		gap                   : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
@@ -83,7 +83,7 @@
 
 }
 
-.section-label { /* What: Section Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared section label. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
 
 
 	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
@@ -96,7 +96,7 @@
 
 }
 
-.section-title { /* What: Section Title Heading. Why: The heading states the section's goal. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
+.secTitHea { /* What: Section Title Heading. Why: The heading states the section's goal. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
 
 
 	color          : var( --tex-mai-col );                                     /* Text Main Color = #0f1e45 */
@@ -109,7 +109,7 @@
 
 
 }
-.section-title.light { /* What: Light Section Title Heading. Why: Navy text would vanish on the dark section. How: This turns the heading white, keeping the shared modifier's two-class specificity. */
+.secTitHea.secTitHea--light { /* What: Light Section Title Heading. Why: Navy text would vanish on the dark section. How: This turns the heading white, keeping the shared modifier's two-class specificity. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
@@ -117,7 +117,7 @@
 
 }
 
-.divider { /* What: Divider Div. Why: A short rule separates the heading from the invitation. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
+.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the invitation. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
 
 
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
@@ -128,7 +128,7 @@
 
 }
 
-.contact__info-body { /* What: Contact Invitation Paragraph. Why: The invitation should read comfortably on the dark band. How: This sets it in light silver with generous leading and room below. */
+.infBodPar { /* What: Info Body Paragraph. Why: The invitation should read comfortably on the dark band. How: This sets it in light silver with generous leading and room below. */
 
 
 	color         : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
@@ -143,7 +143,7 @@
 
 /* #region contact__details */
 
-.contact__details { /* What: Contact Details Div. Why: The location, number, and hours read as one list. How: This stacks the three rows with room below the list. */
+.conDetDiv { /* What: Contact Details Div. Why: The location, number, and hours read as one list. How: This stacks the three rows with room below the list. */
 
 
 	display        : flex;
@@ -157,7 +157,7 @@
 
 /* #region contact__detail */
 
-.contact__detail { /* What: Contact Detail Div. Why: Each detail pairs an icon with its text. How: This sets the icon beside the text, top-aligned. */
+.detRowDiv { /* What: Detail Row Div. Why: Each detail pairs an icon with its text. How: This sets the icon beside the text, top-aligned. */
 
 
 	align-items : flex-start;
@@ -167,7 +167,7 @@
 
 }
 
-.contact__detail-icon { /* What: Contact Detail Icon Span. Why: An icon helps a visitor scan the rows. How: This sets the emoji a little larger, nudged down to line up with the label, and never shrinks it. */
+.detIcoSpa { /* What: Detail Icon Span. Why: An icon helps a visitor scan the rows. How: This sets the emoji a little larger, nudged down to line up with the label, and never shrinks it. */
 
 
 	flex-shrink : 0;
@@ -177,7 +177,7 @@
 
 }
 
-.contact__detail-label { /* What: Contact Detail Label Span. Why: Each value needs a quiet label above it. How: This sets it on its own line, small, spaced, uppercase, and silver. */
+.detLabSpa { /* What: Detail Label Span. Why: Each value needs a quiet label above it. How: This sets it on its own line, small, spaced, uppercase, and silver. */
 
 
 	color          : var( --tex-inm-col );                   /* Text Inverse Muted Color = #8a9ab5 */
@@ -192,7 +192,8 @@
 
 }
 
-.contact__detail-value { /* What: Contact Detail Value Span. Why: The detail itself is the row's focus. How: This sets it on its own line in white. */
+.detValSpa,
+.detValAnc { /* What: Detail Value Span And Anchor. Why: The detail itself is the row's focus, whether it's plain text or the phone link. How: This sets it on its own line in white. */
 
 
 	color     : var( --bac-pag-col ); /* Background Page Color = #ffffff */
@@ -202,7 +203,7 @@
 
 }
 
-.contact__detail-link { /* What: Contact Detail Link Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
+.detValAnc { /* What: Detail Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
 
 
 	color      : var( --acc-lig-col );                            /* Accent Light Color ~= #4488f6 */
@@ -210,17 +211,17 @@
 
 
 }
-.contact__detail-link:hover { /* What: Hovered Contact Detail Link Anchor. Why: The link should respond to the pointer. How: This turns it white. */
+.detValAnc:hover { /* What: Hovered Detail Value Anchor. Why: The link should respond to the pointer. How: This turns it white. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Detail Link Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Detail Value Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.contact__detail-link { /* What: Motionless Contact Detail Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.detValAnc { /* What: Motionless Detail Value Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -237,7 +238,7 @@
 
 
 
-.contact__phone-btn { /* What: Contact Phone Button Anchor. Why: Calling is the fastest way to get a quote, so the number gets a button. How: This sets it as a solid blue button in the display font, sized to its label, and eases every change between its looks. */
+.conPhoAnc { /* What: Contact Phone Anchor. Why: Calling is the fastest way to get a quote, so the number gets a button. How: This sets it as a solid blue button in the display font, sized to its label, and eases every change between its looks. */
 
 
 	background     : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
@@ -254,7 +255,7 @@
 
 
 }
-.contact__phone-btn:hover { /* What: Hovered Contact Phone Button Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text. */
+.conPhoAnc:hover { /* What: Hovered Contact Phone Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text. */
 
 
 	background : transparent;
@@ -262,10 +263,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Phone Button Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Phone Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.contact__phone-btn { /* What: Motionless Contact Phone Button Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
+	.conPhoAnc { /* What: Motionless Contact Phone Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -280,7 +281,7 @@
 
 /* #region contact__form-wrap */
 
-.contact__form-wrap { /* What: Contact Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
+.forWraDiv { /* What: Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
 
 
 	background : var( --bac-pag-col );                      /* Background Page Color = #ffffff */
@@ -288,10 +289,10 @@
 
 
 }
-@media ( max-width : 520px ) { /* What: Narrow Contact Form Wrap Div. Why: The panel's padding eats too much of a phone's width. How: This applies 520px wide and below. */
+@media ( max-width : 520px ) { /* What: Narrow Form Wrap Div. Why: The panel's padding eats too much of a phone's width. How: This applies 520px wide and below. */
 
 
-	.contact__form-wrap { /* What: Tighter Contact Form Wrap Div. Why: The fields need the room on a phone. How: This tightens the panel's padding. */
+	.forWraDiv { /* What: Tighter Form Wrap Div. Why: The fields need the room on a phone. How: This tightens the panel's padding. */
 
 
 		padding : var( --spa-ver-p02 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 1 ~= 19.304px */
@@ -305,7 +306,7 @@
 
 /* #region contact__success */
 
-.contact__success { /* What: Contact Success Div. Why: The thank-you message should fill the panel the form left. How: This centers the check, heading, and note in a column at least about 321px tall. */
+.forSucDiv { /* What: Form Success Div. Why: The thank-you message should fill the panel the form left. How: This centers the check, heading, and note in a column at least about 321px tall. */
 
 
 	align-items     : center;
@@ -320,7 +321,7 @@
 
 }
 
-.contact__success-icon { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the check in a blue circle about 59px across in white. */
+.sucIcoSpa { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the check in a blue circle about 59px across in white. */
 
 
 	align-items     : center;
@@ -336,7 +337,7 @@
 
 }
 
-.contact__success-title { /* What: Success Title Heading. Why: The message needs a clear heading. How: This sets it large in the extra bold display font, uppercase and navy. */
+.sucTitHea { /* What: Success Title Heading. Why: The message needs a clear heading. How: This sets it large in the extra bold display font, uppercase and navy. */
 
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #0f1e45 */
@@ -348,7 +349,7 @@
 
 }
 
-.contact__success-body { /* What: Success Body Paragraph. Why: The visitor should know what happens next. How: This sets the note in the muted text color with generous leading. */
+.sucBodPar { /* What: Success Body Paragraph. Why: The visitor should know what happens next. How: This sets the note in the muted text color with generous leading. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
@@ -362,7 +363,7 @@
 
 
 
-.contact__form-title { /* What: Form Title Heading. Why: The form needs a clear heading, set off from its fields. How: This sets it in the extra bold display font, uppercase and navy, over a blue rule. */
+.forTitHea { /* What: Form Title Heading. Why: The form needs a clear heading, set off from its fields. How: This sets it in the extra bold display font, uppercase and navy, over a blue rule. */
 
 
 	border-bottom  : var( --bor-wid-lar ) solid var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
@@ -382,7 +383,7 @@
 
 /* #region contact__form-row */
 
-.contact__form-row { /* What: Contact Form Row Div. Why: Short fields pair up on wide screens. How: This lays two fields side by side with room below the row. */
+.forRowDiv { /* What: Form Row Div. Why: Short fields pair up on wide screens. How: This lays two fields side by side with room below the row. */
 
 
 	display               : grid;
@@ -392,10 +393,10 @@
 
 
 }
-@media ( max-width : 520px ) { /* What: Narrow Contact Form Row Div. Why: Two fields side by side are too cramped on a phone. How: This applies 520px wide and below. */
+@media ( max-width : 520px ) { /* What: Narrow Form Row Div. Why: Two fields side by side are too cramped on a phone. How: This applies 520px wide and below. */
 
 
-	.contact__form-row { /* What: Stacked Contact Form Row Div. Why: Each field needs the full width on a phone. How: This switches to one column. */
+	.forRowDiv { /* What: Stacked Form Row Div. Why: Each field needs the full width on a phone. How: This switches to one column. */
 
 
 		grid-template-columns : 1fr;
@@ -409,7 +410,7 @@
 
 /* #region contact__field */
 
-.contact__field { /* What: Contact Field Div. Why: Each field stacks its label over its control. How: This stacks the two with a small gap. */
+.forFieDiv { /* What: Form Field Div. Why: Each field stacks its label over its control. How: This stacks the two with a small gap. */
 
 
 	display        : flex;
@@ -418,7 +419,7 @@
 
 
 }
-.contact__field--full { /* What: Full Contact Field Div. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
+.forFieDiv--full { /* What: Full Form Field Div. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
 
 
 	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
@@ -426,7 +427,7 @@
 
 }
 
-.contact__field-label { /* What: Contact Field Label. Why: Every field needs a visible label in the form's display style. How: This sets it small, spaced, uppercase, and in the muted text color. */
+.forFieLab { /* What: Form Field Label. Why: Every field needs a visible label in the form's display style. How: This sets it small, spaced, uppercase, and in the muted text color. */
 
 
 	color          : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
@@ -439,7 +440,8 @@
 
 }
 
-.contact__field-control { /* What: Contact Field Control. Why: Every input and the message box share one look, and focus has to show clearly. How: This sets them on the off-white with a light border, lets the message box grow taller, and holds a zero-width blue outline 6px out, easing it and the border in on focus. */
+.forFieInp,
+.forFieTex { /* What: Form Field Input And Textarea. Why: Every input and the message box share one look, and focus has to show clearly. How: This sets them on the off-white with a light border, lets the message box grow taller, and holds a zero-width blue outline 6px out, easing it and the border in on focus. */
 
 
 	background     : var( --bac-sur-col );                            /* Background Surface Color = #f4f6fa */
@@ -455,14 +457,16 @@
 
 
 }
-.contact__field-control:focus { /* What: Focused Contact Field Control. Why: The field being typed in should stand out. How: This turns its border blue. */
+.forFieInp:focus,
+.forFieTex:focus { /* What: Focused Form Field Input And Textarea. Why: The field being typed in should stand out. How: This turns its border blue. */
 
 
 	border-color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 
 
 }
-.contact__field-control:focus-visible { /* What: Keyboard Focused Contact Field Control. Why: A keyboard user has to see clearly where focus is. How: This grows the ring to 2px and draws it in to 2px from the field. */
+.forFieInp:focus-visible,
+.forFieTex:focus-visible { /* What: Keyboard Focused Form Field Input And Textarea. Why: A keyboard user has to see clearly where focus is. How: This grows the ring to 2px and draws it in to 2px from the field. */
 
 
 	outline-offset : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
@@ -470,10 +474,11 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Field Control. Why: Someone who asked for less motion should see the focus ring simply appear. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Field Input And Textarea. Why: Someone who asked for less motion should see the focus ring simply appear. How: This applies only when the reduced-motion preference is set. */
 
 
-	.contact__field-control { /* What: Motionless Contact Field Control. Why: The border and ring should switch at once. How: This turns the transition off. */
+	.forFieInp,
+	.forFieTex { /* What: Motionless Form Field Input And Textarea. Why: The border and ring should switch at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -491,7 +496,7 @@
 
 /* #region contact__form-error */
 
-.contact__form-error { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel. */
+.forErrPar { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel. */
 
 
 	color      : var( --err-dar-col ); /* Error Dark Color = #b42318 */
@@ -501,7 +506,7 @@
 
 }
 
-.contact__form-error-link { /* What: Form Error Link Anchor. Why: The phone number in the message has to read as a link and stay in one piece. How: This underlines it and keeps it from breaking across lines. */
+.errLinAnc { /* What: Error Link Anchor. Why: The phone number in the message has to read as a link and stay in one piece. How: This underlines it and keeps it from breaking across lines. */
 
 
 	text-decoration : underline;
@@ -513,7 +518,7 @@
 /* #endregion contact__form-error */
 
 
-.contact__submit { /* What: Contact Submit Button. Why: The form's main action spans the panel. How: This sets a full-width navy button in the display font, and eases every change between its looks. */
+.forSubBut { /* What: Form Submit Button. Why: The form's main action spans the panel. How: This sets a full-width navy button in the display font, and eases every change between its looks. */
 
 
 	background     : var( --bac-inr-col );                            /* Background Inverse Raised Color = #0f1e45 */
@@ -532,7 +537,7 @@
 
 
 }
-.contact__submit:hover { /* What: Hovered Contact Submit Button. Why: The button should respond to the pointer. How: This turns its fill and border blue. */
+.forSubBut:hover { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer. How: This turns its fill and border blue. */
 
 
 	background   : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
@@ -540,7 +545,7 @@
 
 
 }
-.contact__submit:disabled { /* What: Disabled Contact Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This dims it and shows the progress cursor. */
+.forSubBut:disabled { /* What: Disabled Form Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This dims it and shows the progress cursor. */
 
 
 	cursor  : progress;
@@ -548,10 +553,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.contact__submit { /* What: Motionless Contact Submit Button. Why: The hover look should simply switch. How: This turns the transition off. */
+	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover look should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -562,7 +567,7 @@
 
 }
 
-.contact__form-note { /* What: Form Note Paragraph. Why: The no-spam promise should be present but quiet. How: This centers it small in the muted text color. */
+.forNotPar { /* What: Form Note Paragraph. Why: The no-spam promise should be present but quiet. How: This centers it small in the muted text color. */
 
 
 	color      : var( --tex-mut-col ); /* Text Muted Color = #616e88 */

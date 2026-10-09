@@ -9,11 +9,11 @@
  * light panel above the navy info card on the left, and the story and the
  * three values on the right, which stack into one column at 900px wide or
  * narrower with the left column centered and capped. The shared container,
- * section label, section title, and divider styles the section used to
- * borrow from the global stylesheet are copied onto those same class names
- * here, along with the text column's adjustment to the label. The phone
- * row's link rule comes after the value rule on purpose: the anchor carries
- * both classes, and the link's light blue wins by coming later.
+ * eyebrow label, section title, and divider styles the section used to borrow
+ * from the global stylesheet are copied in under the same names every module
+ * gives them, along with the text column's adjustment to the label. The phone
+ * value is an anchor that shares the value rule, and its own link rule comes
+ * after that rule on purpose, so its light blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -23,7 +23,7 @@
 
 /* #region about */
 
-.about { /* What: About Section. Why: The company's story sits on a white band between the light services and the dark contact section. How: This fills it white with generous padding above and below. */
+.homAboSec { /* What: Home About Section. Why: The company's story sits on a white band between the light services and the dark contact section. How: This fills it white with generous padding above and below. */
 
 
 	background : var( --bac-pag-col );   /* Background Page Color = #ffffff */
@@ -35,7 +35,7 @@
 
 /* #region container */
 
-.container { /* What: About Container Div. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with side padding, copied from the shared container. */
+.pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with side padding, copied from the shared container. */
 
 
 	margin    : 0 auto;
@@ -48,7 +48,7 @@
 
 /* #region about__layout */
 
-.about__layout { /* What: About Layout Div. Why: The logo and details sit beside the story. How: This lays them out in two top-aligned columns, the story's a little wider. */
+.aboLayDiv { /* What: About Layout Div. Why: The logo and details sit beside the story. How: This lays them out in two top-aligned columns, the story's a little wider. */
 
 
 	align-items           : start;
@@ -61,7 +61,7 @@
 @media ( max-width : 900px ) { /* What: Narrow About Layout Div. Why: Two columns don't fit side by side on narrower screens. How: This applies 900px wide and below. */
 
 
-	.about__layout { /* What: Stacked About Layout Div. Why: The details and story read best one above the other. How: This collapses to one column with a smaller gap. */
+	.aboLayDiv { /* What: Stacked About Layout Div. Why: The details and story read best one above the other. How: This collapses to one column with a smaller gap. */
 
 
 		gap                   : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
@@ -76,7 +76,7 @@
 
 /* #region about__visual */
 
-.about__visual { /* What: About Visual Div. Why: The left column pairs the logo with the company's key facts. How: This stacks the logo over the info card, centered, as the positioning context for the logo's light panel. */
+.aboVisDiv { /* What: About Visual Div. Why: The left column pairs the logo with the company's key facts. How: This stacks the logo over the info card, centered, as the positioning context for the logo's light panel. */
 
 
 	align-items    : center;
@@ -90,7 +90,7 @@
 @media ( max-width : 900px ) { /* What: Narrow About Visual Div. Why: The stacked column shouldn't stretch across the whole screen. How: This applies 900px wide and below. */
 
 
-	.about__visual { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This caps the column at 400px and centers it. */
+	.aboVisDiv { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This caps the column at 400px and centers it. */
 
 
 		margin    : 0 auto;
@@ -102,7 +102,7 @@
 
 }
 
-.about__logo-bg { /* What: About Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond its top and sides, in the off-white behind everything else. */
+.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond its top and sides, in the off-white behind everything else. */
 
 
 	background : var( --bac-sur-col );              /* Background Surface Color = #f4f6fa */
@@ -116,7 +116,7 @@
 
 }
 
-.about__logo { /* What: About Logo Image. Why: The full logo anchors the left column and should lift off its panel. How: This sizes it to 260px wide, casts a soft navy shadow under it, and layers it above the panel. */
+.aboLogIma { /* What: About Logo Image. Why: The full logo anchors the left column and should lift off its panel. How: This sizes it to 260px wide, casts a soft navy shadow under it, and layers it above the panel. */
 
 
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 4 ~= 44.876px, Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
@@ -129,7 +129,7 @@
 @media ( max-width : 900px ) { /* What: Narrow About Logo Image. Why: The capped column has less room for the logo. How: This applies 900px wide and below. */
 
 
-	.about__logo { /* What: Smaller About Logo Image. Why: The logo should fit the narrower column. How: This sizes it to 200px wide. */
+	.aboLogIma { /* What: Smaller About Logo Image. Why: The logo should fit the narrower column. How: This sizes it to 200px wide. */
 
 
 		width : 200px;
@@ -144,7 +144,7 @@
 
 /* #region about__info-card */
 
-.about__info-card { /* What: About Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
+.infCarDiv { /* What: Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
 
 
 	background     : var( --bac-inr-col );                      /* Background Inverse Raised Color = #0f1e45 */
@@ -162,7 +162,7 @@
 
 /* #region about__info-row */
 
-.about__info-row { /* What: About Info Row Div. Why: Each fact pairs its label with its value on one line. How: This spreads the two to either end with a faint divider below. */
+.infRowDiv { /* What: Info Row Div. Why: Each fact pairs its label with its value on one line. How: This spreads the two to either end with a faint divider below. */
 
 
 	align-items     : center;
@@ -173,7 +173,7 @@
 
 
 }
-.about__info-row:last-child { /* What: Last About Info Row Div. Why: The card ends without a divider. How: This drops the last row's border. */
+.infRowDiv:last-child { /* What: Last Info Row Div. Why: The card ends without a divider. How: This drops the last row's border. */
 
 
 	border-bottom : none;
@@ -181,7 +181,7 @@
 
 }
 
-.about__info-label { /* What: About Info Label Span. Why: Each value needs a quiet label. How: This sets it small, spaced, uppercase, and silver. */
+.infLabSpa { /* What: Info Label Span. Why: Each value needs a quiet label. How: This sets it small, spaced, uppercase, and silver. */
 
 
 	color          : var( --tex-inm-col );                   /* Text Inverse Muted Color = #8a9ab5 */
@@ -194,7 +194,8 @@
 
 }
 
-.about__info-value { /* What: About Info Value Span. Why: The fact itself is the row's focus. How: This sets it in the bold display font in white. */
+.infValSpa,
+.infValAnc { /* What: Info Value Span And Anchor. Why: The fact itself is the row's focus, whether it's plain text or the phone link. How: This sets it in the bold display font in white. */
 
 
 	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
@@ -206,7 +207,7 @@
 
 }
 
-.about__info-link { /* What: About Info Link Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
+.infValAnc { /* What: Info Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
 
 
 	color      : var( --acc-lig-col );                            /* Accent Light Color ~= #4488f6 */
@@ -214,17 +215,17 @@
 
 
 }
-.about__info-link:hover { /* What: Hovered About Info Link Anchor. Why: The link should respond to the pointer. How: This turns it white. */
+.infValAnc:hover { /* What: Hovered Info Value Anchor. Why: The link should respond to the pointer. How: This turns it white. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion About Info Link Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Info Value Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.about__info-link { /* What: Motionless About Info Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.infValAnc { /* What: Motionless Info Value Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
 
 
 		transition : none;
@@ -245,7 +246,7 @@
 
 /* #region about__text */
 
-.section-label { /* What: Section Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared section label. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
 
 
 	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
@@ -257,7 +258,7 @@
 
 
 }
-.about__text .section-label { /* What: Text Column Section Label Paragraph. Why: Light blue doesn't have enough contrast on the white section. How: This turns the label the deeper blue. */
+.aboTexDiv .eyeLabPar { /* What: Text Column Eyebrow Label Paragraph. Why: Light blue doesn't have enough contrast on the white section. How: This turns the label the deeper blue. */
 
 
 	color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
@@ -265,7 +266,7 @@
 
 }
 
-.section-title { /* What: Section Title Heading. Why: The heading leads the story. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
+.secTitHea { /* What: Section Title Heading. Why: The heading leads the story. How: This sets it large, tightly leaded, extra bold, uppercase, and navy, scaling with the screen, copied from the shared section title. */
 
 
 	color          : var( --tex-mai-col );                                     /* Text Main Color = #0f1e45 */
@@ -279,7 +280,7 @@
 
 }
 
-.divider { /* What: Divider Div. Why: A short rule separates the heading from the story. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
+.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the story. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
 
 
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
@@ -290,7 +291,7 @@
 
 }
 
-.about__body { /* What: About Body Paragraph. Why: The story should read comfortably. How: This sets it in the muted text color with generous leading and room below each paragraph. */
+.aboBodPar { /* What: About Body Paragraph. Why: The story should read comfortably. How: This sets it in the muted text color with generous leading and room below each paragraph. */
 
 
 	color         : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
@@ -305,7 +306,7 @@
 
 /* #region about__values */
 
-.about__values { /* What: About Values Div. Why: The story closes with what the company stands for. How: This stacks the three values with room above the list. */
+.aboValDiv { /* What: About Values Div. Why: The story closes with what the company stands for. How: This stacks the three values with room above the list. */
 
 
 	display        : flex;
@@ -319,7 +320,7 @@
 
 /* #region about__value */
 
-.about__value { /* What: About Value Div. Why: Each value reads as its own row. How: This sets the marker beside the value's text, top-aligned. */
+.valIteDiv { /* What: Value Item Div. Why: Each value reads as its own row. How: This sets the marker beside the value's text, top-aligned. */
 
 
 	align-items : flex-start;
@@ -329,7 +330,7 @@
 
 }
 
-.about__value-marker { /* What: About Value Marker Div. Why: A short bar marks each value. How: This draws a 3px blue bar at least about 45px tall that never shrinks. */
+.valMarDiv { /* What: Value Marker Div. Why: A short bar marks each value. How: This draws a 3px blue bar at least about 45px tall that never shrinks. */
 
 
 	background  : var( --acc-mai-col );                /* Accent Main Color = #1e56c8 */
@@ -341,7 +342,7 @@
 
 }
 
-.about__value-title { /* What: About Value Title Heading. Why: Each value is named. How: This sets the name in the bold display font, uppercase and navy. */
+.valTitHea { /* What: Value Title Heading. Why: Each value is named. How: This sets the name in the bold display font, uppercase and navy. */
 
 
 	color          : var( --tex-mai-col );                   /* Text Main Color = #0f1e45 */
@@ -355,7 +356,7 @@
 
 }
 
-.about__value-desc { /* What: About Value Description Paragraph. Why: Each value is explained in a sentence. How: This sets it small in the muted text color with generous leading. */
+.valDesPar { /* What: Value Description Paragraph. Why: Each value is explained in a sentence. How: This sets it small in the muted text color with generous leading. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
