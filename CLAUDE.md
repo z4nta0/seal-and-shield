@@ -30,7 +30,15 @@ treatment. The `author` meta names the business itself.
 Open as of 2026-10-08. Per "Width is decided per project" in the user-level
 rules, the choice between the vertical rhythm and the plastic-ratio viewport
 steps waits until the rest of the design system and tokens are applied; then
-the current numbers are compared with both options and the user decides.
+the current numbers are compared with both options and the user decides. The
+tokens are applied as of 2026-10-09, and these horizontal sizes are still
+literal, waiting on the decision: the content cap `--con-max-wid` (1,180px),
+the services header (600px), the stacked about column (400px), the about
+logo (260px, 200px narrow), the hero logo (`clamp( 280px, 38vw, 420px )`,
+`clamp( 200px, 55vw, 300px )` narrow), the section dividers (48px), the value
+markers (3px), and the menu toggle's lines (26px). Square boxes (the bar and
+footer logos, the hero ring, the success icon) mirror their height's
+vertical rhythm step instead.
 
 ## Directory structure
 Decided 2026-10-08, matching reese-roofing's adaptation of the user-level
@@ -93,9 +101,14 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
    (data-page-scroll-active, data-section-link-active,
    data-mobile-menu-open, and the menu button's aria-expanded), and the
    shared container, section label, section title, and divider classes were
-   copied into each module that used them. Still to come: the design-token
-   pass, which renames the classes, custom properties, and keyframes and
-   fits every value to the scale.
+   copied into each module that used them. The design-token pass was done
+   2026-10-09 in five commits: role colors and fonts on the plastic-ratio
+   core design numbers; the type and spacing scale (1rem is the 11px base,
+   with font sizes, line heights, letter spacing, spacing, borders, and
+   heights on their nearest steps and the ledes capped at Lato's measured
+   68-character width); durations and easing; elevation shadows; and every
+   class and keyframe renamed to the three-segment rule. Still to come: the
+   horizontal layout decision above.
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
 
