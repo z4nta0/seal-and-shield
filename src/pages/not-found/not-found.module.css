@@ -1,0 +1,183 @@
+
+
+
+/**
+ * not-found.module.css = Not Found Page Module
+ *
+ * @summary
+ * Styles for NotFouCom: a column at least the screen's height holding the
+ * bar, the main content, and the footer, with the content centered on the
+ * hero's dark navy in the space between. The eyebrow label, title accent,
+ * and buttons are copied from the hero under the same names, so the page
+ * looks like the rest of the site, and every transition turns off for
+ * reduced motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region nofPagDiv */
+
+.nofPagDiv { /* What: Not-Found Page Div. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the page in a column at least the screen's height. */
+
+
+	display        : flex;
+	flex-direction : column;
+	min-height     : 100vh;
+
+
+}
+
+
+/* #region nofConMai */
+
+.nofConMai { /* What: Not-Found Content Main. Why: The message should sit centered on a dark band like the hero's, clear of the fixed bar. How: This grows to fill the space above the footer, centers its column, and pads below the bar and along the gutters. */
+
+
+	align-items     : center;
+	background      : var( --bac-inv-col );
+	display         : flex;
+	flex            : 1;
+	flex-direction  : column;
+	justify-content : center;
+	padding         : var( --spa-ver-p07 ) var( --gut-sid-pad ) var( --spa-ver-p06 );
+	text-align      : center;
+
+
+}
+
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A small label names the error above the heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the hero's eyebrow. */
+
+
+	color          : var( --acc-lig-col );
+	font-family    : var( --fon-fam-sec );
+	font-size      : var( --fon-siz-p01 );
+	font-weight    : 600;
+	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em );
+	margin-bottom  : var( --spa-ver-p01 );
+	text-transform : uppercase;
+
+
+}
+
+.nofTitHea { /* What: Not-Found Title Heading. Why: The heading states the problem in the site's display style. How: This sets it large, extra bold, uppercase, and white, scaling with the screen between two font size steps. */
+
+
+	color          : var( --bac-pag-col );
+	font-family    : var( --fon-fam-sec );
+	font-size      : clamp( var( --fon-siz-p05 ), 7vw, var( --fon-siz-p07 ) );
+	font-weight    : 800;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );
+	line-height    : var( --ver-rhy-m01 );
+	margin-bottom  : var( --spa-ver-p02 );
+	text-transform : uppercase;
+
+
+}
+
+.titAccSpa { /* What: Title Accent Span. Why: The last word stands out from the rest of the heading, as the hero's promise words do. How: This colors it light blue with a thin darker blue outline, copied from the hero. */
+
+
+	-webkit-text-stroke : var( --bor-wid-bas ) var( --acc-mai-col );
+	color               : var( --acc-lig-col );
+
+
+}
+
+.nofLedPar { /* What: Not-Found Lede Paragraph. Why: The explanation should read comfortably on the dark band. How: This sets it in light silver with generous leading, capped near 68 characters a line. */
+
+
+	color         : var( --tex-inv-col );
+	font-size     : var( --fon-siz-p01 );
+	line-height   : var( --ver-rhy-p01 );
+	margin-bottom : var( --spa-ver-p03 );
+	max-width     : var( --tex-wid-bas );
+
+
+}
+
+
+/* #region nofActDiv */
+
+.nofActDiv { /* What: Not-Found Actions Div. Why: The two ways onward sit side by side. How: This lines them up in a centered row that wraps when it runs out of room. */
+
+
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-bas ) var( --spa-hor-bas );
+	justify-content : center;
+
+
+}
+
+.butBasAnc { /* What: Button Base Anchor. Why: Both links read as the site's buttons. How: This sets their spaced, uppercase label and padding, and eases every change between their looks, copied from the hero. */
+
+
+	cursor         : pointer;
+	font-family    : var( --fon-fam-sec );
+	font-size      : var( --fon-siz-p01 );
+	font-weight    : 700;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );
+	padding        : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) );
+	text-transform : uppercase;
+	transition     : all var( --dur-tra-p02 ) var( --mot-sta-eas );
+
+
+}
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills the button solid blue with a matching border. */
+
+
+	background : var( --acc-mai-col );
+	border     : var( --bor-wid-lar ) solid var( --acc-mai-col );
+	color      : var( --tex-acc-col );
+
+
+}
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lightens its fill and border. */
+
+
+	background   : var( --acc-lig-col );
+	border-color : var( --acc-lig-col );
+
+
+}
+.butBasAnc--secondary { /* What: Secondary Button Base Anchor. Why: The quote request is the quieter second option here. How: This leaves it unfilled with white text and a faint white outline. */
+
+
+	background : transparent;
+	border     : var( --bor-wid-lar ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) );
+	color      : var( --bac-pag-col );
+
+
+}
+.butBasAnc--secondary:hover { /* What: Hovered Secondary Button Base Anchor. Why: The button should respond to the pointer. How: This gives it a faint white fill and a solid white outline. */
+
+
+	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) );
+	border-color : var( --bac-pag-col );
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion nofActDiv */
+
+/* #endregion nofConMai */
+
+/* #endregion nofPagDiv */
+
+

@@ -16,8 +16,8 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * The page states the accessibility and rendering suites visit, and the
  * helper that opens one; the responsive suite opens its own widths through
  * the same helper. A state is a page at a width, sometimes with something
- * opened on it: the home page at phone and desktop widths, and the mobile
- * menu open on a phone. opeStaFun sizes the viewport, loads the page, waits
+ * opened on it: the home page and the 404 page at phone and desktop
+ * widths, and the mobile menu open on a phone. opeStaFun sizes the viewport, loads the page, waits
  * for the fonts, scrolls through the page so its scroll-triggered content
  * fades in, runs the state's own action, such as opening the menu, and then
  * waits for the page to stay still so nothing is measured mid-fade.
@@ -60,9 +60,9 @@ type StaRcdTyp = { // What: State Record Type. Why: Every check reads the same d
  * STA_RCD_ARR = State Record Array
  *
  * @summary
- * Every state the checks visit: the home page at a phone width (390px) and
- * a desktop width (1,440px), plus the mobile menu open at the phone width,
- * since the menu is only reachable there. Every row shares the
+ * Every state the checks visit: the home page and the 404 page each at a
+ * phone width (390px) and a desktop width (1,440px), plus the mobile menu
+ * open at the phone width, since the menu is only reachable there. Every row shares the
  * {@link StaRcdTyp} shape, so its fields carry no comments of their own:
  * - `actFun` (Function): Action Function, run after the page loads to open
  *   something on it, such as the menu. Only the menu row has one.
@@ -78,8 +78,10 @@ type StaRcdTyp = { // What: State Record Type. Why: Every check reads the same d
 const STA_RCD_ARR : StaRcdTyp[] = [ // What: State Record Array. Why: Every check walks the same list of states, so a new state is added in one place. How: Each row names a state, its path, and its viewport, and the menu row adds the action that opens it.
 
 
-	{ heiNum : 900, ideStr : 'home-desktop', patStr : '/', widNum : 1440 }, // What: Home Desktop State. Why: Most visitors on a computer land here. How: This loads the home page at 1,440px.
-	{ heiNum : 844, ideStr : 'home-phone',   patStr : '/', widNum : 390  }, // What: Home Phone State. Why: The phone layout stacks every section and hides the bar's links behind the menu. How: This loads the home page at 390px.
+	{ heiNum : 900, ideStr : 'home-desktop',      patStr : '/',        widNum : 1440 }, // What: Home Desktop State. Why: Most visitors on a computer land here. How: This loads the home page at 1,440px.
+	{ heiNum : 844, ideStr : 'home-phone',        patStr : '/',        widNum : 390  }, // What: Home Phone State. Why: The phone layout stacks every section and hides the bar's links behind the menu. How: This loads the home page at 390px.
+	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing', widNum : 1440 }, // What: Not Found Desktop State. Why: Every unknown address lands on the 404 page. How: This loads an address the site doesn't have at 1,440px.
+	{ heiNum : 844, ideStr : 'not-found-phone',   patStr : '/missing', widNum : 390  }, // What: Not Found Phone State. Why: The 404 page has its own phone layout to check. How: This loads an address the site doesn't have at 390px.
 
 	{ // What: Menu Phone State. Why: The open menu holds the phone's only copy of the section links and the phone number. How: This loads the home page at 390px and opens the menu through its toggle button.
 
