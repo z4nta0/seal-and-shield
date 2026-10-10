@@ -410,12 +410,13 @@
 .logRinDiv { /* What: Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a faint blue circle that follows the logo's size at a fixed offset, the way reese-roofing's oval follows its logo, and swells and brightens on a loop of about 4.6 seconds. */
 
 
-	--log-rin-off : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px */ /* What: Logo Ring Offset. Why: The ring sits just outside the logo on wide screens, as it did before the logo became fluid. How: The ring reaches this far past the logo on every side. */
+	--rin-hor-off : var( --spa-hor-m05 ); /* Spacing Horizontal Base Minus 5 ~= 3.572px */ /* What: Ring Horizontal Offset. Why: The ring sits just outside the logo on wide screens, as it did before the logo became fluid. How: The ring reaches this far past the logo's left and right edges. */
+	--rin-ver-off : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px */ /* What: Ring Vertical Offset. Why: The ring sits just outside the logo on wide screens, as it did before the logo became fluid. How: The ring reaches this far past the logo's top and bottom edges. */
 
 	animation     : logRinDivLoopPulse var( --dur-ani-p12 ) var( --mot-sta-eas ) infinite;                          /* Duration Animation Base Plus 12 ~= 4,610.0ms, Motion Standard Easing = ease */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
-	inset         : calc( var( --log-rin-off ) * -1 );                                                              /* Logo Ring Offset, about -3.572px, or -33.876px in the stacked hero */
+	inset         : calc( var( --rin-ver-off ) * -1 ) calc( var( --rin-hor-off ) * -1 );                            /* Ring Vertical Offset and Ring Horizontal Offset, each about -3.572px, or -33.876px in the stacked hero */
 	position      : absolute;
 
 
@@ -434,10 +435,11 @@
 @container app ( max-width : 900px ) { /* What: Narrow Logo Ring Div. Why: The stacked logo is smaller, and its ring keeps the wider margin it had before. How: This applies 900px wide and below. */
 
 
-	.logRinDiv { /* What: Wider Logo Ring Div. Why: The ring should still frame the smaller logo with room to spare. How: This widens the ring's offset to the p03 spacing step. */
+	.logRinDiv { /* What: Wider Logo Ring Div. Why: The ring should still frame the smaller logo with room to spare. How: This widens the ring's offsets to the p03 spacing steps. */
 
 
-		--log-rin-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+		--rin-hor-off : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+		--rin-ver-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
 
 
 	}

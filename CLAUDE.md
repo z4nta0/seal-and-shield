@@ -66,9 +66,9 @@ vertical-rhythm layout and its baselines in one step.
   value markers stay literal, since no step lands within 10%.
 - **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as
   reese-roofing, also on trial.
-- **Hero ring**: follows the logo at a fixed offset (`--log-rin-off`), the
-  way reese-roofing's oval follows its logo, so it never falls behind a
-  growing logo.
+- **Hero ring**: follows the logo at a fixed offset (`--rin-ver-off` and
+  `--rin-hor-off`, one per axis), the way reese-roofing's oval follows its
+  logo, so it never falls behind a growing logo.
 - **Breakpoints**: 1,024, 900, 768, 580, and 520px, measured against the
   `app` container on AppRooCom's root element; the 480px query, which
   repeated the 900px one, was dropped.

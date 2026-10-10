@@ -598,6 +598,8 @@ function ConSecCom () : React.JSX.Element {
 								disabled={ senProBoo }
 								type='submit'
 							>{ /* What: Form Submit Button Element. Why: The visitor sends the request here. How: This submits the form through forSubFun, and is disabled while a submission is on its way. */ }
+
+
 								<span
 									key={ senProBoo ? 'sending' : 'ready' } // What: Label Key. Why: A new key remounts the label, which replays its fade-in. How: This changes whenever the button switches between ready and sending.
 
@@ -605,6 +607,8 @@ function ConSecCom () : React.JSX.Element {
 								>{ /* What: Submit Label Span Element. Why: The label fades to its new text when a request goes out. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
 									{ senProBoo ? 'Sending...' : 'Submit Free Quote Request' }{ /* What: Submit Label Expression. Why: The button should say when it's busy. How: This reads Sending... while a submission is out. */ }
 								</span>
+
+
 							</button>
 
 							<p className={ cssModObj.forNotPar }>{ /* What: Form Note Paragraph Element. Why: Visitors worry about what happens to their details. How: This promises no spam. */ }
