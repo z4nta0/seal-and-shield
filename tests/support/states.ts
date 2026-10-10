@@ -135,11 +135,12 @@ const STA_RCD_ARR : StaRcdTyp[] = [ // What: State Record Array. Why: Every chec
  *
  * @param curPagObj - Current Page Object: The page to scroll through.
  *
- * @returns This function does not return anything.
+ * @returns A promise that settles once the whole page has been scrolled
+ *          through, with no value.
  *
  * @example
  * ```ts
- * revPagFun(page) // => void
+ * revPagFun(page) // => Promise<void>
  * ```
  *
 */
@@ -193,11 +194,12 @@ async function revPagFun ( curPagObj : Page ) : Promise< void > {
  *
  * @param curPagObj - Current Page Object: The page to wait on.
  *
- * @returns This function does not return anything.
+ * @returns A promise that settles once the page has stopped moving, with no
+ *          value.
  *
  * @example
  * ```ts
- * waiSetFun(page) // => void
+ * waiSetFun(page) // => Promise<void>
  * ```
  *
 */
@@ -252,11 +254,12 @@ async function waiSetFun ( curPagObj : Page ) : Promise< void > {
  * @param curPagObj - Current Page Object: The page to open the state on.
  * @param staRcdObj - State Record Object: {@link StaRcdTyp}
  *
- * @returns This function does not return anything.
+ * @returns A promise that settles once the state is open and settled, with no
+ *          value.
  *
  * @example
  * ```ts
- * opeStaFun(page, staRcdObj) // => void
+ * opeStaFun(page, staRcdObj) // => Promise<void>
  * ```
  *
 */

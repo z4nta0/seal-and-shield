@@ -136,7 +136,8 @@ function ConSecCom () : React.JSX.Element {
 	 *
 	 * @param subEveObj - Submit Event Object: The form's submit event.
 	 *
-	 * @returns This function does not return anything.
+	 * @returns A promise that settles once the request has gone out and its
+	 *          answer shows on the page, with no value.
 	 *
 	 * @example
 	 * ```ts

@@ -92,7 +92,7 @@
 	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
+	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245em */
 	text-transform : uppercase;
 
 
@@ -105,7 +105,7 @@
 	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
 	font-weight    : 800;
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	text-transform : uppercase;
 
@@ -189,7 +189,7 @@
 	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
 	font-weight    : 600;
-	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+	letter-spacing : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
 	margin-bottom  : var( --spa-ver-m06 );                   /* Spacing Vertical Base Minus 6 ~= 2.696px */
 	text-transform : uppercase;
 
@@ -259,7 +259,7 @@
 	font-family    : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : calc( var( --cdn-pow-009-rec ) * 1em );                                                         /* Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
+	letter-spacing : calc( var( --cdn-pow-009-rec ) * 1em );                                                         /* Core-Design-Number to the Power of 9 Reciprocal ~= 0.080em */
 	padding        : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
 	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
@@ -463,7 +463,7 @@
 	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p02 );                            /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 800;
-	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	margin-bottom  : var( --spa-ver-p02 );                            /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	padding-bottom : var( --spa-ver-bas );                            /* Spacing Vertical Base ~= 14.572px */
 	text-transform : uppercase;
@@ -689,7 +689,7 @@
 	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );          /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );          /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
 	margin-bottom  : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
 	padding        : var( --spa-ver-bas ) var( --spa-hor-bas );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	text-transform : uppercase;

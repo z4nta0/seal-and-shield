@@ -163,6 +163,8 @@ function NavBarCom () : React.JSX.Element {
 
 					setActSecStr( secIdeStr ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the section's id.
 
+
+
 					break; // What: Walk Stop. Why: Only the lowest reached section is active. How: This ends the walk at the first match.
 
 
@@ -268,7 +270,7 @@ function NavBarCom () : React.JSX.Element {
 					<img
 						className={ cssModObj.navLogIma }
 
-						height={ 133 }
+						height={ 133 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 						src={ losWebUrl }
 						width={ 157 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
