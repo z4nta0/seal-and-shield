@@ -34,27 +34,22 @@ treatment. The `author` meta names the business itself.
   user's choice, the hero's h1 now holds the eyebrow, with "Lawrence, KS" on
   its own second line, as well as the slogan, so the page's main heading
   names the specialty and the city while looking as it did.
-- **Social accounts**: none were provided, so no `twitter:site` or `sameAs`
-  links. The user is asking the company; add any real ones when they arrive.
-- **Off-site work for the user**, which helps local search more than
-  anything on the page:
-  - **Google Business Profile**: set it up as a service-area business with
-    the address hidden and Lawrence, Topeka, the Kansas City metro, and
-    Kansas as service areas; use the same name ("Seal and Shield"), phone,
-    hours, and website address as the site.
-  - **Google Search Console and Bing Webmaster Tools**: verify the domain and
-    submit https://sealandshieldroof.com/sitemap.xml.
-  - **Directory listings**: Apple Business Connect, Bing Places, Yelp, the
-    BBB, Angi, Nextdoor, the Lawrence Chamber of Commerce, and Conklin's
-    contractor locator, each with the identical name, phone, and city.
-  - **Reviews**: ask finished-job customers for Google reviews; the site
-    shows none and claims none in its structured data.
+- **Off-site work handed to the business** (closed 2026-10-10): the user
+  verified the domain in Google Search Console and submitted the sitemap,
+  then passed the rest to the company as optional but worthwhile: a Google
+  Business Profile as a service-area business with the address hidden, Bing
+  Webmaster Tools, directory listings (Apple Business Connect, Bing Places,
+  Yelp, the BBB, Angi, Nextdoor, the Lawrence Chamber of Commerce, Conklin's
+  contractor locator) with the identical name, phone, and city, and Google
+  reviews. No social accounts were provided; if the company ever shares
+  real ones, they join the preview tags as `twitter:site` and the
+  structured data as `sameAs`.
 
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
 is decided per project" rule: reese-roofing's method, applied in `45b71d0`.
-It's on trial, so the user may reverse it; `git revert 45b71d0` restores the
-vertical-rhythm layout and its baselines in one step.
+The user compared it with the live site across device widths and kept it,
+so it's settled (2026-10-10).
 - **Fluid (horizontal rhythm)**: layout values only. The page gutter
   (`--gut-sid-pad`, reese-roofing's own), the column gaps between section
   columns, panel and button side padding, and the footer's column gap are
@@ -65,7 +60,7 @@ vertical-rhythm layout and its baselines in one step.
   field, and tag padding, the heading rules, and the menu lines. The 3px
   value markers stay literal, since no step lands within 10%.
 - **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as
-  reese-roofing, also on trial.
+  reese-roofing.
 - **Hero ring**: follows the logo at a fixed offset (`--rin-ver-off` and
   `--rin-hor-off`, one per axis), the way reese-roofing's oval follows its
   logo, so it never falls behind a growing logo.
@@ -168,8 +163,8 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      Apple touch icon on white) is rendered by `npm run icons` from
      `design/icons/mark.png`, the old 1,210px `public/favicon.png`. A changed
      card needs a new filename (`og-image-2.png`), since apps cache previews.
-     After the deploy, check the live card with a preview checker such as
-     opengraph.xyz or Facebook's Sharing Debugger.
+     The user checked the live card with a preview checker on 2026-10-10,
+     and it came back with no problems.
    - **Interaction feedback: done 2026-10-09.** Every link and button
      changes color on hover, and the buttons also lift a pixel (the service
      cards 3px); buttons press in to 0.97 and text links dim. Focus rings
@@ -241,17 +236,15 @@ waiting for the page to settle.
   its size; and that robots.txt and the sitemap say what they should.
 - `npm test` runs every suite.
 
-## Known issues
-- **Test the contact form after the last deploy** (reminder for the user,
-  2026-10-08): the hidden Netlify detection copy of the form in `index.html`
-  was pasted JSX that repeated the React form's input ids, and it was
-  rebuilt as a bare form with only the form's name and each field's `name`.
-  Once all the cleanup steps are finished and deployed, remind the user to
-  send a test submission and confirm it arrives in Netlify's Forms tab.
-- **Contrast axe can't measure** (needs review, 2026-10-08): text over the
-  hero's, contact section's, and footer's gradients (the headline and its
-  accents, the stats, the bar's brand and links, the contact details, and
-  the footer's links and phone) has to be checked by eye.
+## Live checks
+Done by the user on 2026-10-10, after the step 7 deploy:
+- **Contact form**: a test submission arrived in Netlify's Forms tab. The
+  hidden detection copy of the form in `index.html` is a bare form with only
+  its name and each field's `name`, rebuilt from pasted JSX that repeated
+  the React form's input ids.
+- **Security headers and social preview**: both graded with no problems.
+- **Contrast over the gradients**, which axe can't measure (the hero's,
+  contact section's, and footer's text): checked by eye and passed.
 - **WAVE reports** (2026-10-09): the hidden Netlify form's fields now carry
   aria-labels, and the body is dark so the transparent bar's text no longer
   measures against white. WAVE's remaining contrast flags on the About and
@@ -298,8 +291,8 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
   usual hardening headers. Netlify applies it only once deployed, so it was
   checked by serving the production build with the headers attached in the
   browser: no violations in any engine while every page, font, image, the
-  menu, and the form worked. After the deploy, securityheaders.com should
-  grade the live site. Anything later added from another origin (analytics,
+  menu, and the form worked, and the live site's grade came back with no
+  problems after the deploy. Anything later added from another origin (analytics,
   a map, an embedded review widget) needs its origin added to the policy.
 - **Netlify builds with Node 24.x**, set in the site's Netlify settings
   rather than in the repo.
