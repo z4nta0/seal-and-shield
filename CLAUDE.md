@@ -177,7 +177,8 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      `--foc-rin-col`, which the dark bar, hero, About card, contact
      section, footer, and 404 page set to the light accent for contrast.
      The contact form's success panel fades up with its check popping in
-     once, and its error fades in. Everything has a reduced-motion variant.
+     once, its error fades in, and the submit button's label fades to
+     Sending... while a request is out. Everything has a reduced-motion variant.
      The menu's phone button draws its hover outline as an inset
      box-shadow, which takes no space, so the closed state looks exactly as
      before.

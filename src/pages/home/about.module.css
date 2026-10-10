@@ -49,7 +49,7 @@
 
 /* #region aboLayDiv */
 
-.aboLayDiv { /* What: About Layout Div. Why: The logo and details sit beside the story. How: This lays them out in two top-aligned columns sized to their content, the visual one capped at about 564px, and centers the pair in the container. */
+.aboLayDiv { /* What: About Layout Div. Why: The logo and details sit beside the story. How: This lays them out in two top-aligned columns, the visual one filling up to about 564px and the story sized to its content, and centers the pair in the container. */
 
 
 	align-items           : start;
