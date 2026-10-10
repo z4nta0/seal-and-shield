@@ -109,11 +109,11 @@
 
 
 	background : var( --bac-sur-col );              /* Background Surface Color = #f4f6fa */
-	bottom     : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
-	left       : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	bottom     : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= -33.876px */
+	left       : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= -33.876px */
 	position   : absolute;
-	right      : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
-	top        : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	right      : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= -33.876px */
+	top        : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= -33.876px */
 	z-index    : 0;
 
 
