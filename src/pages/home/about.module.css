@@ -27,6 +27,7 @@
 
 
 	background : var( --bac-pag-col );   /* Background Page Color = #ffffff */
+	overflow-x : clip;                   /* What: Side Clip. Why: The logo's light panel reaches past its column, which on a phone runs past the screen's edge. How: This clips it there without making the section a scroll container, so the panel runs edge to edge. */
 	padding    : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
 
 
@@ -48,13 +49,14 @@
 
 /* #region aboLayDiv */
 
-.aboLayDiv { /* What: About Layout Div. Why: The logo and details sit beside the story. How: This lays them out in two top-aligned columns, the story's a little wider. */
+.aboLayDiv { /* What: About Layout Div. Why: The logo and details sit beside the story. How: This lays them out in two top-aligned columns sized to their content, the visual one capped at about 564px, and centers the pair in the container. */
 
 
 	align-items           : start;
 	display               : grid;
 	gap                   : var( --spa-ver-p06 ) clamp( var( --spa-hor-p03 ), var( --hor-rhy-017 ), var( --spa-hor-p06 ) ); /* Spacing Vertical Base Plus 6 ~= 78.751px, Spacing Horizontal Base Plus 3 ~= 33.876px, Horizontal Rhythm 17 ~= 115.363px @ 1,920px width, Spacing Horizontal Base Plus 6 ~= 78.751px */
-	grid-template-columns : 1fr 1.4fr;
+	grid-template-columns : minmax( 0, calc( var( --ver-rhy-p13 ) * 1rem ) ) auto;                                          /* Vertical Rhythm Base Plus 13 ~= 563.794px */
+	justify-content       : center;
 
 
 }
@@ -90,11 +92,12 @@
 @container app ( max-width : 900px ) { /* What: Narrow About Visual Div. Why: The stacked column shouldn't stretch across the whole screen. How: This applies 900px wide and below. */
 
 
-	.aboVisDiv { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This caps the column at about 426px and centers it. */
+	.aboVisDiv { /* What: Capped About Visual Div. Why: The logo and card read best at a modest width, centered. How: This fills the column up to about 426px and centers it. */
 
 
 		margin    : 0 auto;
 		max-width : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.596px */
+		width     : 100%;
 
 
 	}
@@ -102,15 +105,15 @@
 
 }
 
-.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, in the off-white behind everything else. */
+.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, or to the screen's edges on a phone, in the off-white behind everything else. */
 
 
 	background : var( --bac-sur-col );              /* Background Surface Color = #f4f6fa */
-	bottom     : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= -33.876px */
-	left       : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= -33.876px */
+	bottom     : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	left       : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
 	position   : absolute;
-	right      : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= -33.876px */
-	top        : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= -33.876px */
+	right      : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	top        : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
 	z-index    : 0;
 
 
@@ -241,6 +244,14 @@
 
 
 /* #region aboTexDiv */
+
+.aboTexDiv { /* What: About Text Div. Why: Once the columns stack, the story should sit centered under the logo rather than hug the left edge. How: This centers the column at its content's width in its grid cell, keeping its text left-aligned; beside the logo, its column is already sized to its content, so nothing moves. */
+
+
+	justify-self : center;
+
+
+}
 
 .eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
 
