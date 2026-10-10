@@ -130,11 +130,11 @@ async function namProFun ( curPagObj : Page ) : Promise< string[] > {
  *
  * @param void - This function takes no parameters.
  *
- * @returns A promise that resolves once scrolling has settled.
+ * @returns A promise that settles once scrolling has stopped, with no value.
  *
  * @example
  * ```ts
- * page.evaluate(scrSetFun) // => void
+ * page.evaluate(scrSetFun) // => Promise<void>
  * ```
  *
 */
@@ -229,9 +229,10 @@ function stoInfFun () : StoInfTyp | null {
 
 
 	const actCurEle = document.activeElement as HTMLElement | null; // What: Active Current Element. Why: The stop is whatever holds focus after the press. How: This reads the focused element. // What: Type Assertion Note. Why: activeElement types as Element, which has no blur or focus. How: Every element that can hold focus on this site is an HTMLElement.
-	const actBodBoo = actCurEle === document.body;                  // What: Active Body Boolean. Why: Focus resting on the body means no stop holds it. How: This compares the focused element with the body.
-	const actMisBoo = !actCurEle;                                   // What: Active Missing Boolean. Why: Some engines report no focused element at all once focus leaves. How: This is true when there is none.
-	const docBluBoo = !document.hasFocus();                         // What: Document Blurred Boolean. Why: Focus can leave for the browser's own interface. How: This is true when the document no longer has focus.
+
+	const actBodBoo = actCurEle === document.body; // What: Active Body Boolean. Why: Focus resting on the body means no stop holds it. How: This compares the focused element with the body.
+	const actMisBoo = !actCurEle;                  // What: Active Missing Boolean. Why: Some engines report no focused element at all once focus leaves. How: This is true when there is none.
+	const docBluBoo = !document.hasFocus();        // What: Document Blurred Boolean. Why: Focus can leave for the browser's own interface. How: This is true when the document no longer has focus.
 
 	const walDonBoo = actMisBoo || actBodBoo || docBluBoo; // What: Walk Done Boolean. Why: Any of the three means the walk has left the page. How: This combines them.
 
@@ -267,6 +268,7 @@ function stoInfFun () : StoInfTyp | null {
 
 	const recCurObj = actCurEle.getBoundingClientRect();                                                                       // What: Rect Current Object. Why: A focused stop has to be on screen and uncovered. How: This measures the stop.
 	const topCurEle = document.elementFromPoint( recCurObj.left + recCurObj.width / 2, recCurObj.top + recCurObj.height / 2 ); // What: Top Current Element. Why: Whatever is drawn on top at the stop's center is what a person sees there. How: This asks the page which element sits at that point.
+
 
 
 	const ariLabStr = actCurEle.getAttribute( 'aria-label' ); // What: ARIA Label String. Why: A stop's own label names it best. How: This reads its aria-label, or null.

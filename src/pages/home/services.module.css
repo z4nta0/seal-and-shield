@@ -62,7 +62,7 @@
 	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
+	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245em */
 	text-transform : uppercase;
 
 
@@ -82,7 +82,7 @@
 	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : clamp( var( --fon-siz-p04 ), 4vw, var( --fon-siz-p05 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 5 ~= 44.876px */
 	font-weight    : 800;
-	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	text-transform : uppercase;
 
@@ -317,12 +317,12 @@
 .areTagSpa { /* What: Area Tag Span. Why: Each tag names one place in the display style. How: This sets the name in spaced capitals inside a faint light blue outline, and eases its fill on hover. */
 
 
-	border         : var( --bor-wid-bas ) solid oklch( from var( --acc-lig-col ) l c h / 0.5 );                                    /* Border Width Base ~= 1.160px, Accent Light Color = #4488f6 @ 0.5 opacity */
+	border         : var( --bor-wid-bas ) solid oklch( from var( --acc-lig-col ) l c h / 0.5 );                                    /* Border Width Base ~= 1.160px, Accent Light Color ~= #4488f6 @ 0.5 opacity */
 	color          : var( --bac-pag-col );                                                                                         /* Background Page Color = #ffffff */
 	font-family    : var( --fon-fam-sec );                                                                                         /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                                                                                         /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
-	letter-spacing : calc( var( --cdn-pow-009-rec ) * 1em );                                                                       /* Core-Design-Number to the Power of 9 Reciprocal ~= 0.080 */
+	letter-spacing : calc( var( --cdn-pow-009-rec ) * 1em );                                                                       /* Core-Design-Number to the Power of 9 Reciprocal ~= 0.080em */
 	padding        : var( --spa-ver-m02 ) var( --spa-hor-p01 );                                                                    /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 	text-transform : uppercase;
 	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */

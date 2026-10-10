@@ -26,7 +26,7 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 
 ```bash
 npm run lint       # ESLint across the repo
-npm run typecheck  # TypeScript across src/, the configs, and tests/
+npm run typecheck  # TypeScript across src/, the configs, tests/, and the design/ scripts
 ```
 
 ## Tests
@@ -82,7 +82,7 @@ design/                Source artwork, not served
 - **Type pairing:** Barlow Condensed for headings, labels, and buttons, with Lato for body text, both self-hosted (`src/assets/fonts/`, declared in `src/styles/fonts.css`), so a visit makes no third-party requests.
 - **Palette:** Deep navy (`#0f1e45`, with a darker `#080f24` for the bar, hero, and footer), a strong blue (`#1e56c8`) for buttons and labels on light sections, a lighter blue (`#4488f6`) for accents on dark sections, and an off-white (`#f4f6fa`) behind the services.
 - **Logo usage:** The **full logo** (`src/pages/home/logo-full.webp`) anchors the hero and sits above the company details in the About section. The **simple mark** (`src/assets/logo-simple.webp`) is used in the nav bar and the footer.
-- **Motion:** The hero fades in on load, the other sections fade in as they scroll into view, and the hero logo's ring pulses. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion.
+- **Motion:** The hero fades in on load, the other sections fade in as they scroll into view, and the hero logo's ring pulses. Links and buttons respond to hover, press, and keyboard focus with a color shift, a small lift or press-in, and a focus ring that eases in. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion, leaving only the instant color and position changes.
 
 ## Contact form
 

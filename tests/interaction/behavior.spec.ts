@@ -128,11 +128,12 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
  * @param vieSizObj - Viewport Size Object: {@link DES_VIE_OBJ} or
  *                    {@link PHO_VIE_OBJ}.
  *
- * @returns This function does not return anything.
+ * @returns A promise that settles once the route has loaded at its viewport
+ *          size, with no value.
  *
  * @example
  * ```ts
- * opeRouFun(page, '/', DES_VIE_OBJ) // => void
+ * opeRouFun(page, '/', DES_VIE_OBJ) // => Promise<void>
  * ```
  *
 */
@@ -212,11 +213,12 @@ async function secTopFun ( curPagObj : Page, secIdeStr : string ) : Promise< num
  * @param secIdeStr - Section Identifier String: The id of the section the
  *                    visitor should land on.
  *
- * @returns This function does not return anything.
+ * @returns A promise that settles once the visitor has landed on the section
+ *          with a clean address, with no value.
  *
  * @example
  * ```ts
- * arrSecFun(page, 'contact') // => void
+ * arrSecFun(page, 'contact') // => Promise<void>
  * ```
  *
 */
