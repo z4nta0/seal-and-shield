@@ -366,7 +366,7 @@
 	/* #region Text Width Tokens */
 
 	--tex-wid-sma : calc( var( --cdn-pow-011 ) * 1em ); /* What: Text Width Small Maximum ~= 22.047em. Why: Small or secondary text (hints, captions, subtitles) reads best near 50 characters per line, though nothing on this site caps one yet. How: Lato averages about 2.32 characters per em, so this caps a line at about 51 characters at any font size. */
-	--tex-wid-bas : calc( var( --cdn-pow-012 ) * 1em ); /* What: Text Width Base Maximum ~= 29.207em. Why: Paragraph text reads best near 66 characters per line. How: Lato averages about 2.32 characters per em, so this caps a line at about 68 characters at any font size; the hero pitch, the services intro, and the 404 page's lede read it. */
+	--tex-wid-bas : calc( var( --cdn-pow-012 ) * 1em ); /* What: Text Width Base Maximum ~= 29.207em. Why: Paragraph text reads best near 66 characters per line. How: Lato averages about 2.32 characters per em, so this caps a line at about 68 characters at any font size; the hero pitch, the services intro and area text, the about story and values, the contact intro, and the 404 page's lede read it. */
 
 	/* #endregion Text Width Tokens */
 

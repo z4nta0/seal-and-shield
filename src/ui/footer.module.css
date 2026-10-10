@@ -151,7 +151,7 @@
 
 
 }
-.fooLinBut:active { /* What: Pressed Footer Link Button. Why: A press should register before the page scrolls. How: This dims it slightly while it's held, since a text link can't scale. */
+.fooLinBut:active { /* What: Pressed Footer Link Button. Why: A press should register before the page scrolls. How: This dims it slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -218,7 +218,7 @@
 
 
 }
-.fooPhoAnc:active { /* What: Pressed Footer Phone Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, since a text link can't scale. */
+.fooPhoAnc:active { /* What: Pressed Footer Phone Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */

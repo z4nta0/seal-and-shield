@@ -130,13 +130,14 @@
 
 }
 
-.infBodPar { /* What: Info Body Paragraph. Why: The invitation should read comfortably on the dark band. How: This sets it in light silver with generous leading and room below. */
+.infBodPar { /* What: Info Body Paragraph. Why: The invitation should read comfortably on the dark band. How: This sets it in light silver with generous leading and room below, capped at about 68 characters a line. */
 
 
 	color         : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
 	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	margin-bottom : var( --spa-ver-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -221,7 +222,7 @@
 
 
 }
-.detValAnc:active { /* What: Pressed Detail Value Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, since a text link can't scale. */
+.detValAnc:active { /* What: Pressed Detail Value Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -652,7 +653,7 @@
 
 
 }
-.errLinAnc:active { /* What: Pressed Error Link Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, since a text link can't scale. */
+.errLinAnc:active { /* What: Pressed Error Link Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */

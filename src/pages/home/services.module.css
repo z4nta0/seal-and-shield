@@ -288,12 +288,13 @@
 
 }
 
-.areDesPar { /* What: Area Description Paragraph. Why: The tags need a sentence of context on the dark panel. How: This sets it in light silver with generous leading. */
+.areDesPar { /* What: Area Description Paragraph. Why: The tags need a sentence of context on the dark panel. How: This sets it in light silver with generous leading, capped at about 68 characters a line. */
 
 
 	color       : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
 	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }

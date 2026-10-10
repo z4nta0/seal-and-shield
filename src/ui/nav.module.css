@@ -285,7 +285,7 @@
 
 
 }
-.navLinAnc:active { /* What: Pressed Navigation Link Anchor. Why: A press should register before the page scrolls. How: This dims the link slightly while it's held, since a link sitting in a row can't scale. */
+.navLinAnc:active { /* What: Pressed Navigation Link Anchor. Why: A press should register before the page scrolls. How: This dims the link slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -536,7 +536,7 @@
 
 
 }
-.menLinAnc:active { /* What: Pressed Menu Link Anchor. Why: A press should register before the menu closes. How: This dims the link slightly while it's held. */
+.menLinAnc:active { /* What: Pressed Menu Link Anchor. Why: A press should register before the menu closes. How: This dims the link slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */

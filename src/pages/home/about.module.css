@@ -211,7 +211,7 @@
 
 
 }
-.infValAnc:active { /* What: Pressed Info Value Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, since a text link can't scale. */
+.infValAnc:active { /* What: Pressed Info Value Anchor. Why: A press should register before the phone opens. How: This dims it slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -287,13 +287,14 @@
 
 }
 
-.aboBodPar { /* What: About Body Paragraph. Why: The story should read comfortably. How: This sets it in the muted text color with generous leading and room below each paragraph. */
+.aboBodPar { /* What: About Body Paragraph. Why: The story should read comfortably. How: This sets it in the muted text color with generous leading and room below each paragraph, capped at about 68 characters a line. */
 
 
 	color         : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
 	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	margin-bottom : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -352,12 +353,13 @@
 
 }
 
-.valDesPar { /* What: Value Description Paragraph. Why: Each value is explained in a sentence. How: This sets it small in the muted text color with generous leading. */
+.valDesPar { /* What: Value Description Paragraph. Why: Each value is explained in a sentence. How: This sets it small in the muted text color with generous leading, capped at about 68 characters a line. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
 	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
