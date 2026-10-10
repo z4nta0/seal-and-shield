@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import lofPngUrl from './logo-full.png';    // What: Logo-Full PNG URL. Why: The about section's left column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import lofWebUrl from './logo-full.webp';   // What: Logo-Full WebP URL. Why: The about section's left column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
 import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 100ms per block.
@@ -163,7 +163,9 @@ function AboSecCom () : React.JSX.Element {
 						<img
 							className={ cssModObj.aboLogIma }
 
-							src={ lofPngUrl }
+							height={ 943 }
+							src={ lofWebUrl }
+							width={ 968 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 							alt='Seal and Shield LLC'
 						/>{ /* What: About Logo Image Element. Why: The full logo anchors the left column. How: Its alt text repeats the name the image shows. */ }

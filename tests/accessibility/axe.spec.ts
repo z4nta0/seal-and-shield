@@ -59,6 +59,42 @@ const AXE_TAG_ARR = [ 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'b
 
 // #region Helpers
 
+// #region scaStaFun
+
+/**
+ * scaStaFun = Scan State Function
+ *
+ * @summary
+ * Runs axe-core on the page as it stands, limited to the WCAG and
+ * best-practice rule sets, and returns its full results. The caller opens
+ * and settles the state first, so the scan never sees a page mid-load or
+ * mid-animation.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to scan.
+ *
+ * @returns The scan's results.
+ *
+ * @example
+ * ```ts
+ * scaStaFun(page) // => { violations, incomplete, passes, ... }
+ * ```
+ *
+*/
+
+async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
+
+
+	return new AxeBuilder( { page : curPagObj } ).withTags( AXE_TAG_ARR ).analyze(); // What: Axe Scan Return. Why: The scan's results decide the test. How: This builds an axe run for the page, limits it to the chosen rule sets, and runs it.
+
+
+}
+
+// #endregion scaStaFun
+
+
+
 // #region sumResFun
 
 /**
@@ -93,42 +129,6 @@ function sumResFun ( resLisArr : AxeResTyp[ 'violations' ] ) : string[] {
 }
 
 // #endregion sumResFun
-
-
-
-// #region scaStaFun
-
-/**
- * scaStaFun = Scan State Function
- *
- * @summary
- * Runs axe-core on the page as it stands, limited to the WCAG and
- * best-practice rule sets, and returns its full results. The caller opens
- * and settles the state first, so the scan never sees a page mid-load or
- * mid-animation.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param curPagObj - Current Page Object: The page to scan.
- *
- * @returns The scan's results.
- *
- * @example
- * ```ts
- * scaStaFun(page) // => { violations, incomplete, passes, ... }
- * ```
- *
-*/
-
-async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
-
-
-	return new AxeBuilder( { page : curPagObj } ).withTags( AXE_TAG_ARR ).analyze(); // What: Axe Scan Return. Why: The scan's results decide the test. How: This builds an axe run for the page, limits it to the chosen rule sets, and runs it.
-
-
-}
-
-// #endregion scaStaFun
 
 // #endregion Helpers
 

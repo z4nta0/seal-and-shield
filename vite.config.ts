@@ -6,7 +6,7 @@
 import react from '@vitejs/plugin-react'; // What: React. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
 
 
-import { defineConfig } from 'vite'; // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps vitConObj.
+import { defineConfig } from 'vite'; // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps VIT_CON_OBJ.
 
 
 import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a Vite plugin. How: This types minHtmFun's return, which types its hook.
@@ -24,7 +24,8 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
  * index.html, which Vite processes but never minifies, so the page's comments,
  * indentation, and JSON-LD whitespace stay out of what visitors download.
  * Every other setting stays at Vite's default, including copying the files in
- * public/ (the favicon and Netlify's _redirects) into the build untouched.
+ * public/ (icons, the social card, crawler files, and Netlify's _headers and
+ * _redirects) into the build untouched.
  *
  * Sections:
  *  - Helpers
@@ -104,10 +105,10 @@ const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.ht
 
 
 
-const vitConObj = defineConfig({ // What: Vite Config Object. Why: Vite reads its whole configuration from this file's default export. How: This builds the config, including the minHtmFun plugin above.
+const VIT_CON_OBJ = defineConfig({ // What: Vite Config Object. Why: Vite reads its whole configuration from this file's default export. How: This builds the config, including the minHtmFun plugin above.
 
 
-	css     : { modules : { localsConvention : 'camelCaseOnly' } }, // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so a modifier class such as .navbar--scrolled is read as cssModObj.navbarScrolled, per the CSS modules rules. How: This sets the locals convention.
+	css     : { modules : { localsConvention : 'camelCaseOnly' } }, // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so a modifier class such as .forFieDiv--full is read as cssModObj.forFieDivFull, per the CSS modules rules. How: This sets the locals convention.
 	plugins : [ react(), minHtmFun() ]                              // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React and the page minifier.
 
 
@@ -119,7 +120,7 @@ const vitConObj = defineConfig({ // What: Vite Config Object. Why: Vite reads it
 
 // #region Exports
 
-export default vitConObj; // What: Default Export. Why: Vite reads its config from this file's default export. How: This exports vitConObj.
+export default VIT_CON_OBJ; // What: Default Export. Why: Vite reads its config from this file's default export. How: This exports VIT_CON_OBJ.
 
 // #endregion Exports
 

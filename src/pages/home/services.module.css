@@ -19,7 +19,7 @@
 
 
 
-/* #region services */
+/* #region homSerSec */
 
 .homSerSec { /* What: Home Services Section. Why: The services sit on a light band apart from the dark hero. How: This fills it with the off-white and gives it generous padding above and below. */
 
@@ -31,7 +31,7 @@
 }
 
 
-/* #region container */
+/* #region pagConDiv */
 
 .pagConDiv { /* What: Page Container Div. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with side padding, copied from the shared container. */
 
@@ -44,7 +44,7 @@
 }
 
 
-/* #region services__header */
+/* #region serHeaDiv */
 
 .serHeaDiv { /* What: Services Header Div. Why: The section opens by saying what it covers, at a readable width. How: This caps the header at horizontal step 024, never narrower than the p12 rhythm step (about 426px), and leaves room below it. */
 
@@ -96,7 +96,7 @@
 
 }
 
-.secDivDiv { /* What: Section Divider Div. Why: A short rule separates each heading from the text below it. How: This draws a 48px by about 2.7px blue bar with room above and below, copied from the shared divider. */
+.secDivDiv { /* What: Section Divider Div. Why: A short rule separates each heading from the text below it. How: This draws an about 45px by about 2.7px blue bar with room above and below, copied from the shared divider. */
 
 
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
@@ -118,11 +118,11 @@
 
 }
 
-/* #endregion services__header */
+/* #endregion serHeaDiv */
 
 
 
-/* #region services__grid */
+/* #region serGriDiv */
 
 .serGriDiv { /* What: Services Grid Div. Why: The services read best as a grid of cards. How: This lays the cards out four across with even gaps and leaves room below for the panel. */
 
@@ -162,32 +162,53 @@
 }
 
 
-/* #region services__card */
+/* #region serCarDiv */
 
-.serCarDiv { /* What: Services Card Div. Why: Each service reads as its own white card. How: This draws a white card with a light border and a blue top edge, and eases its lift on hover. */
+.serCarDiv { /* What: Services Card Div. Why: Each service reads as its own white card. How: This draws a white card with a light border and a blue top edge, filling its grid cell, and eases its lift on hover. */
 
 
-	background : var( --bac-pag-col );                                                                                      /* Background Page Color = #ffffff */
-	border     : var( --bor-wid-bas ) solid var( --bor-mai-col );                                                           /* Border Width Base ~= 1.160px, Border Main Color = #c8d0e0 */
-	border-top : var( --bor-wid-xla ) solid var( --acc-mai-col );                                                           /* Border Width Extra Large ~= 3.572px, Accent Main Color = #1e56c8 */
-	padding    : var( --spa-ver-p03 ) var( --spa-hor-p02 );                                                                 /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	background : var( --bac-pag-col );                                /* Background Page Color = #ffffff */
+	border     : var( --bor-wid-bas ) solid var( --bor-mai-col );     /* Border Width Base ~= 1.160px, Border Main Color = #c8d0e0 */
+	border-top : var( --bor-wid-xla ) solid var( --acc-mai-col );     /* Border Width Extra Large ~= 3.572px, Accent Main Color = #1e56c8 */
+	height     : 100%;                                                /* What: Full Cell Height. Why: Cards in a row should match in height now that each sits inside its own reveal cell. How: This fills the cell the grid stretches to the row's tallest card. */
+	padding    : var( --spa-ver-p03 ) var( --spa-hor-p02 );           /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	position   : relative;
-	transition : box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
 
 
 }
-.serCarDiv:hover { /* What: Hovered Services Card Div. Why: The card under the pointer should come forward. How: This lifts it 4px and casts a soft navy shadow. */
+.serCarDiv:hover { /* What: Hovered Services Card Div. Why: The card under the pointer should come forward. How: This lifts it 3px, the most the interaction rule allows, as its shadow layer fades in. */
 
 
-	box-shadow : var( --ele-med-sha ); /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
-	transform  : translateY( -4px );
+	transform : translateY( -3px );
+
+
+}
+.serCarDiv::after { /* What: Services Card Div Shadow. Why: The hovered card casts a soft navy shadow, which should fade in without repainting it every frame. How: This holds the shadow on a layer matching the card's border box, hidden until hover, and fades it in through opacity. */
+
+
+	box-shadow     : var( --ele-med-sha );                                                                                  /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	content        : '';
+	inset          : calc( var( --bor-wid-xla ) * -1 ) calc( var( --bor-wid-bas ) * -1 ) calc( var( --bor-wid-bas ) * -1 ); /* Border Width Extra Large ~= -3.572px, Border Width Base ~= -1.160px */
+	opacity        : 0;
+	pointer-events : none;
+	position       : absolute;
+	transition     : opacity var( --dur-tra-p02 ) var( --mot-sta-eas );                                                     /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.serCarDiv:hover::after { /* What: Hovered Services Card Div Shadow. Why: The card under the pointer should come forward. How: This shows its shadow. */
+
+
+	opacity : 1;
 
 
 }
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Services Card Div. Why: Someone who asked for less motion shouldn't see the cards animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.serCarDiv { /* What: Motionless Services Card Div. Why: The hover look should simply switch. How: This turns the transition off. */
+	.serCarDiv,
+	.serCarDiv::after { /* What: Motionless Services Card Div. Why: The hover look should simply switch. How: This turns both transitions off. */
 
 
 		transition : none;
@@ -232,13 +253,13 @@
 
 }
 
-/* #endregion services__card */
+/* #endregion serCarDiv */
 
-/* #endregion services__grid */
+/* #endregion serGriDiv */
 
 
 
-/* #region services__area */
+/* #region serAreDiv */
 
 .serAreDiv { /* What: Services Area Div. Why: The service area stands apart from the cards as a dark panel. How: This fills a padded navy panel and lays its text and tags out in two columns. */
 
@@ -267,18 +288,19 @@
 
 }
 
-.areDesPar { /* What: Area Description Paragraph. Why: The tags need a sentence of context on the dark panel. How: This sets it in light silver with generous leading. */
+.areDesPar { /* What: Area Description Paragraph. Why: The tags need a sentence of context on the dark panel. How: This sets it in light silver with generous leading, capped at about 68 characters a line. */
 
 
 	color       : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
 	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
 
 
-/* #region services__area-tags */
+/* #region areTagDiv */
 
 .areTagDiv { /* What: Area Tags Div. Why: Each place the company works gets a quick tag. How: This wraps the tags in rows from the top left. */
 
@@ -329,12 +351,12 @@
 
 }
 
-/* #endregion services__area-tags */
+/* #endregion areTagDiv */
 
-/* #endregion services__area */
+/* #endregion serAreDiv */
 
-/* #endregion container */
+/* #endregion pagConDiv */
 
-/* #endregion services */
+/* #endregion homSerSec */
 
 

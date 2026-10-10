@@ -21,10 +21,34 @@ treatment. The `author` meta names the business itself.
   brand name and copyright line, the About story's founding sentence, and
   the full logo's alt text (the image itself reads "LLC"); the bar's and
   footer's small logos have empty alt text, since the brand name sits right
-  beside them. `index.html`'s title and description are rewritten in the SEO
-  pass.
-- **Off-site work for the user** (the Google Business Profile, directory
-  listings, reviews) is listed here once the SEO pass reaches it.
+  beside them.
+- **No street address** (decided 2026-10-09): the company has no business
+  address, only the owner's home, which stays off the site. The page shows
+  Lawrence, Kansas, and the structured data gives only the city, region, and
+  country to match.
+- **SEO done 2026-10-09**: the title ("Commercial Roofing in Lawrence, KS |
+  Seal and Shield") and description name the services and the city, the head
+  carries the author, canonical, and theme color tags and RoofingContractor
+  structured data matching the page's phone, city, weekday hours, and five
+  service areas, and robots.txt and sitemap.xml are in `public/`. At the
+  user's choice, the hero's h1 now holds the eyebrow, with "Lawrence, KS" on
+  its own second line, as well as the slogan, so the page's main heading
+  names the specialty and the city while looking as it did.
+- **Social accounts**: none were provided, so no `twitter:site` or `sameAs`
+  links. The user is asking the company; add any real ones when they arrive.
+- **Off-site work for the user**, which helps local search more than
+  anything on the page:
+  - **Google Business Profile**: set it up as a service-area business with
+    the address hidden and Lawrence, Topeka, the Kansas City metro, and
+    Kansas as service areas; use the same name ("Seal and Shield"), phone,
+    hours, and website address as the site.
+  - **Google Search Console and Bing Webmaster Tools**: verify the domain and
+    submit https://sealandshieldroof.com/sitemap.xml.
+  - **Directory listings**: Apple Business Connect, Bing Places, Yelp, the
+    BBB, Angi, Nextdoor, the Lawrence Chamber of Commerce, and Conklin's
+    contractor locator, each with the identical name, phone, and city.
+  - **Reviews**: ask finished-job customers for Google reviews; the site
+    shows none and claims none in its structured data.
 
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
@@ -42,9 +66,9 @@ vertical-rhythm layout and its baselines in one step.
   value markers stay literal, since no step lands within 10%.
 - **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as
   reese-roofing, also on trial.
-- **Hero ring**: follows the logo at a fixed offset (`--log-rin-off`), the
-  way reese-roofing's oval follows its logo, so it never falls behind a
-  growing logo.
+- **Hero ring**: follows the logo at a fixed offset (`--rin-ver-off` and
+  `--rin-hor-off`, one per axis), the way reese-roofing's oval follows its
+  logo, so it never falls behind a growing logo.
 - **Breakpoints**: 1,024, 900, 768, 580, and 520px, measured against the
   `app` container on AppRooCom's root element; the 480px query, which
   repeated the 900px one, was dropped.
@@ -56,28 +80,34 @@ app with tabs.
 ```
 src/
   main.tsx               entry point
-  app.tsx                root component and the app container (the routes
-                         join it in step 7)
-  assets/                images used by 2 or more pages (logo-simple.png)
+  app.tsx                root component, the app container, and the routes
+  assets/                images used by 2 or more pages (logo-simple.webp)
   pages/
-    home/                the home page, its sections, and logo-full.png
+    home/                the home page, its sections, and logo-full.webp
+    not-found/           the 404 page
   ui/                    components used by 2 or more pages (nav, footer)
+                         and section-link.ts
   styles/                global CSS only (styles.css)
   utils/                 app-agnostic helpers (motion.ts)
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test
-suites").
+suites"), and `design/` holds source artwork that isn't served, with the
+scripts that render it into `public/`: `design/og-image/` (the social
+preview card) and `design/icons/` (the favicon set).
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
   and a component only that page uses (the hero, services, about, and
-  contact sections) lives in that folder. The 404 page joins as
-  `pages/not-found/` in step 7.
+  contact sections) lives in that folder. The 404 page is
+  `pages/not-found/`.
 - **A page's main file is named after its folder, with no prefix**
   (`pages/home/home.tsx`), the same as reese-roofing.
 - **The bar and footer live in `ui/`** as `nav.tsx` and `footer.tsx`, since
-  the 404 page will use them too.
+  the 404 page uses them too. Their section links go through
+  `ui/section-link.ts`, which scrolls in place on the home page and
+  navigates home with the section's id as the hash from any other page;
+  the home page jumps to that section on arrival and clears the hash.
 - **Component names** follow the naming rules since the formatting pass:
   `NavBarCom`, `SitFooCom`, `HerSecCom`, `SerSecCom`, `AboSecCom`,
-  `ConSecCom`, `HomPagCom`, and `AppRooCom`.
+  `ConSecCom`, `HomPagCom`, `NotFouCom`, and `AppRooCom`.
 - **Stylesheet order**: `main.tsx` imports `styles/styles.css` after the app,
   so the global sheet loads after every component's module. Since the module
   pass, every class is scoped to its own module, so no rule depends on that
@@ -121,13 +151,43 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
    layout above followed the same day.
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
-   - **404 links into sections** (asked for 2026-10-09): the 404 page links
-     back with `/#contact` and the like, per the user-level rule, but the
-     site scrolls to sections in JavaScript and keeps the URL free of
-     hashes. So when the home page loads with a hash, it scrolls to that
-     section once React has rendered it, then clears the hash with
-     `history.replaceState`, so the URL ends up as clean as everywhere
-     else.
+   - **404 page: done 2026-10-09.** It has the shared bar and footer, a
+     Return Home button, a Get a Free Quote button to the contact section,
+     and its own title and noindex tag. Every section link works from it
+     through `ui/section-link.ts`, and the home page scrolls to a hash it
+     arrives with and then clears it, as asked for the same day.
+   - **Security headers, WebP logos, and SEO: done 2026-10-09**, as recorded
+     under "Kind of site" and "Known issues".
+   - **Social previews: done 2026-10-09.** The 1,200x630 card
+     (`public/og-image.png`, 270 KB) shows the logo over "Commercial
+     Roofing" and "Lawrence, KS" on the hero's navy, grid, and glow, inside
+     the center square; it's rendered by `npm run og-image` from
+     `design/og-image/card.html`, which reads the site's own fonts and
+     tokens. The Open Graph and Twitter tags match the page's title and
+     description, and the favicon set (ICO, 16 to 512px PNGs, and a 180px
+     Apple touch icon on white) is rendered by `npm run icons` from
+     `design/icons/mark.png`, the old 1,210px `public/favicon.png`. A changed
+     card needs a new filename (`og-image-2.png`), since apps cache previews.
+     After the deploy, check the live card with a preview checker such as
+     opengraph.xyz or Facebook's Sharing Debugger.
+   - **Interaction feedback: done 2026-10-09.** Every link and button
+     changes color on hover, and the buttons also lift a pixel (the service
+     cards 3px); buttons press in to 0.97 and text links dim. Focus rings
+     ease in from a zero-width outline set once in `styles.css`, drawn in
+     `--foc-rin-col`, which the dark bar, hero, About card, contact
+     section, footer, and 404 page set to the light accent for contrast.
+     The contact form's success panel fades up with its check popping in
+     once, its error fades in, and the submit button's label fades to
+     Sending... while a request is out. Everything has a reduced-motion variant.
+     The menu's phone button draws its hover outline as an inset
+     box-shadow, which takes no space, so the closed state looks exactly as
+     before.
+   - **Reveal hooks go on a wrapper** wherever the revealed element has its
+     own hover or press transform: the reveal's global rule sets
+     `transition` and `transform` on the element it marks, which silently
+     cancelled the service cards' lift (in every engine, before this pass)
+     and would have cancelled the Call Now button's. Each card and that
+     button now sit inside a plain reveal div.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
@@ -136,10 +196,10 @@ which starts its own dev server on port 5191 (never the usual 5173) and stops
 it afterwards. Every suite runs in Chromium, Firefox, and WebKit. Results,
 screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states the suites
-visit (the home page at 390px and 1,440px, plus the mobile menu open at
-390px) are listed in `tests/support/states.ts`. Its `opeStaFun` scrolls
-through the page before checking it, since the Services, About, and Contact
-sections only fade their content in once scrolled into view, and skips
+visit (the home page and the 404 page at 390px and 1,440px, plus the mobile
+menu open at 390px) are listed in `tests/support/states.ts`. Its `opeStaFun`
+scrolls through the page before checking it, since the Services, About, and
+Contact sections only fade their content in once scrolled into view, and skips
 animations that repeat forever (the hero logo's `logRinDivLoopPulse`) when
 waiting for the page to settle.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
@@ -149,6 +209,19 @@ waiting for the page to settle.
   visible), reflow at 320px, and motion under reduced motion. axe's "needs
   review" results are printed and attached to the report rather than failing
   the run.
+- `npm run test:interaction`: checks what the controls do, under reduced
+  motion so scrolls land at once. The bar's links, brand, menu, and footer
+  buttons land on their sections with a clean address; the contact form
+  refuses incomplete requests and reports a faked Netlify answer honestly;
+  and the 404 page, its buttons, and a section address like /#about lead
+  where they should. `feedback.spec.ts`, adapted from reese-roofing's,
+  checks that every control in every state has a hover, press, and focus
+  change with a transition, that the focus ring eases in to full width, and
+  that feedback stays without motion under reduced motion. Its two
+  every-control probes are marked slow, since each takes about 28 seconds
+  in Chromium. The open menu state parks the pointer in the bar's corner
+  after tapping the toggle, so the toggle's hover color stays out of every
+  check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
   pixel may differ, and the per-pixel color threshold is 0 too, since
@@ -157,12 +230,16 @@ waiting for the page to settle.
   After an intended visual change, refresh with `npm run test:rendering --
   --update-snapshots` and commit the baselines with it. Baselines are
   captured on Linux.
-- `npm run test:responsive`: measures the home page and the open menu at 19
-  widths from 320 to 1,920px (a pixel either side of each breakpoint
+- `npm run test:responsive`: measures the home page, the 404 page, and the open
+  menu at 18 widths from 320 to 1,920px (a pixel either side of each breakpoint
   included), failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, or two reachable controls overlapping.
-- `npm test` runs every suite. reese-roofing's interaction and seo suites
-  join in step 7, once the site has the features they check.
+- `npm run test:seo`: checks each route's title, description, author,
+  canonical, robots, and single h1; that the structured data's every claim
+  appears on the page; that the social tags are complete and match the page,
+  the card is a 1,200x630 PNG under 300 KB, and every linked icon is served at
+  its size; and that robots.txt and the sitemap say what they should.
+- `npm test` runs every suite.
 
 ## Known issues
 - **Test the contact form after the last deploy** (reminder for the user,
@@ -209,10 +286,20 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
   aspect ratio to within 0.005px so no layout moved. The oversized full logo
   had made Chromium's draw of it nondeterministic under a full test run,
   which a short-lived rendering retry covered until the resize removed it.
-  Converting them to SVG or WebP is still open for step 7's SEO pass.
-- **No security headers yet**: `public/_headers` doesn't exist. Step 7
-  raises with the user whether to add ease-my-life's hardening headers
-  (Content-Security-Policy, HSTS, and the rest), adjusted for whatever this
-  site loads from other origins and for its Netlify Forms POST.
+  On 2026-10-09 both became WebP, encoded through Chromium's canvas since no
+  other encoder was installed: the full logo at 0.95 quality (60 KB, down
+  from 299 KB, averaging 0.6 of 255 off the PNG with no difference visible
+  at 3x zoom) and the simple mark lossless (21 KB, down from 24 KB), since
+  lossy WebP showed on its fine detail and Chromium's lossless encoder made
+  the full logo larger than its PNG.
+- **Security headers** (added 2026-10-09 at the user's go-ahead):
+  `public/_headers` sends a strict Content-Security-Policy (only the site's
+  own files and form post, no inline styles), HSTS without preload, and the
+  usual hardening headers. Netlify applies it only once deployed, so it was
+  checked by serving the production build with the headers attached in the
+  browser: no violations in any engine while every page, font, image, the
+  menu, and the form worked. After the deploy, securityheaders.com should
+  grade the live site. Anything later added from another origin (analytics,
+  a map, an embedded review widget) needs its origin added to the policy.
 - **Netlify builds with Node 24.x**, set in the site's Netlify settings
   rather than in the repo.

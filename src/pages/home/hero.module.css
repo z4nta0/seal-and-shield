@@ -24,10 +24,12 @@
 
 
 
-/* #region home */
+/* #region homHerSec */
 
 .homHerSec { /* What: Home Hero Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
 
+
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
 
 	background      : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
 	display         : flex;
@@ -68,7 +70,8 @@
 }
 
 
-/* #region home__content */
+
+/* #region herConDiv */
 
 .herConDiv { /* What: Hero Content Div. Why: The pitch and the logo sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding plus room above and below, layered above the background. */
 
@@ -100,11 +103,12 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short line says what the company is before the headline. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A short label says what the company is and where, at the start of the page's heading. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
 
 
 	animation      : blockEnterFadeIn var( --dur-ani-p06 ) var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */
 	color          : var( --acc-lig-col );                                            /* Accent Light Color ~= #4488f6 */
+	display        : block;
 	font-family    : var( --fon-fam-sec );                                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
@@ -114,10 +118,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Eyebrow Label Paragraph. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Eyebrow Label Span. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.eyeLabPar { /* What: Motionless Eyebrow Label Paragraph. Why: The eyebrow should simply be there. How: This turns the entrance animation off. */
+	.eyeLabSpa { /* What: Motionless Eyebrow Label Span. Why: The eyebrow should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -152,13 +156,14 @@
 }
 
 
-/* #region home__headline */
+/* #region herSloSpa */
 
-.herTitHea { /* What: Hero Title Heading. Why: The headline is the page's main heading and the company's promise. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
+.herSloSpa { /* What: Hero Slogan Span. Why: The slogan is the company's promise, the large part of the page's heading. How: This sets it huge and tightly leaded in the extra bold display font, scaling with the screen, rising in just after the eyebrow. */
 
 
 	animation      : blockEnterFadeIn var( --dur-ani-p06 ) 0.1s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
 	color          : var( --bac-pag-col );                                                 /* Background Page Color = #ffffff */
+	display        : block;
 	font-family    : var( --fon-fam-sec );                                                 /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : clamp( var( --fon-siz-p06 ), 7vw, var( --fon-siz-p08 ) );             /* Font Size Base Plus 6 ~= 59.447px, Font Size Base Plus 8 ~= 104.323px */
 	font-weight    : 800;
@@ -169,10 +174,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Title Heading. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Slogan Span. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herTitHea { /* What: Motionless Hero Title Heading. Why: The headline should simply be there. How: This turns the entrance animation off. */
+	.herSloSpa { /* What: Motionless Hero Slogan Span. Why: The slogan should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -192,7 +197,7 @@
 
 }
 
-/* #endregion home__headline */
+/* #endregion herSloSpa */
 
 
 .herLedPar { /* What: Hero Lede Paragraph. Why: A short pitch follows the headline at a comfortable reading width. How: This sets it in light silver with generous leading, capped near 68 characters a line, rising in after the headline. */
@@ -235,7 +240,7 @@
 }
 
 
-/* #region home__actions */
+/* #region herActDiv */
 
 .herActDiv { /* What: Hero Actions Div. Why: The pitch ends with the two next steps side by side. How: This lines the buttons up in a row that wraps when it runs out of room, rising in after the pitch. */
 
@@ -284,7 +289,7 @@
 	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );                                                         /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	padding        : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : all var( --dur-tra-p02 ) var( --mot-sta-eas );                                                  /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -302,6 +307,7 @@
 
 	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 	border-color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transform    : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -319,6 +325,14 @@
 
 	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
 	border-color : var( --bac-pag-col );                                                /* Background Page Color = #ffffff */
+	transform    : translateY( -1px );                                                  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.butBasAnc.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, with the base class chained so it outranks the hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
 
 
 }
@@ -336,11 +350,11 @@
 
 }
 
-/* #endregion home__actions */
+/* #endregion herActDiv */
 
 
 
-/* #region home__right */
+/* #region herRigDiv */
 
 .herRigDiv { /* What: Hero Right Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
 
@@ -380,7 +394,7 @@
 }
 
 
-/* #region home__logo-wrap */
+/* #region herLogDiv */
 
 .herLogDiv { /* What: Hero Logo Div. Why: The ring sits behind the logo, centered on it. How: This positions the two in one centered box. */
 
@@ -396,17 +410,18 @@
 .logRinDiv { /* What: Logo Ring Div. Why: A slow pulse around the logo adds a little life to the hero. How: This draws a faint blue circle that follows the logo's size at a fixed offset, the way reese-roofing's oval follows its logo, and swells and brightens on a loop of about 4.6 seconds. */
 
 
-	--log-rin-off : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px */ /* What: Logo Ring Offset. Why: The ring sits just outside the logo on wide screens, as it did before the logo became fluid. How: The ring reaches this far past the logo on every side. */
+	--rin-hor-off : var( --spa-hor-m05 ); /* Spacing Horizontal Base Minus 5 ~= 3.572px */ /* What: Ring Horizontal Offset. Why: The ring sits just outside the logo on wide screens, as it did before the logo became fluid. How: The ring reaches this far past the logo's left and right edges. */
+	--rin-ver-off : var( --spa-ver-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px */ /* What: Ring Vertical Offset. Why: The ring sits just outside the logo on wide screens, as it did before the logo became fluid. How: The ring reaches this far past the logo's top and bottom edges. */
 
 	animation     : logRinDivLoopPulse var( --dur-ani-p12 ) var( --mot-sta-eas ) infinite;                          /* Duration Animation Base Plus 12 ~= 4,610.0ms, Motion Standard Easing = ease */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
-	inset         : calc( var( --log-rin-off ) * -1 );                                                              /* Logo Ring Offset, about 3.572px, or 33.876px in the stacked hero */
+	inset         : calc( var( --rin-ver-off ) * -1 ) calc( var( --rin-hor-off ) * -1 );                            /* Ring Vertical Offset and Ring Horizontal Offset, each about -3.572px, or -33.876px in the stacked hero */
 	position      : absolute;
 
 
 }
-.logRinDiv::before { /* What: Hero Logo Inner Ring. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it about 26px inside the outer circle. */
+.logRinDiv::before { /* What: Logo Ring Div Inner Circle. Why: A second, fainter circle inside the first gives the ring depth. How: This draws it about 26px inside the outer circle. */
 
 
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-007-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
@@ -420,10 +435,11 @@
 @container app ( max-width : 900px ) { /* What: Narrow Logo Ring Div. Why: The stacked logo is smaller, and its ring keeps the wider margin it had before. How: This applies 900px wide and below. */
 
 
-	.logRinDiv { /* What: Wider Logo Ring Div. Why: The ring should still frame the smaller logo with room to spare. How: This widens the ring's offset to the p03 spacing step. */
+	.logRinDiv { /* What: Wider Logo Ring Div. Why: The ring should still frame the smaller logo with room to spare. How: This widens the ring's offsets to the p03 spacing steps. */
 
 
-		--log-rin-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+		--rin-hor-off : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+		--rin-ver-off : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
 
 
 	}
@@ -450,7 +466,7 @@
 	100% {
 
 
-		opacity   : 0.6;
+		opacity   : var( --cdn-pow-002-rec ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 		transform : scale( 1 );
 
 
@@ -492,15 +508,15 @@
 
 }
 
-/* #endregion home__logo-wrap */
+/* #endregion herLogDiv */
 
-/* #endregion home__right */
+/* #endregion herRigDiv */
 
-/* #endregion home__content */
+/* #endregion herConDiv */
 
 
 
-/* #region home__stats */
+/* #region herStaDiv */
 
 .herStaDiv { /* What: Hero Stats Div. Why: Four quick figures close the hero on a band of their own. How: This draws a faintly frosted strip along the hero's bottom with a hairline on top, layered above the background. */
 
@@ -515,7 +531,7 @@
 }
 
 
-/* #region home__stats-inner */
+/* #region staInnDiv */
 
 .staInnDiv { /* What: Stats Inner Div. Why: The figures line up with the page's content width. How: This centers a capped-width row with the container's side padding and lays the four figures out in equal columns. */
 
@@ -544,7 +560,7 @@
 }
 
 
-/* #region home__stat */
+/* #region staIteDiv */
 
 .staIteDiv { /* What: Stat Item Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with their text centered too so a caption that wraps to two lines stays balanced, and a faint divider on its right. */
 
@@ -620,12 +636,12 @@
 
 }
 
-/* #endregion home__stat */
+/* #endregion staIteDiv */
 
-/* #endregion home__stats-inner */
+/* #endregion staInnDiv */
 
-/* #endregion home__stats */
+/* #endregion herStaDiv */
 
-/* #endregion home */
+/* #endregion homHerSec */
 
 

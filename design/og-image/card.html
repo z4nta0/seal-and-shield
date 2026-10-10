@@ -1,0 +1,160 @@
+<!doctype html><!-- What: Document Type Declaration. Why: Browsers render the page in standards mode only with a doctype. How: This declares HTML5. -->
+
+
+
+<html lang='en'><!-- What: Root HTML Element. Why: The card is set in English text. How: This marks the document as English. -->
+
+
+	<head><!-- What: Document Head Element. Why: The card's fonts and layout load before it's captured. How: This holds them in the sections below. -->
+
+
+		<!-- #region Document -->
+
+		<meta charset='UTF-8' />                           <!-- What: Character Set Meta. Why: The card's text has to decode as UTF-8. How: This sits first in the head. -->
+		<title>Seal and Shield Social Preview Card</title> <!-- What: Page Title Element. Why: The file should say what it is when opened in a browser. How: This names the card. -->
+
+		<!-- #endregion Document -->
+
+
+		<!-- #region Card Styles -->
+
+		<style>/* What: Card Style Element. Why: The card is one fixed-size image, styled here from the site's own fonts and tokens. How: This imports the site's font faces and global stylesheet, then lays the card out on the site's scale, keeping literal pixels only for the image's fixed size and the grid's hairlines. */
+
+
+			@import url( '../../src/styles/fonts.css' );  /* What: Site Fonts Import. Why: The card should be set in the site's own typefaces. How: This loads the site's font faces, whose file paths resolve from fonts.css itself. */
+			@import url( '../../src/styles/styles.css' ); /* What: Site Styles Import. Why: The card should read the site's colors and scale rather than copies of them. How: This loads the global tokens and base element styles, which also make 1rem the site's 11px base. */
+
+
+
+			/* #region carBodBod */
+
+			.carBodBod { /* What: Card Body Body. Why: The card fills the whole 1,200x630 capture on the hero's dark navy. How: This sizes it in literal pixels, the image's own fixed size, and centers its single column. */
+
+
+				align-items     : center;
+				background      : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
+				display         : flex;
+				height          : 630px;
+				justify-content : center;
+				overflow        : hidden;
+				position        : relative;
+				width           : 1200px;
+
+
+			}
+			.carBodBod::before { /* What: Card Body Body Grid Lines. Why: The hero's faint blue grid ties the card to the site. How: This tiles thin blue lines one rhythm step apart across the whole card, drawn a crisp 1px as on the hero. */
+
+
+				background-image : linear-gradient( oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ), linear-gradient( 90deg, oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ); /* Accent Main Color = #1e56c8 @ 0.07 opacity */
+				background-size  : calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
+				content          : '';
+				inset            : 0;
+				position         : absolute;
+
+
+			}
+			.carBodBod::after { /* What: Card Body Body Glow. Why: The hero's soft blue glow behind the logo gives the card the same depth. How: This lays a radial blue gradient, centered on the column, that fades out toward the edges. */
+
+
+				background : radial-gradient( ellipse at 50% 45%, oklch( from var( --acc-mai-col ) l c h / 0.22 ) 0%, transparent 60% ); /* Accent Main Color = #1e56c8 @ 0.22 opacity */
+				content    : '';
+				inset      : 0;
+				position   : absolute;
+
+
+			}
+
+
+			/* #region carColDiv */
+
+			.carColDiv { /* What: Card Column Div. Why: Some apps crop the card to its center square, so everything that matters sits inside the middle 630px. How: This stacks the logo and the two lines in one centered column above the grid and glow. */
+
+
+				align-items    : center;
+				display        : flex;
+				flex-direction : column;
+				position       : relative;
+				text-align     : center;
+				z-index        : 1;
+
+
+			}
+
+			.carLogIma { /* What: Card Logo Image. Why: The full logo is what makes the card recognizable at a glance. How: This sets it at a rhythm step tall enough to lead the card while leaving room for the lines below, with the hero logo's soft blue shadow. */
+
+
+				display : block;
+				filter  : drop-shadow( 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ); /* Vertical Rhythm Base Plus 1 ~= 19.304px, Vertical Rhythm Base Plus 5 ~= 59.447px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
+				height  : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.517px */
+				width   : auto;
+
+
+			}
+
+
+			/* #region carTitPar */
+
+			.carTitPar { /* What: Card Title Paragraph. Why: The card's main line says what the company does and where, large enough to read at thumbnail size. How: This sets the specialty in the hero's extra-bold uppercase display style on one line and the city on the next. */
+
+
+				color          : var( --bac-pag-col );                  /* Background Page Color = #ffffff */
+				font-family    : var( --fon-fam-sec );                  /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+				font-size      : var( --fon-siz-p06 );                  /* Font Size Base Plus 6 ~= 59.447px */
+				font-weight    : 800;
+				letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+				line-height    : var( --ver-rhy-m01 );                  /* Vertical Rhythm Base Minus 1 = 1 */
+				margin         : var( --spa-ver-p02 ) 0 0;              /* Spacing Vertical Base Plus 2 ~= 25.572px */
+				text-transform : uppercase;
+
+
+			}
+
+			.titAccSpa { /* What: Title Accent Span. Why: The city stands out the way the hero's promise words do. How: This colors it light blue with a thin darker blue outline, copied from the hero. */
+
+
+				-webkit-text-stroke : var( --bor-wid-bas ) var( --acc-mai-col ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8 */
+				color               : var( --acc-lig-col );                     /* Accent Light Color ~= #4488f6 */
+
+
+			}
+
+			/* #endregion carTitPar */
+
+			/* #endregion carColDiv */
+
+			/* #endregion carBodBod */
+
+
+		</style>
+
+		<!-- #endregion Card Styles -->
+
+
+	</head>
+
+
+
+	<body class='carBodBod'><!-- What: Card Body Body Element. Why: This is the card itself. How: Its single column holds everything the image shows. -->
+
+
+		<div class='carColDiv'><!-- What: Card Column Div Element. Why: The card's content sits in one centered column. How: This stacks the logo and the title. -->
+
+
+			<img
+				class='carLogIma'
+
+				src='../../src/pages/home/logo-full.webp'
+
+				alt='Seal and Shield LLC'
+			/><!-- What: Card Logo Image Element. Why: The full logo identifies the company. How: This loads the same image the site's hero shows. -->
+
+			<p class='carTitPar'>Commercial Roofing<br /><span class='titAccSpa'>Lawrence, KS</span></p><!-- What: Card Title Paragraph Element. Why: The main line says what the company does and where. How: The city sits on its own line in the accent blue. -->
+
+
+		</div>
+
+
+	</body>
+
+
+</html>

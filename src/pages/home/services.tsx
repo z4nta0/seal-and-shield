@@ -35,6 +35,10 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
 
 // #region Constants
 
+const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of Kansas', 'Continental U.S.' ]; // What: Service Area Array. Why: The service area panel tags every place the company works. How: Each entry is a tag's text and React key, from home outward.
+
+
+
 // #region SER_RCD_ARR
 
 /**
@@ -148,10 +152,6 @@ const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists ev
 
 // #endregion SER_RCD_ARR
 
-
-
-const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of Kansas', 'Continental U.S.' ]; // What: Service Area Array. Why: The service area panel tags every place the company works. How: Each entry is a tag's text and React key, from home outward.
-
 // #endregion Constants
 
 
@@ -166,8 +166,9 @@ const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of
  * @summary
  * Renders the services section: the header, a card for each row of
  * SER_RCD_ARR, and the service area panel with a tag for each entry of
- * SER_ARE_ARR. Its header, every card, and the area panel are scroll-reveal
- * blocks, revealed 80ms apart once the section scrolls into view.
+ * SER_ARE_ARR. Its header, each card's grid cell, and the area panel are
+ * scroll-reveal blocks, revealed 80ms apart once the section scrolls into
+ * view.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -237,17 +238,21 @@ function SerSecCom () : React.JSX.Element {
 						<div
 							key={ serRcdObj.titStr }
 
-							className={ cssModObj.serCarDiv }
-
 							data-scroll-reveal-block
-						>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, and fades in in turn. */ }
+						>{ /* What: Card Reveal Div Element. Why: Each card fades in in turn, but the reveal's own transition and transform would override the card's hover lift and shadow. How: This grid cell carries the reveal hook around the card instead of on it. */ }
 
 
-							<span className={ cssModObj.carIcoSpa }>{ serRcdObj.icoStr }</span>{ /* What: Card Icon Span Element. Why: An icon helps a visitor scan the grid. How: This shows the service's emoji. */ }
+							<div className={ cssModObj.serCarDiv }>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, filling its grid cell. */ }
 
-							<h3 className={ cssModObj.carTitHea }>{ serRcdObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This is the card's h3. */ }
 
-							<p className={ cssModObj.carDesPar }>{ serRcdObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Visitors want to know what the service involves. How: This describes it. */ }
+								<span className={ cssModObj.carIcoSpa }>{ serRcdObj.icoStr }</span>{ /* What: Card Icon Span Element. Why: An icon helps a visitor scan the grid. How: This shows the service's emoji. */ }
+
+								<h3 className={ cssModObj.carTitHea }>{ serRcdObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This is the card's h3. */ }
+
+								<p className={ cssModObj.carDesPar }>{ serRcdObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Visitors want to know what the service involves. How: This describes it. */ }
+
+
+							</div>
 
 
 						</div>

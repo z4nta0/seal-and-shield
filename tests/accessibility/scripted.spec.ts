@@ -43,7 +43,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
 
 // #region Constants
 
-const GLY_DEC_REG = /[←↑→↓·•]/; // What: Glyph Decorative Regular Expression. Why: A decorative glyph inside a name is read aloud as noise, such as right arrow. How: This matches the arrows and dots the site draws as decoration.
+const GLY_DEC_REG = /[←↑→↓·•]/; // What: Glyph Decorative Regular Expression. Why: A decorative glyph inside a name is read aloud as noise, such as right arrow. How: This matches the arrows and dots a decorative glyph would add to a name.
 const REF_WID_NUM = 320;        // What: Reflow Width Number. Why: WCAG's reflow criterion asks for no sideways scrolling at 320 CSS pixels, the width of 1,280px at 400% zoom. How: This is the viewport width the reflow check opens each state at.
 const TAB_MAX_NUM = 80;         // What: Tab Maximum Number. Why: A keyboard trap would otherwise keep the walk going forever. How: This caps the walk at far more Tab presses than the site has stops.
 
@@ -63,7 +63,7 @@ const TAB_MAX_NUM = 80;         // What: Tab Maximum Number. Why: A keyboard tra
  * and returns a problem for every link or button with no name, and for every
  * one whose name contains a decorative glyph that should have been hidden.
  * Elements hidden from assistive technology don't appear in the tree, so the
- * hidden logo link and the hidden arrows are never counted.
+ * decorative elements hidden from it are never counted.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -74,7 +74,7 @@ const TAB_MAX_NUM = 80;         // What: Tab Maximum Number. Why: A keyboard tra
  *
  * @example
  * ```ts
- * namProFun(page) // => [ '- link "Home →" has a decorative glyph ...' ]
+ * namProFun(page) // => [ '- button has no name' ]
  * ```
  *
 */
@@ -103,7 +103,7 @@ async function namProFun ( curPagObj : Page ) : Promise< string[] > {
 
 
 
-	return proLisArr;
+	return proLisArr; // What: Problem List Return. Why: The test prints whatever was found. How: This hands back every problem collected.
 
 
 }
@@ -200,17 +200,17 @@ type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges
  * stoInfFun = Stop Information Function
  *
  * @summary
- * Runs inside the page after each Tab press and describes the focused stop,
- * or returns null once focus has left the page: onto the body, to nothing,
- * or out of the document entirely. (Firefox does none of these after its
- * last stop; keyProFun catches it there instead, when focus stays on the
- * same stop.) The focus indicator is judged by blurring the
- * stop for a moment and comparing the styles a focus indicator usually
- * changes (outline, shadow, border, background, color, and underline), then
- * focusing it again so the walk continues from it. Coverage is judged by
- * asking which element sits at the stop's center: anything other than the
- * stop or one of its own descendants means the stop is hidden behind it.
- * Passed to Playwright's evaluate, so it can't read anything from this file.
+ * Runs inside the page after each Tab press and describes the focused stop, or
+ * returns null once focus has left the page: onto the body, to nothing, or out
+ * of the document entirely. (Firefox does none of these after its last stop;
+ * keyProFun catches it there instead, when focus stays on the same stop.) The
+ * focus indicator is judged by blurring the stop for a moment and comparing
+ * the styles a focus indicator usually changes (outline, shadow, border,
+ * background, color, and underline), then focusing it again so the walk
+ * continues from it. Coverage is judged by asking which element sits at the
+ * stop's center: anything other than the stop or one of its own descendants
+ * means the stop is hidden behind it. Passed to Playwright's evaluate, so it
+ * can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -398,7 +398,7 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 
 
-	return proLisArr;
+	return proLisArr; // What: Problem List Return. Why: The test prints whatever was found. How: This hands back every problem collected.
 
 
 }

@@ -4,10 +4,10 @@
 // #region Imports
 
 import cssModObj from './footer.module.css';        // What: CSS Module Object. Why: The footer is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import losPngUrl from '../assets/logo-simple.png'; // What: Logo-Simple PNG URL. Why: The footer's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
+import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The footer's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
-import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function. Why: A section button's smooth scroll has to respect the reduced-motion preference. How: scrSecFun asks it before choosing the scroll behavior.
+import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Function. Why: Section buttons have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
 
 // #endregion Imports
 
@@ -18,9 +18,9 @@ import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function.
  *
  * @summary
  * The site's footer: the brand and tagline, a button for each section that
- * scrolls to it, the phone number and business hours, and the copyright
- * line with the current year. Its nav landmark is labelled Footer, telling
- * it apart from the bar's.
+ * takes the visitor to it from any page, the phone number and business
+ * hours, and the copyright line with the current year. Its nav landmark is
+ * labelled Footer, telling it apart from the bar's.
  *
  * Sections:
  *  - Constants
@@ -35,7 +35,7 @@ import { redMotFun } from '../utils/motion.ts'; // What: Reduce Motion Function.
 
 // #region Constants
 
-const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer Section Array. Why: The footer offers a button for each section, in page order. How: Each entry is a section's id, which its button scrolls to and capitalizes as its label.
+const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer Section Array. Why: The footer offers a button for each section, in page order. How: Each entry is a section's id, which its button goes to and capitalizes as its label.
 
 // #endregion Constants
 
@@ -49,10 +49,11 @@ const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer 
  * SitFooCom = Site Footer Component
  *
  * @summary
- * Renders the footer. Each section button scrolls to its section, smoothly
- * unless the visitor asked for reduced motion, and is labelled with the
- * section's id capitalized. The copyright line reads the current year each
- * time the footer renders, so it never goes stale.
+ * Renders the footer. Each section button reaches its section through
+ * section-link.ts, scrolling in place on the home page, smoothly unless the
+ * visitor asked for reduced motion, or navigating home from any other page,
+ * and is labelled with the section's id capitalized. The copyright line reads
+ * the current year each time the footer renders, so it never goes stale.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -74,7 +75,7 @@ function SitFooCom () : React.JSX.Element {
 
 
 
-	const scrSecFun = ( secIdeStr : string ) => document.getElementById( secIdeStr )?.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); // What: Scroll Section Function. Why: Each section button takes the visitor to its section. How: This scrolls the section with that id into view, jumping instead of gliding under reduced motion.
+	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: Each section button takes the visitor to its section from any page. How: This scrolls to the section on the home page, or navigates home to it from anywhere else.
 
 
 
@@ -93,7 +94,9 @@ function SitFooCom () : React.JSX.Element {
 					<img
 						className={ cssModObj.fooLogIma }
 
-						src={ losPngUrl }
+						height={ 133 }
+						src={ losWebUrl }
+						width={ 157 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 						alt=''
 					/>{ /* What: Footer Logo Image Element. Why: The footer's brand opens with the simple mark. How: Its alt text is empty, since the brand name sits right beside it. */ }
@@ -112,7 +115,6 @@ function SitFooCom () : React.JSX.Element {
 				</div>
 
 
-
 				<nav
 					className={ cssModObj.fooLinNav }
 
@@ -128,8 +130,8 @@ function SitFooCom () : React.JSX.Element {
 
 							className={ cssModObj.fooLinBut }
 
-							onClick={ () => scrSecFun( secIdeStr ) }
-						>{ /* What: Footer Link Button Element. Why: Each button scrolls to its section. How: This calls scrSecFun with the section's id. */ }
+							onClick={ () => visSecFun( secIdeStr ) }
+						>{ /* What: Footer Link Button Element. Why: Each button scrolls to its section. How: This calls visSecFun with the section's id. */ }
 							{ secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) }{ /* What: Section Label Expression. Why: The button names its section. How: This capitalizes the section id's first letter. */ }
 						</button>
 
@@ -185,7 +187,7 @@ function SitFooCom () : React.JSX.Element {
 
 // #region Exports
 
-export { SitFooCom }; // What: Named Exports. Why: The home page renders the footer below its content. How: This exports SitFooCom.
+export { SitFooCom }; // What: Named Exports. Why: Every page renders the footer below its content. How: This exports SitFooCom.
 
 // #endregion Exports
 

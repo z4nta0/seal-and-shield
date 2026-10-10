@@ -21,35 +21,57 @@
 
 
 
-/* #region navbar */
+/* #region navBarHed */
 
 .navBarHed { /* What: Navigation Bar Header. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, transparent until the page scrolls, and eases between its two looks. */
 
 
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Bar. Why: The main blue ring falls under 3:1 on the bar's navy. How: This hands every control in the bar and menu the lighter blue ring. */
+
 	background : transparent;
 	left       : 0;
-	padding    : var( --spa-ver-p01 ) 0; /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding    : var( --spa-ver-p01 ) 0;                                                                                  /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	position   : fixed;
 	right      : 0;
 	top        : 0;
-	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ), box-shadow var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-	z-index    : 1000;
+	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Padding Transition. Why: The bar really gets shorter as it tightens, and a scale transform would squash its logo and links instead. How: This eases the padding itself, a layout property, since no compositor version produces the same effect. */
+	z-index    : 2; /* What: Bar Layer. Why: The bar has to pass over the hero, about, and contact layers raised to 1 as the page scrolls beneath it. How: This puts it one level above them, the lowest value that clears them. */
 
 
 }
-.navBarHed[data-page-scroll-active] { /* What: Scrolled Navigation Bar Header. Why: Once content slides under the bar, it needs a background to stay readable. How: This turns it solid navy, tightens its padding, and adds a soft shadow while the page is scrolled. */
+.navBarHed[data-page-scroll-active] { /* What: Scrolled Navigation Bar Header. Why: Once content slides under the bar, it needs a background to stay readable. How: This turns it solid navy and tightens its padding while the page is scrolled, as its shadow layer fades in below. */
 
 
 	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
-	box-shadow : var( --ele-med-sha );   /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
 	padding    : var( --spa-ver-m01 ) 0; /* Spacing Vertical Base Minus 1 = 11px */
+
+
+}
+.navBarHed::after { /* What: Navigation Bar Header Shadow. Why: The scrolled bar casts a soft shadow onto the page, which should fade in without repainting it every frame. How: This holds the shadow on a layer the size of the bar, hidden until the page scrolls, and fades it in through opacity. */
+
+
+	box-shadow     : var( --ele-med-sha );                              /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	content        : '';
+	inset          : 0;
+	opacity        : 0;
+	pointer-events : none;
+	position       : absolute;
+	transition     : opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.navBarHed[data-page-scroll-active]::after { /* What: Scrolled Navigation Bar Header Shadow. Why: Content sliding under the bar should look like it passes beneath it. How: This shows the shadow while the page is scrolled. */
+
+
+	opacity : 1;
 
 
 }
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Bar Header. Why: Someone who asked for less motion shouldn't see the bar animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navBarHed { /* What: Motionless Navigation Bar Header. Why: The scrolled look should simply switch on. How: This turns the transition off. */
+	.navBarHed,
+	.navBarHed::after { /* What: Motionless Navigation Bar Header. Why: The scrolled look and its shadow should simply switch on. How: This turns both transitions off. */
 
 
 		transition : none;
@@ -61,7 +83,7 @@
 }
 
 
-/* #region navbar__inner */
+/* #region navInnDiv */
 
 .navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents line up with the page's content width. How: This centers a capped-width row with side padding, copied from the shared container, and spreads the brand, links, and menu button across it. */
 
@@ -77,7 +99,7 @@
 }
 
 
-/* #region navbar__brand */
+/* #region navBraAnc */
 
 .navBraAnc { /* What: Navigation Brand Anchor. Why: The mark and the name read as one link. How: This sets the mark beside the name with a small gap. */
 
@@ -85,6 +107,27 @@
 	align-items : center;
 	display     : flex;
 	gap         : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	transition  : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+
+
+}
+.navBraAnc:active { /* What: Pressed Navigation Brand Anchor. Why: A press on the brand should register before the page scrolls. How: This presses the mark and name in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Brand Anchor. Why: Someone who asked for less motion shouldn't see the brand move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navBraAnc { /* What: Motionless Navigation Brand Anchor. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -100,7 +143,7 @@
 }
 
 
-/* #region navbar__brand-text */
+/* #region braTexSpa */
 
 .braTexSpa { /* What: Brand Text Span. Why: The name and its LLC stack tightly as one block. How: This stacks the two lines with no extra line height. */
 
@@ -115,12 +158,33 @@
 .braMaiSpa { /* What: Brand Main Span. Why: The company's name is the brand's main line. How: This sets it in the display font, extra bold and uppercase, in white. */
 
 
-	color          : var( --bac-pag-col ); /* Background Page Color = #ffffff */
-	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	color          : var( --bac-pag-col );                            /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p02 );                            /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 800;
 	letter-spacing : 0.04em;
 	text-transform : uppercase;
+	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+
+
+}
+.navBraAnc:hover .braMaiSpa { /* What: Hovered Brand Main Span. Why: The brand should respond to the pointer like the bar's other links. How: This turns the company name light blue. */
+
+
+	color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Brand Main Span. Why: Someone who asked for less motion shouldn't see the name fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.braMaiSpa { /* What: Motionless Brand Main Span. Why: The hover color should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -138,13 +202,13 @@
 
 }
 
-/* #endregion navbar__brand-text */
+/* #endregion braTexSpa */
 
-/* #endregion navbar__brand */
+/* #endregion navBraAnc */
 
 
 
-/* #region navbar__nav */
+/* #region navLinNav */
 
 .navLinNav { /* What: Navigation Links Nav. Why: Wide screens show the section links and phone button in the bar. How: This lines them up in a row with even gaps. */
 
@@ -172,14 +236,14 @@
 .navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section in the bar's display style. How: This sets it in small, spaced capitals in light silver, positioned so its underline can sit beneath it. */
 
 
-	color          : var( --tex-inv-col );                            /* Text Inverse Color = #c8d0e0 */
-	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	color          : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
 	letter-spacing : 0.12em;
 	position       : relative;
 	text-transform : uppercase;
-	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -187,7 +251,7 @@
 
 
 	background       : var( --acc-lig-col );                                /* Accent Light Color ~= #4488f6 */
-	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= 3.572px */
+	bottom           : calc( var( --spa-ver-m05 ) * -1 );                   /* Spacing Vertical Base Minus 5 ~= -3.572px */
 	content          : '';
 	height           : calc( var( --ver-rhy-m07 ) * 1rem );                 /* Vertical Rhythm Base Minus 7 ~= 2.035px */
 	left             : 0;
@@ -199,11 +263,17 @@
 
 
 }
-.navLinAnc:hover,
-.navLinAnc[data-section-link-active] { /* What: Hovered And Active Navigation Link Anchor. Why: The link under the pointer and the link for the section being read should stand out. How: This turns their text white. */
+.navLinAnc[data-section-link-active] { /* What: Active Navigation Link Anchor. Why: The link for the section being read should stand out. How: This turns its text white. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+.navLinAnc:hover { /* What: Hovered Navigation Link Anchor. Why: The link under the pointer should respond, even when it's the active one. How: This turns its text light blue. */
+
+
+	color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 
 
 }
@@ -212,6 +282,13 @@
 
 
 	transform : scaleX( 1 );
+
+
+}
+.navLinAnc:active { /* What: Pressed Navigation Link Anchor. Why: A press should register before the page scrolls. How: This dims the link slightly while it's held, as every text link does on press. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }
@@ -233,15 +310,15 @@
 .navCtaAnc { /* What: Navigation Call-To-Action Anchor. Why: Calling is the fastest way in, so the number gets a button of its own. How: This sets it as a solid blue button in the display font. */
 
 
-	background     : var( --acc-mai-col );                                                                                  /* Accent Main Color = #1e56c8 */
-	border         : var( --bor-wid-lar ) solid var( --acc-mai-col );                                                       /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
-	color          : var( --tex-acc-col );                                                                                  /* Text Accent Color = #ffffff */
-	font-family    : var( --fon-fam-sec );                                                                                  /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p01 );                                                                                  /* Font Size Base Plus 1 ~= 14.572px */
+	background     : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e56c8 */
+	border         : var( --bor-wid-lar ) solid var( --acc-mai-col );                                                /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
+	color          : var( --tex-acc-col );                                                                           /* Text Accent Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );                                                                /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
-	padding        : var( --spa-ver-m02 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) );        /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
-	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );                                                         /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	padding        : var( --spa-ver-m02 ) clamp( var( --spa-hor-bas ), var( --hor-rhy-011 ), var( --spa-hor-p02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px, Horizontal Rhythm 11 ~= 21.346px @ 1,920px width, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -250,6 +327,14 @@
 
 	background : transparent;
 	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transform  : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.navCtaAnc:active { /* What: Pressed Navigation Call-To-Action Anchor. Why: A press should register before the phone opens. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
 
 
 }
@@ -267,10 +352,10 @@
 
 }
 
-/* #endregion navbar__nav */
+/* #endregion navLinNav */
 
 
-/* #region navbar__hamburger */
+/* #region navTogBut */
 
 .navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon, hidden until the narrow layout shows it. */
 
@@ -282,6 +367,27 @@
 	flex-direction : column;
 	gap            : var( --spa-ver-m04 );                      /* Spacing Vertical Base Minus 4 ~= 4.732px */
 	padding        : var( --spa-ver-m05 ) var( --spa-hor-m05 ); /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base Minus 5 ~= 3.572px */
+	transition     : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+
+
+}
+.navTogBut:active { /* What: Pressed Navigation Toggle Button. Why: A press should register before the menu opens. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Toggle Button. Why: Someone who asked for less motion shouldn't see the button move. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navTogBut { /* What: Motionless Navigation Toggle Button. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
@@ -302,11 +408,18 @@
 .togLinSpa { /* What: Toggle Line Span. Why: Three bars draw the menu icon. How: This draws each as a thin white line that can turn and fade into a cross. */
 
 
-	background : var( --bac-pag-col );                                                                                   /* Background Page Color = #ffffff */
+	background : var( --bac-pag-col );                /* Background Page Color = #ffffff */
 	display    : block;
-	height     : calc( var( --ver-rhy-m07 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 7 ~= 2.035px */
-	transition : transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
-	width      : calc( var( --ver-rhy-p02 ) * 1rem );                                                                    /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+	height     : calc( var( --ver-rhy-m07 ) * 1rem ); /* Vertical Rhythm Base Minus 7 ~= 2.035px */
+	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	width      : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+
+
+}
+.navTogBut:hover .togLinSpa { /* What: Hovered Toggle Line Span. Why: The menu button should respond to the pointer. How: This turns its three lines light blue. */
+
+
+	background : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
 
 
 }
@@ -327,7 +440,7 @@
 .navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 3 ) { /* What: Open Third Toggle Line Span. Why: The open menu's icon should read as a close cross. How: This lifts the bottom bar to the middle and turns it the other way. */
 
 
-	transform : translateY( calc( ( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) * -1 ) ) rotate( -45deg ); /* Vertical Rhythm Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 4 ~= 4.732px */
+	transform : translateY( calc( ( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) * -1 ) ) rotate( -45deg ); /* Vertical Rhythm Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 4 ~= -4.732px */
 
 
 }
@@ -345,24 +458,24 @@
 
 }
 
-/* #endregion navbar__hamburger */
+/* #endregion navTogBut */
 
-/* #endregion navbar__inner */
+/* #endregion navInnDiv */
 
 
 
-/* #region navbar__mobile */
+/* #region navMenDiv */
 
 .navMenDiv { /* What: Navigation Menu Div. Why: Narrow screens show the links and phone number in a panel below the bar. How: This stacks them on the dark navy, collapsed to no height and hidden until the narrow layout shows it. */
 
 
-	background     : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
+	background     : var( --bac-inv-col );                                 /* Background Inverse Color = #080f24 */
 	display        : none;
 	flex-direction : column;
 	max-height     : 0;
 	overflow       : hidden;
-	padding        : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
-	transition     : max-height 0.4s ease;   /* What: Panel Height Transition. Why: The panel has to push down as it opens, which a transform can't do, and its content height isn't known, so it eases a capped max-height instead. How: This animates the max-height between 0 and the open cap. */
+	padding        : 0 var( --gut-sid-pad );                               /* Gutter Side Padding, about 19.304px - 44.876px */
+	transition     : max-height var( --dur-tra-p03 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Panel Height Transition. Why: The panel has to push down as it opens, which a transform can't do, and its content height isn't known, so it eases a capped max-height instead. How: This animates the max-height between 0 and the open cap. */
 
 
 }
@@ -412,7 +525,7 @@
 	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );                                     /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 	padding        : var( --spa-ver-bas ) 0;                                                     /* Spacing Vertical Base ~= 14.572px */
 	text-transform : uppercase;
-	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas );                            /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -420,6 +533,13 @@
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+.menLinAnc:active { /* What: Pressed Menu Link Anchor. Why: A press should register before the menu closes. How: This dims the link slightly while it's held, as every text link does on press. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }
@@ -449,12 +569,43 @@
 	margin-top     : var( --spa-ver-p01 );                      /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	padding        : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
 	text-align     : center;
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+
+
+}
+.menCtaAnc:hover { /* What: Hovered Menu Call-To-Action Anchor. Why: The button should respond to the pointer. How: This empties its fill and turns its text light blue inside the blue ring, like the bar's call button, and lifts it a pixel. */
+
+
+	background : transparent;
+	box-shadow : inset 0 0 0 var( --bor-wid-lar ) var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */ /* What: Outline Ring. Why: The emptied button stays outlined, but a real border would make it taller than it was. How: This draws the outline inside the box, appearing at once beneath the fading fill. */
+	color      : var( --acc-lig-col );                                  /* Accent Light Color ~= #4488f6 */
+	transform  : translateY( -1px );                                    /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.menCtaAnc:active { /* What: Pressed Menu Call-To-Action Anchor. Why: A press should register before the phone opens. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Call-To-Action Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.menCtaAnc { /* What: Motionless Menu Call-To-Action Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }
 
-/* #endregion navbar__mobile */
+/* #endregion navMenDiv */
 
-/* #endregion navbar */
+/* #endregion navBarHed */
 
 

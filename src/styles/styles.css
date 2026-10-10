@@ -5,14 +5,15 @@
  * styles.css = Global Styles
  *
  * @summary
- * The site's one global stylesheet, holding only what can't belong to a
- * single component: the design tokens every module reads, the reset and base
- * element styles every page relies on, and the scroll-reveal attributes the
- * services, about, and contact sections share. Every component's own styles
- * are in its CSS module, and each transition and animation turns itself off
- * for reduced motion there; only the page's smooth scrolling and the scroll
- * reveal are handled here. Every length reads the plastic-ratio scale the
- * tokens define, where 1rem is the 11px base font size.
+ * The site's one global stylesheet, holding only what can't belong to a single
+ * component: the design tokens every module reads, the reset and base element
+ * styles every page relies on, and the scroll-reveal attributes the services,
+ * about, and contact sections share. Every component's own styles are in its
+ * CSS module, and each transition and animation turns itself off for reduced
+ * motion there; only the page's smooth scrolling, the scroll reveal, and the
+ * focus ring every link and button shares are handled here. Every length reads
+ * the plastic-ratio scale the tokens define, where 1rem is the 11px base font
+ * size.
  *
  * Sections:
  *  - Tokens
@@ -130,7 +131,7 @@
 
 	--bor-wid-sma : calc( var( --ver-rhy-m12 ) * 1rem ); /* What: Border Width Small ~= 0.499px. Why: This is the scale's hairline step, which nothing on this site draws yet. How: This multiplies the m12 rhythm step by 1rem, which browsers snap to whole pixels. */
 	--bor-wid-bas : calc( var( --ver-rhy-m09 ) * 1rem ); /* What: Border Width Base ~= 1.160px. Why: Hairline borders and dividers across the site share one width. How: This multiplies the m09 rhythm step by 1rem, which browsers snap to 1px. */
-	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: The outlined buttons, the form's focus ring, and the form heading's underline draw a heavier line. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to 2px. */
+	--bor-wid-lar : calc( var( --ver-rhy-m07 ) * 1rem ); /* What: Border Width Large ~= 2.035px. Why: The outlined buttons, every focus ring, and the form heading's underline draw a heavier line. How: This multiplies the m07 rhythm step by 1rem, which browsers snap to 2px. */
 	--bor-wid-xla : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Border Width Extra Large ~= 3.572px. Why: The service cards' blue top edge is the heaviest line on the site. How: This multiplies the m05 rhythm step by 1rem, which browsers snap to 3px. */
 
 	/* #endregion Border Width Tokens */
@@ -154,7 +155,7 @@
 	--err-dar-col : #b42318;                                                                                 /* What: Error Dark Color. Why: Error text needs a red that reads clearly on white. How: The contact form's error message reads it, clearing 6.5:1 on the white panel. */
 	--err-mai-col : ;                                                                                        /* What: Error Main Color. Why: The standard role set includes the error family. How: This site only shows error text, so it stays empty. */
 	--err-tin-col : ;                                                                                        /* What: Error Tint Color. Why: The standard role set includes the error family. How: This site only shows error text, so it stays empty. */
-	--foc-rin-col : var( --acc-mai-col );                                                                    /* What: Focus Ring Color. Why: Keyboard focus needs one ring color that stands out, kept apart from the accent so it can change on its own. How: The form fields draw their focus ring in it. */
+	--foc-rin-col : var( --acc-mai-col );                                                                    /* What: Focus Ring Color. Why: Keyboard focus needs one ring color that stands out, kept apart from the accent so it can change on its own. How: Every link and button draws its focus ring in it, the dark sections hand it the light accent, and the contact panel hands it back the main blue. */
 	--scr-mai-col : ;                                                                                        /* What: Scrim Main Color. Why: The standard role set includes a scrim. How: This site has no overlays to dim behind, so it stays empty. */
 	--sha-mai-col : var( --bac-inr-col );                                                                    /* What: Shadow Main Color. Why: Shadows on the light sections cast one soft navy rather than pure black. How: Shadows read it with their own alpha through relative color syntax. */
 	--suc-dar-col : ;                                                                                        /* What: Success Dark Color. Why: The standard role set includes the success family. How: This site's thank-you message uses the accent, so it stays empty. */
@@ -216,9 +217,9 @@
 
 	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
 	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for playful motion, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
-	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
-	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
-	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: Every hover, fade, rise, and pulse on this site shares one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
+	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly, as hover lifts, presses, focus rings, and the contact messages do. How: Transitions and animations read it as their timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which the contact form's success check pops in with. How: Transitions and animations read it as their timing function. */
+	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: The color changes, fades, reveals, and the logo ring's pulse share one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
 
 	/* #endregion Easing Tokens */
 
@@ -299,6 +300,7 @@
 
 	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                     /* What: Container Maximum Width. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: Every section's container, the bar, and the footer cap their width at a 1,920px viewport divided by the core design number, about 1,449.4px, the same cap as reese-roofing, so below that width only the gutter limits it. */
 	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) ); /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen within sensible bounds. How: Every container, the bar, the menu, and the footer pad their sides with horizontal step 016, held between the p01 and p04 horizontal spacing steps, about 19.304px to 44.876px, the same gutter as reese-roofing. */
+	--nav-bar-hei : calc( var( --spa-ver-p01 ) * 2 + var( --ver-rhy-p04 ) * 1rem );            /* What: Navigation Bar Height. Why: The fixed bar sits over the top of every page, so content that starts below it has to clear its height. How: This adds the bar's top and bottom padding to its logo's height, about 83.484px, the bar's height at the top of the page. */
 
 	/* #endregion Layout Tokens */
 
@@ -364,7 +366,7 @@
 	/* #region Text Width Tokens */
 
 	--tex-wid-sma : calc( var( --cdn-pow-011 ) * 1em ); /* What: Text Width Small Maximum ~= 22.047em. Why: Small or secondary text (hints, captions, subtitles) reads best near 50 characters per line, though nothing on this site caps one yet. How: Lato averages about 2.32 characters per em, so this caps a line at about 51 characters at any font size. */
-	--tex-wid-bas : calc( var( --cdn-pow-012 ) * 1em ); /* What: Text Width Base Maximum ~= 29.207em. Why: Paragraph text reads best near 66 characters per line. How: Lato averages about 2.32 characters per em, so this caps a line at about 68 characters at any font size; the hero pitch and the services intro read it. */
+	--tex-wid-bas : calc( var( --cdn-pow-012 ) * 1em ); /* What: Text Width Base Maximum ~= 29.207em. Why: Paragraph text reads best near 66 characters per line. How: Lato averages about 2.32 characters per em, so this caps a line at about 68 characters at any font size; the hero pitch, the services intro and area text, the about story and values, the contact intro, and the 404 page's lede read it. */
 
 	/* #endregion Text Width Tokens */
 
@@ -458,10 +460,11 @@ body { /* What: Body. Why: The page's default text sets the tone everything else
 
 }
 
-img { /* What: Image. Why: Images shouldn't leave inline gaps or overflow their containers. How: This makes them blocks capped at their container's width. */
+img { /* What: Image. Why: Images shouldn't leave inline gaps or overflow their containers, or take their height attribute as a fixed size. How: This makes them blocks capped at their container's width, with their height following their width, so the width and height attributes only reserve their aspect ratio. */
 
 
 	display   : block;
+	height    : auto;
 	max-width : 100%;
 
 
@@ -480,6 +483,40 @@ ul { /* What: Unordered List. Why: Lists should start without bullets until a mo
 
 
 	list-style : none;
+
+
+}
+
+a,
+button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather than snap, in a ring that suits the section it's in. How: This gives every link and button a zero-width outline in the focus ring color, held a little away from it, ready to grow in on focus. */
+
+
+	outline        : 0 solid var( --foc-rin-col );                                                                                      /* Focus Ring Color = #1e56c8 */ /* What: Zero Width Outline. Why: A zero width stays invisible, even in forced colors mode, until something is focused. How: The focused rule below grows it. */
+	outline-offset : calc( var( --ver-rhy-m03 ) * 1rem );                                                                               /* Vertical Rhythm Base Minus 3 ~= 6.268px */
+	transition     : outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+a:focus-visible,
+button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard user has to see where focus is. How: This grows the ring to its full width and draws it in close, so it eases in; every element with its own transition lists the two outline properties so the ease survives. */
+
+
+	outline-offset : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+	outline-width  : var( --bor-wid-lar ); /* Border Width Large ~= 2.035px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Focus Ring Controls. Why: Someone who asked for less motion should see the ring appear at once. How: This applies only when the reduced-motion preference is set. */
+
+
+	a,
+	button { /* What: Motionless Focus Ring Controls. Why: The ring should simply appear. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
 
 
 }

@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import lofPngUrl from './logo-full.png';   // What: Logo-Full PNG URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
 import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Function. Why: The hero's buttons scroll smoothly, which has to respect the reduced-motion preference. How: scrSecFun asks it before choosing the scroll behavior.
@@ -37,8 +37,6 @@ import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Functi
 
 // #region Constants
 
-// #region HER_STA_ARR
-
 /**
  * HER_STA_ARR = Hero Stat Array
  *
@@ -63,8 +61,6 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 
 
 ];
-
-// #endregion HER_STA_ARR
 
 // #endregion Constants
 
@@ -170,13 +166,22 @@ function HerSecCom () : React.JSX.Element {
 				<div>{ /* What: Hero Left Div Element. Why: The pitch reads first. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, with no styling of its own. */ }
 
 
-					<p className={ cssModObj.eyeLabPar }>Commercial Roofing Specialists</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short line says what the company is before the headline. How: This sits above the headline in small capitals. */ }
+					<h1>{ /* What: Hero Title Heading Element. Why: The page's main heading should carry what the company does and where, the words local searches look for, as well as its promise. How: This holds the two-line eyebrow and the slogan, each styled as its own block, so the heading reads as one while looking as it always has. */ }
 
-					<h1 className={ cssModObj.herTitHea }>{ /* What: Hero Title Heading Element. Why: The headline is the page's main heading and the company's promise. How: Its two accent words take the light blue. */ }
-						Built to<br />
-						<span className={ cssModObj.titAccSpa }>Seal.</span>{ /* What: Seal Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
-						Built to<br />
-						<span className={ cssModObj.titAccSpa }>Shield.</span>{ /* What: Shield Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
+
+						<span className={ cssModObj.eyeLabSpa }>{ /* What: Eyebrow Label Span Element. Why: A short label says what the company is and where before the slogan. How: This sets the specialty and the city on two lines in small capitals. */ }
+							Commercial Roofing Specialists<br />
+							Lawrence, KS
+						</span>
+
+						<span className={ cssModObj.herSloSpa }>{ /* What: Hero Slogan Span Element. Why: The slogan is the company's promise, set large. How: Its two accent words take the light blue. */ }
+							Built to<br />
+							<span className={ cssModObj.titAccSpa }>Seal.</span>{ /* What: Seal Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
+							Built to<br />
+							<span className={ cssModObj.titAccSpa }>Shield.</span>{ /* What: Shield Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
+						</span>
+
+
 					</h1>
 
 					<p className={ cssModObj.herLedPar }>{ /* What: Hero Lede Paragraph Element. Why: A short pitch follows the headline. How: This names the company's range of work and its promise. */ }
@@ -230,7 +235,9 @@ function HerSecCom () : React.JSX.Element {
 						<img
 							className={ cssModObj.herLogIma }
 
-							src={ lofPngUrl }
+							height={ 943 }
+							src={ lofWebUrl }
+							width={ 968 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 							alt='Seal and Shield LLC Logo'
 						/>{ /* What: Hero Logo Image Element. Why: The full logo anchors the hero. How: Its alt text repeats the name the image shows. */ }

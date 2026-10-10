@@ -5,30 +5,156 @@
 <html lang='en'><!-- What: Root HTML Element. Why: Screen readers and translation tools need the page's language. How: This marks the document as English. -->
 
 
-	<head><!-- What: Document Head Element. Why: The page's metadata and icon link load before the body paints. How: This holds them in the sections below. -->
+	<head><!-- What: Document Head Element. Why: The page's metadata, icons, social tags, and structured data load before the body paints. How: This holds them in the sections below. -->
 
 
 		<!-- #region Document -->
 
 		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1,024 bytes the browser checks. -->
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' /> <!-- What: Viewport Meta. Why: Phones should lay the site out at device width instead of a zoomed-out desktop width. How: This sets the layout width to the device's and starts at no zoom. -->
-		<title>Seal and Shield LLC | Commercial Roofing</title>                  <!-- What: Page Title Element. Why: The tab, bookmarks, and search listings name the page by its title. How: This pairs the company's name with what it does. -->
+		<title>Commercial Roofing in Lawrence, KS | Seal and Shield</title>      <!-- What: Page Title Element. Why: The tab, bookmarks, and search listings name the page by its title, and local searches look for the service and the city. How: This names what the company does and where, then the company. -->
 
 		<!-- #endregion Document -->
 
 
 		<!-- #region Search -->
 
-		<meta name='description' content='Seal and Shield LLC – Commercial Roofing in Lawrence, Kansas. Full installations, repairs, liquid coatings, TPO, EPDM. Serving all of Kansas and the continental US.' /> <!-- What: Description Meta. Why: Search listings and link previews show a short summary under the title. How: This sums up the company's services and where it works. -->
+		<meta name='author'      content='Seal and Shield LLC' />      <!-- What: Author Meta. Why: Search engines and link preview inspectors look for who a page belongs to, and on a real business's site that's the business itself. How: This names the company by its legal name. -->
+		<link href='https://sealandshieldroof.com/' rel='canonical' /> <!-- What: Canonical Link. Why: Netlify also serves the site at deploy preview and netlify.app addresses, which should all count as one page. How: This names the live address as the page's own. -->
+		<meta name='description' content='Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.' /> <!-- What: Description Meta. Why: Search listings show a short summary under the title, and it should name the city and the services people search for. How: This sums up the company's main services and where it's based, in about 120 characters so phones show it whole. -->
 
 		<!-- #endregion Search -->
 
 
+		<!-- #region Web App -->
+
+		<meta name='theme-color' content='#080f24' /> <!-- What: Theme Color Meta. Why: Mobile browsers tint their chrome around the page, and Discord edges its link previews in this color. How: This sets it to the dark navy of the bar and hero. -->
+
+		<!-- #endregion Web App -->
+
+
 		<!-- #region Icons -->
 
-		<link href='/favicon.png' rel='icon' type='image/png' /> <!-- What: PNG Icon Link. Why: Browsers show the site's mark in tabs and bookmarks. How: This points at the PNG favicon in public/. -->
+		<!--
+			index.html = Icons Section
+
+			@summary
+			The root favicon.ico comes first, holding the 16, 32, and 48px
+			sizes for older browsers, then the PNG sizes from smallest to
+			largest. All of them are rendered from design/icons/mark.png by
+			npm run icons. The order is the browser's order of preference, so
+			it stays as written rather than alphabetical.
+
+			@author z4nta0 <https://github.com/z4nta0>
+
+		-->
+
+
+
+		<link href='/favicon.ico'         rel='icon' sizes='any' />                      <!-- What: ICO Icon Link. Why: Older browsers read only a .ico favicon. How: This points at the root favicon.ico, which also answers the request browsers make for it on their own. -->
+		<link href='/favicon-16x16.png'   rel='icon' sizes='16x16'   type='image/png' /> <!-- What: Small PNG Icon Link. Why: Small tab icons look crisper drawn at their own size. How: This offers the 16px PNG. -->
+		<link href='/favicon-32x32.png'   rel='icon' sizes='32x32'   type='image/png' /> <!-- What: Medium PNG Icon Link. Why: Most browsers pick a 32px tab icon. How: This offers the 32px PNG. -->
+		<link href='/favicon-192x192.png' rel='icon' sizes='192x192' type='image/png' /> <!-- What: Large PNG Icon Link. Why: Some browsers and Android pick a large icon for shortcuts and tab previews. How: This offers the 192px PNG. -->
+		<link href='/favicon-512x512.png' rel='icon' sizes='512x512' type='image/png' /> <!-- What: Extra Large PNG Icon Link. Why: High-density screens and app launchers can ask for a bigger icon still. How: This offers the 512px PNG. -->
 
 		<!-- #endregion Icons -->
+
+
+		<!-- #region Home Screen -->
+
+		<link href='/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180' /> <!-- What: Apple Touch Icon Link. Why: iOS draws the home screen icon, and some apps the icon beside a shared link, from this link. How: This points at the 180px touch icon on a solid white square. -->
+
+		<!-- #endregion Home Screen -->
+
+
+		<!-- #region Open Graph -->
+
+		<meta property='og:description'  content='Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.' /> <!-- What: Open Graph Description Meta. Why: A shared link shows a summary under its title. How: This repeats the page's description, which already fits the 125 characters phones show. -->
+		<meta property='og:image'        content='https://sealandshieldroof.com/og-image.png' />                             <!-- What: Open Graph Image Meta. Why: A shared link shows a preview image. How: This points at the 1,200x630 card in public/, by its absolute address. -->
+		<meta property='og:image:alt'    content='Seal and Shield logo above the words Commercial Roofing, Lawrence, KS.' /> <!-- What: Open Graph Image Alt Meta. Why: Screen readers on social sites read the preview image's description. How: This describes what the card shows. -->
+		<meta property='og:image:height' content='630' />                                                                    <!-- What: Open Graph Image Height Meta. Why: Sites can lay out the preview before the image loads. How: This gives the card's height. -->
+		<meta property='og:image:type'   content='image/png' />                                                              <!-- What: Open Graph Image Type Meta. Why: Some apps check an image's type before fetching it. How: This names PNG. -->
+		<meta property='og:image:width'  content='1200' />                                                                   <!-- What: Open Graph Image Width Meta. Why: Sites can lay out the preview before the image loads. How: This gives the card's width. -->
+		<meta property='og:locale'       content='en_US' />                                                                  <!-- What: Open Graph Locale Meta. Why: Sites can tell which language the page is in. How: This names US English. -->
+		<meta property='og:site_name'    content='Seal and Shield' />                                                        <!-- What: Open Graph Site Name Meta. Why: Previews show which site a link belongs to. How: This names the company the way the site does everywhere. -->
+		<meta property='og:title'        content='Commercial Roofing in Lawrence, KS | Seal and Shield' />                   <!-- What: Open Graph Title Meta. Why: A shared link shows a title. How: This matches the page title. -->
+		<meta property='og:type'         content='website' />                                                                <!-- What: Open Graph Type Meta. Why: Sites shape a preview by what kind of page it is. How: This marks it a website. -->
+		<meta property='og:url'          content='https://sealandshieldroof.com/' />                                         <!-- What: Open Graph URL Meta. Why: Shares from any address should count as one page. How: This names the live address, matching the canonical link. -->
+
+		<!-- #endregion Open Graph -->
+
+
+		<!-- #region Twitter Card -->
+
+		<meta name='twitter:card'        content='summary_large_image' /> <!-- What: Twitter Card Meta. Why: X and similar sites pick a preview layout from this tag. How: This asks for the large image layout, which suits the 1,200x630 card. -->
+		<meta name='twitter:description' content='Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.' /> <!-- What: Twitter Description Meta. Why: The preview shows a summary. How: This repeats the page's description. -->
+		<meta name='twitter:image'       content='https://sealandshieldroof.com/og-image.png' />                                                                                 <!-- What: Twitter Image Meta. Why: The preview shows an image. How: This points at the same card as Open Graph. -->
+		<meta name='twitter:image:alt'   content='Seal and Shield logo above the words Commercial Roofing, Lawrence, KS.' />                                                     <!-- What: Twitter Image Alt Meta. Why: Screen readers read the preview image's description. How: This repeats the Open Graph alt text. -->
+		<meta name='twitter:title'       content='Commercial Roofing in Lawrence, KS | Seal and Shield' />                                                                       <!-- What: Twitter Title Meta. Why: The preview shows a title. How: This matches the page title. -->
+
+		<!-- #endregion Twitter Card -->
+
+
+		<!-- #region Structured Data -->
+
+		<script type='application/ld+json'>
+			{
+				"@context": "https://schema.org",
+				"@type": "RoofingContractor",
+				"name": "Seal and Shield",
+				"legalName": "Seal and Shield LLC",
+				"url": "https://sealandshieldroof.com/",
+				"telephone": "+1-785-304-1957",
+				"logo": "https://sealandshieldroof.com/favicon-512x512.png",
+				"image": "https://sealandshieldroof.com/og-image.png",
+				"description": "Commercial roofing in Lawrence, Kansas: full installations, repairs, Conklin coatings, TPO and EPDM, and free inspections.",
+				"foundingDate": "2024",
+				"address": {
+					"@type": "PostalAddress",
+					"addressLocality": "Lawrence",
+					"addressRegion": "KS",
+					"addressCountry": "US"
+				},
+				"openingHoursSpecification": [
+					{
+						"@type": "OpeningHoursSpecification",
+						"dayOfWeek": [
+							"Monday",
+							"Tuesday",
+							"Wednesday",
+							"Thursday",
+							"Friday"
+						],
+						"opens": "08:00",
+						"closes": "17:00"
+					}
+				],
+				"areaServed": [
+					{
+						"@type": "City",
+						"name": "Lawrence, KS"
+					},
+					{
+						"@type": "City",
+						"name": "Topeka, KS"
+					},
+					{
+						"@type": "Place",
+						"name": "Kansas City metro area"
+					},
+					{
+						"@type": "State",
+						"name": "Kansas"
+					},
+					{
+						"@type": "Place",
+						"name": "Continental United States"
+					}
+				]
+			}
+		</script><!-- What: Business Structured Data Script. Why: Search engines read JSON-LD to show a local business's details, and every detail has to match what the page shows. How: This describes the company as a RoofingContractor with its name, legal name, live address, phone, logo, preview image, Lawrence city with no street address, weekday 8 to 5 hours, founding year, and the five service areas the Services section lists. -->
+
+		<!-- #endregion Structured Data -->
 
 
 	</head>

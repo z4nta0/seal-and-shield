@@ -14,16 +14,16 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * playwright.config.ts = Playwright Config
  *
  * @summary
- * The config behind npm test and its suites, each run against the real site
- * in all three of Playwright's engines (Chromium, Firefox, and WebKit), one
- * project per suite and engine, since a check that passes in one engine
- * proves nothing about the others. The suites are accessibility, which the
- * pre-commit check runs, rendering, and responsive.
- * Playwright starts the Vite dev server on port 5191 for the run and stops it
- * afterwards, so a dev server already running on the usual 5173 is never
- * touched. Reports and failure screenshots land in tests/output, which git
- * ignores, while the rendering suite's approved screenshots live in
- * tests/rendering/baselines and are committed.
+ * The config behind npm test and its suites, each run against the real site in
+ * all three of Playwright's engines (Chromium, Firefox, and WebKit), one
+ * project per suite and engine, since a check that passes in one engine proves
+ * nothing about the others. The suites are accessibility, which the pre-commit
+ * check runs, interaction, rendering, responsive, and seo. Playwright starts
+ * the Vite dev server on port 5191 for the run and stops it afterwards, so a
+ * dev server already running on the usual 5173 is never touched. Reports and
+ * failure screenshots land in tests/output, which git ignores, while the
+ * rendering suite's approved screenshots live in tests/rendering/baselines and
+ * are committed.
  *
  * Sections:
  *  - Constants
@@ -37,11 +37,6 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
 
 // #region Constants
 
-const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: The dev server must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
-const SER_URL_STR = 'http://localhost:5191';                           // What: Server URL String. Why: Every suite opens the site from the same dev server. How: This is the address Playwright waits on and every page's baseURL.
-
-
-
 const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all three engines. How: Each entry is a Playwright browser name, crossed with each suite into one project apiece. // What: Type Assertion Note. Why: Each name has to type as one of Playwright's browser names, not a plain string. How: The closing as const keeps each entry's literal type for the projects' browserName.
 
 
@@ -54,12 +49,19 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 
 
+const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: The dev server must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
+const SER_URL_STR = 'http://localhost:5191';                           // What: Server URL String. Why: Every suite opens the site from the same dev server. How: This is the address Playwright waits on and every page's baseURL.
+
+
+
 const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its own folder and runs as its own projects. How: Each entry names a folder under tests/, crossed with each engine into one project apiece.
 
 
 	'accessibility', // What: Accessibility Suite. Why: The pre-commit accessibility scan runs from here. How: This names tests/accessibility.
+	'interaction',   // What: Interaction Suite. Why: What the site's controls actually do is checked from here. How: This names tests/interaction.
 	'rendering',     // What: Rendering Suite. Why: Each page state is compared with its approved screenshot from here. How: This names tests/rendering.
-	'responsive'     // What: Responsive Suite. Why: Each page is measured across screen widths from here. How: This names tests/responsive.
+	'responsive',    // What: Responsive Suite. Why: Each page is measured across screen widths from here. How: This names tests/responsive.
+	'seo'            // What: SEO Suite. Why: The site's search setup is checked from here. How: This names tests/seo.
 
 
 ];

@@ -1,0 +1,200 @@
+
+
+
+/**
+ * not-found.module.css = Not Found Page Module
+ *
+ * @summary
+ * Styles for NotFouCom: a column at least the screen's height holding the bar,
+ * the main content, and the footer, with the content centered on the hero's
+ * dark navy in the space between. The title accent and buttons are copied from
+ * the hero under the same names, and its eyebrow label as a paragraph, so the
+ * page looks like the rest of the site, and every transition turns off for
+ * reduced motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region nofPagDiv */
+
+.nofPagDiv { /* What: Not-Found Page Div. Why: The footer should sit at the bottom of the screen on a page this short. How: This stacks the page in a column at least the screen's height. */
+
+
+	display        : flex;
+	flex-direction : column;
+	min-height     : 100vh;
+
+
+}
+
+
+/* #region nofConMai */
+
+.nofConMai { /* What: Not-Found Content Main. Why: The message should sit centered on a dark band like the hero's, clear of the fixed bar. How: This grows to fill the space above the footer, centers its column, and pads along the gutters and below the fixed bar, clearing the bar's own height plus a full spacing step so the gap holds on short screens. */
+
+
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+
+	align-items     : center;
+	background      : var( --bac-inv-col );                                                                          /* Background Inverse Color = #080f24 */
+	display         : flex;
+	flex            : 1;
+	flex-direction  : column;
+	justify-content : center;
+	padding         : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Navigation Bar Height ~= 83.484px, Spacing Vertical Base Plus 5 ~= 59.447px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
+	text-align      : center;
+
+
+}
+
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A small label names the error above the heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the hero's eyebrow. */
+
+
+	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 600;
+	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em ); /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	margin-bottom  : var( --spa-ver-p01 );                   /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	text-transform : uppercase;
+
+
+}
+
+
+/* #region nofTitHea */
+
+.nofTitHea { /* What: Not-Found Title Heading. Why: The heading states the problem in the site's display style. How: This sets it large, extra bold, uppercase, and white, scaling with the screen between two font size steps. */
+
+
+	color          : var( --bac-pag-col );                                     /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                                     /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : clamp( var( --fon-siz-p05 ), 7vw, var( --fon-siz-p07 ) ); /* Font Size Base Plus 5 ~= 44.876px, Font Size Base Plus 7 ~= 78.751px */
+	font-weight    : 800;
+	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020 */
+	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
+	margin-bottom  : var( --spa-ver-p02 );                                     /* Spacing Vertical Base Plus 2 ~= 25.572px */
+	text-transform : uppercase;
+
+
+}
+
+.titAccSpa { /* What: Title Accent Span. Why: The last word stands out from the rest of the heading, as the hero's promise words do. How: This colors it light blue with a thin darker blue outline, copied from the hero. */
+
+
+	-webkit-text-stroke : var( --bor-wid-bas ) var( --acc-mai-col ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8 */
+	color               : var( --acc-lig-col );                      /* Accent Light Color ~= #4488f6 */
+
+
+}
+
+/* #endregion nofTitHea */
+
+
+.nofLedPar { /* What: Not-Found Lede Paragraph. Why: The explanation should read comfortably on the dark band. How: This sets it in light silver with generous leading, capped near 68 characters a line. */
+
+
+	color         : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
+	font-size     : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height   : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	margin-bottom : var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	max-width     : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
+
+
+}
+
+
+/* #region nofActDiv */
+
+.nofActDiv { /* What: Not-Found Actions Div. Why: The two ways onward sit side by side. How: This lines them up in a centered row that wraps when it runs out of room. */
+
+
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	justify-content : center;
+
+
+}
+
+.butBasAnc { /* What: Button Base Anchor. Why: Both links read as the site's buttons. How: This sets their spaced, uppercase label and padding, and eases every change between their looks, copied from the hero. */
+
+
+	cursor         : pointer;
+	font-family    : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 700;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );                                                         /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+	padding        : var( --spa-ver-bas ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-013 ), var( --spa-hor-p03 ) ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 13 ~= 37.460px @ 1,920px width, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+
+
+}
+.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: Going home is the page's main action. How: This fills the button solid blue with a matching border. */
+
+
+	background : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
+	border     : var( --bor-wid-lar ) solid var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
+	color      : var( --tex-acc-col );                            /* Text Accent Color = #ffffff */
+
+
+}
+.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lightens its fill and border. */
+
+
+	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	border-color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transform    : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.butBasAnc--secondary { /* What: Secondary Button Base Anchor. Why: The quote request is the quieter second option here. How: This leaves it unfilled with white text and a faint white outline. */
+
+
+	background : transparent;
+	border     : var( --bor-wid-lar ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) ); /* Border Width Large ~= 2.035px, Background Page Color = #ffffff, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	color      : var( --bac-pag-col );                                                                           /* Background Page Color = #ffffff */
+
+
+}
+.butBasAnc--secondary:hover { /* What: Hovered Secondary Button Base Anchor. Why: The button should respond to the pointer. How: This gives it a faint white fill and a solid white outline. */
+
+
+	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	border-color : var( --bac-pag-col );                                                /* Background Page Color = #ffffff */
+	transform    : translateY( -1px );                                                  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.butBasAnc.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, with the base class chained so it outranks the hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Base Anchor. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butBasAnc { /* What: Motionless Button Base Anchor. Why: The hover looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion nofActDiv */
+
+/* #endregion nofConMai */
+
+/* #endregion nofPagDiv */
+
+
