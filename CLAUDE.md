@@ -76,13 +76,14 @@ app with tabs.
 src/
   main.tsx               entry point
   app.tsx                root component, the app container, and the routes
-  assets/                images used by 2 or more pages (logo-simple.webp)
+  assets/                images and fonts used by 2 or more pages
+                         (logo-simple.webp, fonts/)
   pages/
     home/                the home page, its sections, and logo-full.webp
     not-found/           the 404 page
   ui/                    components used by 2 or more pages (nav, footer)
                          and section-link.ts
-  styles/                global CSS only (styles.css)
+  styles/                global CSS only (fonts.css, styles.css)
   utils/                 app-agnostic helpers (motion.ts)
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test

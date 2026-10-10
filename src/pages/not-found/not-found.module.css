@@ -64,9 +64,6 @@
 
 }
 
-
-/* #region nofTitHea */
-
 .nofTitHea { /* What: Not-Found Title Heading. Why: The heading states the problem in the site's display style. How: This sets it large, extra bold, uppercase, and white, scaling with the screen between two font size steps. */
 
 
@@ -90,9 +87,6 @@
 
 
 }
-
-/* #endregion nofTitHea */
-
 
 .nofLedPar { /* What: Not-Found Lede Paragraph. Why: The explanation should read comfortably on the dark band. How: This sets it in light silver with generous leading, capped near 68 characters a line. */
 

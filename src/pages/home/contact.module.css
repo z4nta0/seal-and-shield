@@ -587,8 +587,6 @@
 
 
 
-/* #region forErrPar */
-
 .forErrPar { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel, with the same space below it as above, between the message field and the button. */
 
 
@@ -673,8 +671,6 @@
 
 
 }
-
-/* #endregion forErrPar */
 
 
 /* #region forSubBut */
