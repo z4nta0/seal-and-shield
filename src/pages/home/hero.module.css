@@ -47,9 +47,9 @@
 
 
 	background-image : linear-gradient( oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ), linear-gradient( 90deg, oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ); /* Accent Main Color = #1e56c8 @ 0.07 opacity */ /* What: Literal Grid Lines. Why: Each line should draw a crisp single pixel. How: A gradient stop doesn't snap to whole pixels the way a border does, so the lines stay 1px rather than reading the border width. */
-	background-size  : calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem );                                    /* Vertical Rhythm Base Plus 5 ~= 59.447px */
+	background-size  : calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
 	inset            : 0;
-	mask-image       : linear-gradient( to bottom, transparent, rgba( 0, 0, 0, 0.6 ) 30%, rgba( 0, 0, 0, 0.6 ) 70%, transparent );
+	mask-image       : linear-gradient( to bottom, transparent, rgba( 0, 0, 0, var( --cdn-pow-002-rec ) ) 30%, rgba( 0, 0, 0, var( --cdn-pow-002-rec ) ) 70%, transparent ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	position         : absolute;
 
 
@@ -113,6 +113,7 @@
 	font-size      : var( --fon-siz-p01 );                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
 	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em );                          /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325em */
+	line-height    : var( --ver-rhy-m01 );                                            /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom  : var( --spa-ver-p01 );                                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	text-transform : uppercase;
 

@@ -613,7 +613,7 @@ function ConSecCom () : React.JSX.Element {
 							</button>
 
 							<p className={ cssModObj.forNotPar }>{ /* What: Form Note Paragraph Element. Why: Visitors worry about what happens to their details. How: This promises no spam. */ }
-								No spam. We'll only contact you regarding your roofing inquiry.
+								No spam. We'll only contact you about your roofing inquiry.
 							</p>
 
 

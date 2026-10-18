@@ -164,6 +164,7 @@ function AboSecCom () : React.JSX.Element {
 							className={ cssModObj.aboLogIma }
 
 							height={ 943 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
+							loading='lazy'
 							src={ lofWebUrl }
 							width={ 968 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 

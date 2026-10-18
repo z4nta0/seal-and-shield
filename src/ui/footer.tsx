@@ -96,6 +96,7 @@ function SitFooCom () : React.JSX.Element {
 						className={ cssModObj.fooLogIma }
 
 						height={ 133 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
+						loading='lazy'
 						src={ losWebUrl }
 						width={ 157 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
