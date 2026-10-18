@@ -170,7 +170,7 @@
 
 
 }
-.butBasAnc.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, with the base class chained so it outranks the hover lift. */
+.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, replacing the hover lift, since it matches the hover rules' weight and comes after them. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
