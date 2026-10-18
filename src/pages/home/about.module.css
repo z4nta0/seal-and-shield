@@ -124,7 +124,7 @@
 
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 4 ~= 44.876px, Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	position : relative;
-	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) );                                                                                             /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
+	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
 	z-index  : 1;
 
 

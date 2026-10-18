@@ -515,7 +515,7 @@ test( 'widening the screen closes the menu', async ( { page : curPagObj } ) => {
 
 // #region Contact Form Checks
 
-test( 'the form won\'t send without its required fields', async ( { page : curPagObj } ) => { // What: Required Fields Test. Why: A quote request without a name and phone number can't be answered. How: This submits the empty form and checks nothing was sent.
+test( "the form won't send without its required fields", async ( { page : curPagObj } ) => { // What: Required Fields Test. Why: A quote request without a name and phone number can't be answered. How: This submits the empty form and checks nothing was sent.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form lives in the Contact section. How: This opens the home page at desktop size.
@@ -575,7 +575,7 @@ test( 'a failed request explains what to do instead', async ( { page : curPagObj
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: This is the action under test. How: This sends the request.
 
 
-	await expect( curPagObj.getByRole( 'alert' ) ).toContainText( 'didn\'t go through' ); // What: Error Message Assertion. Why: The visitor should know the request failed and what to do next. How: This checks the alert appears with its explanation.
+	await expect( curPagObj.getByRole( 'alert' ) ).toContainText( "didn't go through" ); // What: Error Message Assertion. Why: The visitor should know the request failed and what to do next. How: This checks the alert appears with its explanation.
 
 	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toHaveCount( 0 ); // What: No Thank-You Assertion. Why: A failed request mustn't claim it was sent. How: This checks the thank-you heading never appears.
 

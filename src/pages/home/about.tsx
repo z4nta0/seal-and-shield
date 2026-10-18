@@ -174,48 +174,48 @@ function AboSecCom () : React.JSX.Element {
 						<div className={ cssModObj.infCarDiv }>{ /* What: Info Card Div Element. Why: Visitors want the company's key facts at a glance. How: This lists them as label and value rows. */ }
 
 
-							<div className={ cssModObj.infRowDiv }>{ /* What: Founded Info Row Div Element. Why: The founding year shows how long the company has been at it. How: This pairs the label with 2024. */ }
+							<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: The founding year shows how long the company has been at it. How: This pairs the label with 2024. */ }
 
 
-								<span className={ cssModObj.infLabSpa }>Founded</span>{ /* What: Founded Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.infLabSpa }>Founded</span>{ /* What: Info Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className={ cssModObj.infValSpa }>2024</span>{ /* What: Founded Value Span Element. Why: This is the fact itself. How: This shows the year. */ }
-
-
-							</div>
-
-							<div className={ cssModObj.infRowDiv }>{ /* What: Based In Info Row Div Element. Why: A local business should say where it's based. How: This pairs the label with Lawrence. */ }
-
-
-								<span className={ cssModObj.infLabSpa }>Based In</span>{ /* What: Based In Label Span Element. Why: Each value needs its label. How: This names the row. */ }
-
-								<span className={ cssModObj.infValSpa }>Lawrence, KS</span>{ /* What: Based In Value Span Element. Why: This is the fact itself. How: This shows the town. */ }
+								<span className={ cssModObj.infValSpa }>2024</span>{ /* What: Info Value Span Element. Why: This is the fact itself. How: This shows the year. */ }
 
 
 							</div>
 
-							<div className={ cssModObj.infRowDiv }>{ /* What: Phone Info Row Div Element. Why: The phone number belongs with the company's details. How: This pairs the label with a dialing link. */ }
+							<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: A local business should say where it's based. How: This pairs the label with Lawrence. */ }
 
 
-								<span className={ cssModObj.infLabSpa }>Phone</span>{ /* What: Phone Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.infLabSpa }>Based In</span>{ /* What: Info Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+
+								<span className={ cssModObj.infValSpa }>Lawrence, KS</span>{ /* What: Info Value Span Element. Why: This is the fact itself. How: This shows the town. */ }
+
+
+							</div>
+
+							<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: The phone number belongs with the company's details. How: This pairs the label with a dialing link. */ }
+
+
+								<span className={ cssModObj.infLabSpa }>Phone</span>{ /* What: Info Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
 								<a
 									className={ cssModObj.infValAnc }
 
 									href='tel:7853041957'
-								>{ /* What: Phone Value Anchor Element. Why: Visitors reading the details can call straight away. How: This dials the number on phones. */ }
+								>{ /* What: Info Value Anchor Element. Why: Visitors reading the details can call straight away. How: This dials the number on phones. */ }
 									(785) 304-1957
 								</a>
 
 
 							</div>
 
-							<div className={ cssModObj.infRowDiv }>{ /* What: Hours Info Row Div Element. Why: Callers should know when someone will answer. How: This pairs the label with the business hours. */ }
+							<div className={ cssModObj.infRowDiv }>{ /* What: Info Row Div Element. Why: Callers should know when someone will answer. How: This pairs the label with the business hours. */ }
 
 
-								<span className={ cssModObj.infLabSpa }>Hours</span>{ /* What: Hours Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.infLabSpa }>Hours</span>{ /* What: Info Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className={ cssModObj.infValSpa }>8 a.m. – 5 p.m.</span>{ /* What: Hours Value Span Element. Why: This is the fact itself. How: This shows the hours. */ }
+								<span className={ cssModObj.infValSpa }>8 a.m. – 5 p.m.</span>{ /* What: Info Value Span Element. Why: This is the fact itself. How: This shows the hours. */ }
 
 
 							</div>
@@ -235,7 +235,7 @@ function AboSecCom () : React.JSX.Element {
 							className={ cssModObj.eyeLabPar }
 
 							data-scroll-reveal-block
-						>{ /* What: About Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+						>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
 							Who We Are
 						</p>
 
@@ -243,7 +243,7 @@ function AboSecCom () : React.JSX.Element {
 							className={ cssModObj.secTitHea }
 
 							data-scroll-reveal-block
-						>{ /* What: About Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
+						>{ /* What: Section Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
 							About Seal and Shield
 						</h2>
 
@@ -251,13 +251,13 @@ function AboSecCom () : React.JSX.Element {
 							className={ cssModObj.secDivDiv }
 
 							data-scroll-reveal-block
-						/>{ /* What: About Divider Div Element. Why: A short rule separates the heading from the story. How: This draws it. */ }
+						/>{ /* What: Section Divider Div Element. Why: A short rule separates the heading from the story. How: This draws it. */ }
 
 						<p
 							className={ cssModObj.aboBodPar }
 
 							data-scroll-reveal-block
-						>{ /* What: About Founding Paragraph Element. Why: The story opens with when the company started and why. How: This gives its founding year, mission, and home town. */ }
+						>{ /* What: About Body Paragraph Element. Why: The story opens with when the company started and why. How: This gives its founding year, mission, and home town. */ }
 							Seal and Shield LLC was founded in 2024 with a simple mission: provide Kansas businesses
 							with trustworthy, high-quality commercial roofing they can count on for years to come.
 							Based in Lawrence, Kansas, we combine hands-on expertise with premium materials to
@@ -268,7 +268,7 @@ function AboSecCom () : React.JSX.Element {
 							className={ cssModObj.aboBodPar }
 
 							data-scroll-reveal-block
-						>{ /* What: About Conklin Paragraph Element. Why: The Conklin partnership sets the company apart. How: This explains what it gives clients. */ }
+						>{ /* What: About Body Paragraph Element. Why: The Conklin partnership sets the company apart. How: This explains what it gives clients. */ }
 							As an authorized Conklin distributor, we have direct access to some of the most
 							advanced commercial roofing coatings available, and we back every job with the
 							kind of craftsmanship and communication that earns long-term relationships.

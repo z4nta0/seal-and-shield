@@ -86,12 +86,12 @@
 
 	background : transparent;
 	left       : 0;
-	padding    : var( --spa-ver-p01 ) 0;                                                                                  /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding    : var( --spa-ver-p01 ) 0; /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	position   : fixed;
 	right      : 0;
 	top        : 0;
 	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Padding Transition. Why: The bar really gets shorter as it tightens, and a scale transform would squash its logo and links instead. How: This eases the padding itself, a layout property, since no compositor version produces the same effect. */
-	z-index    : 2; /* What: Bar Layer. Why: The bar has to pass over the hero, about, and contact layers raised to 1 as the page scrolls beneath it. How: This puts it one level above them, the lowest value that clears them. */
+	z-index    : 2;                      /* What: Bar Layer. Why: The bar has to pass over the hero, about, and contact layers raised to 1 as the page scrolls beneath it. How: This puts it one level above them, the lowest value that clears them. */
 
 
 }

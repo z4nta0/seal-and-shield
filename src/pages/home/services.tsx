@@ -87,7 +87,7 @@ const SER_REC_ARR = [ // What: Service Record Array. Why: The card grid lists ev
 		icoStr : '📞',
 		titStr : 'Service Calls',
 
-		desStr : 'If your roof is leaking but may not need a full replacement, we\'ll come out, assess the situation, and recommend the most cost-effective solution.'
+		desStr : "If your roof is leaking but may not need a full replacement, we'll come out, assess the situation, and recommend the most cost-effective solution."
 
 
 	},
@@ -98,7 +98,7 @@ const SER_REC_ARR = [ // What: Service Record Array. Why: The card grid lists ev
 		icoStr : '🔍',
 		titStr : 'Free Inspections',
 
-		desStr : 'No-obligation roof inspections to assess the current condition of your commercial roof. Know exactly what you\'re working with before committing to anything.'
+		desStr : "No-obligation roof inspections to assess the current condition of your commercial roof. Know exactly what you're working with before committing to anything."
 
 
 	},
@@ -212,11 +212,11 @@ function SerSecCom () : React.JSX.Element {
 				>{ /* What: Services Header Div Element. Why: The section opens by saying what it covers. How: This holds the label, heading, divider, and intro, and fades in first. */ }
 
 
-					<p className={ cssModObj.eyeLabPar }>What We Do</p>{ /* What: Services Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals. */ }
+					<p className={ cssModObj.eyeLabPar }>What We Do</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals. */ }
 
-					<h2 className={ cssModObj.secTitHea }>Our Services</h2>{ /* What: Services Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
+					<h2 className={ cssModObj.secTitHea }>Our Services</h2>{ /* What: Section Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
 
-					<div className={ cssModObj.secDivDiv } />{ /* What: Services Divider Div Element. Why: A short rule separates the heading from the intro. How: This draws it. */ }
+					<div className={ cssModObj.secDivDiv } />{ /* What: Section Divider Div Element. Why: A short rule separates the heading from the intro. How: This draws it. */ }
 
 					<p className={ cssModObj.serIntPar }>{ /* What: Services Intro Paragraph Element. Why: The section opens with the company's promise. How: This sums up its range of work. */ }
 						Seal and Shield is a full-service commercial roofing company.
@@ -275,11 +275,11 @@ function SerSecCom () : React.JSX.Element {
 					<div>{ /* What: Services Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, with no styling of its own. */ }
 
 
-						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Area Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in small capitals. */ }
+						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in small capitals. */ }
 
-						<h3 className={ cssModObj.secTitHea }>Service Area</h3>{ /* What: Area Title Heading Element. Why: The panel needs its own heading. How: This is the panel's h3. */ }
+						<h3 className={ cssModObj.secTitHea }>Service Area</h3>{ /* What: Section Title Heading Element. Why: The panel needs its own heading. How: This is the panel's h3. */ }
 
-						<div className={ cssModObj.secDivDiv } />{ /* What: Area Divider Div Element. Why: A short rule separates the heading from the description. How: This draws it. */ }
+						<div className={ cssModObj.secDivDiv } />{ /* What: Section Divider Div Element. Why: A short rule separates the heading from the description. How: This draws it. */ }
 
 						<p className={ cssModObj.areDesPar }>{ /* What: Area Description Paragraph Element. Why: The tags need a sentence of context. How: This names the home base, the region, and the willingness to travel. */ }
 							Based in Lawrence, Kansas, Seal and Shield serves businesses across all of Kansas,

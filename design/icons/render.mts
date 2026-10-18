@@ -47,6 +47,7 @@ type IcoRecTyp = { // What: Icon Record Type. Why: Every PNG icon is described t
 
 
 };
+
 const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
 
 

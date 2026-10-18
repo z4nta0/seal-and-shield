@@ -141,9 +141,9 @@ function HerSecCom () : React.JSX.Element {
 
 						<span className={ cssModObj.herSloSpa }>{ /* What: Hero Slogan Span Element. Why: The slogan is the company's promise, set large. How: Its two accent words take the light blue. */ }
 							Built to<br />
-							<span className={ cssModObj.titAccSpa }>Seal.</span>{ /* What: Seal Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
+							<span className={ cssModObj.titAccSpa }>Seal.</span>{ /* What: Title Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
 							Built to<br />
-							<span className={ cssModObj.titAccSpa }>Shield.</span>{ /* What: Shield Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
+							<span className={ cssModObj.titAccSpa }>Shield.</span>{ /* What: Title Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
 						</span>
 
 
@@ -164,7 +164,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-						>{ /* What: Hero Quote Anchor Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
+						>{ /* What: Button Base Anchor Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
 							Get a Free Quote
 						</a>
 
@@ -174,7 +174,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#services'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
-						>{ /* What: Hero Services Anchor Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
+						>{ /* What: Button Base Anchor Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
 							Our Services
 						</a>
 

@@ -47,7 +47,7 @@
 
 
 	background-image : linear-gradient( oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ), linear-gradient( 90deg, oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ); /* Accent Main Color = #1e56c8 @ 0.07 opacity */ /* What: Literal Grid Lines. Why: Each line should draw a crisp single pixel. How: A gradient stop doesn't snap to whole pixels the way a border does, so the lines stay 1px rather than reading the border width. */
-	background-size  : calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
+	background-size  : calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem );                                    /* Vertical Rhythm Base Plus 5 ~= 59.447px */
 	inset            : 0;
 	mask-image       : linear-gradient( to bottom, transparent, rgba( 0, 0, 0, 0.6 ) 30%, rgba( 0, 0, 0, 0.6 ) 70%, transparent );
 	position         : absolute;
@@ -416,7 +416,7 @@
 	animation     : logRinDivLoopPulse var( --dur-ani-p12 ) var( --mot-sta-eas ) infinite;                          /* Duration Animation Base Plus 12 ~= 4,610.0ms, Motion Standard Easing = ease */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
-	inset         : calc( var( --rin-ver-off ) * -1 ) calc( var( --rin-hor-off ) * -1 );                            /* Ring Vertical Offset and Ring Horizontal Offset, each about -3.572px, or -33.876px in the stacked hero */
+	inset         : calc( var( --rin-ver-off ) * -1 ) calc( var( --rin-hor-off ) * -1 );                            /* Ring Vertical Offset ~= -3.572px, Ring Horizontal Offset ~= -3.572px, each ~= -33.876px in the stacked hero */
 	position      : absolute;
 
 
@@ -489,7 +489,7 @@
 
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ); /* Vertical Rhythm Base Plus 1 ~= 19.304px, Vertical Rhythm Base Plus 5 ~= 59.447px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	position : relative;
-	width    : max( calc( var( --ver-rhy-p11 ) * 1rem ), var( --hor-rhy-022 ) );                                                                                             /* Vertical Rhythm Base Plus 11 ~= 321.273px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
+	width    : max( calc( var( --ver-rhy-p11 ) * 1rem ), var( --hor-rhy-022 ) ); /* Vertical Rhythm Base Plus 11 ~= 321.273px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
 	z-index  : 1;
 
 

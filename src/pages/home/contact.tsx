@@ -242,7 +242,7 @@ function ConSecCom () : React.JSX.Element {
 						className={ cssModObj.eyeLabPar }
 
 						data-scroll-reveal-block
-					>{ /* What: Contact Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+					>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
 						Get In Touch
 					</p>
 
@@ -250,7 +250,7 @@ function ConSecCom () : React.JSX.Element {
 						className={` ${ cssModObj.secTitHea }   ${ cssModObj.secTitHeaLight } `}
 
 						data-scroll-reveal-block
-					>{ /* What: Contact Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
+					>{ /* What: Section Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
 						Request a Free<br />Quote Today
 					</h2>
 
@@ -258,7 +258,7 @@ function ConSecCom () : React.JSX.Element {
 						className={ cssModObj.secDivDiv }
 
 						data-scroll-reveal-block
-					/>{ /* What: Contact Divider Div Element. Why: A short rule separates the heading from the invitation. How: This draws it. */ }
+					/>{ /* What: Section Divider Div Element. Why: A short rule separates the heading from the invitation. How: This draws it. */ }
 
 					<p
 						className={ cssModObj.infBodPar }
@@ -279,21 +279,21 @@ function ConSecCom () : React.JSX.Element {
 					>{ /* What: Contact Details Div Element. Why: Visitors want the location, number, and hours together. How: This lists them as icon and text rows. */ }
 
 
-						<div className={ cssModObj.detRowDiv }>{ /* What: Location Detail Div Element. Why: A local business should say where it is. How: This pairs a pin icon with the town. */ }
+						<div className={ cssModObj.detRowDiv }>{ /* What: Detail Row Div Element. Why: A local business should say where it is. How: This pairs a pin icon with the town. */ }
 
 
 							<span
 								className={ cssModObj.detIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Location Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a pin, hidden from screen readers since the label beside it already says what the row is. */ }📍</span>
+							>📍</span>{ /* What: Detail Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a pin, hidden from screen readers since the label beside it already says what the row is. */ }
 
 							<div>{ /* What: Location Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className={ cssModObj.detLabSpa }>Location</span>{ /* What: Location Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.detLabSpa }>Location</span>{ /* What: Detail Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className={ cssModObj.detValSpa }>Lawrence, Kansas</span>{ /* What: Location Value Span Element. Why: This is the detail itself. How: This shows the town. */ }
+								<span className={ cssModObj.detValSpa }>Lawrence, Kansas</span>{ /* What: Detail Value Span Element. Why: This is the detail itself. How: This shows the town. */ }
 
 
 							</div>
@@ -302,25 +302,25 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.detRowDiv }>{ /* What: Phone Detail Div Element. Why: The phone number is the quickest way in. How: This pairs a phone icon with a dialing link. */ }
+						<div className={ cssModObj.detRowDiv }>{ /* What: Detail Row Div Element. Why: The phone number is the quickest way in. How: This pairs a phone icon with a dialing link. */ }
 
 
 							<span
 								className={ cssModObj.detIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Phone Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a phone, hidden from screen readers since the label beside it already says what the row is. */ }📞</span>
+							>📞</span>{ /* What: Detail Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a phone, hidden from screen readers since the label beside it already says what the row is. */ }
 
 							<div>{ /* What: Phone Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className={ cssModObj.detLabSpa }>Phone</span>{ /* What: Phone Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.detLabSpa }>Phone</span>{ /* What: Detail Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
 								<a
 									className={ cssModObj.detValAnc }
 
 									href='tel:7853041957'
-								>{ /* What: Phone Value Anchor Element. Why: Visitors can call straight from the details. How: This dials the number on phones. */ }
+								>{ /* What: Detail Value Anchor Element. Why: Visitors can call straight from the details. How: This dials the number on phones. */ }
 									(785) 304-1957
 								</a>
 
@@ -331,21 +331,21 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.detRowDiv }>{ /* What: Hours Detail Div Element. Why: Callers should know when someone will answer. How: This pairs a clock icon with the hours. */ }
+						<div className={ cssModObj.detRowDiv }>{ /* What: Detail Row Div Element. Why: Callers should know when someone will answer. How: This pairs a clock icon with the hours. */ }
 
 
 							<span
 								className={ cssModObj.detIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Hours Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a clock, hidden from screen readers since the label beside it already says what the row is. */ }🕐</span>
+							>🕐</span>{ /* What: Detail Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a clock, hidden from screen readers since the label beside it already says what the row is. */ }
 
 							<div>{ /* What: Hours Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className={ cssModObj.detLabSpa }>Business Hours</span>{ /* What: Hours Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.detLabSpa }>Business Hours</span>{ /* What: Detail Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className={ cssModObj.detValSpa }>Monday – Friday, 8 a.m. – 5 p.m.</span>{ /* What: Hours Value Span Element. Why: This is the detail itself. How: This shows the weekday hours. */ }
+								<span className={ cssModObj.detValSpa }>Monday – Friday, 8 a.m. – 5 p.m.</span>{ /* What: Detail Value Span Element. Why: This is the detail itself. How: This shows the weekday hours. */ }
 
 
 							</div>
@@ -416,17 +416,17 @@ function ConSecCom () : React.JSX.Element {
 							<h3 className={ cssModObj.forTitHea }>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
 
 
-							<div className={ cssModObj.forRowDiv }>{ /* What: Name Company Row Div Element. Why: Short fields pair up on wide screens. How: This holds the name and company fields side by side. */ }
+							<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Short fields pair up on wide screens. How: This holds the name and company fields side by side. */ }
 
 
-								<div className={ cssModObj.forFieDiv }>{ /* What: Name Field Div Element. Why: Each field stacks its label over its input. How: This holds the name field. */ }
+								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the name field. */ }
 
 
 									<label
 										className={ cssModObj.forFieLab }
 
 										htmlFor='conNamInp'
-									>{ /* What: Name Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
+									>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
 										Full Name *
 									</label>
 
@@ -443,19 +443,19 @@ function ConSecCom () : React.JSX.Element {
 										value={ forDatObj.name }
 
 										onChange={ fieChaFun }
-									/>{ /* What: Contact Name Input Element. Why: The company needs to know who's asking. How: Its name, name, is the key Netlify records and forDatObj holds. */ }
+									/>{ /* What: Form Field Input Element. Why: The company needs to know who's asking. How: Its name, name, is the key Netlify records and forDatObj holds. */ }
 
 
 								</div>
 
-								<div className={ cssModObj.forFieDiv }>{ /* What: Company Field Div Element. Why: Each field stacks its label over its input. How: This holds the company field. */ }
+								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the company field. */ }
 
 
 									<label
 										className={ cssModObj.forFieLab }
 
 										htmlFor='conComInp'
-									>{ /* What: Company Label Element. Why: Every field needs a visible label. How: This names the field. */ }
+									>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This names the field. */ }
 										Company
 									</label>
 
@@ -471,7 +471,7 @@ function ConSecCom () : React.JSX.Element {
 										value={ forDatObj.company }
 
 										onChange={ fieChaFun }
-									/>{ /* What: Contact Company Input Element. Why: Commercial work is for a business. How: Its name, company, is the key Netlify records and forDatObj holds. */ }
+									/>{ /* What: Form Field Input Element. Why: Commercial work is for a business. How: Its name, company, is the key Netlify records and forDatObj holds. */ }
 
 
 								</div>
@@ -480,17 +480,17 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={ cssModObj.forRowDiv }>{ /* What: Phone Email Row Div Element. Why: Short fields pair up on wide screens. How: This holds the phone and email fields side by side. */ }
+							<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Short fields pair up on wide screens. How: This holds the phone and email fields side by side. */ }
 
 
-								<div className={ cssModObj.forFieDiv }>{ /* What: Phone Field Div Element. Why: Each field stacks its label over its input. How: This holds the phone field. */ }
+								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the phone field. */ }
 
 
 									<label
 										className={ cssModObj.forFieLab }
 
 										htmlFor='conPhoInp'
-									>{ /* What: Phone Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
+									>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
 										Phone *
 									</label>
 
@@ -507,19 +507,19 @@ function ConSecCom () : React.JSX.Element {
 										value={ forDatObj.phone }
 
 										onChange={ fieChaFun }
-									/>{ /* What: Contact Phone Input Element. Why: The company calls back to schedule an inspection. How: Its name, phone, is the key Netlify records and forDatObj holds. */ }
+									/>{ /* What: Form Field Input Element. Why: The company calls back to schedule an inspection. How: Its name, phone, is the key Netlify records and forDatObj holds. */ }
 
 
 								</div>
 
-								<div className={ cssModObj.forFieDiv }>{ /* What: Email Field Div Element. Why: Each field stacks its label over its input. How: This holds the email field. */ }
+								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the email field. */ }
 
 
 									<label
 										className={ cssModObj.forFieLab }
 
 										htmlFor='conEmaInp'
-									>{ /* What: Email Label Element. Why: Every field needs a visible label. How: This names the field. */ }
+									>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This names the field. */ }
 										Email
 									</label>
 
@@ -535,7 +535,7 @@ function ConSecCom () : React.JSX.Element {
 										value={ forDatObj.email }
 
 										onChange={ fieChaFun }
-									/>{ /* What: Contact Email Input Element. Why: Some visitors would rather hear back by email. How: Its name, email, is the key Netlify records and forDatObj holds. */ }
+									/>{ /* What: Form Field Input Element. Why: Some visitors would rather hear back by email. How: Its name, email, is the key Netlify records and forDatObj holds. */ }
 
 
 								</div>
@@ -544,14 +544,14 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Message Field Div Element. Why: The message needs the form's full width. How: This holds the message field across both columns. */ }
+							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Element. Why: The message needs the form's full width. How: This holds the message field across both columns. */ }
 
 
 								<label
 									className={ cssModObj.forFieLab }
 
 									htmlFor='conMesTex'
-								>{ /* What: Message Label Element. Why: Every field needs a visible label. How: This invites the visitor to describe the job. */ }
+								>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This invites the visitor to describe the job. */ }
 									Tell us about your roof
 								</label>
 
@@ -567,7 +567,7 @@ function ConSecCom () : React.JSX.Element {
 									value={ forDatObj.message }
 
 									onChange={ fieChaFun }
-								/>{ /* What: Contact Message Textarea Element. Why: Details about the roof make for a better quote. How: Its name, message, is the key Netlify records and forDatObj holds. */ }
+								/>{ /* What: Form Field Textarea Element. Why: Details about the roof make for a better quote. How: Its name, message, is the key Netlify records and forDatObj holds. */ }
 
 
 							</div>
