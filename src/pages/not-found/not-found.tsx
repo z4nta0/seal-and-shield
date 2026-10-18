@@ -54,6 +54,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * hash, which the home page scrolls to and then clears, while a Ctrl, Cmd, or
  * middle click opens it in a new tab. app.tsx renders it for every path no
  * other route claims.
+ *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.

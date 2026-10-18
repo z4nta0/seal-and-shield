@@ -103,7 +103,7 @@ function SitFooCom () : React.JSX.Element {
 						alt=''
 					/>{ /* What: Footer Logo Image Element. Why: The footer's brand opens with the simple mark. How: Its alt text is empty, since the brand name sits right beside it. */ }
 
-					<div>{ /* What: Footer Brand Text Div Element. Why: The name and tagline stack beside the mark. How: This holds the two lines. */ }
+					<div>{ /* What: Brand Text Div Element. Why: The name and tagline stack beside the mark. How: This holds the two lines. */ }
 
 
 						<p className={ cssModObj.braNamPar }>Seal and Shield LLC</p>{ /* What: Brand Name Paragraph Element. Why: The footer names the company by its legal name. How: This shows it in the display font. */ }

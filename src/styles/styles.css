@@ -218,7 +218,7 @@
 	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go, as the phone menu's dimmer does when it fades out. How: Transitions and animations read it as their timing function. */
 	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for playful motion, which this site doesn't use yet. How: Transitions and animations read it as their timing function. */
 	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly, as hover lifts, presses, focus rings, and the contact messages do. How: Transitions and animations read it as their timing function. */
-	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which the contact form's success check pops in with. How: Transitions and animations read it as their timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, which the contact form's success check pops in with and the phone menu's active dot grows in with. How: Transitions and animations read it as their timing function. */
 	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: The color changes, fades, reveals, and the logo ring's pulse share one ordinary, smooth curve. How: Transitions and animations read it as their timing function. */
 
 	/* #endregion Easing Tokens */
@@ -365,7 +365,7 @@
 
 	/* #region Text Width Tokens */
 
-	--tex-wid-sma : calc( var( --cdn-pow-011 ) * 1em ); /* What: Text Width Small Maximum ~= 22.047em. Why: Small or secondary text (hints, captions, subtitles) reads best near 50 characters per line, though nothing on this site caps one yet. How: Lato averages about 2.32 characters per em, so this caps a line at about 51 characters at any font size. */
+	--tex-wid-sma : calc( var( --cdn-pow-011 ) * 1em ); /* What: Text Width Small Maximum ~= 22.047em. Why: Small or secondary text (hints, captions, subtitles) reads best near 50 characters per line, as in the phone menu's hours and service area line. How: Lato averages about 2.32 characters per em, so this caps a line at about 51 characters at any font size. */
 	--tex-wid-bas : calc( var( --cdn-pow-012 ) * 1em ); /* What: Text Width Base Maximum ~= 29.207em. Why: Paragraph text reads best near 66 characters per line. How: Lato averages about 2.32 characters per em, so this caps a line at about 68 characters at any font size; the hero pitch, the services intro and area text, the about story and values, the contact intro, and the 404 page's lede read it. */
 
 	/* #endregion Text Width Tokens */

@@ -338,7 +338,7 @@ function NavBarCom () : React.JSX.Element {
 				className={ cssModObj.navBarHed }
 
 				data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Attribute. Why: The bar turns solid while the menu is open, so the two read as one panel above the dimmed page. How: This is set only while menOpeBoo is true, and React drops it otherwise.
-				data-page-scroll-active={ barScrBoo || undefined }
+				data-page-scroll-active={ barScrBoo || undefined } // What: Page Scroll Active Attribute. Why: The bar turns solid once the page scrolls under it. How: This sets the attribute only while barScrBoo is true, and drops it otherwise.
 			>{ /* What: Navigation Bar Header Element. Why: The bar and its mobile menu form the page's banner. How: This holds both, and carries data-page-scroll-active while the page is scrolled, which turns the bar solid. */ }
 
 
@@ -440,10 +440,11 @@ function NavBarCom () : React.JSX.Element {
 				</div>
 
 
+
 				<div
 					className={ cssModObj.navMenDiv }
 
-					data-mobile-menu-open={ menOpeBoo || undefined }
+					data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Attribute. Why: The menu slides open and its links play their entrance only while it's open. How: This sets the attribute only while menOpeBoo is true, and drops it otherwise.
 
 					inert={ !menOpeBoo } // What: Closed Menu Inert Flag. Why: The closed menu only collapses to zero height, so its links would otherwise still take keyboard focus while hidden. How: This makes the menu inert whenever it's closed.
 				>{ /* What: Navigation Menu Div Element. Why: Phones show the section links and phone number in a panel below the bar. How: This opens and closes with the menu button, carrying data-mobile-menu-open while it's open. */ }
@@ -474,7 +475,6 @@ function NavBarCom () : React.JSX.Element {
 
 
 					))}
-
 
 
 					<div
