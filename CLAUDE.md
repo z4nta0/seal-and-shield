@@ -54,7 +54,9 @@ treatment. The `author` meta names the business itself.
 Decided 2026-10-17: the user-level "Multi-Page React Sites: Scroll Position"
 rule doesn't apply here. The 404 page is the only other route, and it's a
 short page rather than a scrollable one, so a scroll-to-top hook would add
-complexity for no real gain.
+complexity for no real gain. For the same reason there's no back to top link
+(decided 2026-10-17): the home page's footer and bar already have Home, and
+the 404 page is too short to need one.
 
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
@@ -299,6 +301,8 @@ reduced-motion variant (with `utils/motion.ts`'s `redMotFun` stopping the
 JavaScript smooth scrolls), the form fields got a focus ring, and the muted
 text, light blue, light-section labels, and footer copyright line were
 adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
+- **The logos stay raster** (confirmed 2026-10-17): the company has no SVG
+  version of either logo, so the WebP copies below remain until it does.
 - **The logos were resized on 2026-10-08** (at the user's go-ahead, ahead
   of step 7): `logo-full.png` went from 4763x4640 (3.7 MB, about 88 MB
   decoded) to 968x943 (299 KB), at least 2x its largest display and 3x the
