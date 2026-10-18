@@ -21,10 +21,12 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  * with the company's location, phone number, and hours and a call button on
  * the left, and the free quote request form on the right. The form posts to
  * Netlify Forms as contactForm, which finds the form through the hidden copy
- * in index.html, so every field's name has to match that copy. Once sent,
- * the form gives way to a thank-you message for six seconds. Each block fades
- * in as the section scrolls into view. Its id, contact, is what the bar's
- * Contact link and the hero's quote button scroll to.
+ * in index.html, so every field's name has to match that copy. Once sent, the
+ * form gives way to a thank-you message for six seconds, which then sinks out
+ * a little quicker than it rose in, as a failed request's error does when the
+ * visitor tries again. Each block fades in as the section scrolls into view.
+ * Its id, contact, is what the bar's Contact link and the hero's quote button
+ * scroll to.
  *
  * Sections:
  *  - Constants
@@ -83,6 +85,8 @@ function ConSecCom () : React.JSX.Element {
 	const [ forDatObj, setForDatObj ] = useState( EMP_FOR_OBJ ); // What: Form Data Object And Setter. Why: The fields are controlled, so the form can empty itself once sent. How: This holds every field's current value, keyed by its name.
 	const [ forErrBoo, setForErrBoo ] = useState( false );       // What: Form Error Boolean And Setter. Why: A visitor whose request didn't go through has to be told, with their details kept for a retry. How: This holds whether the error message is showing.
 	const [ senProBoo, setSenProBoo ] = useState( false );       // What: Send Progress Boolean And Setter. Why: The button shouldn't send the same request twice while the first is still on its way. How: This holds whether a submission is waiting on Netlify's answer.
+	const [ errLeaBoo, setErrLeaBoo ] = useState( false );       // What: Error Leaving Boolean And Setter. Why: The error message should fade out before it's removed. How: This holds whether its exit is playing.
+	const [ sucLeaBoo, setSucLeaBoo ] = useState( false );       // What: Success Leaving Boolean And Setter. Why: The thank-you message should fade out before the form returns. How: This holds whether its exit is playing.
 
 
 	// #region fieChaFun
@@ -121,16 +125,16 @@ function ConSecCom () : React.JSX.Element {
 	 * @summary
 	 * Handles the form's submit once the browser's own validation has passed
 	 * (Full Name and Phone are required, and Email has to look like an
-	 * address): stops the page-reloading submit, hides any earlier error, and
-	 * posts the form's fields to Netlify Forms as URL-encoded data, whose
+	 * address): stops the page-reloading submit, fades out any earlier error,
+	 * and posts the form's fields to Netlify Forms as URL-encoded data, whose
 	 * form-name field tells Netlify which form they belong to. While the
 	 * request is out, the submit button is disabled and its label says
 	 * Sending... instead. Only an OK answer from Netlify counts as sent: then
-	 * the thank-you message shows, the fields empty, and the form comes back
-	 * six seconds later. A request that fails outright, or one Netlify
-	 * rejects, keeps the visitor's details in place and shows the error
-	 * message instead, so they can try again or call; a request that fails
-	 * outright is also logged to the console.
+	 * the thank-you message shows, the fields empty, and six seconds later the
+	 * message fades out and the form comes back. A request that fails
+	 * outright, or one Netlify rejects, keeps the visitor's details in place
+	 * and shows the error message instead, so they can try again or call; a
+	 * request that fails outright is also logged to the console.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -158,7 +162,9 @@ function ConSecCom () : React.JSX.Element {
 		let senOkaBoo = false; // What: Send Okay Boolean. Why: Only a confirmed submission should show the thank-you message. How: This starts false and turns true only when Netlify answers OK.
 
 
-		setForErrBoo( false ); // What: Error Message Hide Call. Why: A new attempt shouldn't keep showing the last one's error. How: This hides the error message.
+		if ( forErrBoo ) setErrLeaBoo( true ); // What: Error Message Exit Call. Why: A new attempt shouldn't keep showing the last one's error. How: This plays the error's exit when one is showing, and errEndFun removes it once the exit ends.
+
+
 
 		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the request is on its way, and shouldn't send it twice. How: This disables the button and switches its label to say Sending... instead.
 
@@ -198,17 +204,58 @@ function ConSecCom () : React.JSX.Element {
 
 			setForDatObj( EMP_FOR_OBJ ); // What: Form Reset Call. Why: The form should come back empty. How: This restores every field to blank.
 
-			window.setTimeout( () => setForSenBoo( false ), 6000 ); // What: Form Return Timer. Why: A visitor may want to send another request. How: This brings the form back after six seconds.
+			setForErrBoo( false ); // What: Error Clear Call. Why: An error still fading when the request succeeds would replay its exit once the form returns. How: This removes it with the form.
+
+			setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The next error should arrive with its entrance, not its exit. How: This clears the exit flag.
+
+			window.setTimeout( () => setSucLeaBoo( true ), 6000 ); // What: Form Return Timer. Why: A visitor may want to send another request. How: This starts the thank-you message's exit after six seconds, and sucEndFun brings the form back once it ends.
 
 
 		}
 
-		else setForErrBoo( true ); // What: Error Message Show Call. Why: A failed submission must not look sent. How: This shows the error message and keeps every field as the visitor filled it in.
+		else {
+
+
+			setErrLeaBoo( false ); // What: Error Exit Cancel Call. Why: A failure arriving while the last error is still fading should keep it showing. How: This clears the exit, which replays the error's entrance.
+
+			setForErrBoo( true ); // What: Error Message Show Call. Why: A failed submission must not look sent. How: This shows the error message and keeps every field as the visitor filled it in.
+
+
+		}
 
 
 	};
 
 	// #endregion forSubFun
+
+
+
+	const errEndFun = ( aniEveObj : React.AnimationEvent< HTMLParagraphElement > ) => { // What: Error End Function. Why: The error message should be removed only once its exit has played. How: This removes it when its own exit animation ends.
+
+
+		if ( aniEveObj.target !== aniEveObj.currentTarget || !errLeaBoo ) return; // What: Exit Guard. Why: The paragraph's entrance also ends here. How: This acts only on the paragraph's own animation while its exit is playing.
+
+
+
+		setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The next error should arrive with its entrance. How: This clears the exit flag.
+		setForErrBoo( false ); // What: Error Message Hide Call. Why: The faded error should leave the page. How: This removes it.
+
+
+	};
+
+
+	const sucEndFun = ( aniEveObj : React.AnimationEvent< HTMLDivElement > ) => { // What: Success End Function. Why: The form should come back only once the thank-you message has faded out. How: This swaps the form back in when the panel's own exit animation ends.
+
+
+		if ( aniEveObj.target !== aniEveObj.currentTarget || !sucLeaBoo ) return; // What: Exit Guard. Why: The panel's entrance and its check mark's pop also end here. How: This acts only on the panel's own animation while its exit is playing.
+
+
+
+		setForSenBoo( false ); // What: Sent Message Hide Call. Why: The faded message gives way to the form. How: This swaps the form back in.
+		setSucLeaBoo( false ); // What: Success Exit Reset Call. Why: The next thank-you should arrive with its entrance. How: This clears the exit flag.
+
+
+	};
 
 
 
@@ -387,7 +434,11 @@ function ConSecCom () : React.JSX.Element {
 					{ forSenBoo ? ( // What: Sent Message Branch. Why: A just-sent form gives way to a thank-you. How: This shows the message while forSenBoo is true.
 
 
-						<div className={ cssModObj.forSucDiv }>{ /* What: Form Success Div Element. Why: The visitor should know the form went through. How: This stacks a check, a heading, and a note. */ }
+						<div
+							className={` ${ cssModObj.forSucDiv }   ${ sucLeaBoo ? cssModObj.forSucDivLeaving : '' } `}
+
+							onAnimationEnd={ sucEndFun }
+						>{ /* What: Form Success Div Element. Why: The visitor should know the form went through. How: This stacks a check, a heading, and a note, and sinks out quicker than it rose in before the form returns. */ }
 
 
 							<span className={ cssModObj.sucIcoSpa }>✓</span>{ /* What: Success Icon Span Element. Why: A check mark signals success at a glance. How: This shows it large. */ }
@@ -583,10 +634,12 @@ function ConSecCom () : React.JSX.Element {
 
 
 								<p
-									className={ cssModObj.forErrPar }
+									className={` ${ cssModObj.forErrPar }   ${ errLeaBoo ? cssModObj.forErrParLeaving : '' } `}
 
 									role='alert'
-								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the request didn't go through and what to do next. How: Its alert role has screen readers announce it the moment it appears. */ }
+
+									onAnimationEnd={ errEndFun }
+								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the request didn't go through and what to do next. How: Its alert role has screen readers announce it the moment it appears, and it sinks out quicker than it rose in when the visitor tries again. */ }
 									Sorry, your request didn't go through. Please try again, or call us at <a className={ cssModObj.errLinAnc } href='tel:7853041957'>(785) 304-1957</a>.
 								</p>
 

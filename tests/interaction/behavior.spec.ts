@@ -26,7 +26,8 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * on its button, Escape, a tap on the dimmed page, or a wider screen, and
  * closes again when one of its links is chosen, but not when a link opens in a
  * new tab; the contact form refuses to send without its required fields and
- * reports Netlify's answer honestly, with Netlify's side faked in the browser
+ * reports Netlify's answer honestly, clearing its error on a retry and coming
+ * back after the thank-you message, with Netlify's side faked in the browser
  * so nothing is really sent; and the 404 page answers an unknown address with
  * a noindex tag and leads back to the home page and its sections, as does an
  * address that names a section directly. Pages open under reduced motion, so
@@ -578,6 +579,63 @@ test( 'a failed request explains what to do instead', async ( { page : curPagObj
 	await expect( curPagObj.getByRole( 'alert' ) ).toContainText( "didn't go through" ); // What: Error Message Assertion. Why: The visitor should know the request failed and what to do next. How: This checks the alert appears with its explanation.
 
 	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toHaveCount( 0 ); // What: No Thank-You Assertion. Why: A failed request mustn't claim it was sent. How: This checks the thank-you heading never appears.
+
+
+} );
+
+
+test( 'a retry after a failure clears the error and sends', async ( { page : curPagObj } ) => { // What: Retry Test. Why: The error should fade out once the visitor tries again, and a successful retry should say so. How: This fails one request, lets the next one through, and checks the error leaves as the thank-you arrives.
+
+
+	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form lives in the Contact section. How: This opens the home page at desktop size.
+
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The first attempt has to fail. How: This answers every post with a server error.
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
+
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' ); // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: First Submit Click Call. Why: The first attempt shows the error. How: This sends the request.
+
+	await expect( curPagObj.getByRole( 'alert' ) ).toBeVisible(); // What: Error Shown Wait. Why: The retry only matters once the error is up. How: This waits for the alert.
+
+	await fakNetFun( curPagObj, 200 ); // What: Netlify Success Fake Call. Why: The retry should go through. How: This adds a route answering OK, which Playwright tries before the earlier one.
+
+	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Retry Click Call. Why: This is the action under test. How: This sends the request again.
+
+
+	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toBeVisible(); // What: Thank-You Assertion. Why: An accepted retry should say so. How: This checks the thank-you heading appears.
+
+	await expect( curPagObj.getByRole( 'alert' ) ).toHaveCount( 0 ); // What: Error Gone Assertion. Why: The error should leave once the visitor tries again. How: This checks the alert is gone.
+
+
+} );
+
+
+
+test( 'the form comes back after the thank-you message', async ( { page : curPagObj } ) => { // What: Form Return Test. Why: A visitor may want to send another request, so the thank-you gives way to the form once it has faded out. How: This sends a request, moves the clock past the six-second wait, and checks the form is back.
+
+
+	await curPagObj.clock.install(); // What: Clock Install Call. Why: Waiting six real seconds would slow the suite. How: This puts the page's timers under the test's control before it loads.
+
+	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form lives in the Contact section. How: This opens the home page at desktop size.
+
+	await fakNetFun( curPagObj, 200 ); // What: Netlify OK Fake Call. Why: The request has to be accepted for the thank-you to show. How: This fakes an OK answer.
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
+
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' ); // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: The thank-you only shows once a request is sent. How: This sends the request.
+
+	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toBeVisible(); // What: Thank-You Wait. Why: The return is timed from the thank-you. How: This waits for it to appear.
+
+	await curPagObj.clock.fastForward( 6000 ); // What: Clock Fast Forward Call. Why: This is the wait under test. How: This runs the page's timers six seconds ahead, which starts the message's exit.
+
+
+	await expect( curPagObj.getByRole( 'heading', { name : 'Free Quote Request' } ) ).toBeVisible(); // What: Form Back Assertion. Why: The form should return once the message has faded out. How: This checks the form's heading is showing again.
+
+	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toHaveCount( 0 ); // What: Thank-You Gone Assertion. Why: The message should leave as the form returns. How: This checks it's gone.
 
 
 } );

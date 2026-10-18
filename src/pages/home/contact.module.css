@@ -342,6 +342,13 @@
 
 
 }
+.forSucDiv.forSucDiv--leaving { /* What: Leaving Form Success Div. Why: The message should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
+
+
+	animation : forSucDivHideFadeOut var( --dur-ani-p01 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 1 ~= 209.1ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the message rise in. How: This applies only when the reduced-motion preference is set. */
 
 
@@ -349,6 +356,14 @@
 
 
 		animation : none;
+
+
+	}
+
+	.forSucDiv.forSucDiv--leaving { /* What: Instant Leaving Form Success Div. Why: The page waits on this animation's end to remove the thank-you message, and an animation turned off never ends. How: This shortens it to almost nothing, so the form comes back at once. */
+
+
+		animation-duration : .01ms;
 
 
 	}
@@ -372,6 +387,29 @@
 
 		opacity   : 1;
 		transform : none;
+
+
+	}
+
+
+}
+@keyframes forSucDivHideFadeOut { /* What: Form Success Div Hide Fade Out. Why: The message should leave rather than vanish. How: This sinks it a little and fades it out, the reverse of its entrance. */
+
+
+	from {
+
+
+		opacity   : 1;
+		transform : none;
+
+
+	}
+
+	to {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
 
 	}
@@ -615,6 +653,13 @@
 
 
 }
+.forErrPar.forErrPar--leaving { /* What: Leaving Form Error Paragraph. Why: The error should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
+
+
+	animation : forErrParHideFadeOut var( --dur-ani-bas ) var( --mot-acc-eas ) both; /* Duration Animation Base ~= 157.8ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Error Paragraph. Why: Someone who asked for less motion shouldn't see the message rise in. How: This applies only when the reduced-motion preference is set. */
 
 
@@ -622,6 +667,14 @@
 
 
 		animation : none;
+
+
+	}
+
+	.forErrPar.forErrPar--leaving { /* What: Instant Leaving Form Error Paragraph. Why: The page waits on this animation's end to remove the error, and an animation turned off never ends. How: This shortens it to almost nothing, so it leaves the page at once. */
+
+
+		animation-duration : .01ms;
 
 
 	}
@@ -645,6 +698,29 @@
 
 		opacity   : 1;
 		transform : none;
+
+
+	}
+
+
+}
+@keyframes forErrParHideFadeOut { /* What: Form Error Paragraph Hide Fade Out. Why: The error should leave rather than vanish. How: This sinks it a little and fades it out, the reverse of its entrance. */
+
+
+	from {
+
+
+		opacity   : 1;
+		transform : none;
+
+
+	}
+
+	to {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m03 ) ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 
 	}

@@ -187,7 +187,11 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      section, footer, and 404 page set to the light accent for contrast.
      The contact form's success panel fades up with its check popping in
      once, its error fades in, and the submit button's label fades to
-     Sending... while a request is out. Everything has a reduced-motion variant.
+     Sending... while a request is out. Since 2026-10-18 the panel and the
+     error also leave the way they came, sinking out quicker (209ms and
+     158ms) before the form returns or a retry goes out; their exits shorten
+     to .01ms under reduced motion, since the page waits on their end to
+     remove them. Everything has a reduced-motion variant.
      The menu's phone button draws its hover outline as an inset
      box-shadow, which takes no space, so the closed state looks exactly as
      before.
