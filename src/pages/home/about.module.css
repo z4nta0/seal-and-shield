@@ -137,7 +137,7 @@
 .infCarDiv { /* What: Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Card. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control in the card the lighter blue ring. */
 
 	background     : var( --bac-inr-col );                                                                           /* Background Inverse Raised Color = #0f1e45 */
 	display        : flex;

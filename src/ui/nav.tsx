@@ -103,7 +103,8 @@ const SEC_IDE_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Section
  *
  * @param props - This component does not use any props.
  *
- * @returns The bar's header element, holding the bar and the mobile menu.
+ * @returns The dimmer behind the menu and the bar's header element, which
+ *          holds the bar and the mobile menu.
  *
  * @example
  * ```tsx
@@ -283,6 +284,7 @@ function NavBarCom () : React.JSX.Element {
 		const onResWinFun = () => { if ( !togButEle.getClientRects().length ) setMenOpeBoo( false ); }; // What: On Resize Window Function. Why: A screen widened past the menu's breakpoint hides the menu button, which would leave the page inert under a menu that no longer shows. How: This closes the menu once the button has no box.
 
 
+
 		for ( const sibCurEle of sibEleArr ) sibCurEle.setAttribute( 'inert', '' ); // What: Sibling Inert Loop. Why: Content under the dimmer shouldn't take focus or be read while the menu is open. How: This marks each sibling inert.
 
 
@@ -427,11 +429,11 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Navigation Toggle Button Element. Why: Phones reach the section links through a menu. How: This toggles the mobile menu and reports whether it's open. */ }
 
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three, crossed by the button's aria-expanded state. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is the top bar, which drops to the middle and turns 45 degrees while the menu is open. */ }
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three, crossed by the button's aria-expanded state. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is the middle bar, which fades out while the menu is open. */ }
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is one of the three, crossed by the button's aria-expanded state. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is the bottom bar, which lifts to the middle and turns the other way while the menu is open. */ }
 
 
 					</button>

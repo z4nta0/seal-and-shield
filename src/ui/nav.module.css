@@ -538,7 +538,7 @@
 	max-height     : 0;
 	overflow       : hidden;
 	padding        : 0 var( --gut-sid-pad );                               /* Gutter Side Padding, about 19.304px - 44.876px */
-	transition     : max-height var( --dur-tra-p03 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Panel Height Transition. Why: The panel has to grow down from the bar as it opens, which a transform can't do without squashing its contents. How: This eases the height cap itself, a layout property, since no compositor version produces the same effect. */
+	transition     : max-height var( --dur-tra-p03 ) var( --mot-acc-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Panel Height Transition. Why: The panel has to grow down from the bar as it opens, which a transform can't do without squashing its contents. How: This eases the height cap itself, a layout property, since no compositor version produces the same effect. */
 
 
 }
@@ -548,6 +548,7 @@
 	max-height : min( calc( var( --ver-rhy-p13 ) * 1rem ), calc( 100dvh - var( --nav-bar-hei ) ) ); /* Vertical Rhythm Base Plus 13 ~= 563.794px, Navigation Bar Height ~= 83.484px */
 	overflow-y : auto;
 	padding    : 0 var( --gut-sid-pad ) var( --spa-ver-p02 );                                       /* Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
+	transition : max-height var( --dur-tra-p03 ) var( --mot-dec-eas );                              /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Opening Height Transition. Why: Things arriving decelerate, while the closing panel accelerates away. How: This swaps the base rule's easing for the decelerate curve while the menu opens. */
 
 
 }
@@ -567,7 +568,8 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Menu Div. Why: Someone who asked for less motion shouldn't see the panel slide. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navMenDiv { /* What: Motionless Navigation Menu Div. Why: The panel should simply open and close. How: This turns the transition off. */
+	.navMenDiv,
+	.navMenDiv[data-mobile-menu-open] { /* What: Motionless Navigation Menu Div. Why: The panel should simply open and close. How: This turns both the opening and the closing transition off, naming the open state too since its selector outranks the plain class. */
 
 
 		transition : none;

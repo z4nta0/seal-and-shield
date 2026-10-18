@@ -300,7 +300,7 @@ function AboSecCom () : React.JSX.Element {
 										aria-hidden='true'
 									/>{ /* What: Value Marker Div Element. Why: A short bar marks each value. How: This is decorative and hidden from assistive technology. */ }
 
-									<div>{ /* What: About Value Text Div Element. Why: The title and sentence stack beside the marker. How: This holds the two. */ }
+									<div>{ /* What: Value Text Div Element. Why: The title and sentence stack beside the marker. How: This holds the two. */ }
 
 
 										<h3 className={ cssModObj.valTitHea }>{ valRecObj.titStr }</h3>{ /* What: Value Title Heading Element. Why: Each value is named. How: This is the value's h3. */ }

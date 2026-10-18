@@ -272,7 +272,7 @@ function SerSecCom () : React.JSX.Element {
 				>{ /* What: Services Area Div Element. Why: Visitors want to know whether the company works where they are. How: This panel describes the service area beside its tags, and fades in last. */ }
 
 
-					<div>{ /* What: Services Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, with no styling of its own. */ }
+					<div>{ /* What: Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, with no styling of its own. */ }
 
 
 						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in small capitals. */ }
