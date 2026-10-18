@@ -242,10 +242,10 @@ async function secTopFun ( curPagObj : Page, secIdeStr : string ) : Promise< num
 
 
 
-// #region arrSecFun
+// #region ariSecFun
 
 /**
- * arrSecFun = Arrival Section Function
+ * ariSecFun = Arrival Section Function
  *
  * @summary
  * Waits until the visitor has landed on a home page section: the address is
@@ -265,12 +265,12 @@ async function secTopFun ( curPagObj : Page, secIdeStr : string ) : Promise< num
  *
  * @example
  * ```ts
- * arrSecFun(page, 'contact') // => Promise<void>
+ * ariSecFun(page, 'contact') // => Promise<void>
  * ```
  *
 */
 
-async function arrSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< void > {
+async function ariSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< void > {
 
 
 	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ ); // What: Clean Address Assertion. Why: Section links keep the address free of hashes, even when they come from another page. How: This waits until the URL is the bare root.
@@ -280,7 +280,7 @@ async function arrSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< voi
 
 }
 
-// #endregion arrSecFun
+// #endregion ariSecFun
 
 // #endregion Helpers
 
@@ -301,7 +301,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About',
 		await curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
 
-		await arrSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 
 
 	} );
@@ -321,7 +321,7 @@ test( 'the brand returns to the top', async ( { page : curPagObj } ) => { // Wha
 	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { name : 'Seal and Shield' } ).click(); // What: Brand Click Call. Why: This is the action under test. How: This clicks the bar's brand.
 
 
-	await arrSecFun( curPagObj, 'home' ); // What: Top Arrival Check. Why: The hero is the top of the page. How: This waits for it to sit at the top with a clean address.
+	await ariSecFun( curPagObj, 'home' ); // What: Top Arrival Check. Why: The hero is the top of the page. How: This waits for it to sit at the top with a clean address.
 
 
 } );
@@ -372,7 +372,7 @@ test( 'a footer link scrolls to its section', async ( { page : curPagObj } ) => 
 	await curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : 'About' } ).click(); // What: Footer Link Click Call. Why: This is the action under test. How: This clicks the footer's About link.
 
 
-	await arrSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The visitor should land on the About section. How: This waits for it to sit at the top with a clean address.
+	await ariSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The visitor should land on the About section. How: This waits for it to sit at the top with a clean address.
 
 
 } );
@@ -461,7 +461,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'home' ], [ 'Services', 'ser
 
 		await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: The menu should close once a section is chosen. How: This checks the button reports it collapsed.
 
-		await arrSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 
 
 	} );
@@ -643,7 +643,7 @@ for ( const [ conLabStr, secIdeStr, locKeyStr ] of [ [ 'Get a Free Quote', 'cont
 		await conLocObj.click(); // What: Control Click Call. Why: This is the action under test. How: This clicks the control.
 
 
-		await arrSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the home page's section with a clean address. How: This waits for both.
+		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the home page's section with a clean address. How: This waits for both.
 
 
 	} );
@@ -659,7 +659,7 @@ test( 'an address naming a section opens there', async ( { page : curPagObj } ) 
 	await opeRouFun( curPagObj, '/#about', DES_VIE_OBJ ); // What: Section Address Open Call. Why: This is the action under test. How: This loads the home page with the About section's hash.
 
 
-	await arrSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The visitor should land on About, and the hash should leave the address. How: This waits for both.
+	await ariSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The visitor should land on About, and the hash should leave the address. How: This waits for both.
 
 
 } );

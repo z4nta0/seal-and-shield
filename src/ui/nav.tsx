@@ -384,21 +384,21 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Navigation Links Nav Element. Why: Wide screens show the section links and phone number in the bar. How: This labels the landmark Main, telling it apart from the footer's. */ }
 
 
-						{ NAV_LIN_ARR.map( ( linRcdObj ) => ( // What: Bar Link Map. Why: Each section gets a link in the bar. How: This renders one anchor per row.
+						{ NAV_LIN_ARR.map( ( linRecObj ) => ( // What: Bar Link Map. Why: Each section gets a link in the bar. How: This renders one anchor per row.
 
 
 							<a
-								key={ linRcdObj.labStr }
+								key={ linRecObj.labStr }
 
 								className={ cssModObj.navLinAnc }
 
-								data-section-link-active={ ( isaHomBoo && actSecStr === linRcdObj.ideStr ) || undefined } // What: Active Section Link Flag. Why: The link for the section being read is highlighted. How: This sets the attribute only on the home page when the link names the active section, and drops it otherwise.
+								data-section-link-active={ ( isaHomBoo && actSecStr === linRecObj.ideStr ) || undefined } // What: Active Section Link Flag. Why: The link for the section being read is highlighted. How: This sets the attribute only on the home page when the link names the active section, and drops it otherwise.
 
-								href={ `/#${ linRcdObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, as a real link too. How: This points at the home page with the section's id as the hash.
+								href={ `/#${ linRecObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, as a real link too. How: This points at the home page with the section's id as the hash.
 
-								onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRcdObj.ideStr ) }
+								onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRecObj.ideStr ) }
 							>{ /* What: Navigation Link Anchor Element. Why: Each link scrolls to its section. How: This is marked active while its section is being read. */ }
-								{ linRcdObj.labStr }
+								{ linRecObj.labStr }
 							</a>
 
 
@@ -449,25 +449,25 @@ function NavBarCom () : React.JSX.Element {
 				>{ /* What: Navigation Menu Div Element. Why: Phones show the section links and phone number in a panel below the bar. How: This opens and closes with the menu button, carrying data-mobile-menu-open while it's open. */ }
 
 
-					{ NAV_LIN_ARR.map( ( linRcdObj, linIndNum ) => ( // What: Menu Link Map. Why: Each section gets a link in the mobile menu. How: This renders one anchor per row, handing each its position for the staggered entrance.
+					{ NAV_LIN_ARR.map( ( linRecObj, linIndNum ) => ( // What: Menu Link Map. Why: Each section gets a link in the mobile menu. How: This renders one anchor per row, handing each its position for the staggered entrance.
 
 
 						<a
-							key={ linRcdObj.labStr }
+							key={ linRecObj.labStr }
 
 							className={ cssModObj.menLinAnc }
 
 							style={ { '--men-ite-ind' : linIndNum } as React.CSSProperties } // What: Menu Item Index Style. Why: Each row enters a beat after the one above it. How: This hands the row its position, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's style type has no entry for a custom property. How: as React.CSSProperties accepts the object, which React sets as written.
 
-							data-section-link-active={ ( isaHomBoo && actSecStr === linRcdObj.ideStr ) || undefined } // What: Active Section Link Flag. Why: The menu marks the section being read, as the bar's links do. How: This sets the attribute on the link whose section is active, on the home page only.
+							data-section-link-active={ ( isaHomBoo && actSecStr === linRecObj.ideStr ) || undefined } // What: Active Section Link Flag. Why: The menu marks the section being read, as the bar's links do. How: This sets the attribute on the link whose section is active, on the home page only.
 
-							href={ `/#${ linRcdObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This points at the home page with the section's id as the hash.
+							href={ `/#${ linRecObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This points at the home page with the section's id as the hash.
 
-							onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRcdObj.ideStr ) }
+							onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRecObj.ideStr ) }
 						>{ /* What: Menu Link Anchor Element. Why: Each link takes the visitor to its section. How: This goes through navSecFun, which closes the menu when it handles the click, and shows a dot at its end while its section is being read. */ }
 
 
-							<span className={ cssModObj.menLabSpa }>{ linRcdObj.labStr }</span>{ /* What: Menu Label Span Element. Why: The label slides a little on hover while the row's divider stays put. How: This holds the link's text. */ }
+							<span className={ cssModObj.menLabSpa }>{ linRecObj.labStr }</span>{ /* What: Menu Label Span Element. Why: The label slides a little on hover while the row's divider stays put. How: This holds the link's text. */ }
 
 
 						</a>

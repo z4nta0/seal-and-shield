@@ -39,10 +39,10 @@ const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of
 
 
 
-// #region SER_RCD_ARR
+// #region SER_REC_ARR
 
 /**
- * SER_RCD_ARR = Service Record Array
+ * SER_REC_ARR = Service Record Array
  *
  * @summary
  * The services the card grid shows, in display order. Every row shares one
@@ -56,7 +56,7 @@ const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of
  *
 */
 
-const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists every service the company offers. How: Each row holds a card's icon, title, and description.
+const SER_REC_ARR = [ // What: Service Record Array. Why: The card grid lists every service the company offers. How: Each row holds a card's icon, title, and description.
 
 
 	{ // What: Full Roof Installation Service Row. Why: A new roof is the company's largest job. How: This describes it on its card.
@@ -150,7 +150,7 @@ const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists ev
 
 ];
 
-// #endregion SER_RCD_ARR
+// #endregion SER_REC_ARR
 
 // #endregion Constants
 
@@ -165,7 +165,7 @@ const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists ev
  *
  * @summary
  * Renders the services section: the header, a card for each row of
- * SER_RCD_ARR, and the service area panel with a tag for each entry of
+ * SER_REC_ARR, and the service area panel with a tag for each entry of
  * SER_ARE_ARR. Its header, each card's grid cell, and the area panel are
  * scroll-reveal blocks, revealed 80ms apart once the section scrolls into
  * view.
@@ -232,11 +232,11 @@ function SerSecCom () : React.JSX.Element {
 				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays the cards out in columns. */ }
 
 
-					{ SER_RCD_ARR.map( ( serRcdObj ) => ( // What: Service Card Map. Why: Each service gets its own card. How: This renders one card per row.
+					{ SER_REC_ARR.map( ( serRecObj ) => ( // What: Service Card Map. Why: Each service gets its own card. How: This renders one card per row.
 
 
 						<div
-							key={ serRcdObj.titStr }
+							key={ serRecObj.titStr }
 
 							data-scroll-reveal-block
 						>{ /* What: Card Reveal Div Element. Why: Each card fades in in turn, but the reveal's own transition and transform would override the card's hover lift and shadow. How: This grid cell carries the reveal hook around the card instead of on it. */ }
@@ -245,11 +245,11 @@ function SerSecCom () : React.JSX.Element {
 							<div className={ cssModObj.serCarDiv }>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, filling its grid cell. */ }
 
 
-								<span className={ cssModObj.carIcoSpa }>{ serRcdObj.icoStr }</span>{ /* What: Card Icon Span Element. Why: An icon helps a visitor scan the grid. How: This shows the service's emoji. */ }
+								<span className={ cssModObj.carIcoSpa }>{ serRecObj.icoStr }</span>{ /* What: Card Icon Span Element. Why: An icon helps a visitor scan the grid. How: This shows the service's emoji. */ }
 
-								<h3 className={ cssModObj.carTitHea }>{ serRcdObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This is the card's h3. */ }
+								<h3 className={ cssModObj.carTitHea }>{ serRecObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This is the card's h3. */ }
 
-								<p className={ cssModObj.carDesPar }>{ serRcdObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Visitors want to know what the service involves. How: This describes it. */ }
+								<p className={ cssModObj.carDesPar }>{ serRecObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Visitors want to know what the service involves. How: This describes it. */ }
 
 
 							</div>

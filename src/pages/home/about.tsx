@@ -279,11 +279,11 @@ function AboSecCom () : React.JSX.Element {
 						<div className={ cssModObj.aboValDiv }>{ /* What: About Values Div Element. Why: The story closes with what the company stands for. How: This lists the three values. */ }
 
 
-							{ ABO_VAL_ARR.map( ( valRcdObj, valIndNum ) => ( // What: Value Map. Why: Each value gets its own row. How: This renders one row per value, passing its position for the fade delay.
+							{ ABO_VAL_ARR.map( ( valRecObj, valIndNum ) => ( // What: Value Map. Why: Each value gets its own row. How: This renders one row per value, passing its position for the fade delay.
 
 
 								<div
-									key={ valRcdObj.titStr }
+									key={ valRecObj.titStr }
 
 									className={ cssModObj.valIteDiv }
 
@@ -302,9 +302,9 @@ function AboSecCom () : React.JSX.Element {
 									<div>{ /* What: About Value Text Div Element. Why: The title and sentence stack beside the marker. How: This holds the two. */ }
 
 
-										<h3 className={ cssModObj.valTitHea }>{ valRcdObj.titStr }</h3>{ /* What: Value Title Heading Element. Why: Each value is named. How: This is the value's h3. */ }
+										<h3 className={ cssModObj.valTitHea }>{ valRecObj.titStr }</h3>{ /* What: Value Title Heading Element. Why: Each value is named. How: This is the value's h3. */ }
 
-										<p className={ cssModObj.valDesPar }>{ valRcdObj.desStr }</p>{ /* What: Value Description Paragraph Element. Why: Each value is explained in a sentence. How: This shows it beneath the title. */ }
+										<p className={ cssModObj.valDesPar }>{ valRecObj.desStr }</p>{ /* What: Value Description Paragraph Element. Why: Each value is explained in a sentence. How: This shows it beneath the title. */ }
 
 
 									</div>

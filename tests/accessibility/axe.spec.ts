@@ -8,7 +8,7 @@ import AxeBuilder from '@axe-core/playwright'; // What: Axe Builder. Why: axe-co
 
 import { expect      } from '@playwright/test';     // What: Expect. Why: A state passes only with no violations. How: This asserts the violation list is empty.
 import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each state has to be opened and settled before it's scanned. How: This loads it and waits for it.
-import { STA_RCD_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is scanned. How: This lists them.
+import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is scanned. How: This lists them.
 import { test        } from '@playwright/test';     // What: Test. Why: Each state is its own test. How: This declares them.
 
 
@@ -136,13 +136,13 @@ function sumResFun ( resLisArr : AxeResTyp[ 'violations' ] ) : string[] {
 
 // #region Module Init
 
-for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every page state must pass the scan. How: This declares one axe test per state.
+for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state must pass the scan. How: This declares one axe test per state.
 
 
-	test( `${ staRcdObj.ideStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Axe Test. Why: A state passes only with zero axe violations. How: This opens the state, scans it, reports anything needing review, and fails on any violation.
+	test( `${ staRecObj.ideStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Axe Test. Why: A state passes only with zero axe violations. How: This opens the state, scans it, reports anything needing review, and fails on any violation.
 
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The scan should see the state settled. How: This loads and settles it.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The scan should see the state settled. How: This loads and settles it.
 
 
 		const axeResObj = await scaStaFun( curPagObj );      // What: Axe Result Object. Why: Both the violations and the incomplete results come from one scan. How: This scans the page.
@@ -153,7 +153,7 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-		if ( revLinArr.length ) console.log( `[${ tesInfObj.project.name }] ${ staRcdObj.ideStr } needs review:\n  ${ revLinArr.join( '\n  ' ) }` ); // What: Review Log Call. Why: The terminal run should show what needs a look without opening the report. How: This prints the state's review lines under its project and name.
+		if ( revLinArr.length ) console.log( `[${ tesInfObj.project.name }] ${ staRecObj.ideStr } needs review:\n  ${ revLinArr.join( '\n  ' ) }` ); // What: Review Log Call. Why: The terminal run should show what needs a look without opening the report. How: This prints the state's review lines under its project and name.
 
 
 

@@ -224,19 +224,19 @@ function HerSecCom () : React.JSX.Element {
 				<div className={ cssModObj.staInnDiv }>{ /* What: Stats Inner Div Element. Why: The figures line up with the page's content width. How: This lays the four out in a row. */ }
 
 
-					{ HER_STA_ARR.map( ( staRcdObj ) => ( // What: Stat Map. Why: Each figure gets its own cell. How: This renders one cell per row.
+					{ HER_STA_ARR.map( ( staRecObj ) => ( // What: Stat Map. Why: Each figure gets its own cell. How: This renders one cell per row.
 
 
 						<div
-							key={ staRcdObj.labStr }
+							key={ staRecObj.labStr }
 
 							className={ cssModObj.staIteDiv }
 						>{ /* What: Stat Item Div Element. Why: Each figure reads with its caption. How: This stacks the two. */ }
 
 
-							<span className={ cssModObj.staValSpa }>{ staRcdObj.valStr }</span>{ /* What: Stat Value Span Element. Why: The figure is the cell's focus. How: This shows it large. */ }
+							<span className={ cssModObj.staValSpa }>{ staRecObj.valStr }</span>{ /* What: Stat Value Span Element. Why: The figure is the cell's focus. How: This shows it large. */ }
 
-							<span className={ cssModObj.staLabSpa }>{ staRcdObj.labStr }</span>{ /* What: Stat Label Span Element. Why: The caption says what the figure means. How: This shows it small beneath. */ }
+							<span className={ cssModObj.staLabSpa }>{ staRecObj.labStr }</span>{ /* What: Stat Label Span Element. Why: The caption says what the figure means. How: This shows it small beneath. */ }
 
 
 						</div>
