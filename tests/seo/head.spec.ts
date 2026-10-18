@@ -90,7 +90,7 @@ test( 'the home page names the city, the services, and the business', async ( { 
 
 	expect( desConStr ).toContain( 'Lawrence, Kansas' ); // What: Description City Assertion. Why: The summary should say where the company works. How: This checks the description names the city.
 
-	expect( desConStr.length ).toBeGreaterThanOrEqual( 100 ); // What: Description Minimum Assertion. Why: A summary that's too short wastes the space a listing gives it. How: This checks it runs at least 100 characters.
+	expect( desConStr.length ).toBeGreaterThanOrEqual( 120 ); // What: Description Minimum Assertion. Why: Link preview checkers flag a summary under 120 characters as short. How: This checks it runs at least 120 characters.
 
 	expect( desConStr.length ).toBeLessThanOrEqual( 125 ); // What: Description Maximum Assertion. Why: Phones cut a summary off around 125 characters. How: This checks it stays within that.
 
