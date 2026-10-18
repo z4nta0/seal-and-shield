@@ -3,7 +3,7 @@
 A marketing website for Seal and Shield LLC, a real commercial roofing
 contractor based in Lawrence, Kansas (React, Vite, React Router, deployed on
 Netlify at https://sealandshieldroof.com/). It's also a portfolio piece by
-techgeek.support, linked from https://techgeek.support. Every rule in the
+techgeek.dev, linked from https://techgeek.dev. Every rule in the
 user-level CLAUDE.md applies here; this file records only what's specific to
 this project.
 
@@ -49,6 +49,11 @@ treatment. The `author` meta names the business itself.
   out: there's no business address to give, a ZIP code would point at the
   owner's home area, and the page shows no prices for a range to match. They
   are optional fields, so the warnings don't affect eligibility.
+- **The canonical stays in `index.html`** (decided 2026-10-18): the only other
+  route is the `noindex` 404 page, so under the user-level SEO rule the site
+  counts as one indexed page, and crawlers that never run scripts still read
+  the canonical. The 404 page carries the home page's canonical beside its
+  `noindex`, which is accepted, since the `noindex` keeps it out of search.
 
 ## Multi-page scroll position
 Decided 2026-10-17: the user-level "Multi-Page React Sites: Scroll Position"
@@ -70,7 +75,11 @@ so it's settled (2026-10-10).
   The logos and the services header take `max()` of a rhythm-step floor and
   a horizontal step, since their columns already cap them.
 - **Fixed (rem steps)**: everything inside a component: small gaps, card,
-  field, and tag padding, the heading rules, and the menu lines. The 3px
+  field, and tag padding, the heading rules, and the menu lines. The phone
+  menu's Call Now and Free Quote buttons count as component padding too
+  (decided 2026-10-18), on a fixed `--spa-hor-m01`, the same as the phone
+  menu buttons in reese-roofing, hair-designs, and tonys-toppers, while the
+  bar's own buttons stay fluid. The 3px
   value markers stay literal, since no step lands within 10%.
 - **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as
   reese-roofing.
@@ -97,7 +106,7 @@ src/
   ui/                    components used by 2 or more pages (nav, footer)
                          and section-link.ts
   styles/                global CSS only (fonts.css, styles.css)
-  utils/                 app-agnostic helpers (motion.ts)
+  utils/                 app-agnostic helpers (motion.ts, rhythm.ts)
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test
 suites"), and `design/` holds source artwork that isn't served, with the
@@ -192,6 +201,8 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      158ms) before the form returns or a retry goes out; their exits shorten
      to .01ms under reduced motion, since the page waits on their end to
      remove them. Everything has a reduced-motion variant.
+     The service cards lift and the service area tags fill on hover even
+     though neither is clickable, which the user chose to keep (2026-10-18).
      The menu's phone button draws its hover outline as an inset
      box-shadow, which takes no space, so the closed state looks exactly as
      before.
