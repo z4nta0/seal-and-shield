@@ -291,13 +291,15 @@ async function ariSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< voi
 
 // #region Home Page Navigation Checks
 
-for ( const [ linLabStr, secIdeStr ] of [ [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
+for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'home' ], [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Section Link Loop. Why: Each of the bar's section links has its own target. How: This declares one test per link, pairing its label with its section's id.
 
 
 	test( `the ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Section Link Test. Why: A section link has to take the visitor to its section. How: This clicks the link and checks the address and the section's position.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
+
+		await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : 1200 } ) ); // What: Scroll Down Call. Why: The Home link has to be seen bringing a scrolled visitor back, and every other link reaching its section from mid-page. How: This jumps a way down the page first.
 
 		await curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
@@ -365,18 +367,45 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 
 
 
-test( 'a footer link scrolls to its section', async ( { page : curPagObj } ) => { // What: Footer Link Test. Why: The footer's section links are the way onward from the bottom of the page. How: This clicks the About link and checks where the visitor lands.
+for ( const secIdeStr of [ 'home', 'services', 'about', 'contact' ] ) { // What: Footer Link Loop. Why: Each of the footer's section links is the way onward from the bottom of the page. How: This declares one test per section id, whose capitalized form is the link's label.
 
 
-	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The footer is checked on the home page first. How: This opens it at desktop size.
-
-	await curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : 'About' } ).click(); // What: Footer Link Click Call. Why: This is the action under test. How: This clicks the footer's About link.
+	test( `the footer's ${ secIdeStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Footer Link Test. Why: A footer link has to take the visitor to its section. How: This clicks the link from the bottom of the page and checks where the visitor lands.
 
 
-	await ariSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The visitor should land on the About section. How: This waits for it to sit at the top with a clean address.
+		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The footer is checked on the home page first. How: This opens it at desktop size.
+
+		await curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) } ).click(); // What: Footer Link Click Call. Why: This is the action under test. How: This clicks the footer link labelled with the section id capitalized, which scrolls the page down to reach it.
 
 
-} );
+		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+
+
+	} );
+
+
+}
+
+
+
+for ( const [ butLabStr, secIdeStr ] of [ [ 'Get a Free Quote', 'contact' ], [ 'Our Services', 'services' ] ] ) { // What: Hero Button Loop. Why: Each of the hero's buttons is a section link of its own. How: This declares one test per button, pairing its label with its section's id.
+
+
+	test( `the hero's ${ butLabStr } button scrolls to its section`, async ( { page : curPagObj } ) => { // What: Hero Button Test. Why: The hero's buttons are the page's first way onward. How: This clicks the button and checks where the visitor lands.
+
+
+		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The hero opens the home page. How: This opens it at desktop size.
+
+		await curPagObj.getByRole( 'main' ).getByRole( 'link', { exact : true, name : butLabStr } ).click(); // What: Hero Button Click Call. Why: This is the action under test. How: This clicks the button by its label inside the main content.
+
+
+		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+
+
+	} );
+
+
+}
 
 // #endregion Home Page Navigation Checks
 
@@ -582,6 +611,7 @@ test( 'a failed request explains what to do instead', async ( { page : curPagObj
 
 
 } );
+
 
 
 test( 'a retry after a failure clears the error and sends', async ( { page : curPagObj } ) => { // What: Retry Test. Why: The error should fade out once the visitor tries again, and a successful retry should say so. How: This fails one request, lets the next one through, and checks the error leaves as the thank-you arrives.

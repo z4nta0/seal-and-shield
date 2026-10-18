@@ -16,17 +16,18 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * @summary
  * Checks the site's SEO setup in whichever engine the project runs. Seal and
  * Shield is a real local business, so the home page has to be findable and
- * describe the company accurately: its title and description name the city
- * and services, its canonical and author tags are in place, it carries no
- * noindex, and its RoofingContractor structured data matches what the page
- * itself shows, its phone number, city, hours, and service areas, with no
- * street address, since the company has none to publish. The 404 page
- * carries noindex, and each page has exactly one h1. The social preview
- * tags are complete, use absolute addresses, and match the page's title and
- * description; the card they point at is a 1,200x630 PNG under 300 KB; and
- * every icon the head links to is served at the size its link promises.
- * robots.txt lets every crawler in and names the sitemap, which lists the
- * home page alone.
+ * describe the company accurately: its title and description name the city and
+ * services, its canonical and author tags are in place, it carries no noindex,
+ * index.html itself, fetched without a browser, carries the same full title
+ * and description, each route has exactly one description tag, and the home
+ * page's RoofingContractor structured data matches what the page itself shows,
+ * its phone number, city, hours, and service areas, with no street address,
+ * since the company has none to publish. The 404 page carries noindex, and
+ * each page has exactly one h1. The social preview tags are complete, use
+ * absolute addresses, and match the page's title and description; the card
+ * they point at is a 1,200x630 PNG under 300 KB; and every icon the head links
+ * to is served at the size its link promises. robots.txt lets every crawler in
+ * and names the sitemap, which lists the home page alone.
  *
  * Sections:
  *  - Constants
@@ -161,9 +162,9 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 test( 'the raw page carries the home title and description for script-free readers', async ( { page : curPagObj, request : reqCotObj } ) => { // What: Raw Head Test. Why: Link checkers and many crawlers read the page without running the site's script, so the title and description have to be in index.html itself. How: This fetches the root as raw HTML and checks both against what the page shows.
 
 
-	const rawHtmStr = await ( await reqCotObj.get( '/' ) ).text();                                     // What: Raw HTML String. Why: The page is read the way a script-free reader reads it. How: This fetches the root's HTML without a browser.
-	const desTexStr = rawHtmStr.match( /<meta name='description' content='([^']*)'/ )?.[ 1 ] ?? '';   // What: Description Text String. Why: The raw description is checked as written. How: This reads the description tag's content.
-	const titTexStr = rawHtmStr.match( /<title>([^<]*)<\/title>/ )?.[ 1 ] ?? '';                      // What: Title Text String. Why: The raw title is checked as written. How: This reads the title element's text.
+	const rawHtmStr = await ( await reqCotObj.get( '/' ) ).text();                                      // What: Raw HTML String. Why: The page is read the way a script-free reader reads it. How: This fetches the root's HTML without a browser.
+	const desTexStr = rawHtmStr.match( /<meta name='description' content=(['"])(.*?)\1/ )?.[ 2 ] ?? ''; // What: Description Text String. Why: The raw description is checked as written. How: This reads the description tag's content, in single quotes or, should its text ever hold an apostrophe, double ones.
+	const titTexStr = rawHtmStr.match( /<title>([^<]*)<\/title>/ )?.[ 1 ] ?? '';                        // What: Title Text String. Why: The raw title is checked as written. How: This reads the title element's text.
 
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The raw tags are compared with what the browser shows. How: This loads the root path.
