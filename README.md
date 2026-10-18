@@ -69,7 +69,7 @@ tests/
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout checks across screen widths
 ├── seo/               head tags, structured data, preview card, icon, and crawler file checks
-├── support/           the page states the suites visit
+├── support/           states.ts (the page states the suites visit) and netlify.ts (the Netlify Forms fake the interaction and accessibility suites share)
 └── playwright.config.ts
 
 design/                Source artwork, not served

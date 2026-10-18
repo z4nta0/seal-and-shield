@@ -17,7 +17,9 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * The config behind npm test and its suites, each run against the real site in
  * all three of Playwright's engines (Chromium, Firefox, and WebKit), one
  * project per suite and engine, since a check that passes in one engine proves
- * nothing about the others. The suites are accessibility, which the pre-commit
+ * nothing about the others. Chromium runs as Chrome's full headless mode
+ * rather than Playwright's lighter headless shell, which sometimes lost track
+ * of a tab a click opened. The suites are accessibility, which the pre-commit
  * check runs, interaction, rendering, responsive, and seo. Playwright starts
  * the Vite dev server on port 5197 for the run and stops it afterwards, so a
  * dev server already running on the usual 5173, or a sibling project's suites
@@ -82,7 +84,15 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 
 		name      : `${ suiNamStr }-${ engNamStr }`, // What: Name. Why: A failure has to say which suite and engine it came from. How: This names the project after both.
 		testMatch : `${ suiNamStr }/**/*.spec.ts`,   // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec in the suite's folder under tests/.
-		use       : { browserName : engNamStr }      // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in.
+
+		use : { // What: Use. Why: The project has to launch its own engine. How: This sets the browser it runs in, and which build of it.
+
+
+			browserName : engNamStr,                                        // What: Browser Name. Why: Each project runs in one engine. How: This names that engine's Playwright browser.
+			channel     : engNamStr === 'chromium' ? 'chromium' : undefined // What: Channel. Why: Chromium's default headless shell sometimes opened a modified click's new tab without Playwright ever reporting it, failing about 1 run in 10 in a sibling project once every engine was busy. How: This runs Chromium as Chrome's full headless mode instead, which reported the tab in all 240 runs tried there, and leaves Firefox and WebKit on their only builds.
+
+
+		}
 
 
 	}))),
