@@ -86,6 +86,7 @@ function ConSecCom () : React.JSX.Element {
 	const [ forErrBoo, setForErrBoo ] = useState( false );       // What: Form Error Boolean And Setter. Why: A visitor whose request didn't go through has to be told, with their details kept for a retry. How: This holds whether the error message is showing.
 	const [ senProBoo, setSenProBoo ] = useState( false );       // What: Send Progress Boolean And Setter. Why: The button shouldn't send the same request twice while the first is still on its way. How: This holds whether a submission is waiting on Netlify's answer.
 	const [ errLeaBoo, setErrLeaBoo ] = useState( false );       // What: Error Leaving Boolean And Setter. Why: The error message should fade out before it's removed. How: This holds whether its exit is playing.
+	const [ errCouNum, setErrCouNum ] = useState( 0 );           // What: Error Count Number And Setter. Why: Each failure has to mount a fresh alert, or screen readers won't announce a second one that arrives while the first is still fading. How: This counts failures, and the error paragraph takes it as its key.
 	const [ sucLeaBoo, setSucLeaBoo ] = useState( false );       // What: Success Leaving Boolean And Setter. Why: The thank-you message should fade out before the form returns. How: This holds whether its exit is playing.
 
 
@@ -162,6 +163,7 @@ function ConSecCom () : React.JSX.Element {
 		let senOkaBoo = false; // What: Send Okay Boolean. Why: Only a confirmed submission should show the thank-you message. How: This starts false and turns true only when Netlify answers OK.
 
 
+
 		if ( forErrBoo ) setErrLeaBoo( true ); // What: Error Message Exit Call. Why: A new attempt shouldn't keep showing the last one's error. How: This plays the error's exit when one is showing, and errEndFun removes it once the exit ends.
 
 
@@ -216,7 +218,9 @@ function ConSecCom () : React.JSX.Element {
 		else {
 
 
-			setErrLeaBoo( false ); // What: Error Exit Cancel Call. Why: A failure arriving while the last error is still fading should keep it showing. How: This clears the exit, which replays the error's entrance.
+			setErrCouNum( ( preCouNum ) => preCouNum + 1 ); // What: Error Count Increment Call. Why: A screen reader announces an alert only when it appears, so each failure needs a new one. How: This changes the error paragraph's key, which mounts it afresh and replays its entrance.
+
+			setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The fresh alert should arrive with its entrance, not its exit. How: This clears the exit flag.
 
 			setForErrBoo( true ); // What: Error Message Show Call. Why: A failed submission must not look sent. How: This shows the error message and keeps every field as the visitor filled it in.
 
@@ -229,6 +233,32 @@ function ConSecCom () : React.JSX.Element {
 	// #endregion forSubFun
 
 
+	// #region errEndFun
+
+	/**
+	 * errEndFun = Error End Function
+	 *
+	 * @summary
+	 * The error paragraph's animation end handler. It removes the error only
+	 * once the paragraph's own exit has played: the paragraph's entrance ends
+	 * here too, so the handler does nothing unless the event came from the
+	 * paragraph itself while errLeaBoo says its exit is playing. It then
+	 * clears the exit flag, so the next error arrives with its entrance, and
+	 * removes the paragraph.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param aniEveObj - Animation Event Object: The paragraph's animation
+	 *                    end event.
+	 *
+	 * @returns This function does not return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * errEndFun(aniEveObj) // => void
+	 * ```
+	 *
+	*/
 
 	const errEndFun = ( aniEveObj : React.AnimationEvent< HTMLParagraphElement > ) => { // What: Error End Function. Why: The error message should be removed only once its exit has played. How: This removes it when its own exit animation ends.
 
@@ -238,11 +268,41 @@ function ConSecCom () : React.JSX.Element {
 
 
 		setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The next error should arrive with its entrance. How: This clears the exit flag.
+
 		setForErrBoo( false ); // What: Error Message Hide Call. Why: The faded error should leave the page. How: This removes it.
 
 
 	};
 
+	// #endregion errEndFun
+
+
+	// #region sucEndFun
+
+	/**
+	 * sucEndFun = Success End Function
+	 *
+	 * @summary
+	 * The thank-you panel's animation end handler. It brings the form back
+	 * only once the panel's own exit has played: the panel's entrance and its
+	 * check mark's pop end here too, so the handler does nothing unless the
+	 * event came from the panel itself while sucLeaBoo says its exit is
+	 * playing. It then swaps the form back in and clears the exit flag, so the
+	 * next thank-you arrives with its entrance.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param aniEveObj - Animation Event Object: The panel's animation end
+	 *                    event.
+	 *
+	 * @returns This function does not return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * sucEndFun(aniEveObj) // => void
+	 * ```
+	 *
+	*/
 
 	const sucEndFun = ( aniEveObj : React.AnimationEvent< HTMLDivElement > ) => { // What: Success End Function. Why: The form should come back only once the thank-you message has faded out. How: This swaps the form back in when the panel's own exit animation ends.
 
@@ -252,10 +312,13 @@ function ConSecCom () : React.JSX.Element {
 
 
 		setForSenBoo( false ); // What: Sent Message Hide Call. Why: The faded message gives way to the form. How: This swaps the form back in.
+
 		setSucLeaBoo( false ); // What: Success Exit Reset Call. Why: The next thank-you should arrive with its entrance. How: This clears the exit flag.
 
 
 	};
+
+	// #endregion sucEndFun
 
 
 
@@ -634,6 +697,8 @@ function ConSecCom () : React.JSX.Element {
 
 
 								<p
+									key={ errCouNum }
+
 									className={` ${ cssModObj.forErrPar }   ${ errLeaBoo ? cssModObj.forErrParLeaving : '' } `}
 
 									role='alert'

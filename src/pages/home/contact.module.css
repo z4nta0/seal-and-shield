@@ -349,7 +349,7 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the message rise in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the message rise in or sink out. How: This applies only when the reduced-motion preference is set. */
 
 
 	.forSucDiv { /* What: Motionless Form Success Div. Why: The message should simply appear. How: This turns the animation off. */
@@ -660,7 +660,7 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Error Paragraph. Why: Someone who asked for less motion shouldn't see the message rise in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Error Paragraph. Why: Someone who asked for less motion shouldn't see the message rise in or sink out. How: This applies only when the reduced-motion preference is set. */
 
 
 	.forErrPar { /* What: Motionless Form Error Paragraph. Why: The message should simply appear. How: This turns the animation off. */
