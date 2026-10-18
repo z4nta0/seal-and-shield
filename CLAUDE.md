@@ -235,7 +235,9 @@ waiting for the page to settle.
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
   button names, a Tab walk (order, traps, focus on screen, uncovered, and
-  visible), reflow at 320px, and motion under reduced motion. axe's "needs
+  visible), reflow at 320px, motion under reduced motion, and the contact
+  form's announcements: its alert region waits in the page empty and gains
+  the error, and focus moves to the thank-you message and back to the form. axe's "needs
   review" results are printed and attached to the report rather than failing
   the run.
 - `npm run test:interaction`: checks what the controls do, under reduced

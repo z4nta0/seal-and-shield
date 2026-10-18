@@ -349,6 +349,13 @@
 
 
 }
+.forSucDiv:focus { /* What: Focused Form Success Div. Why: The panel takes focus only so a screen reader announces it, and isn't a control, so a ring around it would read as something to press. How: This drops the browser's default outline while it holds focus. */
+
+
+	outline : none;
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the message rise in or sink out. How: This applies only when the reduced-motion preference is set. */
 
 

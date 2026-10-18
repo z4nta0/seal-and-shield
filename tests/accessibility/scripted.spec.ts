@@ -3,9 +3,10 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: Each check passes only with no problems found. How: This asserts each problem list is empty.
-import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
-import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them.
+import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only with no problems found. How: This asserts each problem list is empty, and the form's announcements and focus land where they should.
+import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form checks need Netlify's answer without sending anything. How: This answers the form's posts in the browser with a chosen status.
+import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
+import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is checked. How: This lists them.
 import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
 
 
@@ -27,8 +28,11 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * lands only on stops that are on screen, not covered by anything else, and
  * visibly changed by focus. Reflow: at 320px wide, WCAG's narrowest reflow
  * width, nothing scrolls sideways. Motion: with reduced motion requested, no
- * animation or transition plays while the state opens. Each failure lists
- * every problem found, by element.
+ * animation or transition plays while the state opens. Forms: a failed request
+ * fills an alert region that sat in the page, empty, from the start, and
+ * sending moves focus to the thank-you message, then back to the form's first
+ * field when the form returns. Each failure lists every problem found, by
+ * element.
  *
  * Sections:
  *  - Constants
@@ -474,6 +478,62 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 }
+
+
+test( 'a failed request fills an alert region that was in the page, empty, from the start', async ( { page : curPagObj } ) => { // What: Failure Announcement Test. Why: A live region added at the moment it speaks is often missed, so the error's region has to wait in the page, empty, and gain the message once a request fails. How: This checks the region on load, fails a request, and checks it again.
+
+
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post with a server error.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+
+	const aleRegObj = curPagObj.locator( '#contact form [role="alert"]' ); // What: Alert Region Object. Why: The error is announced through the form's alert region. How: This finds it inside the form.
+
+
+	await expect( aleRegObj ).toHaveCount( 1 ); // What: Region Present Assertion. Why: The region has to be in the page before anything is sent. How: This checks there's exactly one.
+	await expect( aleRegObj ).toHaveText( '' ); // What: Region Empty Assertion. Why: An empty region on load means its later message is a change a screen reader announces. How: This checks it holds no text yet.
+
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' );   // What: Name Fill Call. Why: The name is required. How: This types a name.
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );     // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: This is the action under test. How: This sends the request.
+
+
+	await expect( aleRegObj ).toContainText( "didn't go through" ); // What: Region Message Assertion. Why: The failure should reach screen readers. How: This checks the region now holds the error.
+
+
+} );
+
+
+
+test( 'sending moves focus to the thank-you message and back to the form when it returns', async ( { page : curPagObj } ) => { // What: Sent Focus Test. Why: The focused submit button disappears with the form, so focus must land on the thank-you message, which announces it, and come back to the form's first field when the form returns. How: This sends a request, checks focus on the message, moves the clock past its six seconds, and checks focus on the name field.
+
+
+	await curPagObj.clock.install(); // What: Clock Install Call. Why: Waiting six real seconds would slow the suite. How: This puts the page's timers under the test's control before it loads.
+
+	await fakNetFun( curPagObj, 200 ); // What: Netlify OK Fake Call. Why: The request has to be accepted for the thank-you to show. How: This fakes an OK answer.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' );   // What: Name Fill Call. Why: The name is required. How: This types a name.
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );     // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: Sending swaps the form for the thank-you message. How: This sends the request.
+
+
+	await expect( curPagObj.locator( ':focus' ) ).toContainText( 'Message Sent!' ); // What: Panel Focus Assertion. Why: Focus should land on the message that replaced the form. How: This checks the focused element holds the thank-you heading.
+
+
+	await curPagObj.clock.fastForward( 6000 ); // What: Clock Fast Forward Call. Why: The form returns after six seconds. How: This runs the page's timers six seconds ahead, which starts the message's exit.
+
+
+	await expect( curPagObj.getByLabel( 'Full Name *' ) ).toBeFocused(); // What: Name Field Focus Assertion. Why: Focus should come back to the returning form's first field. How: This checks the Full Name input holds it.
+
+
+} );
 
 // #endregion Module Init
 

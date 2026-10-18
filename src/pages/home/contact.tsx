@@ -6,6 +6,8 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
+import { useEffect    } from 'react';       // What: Use Effect. Why: Focus has to move when the form gives way to the thank-you message and when it returns. How: This runs the focus move after each render the sent state changes.
+import { useRef       } from 'react';       // What: Use Ref. Why: The focus move needs the thank-you panel and the name field. How: This holds both elements, and whether focus should return to the form.
 import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 80ms per block.
 import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's fields and whether it was just sent. How: This holds both.
 
@@ -19,13 +21,17 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  * @summary
  * The page's last section, where visitors reach the company: an invitation
  * with the company's location, phone number, and hours and a call button on
- * the left, and the free quote request form on the right. The form posts to
- * Netlify Forms as contactForm, which finds the form through the hidden copy
- * in index.html, so every field's name has to match that copy. Once sent, the
+ * the left, and the free quote request form on the right, the form stacking
+ * below the invitation at 900px wide and below. The form posts to Netlify
+ * Forms as contactForm, which finds the form through the hidden copy in
+ * index.html, so every field's name has to match that copy. Once sent, the
  * form gives way to a thank-you message for six seconds, which then sinks out
  * a little quicker than it rose in, as a failed request's error does when the
- * visitor tries again. Each block fades in as the section scrolls into view.
- * Its id, contact, is what the bar's Contact link and the hero's quote button
+ * visitor tries again. Focus moves to the thank-you message when it replaces
+ * the form, which announces it, and back to the first field when the form
+ * returns, while a failure's error appears in an alert region the form carries
+ * from the start. Each block fades in as the section scrolls into view. Its
+ * id, contact, is what the bar's Contact link and the hero's quote button
  * scroll to.
  *
  * Sections:
@@ -86,8 +92,12 @@ function ConSecCom () : React.JSX.Element {
 	const [ forErrBoo, setForErrBoo ] = useState( false );       // What: Form Error Boolean And Setter. Why: A visitor whose request didn't go through has to be told, with their details kept for a retry. How: This holds whether the error message is showing.
 	const [ senProBoo, setSenProBoo ] = useState( false );       // What: Send Progress Boolean And Setter. Why: The button shouldn't send the same request twice while the first is still on its way. How: This holds whether a submission is waiting on Netlify's answer.
 	const [ errLeaBoo, setErrLeaBoo ] = useState( false );       // What: Error Leaving Boolean And Setter. Why: The error message should fade out before it's removed. How: This holds whether its exit is playing.
-	const [ errCouNum, setErrCouNum ] = useState( 0 );           // What: Error Count Number And Setter. Why: Each failure has to mount a fresh alert, or screen readers won't announce a second one that arrives while the first is still fading. How: This counts failures, and the error paragraph takes it as its key.
+	const [ errCouNum, setErrCouNum ] = useState( 0 );           // What: Error Count Number And Setter. Why: Each failure has to add a fresh paragraph to the alert region, or screen readers won't announce a second one that arrives while the first is still fading. How: This counts failures, and the error paragraph takes it as its key.
 	const [ sucLeaBoo, setSucLeaBoo ] = useState( false );       // What: Success Leaving Boolean And Setter. Why: The thank-you message should fade out before the form returns. How: This holds whether its exit is playing.
+
+	const focRetRef = useRef( false );                    // What: Focus Return Reference. Why: The form should take focus back only if the visitor left it on the thank-you message. How: sucEndFun records whether the panel still had focus as it faded out.
+	const namInpRef = useRef< HTMLInputElement >( null ); // What: Name Input Reference. Why: The returning form's first field takes focus back. How: This holds the Full Name input.
+	const sucDivRef = useRef< HTMLDivElement >( null );   // What: Success Div Reference. Why: The thank-you message takes focus when it replaces the form. How: This holds the panel.
 
 
 	// #region fieChaFun
@@ -218,7 +228,7 @@ function ConSecCom () : React.JSX.Element {
 		else {
 
 
-			setErrCouNum( ( preCouNum ) => preCouNum + 1 ); // What: Error Count Increment Call. Why: A screen reader announces an alert only when it appears, so each failure needs a new one. How: This changes the error paragraph's key, which mounts it afresh and replays its entrance.
+			setErrCouNum( ( preCouNum ) => preCouNum + 1 ); // What: Error Count Increment Call. Why: A screen reader announces an alert region's content only when it's added, so each failure needs a new paragraph. How: This changes the error paragraph's key, which mounts it afresh in the region and replays its entrance.
 
 			setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The fresh alert should arrive with its entrance, not its exit. How: This clears the exit flag.
 
@@ -311,6 +321,8 @@ function ConSecCom () : React.JSX.Element {
 
 
 
+		focRetRef.current = document.activeElement === sucDivRef.current; // What: Focus Return Flag Assignment. Why: Focus should go back to the form only if the visitor hadn't moved it on. How: This records whether the panel still holds focus as it leaves.
+
 		setForSenBoo( false ); // What: Sent Message Hide Call. Why: The faded message gives way to the form. How: This swaps the form back in.
 
 		setSucLeaBoo( false ); // What: Success Exit Reset Call. Why: The next thank-you should arrive with its entrance. How: This clears the exit flag.
@@ -319,6 +331,18 @@ function ConSecCom () : React.JSX.Element {
 	};
 
 	// #endregion sucEndFun
+
+
+
+	useEffect( () => { // What: Form Focus Effect. Why: Focus must never fall to the page when the focused submit button disappears with the form, or when the form comes back. How: This focuses the thank-you panel when it appears, which also announces it, and the name field when the form returns while focus was still on the panel.
+
+
+		if ( forSenBoo ) sucDivRef.current?.focus(); // What: Panel Focus Call. Why: The thank-you message replaces the form, taking its submit button with it. How: This moves focus to the panel, whose heading a screen reader then reads.
+
+		else if ( focRetRef.current ) namInpRef.current?.focus(); // What: Name Field Focus Call. Why: The returning form should pick up where the visitor left off. How: This moves focus to the first field when the panel held it to the end.
+
+
+	}, [ forSenBoo ] ); // What: Effect Dependency Array. Why: Focus moves only when the form and the thank-you message trade places. How: forSenBoo flips once when the message appears and once when the form returns.
 
 
 
@@ -498,7 +522,11 @@ function ConSecCom () : React.JSX.Element {
 
 
 						<div
+							ref={ sucDivRef }
+
 							className={` ${ cssModObj.forSucDiv }   ${ sucLeaBoo ? cssModObj.forSucDivLeaving : '' } `}
+
+							tabIndex={ -1 } // What: Programmatic Focus Index. Why: Focus has to land somewhere when the form and its focused button disappear. How: This lets the effect focus the panel without adding it to the Tab order.
 
 							onAnimationEnd={ sucEndFun }
 						>{ /* What: Form Success Div Element. Why: The visitor should know the form went through. How: This stacks a check, a heading, and a note, and sinks out quicker than it rose in before the form returns. */ }
@@ -545,6 +573,8 @@ function ConSecCom () : React.JSX.Element {
 									</label>
 
 									<input
+										ref={ namInpRef }
+
 										id='conNamInp'
 
 										className={ cssModObj.forFieInp }
@@ -693,23 +723,29 @@ function ConSecCom () : React.JSX.Element {
 								value='contactForm'
 							/>{ /* What: Form Name Input Element. Why: Netlify matches a posted submission to its form by this field. How: This posts contactForm along with the visitor's fields. */ }
 
-							{ forErrBoo && ( // What: Error Message Check. Why: A failed submission has to be explained. How: This shows the error message while forErrBoo is true.
+
+							<div role='alert'>{ /* What: Form Alert Div Element. Why: An alert region added at the moment it speaks is often missed, so it has to be in the page from the start. How: This live region stays in the form, empty, and the error paragraph appears inside it when a request fails. */ }
 
 
-								<p
-									key={ errCouNum }
-
-									className={` ${ cssModObj.forErrPar }   ${ errLeaBoo ? cssModObj.forErrParLeaving : '' } `}
-
-									role='alert'
-
-									onAnimationEnd={ errEndFun }
-								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the request didn't go through and what to do next. How: Its alert role has screen readers announce it the moment it appears, and it sinks out quicker than it rose in when the visitor tries again. */ }
-									Sorry, your request didn't go through. Please try again, or call us at <a className={ cssModObj.errLinAnc } href='tel:7853041957'>(785) 304-1957</a>.
-								</p>
+								{ forErrBoo && ( // What: Error Message Check. Why: A failed submission has to be explained. How: This shows the error message while forErrBoo is true.
 
 
-							) }
+									<p
+										key={ errCouNum }
+
+										className={` ${ cssModObj.forErrPar }   ${ errLeaBoo ? cssModObj.forErrParLeaving : '' } `}
+
+										onAnimationEnd={ errEndFun }
+									>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the request didn't go through and what to do next. How: The alert region around it has screen readers announce it the moment it appears, and it sinks out quicker than it rose in when the visitor tries again. */ }
+										Sorry, your request didn't go through. Please try again, or call us at <a className={ cssModObj.errLinAnc } href='tel:7853041957'>(785) 304-1957</a>.
+									</p>
+
+
+								) }
+
+
+							</div>
+
 
 							<button
 								className={ cssModObj.forSubBut }
