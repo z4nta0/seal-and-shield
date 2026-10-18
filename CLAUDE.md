@@ -214,8 +214,9 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
 `tests/`, one project per suite and engine in `tests/playwright.config.ts`,
-which starts its own dev server on port 5191 (never the usual 5173) and stops
-it afterwards. Every suite runs in Chromium, Firefox, and WebKit. Results,
+which starts its own dev server on port 5197 (never the usual 5173, nor the
+5190 to 5196 its sibling projects use) and stops it afterwards. Every suite
+runs in Chromium, Firefox, and WebKit. Results,
 screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states the suites
 visit (the home page and the 404 page at 390px and 1,440px, plus the mobile
