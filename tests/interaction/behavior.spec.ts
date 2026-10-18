@@ -18,20 +18,20 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * behavior.spec.ts = Behavior Spec
  *
  * @summary
- * Checks what the site's controls actually do, in whichever engine the
- * project runs. The bar's section links, the brand, and the footer's
- * section links land on their sections and leave the address free of
- * hashes, while a Ctrl, Cmd, or middle click opens a section in a new tab and
- * leaves the page clicked from alone; the mobile menu opens over a dimmed,
- * inert page, closes on its button, Escape, a tap on the dimmed page, or a
- * wider screen, and closes again when one of its links is chosen, but not
- * when a link opens in a new tab; the contact form refuses to send without its required
- * fields and reports Netlify's answer honestly, with Netlify's side faked
- * in the browser so nothing is really sent; and the 404 page answers an
- * unknown address with a noindex tag and leads back to the home page and
- * its sections, as does an address that names a section directly. Pages
- * open under reduced motion, so scrolling jumps straight to its target and
- * each position can be read at once; how things move is checked elsewhere.
+ * Checks what the site's controls actually do, in whichever engine the project
+ * runs. The bar's section links, the brand, and the footer's section links
+ * land on their sections and leave the address free of hashes, while a Ctrl,
+ * Cmd, or middle click opens a section in a new tab and leaves the page
+ * clicked from alone; the mobile menu opens over a dimmed, inert page, closes
+ * on its button, Escape, a tap on the dimmed page, or a wider screen, and
+ * closes again when one of its links is chosen, but not when a link opens in a
+ * new tab; the contact form refuses to send without its required fields and
+ * reports Netlify's answer honestly, with Netlify's side faked in the browser
+ * so nothing is really sent; and the 404 page answers an unknown address with
+ * a noindex tag and leads back to the home page and its sections, as does an
+ * address that names a section directly. Pages open under reduced motion, so
+ * scrolling jumps straight to its target and each position can be read at
+ * once; how things move is checked elsewhere.
  *
  * Sections:
  *  - Constants

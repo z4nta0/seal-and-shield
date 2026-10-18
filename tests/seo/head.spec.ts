@@ -98,6 +98,8 @@ test( 'the home page names the city, the services, and the business', async ( { 
 
 	await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR ); // What: Canonical Assertion. Why: Every address Netlify serves the site at should count as the live one. How: This checks the canonical link names the live address.
 
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 ); // What: Single Description Assertion. Why: Two descriptions leave search engines to guess. How: This checks there's exactly one, index.html's.
+
 	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveCount( 0 ); // What: Indexable Assertion. Why: The home page has to stay findable. How: This checks it carries no robots tag that could keep it out.
 
 	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 ); // What: Single Heading Assertion. Why: One h1 tells search engines and screen readers what the page is about. How: This checks there's exactly one.
@@ -154,6 +156,26 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 
 } );
 
+
+
+test( 'the raw page carries the home title and description for script-free readers', async ( { page : curPagObj, request : reqCotObj } ) => { // What: Raw Head Test. Why: Link checkers and many crawlers read the page without running the site's script, so the title and description have to be in index.html itself. How: This fetches the root as raw HTML and checks both against what the page shows.
+
+
+	const rawHtmStr = await ( await reqCotObj.get( '/' ) ).text();                                     // What: Raw HTML String. Why: The page is read the way a script-free reader reads it. How: This fetches the root's HTML without a browser.
+	const desTexStr = rawHtmStr.match( /<meta name='description' content='([^']*)'/ )?.[ 1 ] ?? '';   // What: Description Text String. Why: The raw description is checked as written. How: This reads the description tag's content.
+	const titTexStr = rawHtmStr.match( /<title>([^<]*)<\/title>/ )?.[ 1 ] ?? '';                      // What: Title Text String. Why: The raw title is checked as written. How: This reads the title element's text.
+
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The raw tags are compared with what the browser shows. How: This loads the root path.
+
+
+	expect( titTexStr ).toBe( await curPagObj.title() ); // What: Raw Title Assertion. Why: The raw page should name the home page in full, not a bare site name. How: This checks it matches the title the browser shows.
+
+	expect( desTexStr ).toBe( await curPagObj.locator( 'meta[name="description"]' ).getAttribute( 'content' ) ); // What: Raw Description Assertion. Why: Checkers and crawlers without the script need the same description visitors' browsers get. How: This checks the raw description matches the page's.
+
+
+} );
+
 // #endregion Home Page Checks
 
 
@@ -167,6 +189,8 @@ test( 'the 404 page stays out of search results', async ( { page : curPagObj } )
 
 
 	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' ); // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.
+
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 ); // What: Single Description Assertion. Why: A noindex page keeps index.html's description, and rendering a second would leave two. How: This checks there's exactly one.
 
 	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Seal and Shield' ); // What: Not Found Title Assertion. Why: The page needs a title of its own. How: This checks it.
 

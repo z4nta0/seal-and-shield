@@ -43,7 +43,7 @@ import tseslint   from 'typescript-eslint';         // What: TypeScript ESLint. 
 
 // #region Constants
 
-const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the build-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the .tsx hooks config.
+const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the build-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the hooks config for .tsx files and src/ .ts files.
 
 
 	{ ignores : [ 'dist/**', 'tests/output/**' ] }, // What: Ignores Object. Why: The build output and the test suites' reports are generated, not hand-written, so their lint results mean nothing. How: This global ignores entry skips both folders for every config below; one glob each, since braces break ESLint's matching here.
@@ -94,8 +94,8 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 		languageOptions : { // What: Language Options. Why: These files are TypeScript, the .tsx ones with JSX. How: This sets the TypeScript parser and turns on JSX parsing, which the parser applies only to .tsx files.
 
 
-			parser        : tseslint.parser,                   // What: Parser. Why: The source is TypeScript, which ESLint's default parser can't read. How: This sets typescript-eslint's parser.
-			parserOptions : { ecmaFeatures : { jsx : true } }  // What: Parser Options. Why: The .tsx files contain JSX. How: This turns on JSX parsing.
+			parser        : tseslint.parser,                  // What: Parser. Why: The source is TypeScript, which ESLint's default parser can't read. How: This sets typescript-eslint's parser.
+			parserOptions : { ecmaFeatures : { jsx : true } } // What: Parser Options. Why: The .tsx files contain JSX. How: This turns on JSX parsing.
 
 
 		},
