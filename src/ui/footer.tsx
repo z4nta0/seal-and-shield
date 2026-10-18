@@ -7,7 +7,7 @@ import cssModObj from './footer.module.css';        // What: CSS Module Object. 
 import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The footer's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
-import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Function. Why: Section buttons have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
+import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
 
 // #endregion Imports
 
@@ -17,7 +17,7 @@ import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Func
  * footer.tsx = Footer
  *
  * @summary
- * The site's footer: the brand and tagline, a button for each section that
+ * The site's footer: the brand and tagline, a link for each section that
  * takes the visitor to it from any page, the phone number and business
  * hours, and the copyright line with the current year. Its nav landmark is
  * labelled Footer, telling it apart from the bar's.
@@ -35,7 +35,7 @@ import { useSecLinFun } from './section-link.ts'; // What: Use Section Link Func
 
 // #region Constants
 
-const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer Section Array. Why: The footer offers a button for each section, in page order. How: Each entry is a section's id, which its button goes to and capitalizes as its label.
+const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer Section Array. Why: The footer offers a link for each section, in page order. How: Each entry is a section's id, which its link goes to and capitalizes as its label.
 
 // #endregion Constants
 
@@ -49,10 +49,11 @@ const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer 
  * SitFooCom = Site Footer Component
  *
  * @summary
- * Renders the footer. Each section button reaches its section through
+ * Renders the footer. Each section link reaches its section through
  * section-link.ts, scrolling in place on the home page, smoothly unless the
  * visitor asked for reduced motion, or navigating home from any other page,
- * and is labelled with the section's id capitalized. The copyright line reads
+ * while a Ctrl, Cmd, or middle click opens it in a new tab, and is labelled
+ * with the section's id capitalized. The copyright line reads
  * the current year each time the footer renders, so it never goes stale.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -75,7 +76,7 @@ function SitFooCom () : React.JSX.Element {
 
 
 
-	const visSecFun = useSecLinFun(); // What: Visit Section Function. Why: Each section button takes the visitor to its section from any page. How: This scrolls to the section on the home page, or navigates home to it from anywhere else.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Each section link takes the visitor to its section from any page. How: This scrolls to the section on the home page or navigates home to it, and leaves a Ctrl, Cmd, or middle click to the browser.
 
 
 
@@ -85,7 +86,7 @@ function SitFooCom () : React.JSX.Element {
 		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: The page ends with the company's details and a way back to each section. How: This holds the footer's columns and its copyright line. */ }
 
 
-			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's columns line up with the page's content width. How: This lays out the brand, the section buttons, and the contact details across a centered, capped-width row. */ }
+			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's columns line up with the page's content width. How: This lays out the brand, the section links, and the contact details across a centered, capped-width row. */ }
 
 
 				<div className={ cssModObj.fooBraDiv }>{ /* What: Footer Brand Div Element. Why: The mark, name, and tagline read as one block. How: This sets the mark beside the two lines of text. */ }
@@ -122,18 +123,20 @@ function SitFooCom () : React.JSX.Element {
 				>{ /* What: Footer Links Nav Element. Why: Visitors at the bottom of the page can jump back to any section. How: This labels the landmark Footer, telling it apart from the bar's. */ }
 
 
-					{ FOO_SEC_ARR.map( ( secIdeStr ) => ( // What: Section Button Map. Why: Each section gets a button. How: This renders one button per section id.
+					{ FOO_SEC_ARR.map( ( secIdeStr ) => ( // What: Section Link Map. Why: Each section gets a link. How: This renders one link per section id.
 
 
-						<button
+						<a
 							key={ secIdeStr }
 
-							className={ cssModObj.fooLinBut }
+							className={ cssModObj.fooLinAnc }
 
-							onClick={ () => visSecFun( secIdeStr ) }
-						>{ /* What: Footer Link Button Element. Why: Each button scrolls to its section. How: This calls visSecFun with the section's id. */ }
-							{ secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) }{ /* What: Section Label Expression. Why: The button names its section. How: This capitalizes the section id's first letter. */ }
-						</button>
+							href={ `/#${ secIdeStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This joins the root path with the section's id as the hash.
+
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, secIdeStr ) }
+						>{ /* What: Footer Link Anchor Element. Why: Each link takes the visitor to its section. How: This hands the click to secCliFun, which scrolls to the section or navigates home to it, and leaves a Ctrl, Cmd, or middle click to the browser. */ }
+							{ secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) }{ /* What: Section Label Expression. Why: The link names its section. How: This capitalizes the section id's first letter. */ }
+						</a>
 
 
 					))}

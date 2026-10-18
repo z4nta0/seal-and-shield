@@ -6,9 +6,10 @@
 import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page's layout, label, heading, paragraph, and buttons are styled in its own module. How: Each element reads its hashed class name from this object.
 
 
-import { Link      } from 'react-router';        // What: Link. Why: Both ways onward should navigate inside the site without a full page load. How: This renders the two buttons.
-import { NavBarCom } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
-import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
+import { Link         } from 'react-router';             // What: Link. Why: The return button should navigate home inside the site without a full page load. How: This renders it.
+import { NavBarCom    } from '../../ui/nav.tsx';         // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
+import { SitFooCom    } from '../../ui/footer.tsx';      // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The quote button reaches the contact section the way every section link does. How: This returns secCliFun, which navigates home to the section and leaves a Ctrl, Cmd, or middle click to the browser.
 
 // #endregion Imports
 
@@ -44,14 +45,15 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
  * NotFouCom = Not Found Component
  *
  * @summary
- * Renders the 404 page: its title and robots tag, which React moves into
- * the head and removes again when the page leaves, the bar, then a main
- * element holding a centered column with an error label, the heading, a
- * short explanation, and two buttons, then the footer. The return button
- * navigates to the home page; the quote button navigates to the home page
- * with the contact section's id as the hash, which the home page scrolls to
- * and then clears. app.tsx renders it for every path no other route claims.
- *
+ * Renders the 404 page: its title and robots tag, which React moves into the
+ * head and removes again when the page leaves, the bar, then a main element
+ * holding a centered column with an error label, the heading, a short
+ * explanation, and two buttons, then the footer. The return button navigates
+ * to the home page; the quote button is a link to /#contact that goes through
+ * secCliFun, navigating to the home page with the contact section's id as the
+ * hash, which the home page scrolls to and then clears, while a Ctrl, Cmd, or
+ * middle click opens it in a new tab. app.tsx renders it for every path no
+ * other route claims.
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.
@@ -66,6 +68,10 @@ import { SitFooCom } from '../../ui/footer.tsx'; // What: Site Footer Component.
 */
 
 function NotFouCom () : React.JSX.Element {
+
+
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The quote button takes the visitor to the contact section the way every section link does. How: This navigates home to the section and leaves a Ctrl, Cmd, or middle click to the browser.
+
 
 
 	return (
@@ -112,13 +118,15 @@ function NotFouCom () : React.JSX.Element {
 
 
 
-					<Link
+					<a
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
-						to={{ hash : 'contact', pathname : '/' }} // What: Contact Section Address. Why: A visitor who came looking for a roofer can still request a quote in one step. How: This navigates to the home page with the contact section's id as the hash, which the home page scrolls to and then clears.
-					>{ /* What: Quote Request Link. Why: The site's main action stays one step away. How: This opens the home page at the contact section. */ }
+						href='/#contact'
+
+						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
+					>{ /* What: Button Base Anchor Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's contact section and leaves a Ctrl, Cmd, or middle click to the browser. */ }
 						Get a Free Quote
-					</Link>
+					</a>
 
 
 				</div>

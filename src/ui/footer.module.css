@@ -6,7 +6,7 @@
  *
  * @summary
  * Styles for SitFooCom: the dark footer's row of columns (the brand and
- * tagline, the section buttons, and the phone number and hours), which
+ * tagline, the section links, and the phone number and hours), which
  * stacks into one centered column on screens 768px wide or narrower,
  * and the copyright line below a hairline. The shared container styles the
  * columns' row used to borrow from the global stylesheet are copied onto its
@@ -118,7 +118,7 @@
 
 /* #region fooLinNav */
 
-.fooLinNav { /* What: Footer Links Nav. Why: Visitors at the bottom of the page can jump back to any section. How: This lines the section buttons up in a row that wraps when it runs out of room. */
+.fooLinNav { /* What: Footer Links Nav. Why: Visitors at the bottom of the page can jump back to any section. How: This lines the section links up in a row that wraps when it runs out of room. */
 
 
 	display   : flex;
@@ -128,13 +128,10 @@
 
 }
 
-.fooLinBut { /* What: Footer Link Button. Why: Each button should read like a link in the footer's display style, not a boxed button. How: This drops the button's own background and border and sets its label in small, spaced capitals in light silver. */
+.fooLinAnc { /* What: Footer Link Anchor. Why: Each section link should read in the footer's display style. How: This sets its label in small, spaced capitals in light silver. */
 
 
-	background     : none;
-	border         : none;
 	color          : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
-	cursor         : pointer;
 	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
@@ -144,24 +141,24 @@
 
 
 }
-.fooLinBut:hover { /* What: Hovered Footer Link Button. Why: The button should respond to the pointer. How: This turns its label white. */
+.fooLinAnc:hover { /* What: Hovered Footer Link Anchor. Why: The link should respond to the pointer. How: This turns its label white. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 
 
 }
-.fooLinBut:active { /* What: Pressed Footer Link Button. Why: A press should register before the page scrolls. How: This dims it slightly while it's held, as every text link does on press. */
+.fooLinAnc:active { /* What: Pressed Footer Link Anchor. Why: A press should register before the page scrolls. How: This dims it slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Link Button. Why: Someone who asked for less motion shouldn't see the buttons animate. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.fooLinBut { /* What: Motionless Footer Link Button. Why: The hover color should simply switch. How: This turns the transition off. */
+	.fooLinAnc { /* What: Motionless Footer Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
 
 
 		transition : none;

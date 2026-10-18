@@ -7,7 +7,8 @@ import { expect } from '@playwright/test'; // What: Expect. Why: Each behavior p
 import { test   } from '@playwright/test'; // What: Test. Why: Each behavior is its own test. How: This declares them.
 
 
-import type { Page } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
+import type { Locator } from '@playwright/test'; // What: Locator. Why: The new tab checks pass click options a locator's click takes. How: This types those options.
+import type { Page    } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
 
 // #endregion Imports
 
@@ -19,9 +20,12 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * @summary
  * Checks what the site's controls actually do, in whichever engine the
  * project runs. The bar's section links, the brand, and the footer's
- * section buttons land on their sections and leave the address free of
- * hashes; the mobile menu opens, closes, and closes again when one of its
- * links is chosen; the contact form refuses to send without its required
+ * section links land on their sections and leave the address free of
+ * hashes, while a Ctrl, Cmd, or middle click opens a section in a new tab and
+ * leaves the page clicked from alone; the mobile menu opens over a dimmed,
+ * inert page, closes on its button, Escape, a tap on the dimmed page, or a
+ * wider screen, and closes again when one of its links is chosen, but not
+ * when a link opens in a new tab; the contact form refuses to send without its required
  * fields and reports Netlify's answer honestly, with Netlify's side faked
  * in the browser so nothing is really sent; and the 404 page answers an
  * unknown address with a noindex tag and leads back to the home page and
@@ -41,6 +45,8 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
 
 
 // #region Constants
+
+const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: Both ways of asking for a new tab have to keep working now that plain clicks scroll in place. How: Each row pairs a click kind's name with the click options that make it, ControlOrMeta pressing Cmd on a Mac and Ctrl elsewhere.
 
 const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
 const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The mobile menu exists only on small screens. How: This is the phone size the menu checks use.
@@ -107,6 +113,47 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 }
 
 // #endregion fakNetFun
+
+
+
+// #region opeMenFun
+
+/**
+ * opeMenFun = Open Menu Function
+ *
+ * @summary
+ * Opens the mobile menu through its button and waits until the button
+ * reports it open, so a menu check always starts from the menu showing. The
+ * caller has to be on a phone-sized viewport, where the button exists.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page whose menu to open.
+ *
+ * @returns A promise that settles once the menu reports itself open, with no
+ *          value.
+ *
+ * @example
+ * ```ts
+ * opeMenFun(page) // => Promise<void>
+ * ```
+ *
+*/
+
+async function opeMenFun ( curPagObj : Page ) : Promise< void > {
+
+
+	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Object. Why: The menu opens from its button. How: This finds the button by its name.
+
+
+	await togButObj.click(); // What: Toggle Click Call. Why: The menu opens from a tap on the button. How: This clicks it.
+
+	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Wait. Why: A check should start with the menu open. How: This waits until the button reports it expanded.
+
+
+}
+
+// #endregion opeMenFun
 
 
 
@@ -281,12 +328,48 @@ test( 'the brand returns to the top', async ( { page : curPagObj } ) => { // Wha
 
 
 
-test( 'a footer button scrolls to its section', async ( { page : curPagObj } ) => { // What: Footer Button Test. Why: The footer's section buttons are the way onward from the bottom of the page. How: This clicks the About button and checks where the visitor lands.
+for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click Loop. Why: Each way of asking for a new tab gets its own check. How: This declares one test per row of CLI_KIN_ARR.
+
+
+	test( `a ${ cliKinStr } click opens a section in a new tab`, async ( { page : curPagObj } ) => { // What: New Tab Test. Why: A visitor opening a section in a new tab should land on it there, and the page they clicked from should stay put. How: This makes the click, then checks the new tab's section and address and the old page's scroll and address.
+
+
+		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The bar's own links show on wide screens. How: This opens the home page at desktop size.
+
+
+		const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
+
+
+		await curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { exact : true, name : 'About' } ).click( cliOptObj ); // What: Modified Click Call. Why: This is the action under test. How: This clicks the bar's About link the way the loop's row says.
+
+
+		const newTabObj = await newTabPro; // What: New Tab Object. Why: The section should open in the new tab. How: This is the page the click opened.
+
+
+		await expect( newTabObj.locator( '#about' ) ).toBeVisible(); // What: Section Render Wait. Why: The new tab loads the page from scratch, so the section has to exist before it's measured. How: This waits until the About section is on the page.
+
+		await expect.poll( async () => Math.abs( await secTopFun( newTabObj, 'about' ) ) ).toBeLessThan( 2 ); // What: New Tab Position Assertion. Why: The new tab should land on the section. How: This waits until the About section's top edge sits less than 2 pixels from the viewport's top.
+
+		await expect( newTabObj ).toHaveURL( /\/$/ ); // What: New Tab Address Assertion. Why: The new tab's hash should be cleared once used. How: This checks its URL ends at the root.
+
+		expect( await curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Original Scroll Assertion. Why: The page clicked from should stay where it was. How: This checks it's still at the top.
+
+		await expect( curPagObj ).toHaveURL( /\/$/ ); // What: Original Address Assertion. Why: The page clicked from shouldn't navigate. How: This checks its URL still ends at the root.
+
+
+	} );
+
+
+}
+
+
+
+test( 'a footer link scrolls to its section', async ( { page : curPagObj } ) => { // What: Footer Link Test. Why: The footer's section links are the way onward from the bottom of the page. How: This clicks the About link and checks where the visitor lands.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The footer is checked on the home page first. How: This opens it at desktop size.
 
-	await curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'button', { name : 'About' } ).click(); // What: Footer Button Click Call. Why: This is the action under test. How: This clicks the footer's About button.
+	await curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : 'About' } ).click(); // What: Footer Link Click Call. Why: This is the action under test. How: This clicks the footer's About link.
 
 
 	await arrSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The visitor should land on the About section. How: This waits for it to sit at the top with a clean address.
@@ -300,47 +383,128 @@ test( 'a footer button scrolls to its section', async ( { page : curPagObj } ) =
 
 // #region Mobile Menu Checks
 
-test( 'the menu button opens and closes the menu', async ( { page : curPagObj } ) => { // What: Menu Toggle Test. Why: The menu button is the only way to the section links on a phone. How: This clicks it twice and checks the state it reports each time.
+test( 'the menu button opens and closes the menu', async ( { page : curPagObj } ) => { // What: Menu Toggle Test. Why: The menu button is the only way to the section links on a phone. How: This opens the menu, checks its links show and the page behind it is inert, then closes it again.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu button shows only on small screens. How: This opens the home page at phone size.
 
+	await opeMenFun( curPagObj ); // What: Menu Open Call. Why: The open state comes first. How: This opens the menu through its button.
 
-	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Object. Why: The menu opens and closes from this button. How: This finds it by its name.
+
+	await expect( curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Services' } ) ).toBeVisible(); // What: Menu Link Assertion. Why: An open menu should show its links. How: This checks the bar's Services link is visible, the menu's own at phone size, since the bar's row is hidden there.
+
+	await expect( curPagObj.locator( 'main' ) ).toHaveAttribute( 'inert', '' ); // What: Inert Page Assertion. Why: The page under the dimmer shouldn't take focus. How: This checks the main content is inert while the menu is open.
 
 
-	await togButObj.click(); // What: Open Click Call. Why: The first tap should open the menu. How: This clicks the button.
+	await curPagObj.getByRole( 'button', { name : 'Toggle menu' } ).click(); // What: Close Click Call. Why: The same button closes the menu. How: This clicks it again.
 
-	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Open State Assertion. Why: The menu should be open and say so. How: This checks the button reports it expanded.
 
-	await expect( curPagObj.getByRole( 'link', { exact : true, name : 'Services' } ) ).toBeVisible(); // What: Menu Link Assertion. Why: An open menu should show its links. How: This checks the Services link is visible.
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Closed State Assertion. Why: The menu should be closed and say so. How: This checks the button reports it collapsed.
 
-	await togButObj.click(); // What: Close Click Call. Why: A second tap should close the menu. How: This clicks the button again.
-
-	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Closed State Assertion. Why: The menu should be closed and say so. How: This checks the button reports it collapsed.
+	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' ); // What: Live Page Assertion. Why: The page has to be usable again. How: This checks the main content is no longer inert.
 
 
 } );
 
 
 
-test( 'a menu link closes the menu and scrolls to its section', async ( { page : curPagObj } ) => { // What: Menu Link Test. Why: Choosing a section should both take the visitor there and get the menu out of the way. How: This opens the menu, clicks a link, and checks both.
+test( 'Escape closes the menu and returns focus to its button', async ( { page : curPagObj } ) => { // What: Escape Test. Why: Escape is the expected way out of a layer over the page. How: This opens the menu, presses Escape, and checks the menu and focus.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu exists only on small screens. How: This opens the home page at phone size.
 
+	await opeMenFun( curPagObj ); // What: Menu Open Call. Why: Escape only matters with the menu open. How: This opens it.
 
-	const togButObj = curPagObj.getByRole( 'button', { name : 'Toggle menu' } ); // What: Toggle Button Object. Why: The menu opens from this button, which also reports its state. How: This finds it by its name.
-
-
-	await togButObj.click(); // What: Open Click Call. Why: The menu's links show only while it's open. How: This opens it.
-
-	await curPagObj.getByRole( 'link', { name : 'Contact' } ).click(); // What: Menu Link Click Call. Why: This is the action under test. How: This clicks the menu's Contact link.
+	await curPagObj.keyboard.press( 'Escape' ); // What: Escape Press Call. Why: This is the action under test. How: This presses Escape.
 
 
-	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: The menu should close once a link is chosen. How: This checks the button reports it collapsed.
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: Escape should close the menu. How: This checks the button reports it collapsed.
 
-	await arrSecFun( curPagObj, 'contact' ); // What: Contact Arrival Check. Why: The visitor should land on the Contact section. How: This waits for it to sit at the top with a clean address.
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toBeFocused(); // What: Button Focus Assertion. Why: Focus shouldn't be left inside the closed menu. How: This checks it moved to the menu button.
+
+
+} );
+
+
+
+test( 'a tap on the dimmed page closes the menu', async ( { page : curPagObj } ) => { // What: Scrim Test. Why: Tapping outside the menu is a natural way to dismiss it. How: This opens the menu, taps near the bottom of the screen, and checks it closed.
+
+
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu exists only on small screens. How: This opens the home page at phone size.
+
+	await opeMenFun( curPagObj ); // What: Menu Open Call. Why: The dimmer shows only while the menu is open. How: This opens it.
+
+	await curPagObj.mouse.click( 195, 820 ); // What: Scrim Tap Call. Why: This is the action under test. How: This clicks near the bottom middle of the screen, below the menu, where only the dimmer sits.
+
+
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: The tap should close the menu. How: This checks the button reports it collapsed.
+
+
+} );
+
+
+
+for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'home' ], [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ], [ 'Free Quote', 'contact' ] ] ) { // What: Menu Link Loop. Why: Each of the menu's section links, and its quote button, leads to its own section. How: This declares one test per link, pairing its label with its section's id.
+
+
+	test( `the menu's ${ linLabStr } link closes the menu and scrolls to its section`, async ( { page : curPagObj } ) => { // What: Menu Link Test. Why: Choosing a section should both take the visitor there and get the menu out of the way. How: This opens the menu, clicks the link, and checks the menu, the section, and the address.
+
+
+		await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu exists only on small screens. How: This opens the home page at phone size.
+
+		await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : 1200 } ) ); // What: Scroll Down Call. Why: The Home link has to be seen bringing a scrolled visitor back, and every other link reaching its section from mid-page. How: This jumps a way down the page first.
+
+		await opeMenFun( curPagObj ); // What: Menu Open Call. Why: The menu's links show only while it's open. How: This opens it.
+
+		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Menu Link Click Call. Why: This is the action under test. How: This clicks the link by its label, the only one visible at phone size, since the bar's own links are hidden there.
+
+
+		await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: The menu should close once a section is chosen. How: This checks the button reports it collapsed.
+
+		await arrSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
+
+
+	} );
+
+
+}
+
+
+
+test( 'a new tab click on a menu link leaves the menu open', async ( { page : curPagObj } ) => { // What: Menu New Tab Test. Why: A link opened in a new tab hasn't taken the visitor anywhere, so the menu should stay as it was. How: This Ctrl or Cmd clicks a menu link and checks the new tab and the menu.
+
+
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu exists only on small screens. How: This opens the home page at phone size.
+
+	await opeMenFun( curPagObj ); // What: Menu Open Call. Why: The menu's links show only while it's open. How: This opens it.
+
+
+	const newTabPro = curPagObj.context().waitForEvent( 'page' ); // What: New Tab Promise. Why: The click opens its page in a new tab. How: This waits for the browser context to report a new page, set up before the click so it can't be missed.
+
+
+	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'About' } ).click( { modifiers : [ 'ControlOrMeta' ] } ); // What: Modified Click Call. Why: This is the action under test. How: This clicks the menu's About link with Cmd on a Mac and Ctrl elsewhere.
+
+
+	await newTabPro; // What: New Tab Wait. Why: The click should still open the link in a new tab. How: This waits for the new page to appear.
+
+	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Assertion. Why: The menu should stay open on the page clicked from. How: This checks the button still reports it expanded.
+
+
+} );
+
+
+
+test( 'widening the screen closes the menu', async ( { page : curPagObj } ) => { // What: Widen Test. Why: Past the breakpoint the menu button disappears, so an open menu would leave the page inert with no way out. How: This opens the menu, widens the viewport, and checks the page is usable again.
+
+
+	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu exists only on small screens. How: This opens the home page at phone size.
+
+	await opeMenFun( curPagObj ); // What: Menu Open Call. Why: Widening only matters with the menu open. How: This opens it.
+
+	await curPagObj.setViewportSize( DES_VIE_OBJ ); // What: Widen Call. Why: This is the action under test. How: This resizes the viewport to desktop size.
+
+
+	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' ); // What: Live Page Assertion. Why: The page has to stay usable once the menu button is gone. How: This checks the main content is no longer inert.
 
 
 } );
@@ -460,7 +624,7 @@ test( 'Return Home leads to the home page', async ( { page : curPagObj } ) => { 
 
 
 
-for ( const [ conLabStr, secIdeStr, locKeyStr ] of [ [ 'Get a Free Quote', 'contact', 'main' ], [ 'About', 'about', 'bar' ], [ 'Services', 'services', 'footer' ] ] ) { // What: Way Home Loop. Why: The 404 page's own quote button, the bar's links, and the footer's buttons all have to reach their home page sections from it. How: This declares one test per kind of control, naming where to find it.
+for ( const [ conLabStr, secIdeStr, locKeyStr ] of [ [ 'Get a Free Quote', 'contact', 'main' ], [ 'About', 'about', 'bar' ], [ 'Services', 'services', 'footer' ] ] ) { // What: Way Home Loop. Why: The 404 page's own quote button, the bar's links, and the footer's links all have to reach their home page sections from it. How: This declares one test per kind of control, naming where to find it.
 
 
 	test( `the 404 page's ${ locKeyStr } ${ conLabStr } control leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Test. Why: A section control on the 404 page has no section to scroll to, so it has to go home first. How: This clicks it and checks where the visitor lands.
@@ -469,11 +633,11 @@ for ( const [ conLabStr, secIdeStr, locKeyStr ] of [ [ 'Get a Free Quote', 'cont
 		await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: These controls are checked from the 404 page. How: This opens it.
 
 
-		const conLocObj = locKeyStr === 'main' // What: Control Locator Object. Why: Each kind of control lives in a different part of the page. How: This finds the quote link in the page's content, the link in the bar, or the button in the footer.
-			? curPagObj.getByRole( 'main' ).getByRole( 'link', { name : conLabStr } )                                   // What: Quote Link Locator. Why: The page's own button is in its main content. How: This finds it by its label.
-			: locKeyStr === 'bar'                                                                                    // What: Bar Check. Why: The bar and the footer hold different kinds of controls. How: This picks the bar's link next.
-				? curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { name : conLabStr } )      // What: Bar Link Locator. Why: The bar's section links are links. How: This finds one by its label.
-				: curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'button', { name : conLabStr } ); // What: Footer Button Locator. Why: The footer's section controls are buttons. How: This finds one by its label.
+		const conLocObj = locKeyStr === 'main' // What: Control Locator Object. Why: Each kind of control lives in a different part of the page. How: This finds the quote link in the page's content, the link in the bar, or the link in the footer.
+			? curPagObj.getByRole( 'main' ).getByRole( 'link', { name : conLabStr } )                                 // What: Quote Link Locator. Why: The page's own button is in its main content. How: This finds it by its label.
+			: locKeyStr === 'bar'                                                                                     // What: Bar Check. Why: The bar and the footer hold different kinds of controls. How: This picks the bar's link next.
+				? curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { name : conLabStr } )    // What: Bar Link Locator. Why: The bar holds its own section links. How: This finds one by its label.
+				: curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : conLabStr } ); // What: Footer Link Locator. Why: The footer's section controls are links too. How: This finds one by its label.
 
 
 		await conLocObj.click(); // What: Control Click Call. Why: This is the action under test. How: This clicks the control.

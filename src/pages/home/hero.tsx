@@ -7,7 +7,7 @@ import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The 
 import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
-import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Function. Why: The hero's buttons scroll smoothly, which has to respect the reduced-motion preference. How: scrSecFun asks it before choosing the scroll behavior.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way every section link does. How: This returns secCliFun, which scrolls to the section and leaves a Ctrl, Cmd, or middle click to the browser.
 
 // #endregion Imports
 
@@ -74,11 +74,12 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
  * HerSecCom = Hero Section Component
  *
  * @summary
- * Renders the hero section. Its two buttons are real links to the contact
- * and services sections, so they work without JavaScript, but a click goes
- * through scrSecFun, which scrolls to the section in place, smoothly unless
- * the visitor asked for reduced motion. The background grid, glow, and the
- * logo's ring are decorative and hidden from assistive technology.
+ * Renders the hero section. Its two buttons are real links to the contact and
+ * services sections (/#contact, /#services), so they work without JavaScript
+ * and open in a new tab on a Ctrl, Cmd, or middle click, while a plain click
+ * goes through secCliFun, which scrolls to the section in place, smoothly
+ * unless the visitor asked for reduced motion. The background grid, glow, and
+ * the logo's ring are decorative and hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -96,43 +97,7 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 function HerSecCom () : React.JSX.Element {
 
 
-	// #region scrSecFun
-
-	/**
-	 * scrSecFun = Scroll Section Function
-	 *
-	 * @summary
-	 * Handles a click on either hero button: stops the browser's own jump to
-	 * the link's hash and scrolls to the section with the given id instead,
-	 * smoothly unless the visitor asked for reduced motion, in which case it
-	 * jumps.
-	 *
-	 * @author z4nta0 <https://github.com/z4nta0>
-	 *
-	 * @param cliEveObj - Click Event Object: The button's click event.
-	 * @param secIdeStr - Section Identifier String: The id of the section to
-	 *                    scroll to, e.g. 'contact'.
-	 *
-	 * @returns This function does not return anything.
-	 *
-	 * @example
-	 * ```ts
-	 * scrSecFun(cliEveObj, 'contact') // => void
-	 * ```
-	 *
-	*/
-
-	const scrSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Scroll Section Function. Why: Both hero buttons scroll in place instead of jumping. How: This cancels the jump and scrolls to the section.
-
-
-		cliEveObj.preventDefault(); // What: Default Jump Cancel. Why: The browser would otherwise jump to the hash instantly and skip the smooth scroll. How: This stops the link's own navigation.
-
-		document.getElementById( secIdeStr )?.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); // What: Section Scroll Call. Why: The visitor should land on the section the button names. How: This scrolls it into view, jumping instead of gliding under reduced motion.
-
-
-	};
-
-	// #endregion scrSecFun
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both hero buttons take the visitor to their sections the way every section link does. How: This scrolls to the section in place and leaves a Ctrl, Cmd, or middle click to the browser.
 
 
 
@@ -196,9 +161,9 @@ function HerSecCom () : React.JSX.Element {
 						<a
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
-							href='#contact'
+							href='/#contact'
 
-							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'contact' ) }
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
 						>{ /* What: Hero Quote Anchor Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
 							Get a Free Quote
 						</a>
@@ -206,9 +171,9 @@ function HerSecCom () : React.JSX.Element {
 						<a
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
-							href='#services'
+							href='/#services'
 
-							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'services' ) }
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
 						>{ /* What: Hero Services Anchor Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
 							Our Services
 						</a>
