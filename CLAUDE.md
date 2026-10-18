@@ -44,6 +44,17 @@ treatment. The `author` meta names the business itself.
   reviews. No social accounts were provided; if the company ever shares
   real ones, they join the preview tags as `twitter:site` and the
   structured data as `sameAs`.
+- **Google's rich results warnings** (decided 2026-10-17): the test flags
+  a missing `streetAddress`, `postalCode`, and `priceRange`. All three stay
+  out: there's no business address to give, a ZIP code would point at the
+  owner's home area, and the page shows no prices for a range to match. They
+  are optional fields, so the warnings don't affect eligibility.
+
+## Multi-page scroll position
+Decided 2026-10-17: the user-level "Multi-Page React Sites: Scroll Position"
+rule doesn't apply here. The 404 page is the only other route, and it's a
+short page rather than a scrollable one, so a scroll-to-top hook would add
+complexity for no real gain.
 
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
@@ -184,6 +195,21 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      cancelled the service cards' lift (in every engine, before this pass)
      and would have cancelled the Call Now button's. Each card and that
      button now sit inside a plain reveal div.
+   - **Section links and the phone menu updated 2026-10-17**, on the
+     `rules-update` branch. Every section link (bar, menu, hero, footer, and
+     404 page) is now a real `/#section` link handled by `ui/section-link.ts`'s
+     `useSecCliFun`, copied from hair-designs: a plain click scrolls in place
+     or navigates home with no hash left behind, while a Ctrl, Cmd, or middle
+     click opens the section in a new tab, which jumps there once the fonts
+     load and clears its hash. The footer's section buttons became links.
+     The phone menu gained a dimmer behind it (`--scr-mai-col`, the inverse
+     navy at about 0.57 opacity) that closes it on a tap, and, copied from
+     reese-roofing, it makes the page behind it inert, closes on Escape
+     (returning focus to its button), and closes when the screen widens past
+     the breakpoint. It also gained a staggered entrance; an active section dot; a label that nudges sideways
+     on hover; and a contact block with Call Now and Free Quote side by side
+     above the hours and service area. The user may drop the Free Quote
+     button if the menu looks crowded.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
