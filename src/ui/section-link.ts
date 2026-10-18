@@ -21,10 +21,11 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * doesn't exist yet, so the link navigates to the home page with the section's
  * id as the hash, and the home page scrolls to it on arrival and then clears
  * the hash, so the address bar stays free of hashes either way. Each link
- * keeps its real address (/#about), so a Ctrl, Cmd, Shift, Alt, or middle
- * click is left to the browser, which opens the home page at that section.
- * Copied from hair-designs' own, which adds secCliFun so every section link
- * shares one click handler.
+ * keeps its real address (/#about), so a Ctrl, Cmd, Shift, or Alt click is
+ * left to the browser, and a middle click, which the browser sends as
+ * auxclick, never reaches the click handler at all; either way the browser
+ * opens the home page at that section. Copied from hair-designs' own, which
+ * adds secCliFun so every section link shares one click handler.
  *
  * Sections:
  *  - Helpers
@@ -47,9 +48,12 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * @summary
  * Whether a click on a section link should be left to the browser: one made
  * with a modifier key held (Ctrl or Cmd to open a new tab, Shift for a new
- * window, Alt to download) or with any button but the main one. A section
- * link's handler returns early when this is true, so the link's own address
- * opens the home page at the section, where the home page scrolls to it.
+ * window, Alt to download) or with any button but the main one. A middle
+ * click never arrives here in practice, since Chromium, Firefox, and WebKit
+ * send it as auxclick rather than click, so the button check is only a
+ * safeguard for an engine that does. A section link's handler returns early
+ * when this is true, so the link's own address opens the home page at the
+ * section, where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -71,7 +75,7 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
 	const altKeyBoo = cliEveObj.altKey;       // What: Alt Key Boolean. Why: Alt-click downloads the link in some browsers. How: This reads whether Alt was held.
 	const conKeyBoo = cliEveObj.ctrlKey;      // What: Control Key Boolean. Why: Ctrl-click opens a new tab elsewhere. How: This reads whether Ctrl was held.
 	const metKeyBoo = cliEveObj.metaKey;      // What: Meta Key Boolean. Why: Cmd-click opens a new tab on a Mac. How: This reads whether Cmd was held.
-	const othButBoo = cliEveObj.button !== 0; // What: Other Button Boolean. Why: A middle click opens a new tab. How: This checks the click wasn't made with the main button.
+	const othButBoo = cliEveObj.button !== 0; // What: Other Button Boolean. Why: Chromium, Firefox, and WebKit send a middle click as auxclick, so it never reaches this check, but an engine that sent it as a click should still leave it to the browser. How: This checks the click wasn't made with the main button, as a safeguard.
 	const shiKeyBoo = cliEveObj.shiftKey;     // What: Shift Key Boolean. Why: Shift-click opens a new window. How: This reads whether Shift was held.
 
 	const modCliBoo = metKeyBoo || conKeyBoo || shiKeyBoo || altKeyBoo || othButBoo; // What: Modified Click Boolean. Why: Any one of these means the visitor asked the browser to open the link its own way. How: This combines them.
@@ -152,8 +156,9 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  *
  * @summary
  * Returns secCliFun, the click handler every section link shares. A Ctrl,
- * Cmd, Shift, Alt, or middle click is left to the browser, which opens the
- * link's own address. Any other click stops the browser's jump to the hash
+ * Cmd, Shift, or Alt click is left to the browser, which opens the link's
+ * own address, and a middle click, which the browser sends as auxclick,
+ * never reaches it. Any other click stops the browser's jump to the hash
  * and hands the section's id to visSecFun, which scrolls to it on the home
  * page or navigates home to it from any other page. It reports whether it
  * handled the click, so a caller such as the phone menu can close itself
@@ -183,7 +188,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 	return ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Section Click Function. Why: Every section link handles a click the same way. How: This leaves a modified click to the browser and otherwise cancels the jump and visits the section.
 
 
-		if ( modCliFun( cliEveObj ) ) return false; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, Alt, or middle click asks the browser to open the link its own way. How: This leaves the click alone and reports it unhandled.
+		if ( modCliFun( cliEveObj ) ) return false; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, or Alt click asks the browser to open the link its own way, and so would a middle click in an engine that sent it as a click rather than auxclick. How: This leaves the click alone and reports it unhandled.
 
 
 

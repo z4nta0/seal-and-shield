@@ -47,8 +47,11 @@ const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of
  * @summary
  * The services the card grid shows, in display order. Every row shares one
  * shape, so its fields carry no comments of their own:
+ *
  * - `desStr` (String): Description String, the card's paragraph.
+ *
  * - `icoStr` (String): Icon String, the emoji the card opens with.
+ *
  * - `titStr` (String): Title String, the card's heading, which also serves
  *   as the row's React key.
  *
@@ -229,7 +232,7 @@ function SerSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays the cards out in columns. */ }
+				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays the cards out four across, two across at 1,024px wide and below, and in one column at 580px wide and below. */ }
 
 
 					{ SER_REC_ARR.map( ( serRecObj ) => ( // What: Service Card Map. Why: Each service gets its own card. How: This renders one card per row.
@@ -269,10 +272,10 @@ function SerSecCom () : React.JSX.Element {
 					className={ cssModObj.serAreDiv }
 
 					data-scroll-reveal-block
-				>{ /* What: Services Area Div Element. Why: Visitors want to know whether the company works where they are. How: This panel describes the service area beside its tags, and fades in last. */ }
+				>{ /* What: Services Area Div Element. Why: Visitors want to know whether the company works where they are. How: This panel describes the service area beside its tags, or above them at 768px wide and below, and fades in last. */ }
 
 
-					<div>{ /* What: Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, with no styling of its own. */ }
+					<div>{ /* What: Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, or above the tags at 768px wide and below, with no styling of its own. */ }
 
 
 						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in small capitals. */ }
@@ -333,7 +336,7 @@ function SerSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { SerSecCom }; // What: Named Exports. Why: The home page renders the services second. How: This exports SerSecCom.
+export { SerSecCom }; // What: Named Export. Why: The home page renders the services second. How: This exports SerSecCom.
 
 // #endregion Exports
 

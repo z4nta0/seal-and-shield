@@ -21,14 +21,15 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  * nav.tsx = Navigation
  *
  * @summary
- * The site's fixed top bar: the brand, the section links with the phone
- * number on wide screens, and a menu button that opens the same links and
- * phone number in a panel below the bar on phones. The bar takes on a solid
- * background once the page scrolls past its top, and the link for whichever
- * section the visitor is reading is marked active on the home page. Every
- * section link closes the menu and reaches its section through
- * section-link.ts: in place on the home page, smoothly unless the visitor
- * asked for reduced motion, or by navigating home from any other page.
+ * The site's fixed top bar: the brand, then above 768px wide the section
+ * links and the phone number in a row, and at 768px and below a menu button
+ * that opens the same links and phone number in a panel below the bar. The
+ * bar takes on a solid background once the page scrolls past its top, and
+ * the link for whichever section the visitor is reading is marked active on
+ * the home page. Every section link closes the menu and reaches its section
+ * through section-link.ts: in place on the home page, smoothly unless the
+ * visitor asked for reduced motion, or by navigating home from any other
+ * page.
  *
  * Sections:
  *  - Constants
@@ -49,8 +50,10 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  * @summary
  * The section links the bar and the mobile menu both render, in page order.
  * Every row shares one shape, so its fields carry no comments of their own:
+ *
  * - `ideStr` (String): Identifier String, the section's id, which the
  *   link's href names on the home page's path, e.g. /#about.
+ *
  * - `labStr` (String): Label String, the link's visible text and React key.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -84,20 +87,23 @@ const SEC_IDE_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Section
  * NavBarCom = Navigation Bar Component
  *
  * @summary
- * Renders the fixed top bar and its mobile menu. A scroll listener gives the
- * bar its solid scrolled look once the page moves more than 40px, and marks
- * the link of the section the visitor is reading as active on the home page:
- * the last section whose top sits within 120px of the top of the screen, which
- * leaves room for the bar itself. The menu button toggles the mobile menu,
- * which drops down below the bar over a dimmed page: its links enter one
- * after another and end with a contact block, and while it's open the page
- * around the bar is inert, a tap on the dimmed page or Escape closes it, and
- * widening the screen past the menu's breakpoint closes it too. The closed
+ * Renders the fixed top bar and its mobile menu. Above 768px wide the bar
+ * shows the section links and the phone button in a row; at 768px and below
+ * that row hides and a menu button takes its place. A scroll listener gives
+ * the bar its solid scrolled look once the page moves more than 40px, and
+ * marks the link of the section the visitor is reading as active on the home
+ * page: the last section whose top sits within 120px of the top of the
+ * screen, which leaves room for the bar itself. The menu button toggles the
+ * mobile menu, which drops down below the bar over a dimmed page: its links
+ * enter one after another and end with a contact block, and while it's open
+ * the page around the bar is inert, a tap on the dimmed page or Escape
+ * closes it, and widening the screen past 768px closes it too. The closed
  * menu is inert, so its links stay out of the focus order and the
  * accessibility tree. Every section link, including the brand, goes through
  * navSecFun, which reaches the section from any page and closes the menu,
- * while a Ctrl, Cmd, or middle click is left to the browser and leaves the
- * menu as it was.
+ * while a Ctrl, Cmd, Shift, or Alt click is left to the browser and leaves
+ * the menu as it was, and a middle click, which the browser sends as
+ * auxclick, never reaches navSecFun at all.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -220,11 +226,12 @@ function NavBarCom () : React.JSX.Element {
 	 * @summary
 	 * Handles a click on any section link, the brand and the menu's quote
 	 * button included, by handing it to secCliFun, which leaves a Ctrl, Cmd,
-	 * Shift, Alt, or middle click to the browser and otherwise scrolls to the
-	 * section on the home page, smoothly unless the visitor asked for reduced
-	 * motion, or navigates home to it from any other page. The mobile menu
-	 * closes only when secCliFun handled the click, so a link opened in a new
-	 * tab leaves it open.
+	 * Shift, or Alt click to the browser and otherwise scrolls to the
+	 * section on the home page, smoothly unless the visitor asked for
+	 * reduced motion, or navigates home to it from any other page. A middle
+	 * click, which the browser sends as auxclick, never reaches it. The
+	 * mobile menu closes only when secCliFun handled the click, so a link
+	 * opened in a new tab leaves it open.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -317,7 +324,7 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Navigation Fragment Element. Why: The dimmer and the bar render side by side, the dimmer first so the bar, at the same stack level, paints above it. How: This groups them without adding a wrapper element. */ }
+		<>{ /* What: Navigation Fragment. Why: The dimmer and the bar render together, the dimmer first so the bar, at the same stack level, paints above it. How: This groups them without adding a wrapper element. */ }
 
 
 			<div
@@ -330,7 +337,7 @@ function NavBarCom () : React.JSX.Element {
 				aria-hidden='true'
 
 				onClick={ () => setMenOpeBoo( false ) }
-			/>{ /* What: Navigation Scrim Div Element. Why: The open menu should stand apart from the dimmed page, and a tap anywhere on the page should close it. How: This covers the page under the bar, dimmed while the menu is open, and closes the menu when tapped; it's hidden from screen readers, which reach Escape and the menu button instead. */ }
+			/>{ /* What: Navigation Scrim Div Element. Why: The open menu should stand apart from the dimmed page, and a tap anywhere on the page should close it. How: At 768px wide and below, the only width where the menu exists, this covers the page under the bar, dimmed while the menu is open, and closes the menu when tapped; it's hidden from screen readers, which reach Escape and the menu button instead. */ }
 
 
 
@@ -344,7 +351,7 @@ function NavBarCom () : React.JSX.Element {
 			>{ /* What: Navigation Bar Header Element. Why: The bar and its mobile menu form the page's banner. How: This holds both, and carries data-page-scroll-active while the page is scrolled, which turns the bar solid. */ }
 
 
-				<div className={ cssModObj.navInnDiv }>{ /* What: Navigation Inner Div Element. Why: The bar's contents line up with the page's content width. How: This spaces the brand, links, and menu button across a centered, capped-width row. */ }
+				<div className={ cssModObj.navInnDiv }>{ /* What: Navigation Inner Div Element. Why: The bar's contents line up with the page's content width. How: This spaces the brand and either the links row, above 768px wide, or the menu button, at 768px and below, across a centered, capped-width row. */ }
 
 
 					<a
@@ -383,7 +390,7 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.navLinNav }
 
 						aria-label='Main'
-					>{ /* What: Navigation Links Nav Element. Why: Wide screens show the section links and phone number in the bar. How: This labels the landmark Main, telling it apart from the footer's. */ }
+					>{ /* What: Navigation Links Nav Element. Why: Above 768px wide the bar shows the section links and phone number here, while at 768px and below this row hides and the menu takes over. How: This labels the landmark Main, telling it apart from the footer's. */ }
 
 
 						{ NAV_LIN_ARR.map( ( linRecObj ) => ( // What: Bar Link Map. Why: Each section gets a link in the bar. How: This renders one anchor per row.
@@ -399,7 +406,7 @@ function NavBarCom () : React.JSX.Element {
 								href={ `/#${ linRecObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, as a real link too. How: This points at the home page with the section's id as the hash.
 
 								onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRecObj.ideStr ) }
-							>{ /* What: Navigation Link Anchor Element. Why: Each link scrolls to its section. How: This is marked active while its section is being read. */ }
+							>{ /* What: Navigation Link Anchor Element. Why: Each link scrolls to its section. How: This is marked active while its section is being read, and hides with its row at 768px wide and below. */ }
 								{ linRecObj.labStr }
 							</a>
 
@@ -410,7 +417,7 @@ function NavBarCom () : React.JSX.Element {
 							className={ cssModObj.navCtaAnc }
 
 							href='tel:7853041957'
-						>{ /* What: Navigation Call-To-Action Anchor Element. Why: Calling is the fastest way to reach the company. How: This dials its number on phones. */ }
+						>{ /* What: Navigation Call-To-Action Anchor Element. Why: Calling is the fastest way to reach the company. How: This dials its number, and hides with its row at 768px wide and below, where the menu's call button takes over. */ }
 							(785) 304-1957
 						</a>
 
@@ -426,14 +433,14 @@ function NavBarCom () : React.JSX.Element {
 						aria-label='Toggle menu'
 
 						onClick={ () => setMenOpeBoo( ( preOpeBoo ) => !preOpeBoo ) }
-					>{ /* What: Navigation Toggle Button Element. Why: Phones reach the section links through a menu. How: This toggles the mobile menu and reports whether it's open. */ }
+					>{ /* What: Navigation Toggle Button Element. Why: At 768px wide and below the section links move into a menu. How: This shows only at that width, toggles the mobile menu, and reports whether it's open. */ }
 
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is the top bar, which drops to the middle and turns 45 degrees while the menu is open. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, shown with their button at 768px wide and below, turning into a cross while it's open. How: This is the top bar, which drops to the middle and turns 45 degrees while the menu is open. */ }
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is the middle bar, which fades out while the menu is open. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, shown with their button at 768px wide and below, turning into a cross while it's open. How: This is the middle bar, which fades out while the menu is open. */ }
 
-						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, turning into a cross while it's open. How: This is the bottom bar, which lifts to the middle and turns the other way while the menu is open. */ }
+						<span className={ cssModObj.togLinSpa } />{ /* What: Toggle Line Span Element. Why: Three bars draw the menu icon, shown with their button at 768px wide and below, turning into a cross while it's open. How: This is the bottom bar, which lifts to the middle and turns the other way while the menu is open. */ }
 
 
 					</button>
@@ -449,7 +456,7 @@ function NavBarCom () : React.JSX.Element {
 					data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Attribute. Why: The menu slides open and its links play their entrance only while it's open. How: This sets the attribute only while menOpeBoo is true, and drops it otherwise.
 
 					inert={ !menOpeBoo } // What: Closed Menu Inert Flag. Why: The closed menu only collapses to zero height, so its links would otherwise still take keyboard focus while hidden. How: This makes the menu inert whenever it's closed.
-				>{ /* What: Navigation Menu Div Element. Why: Phones show the section links and phone number in a panel below the bar. How: This opens and closes with the menu button, carrying data-mobile-menu-open while it's open. */ }
+				>{ /* What: Navigation Menu Div Element. Why: At 768px wide and below, the section links and phone number move into a panel below the bar. How: This exists only at that width, opening and closing with the menu button, carrying data-mobile-menu-open while it's open. */ }
 
 
 					{ NAV_LIN_ARR.map( ( linRecObj, linIndNum ) => ( // What: Menu Link Map. Why: Each section gets a link in the mobile menu. How: This renders one anchor per row, handing each its position for the staggered entrance.
@@ -467,10 +474,10 @@ function NavBarCom () : React.JSX.Element {
 							href={ `/#${ linRecObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This points at the home page with the section's id as the hash.
 
 							onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRecObj.ideStr ) }
-						>{ /* What: Menu Link Anchor Element. Why: Each link takes the visitor to its section. How: This goes through navSecFun, which closes the menu when it handles the click, and shows a dot at its end while its section is being read. */ }
+						>{ /* What: Menu Link Anchor Element. Why: Each link takes the visitor to its section. How: This goes through navSecFun, which closes the menu when it handles the click, and shows a dot at its end while its section is being read (the menu exists only at 768px wide and below). */ }
 
 
-							<span className={ cssModObj.menLabSpa }>{ linRecObj.labStr }</span>{ /* What: Menu Label Span Element. Why: The label slides a little on hover while the row's divider stays put. How: This holds the link's text. */ }
+							<span className={ cssModObj.menLabSpa }>{ linRecObj.labStr }</span>{ /* What: Menu Label Span Element. Why: The label slides a little on hover while the row's divider stays put. How: This holds the link's text (the menu exists only at 768px wide and below). */ }
 
 
 						</a>
@@ -483,19 +490,19 @@ function NavBarCom () : React.JSX.Element {
 						className={ cssModObj.menConDiv }
 
 						style={ { '--men-ite-ind' : NAV_LIN_ARR.length } as React.CSSProperties } // What: Menu Item Index Style. Why: The contact block enters after the last link. How: This hands it the position after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's style type has no entry for a custom property. How: as React.CSSProperties accepts the object, which React sets as written.
-					>{ /* What: Menu Contact Div Element. Why: The menu ends with every way to reach the company, since the bar's phone button is hidden on small screens. How: This stacks a label, the call and quote buttons, and the hours and service area. */ }
+					>{ /* What: Menu Contact Div Element. Why: The menu ends with every way to reach the company, since the bar's phone button hides at 768px wide and below, the only width where the menu exists. How: This stacks a label, the call and quote buttons, and the hours and service area. */ }
 
 
-						<span className={ cssModObj.conLabSpa }>Get in touch</span>{ /* What: Contact Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in spaced light blue capitals. */ }
+						<span className={ cssModObj.conLabSpa }>Get in touch</span>{ /* What: Contact Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in spaced light blue capitals (the menu exists only at 768px wide and below). */ }
 
-						<div className={ cssModObj.menActDiv }>{ /* What: Menu Actions Div Element. Why: The two ways to get in touch sit side by side. How: This lays the call and quote buttons out in two equal columns. */ }
+						<div className={ cssModObj.menActDiv }>{ /* What: Menu Actions Div Element. Why: The two ways to get in touch sit side by side. How: This lays the call and quote buttons out in two equal columns (the menu exists only at 768px wide and below). */ }
 
 
 							<a
 								className={ cssModObj.menCtaAnc }
 
 								href='tel:7853041957'
-							>{ /* What: Menu Call-To-Action Anchor Element. Why: Calling is the fastest way to reach the company. How: This dials its number from the menu. */ }
+							>{ /* What: Menu Call-To-Action Anchor Element. Why: Calling is the fastest way to reach the company. How: This dials its number from the menu, which exists only at 768px wide and below. */ }
 								(785) 304-1957
 							</a>
 
@@ -505,14 +512,14 @@ function NavBarCom () : React.JSX.Element {
 								href='/#contact'
 
 								onClick={ ( cliEveObj ) => navSecFun( cliEveObj, 'contact' ) }
-							>{ /* What: Menu Quote Anchor Element. Why: Requesting a quote is the site's main goal. How: This takes the visitor to the contact form through navSecFun, closing the menu when it handles the click. */ }
+							>{ /* What: Menu Quote Anchor Element. Why: Requesting a quote is the site's main goal. How: This takes the visitor to the contact form through navSecFun, closing the menu when it handles the click (the menu exists only at 768px wide and below). */ }
 								Free Quote
 							</a>
 
 
 						</div>
 
-						<p className={ cssModObj.menInfPar }>{ /* What: Menu Info Paragraph Element. Why: Visitors want to know when someone will answer and whether the company works in their area. How: This gives the weekday hours and the service area on two lines. */ }
+						<p className={ cssModObj.menInfPar }>{ /* What: Menu Info Paragraph Element. Why: Visitors want to know when someone will answer and whether the company works in their area. How: This gives the weekday hours and the service area on two lines (the menu exists only at 768px wide and below). */ }
 							Monday – Friday, 8 a.m. – 5 p.m.<br />
 							Serving Lawrence, Topeka, and Kansas City
 						</p>
@@ -543,7 +550,7 @@ function NavBarCom () : React.JSX.Element {
 
 // #region Exports
 
-export { NavBarCom }; // What: Named Exports. Why: Every page renders the bar above its content. How: This exports NavBarCom.
+export { NavBarCom }; // What: Named Export. Why: Every page renders the bar above its content. How: This exports NavBarCom.
 
 // #endregion Exports
 

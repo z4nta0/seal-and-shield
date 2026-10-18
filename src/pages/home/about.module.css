@@ -165,7 +165,7 @@
 
 
 }
-.infRowDiv:last-child { /* What: Last Info Row Div. Why: The card ends without a divider. How: This drops the last row's border. */
+.infRowDiv:last-child { /* What: Info Row Div Last. Why: The card ends without a divider. How: This drops the last row's border. */
 
 
 	border-bottom : none;
@@ -265,7 +265,7 @@
 
 
 }
-.aboTexDiv .eyeLabPar { /* What: Text Column Eyebrow Label Paragraph. Why: Light blue doesn't have enough contrast on the white section. How: This turns the label the deeper blue. */
+.aboTexDiv .eyeLabPar { /* What: Eyebrow Label Paragraph In Text Column. Why: Light blue doesn't have enough contrast on the white section. How: This turns the label the deeper blue. */
 
 
 	color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */

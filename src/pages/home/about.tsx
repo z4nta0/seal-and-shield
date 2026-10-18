@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import lofWebUrl from './logo-full.webp';   // What: Logo-Full WebP URL. Why: The about section's left column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import lofWebUrl from './logo-full.webp';   // What: Logo-Full WebP URL. Why: The about section shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
 import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 100ms per block.
@@ -20,7 +20,8 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
  * The page's third section. Its left column shows the full logo over an
  * info card listing when and where the company was founded, its phone
  * number, and its hours; its right column tells the company's story and
- * lists its three values. Each block fades in as the section scrolls into
+ * lists its three values. At 900px wide and below, the columns stack, with
+ * the logo and card on top. Each block fades in as the section scrolls into
  * view. Its id, about, is what the bar's About link scrolls to.
  *
  * Sections:
@@ -44,7 +45,9 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
  * @summary
  * The company's three values, in display order. Every row shares one shape,
  * so its fields carry no comments of their own:
+ *
  * - `desStr` (String): Description String, the value's sentence.
+ *
  * - `titStr` (String): Title String, the value's heading, which also serves
  *   as the row's React key.
  *
@@ -102,11 +105,12 @@ const ABO_VAL_ARR = [ // What: About Value Array. Why: The story closes with wha
  * AboSecCom = About Section Component
  *
  * @summary
- * Renders the about section: the logo and info card on the left, the story and
- * values on the right. The left column, each piece of the story, and each
- * value are scroll-reveal blocks, revealed 100ms apart once the section
- * scrolls into view; the values also delay their own fade by 80ms each, so
- * they settle one after another. The logo's light backdrop is decorative and
+ * Renders the about section: the logo and info card on the left, the story
+ * and values on the right, stacking with the logo and card on top at 900px
+ * wide and below. The logo's column, each piece of the story, and each value
+ * are scroll-reveal blocks, revealed 100ms apart once the section scrolls
+ * into view; the values also delay their own fade by 80ms each, so they
+ * settle one after another. The logo's light backdrop is decorative and
  * hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -144,14 +148,14 @@ function AboSecCom () : React.JSX.Element {
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
 
 
-				<div className={ cssModObj.aboLayDiv }>{ /* What: About Layout Div Element. Why: The logo and details sit beside the story. How: This lays them out in two columns. */ }
+				<div className={ cssModObj.aboLayDiv }>{ /* What: About Layout Div Element. Why: The logo and details sit beside the story. How: This lays them out in two columns, stacking them with the logo and details on top at 900px wide and below. */ }
 
 
 					<div
 						className={ cssModObj.aboVisDiv }
 
 						data-scroll-reveal-block
-					>{ /* What: About Visual Div Element. Why: The left column pairs the logo with the company's key facts. How: This stacks the logo over the info card, and fades in as one block. */ }
+					>{ /* What: About Visual Div Element. Why: The logo's column pairs the logo with the company's key facts. How: This stacks the logo over the info card, beside the story or above it at 900px wide and below, and fades in as one block. */ }
 
 
 						<div
@@ -169,7 +173,7 @@ function AboSecCom () : React.JSX.Element {
 							width={ 968 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 							alt='Seal and Shield LLC'
-						/>{ /* What: About Logo Image Element. Why: The full logo anchors the left column. How: Its alt text repeats the name the image shows. */ }
+						/>{ /* What: About Logo Image Element. Why: The full logo anchors its column. How: Its alt text repeats the name the image shows. */ }
 
 
 						<div className={ cssModObj.infCarDiv }>{ /* What: Info Card Div Element. Why: Visitors want the company's key facts at a glance. How: This lists them as label and value rows. */ }
@@ -229,7 +233,7 @@ function AboSecCom () : React.JSX.Element {
 
 
 
-					<div className={ cssModObj.aboTexDiv }>{ /* What: About Text Div Element. Why: The right column tells the company's story. How: This stacks the label, heading, story, and values. */ }
+					<div className={ cssModObj.aboTexDiv }>{ /* What: About Text Div Element. Why: The second column tells the company's story. How: This stacks the label, heading, story, and values beside the logo, or below it at 900px wide and below. */ }
 
 
 						<p
@@ -345,7 +349,7 @@ function AboSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { AboSecCom }; // What: Named Exports. Why: The home page renders the about section third. How: This exports AboSecCom.
+export { AboSecCom }; // What: Named Export. Why: The home page renders the about section third. How: This exports AboSecCom.
 
 // #endregion Exports
 

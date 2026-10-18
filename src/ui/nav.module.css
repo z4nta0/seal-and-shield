@@ -486,21 +486,21 @@
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 1 ) { /* What: Open First Toggle Line Span. Why: The open menu's icon should read as a close cross. How: This drops the top bar to the middle and turns it 45 degrees. */
+.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 1 ) { /* What: Open Toggle Line Span Top. Why: The open menu's icon should read as a close cross. How: This drops the top bar to the middle and turns it 45 degrees. */
 
 
 	transform : translateY( calc( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) ) rotate( 45deg ); /* Vertical Rhythm Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 4 ~= 4.732px */
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 2 ) { /* What: Open Second Toggle Line Span. Why: The cross only needs two lines. How: This fades the middle bar out. */
+.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 2 ) { /* What: Open Toggle Line Span Middle. Why: The cross only needs two lines. How: This fades the middle bar out. */
 
 
 	opacity : 0;
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 3 ) { /* What: Open Third Toggle Line Span. Why: The open menu's icon should read as a close cross. How: This lifts the bottom bar to the middle and turns it the other way. */
+.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 3 ) { /* What: Open Toggle Line Span Bottom. Why: The open menu's icon should read as a close cross. How: This lifts the bottom bar to the middle and turns it the other way. */
 
 
 	transform : translateY( calc( ( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) * -1 ) ) rotate( -45deg ); /* Vertical Rhythm Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 4 ~= -4.732px */

@@ -67,7 +67,7 @@
 
 
 }
-.serHeaDiv .eyeLabPar { /* What: Header Eyebrow Label Paragraph. Why: Light blue doesn't have enough contrast on the light section. How: This turns the header's label the deeper blue. */
+.serHeaDiv .eyeLabPar { /* What: Eyebrow Label Paragraph In Header. Why: Light blue doesn't have enough contrast on the light section. How: This turns the header's label the deeper blue. */
 
 
 	color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
@@ -286,7 +286,7 @@
 /* What: Eyebrow Label Paragraph. Why: The panel opens with the same small label as the section's header. How: Its rule sits in the serHeaDiv region, where the class first appears. */
 
 /* What: Section Title Heading. Why: The panel's heading shares the section heading's look. How: Its rule sits in the serHeaDiv region, where the class first appears, and the rule below turns it white on the navy. */
-.serAreDiv .secTitHea { /* What: Area Section Title Heading. Why: Navy text would vanish on the navy panel. How: This turns the panel's heading white. */
+.serAreDiv .secTitHea { /* What: Section Title Heading In Area. Why: Navy text would vanish on the navy panel. How: This turns the panel's heading white. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */

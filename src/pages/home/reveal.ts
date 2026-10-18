@@ -127,7 +127,7 @@ function useRevSecFun ( staDelNum : number ) : React.RefObject< HTMLElement | nu
 
 // #region Exports
 
-export { useRevSecFun }; // What: Named Exports. Why: The services, about, and contact sections share the fade-in. How: This exports useRevSecFun.
+export { useRevSecFun }; // What: Named Export. Why: The services, about, and contact sections share the fade-in. How: This exports useRevSecFun.
 
 // #endregion Exports
 

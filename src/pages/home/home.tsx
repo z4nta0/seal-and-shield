@@ -101,7 +101,7 @@ function HomPagCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Home Page Fragment. Why: The bar, main content, and footer sit side by side with no wrapper of their own. How: This groups them without adding an element. */ }
+		<>{ /* What: Home Page Fragment. Why: The bar, main content, and footer sit one above another with no wrapper of their own. How: This groups them without adding an element. */ }
 
 
 			<NavBarCom />{ /* What: Navigation Bar Component. Why: The page starts with the shared top bar. How: This renders it above the content. */ }
@@ -149,7 +149,7 @@ function HomPagCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HomPagCom }; // What: Named Exports. Why: app.tsx renders the home page at the site's root. How: This exports HomPagCom.
+export { HomPagCom }; // What: Named Export. Why: app.tsx renders the home page at the site's root. How: This exports HomPagCom.
 
 // #endregion Exports
 

@@ -35,7 +35,7 @@
 
 /* #region fooInnDiv */
 
-.fooInnDiv { /* What: Footer Inner Div. Why: The footer's columns line up with the page's content width. How: This centers a capped-width row with the container's side padding plus room above and below, and spreads the columns across it, wrapping when they run out of room. */
+.fooInnDiv { /* What: Footer Inner Div. Why: The footer's columns line up with the page's content width. How: This centers a capped-width row with the container's side padding plus room above and below, and spreads the columns across it, wrapping at about 776px wide and below, just before the 768px stack. */
 
 
 	align-items     : center;
@@ -118,7 +118,7 @@
 
 /* #region fooLinNav */
 
-.fooLinNav { /* What: Footer Links Nav. Why: Visitors at the bottom of the page can jump back to any section. How: This lines the section links up in a row that wraps when it runs out of room. */
+.fooLinNav { /* What: Footer Links Nav. Why: Visitors at the bottom of the page can jump back to any section. How: This lines the section links up in a row that stays on one line at every width down to 320px, wrapping only if the text is enlarged. */
 
 
 	display   : flex;

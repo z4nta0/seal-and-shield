@@ -366,10 +366,10 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.conInnDiv }>{ /* What: Contact Inner Div Element. Why: The invitation and the form sit side by side. How: This lays them out in two columns within the content width. */ }
+			<div className={ cssModObj.conInnDiv }>{ /* What: Contact Inner Div Element. Why: The invitation and the form sit side by side. How: This lays them out in two columns within the content width, stacking the form below the invitation at 900px wide and below. */ }
 
 
-				<div>{ /* What: Contact Info Div Element. Why: The left column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button. */ }
+				<div>{ /* What: Contact Info Div Element. Why: The first column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button beside the form, or above it at 900px wide and below. */ }
 
 
 					<p
@@ -558,7 +558,7 @@ function ConSecCom () : React.JSX.Element {
 							<h3 className={ cssModObj.forTitHea }>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
 
 
-							<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Short fields pair up on wide screens. How: This holds the name and company fields side by side. */ }
+							<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Short fields pair up above 520px wide. How: This holds the name and company fields side by side, stacking them at 520px wide and below. */ }
 
 
 								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the name field. */ }
@@ -624,7 +624,7 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Short fields pair up on wide screens. How: This holds the phone and email fields side by side. */ }
+							<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Short fields pair up above 520px wide. How: This holds the phone and email fields side by side, stacking them at 520px wide and below. */ }
 
 
 								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the phone field. */ }
@@ -688,7 +688,7 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Element. Why: The message needs the form's full width. How: This holds the message field across both columns. */ }
+							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Element. Why: The message needs the form's full width. How: This holds the message field across the form's full width. */ }
 
 
 								<label
@@ -799,7 +799,7 @@ function ConSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ConSecCom }; // What: Named Exports. Why: The home page renders the contact section last. How: This exports ConSecCom.
+export { ConSecCom }; // What: Named Export. Why: The home page renders the contact section last. How: This exports ConSecCom.
 
 // #endregion Exports
 

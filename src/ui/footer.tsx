@@ -52,9 +52,11 @@ const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer 
  * Renders the footer. Each section link reaches its section through
  * section-link.ts, scrolling in place on the home page, smoothly unless the
  * visitor asked for reduced motion, or navigating home from any other page,
- * while a Ctrl, Cmd, or middle click opens it in a new tab, and is labelled
- * with the section's id capitalized. The copyright line reads
- * the current year each time the footer renders, so it never goes stale.
+ * and is labelled with the section's id capitalized. A Ctrl or Cmd click is
+ * left to the browser, and a middle click, which the browser sends as
+ * auxclick, never reaches the handler, so either one opens the section in a
+ * new tab. The copyright line reads the current year each time the footer
+ * renders, so it never goes stale.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -76,7 +78,7 @@ function SitFooCom () : React.JSX.Element {
 
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Each section link takes the visitor to its section from any page. How: This scrolls to the section on the home page or navigates home to it, and leaves a Ctrl, Cmd, or middle click to the browser.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Each section link takes the visitor to its section from any page. How: This scrolls to the section on the home page or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches it.
 
 
 
@@ -86,7 +88,7 @@ function SitFooCom () : React.JSX.Element {
 		<footer className={ cssModObj.sitFooFoo }>{ /* What: Site Footer Footer Element. Why: The page ends with the company's details and a way back to each section. How: This holds the footer's columns and its copyright line. */ }
 
 
-			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's columns line up with the page's content width. How: This lays out the brand, the section links, and the contact details across a centered, capped-width row. */ }
+			<div className={ cssModObj.fooInnDiv }>{ /* What: Footer Inner Div Element. Why: The footer's columns line up with the page's content width. How: This lays out the brand, the section links, and the contact details across a centered, capped-width row, which wraps at about 776px wide and below and stacks into one centered column at 768px and below. */ }
 
 
 				<div className={ cssModObj.fooBraDiv }>{ /* What: Footer Brand Div Element. Why: The mark, name, and tagline read as one block. How: This sets the mark beside the two lines of text. */ }
@@ -135,7 +137,7 @@ function SitFooCom () : React.JSX.Element {
 							href={ `/#${ secIdeStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This joins the root path with the section's id as the hash.
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, secIdeStr ) }
-						>{ /* What: Footer Link Anchor Element. Why: Each link takes the visitor to its section. How: This hands the click to secCliFun, which scrolls to the section or navigates home to it, and leaves a Ctrl, Cmd, or middle click to the browser. */ }
+						>{ /* What: Footer Link Anchor Element. Why: Each link takes the visitor to its section. How: This hands the click to secCliFun, which scrolls to the section or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches it. */ }
 							{ secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) }{ /* What: Section Label Expression. Why: The link names its section. How: This capitalizes the section id's first letter. */ }
 						</a>
 
@@ -145,7 +147,7 @@ function SitFooCom () : React.JSX.Element {
 
 				</nav>
 
-				<div className={ cssModObj.fooConDiv }>{ /* What: Footer Contact Div Element. Why: The phone number and hours close the footer's columns. How: This stacks the two. */ }
+				<div className={ cssModObj.fooConDiv }>{ /* What: Footer Contact Div Element. Why: The phone number and hours close the footer's columns. How: This stacks the two, right-aligned above 768px wide and centered once the columns stack at 768px and below. */ }
 
 
 					<a
@@ -191,7 +193,7 @@ function SitFooCom () : React.JSX.Element {
 
 // #region Exports
 
-export { SitFooCom }; // What: Named Exports. Why: Every page renders the footer below its content. How: This exports SitFooCom.
+export { SitFooCom }; // What: Named Export. Why: Every page renders the footer below its content. How: This exports SitFooCom.
 
 // #endregion Exports
 

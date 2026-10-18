@@ -111,7 +111,7 @@
 
 
 }
-.secTitHea.secTitHea--light { /* What: Light Section Title Heading. Why: Navy text would vanish on the dark section. How: This turns the heading white, keeping the shared modifier's two-class specificity. */
+.secTitHea.secTitHea--light { /* What: Section Title Heading Light. Why: Navy text would vanish on the dark section. How: This turns the heading white, keeping the shared modifier's two-class specificity. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
@@ -342,7 +342,7 @@
 
 
 }
-.forSucDiv.forSucDiv--leaving { /* What: Leaving Form Success Div. Why: The message should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
+.forSucDiv.forSucDiv--leaving { /* What: Form Success Div Leaving. Why: The message should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
 
 
 	animation : forSucDivHideFadeOut var( --dur-ani-p01 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 1 ~= 209.1ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
@@ -367,7 +367,7 @@
 
 	}
 
-	.forSucDiv.forSucDiv--leaving { /* What: Instant Leaving Form Success Div. Why: The page waits on this animation's end to remove the thank-you message, and an animation turned off never ends. How: This shortens it to almost nothing, so the form comes back at once. */
+	.forSucDiv.forSucDiv--leaving { /* What: Instant Form Success Div Leaving. Why: The page waits on this animation's end to remove the thank-you message, and an animation turned off never ends. How: This shortens it to almost nothing, so the form comes back at once. */
 
 
 		animation-duration : .01ms;
@@ -630,7 +630,7 @@
 /* #region forFieDiv */
 
 /* What: Form Field Div. Why: The message field stacks its label over its box like the other fields, but sits directly in the form rather than in a row. How: Its rule sits in the forRowDiv region, where the class first appears, and the modifier below gives it the row's space. */
-.forFieDiv--full { /* What: Full Form Field Div. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
+.forFieDiv--full { /* What: Form Field Div Full. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
 
 
 	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
@@ -660,7 +660,7 @@
 
 
 }
-.forErrPar.forErrPar--leaving { /* What: Leaving Form Error Paragraph. Why: The error should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
+.forErrPar.forErrPar--leaving { /* What: Form Error Paragraph Leaving. Why: The error should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
 
 
 	animation : forErrParHideFadeOut var( --dur-ani-bas ) var( --mot-acc-eas ) both; /* Duration Animation Base ~= 157.8ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
@@ -678,7 +678,7 @@
 
 	}
 
-	.forErrPar.forErrPar--leaving { /* What: Instant Leaving Form Error Paragraph. Why: The page waits on this animation's end to remove the error, and an animation turned off never ends. How: This shortens it to almost nothing, so it leaves the page at once. */
+	.forErrPar.forErrPar--leaving { /* What: Instant Form Error Paragraph Leaving. Why: The page waits on this animation's end to remove the error, and an animation turned off never ends. How: This shortens it to almost nothing, so it leaves the page at once. */
 
 
 		animation-duration : .01ms;

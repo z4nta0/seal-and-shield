@@ -9,7 +9,7 @@ import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why:
 import { Link         } from 'react-router';             // What: Link. Why: The return button should navigate home inside the site without a full page load. How: This renders it.
 import { NavBarCom    } from '../../ui/nav.tsx';         // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
 import { SitFooCom    } from '../../ui/footer.tsx';      // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
-import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The quote button reaches the contact section the way every section link does. How: This returns secCliFun, which navigates home to the section and leaves a Ctrl, Cmd, or middle click to the browser.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The quote button reaches the contact section the way every section link does. How: This returns secCliFun, which navigates home to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
 
 // #endregion Imports
 
@@ -71,7 +71,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
 function NotFouCom () : React.JSX.Element {
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The quote button takes the visitor to the contact section the way every section link does. How: This navigates home to the section and leaves a Ctrl, Cmd, or middle click to the browser.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The quote button takes the visitor to the contact section the way every section link does. How: This navigates home to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
 
 
 
@@ -106,7 +106,7 @@ function NotFouCom () : React.JSX.Element {
 
 				<p className={ cssModObj.nofLedPar }>The page you're looking for doesn't exist or has moved. Let's get you back home.</p>{ /* What: Not-Found Lede Paragraph Element. Why: Visitors should know what happened and what to do next. How: This sets the explanation in light silver at a readable width. */ }
 
-				<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the return and quote buttons side by side, wrapping if needed. */ }
+				<div className={ cssModObj.nofActDiv }>{ /* What: Not-Found Actions Div Element. Why: The page's two ways onward sit together. How: This holds the return and quote buttons side by side, wrapping them onto two lines at about 347px wide and below. */ }
 
 
 					<Link
@@ -125,7 +125,7 @@ function NotFouCom () : React.JSX.Element {
 						href='/#contact'
 
 						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-					>{ /* What: Button Base Anchor Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's contact section and leaves a Ctrl, Cmd, or middle click to the browser. */ }
+					>{ /* What: Button Base Anchor Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's contact section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it. */ }
 						Get a Free Quote
 					</a>
 
@@ -156,7 +156,7 @@ function NotFouCom () : React.JSX.Element {
 
 // #region Exports
 
-export { NotFouCom }; // What: Named Exports. Why: app.tsx renders the 404 page for unknown paths. How: This exports NotFouCom.
+export { NotFouCom }; // What: Named Export. Why: app.tsx renders the 404 page for unknown paths. How: This exports NotFouCom.
 
 // #endregion Exports
 

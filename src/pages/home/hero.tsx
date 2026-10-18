@@ -4,10 +4,10 @@
 // #region Imports
 
 import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
-import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way every section link does. How: This returns secCliFun, which scrolls to the section and leaves a Ctrl, Cmd, or middle click to the browser.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way every section link does. How: This returns secCliFun, which scrolls to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
 
 // #endregion Imports
 
@@ -20,9 +20,11 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * The page's opening section: an eyebrow, the "Built to Seal. Built to
  * Shield." headline, a short pitch, and two buttons, one scrolling to the
  * quote form and one to the services, beside the full logo with its pulsing
- * ring, over a background grid and glow. A stats bar along its bottom sums
- * up the company in four figures. Its id, home, is what the bar's Home link
- * and brand scroll to.
+ * ring, over a background grid and glow. At 900px wide and below, the text
+ * and logo become one centered column with the logo first. A stats bar along
+ * its bottom sums up the company in four figures, set two by two at 900px
+ * wide and below. Its id, home, is what the bar's Home link and brand scroll
+ * to.
  *
  * Sections:
  *  - Constants
@@ -43,8 +45,10 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * @summary
  * The four figures in the hero's stats bar, in display order. Every row
  * shares one shape, so its fields carry no comments of their own:
+ *
  * - `labStr` (String): Label String, the small caption under the figure,
  *   which also serves as the row's React key.
+ *
  * - `valStr` (String): Value String, the figure itself.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -97,7 +101,7 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 function HerSecCom () : React.JSX.Element {
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both hero buttons take the visitor to their sections the way every section link does. How: This scrolls to the section in place and leaves a Ctrl, Cmd, or middle click to the browser.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both hero buttons take the visitor to their sections the way every section link does. How: This scrolls to the section in place and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
 
 
 
@@ -125,10 +129,10 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.herConDiv }>{ /* What: Hero Content Div Element. Why: The hero's text and logo line up with the page's content width. How: This lays them out in two columns. */ }
+			<div className={ cssModObj.herConDiv }>{ /* What: Hero Content Div Element. Why: The hero's text and logo line up with the page's content width. How: This lays them out in two columns, stacking them in one centered column with the logo first at 900px wide and below. */ }
 
 
-				<div>{ /* What: Hero Left Div Element. Why: The pitch reads first. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, with no styling of its own. */ }
+				<div>{ /* What: Hero Text Div Element. Why: The pitch is the hero's message. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, or below the logo at 900px wide and below, with no styling of its own. */ }
 
 
 					<h1>{ /* What: Hero Title Heading Element. Why: The page's main heading should carry what the company does and where, the words local searches look for, as well as its promise. How: This holds the two-line eyebrow and the slogan, each styled as its own block, so the heading reads as one while looking as it always has. */ }
@@ -155,7 +159,7 @@ function HerSecCom () : React.JSX.Element {
 						Trusted, reliable, and built to last.
 					</p>
 
-					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The pitch ends with the two next steps. How: This sets the two buttons side by side. */ }
+					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The pitch ends with the two next steps. How: This sets the two buttons side by side, centered at 900px wide and below, wrapping onto two lines at about 349px wide and below. */ }
 
 
 						<a
@@ -185,7 +189,7 @@ function HerSecCom () : React.JSX.Element {
 				</div>
 
 
-				<div className={ cssModObj.herRigDiv }>{ /* What: Hero Right Div Element. Why: The logo balances the pitch. How: This centers the logo and its ring. */ }
+				<div className={ cssModObj.herRigDiv }>{ /* What: Hero Right Div Element. Why: The logo balances the pitch. How: This centers the logo and its ring in the content grid's second column, or above the pitch at 900px wide and below. */ }
 
 
 					<div className={ cssModObj.herLogDiv }>{ /* What: Hero Logo Div Element. Why: The ring sits behind the logo. How: This stacks the two in one box. */ }
@@ -221,7 +225,7 @@ function HerSecCom () : React.JSX.Element {
 			<div className={ cssModObj.herStaDiv }>{ /* What: Hero Stats Div Element. Why: Four quick figures close the hero. How: This draws the bar along the hero's bottom. */ }
 
 
-				<div className={ cssModObj.staInnDiv }>{ /* What: Stats Inner Div Element. Why: The figures line up with the page's content width. How: This lays the four out in a row. */ }
+				<div className={ cssModObj.staInnDiv }>{ /* What: Stats Inner Div Element. Why: The figures line up with the page's content width. How: This lays the four out in a row, or two by two at 900px wide and below. */ }
 
 
 					{ HER_STA_ARR.map( ( staRecObj ) => ( // What: Stat Map. Why: Each figure gets its own cell. How: This renders one cell per row.
@@ -267,7 +271,7 @@ function HerSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HerSecCom }; // What: Named Exports. Why: The home page renders the hero first. How: This exports HerSecCom.
+export { HerSecCom }; // What: Named Export. Why: The home page renders the hero first. How: This exports HerSecCom.
 
 // #endregion Exports
 
