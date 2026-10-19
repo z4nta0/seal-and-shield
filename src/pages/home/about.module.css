@@ -253,22 +253,15 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading, and light blue wouldn't have enough contrast on the white section. How: This sets it small, widely spaced, uppercase, and the main blue, copied from the shared eyebrow label with its color deepened. */
 
 
-	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
+	color          : var( --acc-mai-col );                   /* Accent Main Color = #1e56c8 */
 	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
 	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245em */
 	text-transform : uppercase;
-
-
-}
-.aboTexDiv .eyeLabPar { /* What: Eyebrow Label Paragraph In Text Column. Why: Light blue doesn't have enough contrast on the white section. How: This turns the label the deeper blue. */
-
-
-	color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 
 
 }
