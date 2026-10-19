@@ -39,16 +39,19 @@ const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of
 
 
 
-// #region SER_RCD_ARR
+// #region SER_REC_ARR
 
 /**
- * SER_RCD_ARR = Service Record Array
+ * SER_REC_ARR = Service Record Array
  *
  * @summary
  * The services the card grid shows, in display order. Every row shares one
  * shape, so its fields carry no comments of their own:
+ *
  * - `desStr` (String): Description String, the card's paragraph.
+ *
  * - `icoStr` (String): Icon String, the emoji the card opens with.
+ *
  * - `titStr` (String): Title String, the card's heading, which also serves
  *   as the row's React key.
  *
@@ -56,7 +59,7 @@ const SER_ARE_ARR = [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of
  *
 */
 
-const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists every service the company offers. How: Each row holds a card's icon, title, and description.
+const SER_REC_ARR = [ // What: Service Record Array. Why: The card grid lists every service the company offers. How: Each row holds a card's icon, title, and description.
 
 
 	{ // What: Full Roof Installation Service Row. Why: A new roof is the company's largest job. How: This describes it on its card.
@@ -87,7 +90,7 @@ const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists ev
 		icoStr : '📞',
 		titStr : 'Service Calls',
 
-		desStr : 'If your roof is leaking but may not need a full replacement, we\'ll come out, assess the situation, and recommend the most cost-effective solution.'
+		desStr : "If your roof is leaking but may not need a full replacement, we'll come out, assess the situation, and recommend the most cost-effective solution."
 
 
 	},
@@ -98,7 +101,7 @@ const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists ev
 		icoStr : '🔍',
 		titStr : 'Free Inspections',
 
-		desStr : 'No-obligation roof inspections to assess the current condition of your commercial roof. Know exactly what you\'re working with before committing to anything.'
+		desStr : "No-obligation roof inspections to assess the current condition of your commercial roof. Know exactly what you're working with before committing to anything."
 
 
 	},
@@ -150,7 +153,7 @@ const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists ev
 
 ];
 
-// #endregion SER_RCD_ARR
+// #endregion SER_REC_ARR
 
 // #endregion Constants
 
@@ -165,7 +168,7 @@ const SER_RCD_ARR = [ // What: Service Record Array. Why: The card grid lists ev
  *
  * @summary
  * Renders the services section: the header, a card for each row of
- * SER_RCD_ARR, and the service area panel with a tag for each entry of
+ * SER_REC_ARR, and the service area panel with a tag for each entry of
  * SER_ARE_ARR. Its header, each card's grid cell, and the area panel are
  * scroll-reveal blocks, revealed 80ms apart once the section scrolls into
  * view.
@@ -212,11 +215,11 @@ function SerSecCom () : React.JSX.Element {
 				>{ /* What: Services Header Div Element. Why: The section opens by saying what it covers. How: This holds the label, heading, divider, and intro, and fades in first. */ }
 
 
-					<p className={ cssModObj.eyeLabPar }>What We Do</p>{ /* What: Services Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals. */ }
+					<p className={ cssModObj.eyeLabPar }>What We Do</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals. */ }
 
-					<h2 className={ cssModObj.secTitHea }>Our Services</h2>{ /* What: Services Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
+					<h2 className={ cssModObj.secTitHea }>Our Services</h2>{ /* What: Section Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
 
-					<div className={ cssModObj.secDivDiv } />{ /* What: Services Divider Div Element. Why: A short rule separates the heading from the intro. How: This draws it. */ }
+					<div className={ cssModObj.secDivDiv } />{ /* What: Section Divider Div Element. Why: A short rule separates the heading from the intro. How: This draws it. */ }
 
 					<p className={ cssModObj.serIntPar }>{ /* What: Services Intro Paragraph Element. Why: The section opens with the company's promise. How: This sums up its range of work. */ }
 						Seal and Shield is a full-service commercial roofing company.
@@ -229,14 +232,14 @@ function SerSecCom () : React.JSX.Element {
 
 
 
-				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays the cards out in columns. */ }
+				<div className={ cssModObj.serGriDiv }>{ /* What: Services Grid Div Element. Why: The services read best as a grid of cards. How: This lays the cards out four across, two across at 1,024px wide and below, and in one column at 580px wide and below. */ }
 
 
-					{ SER_RCD_ARR.map( ( serRcdObj ) => ( // What: Service Card Map. Why: Each service gets its own card. How: This renders one card per row.
+					{ SER_REC_ARR.map( ( serRecObj ) => ( // What: Service Card Map. Why: Each service gets its own card. How: This renders one card per row.
 
 
 						<div
-							key={ serRcdObj.titStr }
+							key={ serRecObj.titStr }
 
 							data-scroll-reveal-block
 						>{ /* What: Card Reveal Div Element. Why: Each card fades in in turn, but the reveal's own transition and transform would override the card's hover lift and shadow. How: This grid cell carries the reveal hook around the card instead of on it. */ }
@@ -245,11 +248,11 @@ function SerSecCom () : React.JSX.Element {
 							<div className={ cssModObj.serCarDiv }>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, filling its grid cell. */ }
 
 
-								<span className={ cssModObj.carIcoSpa }>{ serRcdObj.icoStr }</span>{ /* What: Card Icon Span Element. Why: An icon helps a visitor scan the grid. How: This shows the service's emoji. */ }
+								<span className={ cssModObj.carIcoSpa }>{ serRecObj.icoStr }</span>{ /* What: Card Icon Span Element. Why: An icon helps a visitor scan the grid. How: This shows the service's emoji. */ }
 
-								<h3 className={ cssModObj.carTitHea }>{ serRcdObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This is the card's h3. */ }
+								<h3 className={ cssModObj.carTitHea }>{ serRecObj.titStr }</h3>{ /* What: Card Title Heading Element. Why: Each card names its service. How: This is the card's h3. */ }
 
-								<p className={ cssModObj.carDesPar }>{ serRcdObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Visitors want to know what the service involves. How: This describes it. */ }
+								<p className={ cssModObj.carDesPar }>{ serRecObj.desStr }</p>{ /* What: Card Description Paragraph Element. Why: Visitors want to know what the service involves. How: This describes it. */ }
 
 
 							</div>
@@ -269,17 +272,17 @@ function SerSecCom () : React.JSX.Element {
 					className={ cssModObj.serAreDiv }
 
 					data-scroll-reveal-block
-				>{ /* What: Services Area Div Element. Why: Visitors want to know whether the company works where they are. How: This panel describes the service area beside its tags, and fades in last. */ }
+				>{ /* What: Services Area Div Element. Why: Visitors want to know whether the company works where they are. How: This panel describes the service area beside its tags, or above them at 768px wide and below, and fades in last. */ }
 
 
-					<div>{ /* What: Services Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, with no styling of its own. */ }
+					<div>{ /* What: Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, or above the tags at 768px wide and below, with no styling of its own. */ }
 
 
-						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Area Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in small capitals. */ }
+						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in small capitals. */ }
 
-						<h3 className={ cssModObj.secTitHea }>Service Area</h3>{ /* What: Area Title Heading Element. Why: The panel needs its own heading. How: This is the panel's h3. */ }
+						<h3 className={ cssModObj.secTitHea }>Service Area</h3>{ /* What: Section Title Heading Element. Why: The panel needs its own heading. How: This is the panel's h3. */ }
 
-						<div className={ cssModObj.secDivDiv } />{ /* What: Area Divider Div Element. Why: A short rule separates the heading from the description. How: This draws it. */ }
+						<div className={ cssModObj.secDivDiv } />{ /* What: Section Divider Div Element. Why: A short rule separates the heading from the description. How: This draws it. */ }
 
 						<p className={ cssModObj.areDesPar }>{ /* What: Area Description Paragraph Element. Why: The tags need a sentence of context. How: This names the home base, the region, and the willingness to travel. */ }
 							Based in Lawrence, Kansas, Seal and Shield serves businesses across all of Kansas,
@@ -333,7 +336,7 @@ function SerSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { SerSecCom }; // What: Named Exports. Why: The home page renders the services second. How: This exports SerSecCom.
+export { SerSecCom }; // What: Named Export. Why: The home page renders the services second. How: This exports SerSecCom.
 
 // #endregion Exports
 

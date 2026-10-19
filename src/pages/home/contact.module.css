@@ -111,7 +111,7 @@
 
 
 }
-.secTitHea.secTitHea--light { /* What: Light Section Title Heading. Why: Navy text would vanish on the dark section. How: This turns the heading white, keeping the shared modifier's two-class specificity. */
+.secTitHea.secTitHea--light { /* What: Section Title Heading Light. Why: Navy text would vanish on the dark section. How: This turns the heading white, keeping the shared modifier's two-class specificity. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
@@ -342,13 +342,35 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the message rise in. How: This applies only when the reduced-motion preference is set. */
+.forSucDiv.forSucDiv--leaving { /* What: Form Success Div Leaving. Why: The message should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
+
+
+	animation : forSucDivHideFadeOut var( --dur-ani-p01 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 1 ~= 209.1ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
+
+
+}
+.forSucDiv:focus { /* What: Focused Form Success Div. Why: The panel takes focus only so a screen reader announces it, and isn't a control, so a ring around it would read as something to press. How: This drops the browser's default outline while it holds focus. */
+
+
+	outline : none;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Success Div. Why: Someone who asked for less motion shouldn't see the message rise in or sink out. How: This applies only when the reduced-motion preference is set. */
 
 
 	.forSucDiv { /* What: Motionless Form Success Div. Why: The message should simply appear. How: This turns the animation off. */
 
 
 		animation : none;
+
+
+	}
+
+	.forSucDiv.forSucDiv--leaving { /* What: Instant Form Success Div Leaving. Why: The page waits on this animation's end to remove the thank-you message, and an animation turned off never ends. How: This shortens it to almost nothing, so the form comes back at once. */
+
+
+		animation-duration : .01ms;
 
 
 	}
@@ -372,6 +394,29 @@
 
 		opacity   : 1;
 		transform : none;
+
+
+	}
+
+
+}
+@keyframes forSucDivHideFadeOut { /* What: Form Success Div Hide Fade Out. Why: The message should leave rather than vanish. How: This sinks it a little and fades it out, the reverse of its entrance. */
+
+
+	from {
+
+
+		opacity   : 1;
+		transform : none;
+
+
+	}
+
+	to {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
 
 
 	}
@@ -437,6 +482,7 @@
 	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
 	font-weight    : 800;
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 	text-transform : uppercase;
 
 
@@ -464,6 +510,7 @@
 	font-size      : var( --fon-siz-p02 );                            /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 800;
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	line-height    : var( --ver-rhy-m01 );                            /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom  : var( --spa-ver-p02 );                            /* Spacing Vertical Base Plus 2 ~= 25.572px */
 	padding-bottom : var( --spa-ver-bas );                            /* Spacing Vertical Base ~= 14.572px */
 	text-transform : uppercase;
@@ -508,13 +555,6 @@
 	display        : flex;
 	flex-direction : column;
 	gap            : var( --spa-ver-m03 ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
-
-
-}
-.forFieDiv--full { /* What: Full Form Field Div. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
-
-
-	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
 
 
 }
@@ -587,6 +627,25 @@
 
 
 
+/* #region forFieDiv */
+
+/* What: Form Field Div. Why: The message field stacks its label over its box like the other fields, but sits directly in the form rather than in a row. How: Its rule sits in the forRowDiv region, where the class first appears, and the modifier below gives it the row's space. */
+.forFieDiv--full { /* What: Form Field Div Full. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
+
+
+	margin-bottom : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+
+
+}
+
+/* What: Form Field Label. Why: The message field's label matches the others. How: Its rule sits in the forRowDiv region, where the class first appears. */
+
+/* What: Form Field Textarea. Why: The message box shares the inputs' look and focus ring. How: Its rule, shared with the inputs, sits in the forRowDiv region, where the class first appears. */
+
+/* #endregion forFieDiv */
+
+
+
 /* #region forErrPar */
 
 .forErrPar { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel, with the same space below it as above, between the message field and the button. */
@@ -596,17 +655,34 @@
 	color         : var( --err-dar-col );                                               /* Error Dark Color = #b42318 */
 	font-size     : var( --fon-siz-p01 );                                               /* Font Size Base Plus 1 ~= 14.572px */
 	margin-bottom : var( --spa-ver-bas );                                               /* Spacing Vertical Base ~= 14.572px */
+	margin-inline : auto;
+	max-width     : var( --tex-wid-bas );                                               /* Text Width Base Maximum ~= 29.207em */
 	text-align    : center;
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Error Paragraph. Why: Someone who asked for less motion shouldn't see the message rise in. How: This applies only when the reduced-motion preference is set. */
+.forErrPar.forErrPar--leaving { /* What: Form Error Paragraph Leaving. Why: The error should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
+
+
+	animation : forErrParHideFadeOut var( --dur-ani-bas ) var( --mot-acc-eas ) both; /* Duration Animation Base ~= 157.8ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Error Paragraph. Why: Someone who asked for less motion shouldn't see the message rise in or sink out. How: This applies only when the reduced-motion preference is set. */
 
 
 	.forErrPar { /* What: Motionless Form Error Paragraph. Why: The message should simply appear. How: This turns the animation off. */
 
 
 		animation : none;
+
+
+	}
+
+	.forErrPar.forErrPar--leaving { /* What: Instant Form Error Paragraph Leaving. Why: The page waits on this animation's end to remove the error, and an animation turned off never ends. How: This shortens it to almost nothing, so it leaves the page at once. */
+
+
+		animation-duration : .01ms;
 
 
 	}
@@ -630,6 +706,29 @@
 
 		opacity   : 1;
 		transform : none;
+
+
+	}
+
+
+}
+@keyframes forErrParHideFadeOut { /* What: Form Error Paragraph Hide Fade Out. Why: The error should leave rather than vanish. How: This sinks it a little and fades it out, the reverse of its entrance. */
+
+
+	from {
+
+
+		opacity   : 1;
+		transform : none;
+
+
+	}
+
+	to {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m03 ) ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
 
 
 	}
@@ -677,6 +776,7 @@
 /* #endregion forErrPar */
 
 
+
 /* #region forSubBut */
 
 .forSubBut { /* What: Form Submit Button. Why: The form's main action spans the panel. How: This sets a full-width navy button in the display font, and eases every change between its looks. */
@@ -698,7 +798,7 @@
 
 
 }
-.forSubBut:hover:not( :disabled ) { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer, but not while a request is out. How: This turns its fill and border blue and lifts it, only while the button can be used. */
+.forSubBut:hover:not( [aria-disabled] ) { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer, but not while a request is out. How: This turns its fill and border blue and lifts it, only while the button can be used. */
 
 
 	background   : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
@@ -707,14 +807,14 @@
 
 
 }
-.forSubBut:active:not( :disabled ) { /* What: Pressed Form Submit Button. Why: A press should register before the request goes out. How: This presses the button in slightly, unless it's disabled while a request is out. */
+.forSubBut:active:not( [aria-disabled] ) { /* What: Pressed Form Submit Button. Why: A press should register before the request goes out. How: This presses the button in slightly, unless it's marked aria-disabled while a request is out. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
 
 
 }
-.forSubBut:disabled { /* What: Disabled Form Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This fades it dimmer and shows the progress cursor. */
+.forSubBut[aria-disabled='true'] { /* What: ARIA Disabled Form Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This fades it dimmer and shows the progress cursor. */
 
 
 	cursor  : progress;

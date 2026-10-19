@@ -8,16 +8,72 @@
  * Styles for NavBarCom: the fixed top bar, transparent at the top of the
  * page and solid once it scrolls, with the brand, the section links and
  * phone button on wide screens, and on screens 768px wide or narrower the
- * menu button and the panel of links it opens below the bar. The shared
+ * menu button and the panel it opens below the bar over a dimmed page: the
+ * section links, entering one after another, and a contact block with the
+ * call and quote buttons, the hours, and the service area. The shared
  * container styles the bar's inner row used to borrow from the global
  * stylesheet are copied onto its own class here. The bar's states are
  * attributes rather than classes: data-page-scroll-active on the bar,
  * data-section-link-active on the link for the section being read,
- * aria-expanded on the menu button, and data-mobile-menu-open on the panel.
+ * aria-expanded on the menu button, and data-mobile-menu-open on the dimmer,
+ * the bar, and the panel.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
+
+
+
+.navScrDiv { /* What: Navigation Scrim Div. Why: The open menu needs the page behind it dimmed, both to set the menu apart and to catch a tap that closes it. How: This covers the screen beneath the bar, transparent and hidden until the menu opens, and exists only where the menu does. */
+
+
+	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-002-rec ) );                          /* Scrim Main Color = #080f24, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+	display    : none;
+	inset      : 0;
+	opacity    : 0;
+	position   : fixed;
+	transition : opacity var( --dur-tra-p02 ) var( --mot-acc-eas ), visibility 0s linear var( --dur-tra-p02 ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Closing Transition. Why: The dimmer should finish fading before it stops catching taps. How: This fades it out with the accelerating curve and hides it only once the fade is done. */
+	visibility : hidden;
+	z-index    : 2;                                                                                            /* What: Scrim Layer. Why: The dimmer has to cover the hero, about, and contact layers raised to 1, while the bar paints above it. How: This matches the bar's 2, and the bar wins by coming after it in the page. */
+
+
+}
+.navScrDiv[data-mobile-menu-open] { /* What: Open Navigation Scrim Div. Why: The page should dim as the menu opens. How: This fades the dimmer in with the decelerating curve and makes it catch taps at once. */
+
+
+	opacity    : 1;
+	transition : opacity var( --dur-tra-p02 ) var( --mot-dec-eas ), visibility 0s; /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	visibility : visible;
+
+
+}
+@container app ( max-width : 768px ) { /* What: Narrow Navigation Scrim Div. Why: The dimmer exists only where the menu does. How: This applies 768px wide and below. */
+
+
+	.navScrDiv { /* What: Shown Navigation Scrim Div. Why: The dimmer has to be in the layout to fade in. How: This displays it, still hidden until the menu opens. */
+
+
+		display : block;
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Scrim Div. Why: Someone who asked for less motion shouldn't see the page fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navScrDiv,
+	.navScrDiv[data-mobile-menu-open] { /* What: Motionless Navigation Scrim Div. Why: The page should simply dim and brighten. How: This turns both transitions off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
 
 
 
@@ -30,12 +86,12 @@
 
 	background : transparent;
 	left       : 0;
-	padding    : var( --spa-ver-p01 ) 0;                                                                                  /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding    : var( --spa-ver-p01 ) 0; /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	position   : fixed;
 	right      : 0;
 	top        : 0;
 	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Padding Transition. Why: The bar really gets shorter as it tightens, and a scale transform would squash its logo and links instead. How: This eases the padding itself, a layout property, since no compositor version produces the same effect. */
-	z-index    : 2; /* What: Bar Layer. Why: The bar has to pass over the hero, about, and contact layers raised to 1 as the page scrolls beneath it. How: This puts it one level above them, the lowest value that clears them. */
+	z-index    : 2;                      /* What: Bar Layer. Why: The bar has to pass over the hero, about, and contact layers raised to 1 as the page scrolls beneath it. How: This puts it one level above them, the lowest value that clears them. */
 
 
 }
@@ -47,10 +103,17 @@
 
 
 }
+.navBarHed[data-mobile-menu-open] { /* What: Menu Open Navigation Bar Header. Why: The bar and its open menu should read as one panel above the dimmed page, even at the top of the page where the bar is otherwise clear. How: This turns the bar solid navy while the menu is open. */
+
+
+	background : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
+
+
+}
 .navBarHed::after { /* What: Navigation Bar Header Shadow. Why: The scrolled bar casts a soft shadow onto the page, which should fade in without repainting it every frame. How: This holds the shadow on a layer the size of the bar, hidden until the page scrolls, and fades it in through opacity. */
 
 
-	box-shadow     : var( --ele-med-sha );                              /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	box-shadow     : var( --ele-med-sha );                              /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */
 	content        : '';
 	inset          : 0;
 	opacity        : 0;
@@ -85,7 +148,7 @@
 
 /* #region navInnDiv */
 
-.navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents line up with the page's content width. How: This centers a capped-width row with side padding, copied from the shared container, and spreads the brand, links, and menu button across it. */
+.navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents line up with the page's content width. How: This centers a capped-width row with side padding, copied from the shared container, and spreads the brand and either the links row, above 768px wide, or the menu button, at 768px and below, across it. */
 
 
 	align-items     : center;
@@ -107,21 +170,21 @@
 	align-items : center;
 	display     : flex;
 	gap         : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
-	transition  : transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+	transition  : opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.navBraAnc:active { /* What: Pressed Navigation Brand Anchor. Why: A press on the brand should register before the page scrolls. How: This presses the mark and name in slightly. */
+.navBraAnc:active { /* What: Pressed Navigation Brand Anchor. Why: A press on the brand should register before the page scrolls. How: This dims the mark and name slightly while they're held, as every text link does on press, since the brand isn't styled as a button. */
 
 
-	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
 
 
 }
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Brand Anchor. Why: Someone who asked for less motion shouldn't see the brand move. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navBraAnc { /* What: Motionless Navigation Brand Anchor. Why: The press and focus changes should appear at once. How: This turns the transition off. */
+	.navBraAnc { /* What: Motionless Navigation Brand Anchor. Why: The press dim and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -247,7 +310,7 @@
 
 
 }
-.navLinAnc::after { /* What: Navigation Link Underline. Why: A short line marks the hovered and active links. How: This draws a 2px light blue line under the link, scaled to nothing until it's needed. */
+.navLinAnc::after { /* What: Navigation Link Anchor Underline. Why: A short line marks the hovered and active links. How: This draws a 2px light blue line under the link, scaled to nothing until it's needed. */
 
 
 	background       : var( --acc-lig-col );                                /* Accent Light Color ~= #4488f6 */
@@ -278,7 +341,7 @@
 
 }
 .navLinAnc[data-section-link-active]::after,
-.navLinAnc:hover::after { /* What: Hovered And Active Navigation Link Underline. Why: The underline completes the highlight. How: This grows the line to its full width from the left. */
+.navLinAnc:hover::after { /* What: Hovered And Active Navigation Link Anchor Underline. Why: The underline completes the highlight. How: This grows the line to its full width from the left. */
 
 
 	transform : scaleX( 1 );
@@ -322,7 +385,7 @@
 
 
 }
-.navCtaAnc:hover { /* What: Hovered Navigation Call-To-Action Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text. */
+.navCtaAnc:hover { /* What: Hovered Navigation Call-To-Action Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text and lifts it a pixel. */
 
 
 	background : transparent;
@@ -353,6 +416,7 @@
 }
 
 /* #endregion navLinNav */
+
 
 
 /* #region navTogBut */
@@ -423,21 +487,21 @@
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 1 ) { /* What: Open First Toggle Line Span. Why: The open menu's icon should read as a close cross. How: This drops the top bar to the middle and turns it 45 degrees. */
+.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 1 ) { /* What: Open Toggle Line Span Top. Why: The open menu's icon should read as a close cross. How: This drops the top bar to the middle and turns it 45 degrees. */
 
 
 	transform : translateY( calc( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) ) rotate( 45deg ); /* Vertical Rhythm Base Minus 7 ~= 2.035px, Spacing Vertical Base Minus 4 ~= 4.732px */
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 2 ) { /* What: Open Second Toggle Line Span. Why: The cross only needs two lines. How: This fades the middle bar out. */
+.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 2 ) { /* What: Open Toggle Line Span Middle. Why: The cross only needs two lines. How: This fades the middle bar out. */
 
 
 	opacity : 0;
 
 
 }
-.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 3 ) { /* What: Open Third Toggle Line Span. Why: The open menu's icon should read as a close cross. How: This lifts the bottom bar to the middle and turns it the other way. */
+.navTogBut[aria-expanded='true'] .togLinSpa:nth-child( 3 ) { /* What: Open Toggle Line Span Bottom. Why: The open menu's icon should read as a close cross. How: This lifts the bottom bar to the middle and turns it the other way. */
 
 
 	transform : translateY( calc( ( var( --ver-rhy-m07 ) * 1rem + var( --spa-ver-m04 ) ) * -1 ) ) rotate( -45deg ); /* Vertical Rhythm Base Minus 7 ~= -2.035px, Spacing Vertical Base Minus 4 ~= -4.732px */
@@ -466,7 +530,7 @@
 
 /* #region navMenDiv */
 
-.navMenDiv { /* What: Navigation Menu Div. Why: Narrow screens show the links and phone number in a panel below the bar. How: This stacks them on the dark navy, collapsed to no height and hidden until the narrow layout shows it. */
+.navMenDiv { /* What: Navigation Menu Div. Why: Narrow screens show the links and contact details in a panel below the bar. How: This stacks them on the dark navy, collapsed to no height and hidden until the narrow layout shows it. */
 
 
 	background     : var( --bac-inv-col );                                 /* Background Inverse Color = #080f24 */
@@ -475,15 +539,17 @@
 	max-height     : 0;
 	overflow       : hidden;
 	padding        : 0 var( --gut-sid-pad );                               /* Gutter Side Padding, about 19.304px - 44.876px */
-	transition     : max-height var( --dur-tra-p03 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Standard Easing = ease */ /* What: Panel Height Transition. Why: The panel has to push down as it opens, which a transform can't do, and its content height isn't known, so it eases a capped max-height instead. How: This animates the max-height between 0 and the open cap. */
+	transition     : max-height var( --dur-tra-p03 ) var( --mot-acc-eas ); /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Panel Height Transition. Why: The panel has to grow down from the bar as it opens, which a transform can't do without squashing its contents. How: This eases the height cap itself, a layout property, since no compositor version produces the same effect. */
 
 
 }
-.navMenDiv[data-mobile-menu-open] { /* What: Open Navigation Menu Div. Why: The panel should show its links once the menu button opens it. How: This lifts the height cap to fit every link and adds bottom padding. */
+.navMenDiv[data-mobile-menu-open] { /* What: Open Navigation Menu Div. Why: The panel should show its links and contact block once the menu button opens it. How: This lifts the height cap to fit them, or to the screen below the bar on a short one, which then scrolls, and adds bottom padding. */
 
 
-	max-height : calc( var( --ver-rhy-p12 ) * 1rem );         /* Vertical Rhythm Base Plus 12 ~= 425.596px */
-	padding    : 0 var( --gut-sid-pad ) var( --spa-ver-p02 ); /* Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
+	max-height : min( calc( var( --ver-rhy-p13 ) * 1rem ), calc( 100dvh - var( --nav-bar-hei ) ) ); /* Vertical Rhythm Base Plus 13 ~= 563.794px, Navigation Bar Height ~= 83.484px */
+	overflow-y : auto;
+	padding    : 0 var( --gut-sid-pad ) var( --spa-ver-p02 );                                       /* Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
+	transition : max-height var( --dur-tra-p03 ) var( --mot-dec-eas );                              /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Opening Height Transition. Why: Things arriving decelerate, while the closing panel accelerates away. How: This swaps the base rule's easing for the decelerate curve while the menu opens. */
 
 
 }
@@ -503,7 +569,8 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Menu Div. Why: Someone who asked for less motion shouldn't see the panel slide. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navMenDiv { /* What: Motionless Navigation Menu Div. Why: The panel should simply open and close. How: This turns the transition off. */
+	.navMenDiv,
+	.navMenDiv[data-mobile-menu-open] { /* What: Motionless Navigation Menu Div. Why: The panel should simply open and close. How: This turns both the opening and the closing transition off, naming the open state too since its selector outranks the plain class. */
 
 
 		transition : none;
@@ -514,22 +581,42 @@
 
 }
 
-.menLinAnc { /* What: Menu Link Anchor. Why: Each link fills a row of the panel. How: This sets it in spaced capitals in light silver with a faint divider below. */
+
+/* #region menLinAnc */
+
+.menLinAnc { /* What: Menu Link Anchor. Why: Each link fills a row of the panel. How: This sets it in spaced capitals in light silver with a faint divider below, its label at the start and its active dot at the end. */
 
 
-	border-bottom  : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
-	color          : var( --tex-inv-col );                                                       /* Text Inverse Color = #c8d0e0 */
-	font-family    : var( --fon-fam-sec );                                                       /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p02 );                                                       /* Font Size Base Plus 2 ~= 19.304px */
-	font-weight    : 600;
-	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );                                     /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
-	padding        : var( --spa-ver-bas ) 0;                                                     /* Spacing Vertical Base ~= 14.572px */
-	text-transform : uppercase;
-	transition     : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	align-items     : center;
+	border-bottom   : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
+	color           : var( --tex-inv-col );                                                       /* Text Inverse Color = #c8d0e0 */
+	display         : flex;
+	font-family     : var( --fon-fam-sec );                                                       /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size       : var( --fon-siz-p02 );                                                       /* Font Size Base Plus 2 ~= 19.304px */
+	font-weight     : 600;
+	justify-content : space-between;
+	letter-spacing  : calc( var( --cdn-pow-008-rec ) * 1em );                                     /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	padding         : var( --spa-ver-bas ) 0;                                                     /* Spacing Vertical Base ~= 14.572px */
+	text-transform  : uppercase;
+	transition      : color var( --dur-tra-p02 ) var( --mot-sta-eas ), opacity var( --dur-tra-p02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
-.menLinAnc:hover { /* What: Hovered Menu Link Anchor. Why: The link should respond to the pointer. How: This turns its text white. */
+.menLinAnc::after { /* What: Menu Link Anchor Active Dot. Why: The menu marks the section being read, as the bar's links do on wide screens. How: This holds a small light blue dot at the row's end, hidden until its section is active, when it pops in. */
+
+
+	background    : var( --acc-lig-col );                                                                                   /* Accent Light Color ~= #4488f6 */
+	border-radius : 50%;
+	content       : '';
+	height        : calc( var( --ver-rhy-m03 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 3 ~= 6.268px */
+	opacity       : 0;
+	transform     : scale( 0 );
+	transition    : opacity var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p01 ) var( --mot-ove-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+	width         : calc( var( --ver-rhy-m03 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 3 ~= 6.268px */
+
+
+}
+.menLinAnc:hover { /* What: Hovered Menu Link Anchor. Why: The link should respond to the pointer. How: This turns its text white while its label slides a little. */
 
 
 	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
@@ -543,10 +630,93 @@
 
 
 }
+.menLinAnc[data-section-link-active] { /* What: Active Menu Link Anchor. Why: The section being read should stand out in the menu. How: This turns its text white. */
+
+
+	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+.menLinAnc[data-section-link-active]::after { /* What: Active Menu Link Anchor Dot. Why: The dot names the section being read. How: This shows it at full size with a gentle overshoot. */
+
+
+	opacity   : 1;
+	transform : none;
+
+
+}
+.navMenDiv[data-mobile-menu-open] .menLinAnc { /* What: Entering Menu Link Anchor. Why: The links should arrive one after another as the menu opens, rather than all at once. How: This plays the entrance on each, delayed a beat longer for each row. */
+
+
+	animation       : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) backwards; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Backwards Fill. Why: A held end frame would pin the opacity and transform, so the pressed dim and the hover slide could never show. How: This holds only the hidden start through the delay, then hands the element back to its own rules. */
+	animation-delay : calc( var( --dur-ani-m03 ) * ( var( --men-ite-ind ) + 1 ) );            /* Duration Animation Base Minus 3 ~= 67.9ms, Menu Item Index set by its row */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.menLinAnc { /* What: Motionless Menu Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.menLinAnc,
+	.menLinAnc::after { /* What: Motionless Menu Link Anchor. Why: The hover color and the active dot should simply switch. How: This turns both transitions off. */
+
+
+		transition : none;
+
+
+	}
+
+	.navMenDiv[data-mobile-menu-open] .menLinAnc { /* What: Motionless Entering Menu Link Anchor. Why: The links should simply be there when the menu opens. How: This turns the entrance off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes menuItemOpenFadeIn { /* What: Menu Item Open Fade In. Why: Each link and the contact block should rise a little into place as the menu opens. How: This fades the item in from slightly below. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m02 ) ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+	}
+
+	to {
+
+
+		opacity   : 1;
+		transform : none;
+
+
+	}
+
+
+}
+
+.menLabSpa { /* What: Menu Label Span. Why: The label slides a little on hover while the row's divider stays put. How: This eases its position. */
+
+
+	transition : transform var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.menLinAnc:hover .menLabSpa { /* What: Hovered Menu Label Span. Why: A stacked menu's row may nudge sideways to show it's being pointed at. How: This slides the label a few pixels right. */
+
+
+	transform : translateX( var( --spa-hor-m05 ) ); /* Spacing Horizontal Base Minus 5 ~= 3.572px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Label Span. Why: Someone who asked for less motion shouldn't see the label slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.menLabSpa { /* What: Motionless Menu Label Span. Why: The nudge should simply apply. How: This turns the transition off. */
 
 
 		transition : none;
@@ -557,29 +727,92 @@
 
 }
 
-.menCtaAnc { /* What: Menu Call-To-Action Anchor. Why: The panel ends with the quickest way to reach the company. How: This sets the number as a full-width blue button below the links. */
+/* #endregion menLinAnc */
 
 
-	background     : var( --acc-mai-col );                      /* Accent Main Color = #1e56c8 */
-	color          : var( --tex-acc-col );                      /* Text Accent Color = #ffffff */
-	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'Barlow Condensed', sans-serif */
-	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+
+/* #region menConDiv */
+
+.menConDiv { /* What: Menu Contact Div. Why: The menu ends with every way to reach the company. How: This stacks the label, the buttons, and the details with room between them and above the block. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+	padding-top    : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+}
+.navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Entering Menu Contact Div. Why: The contact block should arrive after the last link. How: This plays the same entrance, a beat after the last row. */
+
+
+	animation       : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) backwards; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Backwards Fill. Why: A held end frame would pin the opacity and transform, so the pressed dim and the hover slide could never show. How: This holds only the hidden start through the delay, then hands the element back to its own rules. */
+	animation-delay : calc( var( --dur-ani-m03 ) * ( var( --men-ite-ind ) + 1 ) );            /* Duration Animation Base Minus 3 ~= 67.9ms, Menu Item Index set by the block */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Contact Div. Why: Someone who asked for less motion shouldn't see the block animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Motionless Entering Menu Contact Div. Why: The block should simply be there when the menu opens. How: This turns the entrance off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.conLabSpa { /* What: Contact Label Span. Why: A small label introduces the contact block like the sections' labels. How: This sets it small, widely spaced, uppercase, and light blue. */
+
+
+	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-bas );                   /* Font Size Base = 11px */
+	font-weight    : 600;
+	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em ); /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325em */
+	text-transform : uppercase;
+
+
+}
+
+
+/* #region menActDiv */
+
+.menActDiv { /* What: Menu Actions Div. Why: The call and quote buttons sit side by side. How: This lays them out in two equal columns with a gap between. */
+
+
+	column-gap            : var( --spa-hor-m01 ); /* Spacing Horizontal Base Minus 1 = 11px */
+	display               : grid;
+	grid-template-columns : 1fr 1fr;
+
+
+}
+
+.menCtaAnc { /* What: Menu Call-To-Action Anchor. Why: Calling is the quickest way to reach the company. How: This sets the number as a filled blue button, its border matching its fill so it keeps its size when hover empties it. */
+
+
+	background     : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
+	border         : var( --bor-wid-lar ) solid var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
+	color          : var( --tex-acc-col );                            /* Text Accent Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
-	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
-	margin-top     : var( --spa-ver-p01 );                      /* Spacing Vertical Base Plus 1 ~= 19.304px */
-	padding        : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-m01 );       /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Minus 1 = 11px */
 	text-align     : center;
 	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
-.menCtaAnc:hover { /* What: Hovered Menu Call-To-Action Anchor. Why: The button should respond to the pointer. How: This empties its fill and turns its text light blue inside the blue ring, like the bar's call button, and lifts it a pixel. */
+.menCtaAnc:hover { /* What: Hovered Menu Call-To-Action Anchor. Why: The button should respond to the pointer. How: This empties its fill and turns its text light blue inside its blue border, like the bar's call button, and lifts it a pixel. */
 
 
 	background : transparent;
-	box-shadow : inset 0 0 0 var( --bor-wid-lar ) var( --acc-mai-col ); /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */ /* What: Outline Ring. Why: The emptied button stays outlined, but a real border would make it taller than it was. How: This draws the outline inside the box, appearing at once beneath the fading fill. */
-	color      : var( --acc-lig-col );                                  /* Accent Light Color ~= #4488f6 */
-	transform  : translateY( -1px );                                    /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transform  : translateY( -1px );   /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
 
 
 }
@@ -603,6 +836,68 @@
 
 
 }
+
+.menQuoAnc { /* What: Menu Quote Anchor. Why: The quote form is the site's main goal, offered beside the call button as its quieter partner. How: This sets an unfilled button with white text and a faint white border, the same size as the call button. */
+
+
+	background     : transparent;
+	border         : var( --bor-wid-lar ) solid oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-004-rec ) ); /* Border Width Large ~= 2.035px, Background Page Color = #ffffff, Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+	color          : var( --bac-pag-col );                                                                           /* Background Page Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                                                                           /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                                                                           /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 700;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );                                                         /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-m01 );                                                      /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Minus 1 = 11px */
+	text-align     : center;
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), border-color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+
+
+}
+.menQuoAnc:hover { /* What: Hovered Menu Quote Anchor. Why: The button should respond to the pointer. How: This firms its border to white, adds a faint fill, and lifts it a pixel, like the hero's quieter button. */
+
+
+	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
+	border-color : var( --bac-pag-col );                                                /* Background Page Color = #ffffff */
+	transform    : translateY( -1px );                                                  /* What: Hover Lift. Why: The button invites a tap. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.menQuoAnc:active { /* What: Pressed Menu Quote Anchor. Why: A press should register before the menu closes. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Quote Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
+
+
+	.menQuoAnc { /* What: Motionless Menu Quote Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion menActDiv */
+
+
+.menInfPar { /* What: Menu Info Paragraph. Why: The hours and service area should be there without competing with the buttons. How: This sets them small in the quiet silver, capped at the small text width. */
+
+
+	color       : var( --tex-inm-col ); /* Text Inverse Muted Color = #8a9ab5 */
+	font-size   : var( --fon-siz-bas ); /* Font Size Base = 11px */
+	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-sma ); /* Text Width Small Maximum ~= 22.047em */
+
+
+}
+
+/* #endregion menConDiv */
 
 /* #endregion navMenDiv */
 

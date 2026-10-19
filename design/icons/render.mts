@@ -38,7 +38,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
 
 // #region Constants
 
-type IcoRcdTyp = { // What: Icon Record Type. Why: Every PNG icon is described the same way. How: This names its file, its size, and whether it needs a solid background.
+type IcoRecTyp = { // What: Icon Record Type. Why: Every PNG icon is described the same way. How: This names its file, its size, and whether it needs a solid background.
 
 
 	filStr : string,  // What: File String. Why: Each icon is saved under its own name in public/. How: This is the file name.
@@ -47,7 +47,28 @@ type IcoRcdTyp = { // What: Icon Record Type. Why: Every PNG icon is described t
 
 
 };
-const ICO_RCD_ARR : IcoRcdTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
+
+// #region ICO_REC_ARR
+
+/**
+ * ICO_REC_ARR = Icon Record Array
+ *
+ * @summary
+ * The PNG icons rendered from the mark, in the order they're written. Every
+ * row shares one shape, so its fields carry no comments of their own:
+ *
+ * - `filStr` (String): File String, the icon's file name in public/.
+ *
+ * - `opaBoo` (Boolean): Opaque Boolean, true for the icon drawn on solid
+ *   white.
+ *
+ * - `sizNum` (Number): Size Number, the icon's width and height in pixels.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
 
 
 	{ filStr : 'favicon-16x16.png',    opaBoo : false, sizNum : 16  }, // What: Small Icon Row. Why: Tabs draw small icons crisper at their own size. How: This renders the 16px icon.
@@ -58,6 +79,8 @@ const ICO_RCD_ARR : IcoRcdTyp[] = [ // What: Icon Record Array. Why: The PNG ico
 
 
 ];
+
+// #endregion ICO_REC_ARR
 
 
 
@@ -113,6 +136,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 		const souImaObj = new Image(); // What: Source Image Object. Why: The mark has to be decoded before it's drawn. How: This loads it from its base64 data.
 
+
 		souImaObj.src = `data:image/png;base64,${ souB64Str }`; // What: Source Address Assignment. Why: The image loads from the data handed in. How: This sets it as a data URL.
 
 		await souImaObj.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
@@ -130,16 +154,16 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 			curSizNum = Math.round( curSizNum / 2 ); // What: Halved Size Update. Why: The step is half the previous size. How: This halves and rounds it.
 
-			halCanObj.width = curSizNum; // What: Half Width Assignment. Why: The canvas is square at the step's size. How: This sets its width.
-
+			halCanObj.width  = curSizNum; // What: Half Width Assignment. Why: The canvas is square at the step's size. How: This sets its width.
 			halCanObj.height = curSizNum; // What: Half Height Assignment. Why: The canvas is square at the step's size. How: This sets its height.
 
 
-			const halConObj = halCanObj.getContext( '2d' )!; // What: Half Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
+			const halCotObj = halCanObj.getContext( '2d' )!; // What: Half Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
 
-			halConObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: The best resampling keeps edges clean. How: This asks for high-quality smoothing.
 
-			halConObj.drawImage( curCanObj, 0, 0, curSizNum, curSizNum ); // What: Half Draw Call. Why: This is the step itself. How: This draws the previous step at half size.
+			halCotObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: The best resampling keeps edges clean. How: This asks for high-quality smoothing.
+
+			halCotObj.drawImage( curCanObj, 0, 0, curSizNum, curSizNum ); // What: Half Draw Call. Why: This is the step itself. How: This draws the previous step at half size.
 
 			curCanObj = halCanObj; // What: Step Advance Assignment. Why: The next step draws from this one. How: This makes it the current image.
 
@@ -150,29 +174,30 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 		const finCanObj = document.createElement( 'canvas' ); // What: Final Canvas Object. Why: The last step draws at the exact target size. How: This creates it.
 
-		finCanObj.width = tarSizNum; // What: Final Width Assignment. Why: The icon is square at its target size. How: This sets the width.
 
+		finCanObj.width  = tarSizNum; // What: Final Width Assignment. Why: The icon is square at its target size. How: This sets the width.
 		finCanObj.height = tarSizNum; // What: Final Height Assignment. Why: The icon is square at its target size. How: This sets the height.
 
 
-		const finConObj = finCanObj.getContext( '2d' )!; // What: Final Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
+		const finCotObj = finCanObj.getContext( '2d' )!; // What: Final Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
 
-		finConObj.imageSmoothingQuality = 'high'; // What: Final Smoothing Assignment. Why: The last step should resample as cleanly as the others. How: This asks for high-quality smoothing.
+
+		finCotObj.imageSmoothingQuality = 'high'; // What: Final Smoothing Assignment. Why: The last step should resample as cleanly as the others. How: This asks for high-quality smoothing.
 
 
 		if ( solBacBoo ) { // What: Solid Background Fill. Why: iOS fills transparency with black. How: For the opaque icon, this paints the square white before the mark goes on.
 
 
-			finConObj.fillStyle = '#ffffff'; // What: White Fill Assignment. Why: The background has to be solid white. How: This sets the fill color.
+			finCotObj.fillStyle = '#ffffff'; // What: White Fill Assignment. Why: The background has to be solid white. How: This sets the fill color.
 
-			finConObj.fillRect( 0, 0, tarSizNum, tarSizNum ); // What: Background Fill Call. Why: Every pixel under the mark has to be opaque. How: This paints the whole square.
+			finCotObj.fillRect( 0, 0, tarSizNum, tarSizNum ); // What: Background Fill Call. Why: Every pixel under the mark has to be opaque. How: This paints the whole square.
 
 
 		}
 
 
 
-		finConObj.drawImage( curCanObj, 0, 0, tarSizNum, tarSizNum ); // What: Final Draw Call. Why: This draws the icon itself. How: This draws the last step at the exact size.
+		finCotObj.drawImage( curCanObj, 0, 0, tarSizNum, tarSizNum ); // What: Final Draw Call. Why: This draws the icon itself. How: This draws the last step at the exact size.
 
 
 
@@ -192,7 +217,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 
 
-for ( const icoRcdObj of ICO_RCD_ARR ) writeFileSync( OUT_DIR_STR + icoRcdObj.filStr, await renPngFun( icoRcdObj.sizNum, icoRcdObj.opaBoo ) ); // What: PNG Icon Loop. Why: Each PNG icon is saved under its own name. How: This renders every row and writes it into public/.
+for ( const icoRecObj of ICO_REC_ARR ) writeFileSync( OUT_DIR_STR + icoRecObj.filStr, await renPngFun( icoRecObj.sizNum, icoRecObj.opaBoo ) ); // What: PNG Icon Loop. Why: Each PNG icon is saved under its own name. How: This renders every row and writes it into public/.
 
 
 
@@ -232,7 +257,7 @@ writeFileSync( OUT_DIR_STR + 'favicon.ico', Buffer.concat( [ icoHeaBuf, ...icoPn
 
 await broInsObj.close(); // What: Browser Close Call. Why: The script should exit once the icons are saved. How: This shuts Chromium down.
 
-console.log( `Wrote ${ ICO_RCD_ARR.length } PNG icons and favicon.ico to ${ OUT_DIR_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count and folder.
+console.log( `Wrote ${ ICO_REC_ARR.length } PNG icons and favicon.ico to ${ OUT_DIR_STR }.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the count and folder.
 
 // #endregion Module Init
 

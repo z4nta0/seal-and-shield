@@ -3,7 +3,7 @@
 A marketing website for Seal and Shield LLC, a real commercial roofing
 contractor based in Lawrence, Kansas (React, Vite, React Router, deployed on
 Netlify at https://sealandshieldroof.com/). It's also a portfolio piece by
-techgeek.support, linked from https://techgeek.support. Every rule in the
+techgeek.dev, linked from https://techgeek.dev. Every rule in the
 user-level CLAUDE.md applies here; this file records only what's specific to
 this project.
 
@@ -44,6 +44,32 @@ treatment. The `author` meta names the business itself.
   reviews. No social accounts were provided; if the company ever shares
   real ones, they join the preview tags as `twitter:site` and the
   structured data as `sameAs`.
+- **Google's rich results warnings** (decided 2026-10-17): the test flags
+  a missing `streetAddress`, `postalCode`, and `priceRange`. All three stay
+  out: there's no business address to give, a ZIP code would point at the
+  owner's home area, and the page shows no prices for a range to match. They
+  are optional fields, so the warnings don't affect eligibility.
+- **The canonical stays in `index.html`** (decided 2026-10-18): the only other
+  route is the `noindex` 404 page, so under the user-level SEO rule the site
+  counts as one indexed page, and crawlers that never run scripts still read
+  the canonical. The 404 page carries the home page's canonical beside its
+  `noindex`, which is accepted, since the `noindex` keeps it out of search.
+
+## Multi-page scroll position
+Decided 2026-10-17: the user-level "Multi-Page React Sites: Scroll Position"
+rule doesn't apply here. The 404 page is the only other route, and it's a
+short page rather than a scrollable one, so a scroll-to-top hook would add
+complexity for no real gain. For the same reason there's no back to top link
+(decided 2026-10-17): the home page's footer and bar already have Home, and
+the 404 page is too short to need one.
+
+## Section links
+Decided 2026-10-18: `ui/section-link.ts` exports only `useSecCliFun`, where
+the user-level "## Section Links: No Hash In The Address" implementation
+bullet has the file export `modCliFun` and `useSecLinFun` as well. Every link
+here goes through the shared click handler, and with no back to top link
+nothing else needs `modCliFun`, so nothing outside the file imports either
+one, and both stay internal to it.
 
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
@@ -57,7 +83,11 @@ so it's settled (2026-10-10).
   The logos and the services header take `max()` of a rhythm-step floor and
   a horizontal step, since their columns already cap them.
 - **Fixed (rem steps)**: everything inside a component: small gaps, card,
-  field, and tag padding, the heading rules, and the menu lines. The 3px
+  field, and tag padding, the heading rules, and the menu lines. The phone
+  menu's Call Now and Free Quote buttons count as component padding too
+  (decided 2026-10-18), on a fixed `--spa-hor-m01`, the same as the phone
+  menu buttons in reese-roofing, hair-designs, and tonys-toppers, while the
+  bar's own buttons stay fluid. The 3px
   value markers stay literal, since no step lands within 10%.
 - **Content cap**: a fixed `1920px / ρ` (about 1,449.4px), the same as
   reese-roofing.
@@ -84,7 +114,7 @@ src/
   ui/                    components used by 2 or more pages (nav, footer)
                          and section-link.ts
   styles/                global CSS only (fonts.css, styles.css)
-  utils/                 app-agnostic helpers (motion.ts)
+  utils/                 app-agnostic helpers (motion.ts, rhythm.ts)
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test
 suites"), and `design/` holds source artwork that isn't served, with the
@@ -153,7 +183,7 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      through `ui/section-link.ts`, and the home page scrolls to a hash it
      arrives with and then clears it, as asked for the same day.
    - **Security headers, WebP logos, and SEO: done 2026-10-09**, as recorded
-     under "Kind of site" and "Known issues".
+     under "Kind of site" and "Accessibility pass".
    - **Social previews: done 2026-10-09.** The 1,200x630 card
      (`public/og-image.png`, 270 KB) shows the logo over "Commercial
      Roofing" and "Lawrence, KS" on the hero's navy, grid, and glow, inside
@@ -174,7 +204,13 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      section, footer, and 404 page set to the light accent for contrast.
      The contact form's success panel fades up with its check popping in
      once, its error fades in, and the submit button's label fades to
-     Sending... while a request is out. Everything has a reduced-motion variant.
+     Sending... while a request is out. Since 2026-10-18 the panel and the
+     error also leave the way they came, sinking out quicker (209ms and
+     158ms) before the form returns or a retry goes out; their exits shorten
+     to .01ms under reduced motion, since the page waits on their end to
+     remove them. Everything has a reduced-motion variant.
+     The service cards lift and the service area tags fill on hover even
+     though neither is clickable, which the user chose to keep (2026-10-18).
      The menu's phone button draws its hover outline as an inset
      box-shadow, which takes no space, so the closed state looks exactly as
      before.
@@ -184,12 +220,28 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      cancelled the service cards' lift (in every engine, before this pass)
      and would have cancelled the Call Now button's. Each card and that
      button now sit inside a plain reveal div.
+   - **Section links and the phone menu updated 2026-10-17**, on the
+     `rules-update` branch. Every section link (bar, menu, hero, footer, and
+     404 page) is now a real `/#section` link handled by `ui/section-link.ts`'s
+     `useSecCliFun`, copied from hair-designs: a plain click scrolls in place
+     or navigates home with no hash left behind, while a Ctrl, Cmd, or middle
+     click opens the section in a new tab, which jumps there once the fonts
+     load and clears its hash. The footer's section buttons became links.
+     The phone menu gained a dimmer behind it (`--scr-mai-col`, the inverse
+     navy at about 0.57 opacity) that closes it on a tap, and, copied from
+     reese-roofing, it makes the page behind it inert, closes on Escape
+     (returning focus to its button), and closes when the screen widens past
+     the breakpoint. It also gained a staggered entrance; an active section
+     dot; a label that nudges sideways on hover; and a contact block with Call
+     Now and Free Quote side by side above the hours and service area. The
+     user may drop the Free Quote button if the menu looks crowded.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
 `tests/`, one project per suite and engine in `tests/playwright.config.ts`,
-which starts its own dev server on port 5191 (never the usual 5173) and stops
-it afterwards. Every suite runs in Chromium, Firefox, and WebKit. Results,
+which starts its own dev server on port 5197 (never the usual 5173, nor the
+5190 to 5196 its sibling projects use) and stops it afterwards. Every suite
+runs in Chromium, Firefox, and WebKit. Results,
 screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states the suites
 visit (the home page and the 404 page at 390px and 1,440px, plus the mobile
@@ -202,22 +254,26 @@ waiting for the page to settle.
   checks each state against WCAG 2.2 A and AA plus best practices
   (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
   button names, a Tab walk (order, traps, focus on screen, uncovered, and
-  visible), reflow at 320px, and motion under reduced motion. axe's "needs
-  review" results are printed and attached to the report rather than failing
-  the run.
+  visible), reflow at 320px, motion under reduced motion, and the contact
+  form's announcements: its alert region waits in the page empty and gains
+  the error, focus stays on the submit button after a failed send, and focus
+  moves to the thank-you message and back to the form. axe's "needs review"
+  results are printed and attached to the report rather than failing the
+  run.
 - `npm run test:interaction`: checks what the controls do, under reduced
-  motion so scrolls land at once. The bar's links, brand, menu, and footer
-  buttons land on their sections with a clean address; the contact form
-  refuses incomplete requests and reports a faked Netlify answer honestly;
-  and the 404 page, its buttons, and a section address like /#about lead
-  where they should. `feedback.spec.ts`, adapted from reese-roofing's,
-  checks that every control in every state has a hover, press, and focus
-  change with a transition, that the focus ring eases in to full width, and
-  that feedback stays without motion under reduced motion. Its two
-  every-control probes are marked slow, since each takes about 28 seconds
-  in Chromium. The open menu state parks the pointer in the bar's corner
-  after tapping the toggle, so the toggle's hover color stays out of every
-  check of it.
+  motion so scrolls land at once. The bar's links, brand, menu, footer links,
+  and hero buttons land on their sections with a clean address, a Ctrl or Cmd
+  click and a middle click open them in new tabs, and the menu closes on
+  Escape, on a tap of its dimmer, and when the screen widens; the contact form
+  refuses incomplete requests and reports a faked Netlify answer honestly; and
+  the 404 page, its buttons, and a section address like /#about lead where
+  they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
+  every control in every state has a hover, press, and focus change with a
+  transition, that the focus ring eases in to full width, and that feedback
+  stays without motion under reduced motion. Its two every-control probes are
+  marked slow, since each takes about 28 seconds in Chromium. The open menu
+  state parks the pointer in the bar's corner after tapping the toggle, so the
+  toggle's hover color stays out of every check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
   pixel may differ, and the per-pixel color threshold is 0 too, since
@@ -230,11 +286,12 @@ waiting for the page to settle.
   menu at 18 widths from 320 to 1,920px (a pixel either side of each breakpoint
   included), failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, or two reachable controls overlapping.
-- `npm run test:seo`: checks each route's title, description, author,
-  canonical, robots, and single h1; that the structured data's every claim
-  appears on the page; that the social tags are complete and match the page,
-  the card is a 1,200x630 PNG under 300 KB, and every linked icon is served at
-  its size; and that robots.txt and the sitemap say what they should.
+- `npm run test:seo`: checks each route's title, description, canonical,
+  robots, and single h1, and the author on the home page; that the structured
+  data's every claim appears on the page; that the social tags are complete
+  and match the page, the card is a 1,200x630 PNG under 300 KB, and every
+  linked icon is served at its size; and that robots.txt and the sitemap say
+  what they should.
 - `npm test` runs every suite.
 
 ## Live checks
@@ -272,6 +329,13 @@ reduced-motion variant (with `utils/motion.ts`'s `redMotFun` stopping the
 JavaScript smooth scrolls), the form fields got a focus ring, and the muted
 text, light blue, light-section labels, and footer copyright line were
 adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
+- **To do: shrink the small logo** (recorded 2026-10-18): the Images rule
+  now allows up to 3x, but `logo-simple.webp` is 157x133 in a 44.876px
+  box, about 3.5x by width. Re-encode it near 135x114 through a render
+  script kept in `design/`, update its `width` and `height`, and refresh
+  the rendering baselines in all three engines. Deferred by the user.
+- **The logos stay raster** (confirmed 2026-10-17): the company has no SVG
+  version of either logo, so the WebP copies below remain until it does.
 - **The logos were resized on 2026-10-08** (at the user's go-ahead, ahead
   of step 7): `logo-full.png` went from 4763x4640 (3.7 MB, about 88 MB
   decoded) to 968x943 (299 KB), at least 2x its largest display and 3x the
@@ -293,7 +357,8 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
   checked by serving the production build with the headers attached in the
   browser: no violations in any engine while every page, font, image, the
   menu, and the form worked, and the live site's grade came back with no
-  problems after the deploy. Anything later added from another origin (analytics,
-  a map, an embedded review widget) needs its origin added to the policy.
+  problems after the deploy. Anything later added from another origin
+  (analytics, a map, an embedded review widget) needs its origin added to the
+  policy.
 - **Netlify builds with Node 24.x**, set in the site's Netlify settings
   rather than in the repo.

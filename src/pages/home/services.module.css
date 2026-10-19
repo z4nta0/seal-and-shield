@@ -67,7 +67,7 @@
 
 
 }
-.serHeaDiv .eyeLabPar { /* What: Header Eyebrow Label Paragraph. Why: Light blue doesn't have enough contrast on the light section. How: This turns the header's label the deeper blue. */
+.serHeaDiv .eyeLabPar { /* What: Eyebrow Label Paragraph In Header. Why: Light blue doesn't have enough contrast on the light section. How: This turns the header's label the deeper blue. */
 
 
 	color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
@@ -85,13 +85,6 @@
 	letter-spacing : calc( var( --cdn-pow-014-rec ) * 1em );                   /* Core-Design-Number to the Power of 14 Reciprocal ~= 0.020em */
 	line-height    : var( --ver-rhy-m01 );                                     /* Vertical Rhythm Base Minus 1 = 1 */
 	text-transform : uppercase;
-
-
-}
-.serAreDiv .secTitHea { /* What: Area Section Title Heading. Why: Navy text would vanish on the navy panel. How: This turns the panel's heading white. */
-
-
-	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
 
 
 }
@@ -187,7 +180,7 @@
 .serCarDiv::after { /* What: Services Card Div Shadow. Why: The hovered card casts a soft navy shadow, which should fade in without repainting it every frame. How: This holds the shadow on a layer matching the card's border box, hidden until hover, and fades it in through opacity. */
 
 
-	box-shadow     : var( --ele-med-sha );                                                                                  /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	box-shadow     : var( --ele-med-sha );                                                                                  /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */
 	content        : '';
 	inset          : calc( var( --bor-wid-xla ) * -1 ) calc( var( --bor-wid-bas ) * -1 ) calc( var( --bor-wid-bas ) * -1 ); /* Border Width Extra Large ~= -3.572px, Border Width Base ~= -1.160px */
 	opacity        : 0;
@@ -237,6 +230,7 @@
 	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
 	font-weight    : 700;
 	letter-spacing : 0.04em;
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom  : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	text-transform : uppercase;
 
@@ -249,6 +243,7 @@
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
 	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
 	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	max-width   : var( --tex-wid-bas ); /* Text Width Base Maximum ~= 29.207em */
 
 
 }
@@ -287,6 +282,19 @@
 
 
 }
+
+/* What: Eyebrow Label Paragraph. Why: The panel opens with the same small label as the section's header. How: Its rule sits in the serHeaDiv region, where the class first appears. */
+
+/* What: Section Title Heading. Why: The panel's heading shares the section heading's look. How: Its rule sits in the serHeaDiv region, where the class first appears, and the rule below turns it white on the navy. */
+.serAreDiv .secTitHea { /* What: Section Title Heading In Area. Why: Navy text would vanish on the navy panel. How: This turns the panel's heading white. */
+
+
+	color : var( --bac-pag-col ); /* Background Page Color = #ffffff */
+
+
+}
+
+/* What: Section Divider Div. Why: The panel's heading gets the same short rule as the section's. How: Its rule sits in the serHeaDiv region, where the class first appears. */
 
 .areDesPar { /* What: Area Description Paragraph. Why: The tags need a sentence of context on the dark panel. How: This sets it in light silver with generous leading, capped at about 68 characters a line. */
 

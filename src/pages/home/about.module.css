@@ -27,7 +27,7 @@
 
 
 	background : var( --bac-pag-col );   /* Background Page Color = #ffffff */
-	overflow-x : clip;                   /* What: Side Clip. Why: The logo's light panel reaches past its column, which on a phone runs past the screen's edge. How: This clips it there without making the section a scroll container, so the panel runs edge to edge. */
+	overflow-x : clip;                   /* What: Side Clip. Why: The logo's light panel reaches past its column, which at about 493px wide and below runs past the screen's edge. How: This clips it there without making the section a scroll container, so the panel runs edge to edge. */
 	padding    : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
 
 
@@ -105,7 +105,7 @@
 
 }
 
-.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, or to the screen's edges on a phone, in the off-white behind everything else. */
+.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, or to the screen's edges at about 493px wide and below, in the off-white behind everything else. */
 
 
 	background : var( --bac-sur-col );              /* Background Surface Color = #f4f6fa */
@@ -124,7 +124,7 @@
 
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 4 ~= 44.876px, Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	position : relative;
-	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) );                                                                                             /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
+	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
 	z-index  : 1;
 
 
@@ -137,7 +137,7 @@
 .infCarDiv { /* What: Info Card Div. Why: The company's key facts read as one navy card. How: This fills a padded, full-width navy card above the logo's panel and stacks its rows. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Card. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control in the card the lighter blue ring. */
 
 	background     : var( --bac-inr-col );                                                                           /* Background Inverse Raised Color = #0f1e45 */
 	display        : flex;
@@ -165,7 +165,7 @@
 
 
 }
-.infRowDiv:last-child { /* What: Last Info Row Div. Why: The card ends without a divider. How: This drops the last row's border. */
+.infRowDiv:last-child { /* What: Info Row Div Last. Why: The card ends without a divider. How: This drops the last row's border. */
 
 
 	border-bottom : none;
@@ -245,7 +245,7 @@
 
 /* #region aboTexDiv */
 
-.aboTexDiv { /* What: About Text Div. Why: Once the columns stack, the story should sit centered under the logo rather than hug the left edge. How: This centers the column at its content's width in its grid cell, keeping its text left-aligned; beside the logo, its column is already sized to its content, so nothing moves. */
+.aboTexDiv { /* What: About Text Div. Why: Once the columns stack at 900px wide and below, the story should sit centered under the logo rather than hug the left edge. How: This centers the column at its content's width in its grid cell, keeping its text left-aligned; beside the logo, its column is already sized to its content, so nothing moves. */
 
 
 	justify-self : center;
@@ -253,22 +253,15 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading, and light blue wouldn't have enough contrast on the white section. How: This sets it small, widely spaced, uppercase, and the main blue, copied from the shared eyebrow label with its color deepened. */
 
 
-	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
+	color          : var( --acc-mai-col );                   /* Accent Main Color = #1e56c8 */
 	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'Barlow Condensed', sans-serif */
 	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
 	letter-spacing : calc( var( --cdn-pow-005-rec ) * 1em ); /* Core-Design-Number to the Power of 5 Reciprocal ~= 0.245em */
 	text-transform : uppercase;
-
-
-}
-.aboTexDiv .eyeLabPar { /* What: Text Column Eyebrow Label Paragraph. Why: Light blue doesn't have enough contrast on the white section. How: This turns the label the deeper blue. */
-
-
-	color : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
 
 
 }
@@ -358,6 +351,7 @@
 	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 700;
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em ); /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	line-height    : var( --ver-rhy-m01 );                   /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom  : var( --spa-ver-m04 );                   /* Spacing Vertical Base Minus 4 ~= 4.732px */
 	text-transform : uppercase;
 

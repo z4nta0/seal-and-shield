@@ -6,6 +6,8 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
+import { useEffect    } from 'react';       // What: Use Effect. Why: Focus has to move when the form gives way to the thank-you message and when it returns. How: This runs the focus move after each render the sent state changes.
+import { useRef       } from 'react';       // What: Use Ref. Why: The focus move needs the thank-you panel and the name field. How: This holds both elements, and whether focus should return to the form.
 import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 80ms per block.
 import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's fields and whether it was just sent. How: This holds both.
 
@@ -19,12 +21,18 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  * @summary
  * The page's last section, where visitors reach the company: an invitation
  * with the company's location, phone number, and hours and a call button on
- * the left, and the free quote request form on the right. The form posts to
- * Netlify Forms as contactForm, which finds the form through the hidden copy
- * in index.html, so every field's name has to match that copy. Once sent,
- * the form gives way to a thank-you message for six seconds. Each block fades
- * in as the section scrolls into view. Its id, contact, is what the bar's
- * Contact link and the hero's quote button scroll to.
+ * the left, and the free quote request form on the right, the form stacking
+ * below the invitation at 900px wide and below. The form posts to Netlify
+ * Forms as contactForm, which finds the form through the hidden copy in
+ * index.html, so every field's name has to match that copy. Once sent, the
+ * form gives way to a thank-you message for six seconds, which then sinks out
+ * a little quicker than it rose in, as a failed request's error does when the
+ * visitor tries again. Focus moves to the thank-you message when it replaces
+ * the form, which announces it, and back to the first field when the form
+ * returns, while a failure's error appears in an alert region the form carries
+ * from the start. Each block fades in as the section scrolls into view. Its
+ * id, contact, is what the bar's Contact link and the hero's quote button
+ * scroll to.
  *
  * Sections:
  *  - Constants
@@ -77,12 +85,18 @@ const EMP_FOR_OBJ = { company : '', email : '', message : '', name : '', phone :
 function ConSecCom () : React.JSX.Element {
 
 
-	const secEleRef = useRevSecFun( 80 ); // What: Section Element Reference. Why: The section's blocks fade in as it scrolls into view. How: This is the ref the reveal hook watches, staggering the blocks 80ms apart.
+	const secEleRef = useRevSecFun( 80 );                 // What: Section Element Reference. Why: The section's blocks fade in as it scrolls into view. How: This is the ref the reveal hook watches, staggering the blocks 80ms apart.
+	const focRetRef = useRef( false );                    // What: Focus Return Reference. Why: The form should take focus back only if the visitor left it on the thank-you message. How: sucEndFun records whether the panel still had focus as it faded out.
+	const namInpRef = useRef< HTMLInputElement >( null ); // What: Name Input Reference. Why: The returning form's first field takes focus back. How: This holds the Full Name input.
+	const sucDivRef = useRef< HTMLDivElement >( null );   // What: Success Div Reference. Why: The thank-you message takes focus when it replaces the form. How: This holds the panel.
 
 	const [ forSenBoo, setForSenBoo ] = useState( false );       // What: Form Sent Boolean And Setter. Why: The form gives way to a thank-you message once sent. How: This holds whether the message is showing.
 	const [ forDatObj, setForDatObj ] = useState( EMP_FOR_OBJ ); // What: Form Data Object And Setter. Why: The fields are controlled, so the form can empty itself once sent. How: This holds every field's current value, keyed by its name.
 	const [ forErrBoo, setForErrBoo ] = useState( false );       // What: Form Error Boolean And Setter. Why: A visitor whose request didn't go through has to be told, with their details kept for a retry. How: This holds whether the error message is showing.
 	const [ senProBoo, setSenProBoo ] = useState( false );       // What: Send Progress Boolean And Setter. Why: The button shouldn't send the same request twice while the first is still on its way. How: This holds whether a submission is waiting on Netlify's answer.
+	const [ errLeaBoo, setErrLeaBoo ] = useState( false );       // What: Error Leaving Boolean And Setter. Why: The error message should fade out before it's removed. How: This holds whether its exit is playing.
+	const [ errCouNum, setErrCouNum ] = useState( 0 );           // What: Error Count Number And Setter. Why: Each failure has to add a fresh paragraph to the alert region, or screen readers won't announce a second one that arrives while the first is still fading. How: This counts failures, and the error paragraph takes it as its key.
+	const [ sucLeaBoo, setSucLeaBoo ] = useState( false );       // What: Success Leaving Boolean And Setter. Why: The thank-you message should fade out before the form returns. How: This holds whether its exit is playing.
 
 
 	// #region fieChaFun
@@ -121,16 +135,17 @@ function ConSecCom () : React.JSX.Element {
 	 * @summary
 	 * Handles the form's submit once the browser's own validation has passed
 	 * (Full Name and Phone are required, and Email has to look like an
-	 * address): stops the page-reloading submit, hides any earlier error, and
-	 * posts the form's fields to Netlify Forms as URL-encoded data, whose
+	 * address): stops the page-reloading submit, fades out any earlier error,
+	 * and posts the form's fields to Netlify Forms as URL-encoded data, whose
 	 * form-name field tells Netlify which form they belong to. While the
-	 * request is out, the submit button is disabled and its label says
-	 * Sending... instead. Only an OK answer from Netlify counts as sent: then
-	 * the thank-you message shows, the fields empty, and the form comes back
-	 * six seconds later. A request that fails outright, or one Netlify
-	 * rejects, keeps the visitor's details in place and shows the error
-	 * message instead, so they can try again or call; a request that fails
-	 * outright is also logged to the console.
+	 * request is out, the submit button is marked aria-disabled, so it keeps
+	 * focus, a second submit returns at once, and its label says Sending...
+	 * instead. Only an OK answer from Netlify counts as sent: then
+	 * the thank-you message shows, the fields empty, and six seconds later the
+	 * message fades out and the form comes back. A request that fails
+	 * outright, or one Netlify rejects, keeps the visitor's details in place
+	 * and shows the error message instead, so they can try again or call; a
+	 * request that fails outright is also logged to the console.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -152,15 +167,23 @@ function ConSecCom () : React.JSX.Element {
 		subEveObj.preventDefault(); // What: Default Submit Cancel. Why: A normal submit would reload the page. How: This stops it, so the fetch below sends the fields instead.
 
 
+
+		if ( senProBoo ) return; // What: Sending Exit Guard. Why: The button stays enabled for focus while a request is out, so a second submit can still arrive. How: This returns at once while the first request is on its way.
+
+
+
 		const forCurEle = subEveObj.target as HTMLFormElement;                              // What: Form Current Element. Why: The fields are read from the form itself. How: This is the element the submit event fired on. // What: Type Assertion Note. Why: An event's target types as a plain EventTarget. How: A submit event always fires on its form element.
 		const forValObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Value Object. Why: Netlify expects the form's fields as name and value pairs. How: This reads every named field, form-name included. // What: Type Assertion Note. Why: URLSearchParams doesn't accept a FormData in TypeScript's types. How: Every field in this form holds text, so its entries read as plain string pairs.
 
 		let senOkaBoo = false; // What: Send Okay Boolean. Why: Only a confirmed submission should show the thank-you message. How: This starts false and turns true only when Netlify answers OK.
 
 
-		setForErrBoo( false ); // What: Error Message Hide Call. Why: A new attempt shouldn't keep showing the last one's error. How: This hides the error message.
 
-		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the request is on its way, and shouldn't send it twice. How: This disables the button and switches its label to say Sending... instead.
+		if ( forErrBoo ) setErrLeaBoo( true ); // What: Error Message Exit Call. Why: A new attempt shouldn't keep showing the last one's error. How: This plays the error's exit when one is showing, and errEndFun removes it once the exit ends.
+
+
+
+		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the request is on its way, and shouldn't send it twice. How: This marks the button aria-disabled and switches its label to say Sending... instead.
 
 
 
@@ -187,7 +210,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This re-enables the button and restores its label.
+		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This clears the button's aria-disabled mark and restores its label.
 
 
 
@@ -198,17 +221,135 @@ function ConSecCom () : React.JSX.Element {
 
 			setForDatObj( EMP_FOR_OBJ ); // What: Form Reset Call. Why: The form should come back empty. How: This restores every field to blank.
 
-			window.setTimeout( () => setForSenBoo( false ), 6000 ); // What: Form Return Timer. Why: A visitor may want to send another request. How: This brings the form back after six seconds.
+			setForErrBoo( false ); // What: Error Clear Call. Why: An error still fading when the request succeeds would replay its exit once the form returns. How: This removes it with the form.
+
+			setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The next error should arrive with its entrance, not its exit. How: This clears the exit flag.
+
+
+			window.setTimeout( () => setSucLeaBoo( true ), 6000 ); // What: Form Return Timer. Why: A visitor may want to send another request. How: This starts the thank-you message's exit after six seconds, and sucEndFun brings the form back once it ends.
 
 
 		}
 
-		else setForErrBoo( true ); // What: Error Message Show Call. Why: A failed submission must not look sent. How: This shows the error message and keeps every field as the visitor filled it in.
+		else {
+
+
+			setErrCouNum( ( preCouNum ) => preCouNum + 1 ); // What: Error Count Increment Call. Why: A screen reader announces an alert region's content only when it's added, so each failure needs a new paragraph. How: This changes the error paragraph's key, which mounts it afresh in the region and replays its entrance.
+
+			setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The fresh alert should arrive with its entrance, not its exit. How: This clears the exit flag.
+
+			setForErrBoo( true ); // What: Error Message Show Call. Why: A failed submission must not look sent. How: This shows the error message and keeps every field as the visitor filled it in.
+
+
+		}
 
 
 	};
 
 	// #endregion forSubFun
+
+
+	// #region errEndFun
+
+	/**
+	 * errEndFun = Error End Function
+	 *
+	 * @summary
+	 * The error paragraph's animation end handler. It removes the error only
+	 * once the paragraph's own exit has played: the paragraph's entrance ends
+	 * here too, so the handler does nothing unless the event came from the
+	 * paragraph itself while errLeaBoo says its exit is playing. It then
+	 * clears the exit flag, so the next error arrives with its entrance, and
+	 * removes the paragraph.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param aniEveObj - Animation Event Object: The paragraph's animation
+	 *                    end event.
+	 *
+	 * @returns This function does not return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * errEndFun(aniEveObj) // => void
+	 * ```
+	 *
+	*/
+
+	const errEndFun = ( aniEveObj : React.AnimationEvent< HTMLParagraphElement > ) => { // What: Error End Function. Why: The error message should be removed only once its exit has played. How: This removes it when its own exit animation ends.
+
+
+		if ( aniEveObj.target !== aniEveObj.currentTarget || !errLeaBoo ) return; // What: Exit Guard. Why: The paragraph's entrance also ends here. How: This acts only on the paragraph's own animation while its exit is playing.
+
+
+
+		setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The next error should arrive with its entrance. How: This clears the exit flag.
+
+		setForErrBoo( false ); // What: Error Message Hide Call. Why: The faded error should leave the page. How: This removes it.
+
+
+	};
+
+	// #endregion errEndFun
+
+
+	// #region sucEndFun
+
+	/**
+	 * sucEndFun = Success End Function
+	 *
+	 * @summary
+	 * The thank-you panel's animation end handler. It brings the form back
+	 * only once the panel's own exit has played: the panel's entrance and its
+	 * check mark's pop end here too, so the handler does nothing unless the
+	 * event came from the panel itself while sucLeaBoo says its exit is
+	 * playing. It then swaps the form back in and clears the exit flag, so the
+	 * next thank-you arrives with its entrance.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param aniEveObj - Animation Event Object: The panel's animation end
+	 *                    event.
+	 *
+	 * @returns This function does not return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * sucEndFun(aniEveObj) // => void
+	 * ```
+	 *
+	*/
+
+	const sucEndFun = ( aniEveObj : React.AnimationEvent< HTMLDivElement > ) => { // What: Success End Function. Why: The form should come back only once the thank-you message has faded out. How: This swaps the form back in when the panel's own exit animation ends.
+
+
+		if ( aniEveObj.target !== aniEveObj.currentTarget || !sucLeaBoo ) return; // What: Exit Guard. Why: The panel's entrance and its check mark's pop also end here. How: This acts only on the panel's own animation while its exit is playing.
+
+
+
+		focRetRef.current = document.activeElement === sucDivRef.current; // What: Focus Return Flag Assignment. Why: Focus should go back to the form only if the visitor hadn't moved it on. How: This records whether the panel still holds focus as it leaves.
+
+
+		setForSenBoo( false ); // What: Sent Message Hide Call. Why: The faded message gives way to the form. How: This swaps the form back in.
+
+		setSucLeaBoo( false ); // What: Success Exit Reset Call. Why: The next thank-you should arrive with its entrance. How: This clears the exit flag.
+
+
+	};
+
+	// #endregion sucEndFun
+
+
+
+	useEffect( () => { // What: Form Focus Effect. Why: Focus must never fall to the page when the focused submit button disappears with the form, or when the form comes back. How: This focuses the thank-you panel when it appears, which also announces it, and the name field when the form returns while focus was still on the panel.
+
+
+		if ( forSenBoo ) sucDivRef.current?.focus(); // What: Panel Focus Call. Why: The thank-you message replaces the form, taking its submit button with it. How: This moves focus to the panel, whose heading a screen reader then reads.
+
+		else if ( focRetRef.current ) namInpRef.current?.focus(); // What: Name Field Focus Call. Why: The returning form should pick up where the visitor left off. How: This moves focus to the first field when the panel held it to the end.
+
+
+	}, [ forSenBoo ] ); // What: Effect Dependency Array. Why: Focus moves only when the form and the thank-you message trade places. How: forSenBoo flips once when the message appears and once when the form returns.
 
 
 
@@ -232,17 +373,17 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.conInnDiv }>{ /* What: Contact Inner Div Element. Why: The invitation and the form sit side by side. How: This lays them out in two columns within the content width. */ }
+			<div className={ cssModObj.conInnDiv }>{ /* What: Contact Inner Div Element. Why: The invitation and the form sit side by side. How: This lays them out in two columns within the content width, stacking the form below the invitation at 900px wide and below. */ }
 
 
-				<div>{ /* What: Contact Info Div Element. Why: The left column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button. */ }
+				<div>{ /* What: Contact Info Div Element. Why: The first column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button beside the form, or above it at 900px wide and below. */ }
 
 
 					<p
 						className={ cssModObj.eyeLabPar }
 
 						data-scroll-reveal-block
-					>{ /* What: Contact Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+					>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
 						Get In Touch
 					</p>
 
@@ -250,7 +391,7 @@ function ConSecCom () : React.JSX.Element {
 						className={` ${ cssModObj.secTitHea }   ${ cssModObj.secTitHeaLight } `}
 
 						data-scroll-reveal-block
-					>{ /* What: Contact Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
+					>{ /* What: Section Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
 						Request a Free<br />Quote Today
 					</h2>
 
@@ -258,7 +399,7 @@ function ConSecCom () : React.JSX.Element {
 						className={ cssModObj.secDivDiv }
 
 						data-scroll-reveal-block
-					/>{ /* What: Contact Divider Div Element. Why: A short rule separates the heading from the invitation. How: This draws it. */ }
+					/>{ /* What: Section Divider Div Element. Why: A short rule separates the heading from the invitation. How: This draws it. */ }
 
 					<p
 						className={ cssModObj.infBodPar }
@@ -279,21 +420,21 @@ function ConSecCom () : React.JSX.Element {
 					>{ /* What: Contact Details Div Element. Why: Visitors want the location, number, and hours together. How: This lists them as icon and text rows. */ }
 
 
-						<div className={ cssModObj.detRowDiv }>{ /* What: Location Detail Div Element. Why: A local business should say where it is. How: This pairs a pin icon with the town. */ }
+						<div className={ cssModObj.detRowDiv }>{ /* What: Detail Row Div Element. Why: A local business should say where it is. How: This pairs a pin icon with the town. */ }
 
 
 							<span
 								className={ cssModObj.detIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Location Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a pin, hidden from screen readers since the label beside it already says what the row is. */ }📍</span>
+							>📍</span>{ /* What: Detail Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a pin, hidden from screen readers since the label beside it already says what the row is. */ }
 
 							<div>{ /* What: Location Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className={ cssModObj.detLabSpa }>Location</span>{ /* What: Location Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.detLabSpa }>Location</span>{ /* What: Detail Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className={ cssModObj.detValSpa }>Lawrence, Kansas</span>{ /* What: Location Value Span Element. Why: This is the detail itself. How: This shows the town. */ }
+								<span className={ cssModObj.detValSpa }>Lawrence, Kansas</span>{ /* What: Detail Value Span Element. Why: This is the detail itself. How: This shows the town. */ }
 
 
 							</div>
@@ -302,25 +443,25 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.detRowDiv }>{ /* What: Phone Detail Div Element. Why: The phone number is the quickest way in. How: This pairs a phone icon with a dialing link. */ }
+						<div className={ cssModObj.detRowDiv }>{ /* What: Detail Row Div Element. Why: The phone number is the quickest way in. How: This pairs a phone icon with a dialing link. */ }
 
 
 							<span
 								className={ cssModObj.detIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Phone Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a phone, hidden from screen readers since the label beside it already says what the row is. */ }📞</span>
+							>📞</span>{ /* What: Detail Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a phone, hidden from screen readers since the label beside it already says what the row is. */ }
 
 							<div>{ /* What: Phone Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className={ cssModObj.detLabSpa }>Phone</span>{ /* What: Phone Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.detLabSpa }>Phone</span>{ /* What: Detail Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
 								<a
 									className={ cssModObj.detValAnc }
 
 									href='tel:7853041957'
-								>{ /* What: Phone Value Anchor Element. Why: Visitors can call straight from the details. How: This dials the number on phones. */ }
+								>{ /* What: Detail Value Anchor Element. Why: Visitors can call straight from the details. How: This dials the number on phones. */ }
 									(785) 304-1957
 								</a>
 
@@ -331,21 +472,21 @@ function ConSecCom () : React.JSX.Element {
 						</div>
 
 
-						<div className={ cssModObj.detRowDiv }>{ /* What: Hours Detail Div Element. Why: Callers should know when someone will answer. How: This pairs a clock icon with the hours. */ }
+						<div className={ cssModObj.detRowDiv }>{ /* What: Detail Row Div Element. Why: Callers should know when someone will answer. How: This pairs a clock icon with the hours. */ }
 
 
 							<span
 								className={ cssModObj.detIcoSpa }
 
 								aria-hidden='true'
-							>{ /* What: Hours Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a clock, hidden from screen readers since the label beside it already says what the row is. */ }🕐</span>
+							>🕐</span>{ /* What: Detail Icon Span Element. Why: An icon helps a visitor scan the rows. How: This shows a clock, hidden from screen readers since the label beside it already says what the row is. */ }
 
 							<div>{ /* What: Hours Text Div Element. Why: The label and value stack beside the icon. How: This holds the two. */ }
 
 
-								<span className={ cssModObj.detLabSpa }>Business Hours</span>{ /* What: Hours Label Span Element. Why: Each value needs its label. How: This names the row. */ }
+								<span className={ cssModObj.detLabSpa }>Business Hours</span>{ /* What: Detail Label Span Element. Why: Each value needs its label. How: This names the row. */ }
 
-								<span className={ cssModObj.detValSpa }>Monday – Friday, 8 a.m. – 5 p.m.</span>{ /* What: Hours Value Span Element. Why: This is the detail itself. How: This shows the weekday hours. */ }
+								<span className={ cssModObj.detValSpa }>Monday – Friday, 8 a.m. – 5 p.m.</span>{ /* What: Detail Value Span Element. Why: This is the detail itself. How: This shows the weekday hours. */ }
 
 
 							</div>
@@ -387,7 +528,15 @@ function ConSecCom () : React.JSX.Element {
 					{ forSenBoo ? ( // What: Sent Message Branch. Why: A just-sent form gives way to a thank-you. How: This shows the message while forSenBoo is true.
 
 
-						<div className={ cssModObj.forSucDiv }>{ /* What: Form Success Div Element. Why: The visitor should know the form went through. How: This stacks a check, a heading, and a note. */ }
+						<div
+							ref={ sucDivRef }
+
+							className={` ${ cssModObj.forSucDiv }   ${ sucLeaBoo ? cssModObj.forSucDivLeaving : '' } `}
+
+							tabIndex={ -1 } // What: Programmatic Focus Index. Why: Focus has to land somewhere when the form and its focused button disappear. How: This lets the effect focus the panel without adding it to the Tab order.
+
+							onAnimationEnd={ sucEndFun }
+						>{ /* What: Form Success Div Element. Why: The visitor should know the form went through. How: This stacks a check, a heading, and a note, and sinks out quicker than it rose in before the form returns. */ }
 
 
 							<span className={ cssModObj.sucIcoSpa }>✓</span>{ /* What: Success Icon Span Element. Why: A check mark signals success at a glance. How: This shows it large. */ }
@@ -416,21 +565,23 @@ function ConSecCom () : React.JSX.Element {
 							<h3 className={ cssModObj.forTitHea }>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
 
 
-							<div className={ cssModObj.forRowDiv }>{ /* What: Name Company Row Div Element. Why: Short fields pair up on wide screens. How: This holds the name and company fields side by side. */ }
+							<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Short fields pair up above 520px wide. How: This holds the name and company fields side by side, stacking them at 520px wide and below. */ }
 
 
-								<div className={ cssModObj.forFieDiv }>{ /* What: Name Field Div Element. Why: Each field stacks its label over its input. How: This holds the name field. */ }
+								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the name field. */ }
 
 
 									<label
 										className={ cssModObj.forFieLab }
 
 										htmlFor='conNamInp'
-									>{ /* What: Name Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
+									>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
 										Full Name *
 									</label>
 
 									<input
+										ref={ namInpRef }
+
 										id='conNamInp'
 
 										className={ cssModObj.forFieInp }
@@ -443,19 +594,19 @@ function ConSecCom () : React.JSX.Element {
 										value={ forDatObj.name }
 
 										onChange={ fieChaFun }
-									/>{ /* What: Contact Name Input Element. Why: The company needs to know who's asking. How: Its name, name, is the key Netlify records and forDatObj holds. */ }
+									/>{ /* What: Form Field Input Element. Why: The company needs to know who's asking. How: Its name, name, is the key Netlify records and forDatObj holds. */ }
 
 
 								</div>
 
-								<div className={ cssModObj.forFieDiv }>{ /* What: Company Field Div Element. Why: Each field stacks its label over its input. How: This holds the company field. */ }
+								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the company field. */ }
 
 
 									<label
 										className={ cssModObj.forFieLab }
 
 										htmlFor='conComInp'
-									>{ /* What: Company Label Element. Why: Every field needs a visible label. How: This names the field. */ }
+									>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This names the field. */ }
 										Company
 									</label>
 
@@ -471,7 +622,7 @@ function ConSecCom () : React.JSX.Element {
 										value={ forDatObj.company }
 
 										onChange={ fieChaFun }
-									/>{ /* What: Contact Company Input Element. Why: Commercial work is for a business. How: Its name, company, is the key Netlify records and forDatObj holds. */ }
+									/>{ /* What: Form Field Input Element. Why: Commercial work is for a business. How: Its name, company, is the key Netlify records and forDatObj holds. */ }
 
 
 								</div>
@@ -480,17 +631,17 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={ cssModObj.forRowDiv }>{ /* What: Phone Email Row Div Element. Why: Short fields pair up on wide screens. How: This holds the phone and email fields side by side. */ }
+							<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: Short fields pair up above 520px wide. How: This holds the phone and email fields side by side, stacking them at 520px wide and below. */ }
 
 
-								<div className={ cssModObj.forFieDiv }>{ /* What: Phone Field Div Element. Why: Each field stacks its label over its input. How: This holds the phone field. */ }
+								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the phone field. */ }
 
 
 									<label
 										className={ cssModObj.forFieLab }
 
 										htmlFor='conPhoInp'
-									>{ /* What: Phone Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
+									>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This names the field and marks it required. */ }
 										Phone *
 									</label>
 
@@ -507,19 +658,19 @@ function ConSecCom () : React.JSX.Element {
 										value={ forDatObj.phone }
 
 										onChange={ fieChaFun }
-									/>{ /* What: Contact Phone Input Element. Why: The company calls back to schedule an inspection. How: Its name, phone, is the key Netlify records and forDatObj holds. */ }
+									/>{ /* What: Form Field Input Element. Why: The company calls back to schedule an inspection. How: Its name, phone, is the key Netlify records and forDatObj holds. */ }
 
 
 								</div>
 
-								<div className={ cssModObj.forFieDiv }>{ /* What: Email Field Div Element. Why: Each field stacks its label over its input. How: This holds the email field. */ }
+								<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: Each field stacks its label over its input. How: This holds the email field. */ }
 
 
 									<label
 										className={ cssModObj.forFieLab }
 
 										htmlFor='conEmaInp'
-									>{ /* What: Email Label Element. Why: Every field needs a visible label. How: This names the field. */ }
+									>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This names the field. */ }
 										Email
 									</label>
 
@@ -535,7 +686,7 @@ function ConSecCom () : React.JSX.Element {
 										value={ forDatObj.email }
 
 										onChange={ fieChaFun }
-									/>{ /* What: Contact Email Input Element. Why: Some visitors would rather hear back by email. How: Its name, email, is the key Netlify records and forDatObj holds. */ }
+									/>{ /* What: Form Field Input Element. Why: Some visitors would rather hear back by email. How: Its name, email, is the key Netlify records and forDatObj holds. */ }
 
 
 								</div>
@@ -544,14 +695,14 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Message Field Div Element. Why: The message needs the form's full width. How: This holds the message field across both columns. */ }
+							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Element. Why: The message needs the form's full width. How: This holds the message field across the form's full width. */ }
 
 
 								<label
 									className={ cssModObj.forFieLab }
 
 									htmlFor='conMesTex'
-								>{ /* What: Message Label Element. Why: Every field needs a visible label. How: This invites the visitor to describe the job. */ }
+								>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This invites the visitor to describe the job. */ }
 									Tell us about your roof
 								</label>
 
@@ -567,7 +718,7 @@ function ConSecCom () : React.JSX.Element {
 									value={ forDatObj.message }
 
 									onChange={ fieChaFun }
-								/>{ /* What: Contact Message Textarea Element. Why: Details about the roof make for a better quote. How: Its name, message, is the key Netlify records and forDatObj holds. */ }
+								/>{ /* What: Form Field Textarea Element. Why: Details about the roof make for a better quote. How: Its name, message, is the key Netlify records and forDatObj holds. */ }
 
 
 							</div>
@@ -579,26 +730,37 @@ function ConSecCom () : React.JSX.Element {
 								value='contactForm'
 							/>{ /* What: Form Name Input Element. Why: Netlify matches a posted submission to its form by this field. How: This posts contactForm along with the visitor's fields. */ }
 
-							{ forErrBoo && ( // What: Error Message Check. Why: A failed submission has to be explained. How: This shows the error message while forErrBoo is true.
+
+							<div role='alert'>{ /* What: Form Alert Div Element. Why: An alert region added at the moment it speaks is often missed, so it has to be in the page from the start. How: This live region stays in the form, empty, and the error paragraph appears inside it when a request fails. */ }
 
 
-								<p
-									className={ cssModObj.forErrPar }
-
-									role='alert'
-								>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the request didn't go through and what to do next. How: Its alert role has screen readers announce it the moment it appears. */ }
-									Sorry, your request didn't go through. Please try again, or call us at <a className={ cssModObj.errLinAnc } href='tel:7853041957'>(785) 304-1957</a>.
-								</p>
+								{ forErrBoo && ( // What: Error Message Check. Why: A failed submission has to be explained. How: This shows the error message while forErrBoo is true.
 
 
-							) }
+									<p
+										key={ errCouNum }
+
+										className={` ${ cssModObj.forErrPar }   ${ errLeaBoo ? cssModObj.forErrParLeaving : '' } `}
+
+										onAnimationEnd={ errEndFun }
+									>{ /* What: Form Error Paragraph Element. Why: The visitor needs to know the request didn't go through and what to do next. How: The alert region around it has screen readers announce it the moment it appears, and it sinks out quicker than it rose in when the visitor tries again. */ }
+										Sorry, your request didn't go through. Please try again, or call us at <a className={ cssModObj.errLinAnc } href='tel:7853041957'>(785) 304-1957</a>.
+									</p>
+
+
+								) }
+
+
+							</div>
+
 
 							<button
 								className={ cssModObj.forSubBut }
 
-								disabled={ senProBoo }
 								type='submit'
-							>{ /* What: Form Submit Button Element. Why: The visitor sends the request here. How: This submits the form through forSubFun, and is disabled while a submission is on its way. */ }
+
+								aria-disabled={ senProBoo || undefined } // What: ARIA Disabled Attribute. Why: A truly disabled button loses focus, which would drop it to the page when a send fails. How: This marks the button unavailable while a submission is out, and forSubFun ignores submits meanwhile.
+							>{ /* What: Form Submit Button Element. Why: The visitor sends the request here. How: This submits the form through forSubFun, and is marked aria-disabled, keeping its focus, while a submission is on its way. */ }
 
 
 								<span
@@ -613,7 +775,7 @@ function ConSecCom () : React.JSX.Element {
 							</button>
 
 							<p className={ cssModObj.forNotPar }>{ /* What: Form Note Paragraph Element. Why: Visitors worry about what happens to their details. How: This promises no spam. */ }
-								No spam. We'll only contact you regarding your roofing inquiry.
+								No spam. We'll only contact you about your roofing inquiry.
 							</p>
 
 
@@ -645,7 +807,7 @@ function ConSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ConSecCom }; // What: Named Exports. Why: The home page renders the contact section last. How: This exports ConSecCom.
+export { ConSecCom }; // What: Named Export. Why: The home page renders the contact section last. How: This exports ConSecCom.
 
 // #endregion Exports
 

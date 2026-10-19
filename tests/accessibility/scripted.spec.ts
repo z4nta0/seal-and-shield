@@ -3,10 +3,11 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: Each check passes only with no problems found. How: This asserts each problem list is empty.
-import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
-import { STA_RCD_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them.
-import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
+import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only with no problems found. How: This asserts each problem list is empty, and the form's announcements and focus land where they should.
+import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form checks need Netlify's answer without sending anything. How: This answers the form's posts in the browser with a chosen status.
+import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
+import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is checked. How: This lists them.
+import { test        } from '@playwright/test';      // What: Test. Why: Each check of each state is its own test. How: This declares them.
 
 
 import type { Page } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
@@ -27,8 +28,11 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * lands only on stops that are on screen, not covered by anything else, and
  * visibly changed by focus. Reflow: at 320px wide, WCAG's narrowest reflow
  * width, nothing scrolls sideways. Motion: with reduced motion requested, no
- * animation or transition plays while the state opens. Each failure lists
- * every problem found, by element.
+ * animation or transition plays while the state opens. Forms: a failed request
+ * fills an alert region that sat in the page, empty, from the start, and
+ * sending moves focus to the thank-you message, then back to the form's first
+ * field when the form returns. Each failure lists every problem found, by
+ * element.
  *
  * Sections:
  *  - Constants
@@ -413,13 +417,13 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 // #region Module Init
 
-for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every check runs on every page state. How: This declares each check once per state.
+for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every check runs on every page state. How: This declares each check once per state.
 
 
-	test( `${ staRcdObj.ideStr } names every link and button cleanly`, async ( { page : curPagObj } ) => { // What: Names Test. Why: Every control must be announced by a clean name. How: This opens the state and checks its accessibility tree.
+	test( `${ staRecObj.ideStr } names every link and button cleanly`, async ( { page : curPagObj } ) => { // What: Names Test. Why: Every control must be announced by a clean name. How: This opens the state and checks its accessibility tree.
 
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The tree should be read with the state settled. How: This loads and settles it.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The tree should be read with the state settled. How: This loads and settles it.
 
 
 		expect( await namProFun( curPagObj ) ).toEqual( [] ); // What: No Name Problems Assertion. Why: The state passes only with clean names. How: This compares the problems with an empty list, so a failure prints each one.
@@ -429,14 +433,14 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRcdObj.ideStr } walks cleanly with the keyboard`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Keyboard Test. Why: Everything has to be usable without a mouse. How: This opens the state under reduced motion and walks it with Tab.
+	test( `${ staRecObj.ideStr } walks cleanly with the keyboard`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Keyboard Test. Why: Everything has to be usable without a mouse. How: This opens the state under reduced motion and walks it with Tab.
 
 
 		test.slow(); // What: Slow Test Mark. Why: A full walk measures every stop and takes about 11 seconds alone, which ran past the default 30 second timeout in Firefox when every suite shared the machine. How: This triples this test's timeout.
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: A smooth scroll or a focus transition still running would be measured halfway. How: This makes the page match prefers-reduced-motion, which turns both off.
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The walk should start from the state settled. How: This loads and settles it.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The walk should start from the state settled. How: This loads and settles it.
 
 
 		expect( await keyProFun( curPagObj, engNamStr ) ).toEqual( [] ); // What: No Keyboard Problems Assertion. Why: The state passes only when every stop is reachable, in order, on screen, uncovered, and visibly focused. How: This compares the problems with an empty list, so a failure prints each one.
@@ -446,10 +450,10 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRcdObj.ideStr } reflows at ${ REF_WID_NUM }px without scrolling sideways`, async ( { page : curPagObj } ) => { // What: Reflow Test. Why: Zoomed-in visitors read in one column without scrolling sideways. How: This opens the state at the reflow width and compares the page's scroll width with its visible width.
+	test( `${ staRecObj.ideStr } reflows at ${ REF_WID_NUM }px without scrolling sideways`, async ( { page : curPagObj } ) => { // What: Reflow Test. Why: Zoomed-in visitors read in one column without scrolling sideways. How: This opens the state at the reflow width and compares the page's scroll width with its visible width.
 
 
-		await opeStaFun( curPagObj, { ...staRcdObj, widNum : REF_WID_NUM } ); // What: Narrow State Open Call. Why: Reflow is judged at WCAG's narrowest width. How: This opens the state with its width replaced by the reflow width.
+		await opeStaFun( curPagObj, { ...staRecObj, widNum : REF_WID_NUM } ); // What: Narrow State Open Call. Why: Reflow is judged at WCAG's narrowest width. How: This opens the state with its width replaced by the reflow width.
 
 
 		expect( await curPagObj.evaluate( () => document.documentElement.scrollWidth - document.documentElement.clientWidth ) ).toBeLessThanOrEqual( 0 ); // What: No Sideways Scroll Assertion. Why: The page passes only when nothing reaches past the viewport's width. How: This subtracts the visible width from the scrollable width, which stays at zero without sideways scrolling.
@@ -459,12 +463,12 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRcdObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, opens the state, and lists anything that played.
+	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, opens the state, and lists anything that played.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
 
 
 		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when nothing animated as it opened. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
@@ -474,6 +478,89 @@ for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 }
+
+
+
+test( 'a failed request fills an alert region that was in the page, empty, from the start', async ( { page : curPagObj } ) => { // What: Failure Announcement Test. Why: A live region added at the moment it speaks is often missed, so the error's region has to wait in the page, empty, and gain the message once a request fails. How: This checks the region on load, fails a request, and checks it again.
+
+
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post with a server error.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+
+	const aleRegObj = curPagObj.locator( '#contact form [role="alert"]' ); // What: Alert Region Object. Why: The error is announced through the form's alert region. How: This finds it inside the form.
+
+
+	await expect( aleRegObj ).toHaveCount( 1 ); // What: Region Present Assertion. Why: The region has to be in the page before anything is sent. How: This checks there's exactly one.
+	await expect( aleRegObj ).toHaveText( '' ); // What: Region Empty Assertion. Why: An empty region on load means its later message is a change a screen reader announces. How: This checks it holds no text yet.
+
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: This is the action under test. How: This sends the request.
+
+
+	await expect( aleRegObj ).toContainText( "didn't go through" ); // What: Region Message Assertion. Why: The failure should reach screen readers. How: This checks the region now holds the error.
+
+
+} );
+
+
+test( 'a failed request leaves focus on the submit button', async ( { page : curPagObj } ) => { // What: Failed Focus Test. Why: A button disabled while it holds focus drops that focus to the page, so a failed send must leave it on the submit button. How: This submits from the focused button, fails the request, and checks where focus is.
+
+
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post with a server error.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+
+	const subButObj = curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ); // What: Submit Button Object. Why: Focus is checked on the submit button. How: This finds it by its label.
+
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await subButObj.focus(); // What: Submit Focus Call. Why: The bug only shows while the button holds focus, which a click doesn't give it in every engine. How: This focuses it directly.
+
+	await curPagObj.keyboard.press( 'Enter' ); // What: Enter Press Call. Why: This is the action under test. How: This sends the request from the focused button.
+
+
+	await expect( curPagObj.locator( '#contact form [role="alert"]' ) ).toContainText( "didn't go through" ); // What: Error Shown Assertion. Why: Focus is checked once the failure has played out. How: This waits for the error message.
+	await expect( subButObj ).toBeFocused();                                                                // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the submit button still holds it.
+
+
+} );
+
+
+
+test( 'sending moves focus to the thank-you message and back to the form when it returns', async ( { page : curPagObj } ) => { // What: Sent Focus Test. Why: The focused submit button disappears with the form, so focus must land on the thank-you message, which announces it, and come back to the form's first field when the form returns. How: This sends a request, checks focus on the message, moves the clock past its six seconds, and checks focus on the name field.
+
+
+	await curPagObj.clock.install(); // What: Clock Install Call. Why: Waiting six real seconds would slow the suite. How: This puts the page's timers under the test's control before it loads.
+
+	await fakNetFun( curPagObj, 200 ); // What: Netlify OK Fake Call. Why: The request has to be accepted for the thank-you to show. How: This fakes an OK answer.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: Sending swaps the form for the thank-you message. How: This sends the request.
+
+
+	await expect( curPagObj.locator( ':focus' ) ).toContainText( 'Message Sent!' ); // What: Panel Focus Assertion. Why: Focus should land on the message that replaced the form. How: This checks the focused element holds the thank-you heading.
+
+
+	await curPagObj.clock.fastForward( 6000 ); // What: Clock Fast Forward Call. Why: The form returns after six seconds. How: This runs the page's timers six seconds ahead, which starts the message's exit.
+
+
+	await expect( curPagObj.getByLabel( 'Full Name *' ) ).toBeFocused(); // What: Name Field Focus Assertion. Why: Focus should come back to the returning form's first field. How: This checks the Full Name input holds it.
+
+
+} );
 
 // #endregion Module Init
 

@@ -5,7 +5,7 @@
 
 import { expect      } from '@playwright/test';     // What: Expect. Why: Each state passes only when it matches its approved screenshot. How: This compares the page with its baseline.
 import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each state is captured settled. How: This loads it and waits for it.
-import { STA_RCD_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state gets a baseline. How: This lists them.
+import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state gets a baseline. How: This lists them.
 import { test        } from '@playwright/test';     // What: Test. Why: Each state is its own comparison. How: This declares them.
 
 // #endregion Imports
@@ -50,21 +50,21 @@ const PIX_THR_NUM = 0; // What: Pixel Threshold Number. Why: Playwright otherwis
 
 // #region Module Init
 
-for ( const staRcdObj of STA_RCD_ARR ) { // What: State Test Loop. Why: Every page state has a baseline. How: This declares one comparison per state.
+for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state has a baseline. How: This declares one comparison per state.
 
 
-	test( `${ staRcdObj.ideStr } matches its approved screenshot`, async ( { page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
+	test( `${ staRecObj.ideStr } matches its approved screenshot`, async ( { page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Entrance animations would otherwise be caught partway. How: This makes the page match prefers-reduced-motion, which turns them off.
 
-		await opeStaFun( curPagObj, staRcdObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
 
 
-		await expect( curPagObj ).toHaveScreenshot( `${ staRcdObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline pixel for pixel, color for color.
+		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline pixel for pixel, color for color.
 
 
-			animations        : 'disabled',                                                // What: Animations. Why: A looping animation would never hold still for the capture. How: This stops every animation at its start.
+			animations        : 'disabled',                                                // What: Animations. Why: A looping animation would never hold still for the capture. How: This finishes every finite animation and resets looping ones to their start.
 			fullPage          : true,                                                      // What: Full Page. Why: The whole state has to match, not just the first screen. How: This captures the page's full height.
 			mask              : [ curPagObj.getByRole( 'contentinfo' ).getByText( /©/ ) ], // What: Mask. Why: The copyright year changes every January. How: This covers the copyright line in the capture.
 			maxDiffPixelRatio : MAX_DIF_NUM,                                               // What: Maximum Diff Pixel Ratio. Why: No pixel may differ from the baseline. How: This reads the suite's zero tolerance.

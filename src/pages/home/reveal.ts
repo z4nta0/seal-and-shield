@@ -3,6 +3,7 @@
 
 // #region Imports
 
+import { cdnPowFun } from '../../utils/rhythm.ts'; // What: Core-Design-Number Power Function. Why: The observer's threshold sits on the design scale. How: This gives the 8th reciprocal power of the core design number.
 import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Function. Why: Someone who asked for less motion shouldn't see the blocks arrive one by one. How: The reveal asks it before staggering the blocks.
 import { useEffect } from 'react';                 // What: Use Effect. Why: The section is observed once it mounts and released when it unmounts. How: This runs the observer setup and its cleanup.
 import { useRef    } from 'react';                 // What: Use Ref. Why: The observer needs the section's element. How: This creates the ref the section attaches.
@@ -99,7 +100,7 @@ function useRevSecFun ( staDelNum : number ) : React.RefObject< HTMLElement | nu
 			} );
 
 
-		}, { threshold : 0.1 } ); // What: Observer Options. Why: A section should start revealing as soon as a little of it shows. How: This fires once a tenth of it is in view.
+		}, { threshold : cdnPowFun( -8 ) } ); // What: Observer Options. Why: A section should start revealing as soon as a little of it shows. How: This fires once about a tenth of it is in view. // Core-Design-Number to the Power of 8 Reciprocal ~= 0.105
 
 
 		if ( secEleRef.current ) intObsObj.observe( secEleRef.current ); // What: Section Observe Call. Why: The observer has to watch the section. How: This starts observing it once the ref holds its element.
@@ -126,7 +127,7 @@ function useRevSecFun ( staDelNum : number ) : React.RefObject< HTMLElement | nu
 
 // #region Exports
 
-export { useRevSecFun }; // What: Named Exports. Why: The services, about, and contact sections share the fade-in. How: This exports useRevSecFun.
+export { useRevSecFun }; // What: Named Export. Why: The services, about, and contact sections share the fade-in. How: This exports useRevSecFun.
 
 // #endregion Exports
 

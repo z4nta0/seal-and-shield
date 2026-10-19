@@ -49,7 +49,7 @@
 	background-image : linear-gradient( oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ), linear-gradient( 90deg, oklch( from var( --acc-mai-col ) l c h / 0.07 ) 1px, transparent 1px ); /* Accent Main Color = #1e56c8 @ 0.07 opacity */ /* What: Literal Grid Lines. Why: Each line should draw a crisp single pixel. How: A gradient stop doesn't snap to whole pixels the way a border does, so the lines stay 1px rather than reading the border width. */
 	background-size  : calc( var( --ver-rhy-p05 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
 	inset            : 0;
-	mask-image       : linear-gradient( to bottom, transparent, rgba( 0, 0, 0, 0.6 ) 30%, rgba( 0, 0, 0, 0.6 ) 70%, transparent );
+	mask-image       : linear-gradient( to bottom, transparent, rgba( 0, 0, 0, var( --cdn-pow-002-rec ) ) 30%, rgba( 0, 0, 0, var( --cdn-pow-002-rec ) ) 70%, transparent ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 	position         : absolute;
 
 
@@ -113,6 +113,7 @@
 	font-size      : var( --fon-siz-p01 );                                            /* Font Size Base Plus 1 ~= 14.572px */
 	font-weight    : 600;
 	letter-spacing : calc( var( --cdn-pow-004-rec ) * 1em );                          /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325em */
+	line-height    : var( --ver-rhy-m01 );                                            /* Vertical Rhythm Base Minus 1 = 1 */
 	margin-bottom  : var( --spa-ver-p01 );                                            /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	text-transform : uppercase;
 
@@ -242,7 +243,7 @@
 
 /* #region herActDiv */
 
-.herActDiv { /* What: Hero Actions Div. Why: The pitch ends with the two next steps side by side. How: This lines the buttons up in a row that wraps when it runs out of room, rising in after the pitch. */
+.herActDiv { /* What: Hero Actions Div. Why: The pitch ends with the two next steps side by side. How: This lines the buttons up in a row that wraps onto two lines at about 349px wide and below, rising in after the pitch. */
 
 
 	animation : blockEnterFadeIn var( --dur-ani-p06 ) 0.3s var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */ /* What: Literal Stagger Delay. Why: The hero's blocks rise in a tenth of a second apart. How: No duration step falls within 10% of 100ms, so the delays stay literal and keep the stagger even. */
@@ -293,7 +294,7 @@
 
 
 }
-.butBasAnc--primary { /* What: Primary Button Base Anchor. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue with white text. */
+.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue with white text. */
 
 
 	background : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
@@ -302,7 +303,7 @@
 
 
 }
-.butBasAnc--primary:hover { /* What: Hovered Primary Button Base Anchor. Why: The button should respond to the pointer. How: This lightens its fill and border to the lighter blue. */
+.butBasAnc--primary:hover { /* What: Hovered Button Base Anchor Primary. Why: The button should respond to the pointer. How: This lightens its fill and border to the lighter blue. */
 
 
 	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
@@ -311,7 +312,7 @@
 
 
 }
-.butBasAnc--secondary { /* What: Secondary Button Base Anchor. Why: The services link is the quieter second option. How: This leaves it unfilled with white text and a faint white outline. */
+.butBasAnc--secondary { /* What: Button Base Anchor Secondary. Why: The services link is the quieter second option. How: This leaves it unfilled with white text and a faint white outline. */
 
 
 	background : transparent;
@@ -320,7 +321,7 @@
 
 
 }
-.butBasAnc--secondary:hover { /* What: Hovered Secondary Button Base Anchor. Why: The button should respond to the pointer. How: This firms its outline to white and adds a faint fill. */
+.butBasAnc--secondary:hover { /* What: Hovered Button Base Anchor Secondary. Why: The button should respond to the pointer. How: This firms its outline to white and adds a faint fill. */
 
 
 	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */
@@ -329,7 +330,7 @@
 
 
 }
-.butBasAnc.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, with the base class chained so it outranks the hover lift. */
+.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, replacing the hover lift, since it matches the hover rules' weight and comes after them. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
@@ -354,9 +355,9 @@
 
 
 
-/* #region herRigDiv */
+/* #region herVisDiv */
 
-.herRigDiv { /* What: Hero Right Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
+.herVisDiv { /* What: Hero Visual Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
 
 
 	align-items     : center;
@@ -366,10 +367,10 @@
 
 
 }
-@container app ( max-width : 900px ) { /* What: Narrow Hero Right Div. Why: In the stacked column the logo leads. How: This applies 900px wide and below. */
+@container app ( max-width : 900px ) { /* What: Narrow Hero Visual Div. Why: In the stacked column the logo leads. How: This applies 900px wide and below. */
 
 
-	.herRigDiv { /* What: Leading Hero Right Div. Why: The logo should sit above the pitch once the columns stack. How: This moves it first in the grid's order. */
+	.herVisDiv { /* What: Leading Hero Visual Div. Why: The logo should sit above the pitch once the columns stack. How: This moves it first in the grid's order. */
 
 
 		order : -1;
@@ -379,10 +380,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Right Div. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Visual Div. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herRigDiv { /* What: Motionless Hero Right Div. Why: The logo should simply be there. How: This turns the entrance animation off. */
+	.herVisDiv { /* What: Motionless Hero Visual Div. Why: The logo should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -416,7 +417,7 @@
 	animation     : logRinDivLoopPulse var( --dur-ani-p12 ) var( --mot-sta-eas ) infinite;                          /* Duration Animation Base Plus 12 ~= 4,610.0ms, Motion Standard Easing = ease */
 	border        : var( --bor-wid-bas ) solid oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-005-rec ) ); /* Border Width Base ~= 1.160px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 5 Reciprocal ~= 0.245 */
 	border-radius : 50%;
-	inset         : calc( var( --rin-ver-off ) * -1 ) calc( var( --rin-hor-off ) * -1 );                            /* Ring Vertical Offset and Ring Horizontal Offset, each about -3.572px, or -33.876px in the stacked hero */
+	inset         : calc( var( --rin-ver-off ) * -1 ) calc( var( --rin-hor-off ) * -1 );                            /* Ring Vertical Offset ~= -3.572px, or ~= -33.876px in the stacked hero, Ring Horizontal Offset ~= -3.572px, or ~= -33.876px in the stacked hero */
 	position      : absolute;
 
 
@@ -489,7 +490,7 @@
 
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ); /* Vertical Rhythm Base Plus 1 ~= 19.304px, Vertical Rhythm Base Plus 5 ~= 59.447px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
 	position : relative;
-	width    : max( calc( var( --ver-rhy-p11 ) * 1rem ), var( --hor-rhy-022 ) );                                                                                             /* Vertical Rhythm Base Plus 11 ~= 321.273px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
+	width    : max( calc( var( --ver-rhy-p11 ) * 1rem ), var( --hor-rhy-022 ) ); /* Vertical Rhythm Base Plus 11 ~= 321.273px, Horizontal Rhythm 22 ~= 470.635px @ 1,920px width */
 	z-index  : 1;
 
 
@@ -510,7 +511,7 @@
 
 /* #endregion herLogDiv */
 
-/* #endregion herRigDiv */
+/* #endregion herVisDiv */
 
 /* #endregion herConDiv */
 
@@ -575,7 +576,7 @@
 
 
 }
-.staIteDiv:last-child { /* What: Last Stat Item Div. Why: The row ends without a divider. How: This drops the last cell's right border. */
+.staIteDiv:last-child { /* What: Stat Item Div Last. Why: The row ends without a divider. How: This drops the last cell's right border. */
 
 
 	border-right : none;
@@ -585,7 +586,7 @@
 @container app ( max-width : 900px ) { /* What: Narrow Stat Item Div. Why: The two-by-two grid needs its dividers redrawn. How: This applies 900px wide and below. */
 
 
-	.staIteDiv:nth-child( 2 ) { /* What: Second Stat Item Div. Why: The second cell now ends the first row. How: This drops its right border. */
+	.staIteDiv:nth-child( 2 ) { /* What: Borderless Stat Item Div Second. Why: The second cell now ends the first row. How: This drops its right border. */
 
 
 		border-right : none;
@@ -593,14 +594,14 @@
 
 	}
 	.staIteDiv:nth-child( 3 ),
-	.staIteDiv:nth-child( 4 ) { /* What: Second Row Stat Item Div. Why: The second row needs a line between it and the first. How: This draws a faint border along the top of the third and fourth cells. */
+	.staIteDiv:nth-child( 4 ) { /* What: Top-Bordered Stat Item Div Second Row. Why: The second row needs a line between it and the first. How: This draws a faint border along the top of the third and fourth cells. */
 
 
 		border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
 
 
 	}
-	.staIteDiv:nth-child( 4 ) { /* What: Fourth Stat Item Div. Why: The fourth cell ends the second row. How: This drops its right border. */
+	.staIteDiv:nth-child( 4 ) { /* What: Borderless Stat Item Div Fourth. Why: The fourth cell ends the second row. How: This drops its right border. */
 
 
 		border-right : none;

@@ -49,10 +49,11 @@ import { useNavigate } from 'react-router';        // What: Use Navigate. Why: T
  * services, about, and contact sections in the order a visitor reads them,
  * and SitFooCom. Each section's id is the target of the bar's and footer's
  * section links. When the page arrives with a hash, from a section link on
- * another page or an address like /#contact, it jumps straight to that
- * section once it has rendered and then replaces the address with one
- * without the hash, so the address bar stays as clean as it does when the
- * links scroll in place.
+ * another page, a link opened in a new tab, or an address like /#contact, it
+ * waits for the fonts to load, since they reflow the page above the
+ * section, jumps straight to that section, and then replaces the address
+ * with one without the hash, so the address bar stays as clean as it does
+ * when the links scroll in place.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -75,16 +76,22 @@ function HomPagCom () : React.JSX.Element {
 	const navRouFun = useNavigate(); // What: Navigate Router Function. Why: The hash should be cleared once the page has used it. How: This is the router's navigate function.
 
 
-	useEffect( () => { // What: Hash Arrival Effect. Why: A visitor arriving from a section link should land on that section, with no hash left in the address. How: This jumps to the section the hash names, then replaces the address with one without it.
+	useEffect( () => { // What: Hash Arrival Effect. Why: A visitor arriving from a section link or a shared address should land on that section, with no hash left in the address. How: Once the fonts have loaded, this jumps to the section the hash names, then replaces the address with one without it.
 
 
 		if ( !hasValStr ) return; // What: No Hash Guard. Why: Most visits arrive without a hash. How: This does nothing when the hash is empty, including right after it's been cleared.
 
 
 
-		document.getElementById( hasValStr.slice( 1 ) )?.scrollIntoView( { behavior : 'instant' } ); // What: Arrival Scroll Call. Why: The visitor should land on the section, as a normal link arrival would. How: This jumps to the element the hash names, without the html element's smooth scrolling, since gliding down from the top of a freshly loaded page would be slow.
+		void document.fonts.ready.then( () => { // What: Fonts Ready Callback. Why: The jump should land where the section sits once the fonts have reflowed the page above it. How: This waits for every font face to load, then jumps and clears the hash; void marks the returned promise as deliberately unawaited.
 
-		void navRouFun( { hash : '' }, { replace : true } ); // What: Hash Clear Call. Why: The address should stay as clean as it does for in-page links. How: This replaces the current history entry with the same path and no hash; void marks the returned promise as deliberately unawaited.
+
+			document.getElementById( hasValStr.slice( 1 ) )?.scrollIntoView( { behavior : 'instant' } ); // What: Arrival Scroll Call. Why: The visitor should land on the section, as a normal link arrival would. How: This jumps to the element the hash names, without the html element's smooth scrolling, since gliding down from the top of a freshly loaded page would be slow.
+
+			void navRouFun( { hash : '' }, { replace : true } ); // What: Hash Clear Call. Why: The address should stay as clean as it does for in-page links. How: This replaces the current history entry with the same path and no hash; void marks the returned promise as deliberately unawaited.
+
+
+		} );
 
 
 	}, [ hasValStr, navRouFun ] ); // What: Effect Dependency Array. Why: Each new hash has to be handled once. How: hasValStr changes when a section link arrives, and navRouFun is listed because the effect calls it, though it stays the same between renders.
@@ -94,7 +101,7 @@ function HomPagCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Home Page Fragment. Why: The bar, main content, and footer sit side by side with no wrapper of their own. How: This groups them without adding an element. */ }
+		<>{ /* What: Home Page Fragment. Why: The bar, main content, and footer sit one above another with no wrapper of their own. How: This groups them without adding an element. */ }
 
 
 			<NavBarCom />{ /* What: Navigation Bar Component. Why: The page starts with the shared top bar. How: This renders it above the content. */ }
@@ -142,7 +149,7 @@ function HomPagCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HomPagCom }; // What: Named Exports. Why: app.tsx renders the home page at the site's root. How: This exports HomPagCom.
+export { HomPagCom }; // What: Named Export. Why: app.tsx renders the home page at the site's root. How: This exports HomPagCom.
 
 // #endregion Exports
 

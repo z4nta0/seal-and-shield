@@ -4,10 +4,10 @@
 // #region Imports
 
 import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The hero is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero's right column shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
-import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Function. Why: The hero's buttons scroll smoothly, which has to respect the reduced-motion preference. How: scrSecFun asks it before choosing the scroll behavior.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way every section link does. How: This returns secCliFun, which scrolls to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
 
 // #endregion Imports
 
@@ -20,9 +20,11 @@ import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Functi
  * The page's opening section: an eyebrow, the "Built to Seal. Built to
  * Shield." headline, a short pitch, and two buttons, one scrolling to the
  * quote form and one to the services, beside the full logo with its pulsing
- * ring, over a background grid and glow. A stats bar along its bottom sums
- * up the company in four figures. Its id, home, is what the bar's Home link
- * and brand scroll to.
+ * ring, over a background grid and glow. At 900px wide and below, the text
+ * and logo become one centered column with the logo first. A stats bar along
+ * its bottom sums up the company in four figures, set two by two at 900px
+ * wide and below. Its id, home, is what the bar's Home link and brand scroll
+ * to.
  *
  * Sections:
  *  - Constants
@@ -37,14 +39,18 @@ import { redMotFun } from '../../utils/motion.ts'; // What: Reduce Motion Functi
 
 // #region Constants
 
+// #region HER_STA_ARR
+
 /**
  * HER_STA_ARR = Hero Stat Array
  *
  * @summary
  * The four figures in the hero's stats bar, in display order. Every row
  * shares one shape, so its fields carry no comments of their own:
+ *
  * - `labStr` (String): Label String, the small caption under the figure,
  *   which also serves as the row's React key.
+ *
  * - `valStr` (String): Value String, the figure itself.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -55,12 +61,14 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 
 
 	{ labStr : 'Commercial Focus',     valStr : '100%'    }, // What: Commercial Focus Stat Row. Why: The company works on commercial roofs only. How: This shows 100%.
-	{ labStr : 'Inspections & Quotes', valStr : 'Free'    }, // What: Free Quotes Stat Row. Why: A free inspection lowers the bar to getting in touch. How: This shows Free.
+	{ labStr : 'Inspections & Quotes', valStr : 'Free'    }, // What: Inspections And Quotes Stat Row. Why: A free inspection lowers the bar to getting in touch. How: This shows Free.
 	{ labStr : 'Service Coverage',     valStr : 'KS + US' }, // What: Service Coverage Stat Row. Why: Visitors outside Lawrence want to know they're covered. How: This shows Kansas plus the continental U.S.
 	{ labStr : 'Founded in Lawrence',  valStr : '2024'    }  // What: Founded Stat Row. Why: The founding year and town ground the company locally. How: This shows 2024.
 
 
 ];
+
+// #endregion HER_STA_ARR
 
 // #endregion Constants
 
@@ -74,11 +82,12 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
  * HerSecCom = Hero Section Component
  *
  * @summary
- * Renders the hero section. Its two buttons are real links to the contact
- * and services sections, so they work without JavaScript, but a click goes
- * through scrSecFun, which scrolls to the section in place, smoothly unless
- * the visitor asked for reduced motion. The background grid, glow, and the
- * logo's ring are decorative and hidden from assistive technology.
+ * Renders the hero section. Its two buttons are real links to the contact and
+ * services sections (/#contact, /#services), so they work without JavaScript
+ * and open in a new tab on a Ctrl, Cmd, or middle click, while a plain click
+ * goes through secCliFun, which scrolls to the section in place, smoothly
+ * unless the visitor asked for reduced motion. The background grid, glow, and
+ * the logo's ring are decorative and hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -96,43 +105,7 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 function HerSecCom () : React.JSX.Element {
 
 
-	// #region scrSecFun
-
-	/**
-	 * scrSecFun = Scroll Section Function
-	 *
-	 * @summary
-	 * Handles a click on either hero button: stops the browser's own jump to
-	 * the link's hash and scrolls to the section with the given id instead,
-	 * smoothly unless the visitor asked for reduced motion, in which case it
-	 * jumps.
-	 *
-	 * @author z4nta0 <https://github.com/z4nta0>
-	 *
-	 * @param cliEveObj - Click Event Object: The button's click event.
-	 * @param secIdeStr - Section Identifier String: The id of the section to
-	 *                    scroll to, e.g. 'contact'.
-	 *
-	 * @returns This function does not return anything.
-	 *
-	 * @example
-	 * ```ts
-	 * scrSecFun(cliEveObj, 'contact') // => void
-	 * ```
-	 *
-	*/
-
-	const scrSecFun = ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, secIdeStr : string ) => { // What: Scroll Section Function. Why: Both hero buttons scroll in place instead of jumping. How: This cancels the jump and scrolls to the section.
-
-
-		cliEveObj.preventDefault(); // What: Default Jump Cancel. Why: The browser would otherwise jump to the hash instantly and skip the smooth scroll. How: This stops the link's own navigation.
-
-		document.getElementById( secIdeStr )?.scrollIntoView( { behavior : redMotFun() ? 'auto' : 'smooth' } ); // What: Section Scroll Call. Why: The visitor should land on the section the button names. How: This scrolls it into view, jumping instead of gliding under reduced motion.
-
-
-	};
-
-	// #endregion scrSecFun
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both hero buttons take the visitor to their sections the way every section link does. How: This scrolls to the section in place and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
 
 
 
@@ -160,10 +133,10 @@ function HerSecCom () : React.JSX.Element {
 
 
 
-			<div className={ cssModObj.herConDiv }>{ /* What: Hero Content Div Element. Why: The hero's text and logo line up with the page's content width. How: This lays them out in two columns. */ }
+			<div className={ cssModObj.herConDiv }>{ /* What: Hero Content Div Element. Why: The hero's text and logo line up with the page's content width. How: This lays them out in two columns, stacking them in one centered column with the logo first at 900px wide and below. */ }
 
 
-				<div>{ /* What: Hero Left Div Element. Why: The pitch reads first. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, with no styling of its own. */ }
+				<div>{ /* What: Hero Text Div Element. Why: The pitch is the hero's message. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, or below the logo at 900px wide and below, with no styling of its own. */ }
 
 
 					<h1>{ /* What: Hero Title Heading Element. Why: The page's main heading should carry what the company does and where, the words local searches look for, as well as its promise. How: This holds the two-line eyebrow and the slogan, each styled as its own block, so the heading reads as one while looking as it always has. */ }
@@ -176,9 +149,9 @@ function HerSecCom () : React.JSX.Element {
 
 						<span className={ cssModObj.herSloSpa }>{ /* What: Hero Slogan Span Element. Why: The slogan is the company's promise, set large. How: Its two accent words take the light blue. */ }
 							Built to<br />
-							<span className={ cssModObj.titAccSpa }>Seal.</span>{ /* What: Seal Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
+							<span className={ cssModObj.titAccSpa }>Seal.</span>{ /* What: Title Accent Span Element. Why: The first promise word stands out. How: This colors it light blue. */ }{ ' ' }
 							Built to<br />
-							<span className={ cssModObj.titAccSpa }>Shield.</span>{ /* What: Shield Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
+							<span className={ cssModObj.titAccSpa }>Shield.</span>{ /* What: Title Accent Span Element. Why: The second promise word stands out. How: This colors it light blue. */ }
 						</span>
 
 
@@ -190,26 +163,26 @@ function HerSecCom () : React.JSX.Element {
 						Trusted, reliable, and built to last.
 					</p>
 
-					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The pitch ends with the two next steps. How: This sets the two buttons side by side. */ }
+					<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The pitch ends with the two next steps. How: This sets the two buttons side by side, centered at 900px wide and below, wrapping onto two lines at about 349px wide and below. */ }
 
 
 						<a
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
-							href='#contact'
+							href='/#contact'
 
-							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'contact' ) }
-						>{ /* What: Hero Quote Anchor Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
+						>{ /* What: Button Base Anchor Primary Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
 							Get a Free Quote
 						</a>
 
 						<a
 							className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncSecondary } `}
 
-							href='#services'
+							href='/#services'
 
-							onClick={ ( cliEveObj ) => scrSecFun( cliEveObj, 'services' ) }
-						>{ /* What: Hero Services Anchor Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
+						>{ /* What: Button Base Anchor Secondary Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
 							Our Services
 						</a>
 
@@ -220,7 +193,7 @@ function HerSecCom () : React.JSX.Element {
 				</div>
 
 
-				<div className={ cssModObj.herRigDiv }>{ /* What: Hero Right Div Element. Why: The logo balances the pitch. How: This centers the logo and its ring. */ }
+				<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The logo balances the pitch. How: This centers the logo and its ring in the content grid's second column, or above the pitch at 900px wide and below. */ }
 
 
 					<div className={ cssModObj.herLogDiv }>{ /* What: Hero Logo Div Element. Why: The ring sits behind the logo. How: This stacks the two in one box. */ }
@@ -256,22 +229,22 @@ function HerSecCom () : React.JSX.Element {
 			<div className={ cssModObj.herStaDiv }>{ /* What: Hero Stats Div Element. Why: Four quick figures close the hero. How: This draws the bar along the hero's bottom. */ }
 
 
-				<div className={ cssModObj.staInnDiv }>{ /* What: Stats Inner Div Element. Why: The figures line up with the page's content width. How: This lays the four out in a row. */ }
+				<div className={ cssModObj.staInnDiv }>{ /* What: Stats Inner Div Element. Why: The figures line up with the page's content width. How: This lays the four out in a row, or two by two at 900px wide and below. */ }
 
 
-					{ HER_STA_ARR.map( ( staRcdObj ) => ( // What: Stat Map. Why: Each figure gets its own cell. How: This renders one cell per row.
+					{ HER_STA_ARR.map( ( staRecObj ) => ( // What: Stat Map. Why: Each figure gets its own cell. How: This renders one cell per row.
 
 
 						<div
-							key={ staRcdObj.labStr }
+							key={ staRecObj.labStr }
 
 							className={ cssModObj.staIteDiv }
 						>{ /* What: Stat Item Div Element. Why: Each figure reads with its caption. How: This stacks the two. */ }
 
 
-							<span className={ cssModObj.staValSpa }>{ staRcdObj.valStr }</span>{ /* What: Stat Value Span Element. Why: The figure is the cell's focus. How: This shows it large. */ }
+							<span className={ cssModObj.staValSpa }>{ staRecObj.valStr }</span>{ /* What: Stat Value Span Element. Why: The figure is the cell's focus. How: This shows it large. */ }
 
-							<span className={ cssModObj.staLabSpa }>{ staRcdObj.labStr }</span>{ /* What: Stat Label Span Element. Why: The caption says what the figure means. How: This shows it small beneath. */ }
+							<span className={ cssModObj.staLabSpa }>{ staRecObj.labStr }</span>{ /* What: Stat Label Span Element. Why: The caption says what the figure means. How: This shows it small beneath. */ }
 
 
 						</div>
@@ -302,7 +275,7 @@ function HerSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { HerSecCom }; // What: Named Exports. Why: The home page renders the hero first. How: This exports HerSecCom.
+export { HerSecCom }; // What: Named Export. Why: The home page renders the hero first. How: This exports HerSecCom.
 
 // #endregion Exports
 
