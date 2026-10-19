@@ -51,9 +51,9 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * window, Alt to download) or with any button but the main one. A middle
  * click never arrives here in practice, since Chromium, Firefox, and WebKit
  * send it as auxclick rather than click, so the button check is only a
- * safeguard for an engine that does. A section link's handler returns early
- * when this is true, so the link's own address opens the home page at the
- * section, where the home page scrolls to it.
+ * safeguard for an engine that does. secCliFun, the shared click handler,
+ * returns early when this is true, so the link's own address opens the home
+ * page at the section, where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -101,7 +101,7 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
  * useSecLinFun = Use Section Link Function
  *
  * @summary
- * Returns visSecFun, the function a section link calls with its section's id.
+ * Returns visSecFun, the function secCliFun calls with a section link's id.
  * When an element with that id is on the page, visSecFun scrolls it into view,
  * jumping instead of gliding under reduced motion. When there isn't one,
  * visSecFun navigates to the home page with the id as the hash, inside the
@@ -111,11 +111,11 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
  *
  * @param void - This function takes no parameters.
  *
- * @returns The function a section link calls with its section's id.
+ * @returns The function secCliFun calls with a section's id.
  *
  * @example
  * ```ts
- * useSecLinFun() // => visSecFun, the function a section link calls with an id
+ * useSecLinFun() // => visSecFun, the function secCliFun calls with an id
  * ```
  *
 */
@@ -214,7 +214,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 
 // #region Exports
 
-export { modCliFun, useSecCliFun, useSecLinFun }; // What: Named Exports. Why: The bar, the menu, the hero, the footer, and the 404 page reach sections through these. How: This exports the modified-click check, the shared click handler, and useSecLinFun.
+export { useSecCliFun }; // What: Named Export. Why: The bar, the menu, the hero, the footer, and the 404 page reach sections through it. How: This exports the hook that returns the shared click handler, which uses modCliFun and useSecLinFun inside this file.
 
 // #endregion Exports
 

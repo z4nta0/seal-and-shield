@@ -63,6 +63,14 @@ complexity for no real gain. For the same reason there's no back to top link
 (decided 2026-10-17): the home page's footer and bar already have Home, and
 the 404 page is too short to need one.
 
+## Section links
+Decided 2026-10-18: `ui/section-link.ts` exports only `useSecCliFun`, where
+the user-level "## Section Links: No Hash In The Address" implementation
+bullet has the file export `modCliFun` and `useSecLinFun` as well. Every link
+here goes through the shared click handler, and with no back to top link
+nothing else needs `modCliFun`, so nothing outside the file imports either
+one, and both stay internal to it.
+
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
 is decided per project" rule: reese-roofing's method, applied in `45b71d0`.
