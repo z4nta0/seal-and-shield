@@ -180,7 +180,7 @@
 .serCarDiv::after { /* What: Services Card Div Shadow. Why: The hovered card casts a soft navy shadow, which should fade in without repainting it every frame. How: This holds the shadow on a layer matching the card's border box, hidden until hover, and fades it in through opacity. */
 
 
-	box-shadow     : var( --ele-med-sha );                                                                                  /* Elevation Medium Shadow, about 0 8px 26px plus 0 3.6px 8px -2px */
+	box-shadow     : var( --ele-med-sha );                                                                                  /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */
 	content        : '';
 	inset          : calc( var( --bor-wid-xla ) * -1 ) calc( var( --bor-wid-bas ) * -1 ) calc( var( --bor-wid-bas ) * -1 ); /* Border Width Extra Large ~= -3.572px, Border Width Base ~= -1.160px */
 	opacity        : 0;
