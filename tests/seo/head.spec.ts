@@ -41,6 +41,35 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 
 // #region Constants
 
+/**
+ * ARE_TAG_OBJ = Area Tag Object
+ *
+ * @summary
+ * Pairs each service area the structured data names with the tag the Services
+ * section shows for it. Every row's key is an areaServed name exactly as
+ * index.html writes it, and its value is that area's tag text exactly as
+ * services.tsx writes it, so the structured data test can check each area in
+ * the data against the tag that stands for it on the page, even where the two
+ * are worded differently.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const ARE_TAG_OBJ : Record< string, string > = { // What: Area Tag Object. Why: The structured data and the Services section word some areas differently, so each data name needs its page tag spelled out. How: Each key is an areaServed name and each value is the tag text the page shows for it.
+
+
+	'Continental United States' : 'Continental U.S.',
+	'Kansas'                    : 'All of Kansas',
+	'Kansas City metro area'    : 'Kansas City Metro',
+	'Lawrence, KS'              : 'Lawrence, KS',
+	'Topeka, KS'                : 'Topeka, KS'
+
+
+};
+
+
+
 const LIV_URL_STR = 'https://sealandshieldroof.com/'; // What: Live URL String. Why: The canonical link, structured data, sitemap, and social tags must all name the live address. How: This is the address they're compared with.
 
 
@@ -124,18 +153,25 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 
 
 
-	expect( pagTexStr ).toContain( '(785) 304-1957' );                   // What: Phone Shown Assertion. Why: The number in the data has to be visible on the page. How: This checks the page shows it.
-	expect( ldjDatObj.address.addressLocality ).toBe( 'Lawrence' );      // What: City Assertion. Why: The business is based in Lawrence. How: This checks the data's city.
-	expect( ldjDatObj.address.streetAddress ).toBeUndefined();           // What: No Street Assertion. Why: The company has no business address to publish, only the owner's home. How: This checks the data leaves the street out.
-	expect( pagTexStr ).toContain( 'Lawrence, Kansas' );                 // What: City Shown Assertion. Why: The city in the data has to be visible on the page. How: This checks the page shows it.
+	expect( pagTexStr ).toContain( '(785) 304-1957' );                                // What: Phone Shown Assertion. Why: The number in the data has to be visible on the page. How: This checks the page shows it.
+	expect( ldjDatObj.address.addressLocality ).toBe( 'Lawrence' );                   // What: City Assertion. Why: The business is based in Lawrence. How: This checks the data's city.
+	expect( ldjDatObj.address.streetAddress ).toBeUndefined();                        // What: No Street Assertion. Why: The company has no business address to publish, only the owner's home. How: This checks the data leaves the street out.
+	expect( pagTexStr ).toContain( 'Lawrence, Kansas' );                              // What: City Shown Assertion. Why: The city in the data has to be visible on the page. How: This checks the page shows it.
 	expect( ldjDatObj.openingHoursSpecification[ 0 ] ).toMatchObject( { closes : '17:00', dayOfWeek : [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ], opens : '08:00' } ); // What: Hours Assertion. Why: The data should give the hours the page shows. How: This checks weekdays from 8:00 to 17:00.
-	expect( pagTexStr ).toContain( 'Monday – Friday, 8 a.m. – 5 p.m.' ); // What: Hours Shown Assertion. Why: The hours in the data have to be visible on the page. How: This checks the page shows them.
-	expect( pagTexStr ).toContain( ldjDatObj.foundingDate );             // What: Founding Date Shown Assertion. Why: The founding year in the data has to be visible on the page. How: This checks the page shows it.
-	expect( pagTexStr ).toContain( ldjDatObj.legalName );                // What: Legal Name Shown Assertion. Why: The legal name in the data has to be visible on the page. How: This checks the page shows it.
-	expect( ldjDatObj.areaServed ).toHaveLength( 5 );                    // What: Service Area Count Assertion. Why: The data should list exactly the service areas the page lists. How: This checks there are five.
+	expect( pagTexStr ).toContain( 'Monday – Friday, 8 a.m. – 5 p.m.' );              // What: Hours Shown Assertion. Why: The hours in the data have to be visible on the page. How: This checks the page shows them.
+	expect( pagTexStr ).toContain( ldjDatObj.foundingDate );                          // What: Founding Date Shown Assertion. Why: The founding year in the data has to be visible on the page. How: This checks the page shows it.
+	expect( pagTexStr ).toContain( ldjDatObj.legalName );                             // What: Legal Name Shown Assertion. Why: The legal name in the data has to be visible on the page. How: This checks the page shows it.
+	expect( ldjDatObj.areaServed ).toHaveLength( Object.keys( ARE_TAG_OBJ ).length ); // What: Service Area Count Assertion. Why: The data and the area lookup have to list the same areas, so neither can gain one the other lacks. How: This checks the data names exactly as many areas as the lookup pairs.
 
 
-	for ( const areNamStr of [ 'Lawrence, KS', 'Topeka, KS', 'Kansas City Metro', 'All of Kansas', 'Continental U.S.' ] ) expect( pagTexStr ).toContain( areNamStr ); // What: Service Areas Shown Assertion. Why: Each area in the data has to appear on the page. How: This checks every one of the Services section's area tags.
+	for ( const areSerObj of ldjDatObj.areaServed ) { // What: Service Area Loop. Why: Every area the data names has to be one the page shows. How: This walks the data's areaServed entries, each an object holding the area's name.
+
+
+		expect( ARE_TAG_OBJ ).toHaveProperty( [ areSerObj.name ] );      // What: Area Paired Assertion. Why: An area with no tag paired to it would go unchecked. How: This checks the lookup has the data's area name as a key.
+		expect( pagTexStr ).toContain( ARE_TAG_OBJ[ areSerObj.name ] ); // What: Area Tag Shown Assertion. Why: Each area in the data has to appear on the page. How: This checks the page text holds the Services section tag paired with the area's name.
+
+
+	}
 
 
 } );
