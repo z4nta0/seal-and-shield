@@ -329,6 +329,11 @@ reduced-motion variant (with `utils/motion.ts`'s `redMotFun` stopping the
 JavaScript smooth scrolls), the form fields got a focus ring, and the muted
 text, light blue, light-section labels, and footer copyright line were
 adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
+- **To do: shrink the small logo** (recorded 2026-10-18): the Images rule
+  now allows up to 3x, but `logo-simple.webp` is 157x133 in a 44.876px
+  box, about 3.5x by width. Re-encode it near 135x114 through a render
+  script kept in `design/`, update its `width` and `height`, and refresh
+  the rendering baselines in all three engines. Deferred by the user.
 - **The logos stay raster** (confirmed 2026-10-17): the company has no SVG
   version of either logo, so the WebP copies below remain until it does.
 - **The logos were resized on 2026-10-08** (at the user's go-ahead, ahead
