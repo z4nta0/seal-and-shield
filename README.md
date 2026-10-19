@@ -33,7 +33,7 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and the design
 
 ```bash
 npm test                    # every suite
-npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, and motion checks
+npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, motion, and form announcement checks
 npm run test:interaction    # what the section links, menu, contact form, and 404 page do, and that every control gives feedback
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # the pages and the mobile menu from 320 to 1,920px: no sideways scroll, spill, or overlap

@@ -175,7 +175,7 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      through `ui/section-link.ts`, and the home page scrolls to a hash it
      arrives with and then clears it, as asked for the same day.
    - **Security headers, WebP logos, and SEO: done 2026-10-09**, as recorded
-     under "Kind of site" and "Known issues".
+     under "Kind of site" and "Accessibility pass".
    - **Social previews: done 2026-10-09.** The 1,200x630 card
      (`public/og-image.png`, 270 KB) shows the logo over "Commercial
      Roofing" and "Lawrence, KS" on the hero's navy, grid, and glow, inside
@@ -223,10 +223,10 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      navy at about 0.57 opacity) that closes it on a tap, and, copied from
      reese-roofing, it makes the page behind it inert, closes on Escape
      (returning focus to its button), and closes when the screen widens past
-     the breakpoint. It also gained a staggered entrance; an active section dot; a label that nudges sideways
-     on hover; and a contact block with Call Now and Free Quote side by side
-     above the hours and service area. The user may drop the Free Quote
-     button if the menu looks crowded.
+     the breakpoint. It also gained a staggered entrance; an active section
+     dot; a label that nudges sideways on hover; and a contact block with Call
+     Now and Free Quote side by side above the hours and service area. The
+     user may drop the Free Quote button if the menu looks crowded.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
@@ -253,18 +253,19 @@ waiting for the page to settle.
   results are printed and attached to the report rather than failing the
   run.
 - `npm run test:interaction`: checks what the controls do, under reduced
-  motion so scrolls land at once. The bar's links, brand, menu, and footer
-  buttons land on their sections with a clean address; the contact form
-  refuses incomplete requests and reports a faked Netlify answer honestly;
-  and the 404 page, its buttons, and a section address like /#about lead
-  where they should. `feedback.spec.ts`, adapted from reese-roofing's,
-  checks that every control in every state has a hover, press, and focus
-  change with a transition, that the focus ring eases in to full width, and
-  that feedback stays without motion under reduced motion. Its two
-  every-control probes are marked slow, since each takes about 28 seconds
-  in Chromium. The open menu state parks the pointer in the bar's corner
-  after tapping the toggle, so the toggle's hover color stays out of every
-  check of it.
+  motion so scrolls land at once. The bar's links, brand, menu, footer links,
+  and hero buttons land on their sections with a clean address, a Ctrl or Cmd
+  click and a middle click open them in new tabs, and the menu closes on
+  Escape, on a tap of its dimmer, and when the screen widens; the contact form
+  refuses incomplete requests and reports a faked Netlify answer honestly; and
+  the 404 page, its buttons, and a section address like /#about lead where
+  they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
+  every control in every state has a hover, press, and focus change with a
+  transition, that the focus ring eases in to full width, and that feedback
+  stays without motion under reduced motion. Its two every-control probes are
+  marked slow, since each takes about 28 seconds in Chromium. The open menu
+  state parks the pointer in the bar's corner after tapping the toggle, so the
+  toggle's hover color stays out of every check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state
   with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
   pixel may differ, and the per-pixel color threshold is 0 too, since
@@ -277,11 +278,12 @@ waiting for the page to settle.
   menu at 18 widths from 320 to 1,920px (a pixel either side of each breakpoint
   included), failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, or two reachable controls overlapping.
-- `npm run test:seo`: checks each route's title, description, author,
-  canonical, robots, and single h1; that the structured data's every claim
-  appears on the page; that the social tags are complete and match the page,
-  the card is a 1,200x630 PNG under 300 KB, and every linked icon is served at
-  its size; and that robots.txt and the sitemap say what they should.
+- `npm run test:seo`: checks each route's title, description, canonical,
+  robots, and single h1, and the author on the home page; that the structured
+  data's every claim appears on the page; that the social tags are complete
+  and match the page, the card is a 1,200x630 PNG under 300 KB, and every
+  linked icon is served at its size; and that robots.txt and the sitemap say
+  what they should.
 - `npm test` runs every suite.
 
 ## Live checks
@@ -342,7 +344,8 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
   checked by serving the production build with the headers attached in the
   browser: no violations in any engine while every page, font, image, the
   menu, and the form worked, and the live site's grade came back with no
-  problems after the deploy. Anything later added from another origin (analytics,
-  a map, an embedded review widget) needs its origin added to the policy.
+  problems after the deploy. Anything later added from another origin
+  (analytics, a map, an embedded review widget) needs its origin added to the
+  policy.
 - **Netlify builds with Node 24.x**, set in the site's Netlify settings
   rather than in the repo.

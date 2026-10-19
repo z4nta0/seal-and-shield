@@ -130,6 +130,8 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 	expect( pagTexStr ).toContain( 'Lawrence, Kansas' );                 // What: City Shown Assertion. Why: The city in the data has to be visible on the page. How: This checks the page shows it.
 	expect( ldjDatObj.openingHoursSpecification[ 0 ] ).toMatchObject( { closes : '17:00', dayOfWeek : [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ], opens : '08:00' } ); // What: Hours Assertion. Why: The data should give the hours the page shows. How: This checks weekdays from 8:00 to 17:00.
 	expect( pagTexStr ).toContain( 'Monday – Friday, 8 a.m. – 5 p.m.' ); // What: Hours Shown Assertion. Why: The hours in the data have to be visible on the page. How: This checks the page shows them.
+	expect( pagTexStr ).toContain( ldjDatObj.foundingDate );             // What: Founding Date Shown Assertion. Why: The founding year in the data has to be visible on the page. How: This checks the page shows it.
+	expect( pagTexStr ).toContain( ldjDatObj.legalName );                // What: Legal Name Shown Assertion. Why: The legal name in the data has to be visible on the page. How: This checks the page shows it.
 	expect( ldjDatObj.areaServed ).toHaveLength( 5 );                    // What: Service Area Count Assertion. Why: The data should list exactly the service areas the page lists. How: This checks there are five.
 
 
@@ -163,16 +165,17 @@ test( 'the raw page carries the home title and description for script-free reade
 
 // #region Not Found Page Checks
 
-test( 'the 404 page stays out of search results', async ( { page : curPagObj } ) => { // What: Not Found Head Test. Why: The host answers every unknown address with a 200, so the 404 page must ask not to be indexed. How: This loads an unknown address and checks its robots tag, title, and heading.
+test( 'the 404 page stays out of search results', async ( { page : curPagObj } ) => { // What: Not Found Head Test. Why: The host answers every unknown address with a 200, so the 404 page must ask not to be indexed. How: This loads an unknown address and checks its robots tag, canonical, title, and heading.
 
 
 	await curPagObj.goto( '/no-such-page' ); // What: Unknown Address Open Call. Why: Every unknown path shows the 404 page. How: This loads one.
 
 
-	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' ); // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.
-	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                   // What: Single Description Assertion. Why: A noindex page keeps index.html's description, and rendering a second would leave two. How: This checks there's exactly one.
-	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Seal and Shield' );                        // What: Not Found Title Assertion. Why: The page needs a title of its own. How: This checks it.
-	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 );                   // What: Single Heading Assertion. Why: Every page should have exactly one h1. How: This checks the 404 page has one.
+	await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR ); // What: Canonical Assertion. Why: The 404 page keeps the home page's canonical from index.html, which its noindex keeps out of search. How: This checks the canonical link names the live address.
+	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' );  // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                    // What: Single Description Assertion. Why: A noindex page keeps index.html's description, and rendering a second would leave two. How: This checks there's exactly one.
+	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Seal and Shield' );                         // What: Not Found Title Assertion. Why: The page needs a title of its own. How: This checks it.
+	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 );                    // What: Single Heading Assertion. Why: Every page should have exactly one h1. How: This checks the 404 page has one.
 
 
 } );
