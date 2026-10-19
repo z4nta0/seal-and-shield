@@ -136,6 +136,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 		const souImaObj = new Image(); // What: Source Image Object. Why: The mark has to be decoded before it's drawn. How: This loads it from its base64 data.
 
+
 		souImaObj.src = `data:image/png;base64,${ souB64Str }`; // What: Source Address Assignment. Why: The image loads from the data handed in. How: This sets it as a data URL.
 
 		await souImaObj.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
@@ -153,12 +154,12 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 			curSizNum = Math.round( curSizNum / 2 ); // What: Halved Size Update. Why: The step is half the previous size. How: This halves and rounds it.
 
-			halCanObj.width = curSizNum; // What: Half Width Assignment. Why: The canvas is square at the step's size. How: This sets its width.
-
+			halCanObj.width  = curSizNum; // What: Half Width Assignment. Why: The canvas is square at the step's size. How: This sets its width.
 			halCanObj.height = curSizNum; // What: Half Height Assignment. Why: The canvas is square at the step's size. How: This sets its height.
 
 
 			const halCotObj = halCanObj.getContext( '2d' )!; // What: Half Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
+
 
 			halCotObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: The best resampling keeps edges clean. How: This asks for high-quality smoothing.
 
@@ -173,12 +174,13 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 		const finCanObj = document.createElement( 'canvas' ); // What: Final Canvas Object. Why: The last step draws at the exact target size. How: This creates it.
 
-		finCanObj.width = tarSizNum; // What: Final Width Assignment. Why: The icon is square at its target size. How: This sets the width.
 
+		finCanObj.width  = tarSizNum; // What: Final Width Assignment. Why: The icon is square at its target size. How: This sets the width.
 		finCanObj.height = tarSizNum; // What: Final Height Assignment. Why: The icon is square at its target size. How: This sets the height.
 
 
 		const finCotObj = finCanObj.getContext( '2d' )!; // What: Final Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
+
 
 		finCotObj.imageSmoothingQuality = 'high'; // What: Final Smoothing Assignment. Why: The last step should resample as cleanly as the others. How: This asks for high-quality smoothing.
 

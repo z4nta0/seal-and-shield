@@ -85,7 +85,10 @@ const EMP_FOR_OBJ = { company : '', email : '', message : '', name : '', phone :
 function ConSecCom () : React.JSX.Element {
 
 
-	const secEleRef = useRevSecFun( 80 ); // What: Section Element Reference. Why: The section's blocks fade in as it scrolls into view. How: This is the ref the reveal hook watches, staggering the blocks 80ms apart.
+	const secEleRef = useRevSecFun( 80 );                 // What: Section Element Reference. Why: The section's blocks fade in as it scrolls into view. How: This is the ref the reveal hook watches, staggering the blocks 80ms apart.
+	const focRetRef = useRef( false );                    // What: Focus Return Reference. Why: The form should take focus back only if the visitor left it on the thank-you message. How: sucEndFun records whether the panel still had focus as it faded out.
+	const namInpRef = useRef< HTMLInputElement >( null ); // What: Name Input Reference. Why: The returning form's first field takes focus back. How: This holds the Full Name input.
+	const sucDivRef = useRef< HTMLDivElement >( null );   // What: Success Div Reference. Why: The thank-you message takes focus when it replaces the form. How: This holds the panel.
 
 	const [ forSenBoo, setForSenBoo ] = useState( false );       // What: Form Sent Boolean And Setter. Why: The form gives way to a thank-you message once sent. How: This holds whether the message is showing.
 	const [ forDatObj, setForDatObj ] = useState( EMP_FOR_OBJ ); // What: Form Data Object And Setter. Why: The fields are controlled, so the form can empty itself once sent. How: This holds every field's current value, keyed by its name.
@@ -94,10 +97,6 @@ function ConSecCom () : React.JSX.Element {
 	const [ errLeaBoo, setErrLeaBoo ] = useState( false );       // What: Error Leaving Boolean And Setter. Why: The error message should fade out before it's removed. How: This holds whether its exit is playing.
 	const [ errCouNum, setErrCouNum ] = useState( 0 );           // What: Error Count Number And Setter. Why: Each failure has to add a fresh paragraph to the alert region, or screen readers won't announce a second one that arrives while the first is still fading. How: This counts failures, and the error paragraph takes it as its key.
 	const [ sucLeaBoo, setSucLeaBoo ] = useState( false );       // What: Success Leaving Boolean And Setter. Why: The thank-you message should fade out before the form returns. How: This holds whether its exit is playing.
-
-	const focRetRef = useRef( false );                    // What: Focus Return Reference. Why: The form should take focus back only if the visitor left it on the thank-you message. How: sucEndFun records whether the panel still had focus as it faded out.
-	const namInpRef = useRef< HTMLInputElement >( null ); // What: Name Input Reference. Why: The returning form's first field takes focus back. How: This holds the Full Name input.
-	const sucDivRef = useRef< HTMLDivElement >( null );   // What: Success Div Reference. Why: The thank-you message takes focus when it replaces the form. How: This holds the panel.
 
 
 	// #region fieChaFun
@@ -225,6 +224,7 @@ function ConSecCom () : React.JSX.Element {
 			setForErrBoo( false ); // What: Error Clear Call. Why: An error still fading when the request succeeds would replay its exit once the form returns. How: This removes it with the form.
 
 			setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The next error should arrive with its entrance, not its exit. How: This clears the exit flag.
+
 
 			window.setTimeout( () => setSucLeaBoo( true ), 6000 ); // What: Form Return Timer. Why: A visitor may want to send another request. How: This starts the thank-you message's exit after six seconds, and sucEndFun brings the form back once it ends.
 
