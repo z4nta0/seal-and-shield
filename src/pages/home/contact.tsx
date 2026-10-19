@@ -139,8 +139,9 @@ function ConSecCom () : React.JSX.Element {
 	 * address): stops the page-reloading submit, fades out any earlier error,
 	 * and posts the form's fields to Netlify Forms as URL-encoded data, whose
 	 * form-name field tells Netlify which form they belong to. While the
-	 * request is out, the submit button is disabled and its label says
-	 * Sending... instead. Only an OK answer from Netlify counts as sent: then
+	 * request is out, the submit button is marked aria-disabled, so it keeps
+	 * focus, a second submit returns at once, and its label says Sending...
+	 * instead. Only an OK answer from Netlify counts as sent: then
 	 * the thank-you message shows, the fields empty, and six seconds later the
 	 * message fades out and the form comes back. A request that fails
 	 * outright, or one Netlify rejects, keeps the visitor's details in place
@@ -167,6 +168,11 @@ function ConSecCom () : React.JSX.Element {
 		subEveObj.preventDefault(); // What: Default Submit Cancel. Why: A normal submit would reload the page. How: This stops it, so the fetch below sends the fields instead.
 
 
+
+		if ( senProBoo ) return; // What: Sending Exit Guard. Why: The button stays enabled for focus while a request is out, so a second submit can still arrive. How: This returns at once while the first request is on its way.
+
+
+
 		const forCurEle = subEveObj.target as HTMLFormElement;                              // What: Form Current Element. Why: The fields are read from the form itself. How: This is the element the submit event fired on. // What: Type Assertion Note. Why: An event's target types as a plain EventTarget. How: A submit event always fires on its form element.
 		const forValObj = new FormData( forCurEle ) as unknown as Record< string, string >; // What: Form Value Object. Why: Netlify expects the form's fields as name and value pairs. How: This reads every named field, form-name included. // What: Type Assertion Note. Why: URLSearchParams doesn't accept a FormData in TypeScript's types. How: Every field in this form holds text, so its entries read as plain string pairs.
 
@@ -178,7 +184,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the request is on its way, and shouldn't send it twice. How: This disables the button and switches its label to say Sending... instead.
+		setSenProBoo( true ); // What: Sending Start Call. Why: The visitor should see the request is on its way, and shouldn't send it twice. How: This marks the button aria-disabled and switches its label to say Sending... instead.
 
 
 
@@ -205,7 +211,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This re-enables the button and restores its label.
+		setSenProBoo( false ); // What: Sending End Call. Why: The request has its answer, so the button can be used again. How: This clears the button's aria-disabled mark and restores its label.
 
 
 
@@ -322,6 +328,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 		focRetRef.current = document.activeElement === sucDivRef.current; // What: Focus Return Flag Assignment. Why: Focus should go back to the form only if the visitor hadn't moved it on. How: This records whether the panel still holds focus as it leaves.
+
 
 		setForSenBoo( false ); // What: Sent Message Hide Call. Why: The faded message gives way to the form. How: This swaps the form back in.
 
@@ -750,9 +757,10 @@ function ConSecCom () : React.JSX.Element {
 							<button
 								className={ cssModObj.forSubBut }
 
-								disabled={ senProBoo }
 								type='submit'
-							>{ /* What: Form Submit Button Element. Why: The visitor sends the request here. How: This submits the form through forSubFun, and is disabled while a submission is on its way. */ }
+
+								aria-disabled={ senProBoo || undefined } // What: ARIA Disabled Attribute. Why: A truly disabled button loses focus, which would drop it to the page when a send fails. How: This marks the button unavailable while a submission is out, and forSubFun ignores submits meanwhile.
+							>{ /* What: Form Submit Button Element. Why: The visitor sends the request here. How: This submits the form through forSubFun, and is marked aria-disabled, keeping its focus, while a submission is on its way. */ }
 
 
 								<span

@@ -798,7 +798,7 @@
 
 
 }
-.forSubBut:hover:not( :disabled ) { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer, but not while a request is out. How: This turns its fill and border blue and lifts it, only while the button can be used. */
+.forSubBut:hover:not( [aria-disabled] ) { /* What: Hovered Form Submit Button. Why: The button should respond to the pointer, but not while a request is out. How: This turns its fill and border blue and lifts it, only while the button can be used. */
 
 
 	background   : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
@@ -807,14 +807,14 @@
 
 
 }
-.forSubBut:active:not( :disabled ) { /* What: Pressed Form Submit Button. Why: A press should register before the request goes out. How: This presses the button in slightly, unless it's disabled while a request is out. */
+.forSubBut:active:not( [aria-disabled] ) { /* What: Pressed Form Submit Button. Why: A press should register before the request goes out. How: This presses the button in slightly, unless it's marked aria-disabled while a request is out. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
 
 
 }
-.forSubBut:disabled { /* What: Disabled Form Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This fades it dimmer and shows the progress cursor. */
+.forSubBut[aria-disabled='true'] { /* What: ARIA Disabled Form Submit Button. Why: While a submission is out, the button shouldn't look ready to send again. How: This fades it dimmer and shows the progress cursor. */
 
 
 	cursor  : progress;

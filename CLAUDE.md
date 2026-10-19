@@ -248,9 +248,10 @@ waiting for the page to settle.
   button names, a Tab walk (order, traps, focus on screen, uncovered, and
   visible), reflow at 320px, motion under reduced motion, and the contact
   form's announcements: its alert region waits in the page empty and gains
-  the error, and focus moves to the thank-you message and back to the form. axe's "needs
-  review" results are printed and attached to the report rather than failing
-  the run.
+  the error, focus stays on the submit button after a failed send, and focus
+  moves to the thank-you message and back to the form. axe's "needs review"
+  results are printed and attached to the report rather than failing the
+  run.
 - `npm run test:interaction`: checks what the controls do, under reduced
   motion so scrolls land at once. The bar's links, brand, menu, and footer
   buttons land on their sections with a clean address; the contact form

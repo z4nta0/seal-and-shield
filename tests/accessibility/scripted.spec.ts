@@ -7,7 +7,7 @@ import { expect      } from '@playwright/test';      // What: Expect. Why: Each 
 import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form checks need Netlify's answer without sending anything. How: This answers the form's posts in the browser with a chosen status.
 import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is checked. How: This lists them.
-import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
+import { test        } from '@playwright/test';      // What: Test. Why: Each check of each state is its own test. How: This declares them.
 
 
 import type { Page } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
@@ -503,6 +503,32 @@ test( 'a failed request fills an alert region that was in the page, empty, from 
 
 
 	await expect( aleRegObj ).toContainText( "didn't go through" ); // What: Region Message Assertion. Why: The failure should reach screen readers. How: This checks the region now holds the error.
+
+
+} );
+
+
+test( 'a failed request leaves focus on the submit button', async ( { page : curPagObj } ) => { // What: Failed Focus Test. Why: A button disabled while it holds focus drops that focus to the page, so a failed send must leave it on the submit button. How: This submits from the focused button, fails the request, and checks where focus is.
+
+
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post with a server error.
+
+	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
+
+
+	const subButObj = curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ); // What: Submit Button Object. Why: Focus is checked on the submit button. How: This finds it by its label.
+
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await subButObj.focus(); // What: Submit Focus Call. Why: The bug only shows while the button holds focus, which a click doesn't give it in every engine. How: This focuses it directly.
+
+	await curPagObj.keyboard.press( 'Enter' ); // What: Enter Press Call. Why: This is the action under test. How: This sends the request from the focused button.
+
+
+	await expect( curPagObj.locator( '#contact form [role="alert"]' ) ).toContainText( "didn't go through" ); // What: Error Shown Assertion. Why: Focus is checked once the failure has played out. How: This waits for the error message.
+	await expect( subButObj ).toBeFocused();                                                                // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the submit button still holds it.
 
 
 } );
