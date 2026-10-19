@@ -48,6 +48,26 @@ type IcoRecTyp = { // What: Icon Record Type. Why: Every PNG icon is described t
 
 };
 
+// #region ICO_REC_ARR
+
+/**
+ * ICO_REC_ARR = Icon Record Array
+ *
+ * @summary
+ * The PNG icons rendered from the mark, in the order they're written. Every
+ * row shares one shape, so its fields carry no comments of their own:
+ *
+ * - `filStr` (String): File String, the icon's file name in public/.
+ *
+ * - `opaBoo` (Boolean): Opaque Boolean, true for the icon drawn on solid
+ *   white.
+ *
+ * - `sizNum` (Number): Size Number, the icon's width and height in pixels.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
 const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
 
 
@@ -59,6 +79,8 @@ const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG ico
 
 
 ];
+
+// #endregion ICO_REC_ARR
 
 
 

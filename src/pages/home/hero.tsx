@@ -39,6 +39,8 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
 
 // #region Constants
 
+// #region HER_STA_ARR
+
 /**
  * HER_STA_ARR = Hero Stat Array
  *
@@ -65,6 +67,8 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 
 
 ];
+
+// #endregion HER_STA_ARR
 
 // #endregion Constants
 
@@ -168,7 +172,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-						>{ /* What: Button Base Anchor Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
+						>{ /* What: Button Base Anchor Primary Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
 							Get a Free Quote
 						</a>
 
@@ -178,7 +182,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#services'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
-						>{ /* What: Button Base Anchor Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
+						>{ /* What: Button Base Anchor Secondary Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
 							Our Services
 						</a>
 

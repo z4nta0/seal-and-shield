@@ -148,7 +148,7 @@
 
 /* #region navInnDiv */
 
-.navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents line up with the page's content width. How: This centers a capped-width row with side padding, copied from the shared container, and spreads the brand, links, and menu button across it. */
+.navInnDiv { /* What: Navigation Inner Div. Why: The bar's contents line up with the page's content width. How: This centers a capped-width row with side padding, copied from the shared container, and spreads the brand and either the links row, above 768px wide, or the menu button, at 768px and below, across it. */
 
 
 	align-items     : center;
@@ -310,7 +310,7 @@
 
 
 }
-.navLinAnc::after { /* What: Navigation Link Underline. Why: A short line marks the hovered and active links. How: This draws a 2px light blue line under the link, scaled to nothing until it's needed. */
+.navLinAnc::after { /* What: Navigation Link Anchor Underline. Why: A short line marks the hovered and active links. How: This draws a 2px light blue line under the link, scaled to nothing until it's needed. */
 
 
 	background       : var( --acc-lig-col );                                /* Accent Light Color ~= #4488f6 */
@@ -341,7 +341,7 @@
 
 }
 .navLinAnc[data-section-link-active]::after,
-.navLinAnc:hover::after { /* What: Hovered And Active Navigation Link Underline. Why: The underline completes the highlight. How: This grows the line to its full width from the left. */
+.navLinAnc:hover::after { /* What: Hovered And Active Navigation Link Anchor Underline. Why: The underline completes the highlight. How: This grows the line to its full width from the left. */
 
 
 	transform : scaleX( 1 );
@@ -385,7 +385,7 @@
 
 
 }
-.navCtaAnc:hover { /* What: Hovered Navigation Call-To-Action Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text. */
+.navCtaAnc:hover { /* What: Hovered Navigation Call-To-Action Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text and lifts it a pixel. */
 
 
 	background : transparent;

@@ -27,7 +27,7 @@
 
 
 	background : var( --bac-pag-col );   /* Background Page Color = #ffffff */
-	overflow-x : clip;                   /* What: Side Clip. Why: The logo's light panel reaches past its column, which on a phone runs past the screen's edge. How: This clips it there without making the section a scroll container, so the panel runs edge to edge. */
+	overflow-x : clip;                   /* What: Side Clip. Why: The logo's light panel reaches past its column, which at about 493px wide and below runs past the screen's edge. How: This clips it there without making the section a scroll container, so the panel runs edge to edge. */
 	padding    : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
 
 
@@ -105,7 +105,7 @@
 
 }
 
-.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, or to the screen's edges on a phone, in the off-white behind everything else. */
+.logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, or to the screen's edges at about 493px wide and below, in the off-white behind everything else. */
 
 
 	background : var( --bac-sur-col );              /* Background Surface Color = #f4f6fa */
@@ -245,7 +245,7 @@
 
 /* #region aboTexDiv */
 
-.aboTexDiv { /* What: About Text Div. Why: Once the columns stack, the story should sit centered under the logo rather than hug the left edge. How: This centers the column at its content's width in its grid cell, keeping its text left-aligned; beside the logo, its column is already sized to its content, so nothing moves. */
+.aboTexDiv { /* What: About Text Div. Why: Once the columns stack at 900px wide and below, the story should sit centered under the logo rather than hug the left edge. How: This centers the column at its content's width in its grid cell, keeping its text left-aligned; beside the logo, its column is already sized to its content, so nothing moves. */
 
 
 	justify-self : center;

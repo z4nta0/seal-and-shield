@@ -125,7 +125,7 @@ function NotFouCom () : React.JSX.Element {
 						href='/#contact'
 
 						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-					>{ /* What: Button Base Anchor Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's contact section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it. */ }
+					>{ /* What: Button Base Anchor Secondary Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's contact section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it. */ }
 						Get a Free Quote
 					</a>
 

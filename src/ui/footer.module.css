@@ -6,9 +6,9 @@
  *
  * @summary
  * Styles for SitFooCom: the dark footer's row of columns (the brand and
- * tagline, the section links, and the phone number and hours), which
- * stacks into one centered column on screens 768px wide or narrower,
- * and the copyright line below a hairline. The shared container styles the
+ * tagline, the section links, and the phone number and hours), which wraps
+ * at about 776px wide and below and stacks into one centered column on
+ * screens 768px wide or narrower, and the copyright line below a hairline. The shared container styles the
  * columns' row used to borrow from the global stylesheet are copied onto its
  * own class here, which also retires the !important its vertical padding
  * needed to beat the container's.
@@ -24,7 +24,7 @@
 .sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the dark navy and draws a faint line along its top. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Footer. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
 
 	background : var( --bac-inv-col );                                                       /* Background Inverse Color = #080f24 */
 	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
@@ -55,7 +55,6 @@
 	.fooInnDiv { /* What: Stacked Footer Inner Div. Why: The columns read best one above another on a narrow screen. How: This stacks them down the center with a smaller gap. */
 
 
-		align-items    : center;
 		flex-direction : column;
 		gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
 

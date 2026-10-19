@@ -49,6 +49,25 @@ type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page i
 
 };
 
+// #region LAY_CAS_ARR
+
+/**
+ * LAY_CAS_ARR = Layout Case Array
+ *
+ * @summary
+ * The cases the suite measures, each at every width it exists at. Every row
+ * shares one shape, so its fields carry no comments of their own:
+ *
+ * - `ideStr` (String): Identifier String, the case's name in each test title.
+ *
+ * - `menBoo` (Boolean): Menu Boolean, true when the case opens the menu.
+ *
+ * - `patStr` (String): Path String, the route the case loads.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
 const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page and the open menu are measured the same way. How: Each row names a case, its path, and whether it opens the menu.
 
 
@@ -58,6 +77,8 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page an
 
 
 ];
+
+// #endregion LAY_CAS_ARR
 
 
 

@@ -393,7 +393,7 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Navigation Links Nav Element. Why: Above 768px wide the bar shows the section links and phone number here, while at 768px and below this row hides and the menu takes over. How: This labels the landmark Main, telling it apart from the footer's. */ }
 
 
-						{ NAV_LIN_ARR.map( ( linRecObj ) => ( // What: Bar Link Map. Why: Each section gets a link in the bar. How: This renders one anchor per row.
+						{ NAV_LIN_ARR.map( ( linRecObj ) => ( // What: Bar Link Map. Why: Each section gets a link in the bar above 768px wide. How: This renders one anchor per row.
 
 
 							<a
