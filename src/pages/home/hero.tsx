@@ -61,7 +61,7 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 
 
 	{ labStr : 'Commercial Focus',     valStr : '100%'    }, // What: Commercial Focus Stat Row. Why: The company works on commercial roofs only. How: This shows 100%.
-	{ labStr : 'Inspections & Quotes', valStr : 'Free'    }, // What: Free Quotes Stat Row. Why: A free inspection lowers the bar to getting in touch. How: This shows Free.
+	{ labStr : 'Inspections & Quotes', valStr : 'Free'    }, // What: Inspections And Quotes Stat Row. Why: A free inspection lowers the bar to getting in touch. How: This shows Free.
 	{ labStr : 'Service Coverage',     valStr : 'KS + US' }, // What: Service Coverage Stat Row. Why: Visitors outside Lawrence want to know they're covered. How: This shows Kansas plus the continental U.S.
 	{ labStr : 'Founded in Lawrence',  valStr : '2024'    }  // What: Founded Stat Row. Why: The founding year and town ground the company locally. How: This shows 2024.
 
