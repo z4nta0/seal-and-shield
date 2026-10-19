@@ -418,6 +418,7 @@
 /* #endregion navLinNav */
 
 
+
 /* #region navTogBut */
 
 .navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon, hidden until the narrow layout shows it. */
@@ -664,7 +665,7 @@
 
 	}
 
-	.navMenDiv[data-mobile-menu-open] .menLinAnc { /* What: Still Entering Menu Link Anchor. Why: The links should simply be there when the menu opens. How: This turns the entrance off. */
+	.navMenDiv[data-mobile-menu-open] .menLinAnc { /* What: Motionless Entering Menu Link Anchor. Why: The links should simply be there when the menu opens. How: This turns the entrance off. */
 
 
 		animation : none;
@@ -753,7 +754,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Menu Contact Div. Why: Someone who asked for less motion shouldn't see the block animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Still Entering Menu Contact Div. Why: The block should simply be there when the menu opens. How: This turns the entrance off. */
+	.navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Motionless Entering Menu Contact Div. Why: The block should simply be there when the menu opens. How: This turns the entrance off. */
 
 
 		animation : none;

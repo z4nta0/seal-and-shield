@@ -158,7 +158,7 @@ function SitFooCom () : React.JSX.Element {
 						(785) 304-1957
 					</a>
 
-					<p className={ cssModObj.fooHouPar }>Mon – Fri &nbsp;|&nbsp; 8 a.m. – 5 p.m.</p>{ /* What: Footer Hours Paragraph Element. Why: Callers should know when someone will answer. How: This lists the weekday business hours. */ }
+					<p className={ cssModObj.fooHouPar }>Mon – Fri  |  8 a.m. – 5 p.m.</p>{ /* What: Footer Hours Paragraph Element. Why: Callers should know when someone will answer. How: This lists the weekday business hours. */ }{ /* Each side of the bar holds a regular space and a non-breaking space, the latter typed as the character itself rather than an entity, since HTML would collapse two regular spaces into one and the bar needs the wider gap. */ }
 
 
 				</div>

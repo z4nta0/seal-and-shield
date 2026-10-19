@@ -189,7 +189,7 @@ function HerSecCom () : React.JSX.Element {
 				</div>
 
 
-				<div className={ cssModObj.herRigDiv }>{ /* What: Hero Right Div Element. Why: The logo balances the pitch. How: This centers the logo and its ring in the content grid's second column, or above the pitch at 900px wide and below. */ }
+				<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The logo balances the pitch. How: This centers the logo and its ring in the content grid's second column, or above the pitch at 900px wide and below. */ }
 
 
 					<div className={ cssModObj.herLogDiv }>{ /* What: Hero Logo Div Element. Why: The ring sits behind the logo. How: This stacks the two in one box. */ }

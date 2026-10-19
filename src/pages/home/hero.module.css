@@ -355,9 +355,9 @@
 
 
 
-/* #region herRigDiv */
+/* #region herVisDiv */
 
-.herRigDiv { /* What: Hero Right Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
+.herVisDiv { /* What: Hero Visual Div. Why: The logo balances the pitch in the second column. How: This centers the logo and its ring, rising in alongside the pitch. */
 
 
 	align-items     : center;
@@ -367,10 +367,10 @@
 
 
 }
-@container app ( max-width : 900px ) { /* What: Narrow Hero Right Div. Why: In the stacked column the logo leads. How: This applies 900px wide and below. */
+@container app ( max-width : 900px ) { /* What: Narrow Hero Visual Div. Why: In the stacked column the logo leads. How: This applies 900px wide and below. */
 
 
-	.herRigDiv { /* What: Leading Hero Right Div. Why: The logo should sit above the pitch once the columns stack. How: This moves it first in the grid's order. */
+	.herVisDiv { /* What: Leading Hero Visual Div. Why: The logo should sit above the pitch once the columns stack. How: This moves it first in the grid's order. */
 
 
 		order : -1;
@@ -380,10 +380,10 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Right Div. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Hero Visual Div. Why: Someone who asked for less motion shouldn't see the page animate in. How: This applies only when the reduced-motion preference is set. */
 
 
-	.herRigDiv { /* What: Motionless Hero Right Div. Why: The logo should simply be there. How: This turns the entrance animation off. */
+	.herVisDiv { /* What: Motionless Hero Visual Div. Why: The logo should simply be there. How: This turns the entrance animation off. */
 
 
 		animation : none;
@@ -511,7 +511,7 @@
 
 /* #endregion herLogDiv */
 
-/* #endregion herRigDiv */
+/* #endregion herVisDiv */
 
 /* #endregion herConDiv */
 
