@@ -44,6 +44,8 @@ import { useState     } from 'react';             // What: Use State. Why: The b
 
 // #region Constants
 
+// #region NAV_LIN_ARR
+
 /**
  * NAV_LIN_ARR = Navigation Link Array
  *
@@ -70,6 +72,8 @@ const NAV_LIN_ARR = [ // What: Navigation Link Array. Why: The bar and the mobil
 
 
 ];
+
+// #endregion NAV_LIN_ARR
 
 
 

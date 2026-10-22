@@ -41,6 +41,8 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
 
 // #region Constants
 
+// #region ARE_TAG_OBJ
+
 /**
  * ARE_TAG_OBJ = Area Tag Object
  *
@@ -67,6 +69,8 @@ const ARE_TAG_OBJ : Record< string, string > = { // What: Area Tag Object. Why: 
 
 
 };
+
+// #endregion ARE_TAG_OBJ
 
 
 
