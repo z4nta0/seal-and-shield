@@ -208,14 +208,14 @@ type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges
  * Runs inside the page after each Tab press and describes the focused stop, or
  * returns null once focus has left the page: onto the body, to nothing, or out
  * of the document entirely. (Firefox does none of these after its last stop;
- * keyProFun catches it there instead, when focus stays on the same stop.) The
- * focus indicator is judged by blurring the stop for a moment and comparing
- * the styles a focus indicator usually changes (outline, shadow, border,
- * background, color, and underline), then focusing it again so the walk
- * continues from it. Coverage is judged by asking which element sits at the
- * stop's center: anything other than the stop or one of its own descendants
- * means the stop is hidden behind it. Passed to Playwright's evaluate, so it
- * can't read anything from this file.
+ * keyProFun catches the walk's end there instead, when focus stays on the same
+ * stop.) The focus indicator is judged by blurring the stop for a moment and
+ * comparing the styles a focus indicator usually changes (outline, shadow,
+ * border, background, color, and underline), then focusing it again so the
+ * walk continues from it. Coverage is judged by asking which element sits at
+ * the stop's center: anything other than the stop or one of its own
+ * descendants means the stop is hidden behind it. Passed to Playwright's
+ * evaluate, so it can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -376,7 +376,7 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 
 
-		if ( !firStoStr ) firStoStr = stoInfObj.desStr; // What: First Stop Record. Why: The walk ends if focus comes back to it. How: This remembers the first stop's description.
+		if ( !firStoStr ) firStoStr = stoInfObj.desStr; // What: First Stop Record. Why: The walk ends if focus comes back to the first stop. How: This remembers the first stop's description.
 
 
 
@@ -437,7 +437,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 	test( `${ staRecObj.ideStr } walks cleanly with the keyboard`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Keyboard Test. Why: Everything has to be usable without a mouse. How: This opens the state under reduced motion, walks it with Tab, and checks it finds no keyboard problems.
 
 
-		test.slow(); // What: Slow Test Mark. Why: A full walk measures every stop and takes about 11 seconds alone, which ran past the default 30 second timeout in Firefox when every suite shared the machine. How: This triples this test's timeout.
+		test.slow(); // What: Slow Test Mark. Why: A full walk measures every stop and takes about 11 seconds alone, which ran past the default 30-second timeout in Firefox when every suite shared the machine. How: This triples this test's timeout.
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: A smooth scroll or a focus transition still running would be measured halfway. How: This makes the page match prefers-reduced-motion, which turns both off.
 
@@ -537,7 +537,7 @@ test( 'a failed request leaves focus on the submit button', async ( { page : cur
 
 
 
-test( 'sending moves focus to the thank-you message and back to the form when it returns', async ( { page : curPagObj } ) => { // What: Sent Focus Test. Why: The focused submit button disappears with the form, so focus must land on the thank-you message, which announces it, and come back to the form's first field when the form returns. How: This sends a request, checks focus on the message, moves the clock past its six seconds, and checks focus on the name field.
+test( 'sending moves focus to the thank-you message and back to the form when it returns', async ( { page : curPagObj } ) => { // What: Sent Focus Test. Why: The focused submit button disappears with the form, so focus must land on the thank-you message, which announces the result, and come back to the form's first field when the form returns. How: This sends a request, checks focus on the message, moves the clock past its six seconds, and checks focus on the name field.
 
 
 	await curPagObj.clock.install(); // What: Clock Install Call. Why: Waiting six real seconds would slow the suite. How: This puts the page's timers under the test's control before it loads.

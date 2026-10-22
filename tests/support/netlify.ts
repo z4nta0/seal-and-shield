@@ -13,11 +13,11 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The fake answe
  * netlify.ts = Netlify
  *
  * @summary
- * The stand-in for Netlify Forms that the interaction and accessibility
- * suites share, so a form check can see the page react to Netlify's answer
- * without sending anything. fakNetFun answers every post to the site's root
- * address in the browser with a chosen status and counts them, and lets every
- * other request through.
+ * The stand-in for Netlify Forms that the interaction and accessibility suites
+ * share, so a form check can see the page react to Netlify's answer without
+ * sending anything. fakNetFun answers every post to the site's root address in
+ * the browser with a chosen status and counts each one, and lets every other
+ * request through.
  *
  * Sections:
  *  - Helpers
