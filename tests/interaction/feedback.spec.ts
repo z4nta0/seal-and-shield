@@ -312,7 +312,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
-	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, and probes every control.
+	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every control, and checks it finds no problems.
 
 
 		test.slow(); // What: Slow Test Mark. Why: Probing every control's hover, press, and focus takes about 28 seconds in Chromium alone, which ran past the default 30 second timeout when every suite shared the machine. How: This triples this test's timeout.
@@ -329,7 +329,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } eases its focus ring in to full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop and reads its ring once it has eased in.
+	test( `${ staRecObj.ideStr } eases its focus ring in to full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop and checks its ring reaches 2px once it has eased in.
 
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The walk starts from the state settled. How: This loads and settles it.
@@ -346,7 +346,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control with reduced motion on.
+	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control with reduced motion on and checks it finds no problems.
 
 
 		test.slow(); // What: Slow Test Mark. Why: Probing every control's hover, press, and focus takes about 28 seconds in Chromium alone, which ran past the default 30 second timeout when every suite shared the machine. How: This triples this test's timeout.

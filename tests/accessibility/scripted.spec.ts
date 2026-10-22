@@ -433,7 +433,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRecObj.ideStr } walks cleanly with the keyboard`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Keyboard Test. Why: Everything has to be usable without a mouse. How: This opens the state under reduced motion and walks it with Tab.
+	test( `${ staRecObj.ideStr } walks cleanly with the keyboard`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Keyboard Test. Why: Everything has to be usable without a mouse. How: This opens the state under reduced motion, walks it with Tab, and checks it finds no keyboard problems.
 
 
 		test.slow(); // What: Slow Test Mark. Why: A full walk measures every stop and takes about 11 seconds alone, which ran past the default 30 second timeout in Firefox when every suite shared the machine. How: This triples this test's timeout.
@@ -463,7 +463,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, opens the state, and lists anything that played.
+	test( `${ staRecObj.ideStr } plays no motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Test. Why: Visitors who ask for less motion shouldn't see the page animate. How: This requests reduced motion, opens the state, and checks that nothing played.
 
 
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
