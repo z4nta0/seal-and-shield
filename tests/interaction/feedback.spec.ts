@@ -24,10 +24,12 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  * engine the project runs. Every visible link and button has to look different
  * while hovered than at rest, look different again while pressed, and
  * transition its focus ring's outline, and the first keyboard stop has to draw
- * that ring at full width once it has eased in. Under reduced motion every
- * control keeps its hover and press changes but transitions nothing. Real
- * clicks are blocked during the checks, so pressing a link or the menu's links
- * never navigates or closes anything mid-check.
+ * that ring at full width once it has eased in. Every visible form field has
+ * to look different once keyboard focus reaches it and transition its focus
+ * ring's outline too. Under reduced motion every control keeps its hover and
+ * press changes, and every field its focus change, but transitions nothing.
+ * Real clicks are blocked during the checks, so pressing a link or the menu's
+ * links never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Constants
@@ -103,32 +105,36 @@ function cliBloFun () : void {
  *
  * @summary
  * Collects every control a visitor can reach on the page as it stands: each
- * link and button that's visible, not taken out of the tab order with tabindex
- * -1, and not inside inert content (the closed mobile menu). Handles are taken
- * once, so restyling while the checks scroll (the nav bar's scrolled look)
- * can't shift the list.
+ * element the selector matches that's visible, not taken out of the tab order
+ * with tabindex -1, and not inside inert content (the closed mobile menu), so
+ * the same list serves the links and buttons and the form fields. Handles are
+ * taken once, so restyling while the checks scroll (the nav bar's scrolled
+ * look) can't shift the list.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to collect from.
+ * @param conSelStr - Control Selector String: The kinds of control to collect,
+ *                    'a, button' for the links and buttons or 'input, select,
+ *                    textarea' for the form fields.
  *
  * @returns Every reachable control.
  * @see {@link conHanArr}
  *
  * @example
  * ```ts
- * conLisFun(page) // => [ ElementHandle, ... ]
+ * conLisFun(page, 'a, button') // => [ ElementHandle, ... ]
  * ```
  *
 */
 
-async function conLisFun ( curPagObj : Page ) : Promise< ElementHandle< Element >[] > {
+async function conLisFun ( curPagObj : Page, conSelStr : string ) : Promise< ElementHandle< Element >[] > {
 
 
 	const conHanArr : ElementHandle< Element >[] = []; // What: Control Handle Array. Why: The reachable controls are gathered one by one. How: This collects them.
 
 
-	for ( const conCurObj of await curPagObj.$$( 'a, button' ) ) { // What: Control Loop. Why: Every link and button is judged on its own. How: This keeps each one a visitor can reach.
+	for ( const conCurObj of await curPagObj.$$( conSelStr ) ) { // What: Control Loop. Why: Every control the selector matches is judged on its own. How: This keeps each one a visitor can reach.
 
 
 		const conReaBoo = await conCurObj.evaluate( ( conCurEle ) => conCurEle.getAttribute( 'tabindex' ) !== '-1' && !conCurEle.closest( '[inert]' ) ); // What: Control Reachable Boolean. Why: A control outside the tab order or inside inert content can't be reached. How: This checks both inside the page.
@@ -240,7 +246,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
 
 
-	for ( const conCurObj of await conLisFun( curPagObj ) ) { // What: Control Probe Loop. Why: Every reachable control has to respond. How: This reads each one at rest, hovered, and pressed.
+	for ( const conCurObj of await conLisFun( curPagObj, 'a, button' ) ) { // What: Control Probe Loop. Why: Every reachable control has to respond. How: This reads each one at rest, hovered, and pressed.
 
 
 		const conDesStr = await conCurObj.evaluate( ( conCurEle ) => `${ conCurEle.tagName.toLowerCase() } "${ ( conCurEle.getAttribute( 'aria-label' ) || conCurEle.textContent || '' ).trim().slice( 0, 30 ) }"` ); // What: Control Description String. Why: A problem should name the control a person would recognize. How: This joins its tag with its label or text.
@@ -304,6 +310,139 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 // #endregion feeProFun
 
+
+
+// #region fieSigFun
+
+/**
+ * fieSigFun = Field Signature Function
+ *
+ * @summary
+ * Runs inside the page and describes how a form field looks right now, as one
+ * string of the styles its focus changes (its border color and its outline's
+ * color and width). Passed to Playwright's evaluate, so it can't read
+ * anything from this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param fieCurEle - Field Current Element: The form field to describe.
+ *
+ * @returns The field's look, as one string to compare.
+ *
+ * @example
+ * ```ts
+ * handle.evaluate(fieSigFun) // => 'rgb(200, 208, 224),rgb(30, 86, 200),0px'
+ * ```
+ *
+*/
+
+function fieSigFun ( fieCurEle : Element ) : string {
+
+
+	const styCurObj = getComputedStyle( fieCurEle ); // What: Style Current Object. Why: The field's styles are read as they're drawn now. How: This reads its computed styles.
+
+
+
+	return [ styCurObj.borderColor, styCurObj.outlineColor, styCurObj.outlineWidth ].join( ',' ); // What: Field Signature Return. Why: Two looks compare as one string. How: This joins the field's border color and outline.
+
+
+}
+
+// #endregion fieSigFun
+
+
+
+// #region fieProFun
+
+/**
+ * fieProFun = Field Problems Function
+ *
+ * @summary
+ * Probes every form field a visitor can reach (each visible input, select,
+ * and textarea) and returns a problem for each one that gives no focus
+ * feedback. Each field is scrolled into view and read at rest, then focused
+ * by keyboard, by stepping back off it with Shift+Tab and onto it again with
+ * Tab, and read once its transition has settled. A field the Tab press doesn't
+ * land on, or that looks the same focused as at rest (its border color and
+ * outline), is a problem. Normally a field whose transitions all take no time
+ * is a problem too, and its transition list must include the focus ring's
+ * outline-width, so the ring eases in; under reduced motion every one of its
+ * transition durations must be zero instead.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to probe.
+ * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
+ *                    reduced motion.
+ *
+ * @returns Every focus feedback problem found.
+ * @see {@link proLisArr}
+ *
+ * @example
+ * ```ts
+ * fieProFun(page, false) // => [ 'input "email" looks the same focused' ]
+ * ```
+ *
+*/
+
+async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< string[] > {
+
+
+	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
+
+
+	for ( const fieCurObj of await conLisFun( curPagObj, 'input, select, textarea' ) ) { // What: Field Probe Loop. Why: Every reachable form field has to show focus. How: This reads each one at rest and focused by keyboard.
+
+
+		const fieDesStr = await fieCurObj.evaluate( ( fieCurEle ) => `${ fieCurEle.tagName.toLowerCase() } "${ fieCurEle.getAttribute( 'name' ) || '' }"` ); // What: Field Description String. Why: A problem should name the field in terms of the form. How: This joins its tag with the name Netlify records it under.
+
+
+		await fieCurObj.scrollIntoViewIfNeeded(); // What: Field Scroll Call. Why: A field has to be on screen for its look to be read. How: This scrolls it into view.
+
+
+		const resSigStr = await fieCurObj.evaluate( fieSigFun ); // What: Rest Signature String. Why: The resting look is what focus is compared with. How: This joins the field's border color and outline.
+
+
+		await fieCurObj.focus(); // What: Field Focus Call. Why: The keyboard steps start from the field itself. How: This focuses it so Shift+Tab steps off it.
+
+		await curPagObj.keyboard.press( 'Shift+Tab' ); // What: Back Tab Press Call. Why: Focus has to arrive by keyboard, the way a keyboard user reaches the field. How: This steps focus back to the stop before the field.
+
+		await curPagObj.keyboard.press( 'Tab' ); // What: Tab Press Call. Why: The field is reached by keyboard. How: This steps focus forward onto the field again.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Focus Settle Wait. Why: The focused look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const focFieBoo = await fieCurObj.evaluate( ( fieCurEle ) => fieCurEle === document.activeElement );             // What: Focused Field Boolean. Why: The focused look only counts when the Tab press landed on the field. How: This checks the field holds focus.
+		const focSigStr = await fieCurObj.evaluate( fieSigFun );                                                         // What: Focus Signature String. Why: The focused look is compared with rest. How: This joins the field's border color and outline.
+		const traDurStr = await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving. How: This reads the field's transition durations.
+		const traLisStr = await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).transitionProperty ); // What: Transition List String. Why: The focus ring's ease depends on the field listing its outline. How: This reads the field's transitioned properties.
+
+
+
+		if ( !focFieBoo ) proLisArr.push( `${ fieDesStr } isn't reached by Tab` ); // What: Keyboard Reach Check. Why: A keyboard user has to be able to reach every field. How: This records one the Tab press didn't land on.
+
+		else if ( resSigStr === focSigStr ) proLisArr.push( `${ fieDesStr } looks the same focused` ); // What: Focus Check. Why: A focused field has to stand out. How: This records one whose border and outline don't change.
+
+
+
+		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a field with any duration above zero.
+
+		else if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } changes without a transition` ); // What: Transition Check. Why: A field's focus change should ease rather than snap. How: This records a field whose every transition duration is zero.
+
+		else if ( !redMotBoo && !traLisStr.includes( 'outline-width' ) ) proLisArr.push( `${ fieDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a field whose transition list leaves out the outline.
+
+
+	}
+
+
+
+	return proLisArr; // What: Problem List Return. Why: The test prints whatever was found. How: This hands back every problem collected.
+
+
+}
+
+// #endregion fieProFun
+
 // #endregion Helpers
 
 
@@ -324,6 +463,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 		expect( await feeProFun( curPagObj, false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await fieProFun( curPagObj, false ) ).toEqual( [] ); // What: No Field Problems Assertion. Why: The state passes only when every form field shows focus. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
@@ -360,6 +500,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 		expect( await feeProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await fieProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Field Problems Assertion. Why: Every form field has to show focus without moving. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
