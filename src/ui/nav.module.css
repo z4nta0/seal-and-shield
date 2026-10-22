@@ -95,7 +95,7 @@
 
 
 }
-.navBarHed[data-page-scroll-active] { /* What: Scrolled Navigation Bar Header. Why: Once content slides under the bar, it needs a background to stay readable. How: This turns it solid navy and tightens its padding while the page is scrolled, as its shadow layer fades in below. */
+.navBarHed[data-page-scroll-active] { /* What: Scrolled Navigation Bar Header. Why: Once content slides under the bar, the bar needs a background to stay readable. How: This turns it solid navy and tightens its padding while the page is scrolled, as its shadow layer fades in below. */
 
 
 	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
