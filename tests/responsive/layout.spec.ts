@@ -19,12 +19,12 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * range of screen widths, in whichever engine the project runs, and fails a
  * width whose layout breaks: the page scrolling sideways, a visible element
  * reaching past either edge of the screen (unless an ancestor clips it on
- * purpose), text spilling out of its own box, or two controls a visitor can
- * reach overlapping each other. The widths run from 320px, WCAG's narrowest
- * reflow width, to 1,920px, and include a pixel either side of each of the
- * site's breakpoints, where a layout switches and is most likely to crowd.
- * Pages open under reduced motion, which changes nothing about the layout but
- * skips the wait for entrance animations.
+ * purpose), text spilling out of its own box, two controls a visitor can reach
+ * overlapping each other, or a grid leaving uneven rows. The widths run from
+ * 320px, WCAG's narrowest reflow width, to 1,920px, and include a pixel either
+ * side of each of the site's breakpoints, where a layout switches and is most
+ * likely to crowd. Pages open under reduced motion, which changes nothing
+ * about the layout but skips the wait for entrance animations.
  *
  * Sections:
  *  - Constants
@@ -97,17 +97,20 @@ const WID_LIS_ARR = [ 320, 360, 390, 414, 480, 520, 521, 580, 581, 768, 769, 900
  * layProFun = Layout Problems Function
  *
  * @summary
- * Runs inside the page and returns every layout problem it finds, each
- * naming the element by its tag and its module class's readable part. The
- * page scrolling sideways is one problem. A visible element counts as
- * spilling past an edge when it reaches more than a pixel beyond the
- * viewport and no ancestor clips its overflow. An element with text of its
- * own spills its box when its content is more than a pixel wider than it
- * and it doesn't clip or scroll that content; inline elements are skipped,
- * since they have no box width of their own. Two reachable controls (links
- * and buttons that are visible, in the tab order, and not inside inert
- * content) overlap when their boxes share more than a pixel of area and
- * neither holds the other. Passed to Playwright's evaluate, so it can't read
+ * Runs inside the page and returns every layout problem it finds, each naming
+ * the element by its tag and its module class's readable part. The page
+ * scrolling sideways is one problem. A visible element counts as spilling past
+ * an edge when it reaches more than a pixel beyond the viewport and no
+ * ancestor clips its overflow. An element with text of its own spills its box
+ * when its content is more than a pixel wider than it and it doesn't clip or
+ * scroll that content; inline elements are skipped, since they have no box
+ * width of their own. Two reachable controls (links and buttons that are
+ * visible, in the tab order, and not inside inert content) overlap when their
+ * boxes share more than a pixel of area and neither holds the other. A grid
+ * (an element displayed as a grid, with two or more visible children in its
+ * flow) leaves uneven rows when its rows hold different counts, unless the
+ * last row is a single child centered in the grid at the others' width, as the
+ * Card Grids rule allows. Passed to Playwright's evaluate, so it can't read
  * anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -236,6 +239,58 @@ function layProFun () : string[] {
 
 
 	} ) );
+
+
+
+	for ( const griCurEle of document.body.querySelectorAll( '*' ) ) { // What: Card Grid Loop. Why: A grid of cards should hold the same number of cards in every row at every width. How: This checks each grid with two or more visible children in its flow.
+
+
+		const carEleArr = [ ...griCurEle.children ].filter( ( carCurEle ) => carCurEle.getBoundingClientRect().width > 0 && !/^(absolute|fixed)$/.test( getComputedStyle( carCurEle ).position ) ); // What: Card Element Array. Why: Only children on screen and in the grid's flow make up its rows. How: This keeps the children that take up room and aren't positioned out of the flow.
+
+		const carCouBoo = carEleArr.length >= 2;                                            // What: Card Count Boolean. Why: A grid of one child has no rows to compare. How: This is true when at least two children show.
+		const griDisBoo = /^(inline-)?grid$/.test( getComputedStyle( griCurEle ).display ); // What: Grid Display Boolean. Why: Only a grid lays its children out in rows of columns. How: This is true when the element displays as a grid.
+
+
+		if ( !( griDisBoo && carCouBoo ) ) continue; // What: Not A Card Grid Guard. Why: Only grids of two or more children are held to even rows. How: This skips anything else.
+
+
+
+		const rowCouMap = new Map< number, number >(); // What: Row Count Map. Why: The cards are grouped into the rows they sit in. How: This counts the cards at each rounded top edge, in page order.
+
+
+		for ( const carCurEle of carEleArr ) { // What: Card Row Loop. Why: Each card belongs to the row its top edge sits on. How: This adds each card to its row's count.
+
+
+			const topValNum = Math.round( carCurEle.getBoundingClientRect().top ); // What: Top Value Number. Why: Cards in one row share a top edge. How: This rounds the card's top to whole pixels.
+
+
+			rowCouMap.set( topValNum, ( rowCouMap.get( topValNum ) ?? 0 ) + 1 ); // What: Row Count Set Call. Why: The row gains one card. How: This adds one to the count at the card's top edge.
+
+
+		}
+
+
+
+		const firRecObj = carEleArr[ 0 ].getBoundingClientRect();                    // What: First Rect Object. Why: A lone last card has to keep the width the other cards share. How: This measures the first card.
+		const griRecObj = griCurEle.getBoundingClientRect();                         // What: Grid Rect Object. Why: A lone last card is judged against the grid's center. How: This measures the grid.
+		const lasRecObj = carEleArr[ carEleArr.length - 1 ].getBoundingClientRect(); // What: Last Rect Object. Why: The last card is the one that can sit alone. How: This measures it.
+		const rowCouArr = [ ...rowCouMap.values() ];                                 // What: Row Count Array. Why: The rows are compared by their card counts. How: This lists them top to bottom.
+
+		const cenLasBoo = Math.abs( ( lasRecObj.left + lasRecObj.right ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1; // What: Centered Last Boolean. Why: A lone last card has to sit centered under the rows above it. How: This is true when its center is within a pixel of the grid's.
+		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                                 // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
+		const lonLasBoo = rowCouArr[ rowCouArr.length - 1 ] === 1;                                                              // What: Lone Last Boolean. Why: Only a single leftover card may sit in a row of its own. How: This is true when the last row holds one card.
+		const samWidBoo = Math.abs( lasRecObj.width - firRecObj.width ) <= 1;                                                   // What: Same Width Boolean. Why: The leftover card keeps the others' width, never stretched across its row. How: This is true when its width is within a pixel of the first card's.
+		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );                       // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
+
+		const cenOddBoo = cenLasBoo && lonLasBoo && samWidBoo; // What: Centered Odd Boolean. Why: The Card Grids rule allows one leftover card sitting centered in its own row at the others' width. How: This combines the three.
+
+		const shoRowBoo = uneRowBoo || ( lasShoBoo && !cenOddBoo ); // What: Short Row Boolean. Why: Uneven rows, or a short last row that isn't one centered card at the others' width, break the Card Grids rule. How: This combines them.
+
+
+		if ( shoRowBoo ) proLisArr.push( `${ desEleFun( griCurEle ) } leaves uneven rows (${ rowCouArr.join( ', ' ) })` ); // What: Card Row Check. Why: Every row of a card grid should hold the same number of cards. How: This records a grid with uneven rows, listing each row's count.
+
+
+	}
 
 
 
