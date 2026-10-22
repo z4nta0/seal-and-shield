@@ -23,8 +23,8 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * ring, over a background grid and glow. At 900px wide and below, the text and
  * logo become one centered column with the logo first. A stats bar along the
  * section's bottom sums up the company in four figures, set two by two at
- * 900px wide and below. The section's id, home, is what the bar's Home link
- * and brand scroll to.
+ * 900px wide and below. The section's id, home, is what every Home link and
+ * the bar's brand scroll to.
  *
  * Sections:
  *  - Constants
@@ -117,7 +117,7 @@ function HerSecCom () : React.JSX.Element {
 			id='home'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Home Hero Section Element. Why: The page opens with the headline, pitch, and logo. How: Its id, kept as is because it's the bar's link target, is where the Home link and brand scroll to. */ }
+		>{ /* What: Home Hero Section Element. Why: The page opens with the headline, pitch, and logo. How: Its id, kept as is because it's a link target, is where every Home link and the bar's brand scroll to. */ }
 
 
 			<div

@@ -17,12 +17,12 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
  * about.tsx = About
  *
  * @summary
- * The page's third section. Its left column shows the full logo over an
- * info card listing when and where the company was founded, its phone
- * number, and its hours; its right column tells the company's story and
- * lists its three values. At 900px wide and below, the columns stack, with
- * the logo and card on top. Each block fades in as the section scrolls into
- * view. Its id, about, is what the bar's About link scrolls to.
+ * The page's third section. Its left column shows the full logo over an info
+ * card listing when and where the company was founded, its phone number, and
+ * its hours; its right column tells the company's story and lists its three
+ * values. At 900px wide and below, the columns stack, with the logo and card
+ * on top. Each block fades in as the section scrolls into view. Its id, about,
+ * is what every About link on the site scrolls to.
  *
  * Sections:
  *  - Constants
@@ -118,7 +118,7 @@ function AboSecCom () : React.JSX.Element {
 			id='about'
 
 			className={ cssModObj.homAboSec }
-		>{ /* What: Home About Section Element. Why: The page's third section introduces the company. How: Its id, kept as is because it's a link target, is where the About link scrolls to. */ }
+		>{ /* What: Home About Section Element. Why: The page's third section introduces the company. How: Its id, kept as is because it's a link target, is where every About link on the site scrolls to. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }

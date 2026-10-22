@@ -31,8 +31,8 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  * moves to it, which announces the result, and moves back to the first field
  * when the form returns, while a failure's error appears in an alert region
  * the form carries from the start. Each block fades in as the section scrolls
- * into view. Its id, contact, is what the bar's Contact link and the hero's
- * quote button scroll to.
+ * into view. Its id, contact, is what every Contact link and quote button on
+ * the site scrolls to.
  *
  * Sections:
  *  - Constants
@@ -366,7 +366,7 @@ function ConSecCom () : React.JSX.Element {
 			id='contact'
 
 			className={ cssModObj.homConSec }
-		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach the company. How: Its id, kept as is because it's a link target, is where the Contact link and the hero's quote button scroll to. */ }
+		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach the company. How: Its id, kept as is because it's a link target, is where every Contact link and quote button on the site scrolls to. */ }
 
 
 			<div

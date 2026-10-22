@@ -21,11 +21,11 @@ import { useNavigate } from 'react-router';        // What: Use Navigate. Why: T
  * home.tsx = Home Page
  *
  * @summary
- * The site's home page: the shared top bar, then the four sections in
- * reading order (the hero, services, about, and contact) inside the main
- * landmark, then the shared footer. It's the page the root path shows, and
- * the one the bar's and footer's section links come back to from any other
- * page, arriving with the section's id as the hash.
+ * The site's home page: the shared top bar, then the four sections in reading
+ * order (the hero, services, about, and contact) inside the main landmark,
+ * then the shared footer. It's the page the root path shows, and the one every
+ * section link comes back to from any other page, arriving with the section's
+ * id as the hash.
  *
  * Sections:
  *  - Components
@@ -46,14 +46,13 @@ import { useNavigate } from 'react-router';        // What: Use Navigate. Why: T
  *
  * @summary
  * Renders the whole home page: NavBarCom, a main element holding the hero,
- * services, about, and contact sections in the order a visitor reads them,
- * and SitFooCom. Each section's id is the target of the bar's and footer's
- * section links. When the page arrives with a hash, from a section link on
- * another page, a link opened in a new tab, or an address like /#contact, it
- * waits for the fonts to load, since they reflow the page above the
- * section, jumps straight to that section, and then replaces the address
- * with one without the hash, so the address bar stays as clean as it does
- * when the links scroll in place.
+ * services, about, and contact sections in the order a visitor reads them, and
+ * SitFooCom. Each section's id is the target of every link to that section.
+ * When the page arrives with a hash, from a section link on another page, a
+ * link opened in a new tab, or an address like /#contact, it waits for the
+ * fonts to load, since they reflow the page above the section, jumps straight
+ * to that section, and then replaces the address with one without the hash, so
+ * the address bar stays as clean as it does when the links scroll in place.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -16,11 +16,11 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
  * services.tsx = Services
  *
  * @summary
- * The page's second section: a header introducing the company, a grid of
- * cards for the eight services it offers, and a service area panel naming
- * where it works, with a tag for each area. Each block fades in as the
- * section scrolls into view. Its id, services, is what the bar's Services
- * link and the hero's Our Services button scroll to.
+ * The page's second section: a header introducing the company, a grid of cards
+ * for the eight services it offers, and a service area panel naming where it
+ * works, with a tag for each area. Each block fades in as the section scrolls
+ * into view. Its id, services, is what every Services link and button on the
+ * site scrolls to.
  *
  * Sections:
  *  - Constants
@@ -202,7 +202,7 @@ function SerSecCom () : React.JSX.Element {
 			id='services'
 
 			className={ cssModObj.homSerSec }
-		>{ /* What: Home Services Section Element. Why: The page's second section shows what the company does. How: Its id, kept as is because it's a link target, is where the Services link and the hero's button scroll to. */ }
+		>{ /* What: Home Services Section Element. Why: The page's second section shows what the company does. How: Its id, kept as is because it's a link target, is where every Services link and button on the site scrolls to. */ }
 
 
 			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
