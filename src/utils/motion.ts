@@ -31,9 +31,10 @@
  *
  * @summary
  * Whether the visitor asked their system for reduced motion. JS-driven
- * motion (here, the smooth scrolls behind the section links and buttons)
- * checks this, since the CSS media query alone can't stop it. It reads the
- * live setting on every call, so a change takes effect immediately.
+ * motion (here, the smooth scrolls behind the section links and buttons, and
+ * the scroll reveal's stagger) checks this, since the CSS media query alone
+ * can't stop it. It reads the live setting on every call, so a change takes
+ * effect immediately.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -58,7 +59,7 @@ const redMotFun = () : boolean => !!( window.matchMedia && window.matchMedia( '(
 
 // #region Exports
 
-export { redMotFun }; // What: Named Export. Why: Every smooth scroll checks the same reduced-motion preference. How: This exports redMotFun by name.
+export { redMotFun }; // What: Named Export. Why: Every smooth scroll and the scroll reveal's stagger check the same reduced-motion preference. How: This exports redMotFun by name.
 
 // #endregion Exports
 

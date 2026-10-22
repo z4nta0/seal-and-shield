@@ -96,18 +96,18 @@ const SEC_IDE_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Section
  * that row hides and a menu button takes its place. A scroll listener gives
  * the bar its solid scrolled look once the page moves more than 40px, and
  * marks the link of the section the visitor is reading as active on the home
- * page: the last section whose top sits within 120px of the top of the
- * screen, which leaves room for the bar itself. The menu button toggles the
- * mobile menu, which drops down below the bar over a dimmed page: its links
- * enter one after another and end with a contact block, and while it's open
- * the page around the bar is inert, a tap on the dimmed page or Escape
- * closes it, and widening the screen past 768px closes it too. The closed
- * menu is inert, so its links stay out of the focus order and the
+ * page: the lowest section whose top has scrolled to within 120px of the top
+ * of the screen, or past it, which leaves room for the bar itself. The menu
+ * button toggles the mobile menu, which drops down below the bar over a dimmed
+ * page: its links enter one after another and end with a contact block, and
+ * while it's open the page around the bar is inert, a tap on the dimmed page
+ * or Escape closes it, and widening the screen past 768px closes it too. The
+ * closed menu is inert, so its links stay out of the focus order and the
  * accessibility tree. Every section link, including the brand, goes through
  * navSecFun, which reaches the section from any page and closes the menu,
- * while a Ctrl, Cmd, Shift, or Alt click is left to the browser and leaves
- * the menu as it was, and a middle click, which the browser sends as
- * auxclick, never reaches navSecFun at all.
+ * while a Ctrl, Cmd, Shift, or Alt click is left to the browser and leaves the
+ * menu as it was, and a middle click, which the browser sends as auxclick,
+ * never reaches navSecFun at all.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -146,9 +146,10 @@ function NavBarCom () : React.JSX.Element {
 		 * @summary
 		 * Runs on every scroll. It sets the bar's scrolled look once the page
 		 * has moved more than 40px, then walks the sections from the bottom
-		 * of the page up and marks the first one whose top sits within 120px
-		 * of the top of the screen as active, so the active link changes as
-		 * a section reaches the space just below the bar.
+		 * of the page up and marks the first one whose top has scrolled to
+		 * within 120px of the top of the screen, or past it, as active, so
+		 * the active link changes as a section reaches the space just below
+		 * the bar.
 		 *
 		 * @author z4nta0 <https://github.com/z4nta0>
 		 *
@@ -410,7 +411,7 @@ function NavBarCom () : React.JSX.Element {
 								href={ `/#${ linRecObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, as a real link too. How: This points at the home page with the section's id as the hash.
 
 								onClick={ ( cliEveObj ) => navSecFun( cliEveObj, linRecObj.ideStr ) }
-							>{ /* What: Navigation Link Anchor Element. Why: Each link scrolls to its section. How: This is marked active while its section is being read, and hides with its row at 768px wide and below. */ }
+							>{ /* What: Navigation Link Anchor Element. Why: Each link takes the visitor to its section. How: This is marked active while its section is being read, and hides with its row at 768px wide and below. */ }
 								{ linRecObj.labStr }
 							</a>
 
