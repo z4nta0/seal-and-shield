@@ -127,7 +127,7 @@ function cliBloFun () : void {
  *                    'a, button' for the links and buttons or 'input, select,
  *                    textarea' for the form fields.
  *
- * @returns Every reachable control.
+ * @returns A promise that resolves with every reachable control.
  * @see {@link conHanArr}
  *
  * @example
@@ -293,7 +293,7 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
  *                    reduced motion.
  *
- * @returns Every feedback problem found.
+ * @returns A promise that resolves with every feedback problem found.
  * @see {@link proLisArr}
  *
  * @example
@@ -438,7 +438,7 @@ function fieSigFun ( fieCurEle : Element ) : string {
  * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
  *                    reduced motion.
  *
- * @returns Every focus feedback problem found.
+ * @returns A promise that resolves with every focus feedback problem found.
  * @see {@link proLisArr}
  *
  * @example
@@ -531,7 +531,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
  *                    reduced motion.
  *
- * @returns Every hover feedback problem found.
+ * @returns A promise that resolves with every hover feedback problem found.
  * @see {@link proLisArr}
  *
  * @example

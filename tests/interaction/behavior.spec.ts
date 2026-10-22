@@ -166,7 +166,8 @@ async function opeRouFun ( curPagObj : Page, rouPatStr : string, vieSizObj : { h
  * @param secIdeStr - Section Identifier String: The id of the element to
  *                    measure.
  *
- * @returns The element's top edge, in pixels from the viewport's top.
+ * @returns A promise that resolves with the element's top edge, in pixels from
+ *          the viewport's top.
  *
  * @example
  * ```ts
