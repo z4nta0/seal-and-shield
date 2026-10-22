@@ -104,8 +104,8 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
  * Returns visSecFun, the function secCliFun calls with a section link's id.
  * When an element with that id is on the page, visSecFun scrolls it into view,
  * jumping instead of gliding under reduced motion. When there isn't one,
- * visSecFun navigates to the home page with the id as the hash, inside the
- * site without a full page load, where the home page scrolls to it.
+ * visSecFun navigates, inside the site and without a full page load, to the
+ * home page with the id as the hash, and the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
