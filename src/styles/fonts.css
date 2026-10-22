@@ -24,7 +24,7 @@
 
 
 
-@font-face { /* What: Barlow Condensed Regular Font Face. Why: Barlow Condensed is the display font, and its regular weight sets the small LLC beneath the bar's brand name. How: This loads its latin file at weight 400, showing fallback text until it arrives. */
+@font-face { /* What: Barlow Condensed Regular Font Face. Why: Barlow Condensed is the display font, and this is its regular weight. How: This loads its latin file at weight 400, showing fallback text until it arrives. */
 
 
 	font-display : swap;
@@ -36,7 +36,7 @@
 
 }
 
-@font-face { /* What: Barlow Condensed Semibold Font Face. Why: Barlow Condensed sets the hero's and 404 page's eyebrows, the bar's, phone menu's, and footer's links, the phone menu's contact label, the About card's info labels, Contact's detail labels, and the service area tags at its semibold weight. How: This loads its latin file at weight 600, showing fallback text until it arrives. */
+@font-face { /* What: Barlow Condensed Semibold Font Face. Why: Barlow Condensed is the display font, and this is its semibold weight. How: This loads its latin file at weight 600, showing fallback text until it arrives. */
 
 
 	font-display : swap;
@@ -48,7 +48,7 @@
 
 }
 
-@font-face { /* What: Barlow Condensed Bold Font Face. Why: Barlow Condensed sets the section labels, buttons, card and value titles, the About card's facts, form labels, and phone links at its bold weight. How: This loads its latin file at weight 700, showing fallback text until it arrives. */
+@font-face { /* What: Barlow Condensed Bold Font Face. Why: Barlow Condensed is the display font, and this is its bold weight. How: This loads its latin file at weight 700, showing fallback text until it arrives. */
 
 
 	font-display : swap;
@@ -60,7 +60,7 @@
 
 }
 
-@font-face { /* What: Barlow Condensed Extra Bold Font Face. Why: Barlow Condensed sets the headings, the hero's stats, and the brand names at its extra bold weight. How: This loads its latin file at weight 800, showing fallback text until it arrives. */
+@font-face { /* What: Barlow Condensed Extra Bold Font Face. Why: Barlow Condensed is the display font, and this is its extra bold weight. How: This loads its latin file at weight 800, showing fallback text until it arrives. */
 
 
 	font-display : swap;
@@ -72,7 +72,7 @@
 
 }
 
-@font-face { /* What: Lato Regular Font Face. Why: Lato is the body font for paragraphs, form fields, and the rest of the running text, all at its regular weight. How: This loads its latin file at weight 400, showing fallback text until it arrives. */
+@font-face { /* What: Lato Regular Font Face. Why: Lato is the body font, and this is its regular weight. How: This loads its latin file at weight 400, showing fallback text until it arrives. */
 
 
 	font-display : swap;
