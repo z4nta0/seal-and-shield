@@ -509,6 +509,7 @@ test( 'a failed request fills an alert region that was in the page, empty, from 
 } );
 
 
+
 test( 'a failed request leaves focus on the submit button', async ( { page : curPagObj } ) => { // What: Failed Focus Test. Why: A button disabled while it holds focus drops that focus to the page, so a failed send must leave it on the submit button. How: This submits from the focused button, fails the request, and checks where focus is.
 
 
@@ -529,7 +530,7 @@ test( 'a failed request leaves focus on the submit button', async ( { page : cur
 
 
 	await expect( curPagObj.locator( '#contact form [role="alert"]' ) ).toContainText( "didn't go through" ); // What: Error Shown Assertion. Why: Focus is checked once the failure has played out. How: This waits for the error message.
-	await expect( subButObj ).toBeFocused();                                                                // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the submit button still holds it.
+	await expect( subButObj ).toBeFocused();                                                                  // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the submit button still holds it.
 
 
 } );

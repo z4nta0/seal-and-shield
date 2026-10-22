@@ -79,8 +79,6 @@ const ARE_TAG_OBJ : Record< string, string > = { // What: Area Tag Object. Why: 
 
 const LIV_URL_STR = 'https://sealandshieldroof.com/'; // What: Live URL String. Why: The canonical link, structured data, sitemap, and social tags must all name the live address. How: This is the address they're compared with.
 
-
-
 const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every tag a complete card needs. How: Each entry names one Open Graph or Twitter tag the page must carry.
 
 
@@ -174,7 +172,7 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 	for ( const areSerObj of ldjDatObj.areaServed ) { // What: Service Area Loop. Why: Every area the data names has to be one the page shows. How: This walks the data's areaServed entries, each an object holding the area's name.
 
 
-		expect( ARE_TAG_OBJ ).toHaveProperty( [ areSerObj.name ] );      // What: Area Paired Assertion. Why: An area with no tag paired to it would go unchecked. How: This checks the lookup has the data's area name as a key.
+		expect( ARE_TAG_OBJ ).toHaveProperty( [ areSerObj.name ] );     // What: Area Paired Assertion. Why: An area with no tag paired to it would go unchecked. How: This checks the lookup has the data's area name as a key.
 		expect( pagTexStr ).toContain( ARE_TAG_OBJ[ areSerObj.name ] ); // What: Area Tag Shown Assertion. Why: Each area in the data has to appear on the page. How: This checks the page text holds the Services section tag paired with the area's name.
 
 

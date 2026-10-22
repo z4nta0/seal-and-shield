@@ -92,6 +92,7 @@ async function opeMenFun ( curPagObj : Page ) : Promise< void > {
 
 	await togButObj.click(); // What: Toggle Click Call. Why: The menu opens from a tap on the button. How: This clicks it.
 
+
 	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Wait. Why: A check should start with the menu open. How: This waits until the button reports it expanded.
 
 
@@ -451,6 +452,7 @@ test( 'a new tab click on a menu link leaves the menu open', async ( { page : cu
 
 	await newTabPro; // What: New Tab Wait. Why: The click should still open the link in a new tab. How: This waits for the new page to appear.
 
+
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Assertion. Why: The menu should stay open on the page clicked from. How: This checks the button still reports it expanded.
 
 
@@ -555,7 +557,9 @@ test( 'a retry after a failure clears the error and sends', async ( { page : cur
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: First Submit Click Call. Why: The first attempt shows the error. How: This sends the request.
 
+
 	await expect( curPagObj.getByRole( 'alert' ) ).toBeVisible(); // What: Error Shown Wait. Why: The retry only matters once the error is up. How: This waits for the alert.
+
 
 	await fakNetFun( curPagObj, 200 ); // What: Netlify Success Fake Call. Why: The retry should go through. How: This adds a route answering OK, which Playwright tries before the earlier one.
 
@@ -584,7 +588,9 @@ test( 'the form comes back after the thank-you message', async ( { page : curPag
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: The thank-you only shows once a request is sent. How: This sends the request.
 
+
 	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toBeVisible(); // What: Thank-You Wait. Why: The return is timed from the thank-you. How: This waits for it to appear.
+
 
 	await curPagObj.clock.fastForward( 6000 ); // What: Clock Fast Forward Call. Why: This is the wait under test. How: This runs the page's timers six seconds ahead, which starts the message's exit.
 
