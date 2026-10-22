@@ -260,13 +260,14 @@ waiting for the page to settle.
   moves to the thank-you message and back to the form. axe's "needs review"
   results are printed and attached to the report rather than failing the
   run.
-- `npm run test:interaction`: checks what the controls do, under reduced
-  motion so scrolls land at once. The bar's links, brand, menu, footer links,
-  and hero buttons land on their sections with a clean address, a Ctrl or Cmd
-  click and a middle click open them in new tabs, and the menu closes on
-  Escape, on a tap of its dimmer, and when the screen widens; the contact form
-  refuses incomplete requests and reports a faked Netlify answer honestly; and
-  the 404 page, its buttons, and a section address like /#about lead where
+- `npm run test:interaction`: checks what the controls do, under reduced motion
+  so scrolls land at once. The bar's links, brand, menu, footer links, and hero
+  buttons land on their sections with a clean address, a Ctrl or Cmd click and
+  a middle click on the bar's About link each open it in a new tab, a Ctrl or
+  Cmd click on the menu's About link leaves the menu open, and the menu closes
+  on Escape, on a tap of its dimmer, and when the screen widens; the contact
+  form refuses incomplete requests and reports a faked Netlify answer honestly;
+  and the 404 page, its buttons, and a section address like /#about lead where
   they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
   every control in every state has a hover, press, and focus change with a
   transition, that the focus ring eases in to full width, and that feedback
@@ -274,32 +275,35 @@ waiting for the page to settle.
   marked slow, since each takes about 28 seconds in Chromium. The open menu
   state parks the pointer in the bar's corner after tapping the toggle, so the
   toggle's hover color stays out of every check of it.
-- `npm run test:rendering`: compares a full-page screenshot of every state
-  with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
-  pixel may differ, and the per-pixel color threshold is 0 too, since
-  Playwright's default of 0.2 let a slight color change pass unnoticed
-  (reese-roofing's suite still has that gap). The footer's year is masked.
-  After an intended visual change, refresh with `npm run test:rendering --
-  --update-snapshots` and commit the baselines with it. Baselines are
-  captured on Linux.
+- `npm run test:rendering`: compares a full-page screenshot of every state with
+  its baseline in `tests/rendering/baselines/`, with zero tolerance: no pixel
+  may differ, and the per-pixel color threshold is 0 too, since Playwright's
+  default of 0.2 let a slight color change pass unnoticed (reese-roofing's
+  suite still has that gap). The footer's copyright line is masked, since its
+  year changes. After an intended visual change, refresh with `npm run
+  test:rendering -- --update-snapshots` and commit the baselines with it.
+  Baselines are captured on Linux.
 - `npm run test:responsive`: measures the home page, the 404 page, and the open
   menu at 18 widths from 320 to 1,920px (a pixel either side of each breakpoint
   included), failing on sideways scrolling, an unclipped element past either
   edge, text spilling its box, or two reachable controls overlapping.
 - `npm run test:seo`: checks each route's title, description, canonical,
   robots, and single h1, and the author on the home page; that the structured
-  data's every claim appears on the page; that the social tags are complete
-  and match the page, the card is a 1,200x630 PNG under 300 KB, and every
-  linked icon is served at its size; and that robots.txt and the sitemap say
-  what they should.
+  data is a RoofingContractor with the site's name and live URL, that its phone
+  matches every call link and its city, hours, founding year, legal name, and
+  service areas all appear on the page, and that it gives no street address;
+  that the social tags are complete and match the page, the card is a 1,200x630
+  PNG under 300 KB, and every linked icon is served at its size; and that
+  robots.txt and the sitemap say what they should.
 - `npm test` runs every suite.
 
 ## Live checks
 Done by the user on 2026-10-10, after the step 7 deploy:
 - **Contact form**: a test submission arrived in Netlify's Forms tab. The
-  hidden detection copy of the form in `index.html` is a bare form with only
-  its name and each field's `name`, rebuilt from pasted JSX that repeated
-  the React form's input ids.
+  hidden detection copy of the form in `index.html` carries its `name`,
+  `data-netlify`, and `hidden`, and each field carries its `name`, an
+  `aria-label` (added for WAVE, below), and, on the inputs, a `type`. It was
+  rebuilt from pasted JSX that repeated the React form's input ids.
 - **Security headers and social preview**: both graded with no problems.
 - **Contrast over the gradients**, which axe can't measure (the hero's,
   contact section's, and footer's text): checked by eye and passed.
