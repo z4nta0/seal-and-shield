@@ -303,8 +303,10 @@ function ConSecCom () : React.JSX.Element {
 	 * only once the panel's own exit has played: the panel's entrance and its
 	 * check mark's pop end here too, so the handler does nothing unless the
 	 * event came from the panel itself while sucLeaBoo says its exit is
-	 * playing. It then swaps the form back in and clears the exit flag, so the
-	 * next thank-you arrives with its entrance.
+	 * playing. It then records whether the panel still holds focus, so the
+	 * form's first field takes focus back only if it did, swaps the form back
+	 * in, and clears the exit flag, so the next thank-you arrives with its
+	 * entrance.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
