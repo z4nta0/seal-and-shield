@@ -212,7 +212,7 @@ test( 'the 404 page stays out of search results', async ( { page : curPagObj } )
 	await curPagObj.goto( '/no-such-page' ); // What: Unknown Address Open Call. Why: Every unknown path shows the 404 page. How: This loads one.
 
 
-	await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR ); // What: Canonical Assertion. Why: The 404 page keeps the home page's canonical from index.html, which its noindex keeps out of search. How: This checks the canonical link names the live address.
+	await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR ); // What: Canonical Assertion. Why: The 404 page keeps the home page's canonical from index.html, and its noindex keeps the page out of search anyway. How: This checks the canonical link names the live address.
 	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' );  // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.
 	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                    // What: Single Description Assertion. Why: A noindex page keeps index.html's description, and rendering a second would leave two. How: This checks there's exactly one.
 	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Seal and Shield' );                         // What: Not Found Title Assertion. Why: The page needs a title of its own. How: This checks it.

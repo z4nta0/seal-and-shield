@@ -436,7 +436,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'home' ], [ 'Services', 'ser
 
 
 
-test( 'a new tab click on a menu link leaves the menu open', async ( { page : curPagObj } ) => { // What: Menu New Tab Test. Why: A link opened in a new tab hasn't taken the visitor anywhere, so the menu should stay as it was. How: This Ctrl or Cmd clicks a menu link and checks the new tab and the menu.
+test( 'a new tab click on a menu link leaves the menu open', async ( { page : curPagObj } ) => { // What: Menu New Tab Test. Why: A link opened in a new tab hasn't taken the visitor anywhere, so the menu should stay as it was. How: This clicks a menu link with Ctrl or Cmd held and checks the new tab and the menu.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu exists only on small screens. How: This opens the home page at phone size.
