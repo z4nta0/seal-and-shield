@@ -192,7 +192,7 @@ async function revPagFun ( curPagObj : Page ) : Promise< void > {
  * motion check is what catches one that shouldn't be playing). A single
  * still moment isn't enough, since the sections reveal their items on
  * staggered timers that can start a new fade up to about 100ms after the
- * last one ends, so the page has to read as still on five checks in a row,
+ * last one starts, so the page has to read as still on five checks in a row,
  * 100ms apart. It fails after 5 seconds rather than hanging.
  *
  * @author z4nta0 <https://github.com/z4nta0>
