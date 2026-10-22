@@ -3,10 +3,11 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: Each state passes only when every control responds. How: This asserts each problem list is empty.
-import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
-import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is checked. How: This lists them.
-import { test        } from '@playwright/test';     // What: Test. Why: Each check of each state is its own test. How: This declares them.
+import { expect      } from '@playwright/test';      // What: Expect. Why: Each state passes only when every control responds. How: This asserts each problem list is empty.
+import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The contact form's error, and the phone link inside it, only show once a request fails. How: This answers the form's posts in the browser with a server error.
+import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
+import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is checked. How: This lists them.
+import { test        } from '@playwright/test';      // What: Test. Why: Each check of each state is its own test. How: This declares them.
 
 
 import type { ElementHandle } from '@playwright/test'; // What: Element Handle. Why: Each control is probed through a handle to its element. How: This types the control list.
@@ -28,6 +29,9 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  * to look different once keyboard focus reaches it and transition its focus
  * ring's outline too. Under reduced motion every control keeps its hover and
  * press changes, and every field its focus change, but transitions nothing.
+ * The phone link inside the contact form's error message only shows once a
+ * request fails, so it gets checks of its own, both ways, after a faked
+ * Netlify error at desktop width.
  * Real clicks are blocked during the checks, so pressing a link or the menu's
  * links never navigates or closes anything mid-check.
  *
@@ -44,7 +48,8 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
 
 // #region Constants
 
-const SET_WAI_NUM = 400; // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
+const ERR_LIN_STR = '#contact form [role="alert"] a'; // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
+const SET_WAI_NUM = 400;                              // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
 
 // #endregion Constants
 
@@ -156,6 +161,57 @@ async function conLisFun ( curPagObj : Page, conSelStr : string ) : Promise< Ele
 
 
 
+// #region errOpeFun
+
+/**
+ * errOpeFun = Error Open Function
+ *
+ * @summary
+ * Opens the home page at desktop width with Netlify faked to fail, fills in
+ * the contact form's required fields, sends it, and waits for the error
+ * message, so the phone link inside it can be probed. Real clicks are blocked
+ * once the error shows, so pressing the link never starts a call. A caller
+ * that needs reduced motion sets it first.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to open.
+ *
+ * @returns A promise that settles once the error shows and clicks are
+ *          blocked, with no value.
+ *
+ * @example
+ * ```ts
+ * errOpeFun(page) // => Promise<void>
+ * ```
+ *
+*/
+
+async function errOpeFun ( curPagObj : Page ) : Promise< void > {
+
+
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post with a server error.
+
+	await opeStaFun( curPagObj, STA_REC_ARR.find( ( staRecObj ) => staRecObj.ideStr === 'home-desktop' )! ); // What: Home Desktop Open Call. Why: The form lives in the Contact section, checked at desktop width. How: This loads and settles the home page at 1,440px. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always holds the home-desktop state.
+
+	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
+	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
+
+	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: The error only shows after a send. How: This sends the request, which the fake fails.
+
+
+	await expect( curPagObj.locator( ERR_LIN_STR ) ).toBeVisible(); // What: Error Link Shown Assertion. Why: The link is probed once the error has rendered, and an empty probe would pass without checking anything. How: This waits for the link inside the error message.
+
+
+	await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing the link shouldn't start a call. How: This cancels every click from here on.
+
+
+}
+
+// #endregion errOpeFun
+
+
+
 // #region sigEleFun
 
 /**
@@ -227,6 +283,9 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to probe.
+ * @param conSelStr - Control Selector String: The controls to probe, either
+ *                    'a, button' for every link and button or a narrower
+ *                    selector for one control.
  * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
  *                    reduced motion.
  *
@@ -235,18 +294,18 @@ function sigEleFun ( eleCurEle : Element ) : string {
  *
  * @example
  * ```ts
- * feeProFun(page, false) // => [ 'a "Home" looks the same pressed' ]
+ * feeProFun(page, 'a', false) // => [ 'a "Home" looks the same pressed' ]
  * ```
  *
 */
 
-async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< string[] > {
+async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boolean ) : Promise< string[] > {
 
 
 	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
 
 
-	for ( const conCurObj of await conLisFun( curPagObj, 'a, button' ) ) { // What: Control Probe Loop. Why: Every reachable control has to respond. How: This reads each one at rest, hovered, and pressed.
+	for ( const conCurObj of await conLisFun( curPagObj, conSelStr ) ) { // What: Control Probe Loop. Why: Every reachable control has to respond. How: This reads each one the selector matches at rest, hovered, and pressed.
 
 
 		const conDesStr = await conCurObj.evaluate( ( conCurEle ) => `${ conCurEle.tagName.toLowerCase() } "${ ( conCurEle.getAttribute( 'aria-label' ) || conCurEle.textContent || '' ).trim().slice( 0, 30 ) }"` ); // What: Control Description String. Why: A problem should name the control a person would recognize. How: This joins its tag with its label or text.
@@ -462,8 +521,8 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
 
-		expect( await feeProFun( curPagObj, false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
-		expect( await fieProFun( curPagObj, false ) ).toEqual( [] ); // What: No Field Problems Assertion. Why: The state passes only when every form field shows focus. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await feeProFun( curPagObj, 'a, button', false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await fieProFun( curPagObj, false ) ).toEqual( [] );              // What: No Field Problems Assertion. Why: The state passes only when every form field shows focus. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
@@ -499,14 +558,42 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
 
-		expect( await feeProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
-		expect( await fieProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Field Problems Assertion. Why: Every form field has to show focus without moving. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await feeProFun( curPagObj, 'a, button', true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
+		expect( await fieProFun( curPagObj, true ) ).toEqual( [] );              // What: No Reduced Motion Field Problems Assertion. Why: Every form field has to show focus without moving. How: This compares the problems with an empty list, so a failure prints each one.
 
 
 	} );
 
 
 }
+
+
+
+test( "the contact form error's phone link gives hover, press, and focus feedback", async ( { page : curPagObj } ) => { // What: Error Link Feedback Test. Why: The error's phone link only renders after a failed send, so no page state reaches it. How: This fails a send, probes the link, and checks it finds no problems.
+
+
+	await errOpeFun( curPagObj ); // What: Error Open Call. Why: The link only exists once a send has failed. How: This fails a send and waits for the error.
+
+
+	expect( await feeProFun( curPagObj, ERR_LIN_STR, false ) ).toEqual( [] ); // What: No Error Link Problems Assertion. Why: The link has to respond like every other control. How: This compares the problems with an empty list, so a failure prints each one.
+
+
+} );
+
+
+
+test( "the contact form error's phone link keeps feedback without motion under reduced motion", async ( { page : curPagObj } ) => { // What: Reduced Motion Error Link Test. Why: Visitors who ask for less motion still need to see the link respond. How: This fails a send with reduced motion on, probes the link, and checks it finds no problems.
+
+
+	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
+
+	await errOpeFun( curPagObj ); // What: Error Open Call. Why: The link only exists once a send has failed. How: This fails a send and waits for the error.
+
+
+	expect( await feeProFun( curPagObj, ERR_LIN_STR, true ) ).toEqual( [] ); // What: No Reduced Motion Error Link Problems Assertion. Why: The link has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
+
+
+} );
 
 // #endregion Module Init
 
