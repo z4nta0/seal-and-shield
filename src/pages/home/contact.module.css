@@ -266,7 +266,7 @@
 
 
 }
-.conPhoAnc:hover { /* What: Hovered Contact Phone Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text. */
+.conPhoAnc:hover { /* What: Hovered Contact Phone Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text and lifts it a pixel. */
 
 
 	background : transparent;

@@ -143,7 +143,7 @@
 
 
 }
-.butBasAnc--primary:hover { /* What: Hovered Button Base Anchor Primary. Why: The button should respond to the pointer. How: This lightens its fill and border. */
+.butBasAnc--primary:hover { /* What: Hovered Button Base Anchor Primary. Why: The button should respond to the pointer. How: This lightens its fill and border and lifts it a pixel. */
 
 
 	background   : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
@@ -161,7 +161,7 @@
 
 
 }
-.butBasAnc--secondary:hover { /* What: Hovered Button Base Anchor Secondary. Why: The button should respond to the pointer. How: This gives it a faint white fill and a solid white outline. */
+.butBasAnc--secondary:hover { /* What: Hovered Button Base Anchor Secondary. Why: The button should respond to the pointer. How: This gives it a faint white fill and a solid white outline and lifts it a pixel. */
 
 
 	background   : oklch( from var( --bac-pag-col ) l c h / var( --cdn-pow-010-rec ) ); /* Background Page Color = #ffffff, Core-Design-Number to the Power of 10 Reciprocal ~= 0.060 */

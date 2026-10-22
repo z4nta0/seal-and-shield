@@ -36,7 +36,7 @@
 
 }
 
-@font-face { /* What: Barlow Condensed Semibold Font Face. Why: Barlow Condensed sets the hero's eyebrow, the bar's and footer's links, the detail labels, and the service area tags at its semibold weight. How: This loads its latin file at weight 600, showing fallback text until it arrives. */
+@font-face { /* What: Barlow Condensed Semibold Font Face. Why: Barlow Condensed sets the hero's and 404 page's eyebrows, the bar's, phone menu's, and footer's links, the phone menu's contact label, the About card's info labels, Contact's detail labels, and the service area tags at its semibold weight. How: This loads its latin file at weight 600, showing fallback text until it arrives. */
 
 
 	font-display : swap;
@@ -48,7 +48,7 @@
 
 }
 
-@font-face { /* What: Barlow Condensed Bold Font Face. Why: Barlow Condensed sets the section labels, buttons, card and value titles, form labels, and phone links at its bold weight. How: This loads its latin file at weight 700, showing fallback text until it arrives. */
+@font-face { /* What: Barlow Condensed Bold Font Face. Why: Barlow Condensed sets the section labels, buttons, card and value titles, the About card's facts, form labels, and phone links at its bold weight. How: This loads its latin file at weight 700, showing fallback text until it arrives. */
 
 
 	font-display : swap;
