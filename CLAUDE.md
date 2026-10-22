@@ -271,11 +271,12 @@ waiting for the page to settle.
   and the 404 page, its buttons, and a section address like /#about lead where
   they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
   every control in every state has a hover, press, and focus change with a
-  transition, that the focus ring eases in to full width, and that feedback
-  stays without motion under reduced motion. Its two every-control probes are
-  marked slow, since each takes about 28 seconds in Chromium. The open menu
-  state parks the pointer in the bar's corner after tapping the toggle, so the
-  toggle's hover color stays out of every check of it.
+  transition, every form field a focus change that eases in, that the focus
+  ring eases in to full width, and that feedback stays without motion under
+  reduced motion. Its two every-control probes are marked slow, since each
+  takes about 28 seconds in Chromium. The open menu state parks the pointer in
+  the bar's corner after tapping the toggle, so the toggle's hover color stays
+  out of every check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance: no pixel
   may differ, and the per-pixel color threshold is 0 too, since Playwright's
@@ -288,7 +289,8 @@ waiting for the page to settle.
   widths from 320 to 1,920px (a pixel either side of each breakpoint included),
   and the open menu at each of those up to its 768px breakpoint, failing on
   sideways scrolling, an unclipped element past either edge, text spilling its
-  box, or two reachable controls overlapping.
+  box, two reachable controls overlapping, or a grid whose rows hold different
+  counts (a lone centered last card aside).
 - `npm run test:seo`: checks each route's title, description, canonical,
   robots, and single h1, and the author on the home page; that the structured
   data is a RoofingContractor with the site's name and live URL, that its phone
