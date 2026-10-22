@@ -72,7 +72,7 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: The page an
 
 
 	{ ideStr : 'home',      menBoo : false, patStr : '/'        }, // What: Home Case. Why: The home page holds all of the site's layout. How: This measures it as loaded.
-	{ ideStr : 'not-found', menBoo : false, patStr : '/missing' }, // What: Not Found Case. Why: The 404 page has its own centered layout. How: This measures an address the site doesn't have, closed.
+	{ ideStr : 'not-found', menBoo : false, patStr : '/missing' }, // What: Not Found Case. Why: The 404 page has its own centered layout. How: This measures an address the site doesn't have, with the menu closed.
 	{ ideStr : 'menu',      menBoo : true,  patStr : '/'        }  // What: Menu Case. Why: The open menu stacks the links and phone number its own way. How: This measures the home page with the menu open.
 
 
