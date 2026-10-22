@@ -110,8 +110,11 @@ const WID_LIS_ARR = [ 320, 360, 390, 414, 480, 520, 521, 580, 581, 768, 769, 900
  * (an element displayed as a grid, with two or more visible children in its
  * flow) leaves uneven rows when its rows hold different counts, unless the
  * last row is a single child centered in the grid at the others' width, as the
- * Card Grids rule allows. Passed to Playwright's evaluate, so it can't read
- * anything from this file.
+ * Card Grids rule allows. A grid's children are grouped into rows by where
+ * they overlap vertically, so cards of different heights still share a row
+ * however the grid aligns them, and the rows are read top to bottom, whatever
+ * order the markup gives them. Passed to Playwright's evaluate, so it can't
+ * read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -255,31 +258,37 @@ function layProFun () : string[] {
 
 
 
-		const rowCouMap = new Map< number, number >(); // What: Row Count Map. Why: The cards are grouped into the rows they sit in. How: This counts the cards at each rounded top edge, in page order.
+		const rowLisArr : DOMRect[][] = []; // What: Row List Array. Why: The cards are grouped into the rows they sit in. How: This collects each row as a list of its cards' boxes.
 
 
-		for ( const carCurEle of carEleArr ) { // What: Card Row Loop. Why: Each card belongs to the row its top edge sits on. How: This adds each card to its row's count.
+		for ( const carCurEle of carEleArr ) { // What: Card Row Loop. Why: Each card belongs to the row it shares height with, whatever its own height or how the grid aligns it. How: This adds each card to the first row it overlaps vertically, or starts a new row.
 
 
-			const topValNum = Math.round( carCurEle.getBoundingClientRect().top ); // What: Top Value Number. Why: Cards in one row share a top edge. How: This rounds the card's top to whole pixels.
+			const carRecObj = carCurEle.getBoundingClientRect(); // What: Card Rect Object. Why: A card's row is judged from its box. How: This measures it.
+			const rowCurArr = rowLisArr.find( ( rowFinArr ) => rowFinArr.some( ( rowRecObj ) => carRecObj.top < rowRecObj.bottom - 1 && carRecObj.bottom > rowRecObj.top + 1 ) ); // What: Row Current Array. Why: Cards in one row overlap vertically even when their heights differ. How: This finds the first row holding a card whose vertical span crosses this card's by more than a pixel.
 
 
-			rowCouMap.set( topValNum, ( rowCouMap.get( topValNum ) ?? 0 ) + 1 ); // What: Row Count Set Call. Why: The row gains one card. How: This adds one to the count at the card's top edge.
+			if ( rowCurArr ) rowCurArr.push( carRecObj ); // What: Row Join Call. Why: The card sits in a row already found. How: This adds its box to that row.
+
+			else rowLisArr.push( [ carRecObj ] ); // What: Row Start Call. Why: The card shares height with no row found so far. How: This starts a new row holding only its box.
 
 
 		}
 
 
 
-		const firRecObj = carEleArr[ 0 ].getBoundingClientRect();                    // What: First Rect Object. Why: A lone last card has to keep the width the other cards share. How: This measures the first card.
-		const griRecObj = griCurEle.getBoundingClientRect();                         // What: Grid Rect Object. Why: A lone last card is judged against the grid's center. How: This measures the grid.
-		const lasRecObj = carEleArr[ carEleArr.length - 1 ].getBoundingClientRect(); // What: Last Rect Object. Why: The last card is the one that can sit alone. How: This measures it.
-		const rowCouArr = [ ...rowCouMap.values() ];                                 // What: Row Count Array. Why: The rows are compared by their card counts. How: This lists them top to bottom.
+		rowLisArr.sort( ( rowOneArr, rowTwoArr ) => rowOneArr[ 0 ].top - rowTwoArr[ 0 ].top ); // What: Row Sort Call. Why: The grid's order can differ from its markup's, since a child can move with the CSS order property. How: This sorts the rows top to bottom by their first card's top edge.
+
+
+		const firRecObj = rowLisArr[ 0 ][ 0 ];                                // What: First Rect Object. Why: A lone last card has to keep the width the other cards share. How: This takes a card from the top row.
+		const griRecObj = griCurEle.getBoundingClientRect();                  // What: Grid Rect Object. Why: A lone last card is judged against the grid's center. How: This measures the grid.
+		const lasRecObj = rowLisArr[ rowLisArr.length - 1 ][ 0 ];             // What: Last Rect Object. Why: The last row's card is the one that can sit alone. How: This takes a card from the bottom row.
+		const rowCouArr = rowLisArr.map( ( rowCurArr ) => rowCurArr.length ); // What: Row Count Array. Why: The rows are compared by their card counts. How: This lists them top to bottom.
 
 		const cenLasBoo = Math.abs( ( lasRecObj.left + lasRecObj.right ) / 2 - ( griRecObj.left + griRecObj.right ) / 2 ) <= 1; // What: Centered Last Boolean. Why: A lone last card has to sit centered under the rows above it. How: This is true when its center is within a pixel of the grid's.
 		const lasShoBoo = rowCouArr[ rowCouArr.length - 1 ] !== rowCouArr[ 0 ];                                                 // What: Last Short Boolean. Why: A last row unlike the first leaves the grid uneven. How: This compares the last row's count with the first's.
 		const lonLasBoo = rowCouArr[ rowCouArr.length - 1 ] === 1;                                                              // What: Lone Last Boolean. Why: Only a single leftover card may sit in a row of its own. How: This is true when the last row holds one card.
-		const samWidBoo = Math.abs( lasRecObj.width - firRecObj.width ) <= 1;                                                   // What: Same Width Boolean. Why: The leftover card keeps the others' width, never stretched across its row. How: This is true when its width is within a pixel of the first card's.
+		const samWidBoo = Math.abs( lasRecObj.width - firRecObj.width ) <= 1;                                                   // What: Same Width Boolean. Why: The leftover card keeps the others' width, never stretched across its row. How: This is true when its width is within a pixel of a top row card's.
 		const uneRowBoo = rowCouArr.slice( 0, -1 ).some( ( rowCouNum ) => rowCouNum !== rowCouArr[ 0 ] );                       // What: Uneven Rows Boolean. Why: Every row above the last should match the first. How: This is true when any of them differs.
 
 		const cenOddBoo = cenLasBoo && lonLasBoo && samWidBoo; // What: Centered Odd Boolean. Why: The Card Grids rule allows one leftover card sitting centered in its own row at the others' width. How: This combines the three.
