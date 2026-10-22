@@ -198,7 +198,8 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      and it came back with no problems.
    - **Interaction feedback: done 2026-10-09.** Every link and button
      changes color on hover, and the buttons also lift a pixel (the service
-     cards 3px); buttons press in to 0.97 and text links dim. Focus rings
+     cards 3px, while the bar's menu toggle only changes color); buttons press
+     in to 0.97 and text links dim. Focus rings
      ease in from a zero-width outline set once in `styles.css`, drawn in
      `--foc-rin-col`, which the dark bar, hero, About card, contact
      section, footer, and 404 page set to the light accent for contrast.
@@ -271,12 +272,13 @@ waiting for the page to settle.
   and the 404 page, its buttons, and a section address like /#about lead where
   they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
   every control in every state has a hover, press, and focus change with a
-  transition, every form field a focus change that eases in, that the focus
-  ring eases in to full width, and that feedback stays without motion under
-  reduced motion. Its two every-control probes are marked slow, since each
-  takes about 28 seconds in Chromium. The open menu state parks the pointer in
-  the bar's corner after tapping the toggle, so the toggle's hover color stays
-  out of every check of it.
+  transition (the phone link in the contact form's error message included,
+  reached after a faked failed send), that every form field has a focus change
+  that eases in, that the focus ring eases in to full width, and that feedback
+  stays without motion under reduced motion. Its two every-control probes are
+  marked slow, since each takes about 28 seconds in Chromium. The open menu
+  state parks the pointer in the bar's corner after tapping the toggle, so the
+  toggle's hover color stays out of every check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance: no pixel
   may differ, and the per-pixel color threshold is 0 too, since Playwright's
@@ -295,9 +297,9 @@ waiting for the page to settle.
   data is a RoofingContractor with the site's name and live URL, that its phone
   matches every call link and its city, hours, founding year, legal name, and
   service areas all appear on the page, and that it gives no street address;
-  that the social tags are complete and match the page, the card is a 1,200x630
-  PNG under 300 KB, and every linked icon is served at its size; and that
-  robots.txt and the sitemap say what they should.
+  that the social tags and theme color are complete and match the page, the
+  card is a 1,200x630 PNG under 300 KB, and every linked icon is served at its
+  size; and that robots.txt and the sitemap say what they should.
 - `npm test` runs every suite.
 
 ## Live checks
