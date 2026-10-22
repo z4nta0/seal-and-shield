@@ -147,7 +147,7 @@
 
 
 }
-.fooLinAnc:active { /* What: Pressed Footer Link Anchor. Why: A press should register before the page scrolls. How: This dims it slightly while it's held, as every text link does on press. */
+.fooLinAnc:active { /* What: Pressed Footer Link Anchor. Why: A press should register before the page scrolls or heads home. How: This dims it slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */

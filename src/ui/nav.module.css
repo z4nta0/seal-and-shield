@@ -174,7 +174,7 @@
 
 
 }
-.navBraAnc:active { /* What: Pressed Navigation Brand Anchor. Why: A press on the brand should register before the page scrolls. How: This dims the mark and name slightly while they're held, as every text link does on press, since the brand isn't styled as a button. */
+.navBraAnc:active { /* What: Pressed Navigation Brand Anchor. Why: A press on the brand should register before the page scrolls or heads home. How: This dims the mark and name slightly while they're held, as every text link does on press, since the brand isn't styled as a button. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -348,7 +348,7 @@
 
 
 }
-.navLinAnc:active { /* What: Pressed Navigation Link Anchor. Why: A press should register before the page scrolls. How: This dims the link slightly while it's held, as every text link does on press. */
+.navLinAnc:active { /* What: Pressed Navigation Link Anchor. Why: A press should register before the page scrolls or heads home. How: This dims the link slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
