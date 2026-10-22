@@ -24,16 +24,17 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * footer's section links land on their sections and leave the address free of
  * hashes, while a Ctrl, Cmd, or middle click opens a section in a new tab and
  * leaves the page clicked from alone; the mobile menu opens over a dimmed,
- * inert page, closes on its button, Escape, a tap on the dimmed page, or a
- * wider screen, and closes again when one of its links is chosen, but not when
- * a link opens in a new tab; the contact form refuses to send without its
- * required fields and reports Netlify's answer honestly, clearing its error on
- * a retry and coming back after the thank-you message, with Netlify's side
- * faked in the browser so nothing is really sent; and the 404 page answers an
- * unknown address with a noindex tag and leads back to the home page and its
- * sections, as does an address that names a section directly. Pages open under
- * reduced motion, so scrolling jumps straight to its target and each position
- * can be read at once; how things move is checked elsewhere.
+ * inert page, closes on its button, Escape (which returns focus to the
+ * button), a tap on the dimmed page, or a wider screen, and closes again when
+ * one of its links is chosen, but not when a link opens in a new tab; the
+ * contact form refuses to send without its required fields and reports
+ * Netlify's answer honestly, clearing its error on a retry and coming back
+ * after the thank-you message, with Netlify's side faked in the browser so
+ * nothing is really sent; and the 404 page answers an unknown address with a
+ * noindex tag and leads back to the home page and its sections, as does an
+ * address that names a section directly. Pages open under reduced motion, so
+ * scrolling jumps straight to its target and each position can be read at
+ * once; how things move is checked elsewhere.
  *
  * Sections:
  *  - Constants
@@ -350,7 +351,7 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Get a Free Quote', 'contact' ], [ '
 
 // #region Mobile Menu Checks
 
-test( 'the menu button opens and closes the menu', async ( { page : curPagObj } ) => { // What: Menu Toggle Test. Why: The menu button is the only way to the section links on a phone. How: This opens the menu, checks its links show and the page behind it is inert, then closes it again.
+test( 'the menu button opens and closes the menu', async ( { page : curPagObj } ) => { // What: Menu Toggle Test. Why: The menu button is the bar's only way to the section links on a phone, where the bar's own row is hidden. How: This opens the menu, checks its links show and the page behind it is inert, then closes it again and checks the button reports it collapsed and the page is no longer inert.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu button shows only on small screens. How: This opens the home page at phone size.
@@ -479,7 +480,7 @@ test( 'widening the screen closes the menu', async ( { page : curPagObj } ) => {
 
 // #region Contact Form Checks
 
-test( "the form won't send without its required fields", async ( { page : curPagObj } ) => { // What: Required Fields Test. Why: A quote request without a name and phone number can't be answered. How: This submits the empty form and checks nothing was sent.
+test( "the form won't send without its required fields", async ( { page : curPagObj } ) => { // What: Required Fields Test. Why: A quote request without a name and phone number can't be answered. How: This submits the empty form and checks the name field reports its value missing and nothing was sent.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form lives in the Contact section. How: This opens the home page at desktop size.
@@ -499,7 +500,7 @@ test( "the form won't send without its required fields", async ( { page : curPag
 
 
 
-test( 'a sent request shows the thank-you message', async ( { page : curPagObj } ) => { // What: Sent Request Test. Why: The visitor should see their request arrived only once Netlify accepts it. How: This sends a complete request against a faked OK answer and checks the message.
+test( 'a sent request shows the thank-you message', async ( { page : curPagObj } ) => { // What: Sent Request Test. Why: The visitor should see their request arrived only once Netlify accepts it. How: This sends a complete request against a faked OK answer and checks the message appears and exactly one post was made.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form lives in the Contact section. How: This opens the home page at desktop size.
@@ -522,7 +523,7 @@ test( 'a sent request shows the thank-you message', async ( { page : curPagObj }
 
 
 
-test( 'a failed request explains what to do instead', async ( { page : curPagObj } ) => { // What: Failed Request Test. Why: A request Netlify rejects mustn't look sent. How: This sends a complete request against a faked error and checks the error message.
+test( 'a failed request explains what to do instead', async ( { page : curPagObj } ) => { // What: Failed Request Test. Why: A request Netlify rejects mustn't look sent. How: This sends a complete request against a faked error and checks the error message appears and the thank-you message never does.
 
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form lives in the Contact section. How: This opens the home page at desktop size.
@@ -570,7 +571,7 @@ test( 'a retry after a failure clears the error and sends', async ( { page : cur
 
 
 
-test( 'the form comes back after the thank-you message', async ( { page : curPagObj } ) => { // What: Form Return Test. Why: A visitor may want to send another request, so the thank-you gives way to the form once it has faded out. How: This sends a request, moves the clock past the six-second wait, and checks the form is back.
+test( 'the form comes back after the thank-you message', async ( { page : curPagObj } ) => { // What: Form Return Test. Why: A visitor may want to send another request, so the thank-you gives way to the form once it has faded out. How: This sends a request, moves the clock past the six-second wait, and checks the form is back and the thank-you message is gone.
 
 
 	await curPagObj.clock.install(); // What: Clock Install Call. Why: Waiting six real seconds would slow the suite. How: This puts the page's timers under the test's control before it loads.

@@ -20,14 +20,16 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * its canonical and author tags are in place, it carries no noindex,
  * index.html itself, fetched without a browser, carries the same full title
  * and description, each route has exactly one description tag, and the home
- * page's RoofingContractor structured data matches what the page itself shows,
- * its phone number, city, hours, and service areas, with no street address,
- * since the company has none to publish. The 404 page carries noindex, and
- * each page has exactly one h1. The social preview tags are complete, use
- * absolute addresses, and match the page's title and description; the card
- * they point at is a 1,200x630 PNG under 300 KB; and every icon the head links
- * to is served at the size its link promises. robots.txt lets every crawler in
- * and names the sitemap, which lists the home page alone.
+ * page's structured data names a RoofingContractor with the site's name and
+ * live address and matches what the page itself shows, its phone number, city,
+ * hours, founding year, legal name, and service areas, with no street address,
+ * since the company has none to publish. The 404 page carries noindex beside
+ * the home page's canonical and has its own title, and each page has exactly
+ * one h1. The social preview tags are complete, use absolute addresses, and
+ * match the page's title and description; the card they point at is a
+ * 1,200x630 PNG under 300 KB; and every icon the head links to is served at
+ * the size its link promises. robots.txt lets every crawler in and names the
+ * sitemap, which lists the home page alone.
  *
  * Sections:
  *  - Constants
@@ -135,7 +137,7 @@ test( 'the home page names the city and the business', async ( { page : curPagOb
 
 
 
-test( 'the structured data matches what the page shows', async ( { page : curPagObj } ) => { // What: Structured Data Test. Why: Search engines may show the business's details from its JSON-LD, so every claim in it has to be true and visible on the page. How: This reads the JSON-LD and checks each detail against the page's own text.
+test( 'the structured data matches what the page shows', async ( { page : curPagObj } ) => { // What: Structured Data Test. Why: Search engines may show the business's details from its JSON-LD, so every claim in it has to be true and visible on the page. How: This reads the JSON-LD, checks its type, name, URL, and missing street against fixed values, and checks every other detail against the page's own text.
 
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The structured data lives on the home page. How: This loads the root path.
@@ -263,7 +265,7 @@ test( 'the social preview image is a 1,200x630 PNG under 300 KB', async ( { requ
 
 
 
-test( 'every icon the head links to is served at its size', async ( { page : curPagObj, request : reqCotObj } ) => { // What: Icons Test. Why: Browsers and apps fetch the icons the head names, and a missing or wrong-sized one shows a blank or blurry mark. How: This reads every icon link and checks each file exists and, for PNGs, has the size its link promises.
+test( 'every icon the head links to is served at its size', async ( { page : curPagObj, request : reqCotObj } ) => { // What: Icons Test. Why: Browsers and apps fetch the icons the head names, and a missing or wrong-sized one shows a blank or blurry mark. How: This reads every icon link, checks all six are there, and checks each file is served, the ICO with an icon file header and each PNG at the size its link promises.
 
 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: The icon links live in the page's head. How: This opens the home page.
@@ -314,7 +316,7 @@ test( 'every icon the head links to is served at its size', async ( { page : cur
 
 // #region Crawler File Checks
 
-test( 'robots.txt lets crawlers in and names the sitemap', async ( { request : reqCotObj } ) => { // What: Robots File Test. Why: A real business wants every page crawled and its sitemap found. How: This fetches robots.txt and checks its rules.
+test( 'robots.txt lets crawlers in and names the sitemap', async ( { request : reqCotObj } ) => { // What: Robots File Test. Why: A real business wants every page crawled and its sitemap found. How: This fetches robots.txt and checks it's served and what its rules say.
 
 
 	const robResObj = await reqCotObj.get( '/robots.txt' ); // What: Robots Response Object. Why: The file is read the way a crawler reads it. How: This fetches it from the site.
@@ -331,7 +333,7 @@ test( 'robots.txt lets crawlers in and names the sitemap', async ( { request : r
 
 
 
-test( 'the sitemap lists the home page alone', async ( { request : reqCotObj } ) => { // What: Sitemap Test. Why: The sitemap should list every indexable page and nothing else. How: This fetches it and checks its one entry.
+test( 'the sitemap lists the home page alone', async ( { request : reqCotObj } ) => { // What: Sitemap Test. Why: The sitemap should list every indexable page and nothing else. How: This fetches it and checks it's served and holds its one entry.
 
 
 	const sitResObj = await reqCotObj.get( '/sitemap.xml' ); // What: Sitemap Response Object. Why: The file is read the way a crawler reads it. How: This fetches it from the site.

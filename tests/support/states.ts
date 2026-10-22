@@ -19,9 +19,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * something opened on it: the home page and the 404 page at phone and desktop
  * widths, and the mobile menu open on a phone. opeStaFun sizes the viewport,
  * loads the page, waits for the fonts, scrolls through the page so its
- * scroll-triggered content fades in, runs the state's own action, such as
- * opening the menu, and then waits for the page to stay still so nothing is
- * measured mid-fade.
+ * scroll-triggered content fades in, waits for every image to decode, runs the
+ * state's own action, such as opening the menu, and then waits for the page to
+ * stay still so nothing is measured mid-fade.
  *
  * Sections:
  *  - Types
@@ -90,7 +90,7 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
 	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing', widNum : 1440 }, // What: Not Found Desktop State. Why: Every unknown address lands on the 404 page. How: This loads an address the site doesn't have at 1,440px.
 	{ heiNum : 844, ideStr : 'not-found-phone',   patStr : '/missing', widNum : 390  }, // What: Not Found Phone State. Why: The 404 page has its own phone layout to check. How: This loads an address the site doesn't have at 390px.
 
-	{ // What: Menu Phone State. Why: The open menu holds the phone's only copy of the section links and the phone number. How: This loads the home page at 390px and opens the menu through its toggle button.
+	{ // What: Menu Phone State. Why: On a phone the open menu is the bar's only way to the section links and the phone number, since the bar's own row is hidden there. How: This loads the home page at 390px and opens the menu through its toggle button.
 
 
 		heiNum : 844,
