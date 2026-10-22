@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * nothing about the others. Chromium runs as Chrome's full headless mode
  * rather than Playwright's lighter headless shell, which sometimes lost track
  * of a tab a click opened. The suites are accessibility, which the pre-commit
- * check runs, interaction, rendering, responsive, and seo. Playwright starts
+ * check runs, interaction, rendering, responsive, and SEO. Playwright starts
  * the Vite dev server on port 5197 for the run and stops it afterwards, so a
  * dev server already running on the usual 5173, or a sibling project's suites
  * on 5190 through 5196, are never touched. Reports and failure screenshots
