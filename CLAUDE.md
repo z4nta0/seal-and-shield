@@ -111,8 +111,8 @@ src/
   pages/
     home/                the home page, its sections, and logo-full.webp
     not-found/           the 404 page
-  ui/                    components used by 2 or more pages (nav, footer)
-                         and section-link.ts
+  ui/                    components used by 2 or more pages (nav, footer),
+                         section-link.ts, and sections.ts
   styles/                global CSS only (fonts.css, styles.css)
   utils/                 app-agnostic helpers (motion.ts, rhythm.ts)
 ```

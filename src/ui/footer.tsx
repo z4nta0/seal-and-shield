@@ -7,6 +7,7 @@ import cssModObj from './footer.module.css';        // What: CSS Module Object. 
 import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The footer's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
+import { SEC_LIN_ARR  } from './sections.ts';     // What: Section Link Array. Why: The footer offers a link for each of the home page's sections. How: This is the one list of sections, in page order, whose ids the links go to and whose labels they show.
 import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
 
 // #endregion Imports
@@ -23,21 +24,12 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  * labelled Footer, telling it apart from the bar's.
  *
  * Sections:
- *  - Constants
  *  - Components
  *  - Exports
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
-
-
-
-// #region Constants
-
-const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer Section Array. Why: The footer offers a link for each section, in page order. How: Each entry is a section's id, which its link goes to and capitalizes as its label.
-
-// #endregion Constants
 
 
 
@@ -126,19 +118,19 @@ function SitFooCom () : React.JSX.Element {
 				>{ /* What: Footer Links Nav Element. Why: Visitors at the bottom of the page can jump back to any section. How: This labels the landmark Footer, telling it apart from the bar's. */ }
 
 
-					{ FOO_SEC_ARR.map( ( secIdeStr ) => ( // What: Section Link Map. Why: Each section gets a link. How: This renders one link per section id.
+					{ SEC_LIN_ARR.map( ( linRecObj ) => ( // What: Section Link Map. Why: Each section gets a link. How: This renders one link per row of the section list.
 
 
 						<a
-							key={ secIdeStr }
+							key={ linRecObj.ideStr }
 
 							className={ cssModObj.fooLinAnc }
 
-							href={ `/#${ secIdeStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This joins the root path with the section's id as the hash.
+							href={ `/#${ linRecObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This joins the root path with the section's id as the hash.
 
-							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, secIdeStr ) }
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, linRecObj.ideStr ) }
 						>{ /* What: Footer Link Anchor Element. Why: Each link takes the visitor to its section. How: This hands the click to secCliFun, which scrolls to the section or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches it. */ }
-							{ secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) }{ /* What: Section Label Expression. Why: The link names its section. How: This capitalizes the section id's first letter. */ }
+							{ linRecObj.labStr }
 						</a>
 
 

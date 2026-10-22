@@ -7,6 +7,7 @@ import cssModObj from './nav.module.css';           // What: CSS Module Object. 
 import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The bar's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
+import { SEC_LIN_ARR  } from './sections.ts';     // What: Section Link Array. Why: The bar and the mobile menu link to the home page's sections, and the bar tracks which one is being read. How: This is the one list of sections, in page order, that the links and the scroll walk read.
 import { useEffect    } from 'react';             // What: Use Effect. Why: The bar listens to the page's scroll position, and the open menu changes the page around it. How: This registers the scroll and menu listeners and removes them again.
 import { useLocation  } from 'react-router';      // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
 import { useRef       } from 'react';             // What: Use Ref. Why: The open menu needs the bar, the dimmer, and the menu button. How: This creates the refs those elements attach.
@@ -32,54 +33,12 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  * page.
  *
  * Sections:
- *  - Constants
  *  - Components
  *  - Exports
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
-
-
-
-// #region Constants
-
-// #region NAV_LIN_ARR
-
-/**
- * NAV_LIN_ARR = Navigation Link Array
- *
- * @summary
- * The section links the bar and the mobile menu both render, in page order.
- * Every row shares one shape, so its fields carry no comments of their own:
- *
- * - `ideStr` (String): Identifier String, the section's id, which the
- *   link's href names on the home page's path, e.g. /#about.
- *
- * - `labStr` (String): Label String, the link's visible text and React key.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
-*/
-
-const NAV_LIN_ARR = [ // What: Navigation Link Array. Why: The bar and the mobile menu list the same links, so they're defined once. How: Each row pairs a section's id with the link's label.
-
-
-	{ ideStr : 'home',     labStr : 'Home'     }, // What: Home Link Row. Why: Visitors need a way back to the top. How: This links to the hero section.
-	{ ideStr : 'services', labStr : 'Services' }, // What: Services Link Row. Why: The services are the site's main content. How: This links to the services section.
-	{ ideStr : 'about',    labStr : 'About'    }, // What: About Link Row. Why: Visitors check who they'd be hiring. How: This links to the about section.
-	{ ideStr : 'contact',  labStr : 'Contact'  }  // What: Contact Link Row. Why: The page's goal is a quote request. How: This links to the contact section.
-
-
-];
-
-// #endregion NAV_LIN_ARR
-
-
-
-const SEC_IDE_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Section Identifier Array. Why: The scroll handler finds the section being read by checking each section's position. How: This lists the sections' ids in page order, which the handler walks from the bottom up.
-
-// #endregion Constants
 
 
 
@@ -170,16 +129,16 @@ function NavBarCom () : React.JSX.Element {
 			setBarScrBoo( window.scrollY > 40 ); // What: Bar Scrolled Update. Why: The bar should turn solid as soon as content starts sliding under it. How: This marks it scrolled once the page has moved more than 40px.
 
 
-			for ( const secIdeStr of [ ...SEC_IDE_ARR ].reverse() ) { // What: Section Walk Loop. Why: The active section is the lowest one that has reached the top of the screen. How: This walks a reversed copy of the section ids, from the bottom of the page up.
+			for ( const secRecObj of [ ...SEC_LIN_ARR ].reverse() ) { // What: Section Walk Loop. Why: The active section is the lowest one that has reached the top of the screen. How: This walks a reversed copy of the section list, from the bottom of the page up.
 
 
-				const secCurEle = document.getElementById( secIdeStr ); // What: Section Current Element. Why: The section's position decides whether it's active. How: This looks the section up by its id.
+				const secCurEle = document.getElementById( secRecObj.ideStr ); // What: Section Current Element. Why: The section's position decides whether it's active. How: This looks the section up by its id.
 
 
 				if ( secCurEle && window.scrollY >= secCurEle.offsetTop - 120 ) { // What: Section Reached Check. Why: A section counts as being read once its top nears the top of the screen. How: This allows 120px for the bar above it.
 
 
-					setActSecStr( secIdeStr ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the section's id.
+					setActSecStr( secRecObj.ideStr ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the section's id.
 
 
 
@@ -399,7 +358,7 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Navigation Links Nav Element. Why: Above 768px wide the bar shows the section links and phone number here, while at 768px and below this row hides and the menu takes over. How: This labels the landmark Main, telling it apart from the footer's. */ }
 
 
-						{ NAV_LIN_ARR.map( ( linRecObj ) => ( // What: Bar Link Map. Why: Each section gets a link in the bar above 768px wide. How: This renders one anchor per row.
+						{ SEC_LIN_ARR.map( ( linRecObj ) => ( // What: Bar Link Map. Why: Each section gets a link in the bar above 768px wide. How: This renders one anchor per row.
 
 
 							<a
@@ -465,7 +424,7 @@ function NavBarCom () : React.JSX.Element {
 				>{ /* What: Navigation Menu Div Element. Why: At 768px wide and below, the section links and phone number move into a panel below the bar. How: This exists only at that width, opening and closing with the menu button, carrying data-mobile-menu-open while it's open. */ }
 
 
-					{ NAV_LIN_ARR.map( ( linRecObj, linIndNum ) => ( // What: Menu Link Map. Why: Each section gets a link in the mobile menu. How: This renders one anchor per row, handing each its position for the staggered entrance.
+					{ SEC_LIN_ARR.map( ( linRecObj, linIndNum ) => ( // What: Menu Link Map. Why: Each section gets a link in the mobile menu. How: This renders one anchor per row, handing each its position for the staggered entrance.
 
 
 						<a
@@ -495,7 +454,7 @@ function NavBarCom () : React.JSX.Element {
 					<div
 						className={ cssModObj.menConDiv }
 
-						style={ { '--men-ite-ind' : NAV_LIN_ARR.length } as React.CSSProperties } // What: Menu Item Index Style. Why: The contact block enters after the last link. How: This hands it the position after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's style type has no entry for a custom property. How: as React.CSSProperties accepts the object, which React sets as written.
+						style={ { '--men-ite-ind' : SEC_LIN_ARR.length } as React.CSSProperties } // What: Menu Item Index Style. Why: The contact block enters after the last link. How: This hands it the position after the links, which its stylesheet multiplies into an animation delay. // What: Type Assertion Note. Why: React's style type has no entry for a custom property. How: as React.CSSProperties accepts the object, which React sets as written.
 					>{ /* What: Menu Contact Div Element. Why: The menu ends with every way to reach the company, since the bar's phone button hides at 768px wide and below, the only width where the menu exists. How: This stacks a label, the call and quote buttons, and the hours and service area. */ }
 
 
