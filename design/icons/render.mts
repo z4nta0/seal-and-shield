@@ -101,7 +101,6 @@ const broInsObj = await chromium.launch();   // What: Browser Instance Object. W
 const draPagObj = await broInsObj.newPage(); // What: Draw Page Object. Why: The canvas work runs inside a page. How: This opens a blank one.
 
 
-
 // #region renPngFun
 
 /**
@@ -139,6 +138,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 		souImaObj.src = `data:image/png;base64,${ souB64Str }`; // What: Source Address Assignment. Why: The image loads from the data handed in. How: This sets it as a data URL.
 
+
 		await souImaObj.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
 
 
@@ -152,6 +152,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 			const halCanObj = document.createElement( 'canvas' ); // What: Half Canvas Object. Why: Each step draws into a fresh canvas half the size. How: This creates it.
 
+
 			curSizNum = Math.round( curSizNum / 2 ); // What: Halved Size Update. Why: The step is half the previous size. How: This halves and rounds it.
 
 			halCanObj.width  = curSizNum; // What: Half Width Assignment. Why: The canvas is square at the step's size. How: This sets its width.
@@ -163,7 +164,9 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 			halCotObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: The best resampling keeps edges clean. How: This asks for high-quality smoothing.
 
+
 			halCotObj.drawImage( curCanObj, 0, 0, curSizNum, curSizNum ); // What: Half Draw Call. Why: This is the step itself. How: This draws the previous step at half size.
+
 
 			curCanObj = halCanObj; // What: Step Advance Assignment. Why: The next step draws from this one. How: This makes it the current image.
 
@@ -190,6 +193,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 			finCotObj.fillStyle = '#ffffff'; // What: White Fill Assignment. Why: The background has to be solid white. How: This sets the fill color.
 
+
 			finCotObj.fillRect( 0, 0, tarSizNum, tarSizNum ); // What: Background Fill Call. Why: Every pixel under the mark has to be opaque. How: This paints the whole square.
 
 
@@ -214,7 +218,6 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 }
 
 // #endregion renPngFun
-
 
 
 for ( const icoRecObj of ICO_REC_ARR ) writeFileSync( OUT_DIR_STR + icoRecObj.filStr, await renPngFun( icoRecObj.sizNum, icoRecObj.opaBoo ) ); // What: PNG Icon Loop. Why: Each PNG icon is saved under its own name. How: This renders every row and writes it into public/.

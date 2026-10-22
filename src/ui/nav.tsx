@@ -293,6 +293,7 @@ function NavBarCom () : React.JSX.Element {
 		};
 
 
+
 		const onResWinFun = () => { if ( !togButEle.getClientRects().length ) setMenOpeBoo( false ); }; // What: On Resize Window Function. Why: A screen widened past the menu's breakpoint hides the menu button, which would leave the page inert under a menu that no longer shows. How: This closes the menu once the button has no box.
 
 
