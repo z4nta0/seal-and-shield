@@ -546,7 +546,7 @@
 .navMenDiv[data-mobile-menu-open] { /* What: Open Navigation Menu Div. Why: The panel should show its links and contact block once the menu button opens it. How: This lifts the height cap to fit them, or to the screen below the bar on a short one, which then scrolls, and adds bottom padding. */
 
 
-	max-height : min( calc( var( --ver-rhy-p13 ) * 1rem ), calc( 100dvh - var( --nav-bar-hei ) ) ); /* Vertical Rhythm Base Plus 13 ~= 563.794px, Navigation Bar Height ~= 83.484px */
+	max-height : min( calc( var( --ver-rhy-p13 ) * 1rem ), calc( 100dvh - var( --nav-bar-hei ) ) ); /* Vertical Rhythm Base Plus 13 ~= 563.794px, Navigation Bar Height ~= 83.483px */
 	overflow-y : auto;
 	padding    : 0 var( --gut-sid-pad ) var( --spa-ver-p02 );                                       /* Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 2 ~= 25.572px */
 	transition : max-height var( --dur-tra-p03 ) var( --mot-dec-eas );                              /* Duration Transition Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Opening Height Transition. Why: Things arriving decelerate, while the closing panel accelerates away. How: This swaps the base rule's easing for the decelerate curve while the menu opens. */

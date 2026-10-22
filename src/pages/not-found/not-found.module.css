@@ -44,7 +44,7 @@
 	flex            : 1;
 	flex-direction  : column;
 	justify-content : center;
-	padding         : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Navigation Bar Height ~= 83.484px, Spacing Vertical Base Plus 5 ~= 59.447px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
+	padding         : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) ) var( --gut-sid-pad ) var( --spa-ver-p06 ); /* Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 5 ~= 59.447px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 6 ~= 78.751px */
 	text-align      : center;
 
 
