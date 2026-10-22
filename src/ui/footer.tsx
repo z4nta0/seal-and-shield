@@ -147,7 +147,7 @@ function SitFooCom () : React.JSX.Element {
 
 				</nav>
 
-				<div className={ cssModObj.fooConDiv }>{ /* What: Footer Contact Div Element. Why: The phone number and hours close the footer's columns. How: This stacks the two, right-aligned above 768px wide and centered once the columns stack at 768px and below. */ }
+				<div className={ cssModObj.fooConDiv }>{ /* What: Footer Contact Div Element. Why: The phone number and hours end the footer's row of columns. How: This stacks the two, right-aligned and ending the row on the right from about 777px wide up, starting a wrapped second line on the left between 769px and 776px wide, and centered once the columns stack at 768px and below. */ }
 
 
 					<a

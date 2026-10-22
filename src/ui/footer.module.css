@@ -174,7 +174,7 @@
 
 /* #region fooConDiv */
 
-.fooConDiv { /* What: Footer Contact Div. Why: The phone number and hours close the row on the right. How: This right-aligns the two. */
+.fooConDiv { /* What: Footer Contact Div. Why: The phone number and hours end the footer's row of columns. How: This right-aligns the two, which end the row on the right from about 777px wide up and start a wrapped second line on the left between 769px and 776px wide. */
 
 
 	text-align : right;

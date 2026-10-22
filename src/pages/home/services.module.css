@@ -237,7 +237,7 @@
 
 }
 
-.carDesPar { /* What: Card Description Paragraph. Why: Visitors want to know what the service involves. How: This sets the description small in the muted text color with generous leading. */
+.carDesPar { /* What: Card Description Paragraph. Why: Visitors want to know what the service involves. How: This sets the description small in the muted text color with generous leading, capped at about 68 characters a line. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
