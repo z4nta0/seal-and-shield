@@ -31,7 +31,10 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  * press changes, and every field its focus change, but transitions nothing.
  * The phone link inside the contact form's error message only shows once a
  * request fails, so it gets checks of its own, both ways, after a faked
- * Netlify error at desktop width.
+ * Netlify error at desktop width. On the home page, the service cards and
+ * the service area tags respond to hover too, though neither is a control, so
+ * each has to look different hovered and transition that change, or change
+ * instantly under reduced motion.
  * Real clicks are blocked during the checks, so pressing a link or the menu's
  * links never navigates or closes anything mid-check.
  *
@@ -48,8 +51,9 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
 
 // #region Constants
 
-const ERR_LIN_STR = '#contact form [role="alert"] a'; // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
-const SET_WAI_NUM = 400;                              // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
+const ERR_LIN_STR = '#contact form [role="alert"] a';             // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
+const HOV_TAR_STR = '[class*="serCarDiv"], [class*="areTagSpa"]'; // What: Hover Target String. Why: The service cards and the service area tags respond to hover without being controls, so the control probes never reach them. How: This matches both by their CSS module classes, whose names Vite keeps inside each hashed class.
+const SET_WAI_NUM = 400;                                          // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
 
 // #endregion Constants
 
@@ -502,6 +506,99 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 // #endregion fieProFun
 
+
+
+// #region hovProFun
+
+/**
+ * hovProFun = Hover Problems Function
+ *
+ * @summary
+ * Probes every visible service card and service area tag and returns a
+ * problem for each one that gives no hover feedback. Neither is a control, so
+ * only hover is checked: each is scrolled into view, read at rest with the
+ * pointer away and again while hovered, every look read once its transition
+ * has settled, and one that looks the same both ways is a problem. Its
+ * transition durations are read from the element and its ::after layer, where
+ * a card's shadow fades in. Normally one whose durations are all zero is a
+ * problem; under reduced motion every duration must be zero instead, while
+ * the hover look still has to change. Finding nothing to probe is a problem
+ * too, so the check can't pass without checking anything.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page to probe.
+ * @param redMotBoo - Reduced Motion Boolean: Whether the page is emulating
+ *                    reduced motion.
+ *
+ * @returns Every hover feedback problem found.
+ * @see {@link proLisArr}
+ *
+ * @example
+ * ```ts
+ * hovProFun(page, false) // => [ 'span "Topeka, KS" looks the same hovered' ]
+ * ```
+ *
+*/
+
+async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< string[] > {
+
+
+	const proLisArr : string[] = []; // What: Problem List Array. Why: Every problem should be reported, not just the first. How: This collects them.
+
+	const tarHanArr = await conLisFun( curPagObj, HOV_TAR_STR ); // What: Target Handle Array. Why: Every visible card and tag is probed. How: This collects them the way the controls are collected.
+
+
+	if ( !tarHanArr.length ) proLisArr.push( 'no service card or area tag to probe' ); // What: Empty Probe Check. Why: A probe that finds nothing would pass without checking anything. How: This records a problem when no card or tag is found.
+
+
+
+	for ( const tarCurObj of tarHanArr ) { // What: Target Probe Loop. Why: Every card and tag has to respond to hover. How: This reads each one at rest and hovered.
+
+
+		const tarDesStr = await tarCurObj.evaluate( ( tarCurEle ) => `${ tarCurEle.tagName.toLowerCase() } "${ ( tarCurEle.textContent || '' ).trim().slice( 0, 30 ) }"` ); // What: Target Description String. Why: A problem should name the card or tag a person would recognize. How: This joins its tag with the start of its text.
+
+
+		await tarCurObj.scrollIntoViewIfNeeded(); // What: Target Scroll Call. Why: A card or tag has to be on screen to hover. How: This scrolls it into view.
+
+		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The resting look is read with nothing hovered. How: This moves the pointer to the corner of the bar.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
+
+
+		const resSigStr = await tarCurObj.evaluate( sigEleFun ); // What: Rest Signature String. Why: The resting look is what hover is compared with. How: This reads it.
+
+
+		await tarCurObj.hover(); // What: Target Hover Call. Why: Hover is the one interaction a card or tag has. How: This moves the pointer onto it.
+
+		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hover look is read once it has eased in. How: This pauses for the settle time.
+
+
+		const hovSigStr = await tarCurObj.evaluate( sigEleFun ); // What: Hover Signature String. Why: The hovered look is compared with rest. How: This reads it.
+		const traDurStr = await tarCurObj.evaluate( ( tarCurEle ) => `${ getComputedStyle( tarCurEle ).transitionDuration }, ${ getComputedStyle( tarCurEle, '::after' ).transitionDuration }` ); // What: Transition Duration String. Why: A card's shadow fades in on its ::after layer, so both have to ease normally and stand still under reduced motion. How: This joins the element's durations with its ::after layer's.
+
+
+
+		if ( resSigStr === hovSigStr ) proLisArr.push( `${ tarDesStr } looks the same hovered` ); // What: Hover Check. Why: A hovered card or tag has to respond, under reduced motion too. How: This records one that doesn't change.
+
+
+
+		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ tarDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a card or tag with any duration above zero.
+
+		else if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ tarDesStr } changes without a transition` ); // What: Transition Check. Why: A hover change should ease rather than snap. How: This records a card or tag whose every transition duration is zero.
+
+
+	}
+
+
+
+	return proLisArr; // What: Problem List Return. Why: The test prints whatever was found. How: This hands back every problem collected.
+
+
+}
+
+// #endregion hovProFun
+
 // #endregion Helpers
 
 
@@ -511,7 +608,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
-	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every control, and checks it finds no problems.
+	test( `${ staRecObj.ideStr } gives every control hover, press, and focus feedback`, async ( { page : curPagObj } ) => { // What: Feedback Test. Why: Every interaction should visibly register. How: This opens the state, blocks clicks, probes every control, and on the home states every service card and area tag, and checks it finds no problems.
 
 
 		test.slow(); // What: Slow Test Mark. Why: Probing every control's hover, press, and focus takes about 28 seconds in Chromium alone, which ran past the default 30-second timeout when every suite shared the machine. How: This triples this test's timeout.
@@ -523,6 +620,9 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		expect( await feeProFun( curPagObj, 'a, button', false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
 		expect( await fieProFun( curPagObj, false ) ).toEqual( [] );              // What: No Field Problems Assertion. Why: The state passes only when every form field shows focus. How: This compares the problems with an empty list, so a failure prints each one.
+
+
+		if ( staRecObj.ideStr.startsWith( 'home-' ) ) expect( await hovProFun( curPagObj, false ) ).toEqual( [] ); // What: No Hover Problems Assertion. Why: The service cards and area tags respond to hover, and only the home states show them with nothing covering them. How: This compares their problems with an empty list on the home desktop and phone states, so a failure prints each one.
 
 
 	} );
@@ -546,7 +646,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control with reduced motion on and checks it finds no problems.
+	test( `${ staRecObj.ideStr } keeps feedback without motion under reduced motion`, async ( { page : curPagObj } ) => { // What: Reduced Motion Feedback Test. Why: Visitors who ask for less motion still need to see their actions register. How: This probes every control, and on the home states every service card and area tag, with reduced motion on and checks it finds no problems.
 
 
 		test.slow(); // What: Slow Test Mark. Why: Probing every control's hover, press, and focus takes about 28 seconds in Chromium alone, which ran past the default 30-second timeout when every suite shared the machine. How: This triples this test's timeout.
@@ -560,6 +660,9 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		expect( await feeProFun( curPagObj, 'a, button', true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
 		expect( await fieProFun( curPagObj, true ) ).toEqual( [] );              // What: No Reduced Motion Field Problems Assertion. Why: Every form field has to show focus without moving. How: This compares the problems with an empty list, so a failure prints each one.
+
+
+		if ( staRecObj.ideStr.startsWith( 'home-' ) ) expect( await hovProFun( curPagObj, true ) ).toEqual( [] ); // What: No Reduced Motion Hover Problems Assertion. Why: The service cards and area tags have to keep their hover look without moving. How: This compares their problems with an empty list on the home desktop and phone states, so a failure prints each one.
 
 
 	} );
