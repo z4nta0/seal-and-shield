@@ -242,7 +242,7 @@ function SerSecCom () : React.JSX.Element {
 							key={ serRecObj.titStr }
 
 							data-scroll-reveal-block
-						>{ /* What: Card Reveal Div Element. Why: Each card fades in in turn, but the reveal's own transition and transform would override the card's hover lift and shadow. How: This grid cell carries the reveal hook around the card instead of on it. */ }
+						>{ /* What: Card Reveal Div Element. Why: Each card fades in in turn, but the reveal's own transition and transform would override the card's hover lift. How: This grid cell carries the reveal hook around the card instead of on it. */ }
 
 
 							<div className={ cssModObj.serCarDiv }>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, filling its grid cell. */ }
