@@ -284,10 +284,11 @@ waiting for the page to settle.
   year changes. After an intended visual change, refresh with `npm run
   test:rendering -- --update-snapshots` and commit the baselines with it.
   Baselines are captured on Linux.
-- `npm run test:responsive`: measures the home page, the 404 page, and the open
-  menu at 18 widths from 320 to 1,920px (a pixel either side of each breakpoint
-  included), failing on sideways scrolling, an unclipped element past either
-  edge, text spilling its box, or two reachable controls overlapping.
+- `npm run test:responsive`: measures the home page and the 404 page at 18
+  widths from 320 to 1,920px (a pixel either side of each breakpoint included),
+  and the open menu at each of those up to its 768px breakpoint, failing on
+  sideways scrolling, an unclipped element past either edge, text spilling its
+  box, or two reachable controls overlapping.
 - `npm run test:seo`: checks each route's title, description, canonical,
   robots, and single h1, and the author on the home page; that the structured
   data is a RoofingContractor with the site's name and live URL, that its phone
