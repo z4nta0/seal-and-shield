@@ -23,9 +23,9 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * the hash, so the address bar stays free of hashes either way. Each link
  * keeps its real address (/#about), so a Ctrl, Cmd, Shift, or Alt click is
  * left to the browser, and a middle click, which the browser sends as
- * auxclick, never reaches the click handler at all; either way the browser
- * opens the home page at that section. Copied from hair-designs' own, which
- * adds secCliFun so every section link shares one click handler.
+ * auxclick, never reaches the click handler at all; a new tab or window opened
+ * that way lands on the home page at that section. Copied from hair-designs'
+ * own, which adds secCliFun so every section link shares one click handler.
  *
  * Sections:
  *  - Helpers
@@ -48,12 +48,12 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * @summary
  * Whether a click on a section link should be left to the browser: one made
  * with a modifier key held (Ctrl or Cmd to open a new tab, Shift for a new
- * window, Alt to download) or with any button but the main one. A middle
- * click never arrives here in practice, since Chromium, Firefox, and WebKit
- * send it as auxclick rather than click, so the button check is only a
- * safeguard for an engine that does. secCliFun, the shared click handler,
- * returns early when this is true, so the link's own address opens the home
- * page at the section, where the home page scrolls to it.
+ * window, Alt to download) or with any button but the main one. A middle click
+ * never arrives here in practice, since Chromium, Firefox, and WebKit send it
+ * as auxclick rather than click, so the button check is only a safeguard for
+ * an engine that does. secCliFun, the shared click handler, returns early when
+ * this is true, so a new tab or window opened from the link's own address
+ * lands on the section, where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

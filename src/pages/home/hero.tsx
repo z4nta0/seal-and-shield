@@ -83,11 +83,12 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
  *
  * @summary
  * Renders the hero section. Its two buttons are real links to the contact and
- * services sections (/#contact, /#services), so they work without JavaScript
- * and open in a new tab on a Ctrl, Cmd, or middle click, while a plain click
- * goes through secCliFun, which scrolls to the section in place, smoothly
- * unless the visitor asked for reduced motion. The background grid, glow, and
- * the logo's ring are decorative and hidden from assistive technology.
+ * services sections (/#contact, /#services), so the browser can open, copy, or
+ * show their address, and they open in a new tab on a Ctrl, Cmd, or middle
+ * click, while a plain click goes through secCliFun, which scrolls to the
+ * section in place, smoothly unless the visitor asked for reduced motion. The
+ * background grid, glow, and the logo's ring are decorative and hidden from
+ * assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
