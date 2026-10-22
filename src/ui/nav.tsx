@@ -97,17 +97,17 @@ const SEC_IDE_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Section
  * the bar its solid scrolled look once the page moves more than 40px, and
  * marks the link of the section the visitor is reading as active on the home
  * page: the lowest section whose top has scrolled to within 120px of the top
- * of the screen, or past it, a margin that leaves room for the bar itself. The
- * menu button toggles the mobile menu, which drops down below the bar over a
- * dimmed page: its links enter one after another and end with a contact block,
- * and while it's open the page around the bar is inert, a tap on the dimmed
- * page or Escape closes it, and widening the screen past 768px closes it too.
- * The closed menu is inert, so its links stay out of the focus order and the
- * accessibility tree. Every section link, including the brand, goes through
- * navSecFun, which reaches the section from any page and closes the menu,
- * while a Ctrl, Cmd, Shift, or Alt click is left to the browser and leaves the
- * menu as it was, and a middle click, which the browser sends as auxclick,
- * never reaches navSecFun at all.
+ * of the screen (a margin that leaves room for the bar itself), or past it.
+ * The menu button toggles the mobile menu, which drops down below the bar over
+ * a dimmed page: its links enter one after another and end with a contact
+ * block, and while it's open the page around the bar is inert, a tap on the
+ * dimmed page or Escape closes it, and widening the screen past 768px closes
+ * it too. The closed menu is inert, so its links stay out of the focus order
+ * and the accessibility tree. Every section link, including the brand, goes
+ * through navSecFun, which reaches the section from any page and closes the
+ * menu, while a Ctrl, Cmd, Shift, or Alt click is left to the browser and
+ * leaves the menu as it was, and a middle click, which the browser sends as
+ * auxclick, never reaches navSecFun at all.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

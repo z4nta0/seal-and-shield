@@ -20,9 +20,9 @@ import { useRef    } from 'react';                 // What: Use Ref. Why: The ob
  * share. Each of them marks the blocks that should fade in with the
  * presence-only data-scroll-reveal-block attribute, which styles.css starts
  * hidden and slightly lowered, and attaches the ref this hook returns. Once a
- * tenth of the section enters the viewport, every marked block inside it
- * gains data-scroll-reveal-shown one after another, on a stagger the section
- * chooses, which fades it up into place.
+ * tenth of the section enters the viewport, every marked block inside it gains
+ * data-scroll-reveal-shown, which fades it up into place, one after another on
+ * a stagger the section chooses.
  *
  * Sections:
  *  - Hooks
