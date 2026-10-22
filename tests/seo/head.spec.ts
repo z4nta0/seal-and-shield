@@ -91,7 +91,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 	'og:locale',           // What: Open Graph Locale Key. Why: Every card needs the page's language. How: This names the tag.
 	'og:site_name',        // What: Open Graph Site Name Key. Why: Every card needs the name of the site the link belongs to. How: This names the tag.
 	'og:title',            // What: Open Graph Title Key. Why: Every card needs the card's title. How: This names the tag.
-	'og:type',             // What: Open Graph Type Key. Why: Every card needs what kind of page it is. How: This names the tag.
+	'og:type',             // What: Open Graph Type Key. Why: Every card needs to say what kind of page it is. How: This names the tag.
 	'og:url',              // What: Open Graph URL Key. Why: Every card needs the address shares should count toward. How: This names the tag.
 	'twitter:card',        // What: Twitter Card Key. Why: Every card needs the layout X and similar apps use. How: This names the tag.
 	'twitter:description', // What: Twitter Description Key. Why: Every card needs the summary on X. How: This names the tag.
