@@ -51,9 +51,9 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * window, Alt to download) or with any button but the main one. A middle click
  * never arrives here in practice, since Chromium, Firefox, and WebKit send it
  * as auxclick rather than click, so the button check is only a safeguard for
- * an engine that does. secCliFun, the shared click handler, returns early when
- * this is true, so a new tab or window opened from the link's own address
- * lands on the section, where the home page scrolls to it.
+ * an engine that sends it as a click. secCliFun, the shared click handler,
+ * returns early when this is true, so a new tab or window opened from the
+ * link's own address lands on the section, where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -23,7 +23,7 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  * with the company's location, phone number, and hours and a call button on
  * the left, and the free quote request form on the right, the form stacking
  * below the invitation at 900px wide and below. The form posts to Netlify
- * Forms as contactForm, which finds the form through the hidden copy in
+ * Forms as contactForm. Netlify finds the form through the hidden copy in
  * index.html, so every field's name has to match that copy. Once sent, the
  * form gives way to a thank-you message, which after six seconds sinks out a
  * little quicker than it rose in, as a failed request's error does when the
