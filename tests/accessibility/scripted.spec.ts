@@ -546,7 +546,6 @@ test( 'sending moves focus to the thank-you message and back to the form when it
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
 
-
 	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
 	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
 
