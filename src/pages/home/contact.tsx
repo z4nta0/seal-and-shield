@@ -187,7 +187,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-		try {
+		try { // What: Netlify Post Try. Why: The post can fail outright, such as when the visitor is offline, and that failure should leave the form as it was rather than break the handler. How: This wraps the post and its answer check, so a failure falls through to the catch with senOkaBoo still false.
 
 
 			const netResObj = await fetch( '/', { // What: Netlify Response Object. Why: Netlify Forms records a post to the site's own address carrying the form's name, and its answer says whether it did. How: This posts the fields URL-encoded and waits for the answer.
@@ -231,7 +231,7 @@ function ConSecCom () : React.JSX.Element {
 
 		}
 
-		else {
+		else { // What: Failed Send Branch. Why: A request that never went out, or one Netlify rejected, must not look sent. How: This shows a fresh error in the alert region and keeps every field as the visitor filled it in.
 
 
 			setErrCouNum( ( preCouNum ) => preCouNum + 1 ); // What: Error Count Increment Call. Why: A screen reader announces an alert region's content only when it's added, so each failure needs a new paragraph. How: This changes the error paragraph's key, which mounts it afresh in the region and replays its entrance.
