@@ -23,18 +23,18 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * runs. The bar's section links, the brand, the hero's buttons, and the
  * footer's section links land on their sections and leave the address free of
  * hashes, while a Ctrl, Cmd, or middle click opens a section in a new tab and
- * leaves the page clicked from alone; the mobile menu opens over a dimmed,
- * inert page, closes on its button, Escape (which returns focus to the
- * button), a tap on the dimmed page, or a wider screen, and closes again when
- * one of its links is chosen, but not when a link opens in a new tab; the
- * contact form refuses to send without its required fields and reports
- * Netlify's answer honestly, clearing its error on a retry and coming back
- * after the thank-you message, with Netlify's side faked in the browser so
- * nothing is really sent; and the 404 page answers an unknown address with a
- * noindex tag and leads back to the home page and its sections, as does an
- * address that names a section directly. Pages open under reduced motion, so
- * scrolling jumps straight to its target and each position can be read at
- * once; how things move is checked elsewhere.
+ * leaves the page clicked from alone; the mobile menu opens over an inert
+ * page, closes on its button, Escape (which returns focus to the button), a
+ * tap on the dimmed page, or a wider screen, and closes again when one of its
+ * links is chosen, but not when a link opens in a new tab; the contact form
+ * refuses to send without its required fields and reports Netlify's answer
+ * honestly, clearing its error on a retry and coming back after the thank-you
+ * message, with Netlify's side faked in the browser so nothing is really sent;
+ * and the 404 page answers an unknown address with a noindex tag and leads
+ * back to the home page and its sections, as does an address that names a
+ * section directly. Pages open under reduced motion, so scrolling jumps
+ * straight to its target and each position can be read at once; how things
+ * move is checked elsewhere.
  *
  * Sections:
  *  - Constants
@@ -193,10 +193,9 @@ async function secTopFun ( curPagObj : Page, secIdeStr : string ) : Promise< num
  *
  * @summary
  * Waits until the visitor has landed on a home page section: the address is
- * the bare root, with no hash left in it, and the section's top edge sits
- * within a pixel of the top of the screen. Both are polled, since a link
- * from another page renders the home page and scrolls a moment after the
- * click.
+ * the bare root, with no hash left in it, and the section's top edge sits less
+ * than 2 pixels from the top of the screen. Both are polled, since a link from
+ * another page renders the home page and scrolls a moment after the click.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -218,7 +217,7 @@ async function ariSecFun ( curPagObj : Page, secIdeStr : string ) : Promise< voi
 
 
 	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ );                                                     // What: Clean Address Assertion. Why: Section links keep the address free of hashes, even when they come from another page. How: This waits until the URL is the bare root.
-	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section they chose. How: This waits until its top edge sits within a pixel of the viewport's top.
+	await expect.poll( async () => Math.abs( await secTopFun( curPagObj, secIdeStr ) ) ).toBeLessThan( 2 ); // What: Section Position Assertion. Why: The visitor should land on the section they chose. How: This waits until its top edge sits less than 2 pixels from the viewport's top.
 
 
 }
@@ -259,7 +258,7 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'home' ], [ 'Services', 'ser
 test( 'the brand returns to the top', async ( { page : curPagObj } ) => { // What: Brand Link Test. Why: The brand doubles as the way back to the top. How: This scrolls down, clicks the brand, and checks the page is back at the top.
 
 
-	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The brand is checked on the home page first. How: This opens it at desktop size.
+	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The brand is checked on the home page. How: This opens it at desktop size.
 
 	await curPagObj.evaluate( () => window.scrollTo( 0, 2000 ) ); // What: Scroll Down Call. Why: Returning to the top only shows once the page has left it. How: This scrolls well down the page.
 

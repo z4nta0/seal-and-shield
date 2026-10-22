@@ -17,19 +17,20 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * Checks the site's SEO setup in whichever engine the project runs. Seal and
  * Shield is a real local business, so the home page has to be findable and
  * describe the company accurately: its title and description name the city,
- * its canonical and author tags are in place, it carries no noindex,
- * index.html itself, fetched without a browser, carries the same full title
- * and description, each route has exactly one description tag, and the home
- * page's structured data names a RoofingContractor with the site's name and
- * live address and matches what the page itself shows, its phone number, city,
- * hours, founding year, legal name, and service areas, with no street address,
- * since the company has none to publish. The 404 page carries noindex beside
- * the home page's canonical and has its own title, and each page has exactly
- * one h1. The social preview tags are complete, use absolute addresses, and
- * match the page's title and description; the card they point at is a
- * 1,200x630 PNG under 300 KB; and every icon the head links to is served at
- * the size its link promises. robots.txt lets every crawler in and names the
- * sitemap, which lists the home page alone.
+ * the title runs 60 characters or fewer and the description 120 to 125
+ * characters, its canonical and author tags are in place, it carries no
+ * noindex, index.html itself, fetched without a browser, carries the same full
+ * title and description, each route has exactly one description tag, and the
+ * home page's structured data names a RoofingContractor with the site's name
+ * and live address and matches what the page itself shows, its phone number,
+ * city, hours, founding year, legal name, and service areas, with no street
+ * address, since the company has none to publish. The 404 page carries noindex
+ * beside the home page's canonical and has its own title, and each page has
+ * exactly one h1. The social preview tags are complete, use absolute
+ * addresses, and match the page's title and description; the card they point
+ * at is a 1,200x630 PNG under 300 KB; and the head links all six icons, each
+ * served at the size its link promises. robots.txt lets every crawler in and
+ * names the sitemap, which lists the home page alone.
  *
  * Sections:
  *  - Constants
@@ -137,7 +138,7 @@ test( 'the home page names the city and the business', async ( { page : curPagOb
 
 
 
-test( 'the structured data matches what the page shows', async ( { page : curPagObj } ) => { // What: Structured Data Test. Why: Search engines may show the business's details from its JSON-LD, so every claim in it has to be true and visible on the page. How: This reads the JSON-LD, checks its type, name, URL, and missing street against fixed values, and checks every other detail against the page's own text.
+test( 'the structured data matches what the page shows', async ( { page : curPagObj } ) => { // What: Structured Data Test. Why: Search engines may show the business's details from its JSON-LD, so every claim in it has to be true and visible on the page. How: This reads the JSON-LD, checks its type, name, URL, city, hours, and missing street against fixed values, its phone against every call link, and its service area count against the area lookup, then checks that the page shows the phone, city, hours, founding year, legal name, and each area's tag.
 
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The structured data lives on the home page. How: This loads the root path.
