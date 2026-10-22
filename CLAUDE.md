@@ -280,11 +280,10 @@ waiting for the page to settle.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance: no pixel
   may differ, and the per-pixel color threshold is 0 too, since Playwright's
-  default of 0.2 let a slight color change pass unnoticed (reese-roofing's
-  suite still has that gap). The footer's copyright line is masked, since its
-  year changes. After an intended visual change, refresh with `npm run
-  test:rendering -- --update-snapshots` and commit the baselines with it.
-  Baselines are captured on Linux.
+  default of 0.2 let a slight color change pass unnoticed. The footer's
+  copyright line is masked, since its year changes. After an intended visual
+  change, refresh with `npm run test:rendering -- --update-snapshots` and
+  commit the baselines with it. Baselines are captured on Linux.
 - `npm run test:responsive`: measures the home page and the 404 page at 18
   widths from 320 to 1,920px (a pixel either side of each breakpoint included),
   and the open menu at each of those up to its 768px breakpoint, failing on
