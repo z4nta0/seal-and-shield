@@ -10,8 +10,8 @@
  * pitch, and buttons beside the full logo and its pulsing ring), and the
  * frosted stats bar along its bottom. On screens 900px wide or narrower the
  * row becomes one centered column with the logo first and the stats wrap into
- * two by two. The opening blocks rise and fade in once as the page loads
- * through blockEnterFadeIn, and the logo's ring pulses through
+ * a two-by-two grid. The opening blocks rise and fade in once as the page
+ * loads through blockEnterFadeIn, and the logo's ring pulses through
  * logRinDivLoopPulse; both keyframes live here, since only the hero plays
  * them, and both stop under reduced motion. The shared container styles the
  * content and stats rows used to borrow from the global stylesheet are copied
