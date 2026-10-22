@@ -84,7 +84,7 @@ so it's settled (2026-10-10).
   a horizontal step, since their columns already cap them.
 - **Fixed (rem steps)**: everything inside a component: small gaps, card,
   field, and tag padding, the heading rules, and the menu lines. The phone
-  menu's Call Now and Free Quote buttons count as component padding too
+  menu's call and Free Quote buttons count as component padding too
   (decided 2026-10-18), on a fixed `--spa-hor-m01`, the same as the phone
   menu buttons in reese-roofing, hair-designs, and tonys-toppers, while the
   bar's own buttons stay fluid. The 3px
@@ -232,9 +232,10 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      reese-roofing, it makes the page behind it inert, closes on Escape
      (returning focus to its button), and closes when the screen widens past
      the breakpoint. It also gained a staggered entrance; an active section
-     dot; a label that nudges sideways on hover; and a contact block with Call
-     Now and Free Quote side by side above the hours and service area. The
-     user may drop the Free Quote button if the menu looks crowded.
+     dot; a label that nudges sideways on hover; and a contact block with the
+     phone number and Free Quote buttons side by side above the hours and
+     service area. The user may drop the Free Quote button if the menu looks
+     crowded.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
@@ -341,9 +342,9 @@ adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
 - **The logos stay raster** (confirmed 2026-10-17): the company has no SVG
   version of either logo, so the WebP copies below remain until it does.
 - **The logos were resized on 2026-10-08** (at the user's go-ahead, ahead
-  of step 7): `logo-full.png` went from 4763x4640 (3.7 MB, about 88 MB
+  of step 7): `logo-full.png` went from 4,763x4,640 (3.7 MB, about 88 MB
   decoded) to 968x943 (299 KB), at least 2x its largest display and 3x the
-  phone hero, and `logo-simple.png` from 1210x1025 (705 KB) to 157x133
+  phone hero, and `logo-simple.png` from 1,210x1,025 (705 KB) to 157x133
   (24 KB), over 3x its 44px box, each at a width that keeps the original
   aspect ratio to within 0.005px so no layout moved. The oversized full logo
   had made Chromium's draw of it nondeterministic under a full test run,
