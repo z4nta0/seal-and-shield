@@ -27,7 +27,7 @@
 
 
 	background : var( --bac-pag-col );   /* Background Page Color = #ffffff */
-	overflow-x : clip;                   /* What: Side Clip. Why: The logo's light panel reaches past its column, which at about 493px wide and below runs past the screen's edge. How: This clips it there without making the section a scroll container, so the panel runs edge to edge. */
+	overflow-x : clip;                   /* What: Side Clip. Why: The logo's light panel reaches past its column and, at about 493px wide and below, past the screen's edge. How: This clips it there without making the section a scroll container, so the panel runs edge to edge. */
 	padding    : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
 
 
