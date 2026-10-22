@@ -110,7 +110,7 @@
 
 
 }
-.navBarHed::after { /* What: Navigation Bar Header Shadow. Why: The scrolled bar casts a soft shadow onto the page, which should fade in without repainting it every frame. How: This holds the shadow on a layer the size of the bar, hidden until the page scrolls, and fades it in through opacity. */
+.navBarHed::after { /* What: Navigation Bar Header Shadow. Why: The scrolled bar casts a soft shadow onto the page, and the shadow should fade in without repainting the bar every frame. How: This holds the shadow on a layer the size of the bar, hidden until the page scrolls, and fades it in through opacity. */
 
 
 	box-shadow     : var( --ele-med-sha );                              /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */

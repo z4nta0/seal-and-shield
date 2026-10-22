@@ -29,7 +29,7 @@
 .homHerSec { /* What: Home Hero Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands the lighter blue ring to every control inside. */
 
 	background      : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
 	display         : flex;
@@ -55,7 +55,7 @@
 
 }
 
-.herGraDiv { /* What: Hero Gradient Div. Why: A soft blue glow draws the eye toward the logo. How: This places an oversized radial glow off the top right corner that ignores the pointer. */
+.herGraDiv { /* What: Hero Gradient Div. Why: A soft blue glow draws the eye toward the logo. How: This places an oversized radial glow, which ignores the pointer, off the top right corner. */
 
 
 	background     : radial-gradient( ellipse at 70% 40%, oklch( from var( --acc-mai-col ) l c h / 0.22 ) 0%, transparent 65% ); /* Accent Main Color = #1e56c8 @ 0.22 opacity */
@@ -330,7 +330,7 @@
 
 
 }
-.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, replacing the hover lift, since it matches the hover rules' weight and comes after them. */
+.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, replacing the hover lift, since this rule matches the hover rules' weight and comes after them. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
@@ -563,7 +563,7 @@
 
 /* #region staIteDiv */
 
-.staIteDiv { /* What: Stat Item Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with their text centered too so a caption that wraps to two lines stays balanced, and a faint divider on its right. */
+.staIteDiv { /* What: Stat Item Div. Why: Each figure reads with its caption as one cell. How: This stacks the two, centered and padded, with their text centered too so a caption that wraps to two lines stays balanced, and a faint divider on the cell's right. */
 
 
 	align-items    : center;

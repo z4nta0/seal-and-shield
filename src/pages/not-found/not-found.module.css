@@ -36,7 +36,7 @@
 .nofConMai { /* What: Not-Found Content Main. Why: The message should sit centered on a dark band like the hero's, clear of the fixed bar. How: This grows to fill the space above the footer, centers its column, and pads along the gutters and below the fixed bar, clearing the bar's own height plus a full spacing step so the gap holds on short screens. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands the lighter blue ring to every control inside. */
 
 	align-items     : center;
 	background      : var( --bac-inv-col );                                                                          /* Background Inverse Color = #080f24 */
@@ -170,7 +170,7 @@
 
 
 }
-.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, replacing the hover lift, since it matches the hover rules' weight and comes after them. */
+.butBasAnc:active { /* What: Pressed Button Base Anchor. Why: A press should register before the page responds. How: This presses the button in slightly, replacing the hover lift, since this rule matches the hover rules' weight and comes after them. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
