@@ -293,7 +293,7 @@ function SerSecCom () : React.JSX.Element {
 
 					</div>
 
-					<div className={ cssModObj.areTagDiv }>{ /* What: Area Tags Div Element. Why: Each place the company works gets a quick tag. How: This wraps the tags in rows. */ }
+					<div className={ cssModObj.areTagDiv }>{ /* What: Area Tags Div Element. Why: Each place the company works gets a quick tag. How: This wraps the tags onto two or three rows from the top left, never one, and onto four or five on the narrowest screens below about 403px. */ }
 
 
 						{ SER_ARE_ARR.map( ( areNamStr ) => ( // What: Area Tag Map. Why: Each area gets a tag. How: This renders one span per entry.
