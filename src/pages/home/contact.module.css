@@ -628,7 +628,7 @@
 
 /* #region forFieDiv */
 
-/* What: Form Field Div. Why: The message field stacks its label over its box like the other fields, but sits directly in the form rather than in a row. How: Its rule sits in the forRowDiv region, where the class first appears, and the modifier below gives it the row's space. */
+/* What: Form Field Div Pointer. Why: The message field stacks its label over its box like the other fields, but sits directly in the form rather than in a row. How: Its rule sits in the forRowDiv region, where the class first appears, and the modifier below gives it the row's space. */
 .forFieDiv--full { /* What: Form Field Div Full. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
 
 
@@ -637,9 +637,9 @@
 
 }
 
-/* What: Form Field Label. Why: The message field's label matches the others. How: Its rule sits in the forRowDiv region, where the class first appears. */
+/* What: Form Field Label Pointer. Why: The message field's label matches the others. How: Its rule sits in the forRowDiv region, where the class first appears. */
 
-/* What: Form Field Textarea. Why: The message box shares the inputs' look and focus ring. How: Its rule, shared with the inputs, sits in the forRowDiv region, where the class first appears. */
+/* What: Form Field Textarea Pointer. Why: The message box shares the inputs' look and focus ring. How: Its rule, shared with the inputs, sits in the forRowDiv region, where the class first appears. */
 
 /* #endregion forFieDiv */
 
