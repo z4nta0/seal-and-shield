@@ -376,7 +376,7 @@
 
 
 }
-@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you message should arrive rather than snap into the form's place. How: This rises it a little from below and fades it in. */
+@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you message should arrive rather than snap into the form's place. How: This raises it a little from below and fades it in. */
 
 
 	from {
@@ -687,7 +687,7 @@
 
 
 }
-@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This rises it a little from below and fades it in. */
+@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This raises it a little from below and fades it in. */
 
 
 	from {
