@@ -435,7 +435,7 @@
 
 
 }
-.navTogBut:active { /* What: Pressed Navigation Toggle Button. Why: A press should register before the menu opens. How: This presses the button in slightly. */
+.navTogBut:active { /* What: Pressed Navigation Toggle Button. Why: A press should register before the menu opens or closes. How: This presses the button in slightly. */
 
 
 	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
@@ -648,7 +648,7 @@
 .navMenDiv[data-mobile-menu-open] .menLinAnc { /* What: Entering Menu Link Anchor. Why: The links should arrive one after another as the menu opens, rather than all at once. How: This plays the entrance on each, delayed a beat longer for each row. */
 
 
-	animation       : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) backwards; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Backwards Fill. Why: A held end frame would pin the opacity and transform, so the pressed dim and the hover slide could never show. How: This holds only the hidden start through the delay, then hands the element back to its own rules. */
+	animation       : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) backwards; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Backwards Fill. Why: A held end frame would pin the link's opacity, so its pressed dim could never show. How: This holds only the hidden start through the delay, then hands the element back to its own rules. */
 	animation-delay : calc( var( --dur-ani-m03 ) * ( var( --men-ite-ind ) + 1 ) );            /* Duration Animation Base Minus 3 ~= 67.9ms, Menu Item Index set by its row */
 
 
@@ -746,7 +746,7 @@
 .navMenDiv[data-mobile-menu-open] .menConDiv { /* What: Entering Menu Contact Div. Why: The contact block should arrive after the last link. How: This plays the same entrance, a beat after the last row. */
 
 
-	animation       : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) backwards; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Backwards Fill. Why: A held end frame would pin the opacity and transform, so the pressed dim and the hover slide could never show. How: This holds only the hidden start through the delay, then hands the element back to its own rules. */
+	animation       : menuItemOpenFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) backwards; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Backwards Fill. Why: The block has to stay hidden through its delay, and holding the end frame afterwards would serve no purpose. How: This holds only the hidden start through the delay, then hands the element back to its own rules. */
 	animation-delay : calc( var( --dur-ani-m03 ) * ( var( --men-ite-ind ) + 1 ) );            /* Duration Animation Base Minus 3 ~= 67.9ms, Menu Item Index set by the block */
 
 

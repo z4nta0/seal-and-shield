@@ -24,7 +24,7 @@
 
 
 
-@font-face { /* What: Barlow Condensed Regular Font Face. Why: Barlow Condensed is the display font, and its regular weight sets the small LLC beside the bar's brand name. How: This loads its latin file at weight 400, showing fallback text until it arrives. */
+@font-face { /* What: Barlow Condensed Regular Font Face. Why: Barlow Condensed is the display font, and its regular weight sets the small LLC beneath the bar's brand name. How: This loads its latin file at weight 400, showing fallback text until it arrives. */
 
 
 	font-display : swap;
