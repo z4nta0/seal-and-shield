@@ -28,11 +28,11 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  * form gives way to a thank-you message, which after six seconds sinks out a
  * little quicker than it rose in, as a failed request's error does when the
  * visitor tries again. Focus moves to the thank-you message when it replaces
- * the form, which announces it, and back to the first field when the form
- * returns, while a failure's error appears in an alert region the form carries
- * from the start. Each block fades in as the section scrolls into view. Its
- * id, contact, is what the bar's Contact link and the hero's quote button
- * scroll to.
+ * the form, which announces the result, and back to the first field when the
+ * form returns, while a failure's error appears in an alert region the form
+ * carries from the start. Each block fades in as the section scrolls into
+ * view. Its id, contact, is what the bar's Contact link and the hero's quote
+ * button scroll to.
  *
  * Sections:
  *  - Constants
