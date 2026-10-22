@@ -543,7 +543,7 @@
 
 
 }
-.navMenDiv[data-mobile-menu-open] { /* What: Open Navigation Menu Div. Why: The panel should show its links and contact block once the menu button opens it. How: This lifts the height cap to fit them, or to the screen below the bar on a short one, which then scrolls, and adds bottom padding. */
+.navMenDiv[data-mobile-menu-open] { /* What: Open Navigation Menu Div. Why: The panel should show its links and contact block once the menu button opens it. How: This lifts the height cap to fit them, or on a short screen to the space below the bar, where the panel then scrolls, and adds bottom padding. */
 
 
 	max-height : min( calc( var( --ver-rhy-p13 ) * 1rem ), calc( 100dvh - var( --nav-bar-hei ) ) ); /* Vertical Rhythm Base Plus 13 ~= 563.794px, Navigation Bar Height ~= 83.483px */
