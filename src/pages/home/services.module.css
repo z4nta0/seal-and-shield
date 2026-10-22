@@ -89,7 +89,7 @@
 
 }
 
-.secDivDiv { /* What: Section Divider Div. Why: A short rule separates each heading from the text below it. How: This draws an about 45px by about 2.7px blue bar with room above and below, copied from the shared divider. */
+.secDivDiv { /* What: Section Divider Div. Why: A short rule separates each heading from the text below it. How: This draws a blue bar about 45px wide and 2.7px tall with room above and below, copied from the shared divider. */
 
 
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
