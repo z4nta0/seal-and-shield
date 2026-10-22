@@ -140,7 +140,7 @@ function ConSecCom () : React.JSX.Element {
 	 * and posts the form's fields to Netlify Forms as URL-encoded data, whose
 	 * form-name field tells Netlify which form they belong to. While the
 	 * request is out, the submit button is marked aria-disabled, so it keeps
-	 * focus, a second submit returns at once, and its label says Sending...
+	 * focus, a second submit is ignored, and its label says Sending...
 	 * instead. Only an OK answer from Netlify counts as sent: then
 	 * the thank-you message shows, the fields empty, and six seconds later the
 	 * message fades out and the form comes back. A request that fails

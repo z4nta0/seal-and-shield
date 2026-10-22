@@ -23,8 +23,8 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * ring, over a background grid and glow. At 900px wide and below, the text
  * and logo become one centered column with the logo first. A stats bar along
  * its bottom sums up the company in four figures, set two by two at 900px
- * wide and below. Its id, home, is what the bar's Home link and brand scroll
- * to.
+ * wide and below. The section's id, home, is what the bar's Home link and
+ * brand scroll to.
  *
  * Sections:
  *  - Constants
