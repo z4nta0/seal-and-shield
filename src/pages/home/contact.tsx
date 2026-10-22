@@ -61,13 +61,13 @@ const EMP_FOR_OBJ = { company : '', email : '', message : '', name : '', phone :
  * ConSecCom = Contact Section Component
  *
  * @summary
- * Renders the contact section. The form's fields are controlled by
- * forDatObj, whose keys match each field's name attribute, so one change
- * handler serves all five. The browser checks the required fields before
- * submitting, then forSubFun posts the fields to Netlify Forms and shows the
- * thank-you message only once Netlify confirms it, or an error message that
- * keeps the fields filled in if it doesn't. The background accent is
- * decorative and hidden from assistive technology.
+ * Renders the contact section. The form's fields are controlled by forDatObj,
+ * whose keys match each field's name attribute, so one change handler serves
+ * all five. The browser checks the required fields before submitting, then
+ * forSubFun posts the fields to Netlify Forms and shows the thank-you message
+ * only once Netlify confirms the submission, or an error message that keeps
+ * the fields filled in if it doesn't. The background accent is decorative and
+ * hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -162,7 +162,7 @@ function ConSecCom () : React.JSX.Element {
 	 *
 	*/
 
-	const forSubFun = async ( subEveObj : React.SubmitEvent< HTMLFormElement > ) => { // What: Form Submit Function. Why: The form sends its fields without leaving the page, and only reports success once Netlify confirms it. How: This posts them to Netlify Forms, then shows the thank-you message or the error message depending on the answer.
+	const forSubFun = async ( subEveObj : React.SubmitEvent< HTMLFormElement > ) => { // What: Form Submit Function. Why: The form sends its fields without leaving the page, and only reports success once Netlify confirms the submission. How: This posts them to Netlify Forms, then shows the thank-you message or the error message depending on the answer.
 
 
 		subEveObj.preventDefault(); // What: Default Submit Cancel. Why: A normal submit would reload the page. How: This stops it, so the fetch below sends the fields instead.
