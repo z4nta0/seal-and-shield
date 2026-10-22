@@ -378,7 +378,7 @@ function NavBarCom () : React.JSX.Element {
 
 							<span className={ cssModObj.braMaiSpa }>Seal and Shield</span>{ /* What: Brand Main Span Element. Why: The company's name is the brand's main line. How: This shows it in the display font. */ }
 
-							<span className={ cssModObj.braSubSpa }>LLC</span>{ /* What: Brand Sub Span Element. Why: The legal suffix completes the brand without competing with the name. How: This shows it small beneath the name. */ }
+							<span className={ cssModObj.braSufSpa }>LLC</span>{ /* What: Brand Suffix Span Element. Why: The legal suffix completes the brand without competing with the name. How: This shows it small beneath the name. */ }
 
 
 						</span>

@@ -252,7 +252,7 @@
 
 }
 
-.braSubSpa { /* What: Brand Sub Span. Why: The legal suffix completes the brand without competing with the name. How: This sets it small, widely spaced, and silver. */
+.braSufSpa { /* What: Brand Suffix Span. Why: The legal suffix completes the brand without competing with the name. How: This sets it small, widely spaced, and silver. */
 
 
 	color          : var( --tex-inm-col );                   /* Text Inverse Muted Color = #8a9ab5 */
