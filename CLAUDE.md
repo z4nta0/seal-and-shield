@@ -298,9 +298,10 @@ waiting for the page to settle.
   data is a RoofingContractor with the site's name and live URL, that its phone
   matches every call link and its city, hours, founding year, legal name, and
   service areas all appear on the page, and that it gives no street address;
-  that the social tags and theme color are complete and match the page, the
-  card is a 1,200x630 PNG under 300 KB, and every linked icon is served at its
-  size; and that robots.txt and the sitemap say what they should.
+  that the social tags are complete and match the page, the theme color names
+  the site's darkest navy, the card is a 1,200x630 PNG under 300 KB, and every
+  linked icon is served at its size; and that robots.txt and the sitemap say
+  what they should.
 - `npm test` runs every suite.
 
 ## Live checks
