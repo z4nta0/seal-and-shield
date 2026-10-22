@@ -391,7 +391,7 @@ function ConSecCom () : React.JSX.Element {
 						className={` ${ cssModObj.secTitHea }   ${ cssModObj.secTitHeaLight } `}
 
 						data-scroll-reveal-block
-					>{ /* What: Section Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
+					>{ /* What: Section Title Heading Light Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
 						Request a Free<br />Quote Today
 					</h2>
 
@@ -695,7 +695,7 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Element. Why: The message needs the form's full width. How: This holds the message field across the form's full width. */ }
+							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Full Element. Why: The message needs the form's full width. How: This holds the message field across the form's full width. */ }
 
 
 								<label
