@@ -366,7 +366,6 @@
 
 
 	}
-
 	.forSucDiv.forSucDiv--leaving { /* What: Instant Form Success Div Leaving. Why: The page waits on this animation's end to remove the thank-you message, and an animation turned off never ends. How: This shortens it to almost nothing, so the form comes back at once. */
 
 
@@ -678,7 +677,6 @@
 
 
 	}
-
 	.forErrPar.forErrPar--leaving { /* What: Instant Form Error Paragraph Leaving. Why: The page waits on this animation's end to remove the error, and an animation turned off never ends. How: This shortens it to almost nothing, so it leaves the page at once. */
 
 

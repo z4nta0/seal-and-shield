@@ -664,7 +664,6 @@
 
 
 	}
-
 	.navMenDiv[data-mobile-menu-open] .menLinAnc { /* What: Motionless Entering Menu Link Anchor. Why: The links should simply be there when the menu opens. How: This turns the entrance off. */
 
 
