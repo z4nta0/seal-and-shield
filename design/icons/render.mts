@@ -28,6 +28,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  *
  * Sections:
  *  - Constants
+ *  - Module State
  *  - Module Init
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -88,10 +89,17 @@ const ICO_SIZ_ARR = [ 16, 32, 48 ]; // What: ICO Size Array. Why: favicon.ico sh
 
 
 
-const OUT_DIR_STR = fileURLToPath( new URL( '../../public/', import.meta.url ) );                  // What: Output Directory String. Why: Browsers request icons from the site's root. How: This resolves public/ from this script's folder.
-const SOU_B64_STR = readFileSync( new URL( './mark.png', import.meta.url ) ).toString( 'base64' ); // What: Source Base64 String. Why: The browser draws the mark from data rather than a file path. How: This reads mark.png and encodes it.
+const OUT_DIR_STR = fileURLToPath( new URL( '../../public/', import.meta.url ) ); // What: Output Directory String. Why: Browsers request icons from the site's root. How: This resolves public/ from this script's folder.
 
 // #endregion Constants
+
+
+
+// #region Module State
+
+const SOU_B64_STR = readFileSync( new URL( './mark.png', import.meta.url ) ).toString( 'base64' ); // What: Source Base64 String. Why: The browser draws the mark from data rather than a file path. How: This reads mark.png and encodes it.
+
+// #endregion Module State
 
 
 
