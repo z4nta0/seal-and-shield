@@ -50,7 +50,7 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A small label names the error above the heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the hero's eyebrow. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A small label names the error above the heading. How: This sets it widely spaced, uppercase, and light blue, copied from the hero's eyebrow. */
 
 
 	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */

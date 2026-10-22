@@ -216,7 +216,7 @@ function AboSecCom () : React.JSX.Element {
 							className={ cssModObj.eyeLabPar }
 
 							data-scroll-reveal-block
-						>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in right after the logo's column. */ }
+						>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in uppercase, and fades in right after the logo's column. */ }
 							Who We Are
 						</p>
 

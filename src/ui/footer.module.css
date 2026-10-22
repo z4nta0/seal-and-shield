@@ -127,7 +127,7 @@
 
 }
 
-.fooLinAnc { /* What: Footer Link Anchor. Why: Each section link should read in the footer's display style. How: This sets its label in small, spaced capitals in light silver. */
+.fooLinAnc { /* What: Footer Link Anchor. Why: Each section link should read in the footer's display style. How: This sets its label in spaced uppercase in light silver. */
 
 
 	color          : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */

@@ -55,7 +55,7 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above each heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above each heading. How: This sets it widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
 
 
 	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
@@ -237,7 +237,7 @@
 
 }
 
-.carDesPar { /* What: Card Description Paragraph. Why: Visitors want to know what the service involves. How: This sets the description small in the muted text color with generous leading, capped at about 68 characters a line. */
+.carDesPar { /* What: Card Description Paragraph. Why: Visitors want to know what the service involves. How: This sets the description in the muted text color with generous leading, capped at about 68 characters a line. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */

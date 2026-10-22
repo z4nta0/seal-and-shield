@@ -215,7 +215,7 @@ function SerSecCom () : React.JSX.Element {
 				>{ /* What: Services Header Div Element. Why: The section opens by saying what it covers. How: This holds the label, heading, divider, and intro, and fades in first. */ }
 
 
-					<p className={ cssModObj.eyeLabPar }>What We Do</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals. */ }
+					<p className={ cssModObj.eyeLabPar }>What We Do</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in uppercase. */ }
 
 					<h2 className={ cssModObj.secTitHea }>Our Services</h2>{ /* What: Section Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
 
@@ -278,7 +278,7 @@ function SerSecCom () : React.JSX.Element {
 					<div>{ /* What: Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, or above the tags at 768px wide and below, with no styling of its own. */ }
 
 
-						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in small capitals. */ }
+						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in uppercase. */ }
 
 						<h3 className={ cssModObj.secTitHea }>Service Area</h3>{ /* What: Section Title Heading Element. Why: The panel needs its own heading. How: This is the panel's h3. */ }
 

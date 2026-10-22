@@ -103,7 +103,7 @@
 
 }
 
-.eyeLabSpa { /* What: Eyebrow Label Span. Why: A short label says what the company is and where, at the start of the page's heading. How: This sets it small, widely spaced, uppercase, and light blue, rising in first as the page loads. */
+.eyeLabSpa { /* What: Eyebrow Label Span. Why: A short label says what the company is and where, at the start of the page's heading. How: This sets it widely spaced, uppercase, and light blue, rising in first as the page loads. */
 
 
 	animation      : blockEnterFadeIn var( --dur-ani-p06 ) var( --mot-sta-eas ) both; /* Duration Animation Base Plus 6 ~= 853.0ms, Motion Standard Easing = ease */

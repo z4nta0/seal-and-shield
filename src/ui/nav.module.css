@@ -296,7 +296,7 @@
 
 }
 
-.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section in the bar's display style. How: This sets it in small, spaced capitals in light silver, positioned so its underline can sit beneath it. */
+.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section in the bar's display style. How: This sets it in spaced uppercase in light silver, positioned so its underline can sit beneath it. */
 
 
 	color          : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */

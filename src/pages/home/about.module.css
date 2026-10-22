@@ -253,7 +253,7 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading, and light blue wouldn't have enough contrast on the white section. How: This sets it small, widely spaced, uppercase, and the main blue, copied from the shared eyebrow label with its color deepened. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading, and light blue wouldn't have enough contrast on the white section. How: This sets it widely spaced, uppercase, and the main blue, copied from the shared eyebrow label with its color deepened. */
 
 
 	color          : var( --acc-mai-col );                   /* Accent Main Color = #1e56c8 */
@@ -358,7 +358,7 @@
 
 }
 
-.valDesPar { /* What: Value Description Paragraph. Why: Each value is explained in a sentence. How: This sets it small in the muted text color with generous leading, capped at about 68 characters a line. */
+.valDesPar { /* What: Value Description Paragraph. Why: Each value is explained in a sentence. How: This sets it in the muted text color with generous leading, capped at about 68 characters a line. */
 
 
 	color       : var( --tex-mut-col ); /* Text Muted Color = #616e88 */
