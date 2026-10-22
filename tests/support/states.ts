@@ -302,7 +302,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_REC_ARR }; // What: Named Exports. Why: The accessibility, interaction, rendering, and responsive specs share these states and their opener. How: This exports the state list and the helper that opens one.
+export { opeStaFun, STA_REC_ARR }; // What: Named Exports. Why: The accessibility, feedback, and rendering specs check every state, and the responsive spec opens its own pages the same way. How: This exports the state list those three specs import and the opener all four import.
 
 // #endregion Exports
 

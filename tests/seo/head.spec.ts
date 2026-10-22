@@ -16,8 +16,8 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * @summary
  * Checks the site's SEO setup in whichever engine the project runs. Seal and
  * Shield is a real local business, so the home page has to be findable and
- * describe the company accurately: its title and description name the city and
- * services, its canonical and author tags are in place, it carries no noindex,
+ * describe the company accurately: its title and description name the city,
+ * its canonical and author tags are in place, it carries no noindex,
  * index.html itself, fetched without a browser, carries the same full title
  * and description, each route has exactly one description tag, and the home
  * page's RoofingContractor structured data matches what the page itself shows,
@@ -109,7 +109,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 
 // #region Home Page Checks
 
-test( 'the home page names the city, the services, and the business', async ( { page : curPagObj } ) => { // What: Home Head Test. Why: Search listings show the title and description, and local searches look for the city. How: This loads the home page and checks its title, description, author, canonical, and robots tags.
+test( 'the home page names the city and the business', async ( { page : curPagObj } ) => { // What: Home Head Test. Why: Search listings show the title and description, and local searches look for the city. How: This loads the home page and checks its title, its single description, its author, canonical, and robots tags, and that its single h1 names the city.
 
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The checks read the home page's head. How: This loads the root path.
@@ -205,7 +205,7 @@ test( 'the raw page carries the home title and description for script-free reade
 
 // #region Not Found Page Checks
 
-test( 'the 404 page stays out of search results', async ( { page : curPagObj } ) => { // What: Not Found Head Test. Why: The host answers every unknown address with a 200, so the 404 page must ask not to be indexed. How: This loads an unknown address and checks its robots tag, canonical, title, and heading.
+test( 'the 404 page stays out of search results', async ( { page : curPagObj } ) => { // What: Not Found Head Test. Why: The host answers every unknown address with a 200, so the 404 page must ask not to be indexed. How: This loads an unknown address and checks its robots tag, canonical, single description, title, and heading.
 
 
 	await curPagObj.goto( '/no-such-page' ); // What: Unknown Address Open Call. Why: Every unknown path shows the 404 page. How: This loads one.
@@ -247,7 +247,7 @@ test( 'the social preview tags are complete', async ( { page : curPagObj } ) => 
 
 
 
-test( 'the social preview image is a 1,200x630 PNG under 300 KB', async ( { request : reqCotObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card small enough for WhatsApp. How: This fetches the image, checks its byte count, and reads its size from the PNG header.
+test( 'the social preview image is a 1,200x630 PNG under 300 KB', async ( { request : reqCotObj } ) => { // What: Preview Image Test. Why: The social tags promise a 1,200x630 card small enough for WhatsApp. How: This fetches the image, checks its served type and byte count, and reads its size from the PNG header.
 
 
 	const imaResObj = await reqCotObj.get( '/og-image.png' ); // What: Image Response Object. Why: The image has to exist where the tags point. How: This fetches it from the site.

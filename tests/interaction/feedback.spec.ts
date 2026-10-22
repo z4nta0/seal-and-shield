@@ -10,7 +10,7 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each che
 
 
 import type { ElementHandle } from '@playwright/test'; // What: Element Handle. Why: Each control is probed through a handle to its element. How: This types the control list.
-import type { Page          } from '@playwright/test'; // What: Page. Why: Every helper drives a Playwright page. How: This types their page parameters.
+import type { Page          } from '@playwright/test'; // What: Page. Why: The helpers that drive the page from the test take a Playwright page, while those that run inside it take none. How: This types the driving helpers' page parameters.
 
 // #endregion Imports
 
@@ -21,12 +21,12 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  *
  * @summary
  * Checks the interaction feedback rule on every page state, in whichever
- * engine the project runs. Every visible link and button has to look
- * different while hovered than at rest, look different again while pressed,
- * and transition its focus ring's outline, and the first keyboard stop has to
- * draw that ring at full width once it has eased in. Under reduced motion
- * every control keeps its hover change but transitions nothing. Real clicks
- * are blocked during the checks, so pressing a link or the menu's links
+ * engine the project runs. Every visible link and button has to look different
+ * while hovered than at rest, look different again while pressed, and
+ * transition its focus ring's outline, and the first keyboard stop has to draw
+ * that ring at full width once it has eased in. Under reduced motion every
+ * control keeps its hover and press changes but transitions nothing. Real
+ * clicks are blocked during the checks, so pressing a link or the menu's links
  * never navigates or closes anything mid-check.
  *
  * Sections:
@@ -207,15 +207,16 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * feeProFun = Feedback Problems Function
  *
  * @summary
- * Probes every reachable control and returns a problem for each one that
- * gives no feedback. Each control is scrolled into view, read at rest with
- * the pointer away, read again while hovered, and again while the mouse
- * button is held on it, every look read once its transition has settled. A
- * control that looks the same at rest and hovered, or hovered and pressed,
- * is a problem. Normally its transition list must include the focus ring's
- * outline-width, so the ring eases in; under reduced motion every one of its
- * transition durations must be zero instead. The caller blocks real clicks
- * first, so releasing the mouse does nothing.
+ * Probes every reachable control and returns a problem for each one that gives
+ * no feedback. Each control is scrolled into view, read at rest with the
+ * pointer away, read again while hovered, and again while the mouse button is
+ * held on it, every look read once its transition has settled. A control that
+ * looks the same at rest and hovered, or hovered and pressed, is a problem.
+ * Normally a control whose transitions all take no time is a problem too, and
+ * its transition list must include the focus ring's outline-width, so the ring
+ * eases in; under reduced motion every one of its transition durations must be
+ * zero instead. The caller blocks real clicks first, so releasing the mouse
+ * does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

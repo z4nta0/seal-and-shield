@@ -211,9 +211,9 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      remove them. Everything has a reduced-motion variant.
      The service cards lift and the service area tags fill on hover even
      though neither is clickable, which the user chose to keep (2026-10-18).
-     The menu's phone button draws its hover outline as an inset
-     box-shadow, which takes no space, so the closed state looks exactly as
-     before.
+     The menu's phone button carries a border the same blue as its fill,
+     so when hover empties the fill to leave a blue outline with light blue
+     text, the button keeps its size and nothing beside it moves.
    - **Reveal hooks go on a wrapper** wherever the revealed element has its
      own hover or press transform: the reveal's global rule sets
      `transition` and `transform` on the element it marks, which silently

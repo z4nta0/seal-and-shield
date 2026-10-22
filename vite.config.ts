@@ -80,7 +80,7 @@ const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.ht
 
 		order : 'post', // What: Order. Why: The page should be compacted only after Vite has injected the bundle's script and stylesheet tags. How: This runs after Vite's own transforms.
 
-		handler : ( htmTexStr ) => { // What: Handler. Why: This is the plugin's actual work. How: This strips comments, then drops indentation and blank lines.
+		handler : ( htmTexStr ) => { // What: Handler. Why: This is the plugin's actual work. How: This rewrites each JSON-LD script on one line, strips comments, then drops indentation and blank lines.
 
 
 			return htmTexStr                                                                               // What: Compacted Page Return. Why: Vite writes whatever this returns as the shipped page. How: This chains each compaction over the page's text.
