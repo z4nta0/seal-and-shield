@@ -9,7 +9,7 @@ import { HerSecCom   } from './hero.tsx';          // What: Hero Section Compone
 import { NavBarCom   } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
 import { SerSecCom   } from './services.tsx';      // What: Services Section Component. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
 import { SitFooCom   } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: Every page ends with the shared footer. How: This is rendered below main.
-import { useEffect   } from 'react';               // What: Use Effect. Why: Arriving with a section's hash has to scroll there once the sections render. How: This runs the arrival scroll after each render the hash changes.
+import { useEffect   } from 'react';               // What: Use Effect. Why: Arriving with a section's hash has to scroll there once the sections render. How: This runs the arrival scroll after each render in which the hash changes.
 import { useLocation } from 'react-router';        // What: Use Location. Why: The page needs the hash a section link arrived with. How: This reads the current location.
 import { useNavigate } from 'react-router';        // What: Use Navigate. Why: The hash should leave the address once the page has scrolled to it. How: This returns the router's navigate function.
 

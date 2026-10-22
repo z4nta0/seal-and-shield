@@ -6,9 +6,9 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { useEffect    } from 'react';       // What: Use Effect. Why: Focus has to move when the form gives way to the thank-you message and when it returns. How: This runs the focus move after each render the sent state changes.
+import { useEffect    } from 'react';       // What: Use Effect. Why: Focus has to move when the form gives way to the thank-you message and when it returns. How: This runs the focus move after each render in which the sent state changes.
 import { useRef       } from 'react';       // What: Use Ref. Why: The focus move needs the thank-you panel and the name field. How: This holds both elements, and whether focus should return to the form.
-import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 80ms per block.
+import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, and its blocks reveal 80ms apart.
 import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's fields and whether it was just sent. How: This holds both.
 
 // #endregion Imports
@@ -25,8 +25,8 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  * below the invitation at 900px wide and below. The form posts to Netlify
  * Forms as contactForm, which finds the form through the hidden copy in
  * index.html, so every field's name has to match that copy. Once sent, the
- * form gives way to a thank-you message for six seconds, which then sinks out
- * a little quicker than it rose in, as a failed request's error does when the
+ * form gives way to a thank-you message, which after six seconds sinks out a
+ * little quicker than it rose in, as a failed request's error does when the
  * visitor tries again. Focus moves to the thank-you message when it replaces
  * the form, which announces it, and back to the first field when the form
  * returns, while a failure's error appears in an alert region the form carries

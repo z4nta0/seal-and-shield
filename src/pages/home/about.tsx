@@ -7,7 +7,7 @@ import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The
 import lofWebUrl from './logo-full.webp';   // What: Logo-Full WebP URL. Why: The about section shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
-import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 100ms per block.
+import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, and its blocks reveal 100ms apart.
 
 // #endregion Imports
 
