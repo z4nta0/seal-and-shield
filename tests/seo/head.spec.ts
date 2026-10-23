@@ -27,10 +27,11 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * address, since the company has none to publish. The 404 page carries noindex
  * beside the home page's canonical and has its own title, and each page has
  * exactly one h1. The social preview tags are complete, use absolute
- * addresses, and match the page's title and description; the card they point
- * at is a 1,200x630 PNG under 300 KB; and the head links all six icons, each
- * served at the size its link promises. robots.txt lets every crawler in and
- * names the sitemap, which lists the home page alone.
+ * addresses, and match the page's title and description, and the theme color
+ * names the site's darkest navy; the card they point at is a 1,200x630 PNG
+ * under 300 KB; and the head links all six icons, each served at the size its
+ * link promises. robots.txt lets every crawler in and names the sitemap, which
+ * lists the home page alone.
  *
  * Sections:
  *  - Constants
@@ -225,7 +226,7 @@ test( 'the 404 page stays out of search results', async ( { page : curPagObj } )
 
 // #region Social Preview Checks
 
-test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full card that matches the page. How: This loads the home page and checks every social tag, its absolute URLs, the image type and size it gives, and its copy against the page's own title and description.
+test( 'the social preview tags are complete', async ( { page : curPagObj } ) => { // What: Social Tags Test. Why: A link shared anywhere should show a full card that matches the page. How: This loads the home page and checks every social tag, its absolute URLs, the image type and size it gives, its copy against the page's own title and description, and the theme color.
 
 
 	await curPagObj.goto( '/' ); // What: Home Load Call. Why: Link scrapers read the page every route shares. How: This opens the home page.

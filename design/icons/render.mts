@@ -4,7 +4,7 @@
 // #region Imports
 
 import { chromium      } from '@playwright/test'; // What: Chromium. Why: The icons are resized in a real browser's canvas, the one image tool every machine running the tests already has. How: This launches Playwright's Chromium.
-import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why: The source and output paths are resolved from this script's own location. How: This turns a file URL into a path.
+import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why: The output folder is resolved from this script's own location. How: This turns a file URL into a path.
 import { readFileSync  } from 'node:fs';          // What: Read File Sync. Why: The source mark is handed to the browser as data. How: This reads it from design/icons.
 import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why: Each finished icon is saved into public/. How: This writes its bytes.
 

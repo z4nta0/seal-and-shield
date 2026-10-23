@@ -424,7 +424,7 @@
 
 }
 
-.sucIcoSpa { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the white check in a blue circle about 59px across, popping it in once as the message appears. */
+.sucIcoSpa { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the white check in a blue circle about 59px across, popping it in once from about half size as the message appears. */
 
 
 	align-items     : center;
@@ -453,7 +453,7 @@
 
 
 }
-@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the request as sent. How: This grows the check from a little smaller to full size with a gentle overshoot, once. */
+@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the request as sent. How: This grows the check from about half size to full size with a gentle overshoot, once. */
 
 
 	from {
@@ -879,7 +879,7 @@
 
 
 }
-@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that cross-fades reads as a response to the press. How: This fades the new label up from transparent. */
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that fades in reads as a response to the press. How: This fades the new label up from transparent. */
 
 
 	from {
