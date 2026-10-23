@@ -511,7 +511,7 @@ const valSigFun = ( snaRecArr : SnaRecTyp[] ) : string => JSON.stringify( snaRec
  *
  * @example
  * ```ts
- * feeProFun(page, 'a', false) // => [ 'a "Home" looks the same pressed' ]
+ * feeProFun(page, 'a, button', false) // => [] when every control responds
  * ```
  *
 */
