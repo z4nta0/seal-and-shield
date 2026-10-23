@@ -95,24 +95,24 @@ const WID_LIS_ARR = [ 320, 360, 390, 414, 480, 520, 521, 580, 581, 768, 769, 900
  * layProFun = Layout Problems Function
  *
  * @summary
- * Runs inside the page and returns every layout problem it finds, each naming
- * the element by its tag and its module class's readable part. The page
- * scrolling sideways is one problem. A visible element counts as spilling past
- * an edge when it reaches more than a pixel beyond the viewport and no
- * ancestor clips its overflow. An element with text of its own spills its box
- * when its content is more than a pixel wider than it and it doesn't clip or
- * scroll that content; inline elements are skipped, since they have no box
- * width of their own. Two reachable controls (links and buttons that are
- * visible, in the tab order, and not inside inert content) overlap when their
- * boxes share more than a pixel of area and neither holds the other. A grid
- * (an element displayed as a grid, with two or more visible children in its
- * flow) leaves uneven rows when its rows hold different counts, unless the
- * last row is a single child centered in the grid at the others' width, as the
- * Card Grids rule allows. A grid's children are grouped into rows by where
- * they overlap vertically, so cards of different heights still share a row
- * however the grid aligns them, and the rows are read top to bottom, whatever
- * order the markup gives them. Passed to Playwright's evaluate, so it can't
- * read anything from this file.
+ * Runs inside the page and returns every layout problem it finds, each one
+ * about an element naming it by its tag and, where it has one, its module
+ * class's readable part. The page scrolling sideways is one problem. A visible
+ * element counts as spilling past an edge when it reaches more than a pixel
+ * beyond the viewport and no ancestor clips its overflow. An element with text
+ * of its own spills its box when its content is more than a pixel wider than
+ * it and it doesn't clip or scroll that content; inline elements are skipped,
+ * since they have no box width of their own. Two reachable controls (links and
+ * buttons that are visible, in the tab order, and not inside inert content)
+ * overlap when their boxes share more than a pixel of area and neither holds
+ * the other. A grid (an element displayed as a grid, with two or more visible
+ * children in its flow) leaves uneven rows when its rows hold different
+ * counts, unless the last row is a single child centered in the grid at the
+ * others' width, as the Card Grids rule allows. A grid's children are grouped
+ * into rows by where they overlap vertically, so cards of different heights
+ * still share a row however the grid aligns them, and the rows are read top to
+ * bottom, whatever order the markup gives them. Passed to Playwright's
+ * evaluate, so it can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

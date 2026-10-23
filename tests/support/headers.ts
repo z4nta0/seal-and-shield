@@ -17,8 +17,8 @@ import { readFileSync  } from 'node:fs';  // What: Read File Sync. Why: The head
  * Reads the security headers the site sends from public/_headers, the file
  * Netlify applies to every response once deployed, so the security checks test
  * the real policy rather than a copy of it. Neither the dev server nor vite
- * preview reads that file, so the checks that load pages apply these headers
- * to each response themselves.
+ * preview reads that file, so this reader is the only way the tests get its
+ * headers.
  *
  * Sections:
  *  - Constants

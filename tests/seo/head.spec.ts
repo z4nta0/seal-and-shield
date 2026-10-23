@@ -127,7 +127,7 @@ test( 'the home page names the city and the business', async ( { page : curPagOb
 
 
 
-test( 'the structured data matches what the page shows', async ( { page : curPagObj } ) => { // What: Structured Data Test. Why: Search engines may show the business's details from its JSON-LD, so every claim in it has to be true and visible on the page. How: This reads the JSON-LD, checks its type, name, URL, city, hours, and missing street against fixed values, its phone against every call link, and its service areas, by count and by name, against the area lookup, then checks that the page shows the phone, city, hours, founding year, legal name, and each area's tag.
+test( 'the structured data matches what the page shows', async ( { page : curPagObj } ) => { // What: Structured Data Test. Why: Search engines may show the business's details from its JSON-LD, so every claim in it has to be true and visible on the page. How: This reads the JSON-LD, checks its type, name, URL, city, hours, and missing street against fixed values, its phone against every call link, after checking the page has at least one, and its service areas, by count and by name, against the area lookup, then checks that the page shows the phone, city, hours, founding year, legal name, and each area's tag.
 
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The structured data lives on the home page. How: This loads the root path.

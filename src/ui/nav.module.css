@@ -14,9 +14,8 @@
  * links and then a contact block entering one after another. The shared
  * container styles the bar's inner row used to borrow from the global
  * stylesheet are copied onto its own class here. The bar's states are
- * attributes rather than classes, such as data-page-scroll-active on the
- * scrolled bar, data-section-link-active on the link for the section being
- * read, and data-mobile-menu-open on the open menu's parts.
+ * attributes rather than classes, such as the scrolled bar's, the active
+ * section link's, and the open menu's.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -91,7 +91,7 @@ test( 'the content security policy allows only the site itself', () => { // What
 
 
 
-test( 'the other hardening headers are set', () => { // What: Hardening Headers Test. Why: Each header closes a different gap: plain HTTP, sniffed file types, framing, referrer leaks, and unused browser features. How: This reads the policy and checks each header's value.
+test( 'the other hardening headers are set', () => { // What: Hardening Headers Test. Why: Each header closes a different gap: plain HTTP, sniffed file types, framing, referrer leaks, and unused browser features. How: This reads the policy, checks HSTS's age and subdomain flag and the nosniff and DENY values, and checks that a referrer policy and a permissions policy are set.
 
 
 	const heaAllObj = heaAllFun();                                    // What: Headers All Object. Why: Each header is looked up by name. How: This reads the /* block of public/_headers.
