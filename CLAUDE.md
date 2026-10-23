@@ -264,8 +264,9 @@ Contact sections only fade their content in once scrolled into view, and skips
 animations that repeat forever (the hero logo's `logRinDivLoopPulse`) when
 waiting for the page to settle.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
-  checks each state against WCAG 2.2 A and AA plus best practices
-  (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
+  checks each state, and the contact form's thank-you message and error
+  (sent against a faked Netlify answer), against WCAG 2.2 A and AA plus best
+  practices (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
   button names, a Tab walk (order, traps, focus on screen, uncovered, and
   visible), reflow at 320px, motion under reduced motion, and the contact
   form's announcements: its alert region waits in the page empty and gains

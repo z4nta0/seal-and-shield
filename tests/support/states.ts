@@ -302,7 +302,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_REC_ARR }; // What: Named Exports. Why: Both accessibility specs and the feedback and rendering specs check every state, and the responsive spec opens its own pages the same way. How: This exports the state list those four specs import and the opener all five import.
+export { opeStaFun, STA_REC_ARR, waiSetFun }; // What: Named Exports. Why: Both accessibility specs and the feedback and rendering specs check every state, the responsive spec opens its own pages the same way, and the axe spec settles the contact form's result states. How: This exports the state list those four specs import, the opener all five import, and the settle wait the axe spec uses.
 
 // #endregion Exports
 
