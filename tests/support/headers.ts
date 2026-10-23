@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { fileURLToPath } from 'node:url'; // What: File URL To Path. Why: The headers file sits two folders above this one, at the repo's public/. How: This turns that file's URL into a path to read.
+import { fileURLToPath } from 'node:url'; // What: File URL To Path. Why: The headers file sits in public/ at the repo root, two folders above this one. How: This turns that file's URL into a path to read.
 import { readFileSync  } from 'node:fs';  // What: Read File Sync. Why: The headers are read from the file Netlify serves them from. How: This reads public/_headers as text.
 
 // #endregion Imports

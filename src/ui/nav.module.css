@@ -10,11 +10,11 @@
  * transparent at the top of the page and solid once it scrolls or its menu
  * opens, with the brand, the section links and phone button on wide screens,
  * and on screens 768px wide or narrower the menu button and the panel it opens
- * below the bar over a dimmed page: the section links, entering one after
- * another, and a contact block with its label, the call and quote buttons, the
- * hours, and the service area. The shared container styles the bar's inner row
- * used to borrow from the global stylesheet are copied onto its own class
- * here. The bar's states are attributes rather than classes:
+ * below the bar over a dimmed page: the section links and then a contact block
+ * entering one after another, the block holding its label, the call and quote
+ * buttons, the hours, and the service area. The shared container styles the
+ * bar's inner row used to borrow from the global stylesheet are copied onto
+ * its own class here. The bar's states are attributes rather than classes:
  * data-page-scroll-active on the bar, data-section-link-active on the bar's
  * and the menu's links for the section being read, aria-expanded on the menu
  * button, and data-mobile-menu-open on the dimmer, the bar, and the panel.

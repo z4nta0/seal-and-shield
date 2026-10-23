@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';      // What: Expect. Why: Each state passes only when every control responds. How: This asserts each problem list is empty.
+import { expect      } from '@playwright/test';      // What: Expect. Why: Each state passes only when every control responds. How: This asserts on what each check reads, most often that its problem list is empty, and waits for content a check needs.
 import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The contact form's error, and the phone link inside it, only show once a request fails. How: This answers the form's posts in the browser with a server error.
 import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each check opens and settles its state first. How: This loads it and waits for it.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is checked. How: This lists them.

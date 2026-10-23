@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only when the page breaks no rule of the policy. How: This asserts on the violations and links collected.
+import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only when the policy is enforced and the page breaks none of its rules. How: This asserts on what each check collects from the page.
 import { heaAllFun   } from '../support/headers.ts'; // What: Headers All Function. Why: The pages are loaded under the policy Netlify really sends. How: This reads the /* block of public/_headers.
 import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each state is opened the way every suite opens it. How: This loads the page, scrolls it through, and runs the state's action.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: The policy has to hold in every state the suites visit. How: This is the list of states to load.

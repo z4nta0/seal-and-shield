@@ -6,7 +6,7 @@
 import AxeBuilder from '@axe-core/playwright'; // What: Axe Builder. Why: axe-core finds the mechanical accessibility failures, such as low contrast, missing names, and misused ARIA. How: This runs its scan against a Playwright page.
 
 
-import { expect      } from '@playwright/test';      // What: Expect. Why: A state passes only with no violations. How: This asserts the violation list is empty.
+import { expect      } from '@playwright/test';      // What: Expect. Why: A state passes only with no violations. How: This asserts the violation list is empty, and waits for content a scan needs.
 import { fakNetFun   } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form's thank-you message and its error only show once Netlify answers a send. How: This answers the form's posts in the browser with a chosen status.
 import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each state has to be opened and settled before it's scanned. How: This loads it and waits for it.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: Every page state is scanned. How: This lists them.
