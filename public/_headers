@@ -2,11 +2,10 @@
 #
 # @summary
 # Hardening headers applied to every response. The site has no backend,
-# accounts, or third-party code: every script, style, font, and image is
-# self-hosted, and its only network write is the contact form's Netlify
-# Forms POST (src/pages/home/contact.tsx), which goes to this same origin.
-# That lets the Content-Security-Policy be strict rather than needing broad
-# allowances.
+# accounts, or third-party code: everything it loads is self-hosted, and its
+# only network write is the contact form's Netlify Forms POST
+# (src/pages/home/contact.tsx), which goes to this same origin. That lets the
+# Content-Security-Policy be strict rather than needing broad allowances.
 #
 # default-src 'self' is the fallback every unlisted fetch directive inherits,
 # such as the one for fonts, so those need no lines of their own. The
@@ -26,7 +25,11 @@
 #
 # @author z4nta0 <https://github.com/z4nta0>
 
-# What: Security Headers Rule. Why: Every response should refuse framing, sniffing, plain HTTP, unused browser features, and anything loaded from another origin. How: This applies the Content-Security-Policy, the permissions and referrer policies, HSTS, a nosniff content type, and a deny on framing to every path.
+# What: Security Headers Rule. Why: Every response should refuse framing,
+# sniffing, plain HTTP, referrer leaks to other sites, unused browser features,
+# and anything loaded from another origin. How: This applies the
+# Content-Security-Policy, the permissions and referrer policies, HSTS, a
+# nosniff content type, and a deny on framing to every path.
 /*
 	Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none'; object-src 'none'; script-src 'self'; style-src 'self'
 	Permissions-Policy: accelerometer=(), autoplay=(), browsing-topics=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), hid=(), idle-detection=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), usb=(), xr-spatial-tracking=()

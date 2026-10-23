@@ -135,7 +135,7 @@ function cliBloFun () : void {
  *
  * @param curPagObj - Current Page Object: The page to collect from.
  * @param conSelStr - Control Selector String: The elements to collect, such as
- * every form field.
+ *                    every form field.
  *
  * @returns A promise that resolves with every reachable control.
  * @see {@link conHanArr}

@@ -99,7 +99,7 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 		rules : { // What: Rules. Why: The plugin's recommended set is the standard hooks checks, but four of its rules only judge whether a component suits the React Compiler, which this site doesn't use. How: This spreads the recommended set in, then turns those four off.
 
 
-			...rehPluObj.configs.recommended.rules, // What: Recommended Rules Spread. Why: These are the standard hooks checks, rules-of-hooks and exhaustive-deps among them. How: This spreads the plugin's recommended set in first, so the overrides below win.
+			...rehPluObj.configs.recommended.rules, // What: Recommended Rules Spread. Why: These are the standard hooks checks, such as exhaustive-deps. How: This spreads the plugin's recommended set in first, so the overrides below win.
 
 			'react-hooks/preserve-manual-memoization' : 'off', // What: Preserve Manual Memoization Rule. Why: It only reports where the compiler would skip a component. How: This turns it off.
 			'react-hooks/purity'                      : 'off', // What: Purity Rule. Why: It flags impure calls the compiler can't place, including ones that only run in event handlers. How: This turns it off.

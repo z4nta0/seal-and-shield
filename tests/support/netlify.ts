@@ -46,7 +46,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The fake answe
  *
  * @param curPagObj - Current Page Object: The page whose posts to answer.
  * @param staCodNum - Status Code Number: The HTTP status Netlify should
- *                    seem to answer with, e.g. 200 or 500.
+ *                    seem to answer with, such as 500.
  *
  * @returns A promise that resolves with an object whose couNum field counts
  *          the posts answered so far.
