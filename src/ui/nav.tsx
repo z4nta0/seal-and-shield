@@ -7,12 +7,13 @@ import cssModObj from './nav.module.css';           // What: CSS Module Object. 
 import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The bar's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
-import { SEC_LIN_ARR  } from './sections.ts';     // What: Section Link Array. Why: The bar and the mobile menu link to the home page's sections, and the bar tracks which one is being read. How: This is the one list of sections, in page order, that the links and the scroll walk read.
-import { useEffect    } from 'react';             // What: Use Effect. Why: The bar listens to the page's scroll position, and the open menu changes the page around it. How: This registers the scroll and menu listeners and removes them again.
-import { useLocation  } from 'react-router';      // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
-import { useRef       } from 'react';             // What: Use Ref. Why: The open menu needs the bar, the dimmer, and the menu button. How: This creates the refs those elements attach.
-import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, and a Ctrl, Cmd, or middle click should open them in a new tab. How: This returns secCliFun, the shared click handler, which reports whether it handled the click.
-import { useState     } from 'react';             // What: Use State. Why: The bar tracks its scrolled look, the active section, and whether the menu is open. How: This holds each of the three.
+import { SEC_LIN_ARR  } from './sections.ts';      // What: Section Link Array. Why: The bar and the mobile menu link to the home page's sections, and the bar tracks which one is being read. How: This is the one list of sections, in page order, that the links and the scroll walk read.
+import { tokPxlFun    } from '../utils/rhythm.ts'; // What: Token Pixel Function. Why: The active section's line has to clear the bar, which the stylesheet sizes. How: This reads the bar's height and a spacing step from their tokens in pixels.
+import { useEffect    } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position, and the open menu changes the page around it. How: This registers the scroll and menu listeners and removes them again.
+import { useLocation  } from 'react-router';       // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
+import { useRef       } from 'react';              // What: Use Ref. Why: The open menu needs the bar, the dimmer, and the menu button. How: This creates the refs those elements attach.
+import { useSecCliFun } from './section-link.ts';  // What: Use Section Click Function. Why: Section links have to work from every page, and a Ctrl, Cmd, or middle click should open them in a new tab. How: This returns secCliFun, the shared click handler, which reports whether it handled the click.
+import { useState     } from 'react';              // What: Use State. Why: The bar tracks its scrolled look, the active section, and whether the menu is open. How: This holds each of the three.
 
 // #endregion Imports
 
@@ -55,18 +56,18 @@ import { useState     } from 'react';             // What: Use State. Why: The b
  * that row hides and a menu button takes its place. A scroll listener gives
  * the bar its solid scrolled look once the page moves more than 40px, and
  * marks the link of the section the visitor is reading as active on the home
- * page: the lowest section whose top has scrolled to within 120px of the top
- * of the screen (a margin that leaves room for the bar itself), or past it.
- * The menu button toggles the mobile menu, which drops down below the bar over
- * a dimmed page: its links enter one after another and end with a contact
- * block, and while it's open the page around the bar is inert, a tap on the
- * dimmed page or Escape closes it, and widening the screen past 768px closes
- * it too. The closed menu is inert, so its links stay out of the focus order
- * and the accessibility tree. Every section link, including the brand, goes
- * through navSecFun, which reaches the section from any page and closes the
- * menu, while a Ctrl, Cmd, Shift, or Alt click is left to the browser and
- * leaves the menu as it was, and a middle click, which the browser sends as
- * auxclick, never reaches navSecFun at all.
+ * page: the lowest section whose top has scrolled to within the bar's height
+ * plus a spacing step of the top of the screen, or past it. The menu button
+ * toggles the mobile menu, which drops down below the bar over a dimmed page:
+ * its links enter one after another and end with a contact block, and while
+ * it's open the page around the bar is inert, a tap on the dimmed page or
+ * Escape closes it, and widening the screen past 768px closes it too. The
+ * closed menu is inert, so its links stay out of the focus order and the
+ * accessibility tree. Every section link, including the brand, goes through
+ * navSecFun, which reaches the section from any page and closes the menu,
+ * while a Ctrl, Cmd, Shift, or Alt click is left to the browser and leaves the
+ * menu as it was, and a middle click, which the browser sends as auxclick,
+ * never reaches navSecFun at all.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -97,6 +98,9 @@ function NavBarCom () : React.JSX.Element {
 	useEffect( () => { // What: Scroll Listener Effect. Why: The bar's look and active link follow the scroll position. How: This registers the scroll handler once and removes it when the bar unmounts.
 
 
+		const actOffNum = tokPxlFun( '--nav-bar-hei' ) + tokPxlFun( '--spa-ver-p03' ); // What: Active Offset Number. Why: A section counts as being read once its top has passed a line just below the bar. How: This adds a spacing step to the bar's height, both read from their tokens, so the line follows the bar if it changes. // Navigation Bar Height ~= 83.483px, Spacing Vertical Base Plus 3 ~= 33.876px
+
+
 		// #region onWinScrFun
 
 		/**
@@ -104,11 +108,11 @@ function NavBarCom () : React.JSX.Element {
 		 *
 		 * @summary
 		 * Runs on every scroll. It sets the bar's scrolled look once the page
-		 * has moved more than 40px, then walks the sections from the bottom
-		 * of the page up and marks the first one whose top has scrolled to
-		 * within 120px of the top of the screen, or past it, as active, so
-		 * the active link changes as a section reaches the space just below
-		 * the bar.
+		 * has moved more than 40px, then walks the sections from the bottom of
+		 * the page up and marks the first one whose top has scrolled to within
+		 * the bar's height plus a spacing step of the top of the screen, or
+		 * past it, as active, so the active link changes as a section reaches
+		 * the space just below the bar.
 		 *
 		 * @author z4nta0 <https://github.com/z4nta0>
 		 *
@@ -135,7 +139,7 @@ function NavBarCom () : React.JSX.Element {
 				const secCurEle = document.getElementById( secRecObj.ideStr ); // What: Section Current Element. Why: The section's position decides whether it's active. How: This looks the section up by its id.
 
 
-				if ( secCurEle && window.scrollY >= secCurEle.offsetTop - 120 ) { // What: Section Reached Check. Why: A section counts as being read once its top nears the top of the screen. How: This allows 120px for the bar above it.
+				if ( secCurEle && window.scrollY >= secCurEle.offsetTop - actOffNum ) { // What: Section Reached Check. Why: A section counts as being read once its top nears the top of the screen. How: This compares the section's top against the line actOffNum sets just below the bar.
 
 
 					setActSecStr( secRecObj.ideStr ); // What: Active Section Update. Why: Its link should be marked active. How: This stores the section's id.
