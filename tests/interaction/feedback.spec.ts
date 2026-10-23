@@ -252,7 +252,8 @@ async function errOpeFun ( curPagObj : Page ) : Promise< void > {
  * @param snaArgArr - Snapshot Argument Array: The property names to probe,
  *                    then whether to add the element's ::after layer.
  *
- * @returns One record per element, the element itself first.
+ * @returns One record per element, the element itself first, then its ::after
+ *          layer when asked.
  * @see {@link snaRecArr}
  *
  * @example
@@ -370,7 +371,7 @@ function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], boolean ] ) : 
  *                    ::after layer.
  *
  * @returns A promise that resolves with one record per element, the element
- *          itself first.
+ *          itself first, then its ::after layer when asked.
  *
  * @example
  * ```ts
