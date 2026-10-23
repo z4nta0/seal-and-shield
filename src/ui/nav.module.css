@@ -612,7 +612,7 @@
 
 
 }
-.menLinAnc::after { /* What: Menu Link Anchor Active Dot. Why: The menu marks the section being read, as the bar's links do on wide screens. How: This holds a small light blue dot at the row's end, hidden until its section is active, when it pops in, and shrinking it away on the accelerating curve as it leaves. */
+.menLinAnc::after { /* What: Menu Link Anchor Active Dot. Why: The menu marks the section being read, as the bar's links do on wide screens. How: This holds a small light blue dot at the row's end, hidden until its section is active, when it pops in, and shrinks it away on the accelerating curve as it leaves. */
 
 
 	background    : var( --acc-lig-col );                                                                                   /* Accent Light Color ~= #4488f6 */

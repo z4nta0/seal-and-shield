@@ -55,7 +55,7 @@ npm run preview
 src/
 ├── assets/            Images and fonts shared by 2+ pages (logo-simple.webp, fonts/)
 ├── pages/
-│   ├── home/          Home page and its sections (hero, services, about, contact), each with its own .module.css, plus reveal.ts and logo-full.webp
+│   ├── home/          Home page and its sections (the hero, Services, About, and Contact), each with its own .module.css, plus reveal.ts and logo-full.webp
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
 ├── ui/                Shared components (nav, footer), each with its own .module.css, section-link.ts (section links that work from any page), and sections.ts (the one list of the home page's sections)
 ├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, the shared focus ring, and the shared scroll-reveal attributes)
@@ -81,7 +81,7 @@ design/                Source artwork, not served
 ## Design notes
 
 - **Type pairing:** Barlow Condensed for headings, labels, and buttons, with Lato for body text, both self-hosted (`src/assets/fonts/`, declared in `src/styles/fonts.css`), so a visit makes no third-party requests.
-- **Palette:** Deep navy (`#0f1e45`, with a darker `#080f24` for the bar, hero, Contact section, and footer), a strong blue (`#1e56c8`) for buttons and labels on light sections, a lighter blue (`#4488f6`) for accents on dark sections, and an off-white (`#f4f6fa`) behind the services.
+- **Palette:** Deep navy (`#0f1e45`, with a darker `#080f24` for the bar, hero, Contact section, and footer), a strong blue (`#1e56c8`) for buttons and labels on light sections, a lighter blue (`#4488f6`) for accents on dark sections, and an off-white (`#f4f6fa`) behind the Services section.
 - **Logo usage:** The **full logo** (`src/pages/home/logo-full.webp`) anchors the hero and sits above the company details in the About section. The **simple mark** (`src/assets/logo-simple.webp`) is used in the nav bar and the footer.
 - **Motion:** The hero fades in on load, the other sections fade in as they scroll into view, and the hero logo's ring pulses. Links and buttons respond to hover, press, and keyboard focus: buttons shift color, lift a pixel (the menu toggle only shifts color), and press in, text links shift color and dim slightly when pressed, and a focus ring eases in on all of them. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion, leaving only the instant color and position changes.
 

@@ -303,15 +303,15 @@ for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Modified Click 
 
 
 
-for ( const secIdeStr of [ 'home', 'services', 'about', 'contact' ] ) { // What: Footer Link Loop. Why: Each of the footer's section links is the way onward from the bottom of the page. How: This declares one test per section id, whose capitalized form is the link's label.
+for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'home' ], [ 'Services', 'services' ], [ 'About', 'about' ], [ 'Contact', 'contact' ] ] ) { // What: Footer Link Loop. Why: Each of the footer's section links is the way onward from the bottom of the page. How: This declares one test per link, pairing its label with its section's id.
 
 
-	test( `the footer's ${ secIdeStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Footer Link Test. Why: A footer link has to take the visitor to its section. How: This clicks the link from the bottom of the page and checks where the visitor lands.
+	test( `the footer's ${ linLabStr } link scrolls to its section`, async ( { page : curPagObj } ) => { // What: Footer Link Test. Why: A footer link has to take the visitor to its section. How: This clicks the link from the bottom of the page and checks where the visitor lands.
 
 
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The footer is checked on the home page first. How: This opens it at desktop size.
 
-		await curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) } ).click(); // What: Footer Link Click Call. Why: This is the action under test. How: This clicks the footer link labelled with the section id capitalized, which scrolls the page down to reach it.
+		await curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : linLabStr } ).click(); // What: Footer Link Click Call. Why: This is the action under test. How: This clicks the footer link labelled by the loop's label, which scrolls the page down to reach it.
 
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 

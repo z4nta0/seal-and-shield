@@ -16,7 +16,7 @@
 # clarity (script-src, style-src). Unlike ease-my-life, style-src needs no
 # 'unsafe-inline': the build ships no inline styles, and React sets its few
 # dynamic styles through the DOM, which the policy doesn't restrict. The
-# structured data script the SEO pass adds is a data block that never runs,
+# structured data script in index.html is a data block that never runs,
 # so script-src doesn't need to allow it either.
 #
 # Strict-Transport-Security keeps browsers on HTTPS for two years across

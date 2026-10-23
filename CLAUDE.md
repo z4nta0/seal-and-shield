@@ -213,7 +213,7 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      cards 3px, while the bar's menu toggle only changes color); buttons press
      in to 0.97 and text links dim. Focus rings
      ease in from a zero-width outline set once in `styles.css`, drawn in
-     `--foc-rin-col`, which the dark bar, hero, About card, contact
+     `--foc-rin-col`, which the dark bar, hero, About card, Contact
      section, footer, and 404 page set to the light accent for contrast.
      The contact form's success panel fades up with its check popping in
      once, its error fades in, and the submit button's label fades to
