@@ -341,7 +341,6 @@ for ( const layCasObj of LAY_CAS_ARR ) { // What: Case Loop. Why: The page and t
 
 			} );
 
-
 			expect( await curPagObj.evaluate( layProFun ) ).toEqual( [] ); // What: No Layout Problems Assertion. Why: The width passes only with nothing scrolling sideways, spilling, or overlapping, and no grid leaving uneven rows. How: This compares the problems with an empty list, so a failure prints each one.
 
 

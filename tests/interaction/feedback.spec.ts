@@ -642,8 +642,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await fieCurObj.focus(); // What: Field Focus Call. Why: The keyboard steps start from the field itself. How: This focuses it so Shift+Tab steps off it.
 
 		await curPagObj.keyboard.press( 'Shift+Tab' ); // What: Back Tab Press Call. Why: Focus has to arrive by keyboard, the way a keyboard user reaches the field. How: This steps focus back to the stop before the field.
-
-		await curPagObj.keyboard.press( 'Tab' ); // What: Tab Press Call. Why: The field is reached by keyboard. How: This steps focus forward onto the field again.
+		await curPagObj.keyboard.press( 'Tab' );       // What: Tab Press Call. Why: The field is reached by keyboard. How: This steps focus forward onto the field again.
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Focus Settle Wait. Why: The focused look is read once it has eased in. How: This pauses for the settle time.
 
