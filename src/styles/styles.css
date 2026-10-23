@@ -31,7 +31,7 @@
 
 /* #region Tokens */
 
-:root { /* What: Root Tokens. Why: Every module reads the site's core design numbers, colors, fonts, type and spacing scales, layout width, and motion scales from one place. How: This defines them as custom properties on the root element, grouped into sections. */
+:root { /* What: Root Tokens. Why: Every module reads the site's design tokens from one place. How: This defines them as custom properties on the root element, grouped into sections, the core design numbers first and the rest in alphabetical order. */
 
 
 	/* #region Core Design Numbers */

@@ -223,8 +223,9 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      old 1,210px `public/favicon.png`. A changed card needs a new filename,
      since apps cache previews: on 2026-10-23 it was rebuilt from the
      re-encoded full logo as `og-image-2.png`, so the next change takes
-     `og-image-3.png`. The user checked the live card with a preview checker on
-     2026-10-10, and it came back with no problems.
+     `og-image-3.png`. The user checked the original live card (`og-image.png`)
+     with a preview checker on 2026-10-10, and it came back with no problems;
+     `og-image-2.png` gets the same check after its deploy.
    - **Interaction feedback: done 2026-10-09.** Every link and button changes
      color on hover, and the buttons also lift a pixel (the service cards 3px,
      while the bar's menu toggle only changes color); buttons press in to 0.97
