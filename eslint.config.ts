@@ -43,7 +43,7 @@ import tyeEslObj from 'typescript-eslint';         // What: TypeScript ESLint Ob
 
 // #region Constants
 
-const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the build-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the hooks config for .tsx files and src/ .ts files.
+const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the generated-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the hooks config for .tsx files and src/ .ts files.
 
 
 	{ ignores : [ 'dist/**', 'tests/output/**' ] }, // What: Ignores Object. Why: The build output and the test suites' reports are generated, not hand-written, so their lint results mean nothing. How: This global ignores entry skips both folders for every config below; one glob each, since braces break ESLint's matching here.
