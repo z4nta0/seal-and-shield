@@ -5,10 +5,11 @@
  * sections.ts = Sections
  *
  * @summary
- * The home page's sections in page order, the one list every part of the
- * site that names them reads: the bar's links, the mobile menu's links, the
- * bar's tracking of the section being read, and the footer's links. Adding,
- * renaming, or moving a section means changing this list alone.
+ * The home page's sections in page order, each row pairing a section's id with
+ * the label its links show, the list the site's section links and the bar's
+ * tracking of the section being read are built from. A section's id is also
+ * set on its own component, and a few buttons name their section directly, so
+ * a renamed id changes in those places too.
  *
  * Sections:
  *  - Constants
