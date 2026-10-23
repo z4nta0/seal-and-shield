@@ -18,8 +18,10 @@ treatment. The `author` meta names the business itself.
   the legal name fits, such as the footer's copyright line and the odd
   sentence of copy. Applied 2026-10-08: the bar, About heading, Services
   intro, and Contact copy say "Seal and Shield"; "LLC" stays in the footer's
-  brand name and copyright line, the About story's founding sentence, and
-  the full logo's alt text (the image itself reads "LLC"); the bar's and
+  brand name and copyright line, the About story's founding sentence, the
+  full logo's alt text (the image itself reads "LLC"), and the bar's brand,
+  which sets a small "LLC" beneath the name like the logo's own lockup
+  (recorded 2026-10-22); the bar's and
   footer's small logos have empty alt text, since the brand name sits right
   beside them.
 - **No street address** (decided 2026-10-09): the company has no business
