@@ -114,7 +114,6 @@
 	position   : absolute;
 	right      : calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Horizontal Base Plus 3 ~= -33.876px */
 	top        : calc( var( --spa-ver-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= -33.876px */
-	z-index    : 0;
 
 
 }
@@ -125,7 +124,6 @@
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 4 ~= 44.876px, Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	position : relative;
 	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
-	z-index  : 1;
 
 
 }
@@ -146,7 +144,6 @@
 	padding        : var( --spa-ver-p02 ) clamp( var( --spa-hor-p01 ), var( --hor-rhy-014 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 1 ~= 19.304px, Horizontal Rhythm 14 ~= 49.625px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
 	position       : relative;
 	width          : 100%;
-	z-index        : 1;
 
 
 }

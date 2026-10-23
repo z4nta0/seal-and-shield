@@ -34,7 +34,7 @@
 	position   : fixed;
 	transition : opacity var( --dur-tra-p02 ) var( --mot-acc-eas ), visibility 0s linear var( --dur-tra-p02 ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */ /* What: Closing Transition. Why: The dimmer should finish fading before it stops catching taps. How: This fades it out with the accelerating curve and hides it only once the fade is done. */
 	visibility : hidden;
-	z-index    : 2;                                                                                            /* What: Scrim Layer. Why: The dimmer has to cover the hero, about, and contact layers raised to 1, while the bar paints above it. How: This matches the bar's 2, and the bar wins by coming after it in the page. */
+	z-index    : 1;                                                                                            /* What: Scrim Layer. Why: The dimmer comes before the page's content, which would otherwise paint over it, while the bar paints above it. How: This lifts it one level above the content, the same level as the bar, which wins by coming after it in the page. */
 
 
 }
@@ -91,7 +91,7 @@
 	right      : 0;
 	top        : 0;
 	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), padding var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */ /* What: Padding Transition. Why: The bar really gets shorter as it tightens, and a scale transform would squash its logo and links instead. How: This eases the padding itself, a layout property, since no compositor version produces the same effect. */
-	z-index    : 2;                      /* What: Bar Layer. Why: The bar has to pass over the hero, about, and contact layers raised to 1 as the page scrolls beneath it. How: This puts it one level above them, the lowest value that clears them. */
+	z-index    : 1;                      /* What: Bar Layer. Why: The bar comes before the page's content, whose positioned layers would otherwise paint over it as the page scrolls beneath it. How: This lifts it one level above them, the lowest value that clears them. */
 
 
 }
