@@ -30,11 +30,12 @@ import { useState     } from 'react';              // What: Use State. Why: The 
  * block with ways to reach the company, such as the call and quote buttons and
  * the hours. The bar takes on a solid background once the page scrolls past
  * its top or the menu opens, and the link for whichever section the visitor is
- * reading is marked active on the home page. Every section link closes the
- * menu and reaches its section through section-link.ts: smoothly in place on
- * the home page, or by navigating home from any other page. The bar opens with
- * a skip link, waiting above the screen until it's focused, that moves focus
- * past the bar to the page's main content.
+ * reading is marked active on the home page. A plain click on any section link
+ * closes the menu and reaches its section through section-link.ts: smoothly in
+ * place on the home page, or by navigating home from any other page, while a
+ * modified click is left to the browser and leaves the menu open. The bar
+ * opens with a skip link, waiting above the screen until it's focused, that
+ * moves focus past the bar to the page's main content.
  *
  * Sections:
  *  - Components
