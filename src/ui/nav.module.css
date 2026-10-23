@@ -24,7 +24,7 @@
 
 
 
-.navSkiAnc { /* What: Navigation Skip Anchor. Why: A keyboard user should be able to jump past the bar, and the link shouldn't show until it's needed. How: This sets it as a solid blue button fixed just above the screen's top edge, at the page's side gutter, leaving on the accelerating curve, and eases its hover fill and color, press, and focus ring. */
+.navSkiAnc { /* What: Navigation Skip Anchor. Why: A keyboard user should be able to jump past the bar, and the link shouldn't show until it's needed. How: This sets it as a solid blue button fixed just above the screen's top edge, at the page's side gutter, leaving on the accelerating curve, and eases its hover fill, color, and lift, press, and focus ring. */
 
 
 	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Skip Link. Why: The main blue ring falls under 3:1 against the button and the bar's navy behind it. How: This hands the link the light accent, the same ring the bar's own controls draw. */

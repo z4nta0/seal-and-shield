@@ -5,7 +5,7 @@
 
 import reaPluObj from 'eslint-plugin-react';       // What: React Plugin Object. Why: An undefined component in a JSX tag should fail lint. How: This registers the plugin behind react/jsx-no-undef.
 import rehPluObj from 'eslint-plugin-react-hooks'; // What: React-Hooks Plugin Object. Why: Hook calls follow rules plain JS linting can't check. How: Its recommended rules are spread into the hooks config.
-import tyeEslObj from 'typescript-eslint';         // What: TypeScript ESLint Object. Why: ESLint's default parser can't read TypeScript's type annotations. How: Its recommended rules are spread into the config, and its parser reads the TypeScript in the configs scoped to the site's files.
+import tyeEslObj from 'typescript-eslint';         // What: TypeScript ESLint Object. Why: ESLint's default parser can't read TypeScript's type annotations. How: Its recommended configs bring in its parser and recommended rules for every file, and the configs scoped to the site's files set its parser again beside their own options.
 
 // #endregion Imports
 

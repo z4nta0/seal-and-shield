@@ -71,7 +71,7 @@ test.skip( ( { browserName : broNamStr } ) => broNamStr !== 'chromium', 'These c
 
 // #region Headers Checks
 
-test( 'the content security policy allows only the site itself', () => { // What: Content Security Policy Test. Why: A strict policy stops injected or third-party script from running, the main defense against cross-site scripting. How: This reads the policy and checks each directive it depends on.
+test( 'the content security policy allows only the site itself', () => { // What: Content Security Policy Test. Why: A strict policy stops injected or third-party script from running, the main defense against cross-site scripting. How: This reads the policy, checks each directive it depends on, and checks that it never allows inline or evaluated code or every origin.
 
 
 	const cspValStr = heaAllFun()[ 'content-security-policy' ] ?? ''; // What: Content-Security-Policy Value String. Why: Each directive is checked in the policy's own text. How: This reads the header, or an empty string if it's missing.

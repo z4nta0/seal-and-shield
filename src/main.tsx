@@ -9,7 +9,7 @@ import { createRoot    } from 'react-dom/client'; // What: Create Root. Why: Thi
 import { StrictMode    } from 'react';            // What: Strict Mode. Why: Development builds should flag unsafe patterns early. How: This wraps the whole tree below.
 
 
-import './styles/fonts.css';  // What: Fonts Stylesheet Import. Why: The site's own stylesheets assume the self-hosted font faces are already registered. How: This is imported first, purely for its side effect, so its @font-face rules register before styles.css is parsed.
+import './styles/fonts.css';  // What: Fonts Stylesheet Import. Why: The site's own stylesheets assume the self-hosted font faces are already registered. How: This is imported before styles.css, purely for its side effect, so its @font-face rules register before styles.css is parsed.
 import './styles/styles.css'; // What: Styles Stylesheet Import. Why: This is the site's global stylesheet, holding the design tokens and the styles no single component owns. How: This is imported purely for its side effect.
 
 // #endregion Imports
