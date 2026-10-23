@@ -75,7 +75,7 @@ tests/
 design/                Source artwork, not served
 ├── icons/             mark.png and render.mts, which builds the favicon set in public/ (npm run icons)
 ├── logos/             logo-full.png, logo-simple.png, and render.mts, which builds both WebP logos in src/ (npm run logos)
-└── og-image/          card.html and render.mts, which builds public/og-image.png (npm run og-image)
+└── og-image/          card.html and render.mts, which builds public/og-image-2.png (npm run og-image)
 ```
 
 ## Design notes

@@ -213,17 +213,18 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
    - **Security headers, WebP logos, and SEO: done 2026-10-09**, as recorded
      under "Kind of site" and "Accessibility pass".
    - **Social previews: done 2026-10-09.** The 1,200x630 card
-     (`public/og-image.png`, 270 KB) shows the logo over "Commercial
-     Roofing" and "Lawrence, KS" on the hero's navy, grid, and glow, inside
-     the center square; it's rendered by `npm run og-image` from
-     `design/og-image/card.html`, which reads the site's own fonts and
-     tokens. The Open Graph and Twitter tags match the page's title and
-     description, and the favicon set (ICO, 16 to 512px PNGs, and a 180px
-     Apple touch icon on white) is rendered by `npm run icons` from
-     `design/icons/mark.png`, the old 1,210px `public/favicon.png`. A changed
-     card needs a new filename (`og-image-2.png`), since apps cache previews.
-     The user checked the live card with a preview checker on 2026-10-10,
-     and it came back with no problems.
+     (`public/og-image-2.png` since 2026-10-23, 270 KB) shows the logo over
+     "Commercial Roofing" and "Lawrence, KS" on the hero's navy, grid, and
+     glow, inside the center square; it's rendered by `npm run og-image` from
+     `design/og-image/card.html`, which reads the site's own fonts and tokens.
+     The Open Graph and Twitter tags match the page's title and description,
+     and the favicon set (ICO, 16 to 512px PNGs, and a 180px Apple touch icon
+     on white) is rendered by `npm run icons` from `design/icons/mark.png`, the
+     old 1,210px `public/favicon.png`. A changed card needs a new filename,
+     since apps cache previews: on 2026-10-23 it was rebuilt from the
+     re-encoded full logo as `og-image-2.png`, so the next change takes
+     `og-image-3.png`. The user checked the live card with a preview checker on
+     2026-10-10, and it came back with no problems.
    - **Interaction feedback: done 2026-10-09.** Every link and button
      changes color on hover, and the buttons also lift a pixel (the service
      cards 3px, while the bar's menu toggle only changes color); buttons press
