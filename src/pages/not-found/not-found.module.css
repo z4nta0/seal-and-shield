@@ -32,7 +32,7 @@
 
 /* #region nofConMai */
 
-.nofConMai { /* What: Not-Found Content Main. Why: The message should sit centered on a dark band like the hero's, clear of the fixed bar. How: This grows to fill the space above the footer, centers its column, and pads along the gutters and below the fixed bar, clearing the bar's own height plus a full spacing step so the gap holds on short screens. */
+.nofConMai { /* What: Not-Found Content Main. Why: The message should sit centered on a dark band like the hero's, clear of the fixed bar. How: This grows to fill the space above the footer, centers its column, and pads along the gutters, above the footer, and below the fixed bar, clearing the bar's own height plus a full spacing step so the gap holds on short screens. */
 
 
 	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands the lighter blue ring to every control inside. */

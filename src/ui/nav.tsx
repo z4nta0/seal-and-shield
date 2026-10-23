@@ -10,7 +10,7 @@ import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP UR
 import { modCliFun    } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl, Cmd, Shift, or Alt click on the skip link should open it the browser's own way. How: The skip link's click handler asks it before cancelling the default.
 import { SEC_LIN_ARR  } from './sections.ts';      // What: Section Link Array. Why: The bar and the mobile menu link to the home page's sections, and the bar tracks which one is being read. How: This is the one list of sections, in page order, that the links and the scroll walk read.
 import { tokPxlFun    } from '../utils/rhythm.ts'; // What: Token Pixel Function. Why: The active section's line has to clear the bar, which the stylesheet sizes. How: This reads the bar's height and a spacing step from their tokens in pixels.
-import { useEffect    } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position, and the open menu changes the page around it. How: This registers the scroll and menu listeners and removes them again.
+import { useEffect    } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position, and the open menu changes the page around it. How: This registers the scroll and menu listeners and the open menu's inert marks, and removes them again.
 import { useLocation  } from 'react-router';       // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
 import { useRef       } from 'react';              // What: Use Ref. Why: The open menu needs the bar, the dimmer, and the menu button. How: This creates the refs those elements attach.
 import { useSecCliFun } from './section-link.ts';  // What: Use Section Click Function. Why: Section links have to work from every page, and a Ctrl, Cmd, or middle click should open them in a new tab. How: This returns secCliFun, the shared click handler, which reports whether it handled the click.
@@ -233,7 +233,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 
-	useEffect( () => { // What: Modal Menu Effect. Why: The open menu sits over a dimmed page, so keyboard and screen reader users should stay in the bar and menu until it closes. How: While the menu is open, this makes the bar's siblings inert, closes on Escape, and closes when the menu button disappears.
+	useEffect( () => { // What: Modal Menu Effect. Why: The open menu sits over a dimmed page, so keyboard and screen reader users should stay in the bar and menu until it closes. How: While the menu is open, this makes the bar's siblings other than the dimmer inert, closes on Escape, and closes when the menu button disappears.
 
 
 		if ( !menOpeBoo ) return; // What: Closed Menu Guard. Why: Only the open menu changes the rest of the page. How: This leaves everything alone while the menu is closed.

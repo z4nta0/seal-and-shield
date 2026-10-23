@@ -12,11 +12,11 @@
  * back in when it returns. The columns stack at 900px wide or narrower, and
  * the form's paired fields stack and the panel's padding tightens at 520px.
  * Each form control eases its focus ring in from a zero-width outline. The
- * shared container, eyebrow label, section title, and divider styles the
- * section used to borrow from the global stylesheet are copied in under the
- * same names every module gives them. The phone detail is an anchor that
- * shares the value rule, and its own link rule comes after that rule on
- * purpose, so its light blue wins.
+ * shared eyebrow label, section title, and divider styles the section used to
+ * borrow from the global stylesheet are copied in under the same names every
+ * module gives them, and the shared container's onto the inner row's own
+ * class. The phone detail is an anchor that shares the value rule, and its own
+ * link rule comes after that rule on purpose, so its light blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -630,7 +630,7 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Field Input And Textarea. Why: Someone who asked for less motion should see the focus ring simply appear. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Field Input And Textarea. Why: Someone who asked for less motion should see the border and focus ring simply switch. How: This applies only when the reduced-motion preference is set. */
 
 
 	.forFieInp,

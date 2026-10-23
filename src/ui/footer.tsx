@@ -8,7 +8,7 @@ import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP UR
 
 
 import { SEC_LIN_ARR  } from './sections.ts';     // What: Section Link Array. Why: The footer offers a link for each of the home page's sections. How: This is the one list of sections, in page order, whose ids the links go to and whose labels they show.
-import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
+import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns secCliFun, which scrolls to the section or navigates home to it and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, sent as auxclick, never reaches the handler.
 
 // #endregion Imports
 

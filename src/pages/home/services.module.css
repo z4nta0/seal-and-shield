@@ -324,7 +324,7 @@
 
 }
 
-.areTagSpa { /* What: Area Tag Span. Why: Each tag names one place in the display style. How: This sets the name in spaced capitals inside a faint light blue outline, and eases its fill on hover. */
+.areTagSpa { /* What: Area Tag Span. Why: Each tag names one place in the display style. How: This sets the name in spaced capitals inside a faint light blue outline, and eases its fill and outline on hover. */
 
 
 	border         : var( --bor-wid-bas ) solid oklch( from var( --acc-lig-col ) l c h / 0.5 );                                    /* Border Width Base ~= 1.160px, Accent Light Color ~= #4488f6 @ 0.5 opacity */
@@ -350,7 +350,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Area Tag Span. Why: Someone who asked for less motion shouldn't see the tags animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.areTagSpa { /* What: Motionless Area Tag Span. Why: The hover fill should simply switch. How: This turns the transition off. */
+	.areTagSpa { /* What: Motionless Area Tag Span. Why: The hover fill and outline should simply switch. How: This turns the transition off. */
 
 
 		transition : none;

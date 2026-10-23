@@ -315,7 +315,7 @@ waiting for the page to settle.
   outline (the phone link in the contact form's error message included, reached
   after a faked failed send), that every form field has a focus change that
   eases in, that the home page's service cards and area tags have a hover
-  change that eases in, that the focus ring eases in to full width, and that
+  change that eases in, that the first focus ring reaches full width, and that
   feedback stays without motion under reduced motion. Its two every-control
   probes are marked slow, since each takes about 28 seconds in Chromium. The
   open menu state parks the pointer in the bar's corner after tapping the
