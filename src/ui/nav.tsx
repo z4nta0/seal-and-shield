@@ -8,7 +8,7 @@ import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP UR
 
 
 import { modCliFun    } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl, Cmd, Shift, or Alt click on the skip link should open it the browser's own way. How: The skip link's click handler asks it before cancelling the default.
-import { SEC_LIN_ARR  } from './sections.ts';      // What: Section Link Array. Why: The bar's links and its tracking of the section being read follow the home page's sections. How: This is the one list of sections, in page order, that the bar builds them from.
+import { SEC_LIN_ARR  } from './sections.ts';      // What: Section Link Array. Why: The parts of the bar that follow the home page's sections, such as its links, read them from one shared list. How: This is the one list of sections, in page order.
 import { tokPxlFun    } from '../utils/rhythm.ts'; // What: Token Pixel Function. Why: The active section's line has to clear the bar, which the stylesheet sizes. How: This reads the bar's height and a spacing step from their tokens in pixels.
 import { useEffect    } from 'react';              // What: Use Effect. Why: The bar reacts to the page around it, such as its scroll position. How: This sets up the bar's listeners and the open menu's changes to the page, and undoes them again.
 import { useLocation  } from 'react-router';       // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.

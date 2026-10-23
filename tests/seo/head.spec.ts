@@ -19,8 +19,9 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * accurately and keep only the home page in search. That covers the head's
  * tags, such as the canonical, along with the raw index.html a script-free
  * reader sees and the structured data, which has to match what the page itself
- * shows. The social preview tags, the card and icons they point at, and the
- * crawler files, such as the sitemap, are checked against what they promise.
+ * shows. The social preview tags and the card they point at, the icons the
+ * head links to, and the crawler files, such as the sitemap, are checked
+ * against what they promise.
  *
  * Sections:
  *  - Constants

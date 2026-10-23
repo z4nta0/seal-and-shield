@@ -44,7 +44,7 @@
 
 
 }
-.navSkiAnc:focus { /* What: Focused Navigation Skip Anchor. Why: The link has to come into view however focus reaches it. How: This slides it down over the bar's corner on the decelerating curve, on :focus rather than :focus-visible so a script's focus shows it too. */
+.navSkiAnc:focus { /* What: Focused Navigation Skip Anchor. Why: The link has to come into view however focus reaches it. How: This slides it down over the bar's corner on the decelerating curve, still easing its hover fill and color and its focus ring, on :focus rather than :focus-visible so a script's focus shows it too. */
 
 
 	transform  : translateY( 0 );
@@ -169,7 +169,7 @@
 
 
 }
-.navBarHed::after { /* What: Navigation Bar Header Shadow. Why: The scrolled bar casts a soft shadow onto the page, and the shadow should fade in without repainting the bar every frame. How: This holds the shadow on a layer the size of the bar, hidden until the page scrolls, and fades it in through opacity. */
+.navBarHed::after { /* What: Navigation Bar Header Shadow. Why: The scrolled bar casts a soft shadow onto the page, and the shadow should fade in without repainting the bar every frame. How: This holds the shadow on a layer the size of the bar, hidden until the page scrolls, and fades it in and out through opacity. */
 
 
 	box-shadow     : var( --ele-med-sha );                              /* Elevation Medium Shadow ~= 0 8.304px 25.572px plus 0 3.572px 8.304px -2.035px */
@@ -573,7 +573,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Toggle Line Span. Why: Someone who asked for less motion shouldn't see the icon animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.togLinSpa { /* What: Motionless Toggle Line Span. Why: The icon's hover color and its turn into a cross should simply switch. How: This turns the transitions off. */
+	.togLinSpa { /* What: Motionless Toggle Line Span. Why: The icon's hover color and its turn and fade into a cross should simply switch. How: This turns the transitions off. */
 
 
 		transition : none;
