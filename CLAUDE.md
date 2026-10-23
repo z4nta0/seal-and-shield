@@ -271,7 +271,9 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
 `tests/`, one project per suite and engine in `tests/playwright.config.ts`,
 which starts its own dev server on port 5197 (never the usual 5173, nor the
-5190 to 5196 its sibling projects use) and stops it afterwards. Every suite
+5190 to 5196 its sibling projects use), plus a production build served by
+`vite preview` on 5198 for the security suite, and stops both afterwards, so a
+temporary server of Claude's own uses 5199. Every suite
 runs in Chromium, Firefox, and WebKit. Results,
 screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states the suites
@@ -342,6 +344,20 @@ waiting for the page to settle.
   the site's darkest navy, the card is a 1,200x630 PNG under 300 KB, and every
   linked icon is served at its size; and that robots.txt and the sitemap say
   what they should.
+- `npm run test:security` (added 2026-10-23, under the user-level "##
+  Testing: Security" baseline): the security suite. `headers.spec.ts` reads
+  the policy itself, so it runs in Chromium only: the Content-Security-Policy
+  in `public/_headers` allows only the site's own files and has no
+  `unsafe-inline`, `unsafe-eval`, or wildcard, HSTS lasts at least a year
+  across subdomains, the other hardening headers are set, the built files hold
+  no private key or provider token, and `npm audit` finds no high or critical
+  advisory in the shipped dependencies, skipping with a message when offline.
+  `browser.spec.ts` loads the production build with `_headers`' headers added
+  to every response (neither server reads that file), checks that an injected
+  inline script is refused and reported, so the policy is known to be live,
+  then that every state loads with no violation and every new tab link
+  carries noopener and noreferrer (the site has none yet). The site has no
+  accounts, so none of the rule's app checks apply.
 - `npm test` runs every suite.
 
 ## Live checks
