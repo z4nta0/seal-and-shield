@@ -133,7 +133,7 @@
 
 
 }
-.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: Going home is the page's main action. How: This fills the button solid blue with a matching border. */
+.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: Going home is the page's main action. How: This fills the button solid blue, with a matching border and white text. */
 
 
 	background : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */

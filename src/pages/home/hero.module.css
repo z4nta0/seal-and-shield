@@ -292,7 +292,7 @@
 
 
 }
-.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue with white text. */
+.butBasAnc--primary { /* What: Button Base Anchor Primary. Why: The quote request is the page's main goal, so its button leads. How: This fills it solid blue, with a matching border and white text. */
 
 
 	background : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
