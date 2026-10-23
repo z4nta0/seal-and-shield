@@ -7,11 +7,11 @@
  * @summary
  * The site's one global stylesheet, holding only what belongs to the whole
  * site rather than to one component. Its Tokens region defines every design
- * token the modules read, the core design numbers first and then the scales,
- * colors, and layout sizes built on them. Its Base Elements region holds the
- * reset and the bare element styles, such as the root font size, the body's
- * default text, and the focus ring every link and button shares. Its Body
- * State region styles the scroll reveal's role attributes, the fade-in
+ * token the modules read, the core design numbers first and then the rest,
+ * such as the scales, colors, and layout sizes. Its Base Elements region holds
+ * the reset and the bare element styles, such as the root font size, the
+ * body's default text, and the focus ring every link and button shares. Its
+ * Body State region styles the scroll reveal's role attributes, the fade-in
  * sections can use. Each component's own styles live in its CSS module
  * instead.
  *

@@ -67,19 +67,20 @@ const TAB_MAX_NUM = 80;         // What: Tab Maximum Number. Why: A keyboard tra
  * Runs inside the page from before it loads, as an init script, and records
  * every animation or transition longer than 1ms that plays, so a motion that
  * starts and finishes before the check reads the page still fails it. Each
- * frame it sweeps document.getAnimations(), which holds whatever is playing
- * at that moment. It also listens on the document for animationstart,
+ * frame it sweeps document.getAnimations(), which holds whatever is playing at
+ * that moment. It also listens on the document for animationstart,
  * transitionrun, and transitionstart, in the capture phase so nothing on the
  * page can stop it hearing one, which catches a motion that starts and ends
  * between two frames. An event carries no duration, so the listener reads the
  * one the target's computed style gives that animation's name or that
  * transition's property. Each motion is labelled by its animation name or
- * transition property and the element it ran on, tag and classes, and kept
- * once however often it's seen. The 1ms floor skips the .01ms reduced-motion
- * exits the page waits on. The sweep is kept on the window as __motPolFun,
- * which runs one last sweep and returns every label, so the check also
- * catches anything still playing when it reads. Passed to Playwright's
- * addInitScript, so it can't read anything from this file.
+ * transition property and the element it ran on, by its tag, its classes, and
+ * any pseudo-element, and kept once however often it's seen. The 1ms floor
+ * skips the .01ms reduced-motion exits the page waits on. The sweep is kept on
+ * the window as __motPolFun, which runs one last sweep and returns every
+ * label, so the check also catches anything still playing when it reads.
+ * Passed to Playwright's addInitScript, so it can't read anything from this
+ * file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

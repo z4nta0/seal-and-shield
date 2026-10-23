@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on the page's head, its text, and the crawler files.
+import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on the page's head and text and on the files the site serves, such as robots.txt, the preview card, and the icons.
 import { test   } from '@playwright/test'; // What: Test. Why: Each route and each file is its own test. How: This declares them.
 
 // #endregion Imports

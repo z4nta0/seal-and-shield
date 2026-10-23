@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect    } from '@playwright/test';      // What: Expect. Why: Each behavior passes only when the page ends up where it should. How: This asserts on URLs, attributes, text, and positions.
+import { expect    } from '@playwright/test';      // What: Expect. Why: Each behavior passes only when the page ends up where it should. How: This asserts on what each check reads from the page, such as its address, focus, and the position of a section.
 import { fakNetFun } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form checks need Netlify's answer without sending anything. How: This answers the form's posts in the browser with a chosen status.
 import { test      } from '@playwright/test';      // What: Test. Why: Each behavior is its own test. How: This declares them.
 
@@ -54,7 +54,7 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
 
 const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: Both ways of asking for a new tab have to keep working now that plain clicks scroll in place. How: Each row pairs a click kind's name with the click options that make it, ControlOrMeta pressing Cmd on a Mac and Ctrl elsewhere.
 
-const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size the navigation checks use.
+const DES_VIE_OBJ = { height : 900, width : 1440 }; // What: Desktop Viewport Object. Why: The bar's own links show only on wide screens. How: This is the desktop size most checks open at, and the size the widen check grows to.
 const PHO_VIE_OBJ = { height : 844, width : 390  }; // What: Phone Viewport Object. Why: The mobile menu exists only on small screens. How: This is the phone size the menu checks use.
 
 // #endregion Constants

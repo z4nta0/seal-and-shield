@@ -861,7 +861,7 @@
 
 }
 
-.subLabSpa { /* What: Submit Label Span. Why: The button's label should change visibly when a request goes out, not just swap. How: This fades each new label in once, as the label remounts under a new key. */
+.subLabSpa { /* What: Submit Label Span. Why: The button's label should change visibly, not just swap, whenever it switches between ready and sending. How: This fades each new label in once, as the label remounts under a new key. */
 
 
 	animation : subLabSpaSwapFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ); /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -881,7 +881,7 @@
 
 
 }
-@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that fades in reads as a response to the press. How: This fades the new label up from transparent. */
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that fades in reads as the button's state changing, whether a request has just gone out or the button is ready again. How: This fades the new label up from transparent. */
 
 
 	from {
