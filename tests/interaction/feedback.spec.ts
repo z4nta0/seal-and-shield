@@ -23,22 +23,25 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  * @summary
  * Checks the interaction feedback rule on every page state, in whichever
  * engine the project runs. Every visible link and button has to look different
- * while hovered than at rest, look different again while pressed, and
- * transition its focus ring's outline, and the first keyboard stop has to draw
- * that ring at full width once it has eased in. Every visible form field has
- * to look different once keyboard focus reaches it and transition its focus
- * ring's outline too. Under reduced motion every control keeps its hover and
- * press changes, and every field its focus change, but transitions nothing.
+ * while hovered than at rest, look different again while pressed, ease every
+ * property each change touches, on it or anything inside it, and transition
+ * its focus ring's outline, and the first keyboard stop has to draw that ring
+ * at full width once it has eased in. Every visible form field has to look
+ * different once keyboard focus reaches it and ease every property that
+ * changes, its outline included. Under reduced motion every control keeps its
+ * hover and press changes, and every field its focus change, but transitions
+ * nothing.
  * The phone link inside the contact form's error message only shows once a
  * request fails, so it gets checks of its own, both ways, after a faked
  * Netlify error at desktop width. On the home page, the service cards and
  * the service area tags respond to hover too, though neither is a control, so
- * each has to look different hovered and transition that change, or change
- * instantly under reduced motion.
+ * each has to look different hovered and ease every property that changes, or
+ * change instantly under reduced motion.
  * Real clicks are blocked during the checks, so pressing a link or the menu's
  * links never navigates or closes anything mid-check.
  *
  * Sections:
+ *  - Types
  *  - Constants
  *  - Helpers
  *  - Module Init
@@ -49,11 +52,28 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
 
 
 
+// #region Types
+
+type SnaRecTyp = { // What: Snapshot Record Type. Why: An element's look, and whether each part of it would ease, is compared between two moments the same way. How: This holds one value and one duration per probed property.
+
+
+	durArr : number[], // What: Duration Array. Why: A property that changes has to ease rather than snap. How: This holds each probed property's transition duration in milliseconds, or 0 when no transition covers it.
+	valArr : string[]  // What: Value Array. Why: Two moments are compared property by property. How: This holds each probed property's computed value.
+
+
+};
+
+// #endregion Types
+
+
+
 // #region Constants
 
-const ERR_LIN_STR = '#contact form [role="alert"] a';             // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
-const HOV_TAR_STR = '[class*="serCarDiv"], [class*="areTagSpa"]'; // What: Hover Target String. Why: The service cards and the service area tags respond to hover without being controls, so the control probes never reach them. How: This matches both by their CSS module classes, whose names Vite keeps inside each hashed class.
-const SET_WAI_NUM = 400;                                          // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
+const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control and on what's inside it, such as its icon lines. How: Each is compared between moments, and each that changes has to be transitioned.
+const ERR_LIN_STR = '#contact form [role="alert"] a';                                        // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
+const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-width' ];                    // What: Field Property Array. Why: A field's focus changes its border and its outline. How: Each is compared between rest and focus, and each that changes has to be transitioned.
+const HOV_TAR_STR = '[class*="serCarDiv"], [class*="areTagSpa"]';                            // What: Hover Target String. Why: The service cards and the service area tags respond to hover without being controls, so the control probes never reach them. How: This matches both by their CSS module classes, whose names Vite keeps inside each hashed class.
+const SET_WAI_NUM = 400;                                                                     // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest interface transition runs about 367ms. How: This is the pause, in milliseconds, after each hover, press, or focus.
 
 // #endregion Constants
 
@@ -214,54 +234,245 @@ async function errOpeFun ( curPagObj : Page ) : Promise< void > {
 
 
 
-// #region sigEleFun
+// #region snaEleFun
 
 /**
- * sigEleFun = Signature Element Function
+ * snaEleFun = Snapshot Element Function
  *
  * @summary
- * Runs inside the page and describes how a control looks right now, as one
- * string of the styles feedback usually changes (color, background, border
- * color, transform, and opacity) for the control and every element inside
- * it, so a change to its icon lines or its label counts as the control's own.
- * Passed to Playwright's evaluate, so it can't read anything from this file.
+ * Runs inside the page and records how an element looks right now, and
+ * whether each part of that look would ease if it changed: for the element,
+ * every element inside it, and its ::after layer when asked, each probed
+ * property's computed value and the duration of the transition covering it,
+ * listed by its own name, by a shorthand holding it (background for
+ * background-color, border for border-color), or by all, or 0 when none is.
+ * The border color reads only the sides actually drawn, those with a width
+ * above zero, as one color when they all share it, since an undrawn side's
+ * color can change without anything showing.
+ * An inner element whose color matches its parent's takes the parent's
+ * duration for it, since an inherited color eases with the parent's
+ * transition, and a border color matching the element's own color takes the
+ * color's duration, since an unset border color is currentColor and follows
+ * the color as it eases. Passed to Playwright's evaluate, so it can't read
+ * anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
- * @param eleCurEle - Element Current Element: The control to describe.
+ * @param eleCurEle - Element Current Element: The element to record.
+ * @param snaArgArr - Snapshot Argument Array: The property names to probe,
+ *                    then whether to add the element's ::after layer.
  *
- * @returns The control's look, as one string to compare.
+ * @returns One record per element, the element itself first.
+ * @see {@link snaRecArr}
  *
  * @example
  * ```ts
- * handle.evaluate(sigEleFun) // => 'rgb(...),rgba(...),none,1,...|...'
+ * handle.evaluate(snaEleFun, [CON_PRO_ARR, false]) // => [ { ... } ]
  * ```
  *
 */
 
-function sigEleFun ( eleCurEle : Element ) : string {
+function snaEleFun ( eleCurEle : Element, snaArgArr : [ string[], boolean ] ) : SnaRecTyp[] {
 
 
-	const sigStyFun = ( sigCurEle : Element ) => { // What: Signature Style Function. Why: Each element's look is read the same way. How: This joins one element's feedback styles into one string.
+	const [ proNamArr, aftIncBoo ] = snaArgArr; // What: Property Name Array And After Include Boolean. Why: The page function takes one argument. How: This unpacks the names to probe and whether to add the ::after layer.
+
+	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand to its shorthand.
 
 
-		const styCurObj = getComputedStyle( sigCurEle ); // What: Style Current Object. Why: The element's styles are read as they're drawn now. How: This reads its computed styles.
+
+	const borValFun = ( styCurObj : CSSStyleDeclaration ) : string => [ ...new Set( [ 'top', 'right', 'bottom', 'left' ].filter( ( sidNamStr ) => styCurObj.getPropertyValue( `border-${ sidNamStr }-width` ) !== '0px' ).map( ( sidNamStr ) => styCurObj.getPropertyValue( `border-${ sidNamStr }-color` ) ) ) ].join( ' ' ); // What: Border Value Function. Why: Only a drawn border's color shows, so an undrawn side changing color isn't feedback. How: This joins the distinct colors of the sides wider than zero, one color when they share it.
 
 
 
-		return [ styCurObj.color, styCurObj.backgroundColor, styCurObj.borderColor, styCurObj.transform, styCurObj.opacity ].join( ',' ); // What: Element Signature Return. Why: One element's look compares as one string. How: This joins its feedback styles.
+	const snaStyFun = ( styCurObj : CSSStyleDeclaration ) : SnaRecTyp => { // What: Snapshot Style Function. Why: Each element and layer is recorded the same way. How: This reads its probed values and the duration covering each.
+
+
+		const traDurArr = styCurObj.transitionDuration.split( ',' ).map( ( traDurStr ) => parseFloat( traDurStr ) * ( traDurStr.trim().endsWith( 'ms' ) ? 1 : 1000 ) ); // What: Transition Duration Array. Why: A covered property eases only with a duration above zero. How: This reads each listed duration in milliseconds.
+		const traNamArr = styCurObj.transitionProperty.split( ',' ).map( ( traNamStr ) => traNamStr.trim() );                                                           // What: Transition Name Array. Why: A property eases only when its transition lists it. How: This reads each listed property name.
+
+
+		const durProFun = ( proNamStr : string ) : number => { // What: Duration Property Function. Why: Each probed property needs the duration of whichever transition covers it. How: This finds the first listing by its name, its shorthand, or all, and reads its duration, which repeats when fewer durations than names are listed.
+
+
+			const traIndNum = traNamArr.findIndex( ( traNamStr ) => [ proNamStr, 'all', parNamObj[ proNamStr ] ].includes( traNamStr ) ); // What: Transition Index Number. Why: The covering transition's place picks its duration. How: This finds the first name that covers the property.
+
+
+
+			return traIndNum < 0 ? 0 : traDurArr[ traIndNum % traDurArr.length ]; // What: Covering Duration Return. Why: An uncovered property has no transition at all. How: This returns 0 for one, or its listing's duration.
+
+
+		};
+
+
+
+		return { // What: Snapshot Record Return. Why: Each element's record holds its values and durations side by side. How: This reads both for every probed property.
+
+
+			durArr : proNamArr.map( durProFun ),
+			valArr : proNamArr.map( ( proNamStr ) => ( proNamStr === 'border-color' ? borValFun( styCurObj ) : styCurObj.getPropertyValue( proNamStr ) ) )
+
+
+		};
 
 
 	};
 
 
 
-	return [ eleCurEle, ...eleCurEle.querySelectorAll( '*' ) ].map( sigStyFun ).join( '|' ); // What: Signature Return. Why: Two looks compare as one string. How: This joins the signatures of the control and everything inside it.
+	const borIndNum = proNamArr.indexOf( 'border-color' );                                          // What: Border Index Number. Why: An unset border color follows the color, so its place is checked against color's. How: This finds its place, or -1 when it isn't probed.
+	const colIndNum = proNamArr.indexOf( 'color' );                                                 // What: Color Index Number. Why: Only color is inherited among the probed properties. How: This finds its place, or -1 when it isn't probed.
+	const eleLisArr = [ eleCurEle, ...eleCurEle.querySelectorAll( '*' ) ];                          // What: Element List Array. Why: A change to an inner element counts as the control's own. How: This lists the element and everything inside it, parents before children.
+	const snaRecArr = eleLisArr.map( ( lisCurEle ) => snaStyFun( getComputedStyle( lisCurEle ) ) ); // What: Snapshot Record Array. Why: Each element is recorded. How: This snapshots every listed element's computed styles.
+
+	const borColBoo = borIndNum >= 0 && colIndNum >= 0; // What: Border Color Boolean. Why: The currentColor check needs both properties probed. How: This is true when the border color and the color are both in the list.
+
+
+	for ( const [ lisIndNum, lisCurEle ] of eleLisArr.entries() ) { // What: Inherited Color Loop. Why: An inner element whose color comes from its parent eases with the parent's transition. How: This gives each one whose color matches its parent's the parent's duration, in document order, so it passes down every level.
+
+
+		const parIndNum = lisCurEle.parentElement ? eleLisArr.indexOf( lisCurEle.parentElement ) : -1; // What: Parent Index Number. Why: Only a parent inside the element passes its color down here. How: This finds the parent's place in the list, or -1.
+
+
+		if ( parIndNum < 0 || colIndNum < 0 ) continue; // What: No Parent Guard. Why: The element itself, and every element when color isn't probed, keeps its own duration. How: This skips them.
+
+
+
+		if ( snaRecArr[ lisIndNum ].valArr[ colIndNum ] === snaRecArr[ parIndNum ].valArr[ colIndNum ] ) snaRecArr[ lisIndNum ].durArr[ colIndNum ] = snaRecArr[ parIndNum ].durArr[ colIndNum ]; // What: Inherited Duration Assignment. Why: A color matching the parent's is the parent's, eased by the parent's transition. How: This copies the parent's color duration.
+
+
+	}
+
+
+
+	if ( aftIncBoo ) snaRecArr.push( snaStyFun( getComputedStyle( eleCurEle, '::after' ) ) ); // What: After Layer Snapshot. Why: A card's shadow fades in on its ::after layer. How: When asked, this records that layer last.
+
+
+
+	for ( const snaRecObj of snaRecArr ) if ( borColBoo && snaRecObj.valArr[ borIndNum ] === snaRecObj.valArr[ colIndNum ] ) snaRecObj.durArr[ borIndNum ] = Math.max( snaRecObj.durArr[ borIndNum ], snaRecObj.durArr[ colIndNum ] ); // What: Current Color Border Loop. Why: A border color matching the element's own color is currentColor, which follows the color as it eases, so a text link with no border set doesn't snap one. How: This gives each such border color the longer of its own duration and the color's.
+
+
+
+	return snaRecArr; // What: Snapshot Records Return. Why: The caller compares two moments' records. How: This hands back every record.
 
 
 }
 
-// #endregion sigEleFun
+// #endregion snaEleFun
+
+
+
+// #region snaHanFun
+
+/**
+ * snaHanFun = Snapshot Handle Function
+ *
+ * @summary
+ * Records an element the test holds a handle to, by running {@link snaEleFun}
+ * on it in the page with the properties to probe and whether to add its
+ * ::after layer, handed over as one two-item argument, since the page
+ * function takes only one.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param hanCurObj - Handle Current Object: The element to record.
+ * @param proNamArr - Property Name Array: The properties to probe.
+ * @param aftIncBoo - After Include Boolean: Whether to add the element's
+ *                    ::after layer.
+ *
+ * @returns A promise that resolves with one record per element, the element
+ *          itself first.
+ *
+ * @example
+ * ```ts
+ * snaHanFun(conCurObj, CON_PRO_ARR, false) // => [ { durArr, valArr } ]
+ * ```
+ *
+*/
+
+async function snaHanFun ( hanCurObj : ElementHandle, proNamArr : string[], aftIncBoo : boolean ) : Promise< SnaRecTyp[] > {
+
+
+	const snaArgArr : [ string[], boolean ] = [ proNamArr, aftIncBoo ]; // What: Snapshot Argument Array. Why: The page function takes one argument, typed as a two-item tuple. How: This packs the property names and the ::after choice.
+
+
+
+	return hanCurObj.evaluate( snaEleFun, snaArgArr ); // What: Snapshot Return. Why: The caller compares two moments' records. How: This runs snaEleFun on the element in the page and hands back its records.
+
+
+}
+
+// #endregion snaHanFun
+
+
+
+const valSigFun = ( snaRecArr : SnaRecTyp[] ) : string => JSON.stringify( snaRecArr.map( ( snaRecObj ) => snaRecObj.valArr ) ); // What: Value Signature Function. Why: A look is the same between two moments only when every probed value matches. How: This joins every record's values into one string to compare.
+
+
+
+// #region snaProFun
+
+/**
+ * snaProFun = Snap Problems Function
+ *
+ * @summary
+ * Compares two snapshots of the same element, taken before and after a
+ * change, and returns one problem for each probed property that changed on
+ * the element or anything inside it without a transition to ease it, read
+ * from the later snapshot, since a change eases with the transition of the
+ * state it moves into. A property that snaps on several inner elements is one
+ * problem.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param froRecArr - From Record Array: The snapshot before the change.
+ * @param tarRecArr - Target Record Array: The snapshot after the change.
+ * @param proNamArr - Property Name Array: The probed property names, in the
+ *                    snapshots' order.
+ * @param desLabStr - Description Label String: The element's name in each
+ *                    problem.
+ * @param staNamStr - State Name String: The change in each problem, such as
+ *                    'when hovered'.
+ *
+ * @returns One problem per snapped property.
+ *
+ * @example
+ * ```ts
+ * snaProFun(resSnaArr, hovSnaArr, CON_PRO_ARR, 'a "Home"', 'when hovered')
+ * // => []
+ * ```
+ *
+*/
+
+function snaProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr : string[], desLabStr : string, staNamStr : string ) : string[] {
+
+
+	const snaNamSet = new Set< string >(); // What: Snapped Name Set. Why: A property that snaps on several inner elements is one problem. How: This collects each snapped property's name once.
+
+
+	for ( const [ recIndNum, tarCurObj ] of tarRecArr.entries() ) { // What: Record Compare Loop. Why: Every element of the snapshot has to ease its own changes. How: This compares each later record with the earlier one in its place.
+
+
+		const froCurObj = froRecArr[ recIndNum ]; // What: From Current Object. Why: The change is read against the same element's earlier record. How: This finds it by place.
+
+
+		if ( !froCurObj ) continue; // What: Missing Record Guard. Why: An element that appeared with the change has nothing to compare with. How: This skips it.
+
+
+
+		for ( const [ proIndNum, proNamStr ] of proNamArr.entries() ) if ( froCurObj.valArr[ proIndNum ] !== tarCurObj.valArr[ proIndNum ] && tarCurObj.durArr[ proIndNum ] === 0 ) snaNamSet.add( proNamStr ); // What: Property Compare Loop. Why: A property that changed with nothing to ease it snaps. How: This records each one whose value changed while its later duration is 0.
+
+
+	}
+
+
+
+	return [ ...snaNamSet ].map( ( proNamStr ) => `${ desLabStr } snaps its ${ proNamStr } ${ staNamStr }` ); // What: Snap Problems Return. Why: Each snapped property should be reported plainly. How: This turns each name into a problem line.
+
+
+}
+
+// #endregion snaProFun
 
 
 
@@ -276,11 +487,12 @@ function sigEleFun ( eleCurEle : Element ) : string {
  * pointer away, read again while hovered, and again while the mouse button is
  * held on it, every look read once its transition has settled. A control that
  * looks the same at rest and hovered, or hovered and pressed, is a problem.
- * Normally a control whose transitions all take no time is a problem too, and
- * its transition list must include the focus ring's outline-width, so the ring
- * eases in; under reduced motion every one of its transition durations must be
- * zero instead. The caller blocks real clicks first, so releasing the mouse
- * does nothing.
+ * Normally every property that changes on hover or press, on the control or
+ * anything inside it, has to be eased by a transition ({@link snaProFun}),
+ * and its transition list must include the focus ring's outline-width, so the
+ * ring eases in; under reduced motion every one of its transition durations
+ * must be zero instead. The caller blocks real clicks first, so releasing the
+ * mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -320,7 +532,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
 
 
-		const resSigStr = await conCurObj.evaluate( sigEleFun ); // What: Rest Signature String. Why: The resting look is what hover is compared with. How: This reads it.
+		const resSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, false ); // What: Rest Snapshot Array. Why: The resting look is what hover is compared with. How: This records the control and everything inside it.
 
 
 		await conCurObj.hover(); // What: Control Hover Call. Why: Hover feedback is the first thing checked. How: This moves the pointer onto the control.
@@ -328,7 +540,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hover look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const hovSigStr = await conCurObj.evaluate( sigEleFun ); // What: Hover Signature String. Why: The hovered look is compared with rest and with pressed. How: This reads it.
+		const hovSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, false ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest and with pressed. How: This records it.
 
 
 		await curPagObj.mouse.down(); // What: Mouse Down Call. Why: A press shows while the button is held. How: This holds the mouse button down on the control.
@@ -336,7 +548,7 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Press Settle Wait. Why: The pressed look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const preSigStr = await conCurObj.evaluate( sigEleFun );                                                         // What: Press Signature String. Why: The pressed look is compared with hovered. How: This reads it.
+		const preSnaArr = await snaHanFun( conCurObj, CON_PRO_ARR, false );                                              // What: Press Snapshot Array. Why: The pressed look is compared with hovered. How: This records it.
 		const traLisStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionProperty ); // What: Transition List String. Why: The focus ring's ease depends on the control listing its outline. How: This reads the control's transitioned properties.
 		const traDurStr = await conCurObj.evaluate( ( conCurEle ) => getComputedStyle( conCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving. How: This reads the control's transition durations.
 
@@ -345,19 +557,21 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 
 
-		if ( resSigStr === hovSigStr ) proLisArr.push( `${ conDesStr } looks the same hovered` ); // What: Hover Check. Why: A hovered control has to respond. How: This records one that doesn't change.
+		if ( valSigFun( resSnaArr ) === valSigFun( hovSnaArr ) ) proLisArr.push( `${ conDesStr } looks the same hovered` ); // What: Hover Check. Why: A hovered control has to respond. How: This records one that doesn't change.
 
 
 
-		if ( hovSigStr === preSigStr ) proLisArr.push( `${ conDesStr } looks the same pressed` ); // What: Press Check. Why: A press has to register before anything happens. How: This records one that doesn't change.
+		if ( valSigFun( hovSnaArr ) === valSigFun( preSnaArr ) ) proLisArr.push( `${ conDesStr } looks the same pressed` ); // What: Press Check. Why: A press has to register before anything happens. How: This records one that doesn't change.
 
 
 
 		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a control with any duration above zero.
 
-		else if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ conDesStr } changes without a transition` ); // What: Transition Check. Why: Every hover, press, and focus change should ease rather than snap. How: This records a control whose every transition duration is zero.
-
 		else if ( !redMotBoo && !traLisStr.includes( 'outline-width' ) ) proLisArr.push( `${ conDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a control whose transition list leaves out the outline.
+
+
+
+		if ( !redMotBoo ) proLisArr.push( ...snaProFun( resSnaArr, hovSnaArr, CON_PRO_ARR, conDesStr, 'when hovered' ), ...snaProFun( hovSnaArr, preSnaArr, CON_PRO_ARR, conDesStr, 'when pressed' ) ); // What: Snapped Change Check. Why: Every property a hover or press changes should ease rather than snap. How: This records each one that changes without a transition, on the control or anything inside it.
 
 
 	}
@@ -373,46 +587,6 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 
 
-// #region fieSigFun
-
-/**
- * fieSigFun = Field Signature Function
- *
- * @summary
- * Runs inside the page and describes how a form field looks right now, as one
- * string of the styles its focus changes (its border color and its outline's
- * color and width). Passed to Playwright's evaluate, so it can't read
- * anything from this file.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param fieCurEle - Field Current Element: The form field to describe.
- *
- * @returns The field's look, as one string to compare.
- *
- * @example
- * ```ts
- * handle.evaluate(fieSigFun) // => 'rgb(200, 208, 224),rgb(30, 86, 200),0px'
- * ```
- *
-*/
-
-function fieSigFun ( fieCurEle : Element ) : string {
-
-
-	const styCurObj = getComputedStyle( fieCurEle ); // What: Style Current Object. Why: The field's styles are read as they're drawn now. How: This reads its computed styles.
-
-
-
-	return [ styCurObj.borderColor, styCurObj.outlineColor, styCurObj.outlineWidth ].join( ',' ); // What: Field Signature Return. Why: Two looks compare as one string. How: This joins the field's border color and outline.
-
-
-}
-
-// #endregion fieSigFun
-
-
-
 // #region fieProFun
 
 /**
@@ -425,10 +599,10 @@ function fieSigFun ( fieCurEle : Element ) : string {
  * by keyboard, by stepping back off it with Shift+Tab and onto it again with
  * Tab, and read once its transition has settled. A field the Tab press doesn't
  * land on, or that looks the same focused as at rest (its border color and
- * outline), is a problem. Normally a field whose transitions all take no time
- * is a problem too, and its transition list must include the focus ring's
- * outline-width, so the ring eases in; under reduced motion every one of its
- * transition durations must be zero instead.
+ * outline), is a problem. Normally every one of those that changes has to be
+ * eased by a transition ({@link snaProFun}), outline-width included, so the
+ * ring eases in; under reduced motion every one of its transition durations
+ * must be zero instead.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -461,7 +635,7 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await fieCurObj.scrollIntoViewIfNeeded(); // What: Field Scroll Call. Why: A field has to be on screen for its look to be read. How: This scrolls it into view.
 
 
-		const resSigStr = await fieCurObj.evaluate( fieSigFun ); // What: Rest Signature String. Why: The resting look is what focus is compared with. How: This joins the field's border color and outline.
+		const resSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, false ); // What: Rest Snapshot Array. Why: The resting look is what focus is compared with. How: This records the field's border color and outline.
 
 
 		await fieCurObj.focus(); // What: Field Focus Call. Why: The keyboard steps start from the field itself. How: This focuses it so Shift+Tab steps off it.
@@ -474,23 +648,20 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 		const focFieBoo = await fieCurObj.evaluate( ( fieCurEle ) => fieCurEle === document.activeElement );             // What: Focused Field Boolean. Why: The focused look only counts when the Tab press landed on the field. How: This checks the field holds focus.
-		const focSigStr = await fieCurObj.evaluate( fieSigFun );                                                         // What: Focus Signature String. Why: The focused look is compared with rest. How: This joins the field's border color and outline.
+		const focSnaArr = await snaHanFun( fieCurObj, FIE_PRO_ARR, false );                                              // What: Focus Snapshot Array. Why: The focused look is compared with rest. How: This records the field's border color and outline.
 		const traDurStr = await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).transitionDuration ); // What: Transition Duration String. Why: Reduced motion should leave nothing moving. How: This reads the field's transition durations.
-		const traLisStr = await fieCurObj.evaluate( ( fieCurEle ) => getComputedStyle( fieCurEle ).transitionProperty ); // What: Transition List String. Why: The focus ring's ease depends on the field listing its outline. How: This reads the field's transitioned properties.
 
 
 
 		if ( !focFieBoo ) proLisArr.push( `${ fieDesStr } isn't reached by Tab` ); // What: Keyboard Reach Check. Why: A keyboard user has to be able to reach every field. How: This records one the Tab press didn't land on.
 
-		else if ( resSigStr === focSigStr ) proLisArr.push( `${ fieDesStr } looks the same focused` ); // What: Focus Check. Why: A focused field has to stand out. How: This records one whose border and outline don't change.
+		else if ( valSigFun( resSnaArr ) === valSigFun( focSnaArr ) ) proLisArr.push( `${ fieDesStr } looks the same focused` ); // What: Focus Check. Why: A focused field has to stand out. How: This records one whose border and outline don't change.
 
 
 
 		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a field with any duration above zero.
 
-		else if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ fieDesStr } changes without a transition` ); // What: Transition Check. Why: A field's focus change should ease rather than snap. How: This records a field whose every transition duration is zero.
-
-		else if ( !redMotBoo && !traLisStr.includes( 'outline-width' ) ) proLisArr.push( `${ fieDesStr } doesn't transition its focus ring` ); // What: Focus Ease Check. Why: The focus ring should ease in rather than snap. How: This records a field whose transition list leaves out the outline.
+		else if ( !redMotBoo && focFieBoo ) proLisArr.push( ...snaProFun( resSnaArr, focSnaArr, FIE_PRO_ARR, fieDesStr, 'when focused' ) ); // What: Snapped Change Check. Why: A field's focus change, its ring included, should ease rather than snap. How: This records each changed border or outline property without a transition, once the Tab press has landed on the field.
 
 
 	}
@@ -518,8 +689,9 @@ async function fieProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
  * pointer away and again while hovered, every look read once its transition
  * has settled, and one that looks the same both ways is a problem. Its
  * transition durations are read from the element and its ::after layer, where
- * a card's shadow fades in. Normally one whose durations are all zero is a
- * problem; under reduced motion every duration must be zero instead, while
+ * a card's shadow fades in. Normally every property that changes, on it,
+ * anything inside it, or that layer, has to be eased by a transition ({@link
+ * snaProFun}); under reduced motion every duration must be zero instead, while
  * the hover look still has to change. Finding nothing to probe is a problem
  * too, so the check can't pass without checking anything.
  *
@@ -564,7 +736,7 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
 
 
-		const resSigStr = await tarCurObj.evaluate( sigEleFun ); // What: Rest Signature String. Why: The resting look is what hover is compared with. How: This reads it.
+		const resSnaArr = await snaHanFun( tarCurObj, CON_PRO_ARR, true ); // What: Rest Snapshot Array. Why: The resting look is what hover is compared with. How: This records the card or tag, everything inside it, and its ::after layer.
 
 
 		await tarCurObj.hover(); // What: Target Hover Call. Why: Hover is the one interaction a card or tag has. How: This moves the pointer onto it.
@@ -572,18 +744,18 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hover look is read once it has eased in. How: This pauses for the settle time.
 
 
-		const hovSigStr = await tarCurObj.evaluate( sigEleFun ); // What: Hover Signature String. Why: The hovered look is compared with rest. How: This reads it.
+		const hovSnaArr = await snaHanFun( tarCurObj, CON_PRO_ARR, true ); // What: Hover Snapshot Array. Why: The hovered look is compared with rest. How: This records it.
 		const traDurStr = await tarCurObj.evaluate( ( tarCurEle ) => `${ getComputedStyle( tarCurEle ).transitionDuration }, ${ getComputedStyle( tarCurEle, '::after' ).transitionDuration }` ); // What: Transition Duration String. Why: A card's shadow fades in on its ::after layer, so both have to ease normally and stand still under reduced motion. How: This joins the element's durations with its ::after layer's.
 
 
 
-		if ( resSigStr === hovSigStr ) proLisArr.push( `${ tarDesStr } looks the same hovered` ); // What: Hover Check. Why: A hovered card or tag has to respond, under reduced motion too. How: This records one that doesn't change.
+		if ( valSigFun( resSnaArr ) === valSigFun( hovSnaArr ) ) proLisArr.push( `${ tarDesStr } looks the same hovered` ); // What: Hover Check. Why: A hovered card or tag has to respond, under reduced motion too. How: This records one that doesn't change.
 
 
 
 		if ( redMotBoo && !/^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ tarDesStr } still transitions under reduced motion (${ traDurStr })` ); // What: Reduced Motion Check. Why: Asking for less motion should stop every transition. How: This records a card or tag with any duration above zero.
 
-		else if ( !redMotBoo && /^0s(, 0s)*$/.test( traDurStr ) ) proLisArr.push( `${ tarDesStr } changes without a transition` ); // What: Transition Check. Why: A hover change should ease rather than snap. How: This records a card or tag whose every transition duration is zero.
+		else if ( !redMotBoo ) proLisArr.push( ...snaProFun( resSnaArr, hovSnaArr, CON_PRO_ARR, tarDesStr, 'when hovered' ) ); // What: Snapped Change Check. Why: A hover change should ease rather than snap. How: This records each property that changes without a transition, on the card or tag, anything inside it, or its ::after layer.
 
 
 	}

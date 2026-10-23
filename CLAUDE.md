@@ -284,8 +284,9 @@ waiting for the page to settle.
   form refuses incomplete requests and reports a faked Netlify answer honestly;
   and the 404 page, its buttons, and a section address like /#about lead where
   they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
-  every control in every state has a hover, press, and focus change with a
-  transition (the phone link in the contact form's error message included,
+  every control in every state has a hover, press, and focus change, with
+  every property each change touches (on the control or anything inside it)
+  eased by a transition (the phone link in the contact form's error message included,
   reached after a faked failed send), that every form field has a focus change
   that eases in, that the home page's service cards and area tags have a hover
   change that eases in, that the focus ring eases in to full width, and that
