@@ -8,8 +8,8 @@
  * Styles for NotFouCom: a column at least the screen's height holding the bar,
  * the main content, and the footer, with the content centered on the hero's
  * dark navy in the space between. The title accent and buttons are copied from
- * the hero under the same names, and its eyebrow label as a paragraph, so the
- * page looks like the rest of the site.
+ * the hero under the same names, and its eyebrow label's type onto a
+ * paragraph, so the page looks like the rest of the site.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -49,7 +49,7 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label names the error above the heading. How: This sets it widely spaced, uppercase, and light blue, copied from the hero's eyebrow. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label names the error above the heading. How: This sets it widely spaced, uppercase, and light blue, matching the hero eyebrow's type at the font's normal leading. */
 
 
 	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */

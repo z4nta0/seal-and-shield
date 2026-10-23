@@ -69,7 +69,7 @@ type SnaRecTyp = { // What: Snapshot Record Type. Why: An element's look, and wh
 
 // #region Constants
 
-const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control and on what's inside it, such as its icon lines. How: Each is compared between moments, and each that changes has to be transitioned.
+const CON_PRO_ARR = [ 'color', 'background-color', 'border-color', 'transform', 'opacity' ]; // What: Control Property Array. Why: Hover and press feedback changes these, on a control or a hover-only card or tag and on what's inside it, such as its icon lines. How: Each is compared between moments, and each that changes has to be transitioned.
 const ERR_LIN_STR = '#contact form [role="alert"] a';                                        // What: Error Link String. Why: The phone link in the contact form's error message is probed on its own. How: This selects the link inside the form's alert region.
 const FIE_PRO_ARR = [ 'border-color', 'outline-color', 'outline-width' ];                    // What: Field Property Array. Why: A field's focus changes its border and its outline. How: Each is compared between rest and focus, and each that changes has to be transitioned.
 const HOV_TAR_STR = '[class*="serCarDiv"], [class*="areTagSpa"]';                            // What: Hover Target String. Why: The service cards and the service area tags respond to hover without being controls, so the control probes never reach them. How: This matches both by their CSS module classes, whose names Vite keeps inside each hashed class.
@@ -135,11 +135,11 @@ function cliBloFun () : void {
  * @summary
  * Collects every element a visitor can reach on the page as it stands: each
  * element the selector matches that's visible, not taken out of the tab order
- * with tabindex -1, and not inside inert content (the closed mobile menu), so
- * the same list serves every kind of element the checks probe, such as links
- * and buttons, form fields, and the hover-only cards. Handles are taken once,
- * so restyling while the checks scroll (the nav bar's scrolled look) can't
- * shift the list.
+ * with tabindex -1, and not inside inert content, such as the closed mobile
+ * menu or the page behind the open one, so the same list serves every kind of
+ * element the checks probe, such as links and buttons, form fields, and the
+ * hover-only cards. Handles are taken once, so restyling while the checks
+ * scroll (the nav bar's scrolled look) can't shift the list.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

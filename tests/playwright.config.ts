@@ -51,7 +51,7 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 ] as const;
 
-const PRE_URL_STR = 'http://localhost:5198';                           // What: Preview URL String. Why: The security suite loads the production build, since the dev server injects inline scripts the security policy would block. How: This is the address the preview server answers on and the security projects' baseURL.
+const PRE_URL_STR = 'http://localhost:5198';                           // What: Preview URL String. Why: The security suite loads the production build, since the dev server injects inline scripts the security policy would block. How: This is the address Playwright waits on for the preview and the security projects' baseURL.
 const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: Both servers must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
 const SER_URL_STR = 'http://localhost:5197';                           // What: Server URL String. Why: Every other suite opens the site from the same dev server. How: This is the address Playwright waits on and every other suite's baseURL.
 

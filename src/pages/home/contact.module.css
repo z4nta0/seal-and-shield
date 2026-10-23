@@ -10,7 +10,9 @@
  * quote panel on the right, holding either the request form or its thank-you
  * message. Its thank-you message and error rise in and sink out as they come
  * and go, the thank-you check popping in once, the form rises back in when it
- * returns, and the submit button's label fades in each time it changes. The
+ * returns, and the submit button's label fades in each time it changes. Its
+ * buttons and links ease their hover, press, and focus changes, the buttons
+ * lifting a pixel and pressing in, the links shifting color and dimming. The
  * columns stack at 900px wide or narrower, and the form's paired fields stack
  * and the panel's padding tightens at 520px. Each form control eases its focus
  * ring in from a zero-width outline. The shared eyebrow label, section title,

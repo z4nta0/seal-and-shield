@@ -132,7 +132,8 @@ app with tabs.
 ```
 src/
   main.tsx               entry point
-  app.tsx                root component, the app container, and the routes
+  app.tsx                root component, the app container (app.module.css),
+                         and the routes
   assets/                images and fonts used by 2 or more pages
                          (logo-simple.webp, fonts/)
   pages/
