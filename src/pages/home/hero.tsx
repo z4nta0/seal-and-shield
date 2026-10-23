@@ -139,10 +139,10 @@ function HerSecCom () : React.JSX.Element {
 				<div>{ /* What: Hero Text Div Element. Why: The pitch is the hero's message. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, or below the logo at 900px wide and below, with no styling of its own. */ }
 
 
-					<h1>{ /* What: Hero Title Heading Element. Why: The page's main heading should carry what the company does and where, the words local searches look for, as well as its promise. How: This holds the two-line eyebrow and the slogan, each styled as its own block, so the heading reads as one while looking as it always has. */ }
+					<h1>{ /* What: Hero Title Heading Element. Why: The page's main heading should carry what the company does and where, the words local searches look for, as well as its promise. How: This holds the eyebrow, the specialty over the city, and the slogan, each styled as its own block, so the heading reads as one while looking as it always has. */ }
 
 
-						<span className={ cssModObj.eyeLabSpa }>{ /* What: Eyebrow Label Span Element. Why: A short label says what the company is and where before the slogan. How: This sets the specialty and the city on two lines in uppercase. */ }
+						<span className={ cssModObj.eyeLabSpa }>{ /* What: Eyebrow Label Span Element. Why: A short label says what the company is and where before the slogan. How: This sets the specialty and the city on two lines in uppercase, the specialty wrapping onto a second line of its own at about 360px wide and below. */ }
 							Commercial Roofing Specialists<br />
 							Lawrence, KS
 						</span>

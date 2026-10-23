@@ -550,7 +550,7 @@ test( 'a failed request explains what to do instead', async ( { page : curPagObj
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form lives in the Contact section. How: This opens the home page at desktop size.
 
-	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The form has to handle Netlify turning a request down. How: This answers every post with a server error.
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The form has to handle Netlify turning a request down. How: This answers every post to the site's root with a server error.
 
 	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
 	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
@@ -570,7 +570,7 @@ test( 'a retry after a failure clears the error and sends', async ( { page : cur
 
 	await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The form lives in the Contact section. How: This opens the home page at desktop size.
 
-	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The first attempt has to fail. How: This answers every post with a server error.
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The first attempt has to fail. How: This answers every post to the site's root with a server error.
 
 	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
 	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.

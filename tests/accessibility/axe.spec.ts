@@ -251,7 +251,7 @@ for ( const resRecObj of FOR_RES_ARR ) { // What: Form Result Test Loop. Why: Th
 	test( `${ resRecObj.ideStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Form Result Axe Test. Why: The thank-you message and the error must be as accessible as the page. How: This sends the form against the faked answer, waits for the result to settle, then checks a scan of it finds no violations, reporting anything needing review.
 
 
-		await fakNetFun( curPagObj, resRecObj.codNum ); // What: Netlify Fake Call. Why: The result depends on Netlify's answer, and no real request should go out. How: This answers every post with the row's status.
+		await fakNetFun( curPagObj, resRecObj.codNum ); // What: Netlify Fake Call. Why: The result depends on Netlify's answer, and no real request should go out. How: This answers every post to the site's root with the row's status.
 
 		await opeStaFun( curPagObj, STA_REC_ARR.find( ( staRecObj ) => staRecObj.ideStr === 'home-desktop' )! ); // What: Home Desktop Open Call. Why: The form lives in the Contact section, scanned at desktop width. How: This loads and settles the home page at 1,440px. // What: Non-Null Note. Why: find types its result as possibly undefined. How: STA_REC_ARR always holds the home-desktop state.
 

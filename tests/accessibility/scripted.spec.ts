@@ -607,7 +607,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 test( 'a failed request fills an alert region that was in the page, empty, from the start', async ( { page : curPagObj } ) => { // What: Failure Announcement Test. Why: A live region added at the moment it speaks is often missed, so the error's region has to wait in the page, empty, and gain the message once a request fails. How: This checks the region on load, fails a request, and checks it again.
 
 
-	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post with a server error.
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post to the site's root with a server error.
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
 
@@ -633,7 +633,7 @@ test( 'a failed request fills an alert region that was in the page, empty, from 
 test( 'a failed request leaves focus on the submit button', async ( { page : curPagObj } ) => { // What: Failed Focus Test. Why: A button disabled while it holds focus drops that focus to the page, so a failed send must leave it on the submit button. How: This submits from the focused button, fails the request, and checks where focus is.
 
 
-	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post with a server error.
+	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post to the site's root with a server error.
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The form lives in the Contact section. How: This loads the home page.
 
