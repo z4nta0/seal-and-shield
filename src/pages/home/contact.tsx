@@ -8,7 +8,7 @@ import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: T
 
 import { useEffect    } from 'react';       // What: Use Effect. Why: Focus has to move when the form gives way to the thank-you message and when it returns. How: This runs the focus move after each render in which the sent state changes.
 import { useRef       } from 'react';       // What: Use Ref. Why: The focus move needs a few things kept between renders, such as the thank-you panel's element. How: This holds each one.
-import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, and its blocks reveal 80ms apart.
+import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in once the section scrolls into view. How: This returns the ref the section attaches, and its blocks reveal 80ms apart.
 import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's state, such as whether a request is out. How: This holds each piece.
 
 // #endregion Imports

@@ -6,7 +6,7 @@
 import cssModObj from './services.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks, such as its cards, fade in as they scroll into view. How: This returns the ref the section attaches, and its blocks reveal 80ms apart.
+import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks, such as its cards, fade in once the section scrolls into view. How: This returns the ref the section attaches, and its blocks reveal 80ms apart.
 
 // #endregion Imports
 
