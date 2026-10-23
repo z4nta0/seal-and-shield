@@ -272,7 +272,7 @@ Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
 `tests/`, one project per suite and engine in `tests/playwright.config.ts`,
 which starts its own dev server on port 5197 (never the usual 5173, nor the
 5190 to 5196 its sibling projects use), plus a production build served by
-`vite preview` on 5198 for the security suite, and stops both afterwards, so a
+`vite preview` on 5198 for the security suite, and stops both afterwards. A
 temporary server of Claude's own uses 5199. Every suite
 runs in Chromium, Firefox, and WebKit. Results,
 screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright

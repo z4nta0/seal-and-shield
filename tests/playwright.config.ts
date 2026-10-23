@@ -4,7 +4,7 @@
 // #region Imports
 
 import { defineConfig  } from '@playwright/test'; // What: Define Config. Why: Playwright's config helper passes the config through with its types. How: This wraps the exported config object.
-import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why: The dev server has to start from the repo root, one folder above this file. How: This turns that folder's URL into a path for webServer.cwd.
+import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why: Both servers have to start from the repo root, one folder above this file. How: This turns that folder's URL into a path for each server's cwd.
 
 // #endregion Imports
 
@@ -53,7 +53,7 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 const PRE_URL_STR = 'http://localhost:5198';                           // What: Preview URL String. Why: The security suite loads the production build, since the dev server injects inline scripts the security policy would block. How: This is the address the preview server answers on and the security projects' baseURL.
 const ROO_DIR_STR = fileURLToPath( new URL( '..', import.meta.url ) ); // What: Root Directory String. Why: Both servers must run from the repo root, where vite.config.ts lives. How: This resolves the folder above tests/.
-const SER_URL_STR = 'http://localhost:5197';                           // What: Server URL String. Why: Every other suite opens the site from the same dev server. How: This is the address Playwright waits on and every other page's baseURL.
+const SER_URL_STR = 'http://localhost:5197';                           // What: Server URL String. Why: Every other suite opens the site from the same dev server. How: This is the address Playwright waits on and every other suite's baseURL.
 
 const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its own folder and runs as its own projects. How: Each entry names a folder under tests/, crossed with each engine into one project apiece.
 
@@ -68,7 +68,7 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 
 ];
 
-const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playwright reads its whole setup from this file's default export. How: This holds the shared page settings, one project per suite and engine, the reporters, and the dev server.
+const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playwright reads its whole setup from this file's default export. How: This holds the shared page settings, one project per suite and engine, the reporters, and the dev and preview servers.
 
 
 	fullyParallel        : false,                                              // What: Fully Parallel. Why: Each spec file walks its states in order. How: This keeps a file's tests running in sequence, while separate files may still run in parallel.

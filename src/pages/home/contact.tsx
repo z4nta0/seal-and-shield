@@ -705,7 +705,7 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Full Element. Why: The message needs the form's full width. How: This holds the message field across the form's full width. */ }
+							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Full Element. Why: The message field sits directly in the form rather than in a row, so it spans the form's full width. How: This holds the message field, and its modifier gives it the space below a row. */ }
 
 
 								<label

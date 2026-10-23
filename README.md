@@ -34,11 +34,11 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and the design
 ```bash
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, motion, and form announcement checks
-npm run test:interaction    # what the section links, menu, contact form, and 404 page do, and that every control gives feedback
+npm run test:interaction    # what the section links, skip link, menu, contact form, and 404 page do, and that every control gives feedback
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # the pages from 320 to 1,920px and the mobile menu up to 768px: no sideways scroll, spill, overlap, or uneven grid rows
-npm run test:security       # the security headers, the production build under its policy in every state, new tab links, shipped secrets, and the dependency audit
-npm run test:seo            # titles, descriptions, canonical, robots, structured data, social tags and theme color, the preview card, icons, robots.txt, and the sitemap
+npm run test:security       # the security headers, a check that the policy refuses an injected script, the production build under its policy in every state, new tab links, shipped secrets, and the dependency audit
+npm run test:seo            # titles, descriptions, author, canonical, robots, single h1s, the raw index.html head, structured data, social tags and theme color, the preview card, icons, robots.txt, and the sitemap
 ```
 
 Each suite runs in Chromium, Firefox, and WebKit against a dev server Playwright starts on port 5197 for the run, so a dev server already running on 5173 is left alone. The security suite instead loads a fresh production build, which Playwright builds and serves with `vite preview` on port 5198, since the dev server's inline scripts would break the site's strict policy. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how the page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
@@ -71,7 +71,7 @@ tests/
 ├── responsive/        layout checks across screen widths
 ├── security/          header policy, build, and dependency checks, and every page state under the policy
 ├── seo/               head tags, structured data, preview card, icon, and crawler file checks
-├── support/           states.ts (the page states the suites visit) netlify.ts (the Netlify Forms fake the interaction and accessibility suites share), and headers.ts (reads the security headers from public/_headers)
+├── support/           states.ts (the page states the suites visit), netlify.ts (the Netlify Forms fake the interaction and accessibility suites share), and headers.ts (reads the security headers from public/_headers)
 └── playwright.config.ts
 
 design/                Source artwork, not served

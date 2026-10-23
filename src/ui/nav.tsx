@@ -341,7 +341,7 @@ function NavBarCom () : React.JSX.Element {
 
 				data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Attribute. Why: The bar turns solid while the menu is open, so the two read as one panel above the dimmed page. How: This is set only while menOpeBoo is true, and React drops it otherwise.
 				data-page-scroll-active={ barScrBoo || undefined } // What: Page Scroll Active Attribute. Why: The bar turns solid once the page scrolls under it. How: This sets the attribute only while barScrBoo is true, and drops it otherwise.
-			>{ /* What: Navigation Bar Header Element. Why: The bar and its mobile menu form the page's banner. How: This holds both, and carries data-page-scroll-active while the page is scrolled, which turns the bar solid. */ }
+			>{ /* What: Navigation Bar Header Element. Why: The bar and its mobile menu form the page's banner. How: This holds both, and turns the bar solid while the page is scrolled (data-page-scroll-active) or the menu is open (data-mobile-menu-open). */ }
 
 
 				<div className={ cssModObj.navInnDiv }>{ /* What: Navigation Inner Div Element. Why: The bar's contents line up with the page's content width. How: This spaces the brand and either the links row, above 768px wide, or the menu button, at 768px and below, across a centered, capped-width row. */ }
