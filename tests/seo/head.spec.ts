@@ -101,7 +101,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule li
 
 // #region Home Page Checks
 
-test( 'the home page names the city and the business', async ( { page : curPagObj } ) => { // What: Home Head Test. Why: Search listings show the title and description, and local searches look for the city. How: This loads the home page and checks its title, its single description, its author, canonical, and robots tags, and that its single h1 names the city.
+test( 'the home page names the city and the business', async ( { page : curPagObj } ) => { // What: Home Head Test. Why: Search listings show the title and description, and local searches look for the city. How: This loads the home page and checks that its title names the city in 60 characters or fewer, that its single description names the city in 120 to 125 characters, its author and canonical tags, that it carries no robots tag, and that its single h1 names the city.
 
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The checks read the home page's head. How: This loads the root path.
