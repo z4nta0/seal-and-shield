@@ -136,7 +136,8 @@ src/
   assets/                images and fonts used by 2 or more pages
                          (logo-simple.webp, fonts/)
   pages/
-    home/                the home page, its sections, and logo-full.webp
+    home/                the home page, its sections, reveal.ts, and
+                         logo-full.webp
     not-found/           the 404 page
   ui/                    components used by 2 or more pages (nav, footer),
                          section-link.ts, and sections.ts

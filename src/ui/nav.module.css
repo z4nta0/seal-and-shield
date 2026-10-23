@@ -196,7 +196,7 @@
 
 
 	.navBarHed,
-	.navBarHed::after { /* What: Motionless Navigation Bar Header. Why: The scrolled look and its shadow should simply switch on. How: This turns both transitions off. */
+	.navBarHed::after { /* What: Motionless Navigation Bar Header. Why: The bar's scrolled and menu-open looks and its shadow should simply switch on. How: This turns both transitions off. */
 
 
 		transition : none;
@@ -534,7 +534,7 @@
 
 }
 
-.togLinSpa { /* What: Toggle Line Span. Why: Three bars draw the menu icon. How: This draws each as a thin white line that can turn and fade into a cross. */
+.togLinSpa { /* What: Toggle Line Span. Why: Three bars draw the menu icon. How: This draws each as a thin white line that eases its hover color and can turn and fade into a cross. */
 
 
 	background : var( --bac-pag-col );                /* Background Page Color = #ffffff */
@@ -674,7 +674,7 @@
 
 
 }
-.menLinAnc::after { /* What: Menu Link Anchor Active Dot. Why: The menu marks the section being read, as the bar's links do on wide screens. How: This holds a small light blue dot at the row's end, hidden until its section is active, when it pops in, and shrinks it away on the accelerating curve as it leaves. */
+.menLinAnc::after { /* What: Menu Link Anchor Active Dot. Why: The menu marks the section being read, as the bar's links do on wide screens. How: This holds a small light blue dot at the row's end, hidden until its section is active, when it pops in, and shrinks and fades it away on the accelerating curve as it leaves. */
 
 
 	background    : var( --acc-lig-col );                                                                                   /* Accent Light Color ~= #4488f6 */

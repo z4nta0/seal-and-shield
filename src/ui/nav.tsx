@@ -26,14 +26,15 @@ import { useState     } from 'react';              // What: Use State. Why: The 
  * @summary
  * The site's fixed top bar: the brand, then above 768px wide the section links
  * and the phone number in a row, and at 768px and below a menu button that
- * opens the same links and phone number in a panel below the bar. The bar
- * takes on a solid background once the page scrolls past its top, and the link
- * for whichever section the visitor is reading is marked active on the home
- * page. Every section link closes the menu and reaches its section through
- * section-link.ts: smoothly in place on the home page, or by navigating home
- * from any other page. The bar opens with a skip link, waiting above the
- * screen until it's focused, that moves focus past the bar to the page's main
- * content.
+ * opens a panel below the bar holding the same links and phone number, plus a
+ * quote button, the hours, and the service area. The bar takes on a solid
+ * background once the page scrolls past its top or the menu opens, and the
+ * link for whichever section the visitor is reading is marked active on the
+ * home page. Every section link closes the menu and reaches its section
+ * through section-link.ts: smoothly in place on the home page, or by
+ * navigating home from any other page. The bar opens with a skip link, waiting
+ * above the screen until it's focused, that moves focus past the bar to the
+ * page's main content.
  *
  * Sections:
  *  - Components
@@ -449,7 +450,7 @@ function NavBarCom () : React.JSX.Element {
 					data-mobile-menu-open={ menOpeBoo || undefined } // What: Mobile Menu Open Attribute. Why: The menu slides open and its links play their entrance only while it's open. How: This sets the attribute only while menOpeBoo is true, and drops it otherwise.
 
 					inert={ !menOpeBoo } // What: Closed Menu Inert Flag. Why: The closed menu only collapses to zero height, so its links would otherwise still take keyboard focus while hidden. How: This makes the menu inert whenever it's closed.
-				>{ /* What: Navigation Menu Div Element. Why: At 768px wide and below, the section links and phone number move into a panel below the bar. How: This exists only at that width, opening and closing with the menu button, carrying data-mobile-menu-open while it's open. */ }
+				>{ /* What: Navigation Menu Div Element. Why: At 768px wide and below, the section links and phone number move into a panel below the bar, along with a quote button and the hours and service area. How: This exists only at that width, opening and closing with the menu button, carrying data-mobile-menu-open while it's open. */ }
 
 
 					{ SEC_LIN_ARR.map( ( linRecObj, linIndNum ) => ( // What: Menu Link Map. Why: Each section gets a link in the mobile menu. How: This renders one anchor per row, handing each its position for the staggered entrance.

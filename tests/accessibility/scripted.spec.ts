@@ -656,7 +656,7 @@ test( 'a failed request leaves focus on the submit button', async ( { page : cur
 
 
 
-test( 'sending moves focus to the thank-you message and back to the form when it returns', async ( { page : curPagObj } ) => { // What: Sent Focus Test. Why: The focused submit button disappears with the form, so focus must land on the thank-you message, which announces the result, and come back to the form's first field when the form returns. How: This sends a request, checks focus on the message, moves the clock past its six seconds, and checks focus on the name field.
+test( 'sending moves focus to the thank-you message and back to the form when it returns', async ( { page : curPagObj } ) => { // What: Sent Focus Test. Why: The focused submit button disappears with the form, so focus must land on the thank-you message, which announces the result, and come back to the form's first field when the form returns. How: This sends a request, checks focus on the message, moves the clock six seconds ahead, and checks focus on the name field.
 
 
 	await curPagObj.clock.install(); // What: Clock Install Call. Why: Waiting six real seconds would slow the suite. How: This puts the page's timers under the test's control before it loads.

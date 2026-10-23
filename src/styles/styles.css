@@ -556,7 +556,7 @@ button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard use
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Scroll Reveal Block. Why: Someone who asked for less motion shouldn't see blocks slide in. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Scroll Reveal Block. Why: Someone who asked for less motion shouldn't see blocks fade and slide in. How: This applies only when the reduced-motion preference is set. */
 
 
 	[data-scroll-reveal-block] { /* What: Motionless Scroll Reveal Block. Why: A block should simply appear when the hook reaches it. How: This turns the transition off. */

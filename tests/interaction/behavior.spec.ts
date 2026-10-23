@@ -592,7 +592,7 @@ test( 'a retry after a failure clears the error and sends', async ( { page : cur
 
 
 
-test( 'the form comes back after the thank-you message', async ( { page : curPagObj } ) => { // What: Form Return Test. Why: A visitor may want to send another request, so the thank-you gives way to the form once the message has faded out. How: This sends a request, moves the clock past the six-second wait, and checks the form is back and the thank-you message is gone.
+test( 'the form comes back after the thank-you message', async ( { page : curPagObj } ) => { // What: Form Return Test. Why: A visitor may want to send another request, so the thank-you gives way to the form once the message has faded out. How: This sends a request, moves the clock six seconds ahead, and checks the form is back and the thank-you message is gone.
 
 
 	await curPagObj.clock.install(); // What: Clock Install Call. Why: Waiting six real seconds would slow the suite. How: This puts the page's timers under the test's control before it loads.

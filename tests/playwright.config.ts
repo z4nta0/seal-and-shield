@@ -83,7 +83,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 		name      : `${ suiNamStr }-${ engNamStr }`, // What: Name. Why: A failure has to say which suite and engine it came from. How: This names the project after both.
 		testMatch : `${ suiNamStr }/**/*.spec.ts`,   // What: Test Match. Why: Each suite lives in its own folder. How: This runs every spec in the suite's folder under tests/.
 
-		use : { // What: Use. Why: The project has to launch its own engine, and the security suite its own server. How: This sets the browser it runs in, which build of it, and, for the security suite, the preview server's address.
+		use : { // What: Use. Why: The project has to launch its own engine, and the security suite its own server. How: This sets the browser it runs in, which build of it, and the server its pages open from, the preview for the security suite and the dev server for every other.
 
 
 			baseURL     : suiNamStr === 'security' ? PRE_URL_STR : SER_URL_STR, // What: Base URL. Why: The security suite checks the production build, while every other suite checks the dev server. How: This points each project's page.goto at its own server.
