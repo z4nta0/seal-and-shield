@@ -230,7 +230,7 @@ function AboSecCom () : React.JSX.Element {
 
 
 
-					<div className={ cssModObj.aboTexDiv }>{ /* What: About Text Div Element. Why: The second column tells the company's story. How: This stacks the label, heading, story, and values beside the logo, or below it at 900px wide and below. */ }
+					<div className={ cssModObj.aboTexDiv }>{ /* What: About Text Div Element. Why: The second column tells the company's story. How: This stacks the label, heading, divider, story, and values beside the logo, or below it at 900px wide and below. */ }
 
 
 						<p

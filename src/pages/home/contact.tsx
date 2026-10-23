@@ -384,7 +384,7 @@ function ConSecCom () : React.JSX.Element {
 			<div className={ cssModObj.conInnDiv }>{ /* What: Contact Inner Div Element. Why: The invitation and the form sit side by side. How: This lays them out in two columns within the content width, stacking the form below the invitation at 900px wide and below. */ }
 
 
-				<div>{ /* What: Contact Info Div Element. Why: The first column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button beside the form, or above it at 900px wide and below. */ }
+				<div>{ /* What: Contact Info Div Element. Why: The first column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, divider, invitation, details, and call button beside the form, or above it at 900px wide and below. */ }
 
 
 					<p

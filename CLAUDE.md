@@ -299,8 +299,10 @@ waiting for the page to settle.
   middle click on the bar's About link each open it in a new tab, a Ctrl or Cmd
   click on the menu's About link leaves the menu open, and the menu closes on
   Escape, on a tap of its dimmer, and when the screen widens; the contact form
-  refuses incomplete requests and reports a faked Netlify answer honestly; and
-  the 404 page, its buttons, and a section address like /#about lead where they
+  refuses incomplete requests, reports a faked Netlify answer honestly, clears
+  its error on a retry, and comes back after the thank-you message; and an
+  unknown address shows the 404 page with its own title and noindex tag, while
+  its buttons and links and a section address like /#about lead where they
   should. `feedback.spec.ts`, adapted from reese-roofing's, checks that every
   control in every state has a hover and press change, with every property each
   change touches (on the control or anything inside it) eased by a transition,
@@ -327,14 +329,15 @@ waiting for the page to settle.
   box, two reachable controls overlapping, or a grid whose rows hold different
   counts (a lone centered last card aside).
 - `npm run test:seo`: checks each route's title, description, canonical,
-  robots, and single h1, and the author on the home page; that the structured
-  data is a RoofingContractor with the site's name and live URL, that its phone
-  matches every call link and its city, hours, founding year, legal name, and
-  service areas all appear on the page, and that it gives no street address;
-  that the social tags are complete and match the page, the theme color names
-  the site's darkest navy, the card is a 1,200x630 PNG under 300 KB, and every
-  linked icon is served at its size; and that robots.txt and the sitemap say
-  what they should.
+  robots, and single h1, and the author on the home page; that index.html
+  itself, fetched without a browser, carries the home page's full title and
+  description; that the structured data is a RoofingContractor with the site's
+  name and live URL, that its phone matches every call link and its city,
+  hours, founding year, legal name, and service areas all appear on the page,
+  and that it gives no street address; that the social tags are complete and
+  match the page, the theme color names the site's darkest navy, the card is a
+  1,200x630 PNG under 300 KB, and every linked icon is served at its size; and
+  that robots.txt and the sitemap say what they should.
 - `npm test` runs every suite.
 
 ## Live checks
@@ -344,7 +347,9 @@ Done by the user on 2026-10-10, after the step 7 deploy:
   `data-netlify`, and `hidden`, and each field carries its `name`, an
   `aria-label` (added for WAVE, below), and, on the inputs, a `type`. It was
   rebuilt from pasted JSX that repeated the React form's input ids.
-- **Security headers and social preview**: both graded with no problems.
+- **Security headers and social preview**: both graded with no problems (the
+  preview then showed the original `og-image.png`; `og-image-2.png` gets the
+  same check after its deploy, as noted under step 7).
 - **Contrast over the gradients**, which axe can't measure (the hero's,
   Contact section's, and footer's text): checked by eye and passed.
 - **WAVE reports** (2026-10-09): the hidden Netlify form's fields now carry
