@@ -27,6 +27,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * then update the images' width and height attributes if a size moved.
  *
  * Sections:
+ *  - Types
  *  - Constants
  *  - Module Init
  *
@@ -36,7 +37,7 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
 
 
 
-// #region Constants
+// #region Types
 
 type LogRecTyp = { // What: Logo Record Type. Why: Every logo is described the same way. How: This names its original, its output, its size, and its encoding quality.
 
@@ -49,6 +50,12 @@ type LogRecTyp = { // What: Logo Record Type. Why: Every logo is described the s
 
 
 };
+
+// #endregion Types
+
+
+
+// #region Constants
 
 // #region LOG_REC_ARR
 
