@@ -55,6 +55,14 @@ treatment. The `author` meta names the business itself.
   the canonical. The 404 page carries the home page's canonical beside its
   `noindex`, which is accepted, since the `noindex` keeps it out of search.
 
+## Label casing
+Decided 2026-10-22: the site's eyebrow labels (the small uppercase line above
+each heading, the menu's included) and its form field labels are written in
+Title Case in the source ("Get In Touch", "Tell Us About Your Roof"), even
+where CSS uppercases them on screen, since screen readers read the source.
+Buttons keep their own wording ("Get a Free Quote", "Submit Free Quote
+Request").
+
 ## Multi-page scroll position
 Decided 2026-10-17: the user-level "Multi-Page React Sites: Scroll Position"
 rule doesn't apply here. The 404 page is the only other route, and it's a

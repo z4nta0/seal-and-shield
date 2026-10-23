@@ -462,7 +462,7 @@ function NavBarCom () : React.JSX.Element {
 					>{ /* What: Menu Contact Div Element. Why: The menu ends with every way to reach the company, since the bar's phone button hides at 768px wide and below, the only width where the menu exists. How: This stacks a label, the call and quote buttons, and the hours and service area. */ }
 
 
-						<span className={ cssModObj.conLabSpa }>Get in touch</span>{ /* What: Contact Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in spaced light blue capitals (the menu exists only at 768px wide and below). */ }
+						<span className={ cssModObj.conLabSpa }>Get In Touch</span>{ /* What: Contact Label Span Element. Why: A small label introduces the contact block like the sections' labels. How: This reads in spaced light blue capitals (the menu exists only at 768px wide and below). */ }
 
 						<div className={ cssModObj.menActDiv }>{ /* What: Menu Actions Div Element. Why: The two ways to get in touch sit side by side. How: This lays the call and quote buttons out in two equal columns (the menu exists only at 768px wide and below). */ }
 
