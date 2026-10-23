@@ -5,7 +5,7 @@
 
 import { execFileSync  } from 'node:child_process';    // What: Exec File Sync. Why: The dependency check asks npm itself. How: This runs npm audit and returns its output.
 import { expect        } from '@playwright/test';      // What: Expect. Why: Each check passes only when the policy and the build are what they should be. How: This asserts on the headers, the built files, and the audit.
-import { fileURLToPath } from 'node:url';              // What: File URL To Path. Why: The build and npm both work from the repo root, two folders above this file. How: This turns that folder's URL into a path.
+import { fileURLToPath } from 'node:url';              // What: File URL To Path. Why: The build folder and the repo root npm works from both sit two folders above this file. How: This turns each one's URL into a path.
 import { heaAllFun     } from '../support/headers.ts'; // What: Headers All Function. Why: The checks test the policy Netlify really sends. How: This reads the /* block of public/_headers.
 import { join          } from 'node:path';             // What: Join. Why: A built file's path is its folder plus its name. How: This joins them with the right separator.
 import { readdirSync   } from 'node:fs';               // What: Read Directory Sync. Why: Every built file is searched for secrets. How: This lists the build folder's entries, recursively.

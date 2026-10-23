@@ -348,7 +348,8 @@ waiting for the page to settle.
 - `npm run test:security` (added 2026-10-23, under the user-level "##
   Testing: Security" baseline): the security suite. `headers.spec.ts` reads
   the policy itself, so it runs in Chromium only: the Content-Security-Policy
-  in `public/_headers` allows only the site's own files and has no
+  in `public/_headers` allows only the site's own files, keeps the base
+  address and form posts on the site, refuses framing and plugins, and has no
   `unsafe-inline`, `unsafe-eval`, or wildcard, HSTS lasts at least a year
   across subdomains, the other hardening headers are set, the built files hold
   no private key or provider token, and `npm audit` finds no high or critical

@@ -384,7 +384,7 @@ for ( const [ pagNamStr, rouPatStr ] of [ [ 'home page', '/' ], [ '404 page', '/
 
 // #region Mobile Menu Checks
 
-test( 'the menu button opens and closes the menu', async ( { page : curPagObj } ) => { // What: Menu Toggle Test. Why: The menu button is the bar's only way to the section links on a phone, where the bar's own row is hidden. How: This opens the menu, checks its links show and the page behind it is inert, then closes it again and checks the button reports it collapsed and the page is no longer inert.
+test( 'the menu button opens and closes the menu', async ( { page : curPagObj } ) => { // What: Menu Toggle Test. Why: The menu button is the bar's only way to the section links on a phone, where the bar's own row is hidden. How: This opens the menu, checks its Services link shows and the page behind it is inert, then closes it again and checks the button reports it collapsed and the page is no longer inert.
 
 
 	await opeRouFun( curPagObj, '/', PHO_VIE_OBJ ); // What: Phone Open Call. Why: The menu button shows only on small screens. How: This opens the home page at phone size.
@@ -663,7 +663,7 @@ for ( const [ conLabStr, secIdeStr, locKeyStr, conDesStr ] of [ [ 'Get a Free Qu
 
 		const conLocObj = locKeyStr === 'main' // What: Control Locator Object. Why: Each kind of control lives in a different part of the page. How: This finds the quote link in the page's content, the link in the bar, or the link in the footer.
 			? curPagObj.getByRole( 'main' ).getByRole( 'link', { name : conLabStr } )                                 // What: Quote Link Locator. Why: The page's own button is in its main content. How: This finds it by its label.
-			: locKeyStr === 'bar'                                                                                     // What: Bar Check. Why: The bar and the footer hold different kinds of controls. How: This picks the bar's link next.
+			: locKeyStr === 'bar'                                                                                     // What: Bar Check. Why: The bar's links and the footer's sit in different navigation landmarks. How: This picks the bar's link next.
 				? curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { name : conLabStr } )    // What: Bar Link Locator. Why: The bar holds its own section links. How: This finds one by its label.
 				: curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : conLabStr } ); // What: Footer Link Locator. Why: The footer's section controls are links too. How: This finds one by its label.
 

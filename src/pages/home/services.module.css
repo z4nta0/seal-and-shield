@@ -339,7 +339,7 @@
 
 
 }
-.areTagSpa:hover { /* What: Hovered Area Tag Span. Why: The tag under the pointer should respond. How: This fills it solid blue. */
+.areTagSpa:hover { /* What: Hovered Area Tag Span. Why: The tag under the pointer should respond. How: This fills it and its outline solid blue. */
 
 
 	background   : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */
