@@ -511,7 +511,7 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Quote Request Form Returning. Why: Someone who asked for less motion shouldn't see the form rise in. How: This applies only when they have. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Quote Request Form Returning. Why: Someone who asked for less motion shouldn't see the form rise in. How: This applies only when the reduced-motion preference is set. */
 
 
 	.quoReqFor--returning { /* What: Motionless Quote Request Form Returning. Why: The form should simply reappear. How: This turns the animation off. */
