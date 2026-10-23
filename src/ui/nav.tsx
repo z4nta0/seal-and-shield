@@ -241,7 +241,7 @@ function NavBarCom () : React.JSX.Element {
 
 		const navBarEle = navBarRef.current!; // What: Navigation Bar Element. Why: The bar and its menu stay usable. How: This reads the bar. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after React attaches refs, and the bar always renders.
 		const scrDivEle = scrDivRef.current!; // What: Scrim Div Element. Why: The dimmer stays clickable to close the menu. How: This reads the dimmer. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after React attaches refs, and the dimmer always renders.
-		const sibEleArr = Array.from( navBarEle.parentElement!.children ).filter( ( sibCurEle ) => sibCurEle !== navBarEle && sibCurEle !== scrDivEle ); // What: Sibling Element Array. Why: The page's main content and footer sit beside the bar and the dimmer. How: This collects every child of the bar's parent except those two. // What: Non-Null Note. Why: TypeScript can't see the bar has a parent. How: The bar always renders inside its page.
+		const sibEleArr = Array.from( navBarEle.parentElement!.children ).filter( ( sibCurEle ) => sibCurEle !== navBarEle && sibCurEle !== scrDivEle ); // What: Sibling Element Array. Why: The skip link, the page's main content, and the footer sit beside the bar and the dimmer. How: This collects every child of the bar's parent except those two. // What: Non-Null Note. Why: TypeScript can't see the bar has a parent. How: The bar always renders inside its page.
 		const togButEle = togButRef.current!; // What: Toggle Button Element. Why: Escape returns focus here, and its visibility says whether the menu still applies. How: This reads the menu button. // What: Non-Null Note. Why: TypeScript can't see the ref is attached. How: Effects run after React attaches refs, and the button always renders.
 
 
@@ -265,7 +265,7 @@ function NavBarCom () : React.JSX.Element {
 
 
 
-		for ( const sibCurEle of sibEleArr ) sibCurEle.setAttribute( 'inert', '' ); // What: Sibling Inert Loop. Why: Content under the dimmer shouldn't take focus or be read while the menu is open. How: This marks each sibling inert.
+		for ( const sibCurEle of sibEleArr ) sibCurEle.setAttribute( 'inert', '' ); // What: Sibling Inert Loop. Why: The skip link and the content under the dimmer shouldn't take focus or be read while the menu is open. How: This marks each sibling inert.
 
 
 
