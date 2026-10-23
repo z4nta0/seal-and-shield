@@ -667,7 +667,7 @@
 
 /* What: Form Field Label Pointer. Why: The message field's label matches the others. How: Its rule sits in the forRowDiv region, where the class first appears. */
 
-/* What: Form Field Textarea Pointer. Why: The message box shares the inputs' look and focus ring. How: Its rule, shared with the inputs, sits in the forRowDiv region, where the class first appears. */
+/* What: Form Field Textarea Pointer. Why: The message box shares the inputs' look and focus ring. How: Its rule, shared with the inputs, sits in the forRowDiv region, where the inputs first appear. */
 
 /* #endregion forFieDiv */
 

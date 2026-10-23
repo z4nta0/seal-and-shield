@@ -538,7 +538,7 @@ button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard use
 
 /* #region Body State */
 
-[data-scroll-reveal-block] { /* What: Scroll Reveal Block. Why: The home page's sections below the hero fade their blocks in as they scroll into view, a role shared across modules. How: This starts every block marked by the reveal hook transparent and a little low, ready to ease into place. */
+[data-scroll-reveal-block] { /* What: Scroll Reveal Block. Why: The home page's sections below the hero fade their blocks in as they scroll into view, a role shared across modules. How: This starts every block marked by the reveal hook transparent and a little low, and eases its fade and rise into place once the hook shows it. */
 
 
 	opacity    : 0;

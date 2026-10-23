@@ -27,7 +27,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The policy set
  * so every response is given its headers here. First a check proves the policy
  * is live, by injecting an inline script and seeing it refused and reported.
  * Then every state the suites visit is checked for policy violations and
- * against its related rules, such as how new tab links are closed off.
+ * checked to close off every new tab link.
  *
  * Sections:
  *  - Helpers
