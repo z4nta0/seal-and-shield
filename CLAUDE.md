@@ -225,25 +225,24 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      re-encoded full logo as `og-image-2.png`, so the next change takes
      `og-image-3.png`. The user checked the live card with a preview checker on
      2026-10-10, and it came back with no problems.
-   - **Interaction feedback: done 2026-10-09.** Every link and button
-     changes color on hover, and the buttons also lift a pixel (the service
-     cards 3px, while the bar's menu toggle only changes color); buttons press
-     in to 0.97 and text links dim. Focus rings
-     ease in from a zero-width outline set once in `styles.css`, drawn in
-     `--foc-rin-col`, which the dark bar, hero, About card, Contact
-     section, footer, and 404 page set to the light accent for contrast.
-     The contact form's success panel fades up with its check popping in
-     once, its error fades in, and the submit button's label fades to
-     Sending... while a request is out. Since 2026-10-18 the panel and the
-     error also leave the way they came, sinking out quicker (209ms and
-     158ms) before the form returns or a retry goes out; their exits shorten
-     to .01ms under reduced motion, since the page waits on their end to
-     remove them. Everything has a reduced-motion variant.
-     The service cards lift and the service area tags fill on hover even
-     though neither is clickable, which the user chose to keep (2026-10-18).
-     The menu's phone button carries a border the same blue as its fill,
-     so when hover empties the fill to leave a blue outline with light blue
-     text, the button keeps its size and nothing beside it moves.
+   - **Interaction feedback: done 2026-10-09.** Every link and button changes
+     color on hover, and the buttons also lift a pixel (the service cards 3px,
+     while the bar's menu toggle only changes color); buttons press in to 0.97
+     and text links dim. Focus rings ease in from a zero-width outline set once
+     in `styles.css`, drawn in `--foc-rin-col`, which the skip link, the dark
+     bar, hero, About card, Contact section, footer, and 404 page set to the
+     light accent for contrast. The contact form's success panel fades up with
+     its check popping in once, its error fades in, and the submit button's
+     label fades to Sending... while a request is out. Since 2026-10-18 the
+     panel and the error also leave the way they came, sinking out quicker
+     (209ms and 158ms) before the form returns or a retry goes out; their exits
+     shorten to .01ms under reduced motion, since the page waits on their end
+     to remove them. Everything has a reduced-motion variant. The service cards
+     lift and the service area tags fill on hover even though neither is
+     clickable, which the user chose to keep (2026-10-18). The menu's phone
+     button carries a border the same blue as its fill, so when hover empties
+     the fill to leave a blue outline with light blue text, the button keeps
+     its size and nothing beside it moves.
    - **Reveal hooks go on a wrapper** wherever the revealed element has its
      own hover or press transform: the reveal's global rule sets
      `transition` and `transform` on the element it marks, which silently
@@ -386,7 +385,8 @@ adjusted to clear 4.5:1. All 144 tests then passed in all three engines.
   each keeping the original's proportions to within about 0.01px where it's
   drawn.
 - **The logos stay raster** (confirmed 2026-10-17): the company has no SVG
-  version of either logo, so the WebP copies below remain until it does.
+  version of either logo, so the WebP copies the logo script renders remain
+  until it does.
 - **The logos were resized on 2026-10-08** (at the user's go-ahead, ahead
   of step 7): `logo-full.png` went from 4,763x4,640 (3.7 MB, about 88 MB
   decoded) to 968x943 (299 KB), at least 2x its largest display and 3x the

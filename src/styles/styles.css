@@ -254,15 +254,15 @@
 
 	/* #region Font Size Tokens */
 
-	--fon-siz-bas : 1rem;                                                /* What: Font Size Base = 11px. Why: This is the smallest font size accessibility tools accept, and every other step multiplies it; html sets 1rem to 11px by default. How: Each step above reads it as its starting point. */
-	--fon-siz-p01 : calc( var( --fon-siz-bas ) * var( --cdn-pow-001 ) ); /* What: Font Size Base Plus 1 ~= 14.572px. Why: This is one step up the scale from the base. How: This multiplies the base by the first power of the core design number. */
-	--fon-siz-p02 : calc( var( --fon-siz-bas ) * var( --cdn-pow-002 ) ); /* What: Font Size Base Plus 2 ~= 19.304px. Why: This is two steps up the scale from the base. How: This multiplies the base by the second power of the core design number. */
-	--fon-siz-p03 : calc( var( --fon-siz-bas ) * var( --cdn-pow-003 ) ); /* What: Font Size Base Plus 3 ~= 25.572px. Why: This is three steps up the scale from the base. How: This multiplies the base by the third power of the core design number. */
-	--fon-siz-p04 : calc( var( --fon-siz-bas ) * var( --cdn-pow-004 ) ); /* What: Font Size Base Plus 4 ~= 33.876px. Why: This is four steps up the scale from the base. How: This multiplies the base by the fourth power of the core design number. */
-	--fon-siz-p05 : calc( var( --fon-siz-bas ) * var( --cdn-pow-005 ) ); /* What: Font Size Base Plus 5 ~= 44.876px. Why: This is five steps up the scale from the base. How: This multiplies the base by the fifth power of the core design number. */
-	--fon-siz-p06 : calc( var( --fon-siz-bas ) * var( --cdn-pow-006 ) ); /* What: Font Size Base Plus 6 ~= 59.447px. Why: This is six steps up the scale from the base. How: This multiplies the base by the sixth power of the core design number. */
-	--fon-siz-p07 : calc( var( --fon-siz-bas ) * var( --cdn-pow-007 ) ); /* What: Font Size Base Plus 7 ~= 78.751px. Why: This is seven steps up the scale from the base. How: This multiplies the base by the seventh power of the core design number. */
-	--fon-siz-p08 : calc( var( --fon-siz-bas ) * var( --cdn-pow-008 ) ); /* What: Font Size Base Plus 8 ~= 104.323px. Why: This is eight steps up the scale from the base, its largest step. How: This multiplies the base by the eighth power of the core design number. */
+	--fon-siz-bas : 1rem;                                                /* What: Font Size Base = 11px. Why: This is the font size scale's base step, the smallest size accessibility tools accept; html sets 1rem to 11px by default. How: Each step above reads it as its starting point. */
+	--fon-siz-p01 : calc( var( --fon-siz-bas ) * var( --cdn-pow-001 ) ); /* What: Font Size Base Plus 1 ~= 14.572px. Why: This is the font size scale's step 1 above its base. How: This multiplies the base by the first power of the core design number. */
+	--fon-siz-p02 : calc( var( --fon-siz-bas ) * var( --cdn-pow-002 ) ); /* What: Font Size Base Plus 2 ~= 19.304px. Why: This is the font size scale's step 2 above its base. How: This multiplies the base by the second power of the core design number. */
+	--fon-siz-p03 : calc( var( --fon-siz-bas ) * var( --cdn-pow-003 ) ); /* What: Font Size Base Plus 3 ~= 25.572px. Why: This is the font size scale's step 3 above its base. How: This multiplies the base by the third power of the core design number. */
+	--fon-siz-p04 : calc( var( --fon-siz-bas ) * var( --cdn-pow-004 ) ); /* What: Font Size Base Plus 4 ~= 33.876px. Why: This is the font size scale's step 4 above its base. How: This multiplies the base by the fourth power of the core design number. */
+	--fon-siz-p05 : calc( var( --fon-siz-bas ) * var( --cdn-pow-005 ) ); /* What: Font Size Base Plus 5 ~= 44.876px. Why: This is the font size scale's step 5 above its base. How: This multiplies the base by the fifth power of the core design number. */
+	--fon-siz-p06 : calc( var( --fon-siz-bas ) * var( --cdn-pow-006 ) ); /* What: Font Size Base Plus 6 ~= 59.447px. Why: This is the font size scale's step 6 above its base. How: This multiplies the base by the sixth power of the core design number. */
+	--fon-siz-p07 : calc( var( --fon-siz-bas ) * var( --cdn-pow-007 ) ); /* What: Font Size Base Plus 7 ~= 78.751px. Why: This is the font size scale's step 7 above its base. How: This multiplies the base by the seventh power of the core design number. */
+	--fon-siz-p08 : calc( var( --fon-siz-bas ) * var( --cdn-pow-008 ) ); /* What: Font Size Base Plus 8 ~= 104.323px. Why: This is the font size scale's step 8 above its base, its largest step. How: This multiplies the base by the eighth power of the core design number. */
 
 	/* #endregion Font Size Tokens */
 
@@ -304,7 +304,7 @@
 
 	/* #region Layout Tokens */
 
-	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                     /* What: Container Maximum Width ~= 1,449.365px. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: This divides a 1,920px viewport by the core design number, the same cap as reese-roofing, so below that width only the gutter limits the column. */
+	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                     /* What: Container Maximum Width ~= 1,449.365px. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: This divides a 1,920px viewport by the core design number, the same cap as reese-roofing, gutters included, so below about 1,449px wide only the gutter limits the column. */
 	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) ); /* What: Gutter Side Padding, about 19.304px - 44.876px. Why: Content needs side margins that grow with the screen within sensible bounds. How: This holds horizontal step 016 between the p01 and p04 horizontal spacing steps, the same gutter as reese-roofing. */
 	--nav-bar-hei : calc( var( --spa-ver-p01 ) * 2 + var( --ver-rhy-p04 ) * 1rem );            /* What: Navigation Bar Height ~= 83.483px. Why: The fixed bar sits over the top of every page, so content that starts below it has to clear its height. How: This adds the bar's top and bottom padding to its logo's height, the bar's height at the top of the page. */
 	--nav-scr-hei : calc( var( --spa-ver-m01 ) * 2 + var( --ver-rhy-p04 ) * 1rem );            /* What: Navigation Scrolled Height ~= 66.876px. Why: The fixed bar sits shorter once the page has scrolled, since its padding tightens. How: This adds the scrolled bar's top and bottom padding to its logo's height, the bar's height once the page has scrolled. */
@@ -315,11 +315,11 @@
 
 	/* #region Radius Tokens */
 
-	--rad-bor-xsm : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Radius Border Extra Small ~= 3.572px. Why: This is the scale's subtlest corner. How: This multiplies the m05 rhythm step by 1rem. */
-	--rad-bor-sma : calc( var( --ver-rhy-m02 ) * 1rem ); /* What: Radius Border Small ~= 8.304px. Why: This is the scale's small corner. How: This multiplies the m02 rhythm step by 1rem. */
-	--rad-bor-med : calc( var( --ver-rhy-m01 ) * 1rem ); /* What: Radius Border Medium = 11px. Why: This is the scale's medium corner. How: This multiplies the m01 rhythm step by 1rem. */
-	--rad-bor-lar : calc( var( --ver-rhy-bas ) * 1rem ); /* What: Radius Border Large ~= 14.572px. Why: This is the scale's large corner. How: This multiplies the bas rhythm step by 1rem. */
-	--rad-bor-xla : calc( var( --ver-rhy-p01 ) * 1rem ); /* What: Radius Border Extra Large ~= 19.304px. Why: This is the scale's softest corner. How: This multiplies the p01 rhythm step by 1rem. */
+	--rad-bor-xsm : calc( var( --ver-rhy-m05 ) * 1rem ); /* What: Radius Border Extra Small ~= 3.572px. Why: This is the border radius scale's smallest step. How: This multiplies the m05 rhythm step by 1rem. */
+	--rad-bor-sma : calc( var( --ver-rhy-m02 ) * 1rem ); /* What: Radius Border Small ~= 8.304px. Why: This is the border radius scale's small step. How: This multiplies the m02 rhythm step by 1rem. */
+	--rad-bor-med : calc( var( --ver-rhy-m01 ) * 1rem ); /* What: Radius Border Medium = 11px. Why: This is the border radius scale's medium step. How: This multiplies the m01 rhythm step by 1rem. */
+	--rad-bor-lar : calc( var( --ver-rhy-bas ) * 1rem ); /* What: Radius Border Large ~= 14.572px. Why: This is the border radius scale's large step. How: This multiplies the bas rhythm step by 1rem. */
+	--rad-bor-xla : calc( var( --ver-rhy-p01 ) * 1rem ); /* What: Radius Border Extra Large ~= 19.304px. Why: This is the border radius scale's largest step. How: This multiplies the p01 rhythm step by 1rem. */
 
 	/* #endregion Radius Tokens */
 
@@ -392,9 +392,9 @@
 	--ver-rhy-m04 : var( --cdn-pow-003-rec ); /* What: Vertical Rhythm Base Minus 4 ~= 0.430. Why: This is the vertical rhythm's step 4 below its base. How: This is the reciprocal of the third power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m03 : var( --cdn-pow-002-rec ); /* What: Vertical Rhythm Base Minus 3 ~= 0.570. Why: This is the vertical rhythm's step 3 below its base. How: This is the reciprocal of the second power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-m02 : var( --cdn-pow-001-rec ); /* What: Vertical Rhythm Base Minus 2 ~= 0.755. Why: This is the vertical rhythm's step 2 below its base. How: This is the reciprocal of the first power of the core design number, multiplied by 1rem where a length is needed. */
-	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: This is the vertical rhythm's step 1 below its base. How: This is read unitless as a line height, so each line is exactly its own font size tall, or multiplied by 1rem where a length is needed. */
+	--ver-rhy-m01 : var( --cdn-pow-000 );     /* What: Vertical Rhythm Base Minus 1 = 1. Why: This is the vertical rhythm's step 1 below its base. How: This is the zeroth power of the core design number, used unitless or multiplied by 1rem where a length is needed. */
 	--ver-rhy-bas : var( --cdn-pow-001 );     /* What: Vertical Rhythm Base ~= 1.325. Why: This is the vertical rhythm's base step. How: This is the first power of the core design number, multiplied by 1rem where a length is needed, and every other rhythm step counts from it. */
-	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: This is the vertical rhythm's step 1 above its base. How: This is the second power of the core design number, read unitless as a line height (~= 19.304px on base-size text) or multiplied by 1rem where a length is needed. */
+	--ver-rhy-p01 : var( --cdn-pow-002 );     /* What: Vertical Rhythm Base Plus 1 ~= 1.755. Why: This is the vertical rhythm's step 1 above its base. How: This is the second power of the core design number, used unitless or multiplied by 1rem where a length is needed. */
 	--ver-rhy-p02 : var( --cdn-pow-003 );     /* What: Vertical Rhythm Base Plus 2 ~= 2.325. Why: This is the vertical rhythm's step 2 above its base. How: This is the third power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p03 : var( --cdn-pow-004 );     /* What: Vertical Rhythm Base Plus 3 ~= 3.080. Why: This is the vertical rhythm's step 3 above its base. How: This is the fourth power of the core design number, multiplied by 1rem where a length is needed. */
 	--ver-rhy-p04 : var( --cdn-pow-005 );     /* What: Vertical Rhythm Base Plus 4 ~= 4.080. Why: This is the vertical rhythm's step 4 above its base. How: This is the fifth power of the core design number, multiplied by 1rem where a length is needed. */
