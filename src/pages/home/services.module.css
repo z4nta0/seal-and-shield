@@ -203,7 +203,7 @@
 
 	.serCarDiv,
 	.serCarDiv::after,
-	.serCarDiv:hover::after { /* What: Motionless Services Card Div. Why: The hover look should simply switch. How: This turns both transitions off. */
+	.serCarDiv:hover::after { /* What: Motionless Services Card Div. Why: The hover look should simply switch. How: This turns the card's lift transition and both of its shadow's fade transitions off, naming the hovered shadow too since its selector outranks the base. */
 
 
 		transition : none;

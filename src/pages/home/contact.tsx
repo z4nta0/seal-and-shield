@@ -777,8 +777,8 @@ function ConSecCom () : React.JSX.Element {
 									key={ senProBoo ? 'sending' : 'ready' } // What: Label Key. Why: A new key remounts the label, which replays its fade-in. How: This changes whenever the button switches between ready and sending.
 
 									className={ cssModObj.subLabSpa }
-								>{ /* What: Submit Label Span Element. Why: The label fades to its new text when a request goes out. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
-									{ senProBoo ? 'Sending...' : 'Submit Free Quote Request' }{ /* What: Submit Label Expression. Why: The button should say when it's busy. How: This reads Sending... while a submission is out. */ }
+								>{ /* What: Submit Label Span Element. Why: The label fades to its new text whenever the button switches between ready and sending. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
+									{ senProBoo ? 'Sending...' : 'Submit Free Quote Request' }{ /* What: Submit Label Expression. Why: The button should say when it's busy. How: This reads Sending... while a submission is out, and Submit Free Quote Request otherwise. */ }
 								</span>
 
 

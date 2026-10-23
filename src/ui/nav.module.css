@@ -11,13 +11,13 @@
  * opens, with the brand, the section links and phone button on wide screens,
  * and on screens 768px wide or narrower the menu button and the panel it opens
  * below the bar over a dimmed page: the section links, entering one after
- * another, and a contact block with the call and quote buttons, the hours, and
- * the service area. The shared container styles the bar's inner row used to
- * borrow from the global stylesheet are copied onto its own class here. The
- * bar's states are attributes rather than classes: data-page-scroll-active on
- * the bar, data-section-link-active on the link for the section being read,
- * aria-expanded on the menu button, and data-mobile-menu-open on the dimmer,
- * the bar, and the panel.
+ * another, and a contact block with its label, the call and quote buttons, the
+ * hours, and the service area. The shared container styles the bar's inner row
+ * used to borrow from the global stylesheet are copied onto its own class
+ * here. The bar's states are attributes rather than classes:
+ * data-page-scroll-active on the bar, data-section-link-active on the link for
+ * the section being read, aria-expanded on the menu button, and
+ * data-mobile-menu-open on the dimmer, the bar, and the panel.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -424,7 +424,7 @@
 	.navLinAnc,
 	.navLinAnc::after,
 	.navLinAnc[data-section-link-active]::after,
-	.navLinAnc:hover::after { /* What: Motionless Navigation Link Anchor. Why: The color, underline, press dim, and focus ring should simply switch. How: This turns both transitions off. */
+	.navLinAnc:hover::after { /* What: Motionless Navigation Link Anchor. Why: The color, underline, press dim, and focus ring should simply switch. How: This turns the link's transition and both of its underline's transitions off, naming the underline's shown state too since its selector outranks the base. */
 
 
 		transition : none;
@@ -738,7 +738,7 @@
 
 	.menLinAnc,
 	.menLinAnc::after,
-	.menLinAnc[data-section-link-active]::after { /* What: Motionless Menu Link Anchor. Why: The hover color, press dim, focus ring, and active dot should simply switch. How: This turns both transitions off. */
+	.menLinAnc[data-section-link-active]::after { /* What: Motionless Menu Link Anchor. Why: The hover color, press dim, focus ring, and active dot should simply switch. How: This turns the link's transition and both of its dot's transitions off, naming the active dot too since its selector outranks the base. */
 
 
 		transition : none;
