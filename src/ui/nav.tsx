@@ -29,9 +29,8 @@ import { useState     } from 'react';              // What: Use State. Why: The 
  * bar takes on a solid background once the page scrolls past its top, and
  * the link for whichever section the visitor is reading is marked active on
  * the home page. Every section link closes the menu and reaches its section
- * through section-link.ts: in place on the home page, smoothly unless the
- * visitor asked for reduced motion, or by navigating home from any other
- * page.
+ * through section-link.ts: smoothly in place on the home page, or by
+ * navigating home from any other page.
  *
  * Sections:
  *  - Components
@@ -195,11 +194,10 @@ function NavBarCom () : React.JSX.Element {
 	 * Handles a click on any section link, the brand and the menu's quote
 	 * button included, by handing it to secCliFun, which leaves a Ctrl, Cmd,
 	 * Shift, or Alt click to the browser and otherwise scrolls to the section
-	 * on the home page, smoothly unless the visitor asked for reduced motion,
-	 * or navigates home to it from any other page. A middle click, which the
-	 * browser sends as auxclick, never reaches the handler. The mobile menu
-	 * closes only when secCliFun handled the click, so a link opened in a new
-	 * tab leaves it open.
+	 * on the home page or navigates home to it from any other page. A middle
+	 * click, which the browser sends as auxclick, never reaches the handler.
+	 * The mobile menu closes only when secCliFun handled the click, so a link
+	 * opened in a new tab leaves it open.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *

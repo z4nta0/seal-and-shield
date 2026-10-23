@@ -285,7 +285,7 @@
 
 }
 
-/* What: Eyebrow Label Paragraph Pointer. Why: The panel opens with the same small label as the section's header. How: Its rule sits in the serHeaDiv region, where the class first appears. */
+/* What: Eyebrow Label Paragraph Pointer. Why: The panel opens with the same short label as the section's header. How: Its rule sits in the serHeaDiv region, where the class first appears. */
 
 /* What: Section Title Heading Pointer. Why: The panel's heading shares the section heading's look. How: Its rule sits in the serHeaDiv region, where the class first appears, and the rule below turns it white on the navy. */
 .serAreDiv .secTitHea { /* What: Section Title Heading In Area. Why: Navy text would vanish on the navy panel. How: This turns the panel's heading white. */

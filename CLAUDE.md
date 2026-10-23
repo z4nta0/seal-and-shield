@@ -363,7 +363,7 @@ adjusted to clear 4.5:1. All 144 tests then passed in all three engines.
   (`design/logos/render.mts`) writes both WebP copies into `src/` through
   Chromium's canvas. The full logo stays 968x943 at 0.95 quality (57 KB),
   under 3x its widest drawing of about 628px, and the simple mark became
-  131x111 lossless (15 KB, down from 21 KB), under 3x its 44.875px box,
+  131x111 lossless (15 KB, down from 21 KB), under 3x its 44.876px box,
   each keeping the original's proportions to within about 0.01px where it's
   drawn.
 - **The logos stay raster** (confirmed 2026-10-17): the company has no SVG

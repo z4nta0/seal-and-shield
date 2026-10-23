@@ -343,7 +343,7 @@
 
 
 }
-.forSucDiv.forSucDiv--leaving { /* What: Form Success Div Leaving. Why: The message should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, while its own reduced-motion variant below shortens it instead. */
+.forSucDiv.forSucDiv--leaving { /* What: Form Success Div Leaving. Why: The message should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule. */
 
 
 	animation : forSucDivHideFadeOut var( --dur-ani-p01 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 1 ~= 209.1ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
@@ -685,7 +685,7 @@
 
 
 }
-.forErrPar.forErrPar--leaving { /* What: Form Error Paragraph Leaving. Why: The error should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, while its own reduced-motion variant below shortens it instead. */
+.forErrPar.forErrPar--leaving { /* What: Form Error Paragraph Leaving. Why: The error should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule. */
 
 
 	animation : forErrParHideFadeOut var( --dur-ani-bas ) var( --mot-acc-eas ) both; /* Duration Animation Base ~= 157.8ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */

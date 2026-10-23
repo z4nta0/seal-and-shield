@@ -85,10 +85,9 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
  * Renders the hero section. Its two buttons are real links to the Contact and
  * Services sections (/#contact, /#services), so the browser can open, copy, or
  * show their address, and they open in a new tab on a Ctrl, Cmd, or middle
- * click, while a plain click goes through secCliFun, which scrolls to the
- * section in place, smoothly unless the visitor asked for reduced motion. The
- * background grid, glow, and the logo's ring are decorative and hidden from
- * assistive technology.
+ * click, while a plain click goes through secCliFun, which scrolls smoothly to
+ * the section in place. The background grid, glow, and the logo's ring are
+ * decorative and hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -204,7 +203,7 @@ function HerSecCom () : React.JSX.Element {
 							className={ cssModObj.logRinDiv }
 
 							aria-hidden='true'
-						/>{ /* What: Logo Ring Div Element. Why: A slow pulse around the logo adds a little life. How: This is decorative, hidden from assistive technology, and still under reduced motion. */ }
+						/>{ /* What: Logo Ring Div Element. Why: A slow pulse around the logo adds a little life. How: This is decorative and hidden from assistive technology. */ }
 
 						<img
 							className={ cssModObj.herLogIma }

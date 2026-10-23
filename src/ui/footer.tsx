@@ -42,13 +42,13 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  *
  * @summary
  * Renders the footer. Each section link reaches its section through
- * section-link.ts, scrolling in place on the home page, smoothly unless the
- * visitor asked for reduced motion, or navigating home from any other page,
- * and is labelled with the section's id capitalized. A Ctrl, Cmd, Shift, or
- * Alt click is left to the browser, and a middle click, which the browser
- * sends as auxclick, never reaches the handler, so a Ctrl or Cmd click or a
- * middle click opens the section in a new tab. The copyright line reads the
- * current year each time the footer renders, so it never goes stale.
+ * section-link.ts, scrolling smoothly in place on the home page, or navigating
+ * home from any other page, and shows its row's label from the shared section
+ * list. A Ctrl, Cmd, Shift, or Alt click is left to the browser, and a middle
+ * click, which the browser sends as auxclick, never reaches the handler, so a
+ * Ctrl or Cmd click or a middle click opens the section in a new tab. The
+ * copyright line reads the current year each time the footer renders, so it
+ * never goes stale.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

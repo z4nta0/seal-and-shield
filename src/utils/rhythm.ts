@@ -113,7 +113,7 @@ const tokPxlFun = ( tokNamStr : string ) : number => { // What: Token Pixel Func
 
 
 
-	return tokHeiNum;
+	return tokHeiNum; // What: Token Height Number Return. Why: The caller works in pixels. How: This hands back the probe's measured height.
 
 
 };

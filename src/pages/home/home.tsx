@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { AboSecCom   } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
+import { AboSecCom   } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the Services section.
 import { ConSecCom   } from './contact.tsx';       // What: Contact Section Component. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
 import { HerSecCom   } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
 import { NavBarCom   } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router';        // What: Use Navigate. Why: T
  *
  * @summary
  * The site's home page: the shared top bar, then the four sections in reading
- * order (the hero, services, about, and contact) inside the main landmark,
+ * order (the hero, Services, About, and Contact) inside the main landmark,
  * then the shared footer. It's the page the root path shows, and the one every
  * section link comes back to from any other page, arriving with the section's
  * id as the hash.

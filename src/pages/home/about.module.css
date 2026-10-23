@@ -11,9 +11,9 @@
  * narrower with the left column centered and capped. The shared container,
  * eyebrow label, section title, and divider styles the section used to borrow
  * from the global stylesheet are copied in under the same names every module
- * gives them, along with the text column's adjustment to the label. The phone
- * value is an anchor that shares the value rule, and its own link rule comes
- * after that rule on purpose, so its light blue wins.
+ * gives them, the label's color deepened to the main blue. The phone value is
+ * an anchor that shares the value rule, and its own link rule comes after that
+ * rule on purpose, so its light blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -23,7 +23,7 @@
 
 /* #region homAboSec */
 
-.homAboSec { /* What: Home About Section. Why: The company's story sits on a white band between the light services and the dark Contact section. How: This fills it white with generous padding above and below. */
+.homAboSec { /* What: Home About Section. Why: The company's story sits on a white band between the light Services section and the dark Contact section. How: This fills it white with generous padding above and below. */
 
 
 	background : var( --bac-pag-col );   /* Background Page Color = #ffffff */

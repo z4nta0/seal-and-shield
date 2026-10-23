@@ -21,7 +21,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * @summary
  * The page every unknown path falls through to. Between the shared bar and
  * footer, it says the page doesn't exist and offers two ways onward: back
- * to the home page, or straight to the quote request in the contact
+ * to the home page, or straight to the quote request in the Contact
  * section. It carries its own title and a noindex robots tag, since the
  * host answers every unknown path with a 200 and search engines shouldn't
  * index it. The page fills at least the screen's height, so the footer sits
