@@ -69,7 +69,7 @@ type IcoRecTyp = { // What: Icon Record Type. Why: Every PNG icon is described t
  *
 */
 
-const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
+const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file, its size, and whether it's drawn on solid white.
 
 
 	{ filStr : 'favicon-16x16.png',    opaBoo : false, sizNum : 16  }, // What: Small Icon Row. Why: Tabs draw small icons crisper at their own size. How: This renders the 16px icon.
