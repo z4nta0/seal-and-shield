@@ -129,8 +129,9 @@ src/
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test
 suites"), and `design/` holds source artwork that isn't served, with the
-scripts that render it into `public/`: `design/og-image/` (the social
-preview card) and `design/icons/` (the favicon set).
+scripts that render it: `design/og-image/` (the social preview card) and
+`design/icons/` (the favicon set), into `public/`, and `design/logos/` (both
+logos), into `src/`.
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
   and a component only that page uses (the hero, Services, About, and
   Contact sections) lives in that folder. The 404 page is
@@ -352,11 +353,15 @@ reduced-motion variant (with `utils/motion.ts`'s `redMotFun` stopping the
 JavaScript smooth scrolls), the form fields got a focus ring, and the muted
 text, light blue, light-section labels, and footer copyright line were
 adjusted to clear 4.5:1. All 144 tests then passed in all three engines.
-- **To do: shrink the small logo** (recorded 2026-10-18): the Images rule
-  now allows up to 3x, but `logo-simple.webp` is 157x133 in a 44.876px
-  box, about 3.5x by width. Re-encode it near 135x114 through a render
-  script kept in `design/`, update its `width` and `height`, and refresh
-  the rendering baselines in all three engines. Deferred by the user.
+- **The logos are rendered by a script** (done 2026-10-22): both originals
+  (`logo-full.png`, 4,763x4,640, and `logo-simple.png`, 1,210x1,025) were
+  restored from git history into `design/logos/`, and `npm run logos`
+  (`design/logos/render.mts`) writes both WebP copies into `src/` through
+  Chromium's canvas. The full logo stays 968x943 at 0.95 quality (57 KB),
+  under 3x its widest drawing of about 628px, and the simple mark became
+  131x111 lossless (15 KB, down from 21 KB), under 3x its 44.875px box,
+  each keeping the original's proportions to within about 0.01px where it's
+  drawn.
 - **The logos stay raster** (confirmed 2026-10-17): the company has no SVG
   version of either logo, so the WebP copies below remain until it does.
 - **The logos were resized on 2026-10-08** (at the user's go-ahead, ahead
