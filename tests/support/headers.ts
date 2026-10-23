@@ -51,7 +51,8 @@ const HEA_PAT_STR = fileURLToPath( new URL( '../../public/_headers', import.meta
  * keyed by lowercase header name, the way Playwright reports response headers.
  * Netlify's format puts each path on a line of its own and indents that path's
  * headers below it, one Name: value pair per line, with # lines as comments,
- * so this reads the indented lines under /* until the next unindented line.
+ * so this reads the indented lines under /* until the next unindented path
+ * line, skipping comments.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -72,7 +73,7 @@ function heaAllFun () : Record< string, string > {
 
 	const heaAllObj : Record< string, string > = {}; // What: Headers All Object. Why: Each header is looked up by name. How: This collects the /* block's headers.
 
-	let insBloBoo = false; // What: Inside Block Boolean. Why: Only the lines under /* belong to it. How: This turns on at the /* line and off at the next unindented line.
+	let insBloBoo = false; // What: Inside Block Boolean. Why: Only the lines under /* belong to it. How: This turns on at the /* line and off at the next unindented line that names a path.
 
 
 	for ( const linTexStr of readFileSync( HEA_PAT_STR, 'utf8' ).split( '\n' ) ) { // What: Line Loop. Why: The file is read line by line, the way Netlify reads it. How: This walks every line of public/_headers.

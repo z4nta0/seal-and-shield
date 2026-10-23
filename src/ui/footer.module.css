@@ -157,7 +157,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.fooLinAnc { /* What: Motionless Footer Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.fooLinAnc { /* What: Motionless Footer Link Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -225,7 +225,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Phone Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.fooPhoAnc { /* What: Motionless Footer Phone Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.fooPhoAnc { /* What: Motionless Footer Phone Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;

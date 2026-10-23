@@ -205,7 +205,7 @@ function SerSecCom () : React.JSX.Element {
 		>{ /* What: Home Services Section Element. Why: The page's second section shows what the company does. How: Its id, kept as is because it's a link target, is where every Services link and button on the site scrolls to. */ }
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with the page's side padding. */ }
 
 
 				<div

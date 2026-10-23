@@ -20,7 +20,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * sizes the viewport, loads the page, waits for the fonts, scrolls through the
  * page so its scroll-triggered content fades in, waits for every image to
  * decode, runs the state's own action, such as opening the menu, and then
- * waits for the page to stay still so nothing is measured mid-fade.
+ * waits for the page to stay still so nothing is measured mid-fade. Its settle
+ * wait, waiSetFun, is exported too, for a check that has to wait out a change
+ * it makes itself.
  *
  * Sections:
  *  - Types
@@ -42,7 +44,7 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
 	actFun? : ( curPagObj : Page ) => Promise< void >, // What: Action Function. Why: Some states need something opened after the page loads. How: This runs against the loaded page, e.g. clicking the menu toggle.
 	heiNum  : number,                                  // What: Height Number. Why: The viewport's height decides what's on screen. How: This is the viewport height in CSS pixels.
 	ideStr  : string,                                  // What: Identifier String. Why: Each test names the state it checks. How: This becomes part of the test title.
-	patStr  : string,                                  // What: Path String. Why: Each state opens one route. How: This is the path loaded from the dev server.
+	patStr  : string,                                  // What: Path String. Why: Each state opens one route. How: This is the path loaded from the suite's server.
 	widNum  : number                                   // What: Width Number. Why: Layouts and menus change with width. How: This is the viewport width in CSS pixels.
 
 
@@ -73,7 +75,7 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  *
  * - `ideStr` (String): Identifier String, the state's name in test titles.
  *
- * - `patStr` (String): Path String, the route loaded from the dev server.
+ * - `patStr` (String): Path String, the route loaded from the suite's server.
  *
  * - `widNum` (Number): Width Number, the viewport width in CSS pixels.
  *
@@ -275,7 +277,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 	await curPagObj.setViewportSize( { height : staRecObj.heiNum, width : staRecObj.widNum } ); // What: Viewport Size Call. Why: The state's layout depends on its width. How: This sizes the page before it loads, so breakpoints apply from the first paint.
 
-	await curPagObj.goto( staRecObj.patStr ); // What: Page Load Call. Why: Each state starts from a fresh load of its route. How: This opens the path on the suite's dev server.
+	await curPagObj.goto( staRecObj.patStr ); // What: Page Load Call. Why: Each state starts from a fresh load of its route. How: This opens the path on the suite's server, the dev server or, for the security suite, the preview.
 
 	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until every font face has loaded.
 

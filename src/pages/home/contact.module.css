@@ -208,7 +208,7 @@
 
 }
 
-.detValAnc { /* What: Detail Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
+.detValAnc { /* What: Detail Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color, press dim, and focus ring. */
 
 
 	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
@@ -233,7 +233,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Detail Value Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.detValAnc { /* What: Motionless Detail Value Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.detValAnc { /* What: Motionless Detail Value Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -286,7 +286,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Phone Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.conPhoAnc { /* What: Motionless Contact Phone Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
+	.conPhoAnc { /* What: Motionless Contact Phone Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -848,7 +848,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover look should simply switch. How: This turns the transition off. */
+	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover, press, sending, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;

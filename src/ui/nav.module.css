@@ -7,15 +7,15 @@
  * @summary
  * Styles for NavBarCom: the skip link, waiting above the screen until it's
  * focused and then sliding down over the bar's corner, the fixed top bar,
- * transparent at the top of the page and solid once it scrolls, with the
- * brand, the section links and phone button on wide screens, and on screens
- * 768px wide or narrower the menu button and the panel it opens below the bar
- * over a dimmed page: the section links, entering one after another, and a
- * contact block with the call and quote buttons, the hours, and the service
- * area. The shared container styles the bar's inner row used to borrow from
- * the global stylesheet are copied onto its own class here. The bar's states
- * are attributes rather than classes: data-page-scroll-active on the bar,
- * data-section-link-active on the link for the section being read,
+ * transparent at the top of the page and solid once it scrolls or its menu
+ * opens, with the brand, the section links and phone button on wide screens,
+ * and on screens 768px wide or narrower the menu button and the panel it opens
+ * below the bar over a dimmed page: the section links, entering one after
+ * another, and a contact block with the call and quote buttons, the hours, and
+ * the service area. The shared container styles the bar's inner row used to
+ * borrow from the global stylesheet are copied onto its own class here. The
+ * bar's states are attributes rather than classes: data-page-scroll-active on
+ * the bar, data-section-link-active on the link for the section being read,
  * aria-expanded on the menu button, and data-mobile-menu-open on the dimmer,
  * the bar, and the panel.
  *
@@ -75,7 +75,7 @@
 
 
 	.navSkiAnc,
-	.navSkiAnc:focus { /* What: Motionless Navigation Skip Anchor. Why: The link should simply appear and its hover look switch on. How: This turns the transition off on both the hidden and the focused rule, since the focused rule outranks the base. */
+	.navSkiAnc:focus { /* What: Motionless Navigation Skip Anchor. Why: The link should simply appear and its hover, press, and focus changes switch on at once. How: This turns the transition off on both the hidden and the focused rule, since the focused rule outranks the base. */
 
 
 		transition : none;
@@ -141,7 +141,7 @@
 
 /* #region navBarHed */
 
-.navBarHed { /* What: Navigation Bar Header. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, transparent until the page scrolls, and eases between its two looks. */
+.navBarHed { /* What: Navigation Bar Header. Why: The bar stays at the top of the screen over the page. How: This fixes it to the top edge above the page's content, transparent until the page scrolls or the menu opens, and eases between its looks. */
 
 
 	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Bar. Why: The main blue ring falls under 3:1 on the bar's navy. How: This hands every control in the bar and menu the lighter blue ring. */
@@ -424,7 +424,7 @@
 	.navLinAnc,
 	.navLinAnc::after,
 	.navLinAnc[data-section-link-active]::after,
-	.navLinAnc:hover::after { /* What: Motionless Navigation Link Anchor. Why: The color and underline should simply switch. How: This turns both transitions off. */
+	.navLinAnc:hover::after { /* What: Motionless Navigation Link Anchor. Why: The color, underline, press dim, and focus ring should simply switch. How: This turns both transitions off. */
 
 
 		transition : none;
@@ -469,7 +469,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Call-To-Action Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.navCtaAnc { /* What: Motionless Navigation Call-To-Action Anchor. Why: The hover look should simply switch on. How: This turns the transition off. */
+	.navCtaAnc { /* What: Motionless Navigation Call-To-Action Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -576,7 +576,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Toggle Line Span. Why: Someone who asked for less motion shouldn't see the icon animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.togLinSpa { /* What: Motionless Toggle Line Span. Why: The icon should simply switch to a cross. How: This turns the transitions off. */
+	.togLinSpa { /* What: Motionless Toggle Line Span. Why: The icon's hover color and its turn into a cross should simply switch. How: This turns the transitions off. */
 
 
 		transition : none;
@@ -738,7 +738,7 @@
 
 	.menLinAnc,
 	.menLinAnc::after,
-	.menLinAnc[data-section-link-active]::after { /* What: Motionless Menu Link Anchor. Why: The hover color and the active dot should simply switch. How: This turns both transitions off. */
+	.menLinAnc[data-section-link-active]::after { /* What: Motionless Menu Link Anchor. Why: The hover color, press dim, focus ring, and active dot should simply switch. How: This turns both transitions off. */
 
 
 		transition : none;

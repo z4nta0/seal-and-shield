@@ -138,7 +138,7 @@ function NavBarCom () : React.JSX.Element {
 			setBarScrBoo( window.scrollY > 40 ); // What: Bar Scrolled Update. Why: The bar should turn solid as soon as content starts sliding under it. How: This marks it scrolled once the page has moved more than 40px.
 
 
-			for ( const secRecObj of [ ...SEC_LIN_ARR ].reverse() ) { // What: Section Walk Loop. Why: The active section is the lowest one that has reached the top of the screen. How: This walks a reversed copy of the section list, from the bottom of the page up.
+			for ( const secRecObj of [ ...SEC_LIN_ARR ].reverse() ) { // What: Section Walk Loop. Why: The active section is the lowest one whose top has reached the line just below the bar. How: This walks a reversed copy of the section list, from the bottom of the page up.
 
 
 				const secCurEle = document.getElementById( secRecObj.ideStr ); // What: Section Current Element. Why: The section's position decides whether it's active. How: This looks the section up by its id.

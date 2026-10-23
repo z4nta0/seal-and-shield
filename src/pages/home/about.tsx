@@ -142,7 +142,7 @@ function AboSecCom () : React.JSX.Element {
 		>{ /* What: Home About Section Element. Why: The page's third section introduces the company. How: Its id, kept as is because it's a link target, is where every About link on the site scrolls to. */ }
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with the page's side padding. */ }
 
 
 				<div className={ cssModObj.aboLayDiv }>{ /* What: About Layout Div Element. Why: The logo and details sit beside the story. How: This lays them out in two columns, stacking them with the logo and details on top at 900px wide and below. */ }

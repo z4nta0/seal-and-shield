@@ -24,13 +24,14 @@ import { test          } from '@playwright/test';      // What: Test. Why: Each 
  * Checks the security policy itself rather than a page, so it runs in the
  * Chromium project only, since a file reads the same in every engine. The
  * Content-Security-Policy in public/_headers allows only the site's own files,
- * forbids inline and evaluated script, plugins, framing, and a changed base
- * address, and keeps form posts on the site; HSTS lasts at least a year and
- * covers subdomains; and the nosniff, framing, referrer, and permissions
- * headers are all set. The production build, which the security suite's
- * preview server builds before the run, holds no private key or provider
- * token. npm audit finds no high or critical advisory in the shipped
- * dependencies, and skips with a message when npm can't be reached.
+ * forbids inline script and style, evaluated script, wildcard sources,
+ * plugins, framing, and a changed base address, and keeps form posts on the
+ * site; HSTS lasts at least a year and covers subdomains; and the nosniff,
+ * framing, referrer, and permissions headers are all set. The production
+ * build, which the security suite's preview server builds before the run,
+ * holds no private key or provider token. npm audit finds no high or critical
+ * advisory in the shipped dependencies, and skips with a message when npm
+ * can't be reached.
  *
  * Sections:
  *  - Constants
