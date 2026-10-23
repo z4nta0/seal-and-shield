@@ -17,9 +17,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening and se
  * which also open pages a suite sizes for itself. A state is a page at a
  * width, sometimes with something opened on it, such as the mobile menu on a
  * phone. opeStaFun loads a state and gets it ready to measure, revealing the
- * content that fades in on scroll and waiting out fonts, images, and motion,
- * so nothing is measured mid-fade. Its settle wait, waiSetFun, is exported
- * too, for a check that has to wait out a change it makes itself.
+ * content that fades in on scroll and waiting until everything has loaded and
+ * stopped moving, so nothing is measured mid-fade. Its settle wait, waiSetFun,
+ * is exported too, for a check that has to wait out a change it makes itself.
  *
  * Sections:
  *  - Types

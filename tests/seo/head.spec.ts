@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on the page's head and text and on the files the site serves, such as robots.txt, the preview card, and the icons.
+import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on the page's head and text and on the files the site serves, such as robots.txt.
 import { test   } from '@playwright/test'; // What: Test. Why: Each route and each file is its own test. How: This declares them.
 
 // #endregion Imports
@@ -16,11 +16,11 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * @summary
  * Checks the site's SEO setup in whichever engine the project runs. Seal and
  * Shield is a real local business, so each route's head has to describe it
- * accurately and keep only the home page in search. That covers tags such as
- * the canonical, the raw index.html a script-free reader sees, and the
- * structured data, which has to match what the page itself shows. The social
- * preview tags, the card and icons they point at, and the crawler files, such
- * as robots.txt and the sitemap, are checked against what they promise.
+ * accurately and keep only the home page in search. That covers the head's
+ * tags, such as the canonical, along with the raw index.html a script-free
+ * reader sees and the structured data, which has to match what the page itself
+ * shows. The social preview tags, the card and icons they point at, and the
+ * crawler files, such as the sitemap, are checked against what they promise.
  *
  * Sections:
  *  - Constants
