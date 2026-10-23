@@ -127,7 +127,7 @@
 
 }
 
-.fooLinAnc { /* What: Footer Link Anchor. Why: Each section link should read in the footer's display style. How: This sets its label in spaced uppercase in light silver. */
+.fooLinAnc { /* What: Footer Link Anchor. Why: Each section link should read in the footer's display style. How: This sets its label in spaced uppercase in light silver, and eases its hover color, press dim, and focus ring. */
 
 
 	color          : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
@@ -195,7 +195,7 @@
 
 }
 
-.fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number is the footer's main call to action. How: This sets it on its own line in the bold display font, in light blue. */
+.fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number is the footer's main call to action. How: This sets it on its own line in the bold display font, in light blue, and eases its hover color, press dim, and focus ring. */
 
 
 	color          : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */

@@ -24,7 +24,7 @@
 
 
 
-.navSkiAnc { /* What: Navigation Skip Anchor. Why: A keyboard user should be able to jump past the bar, and the link shouldn't show until it's needed. How: This sets it as a solid blue button fixed just above the screen's top edge, at the page's side gutter, leaving on the accelerating curve. */
+.navSkiAnc { /* What: Navigation Skip Anchor. Why: A keyboard user should be able to jump past the bar, and the link shouldn't show until it's needed. How: This sets it as a solid blue button fixed just above the screen's top edge, at the page's side gutter, leaving on the accelerating curve, and eases its hover fill and color, press, and focus ring. */
 
 
 	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Skip Link. Why: The main blue ring falls under 3:1 against the button and the bar's navy behind it. How: This hands the link the light accent, the same ring the bar's own controls draw. */
@@ -85,7 +85,7 @@
 
 }
 
-.navScrDiv { /* What: Navigation Scrim Div. Why: The open menu needs the page behind it dimmed, both to set the menu apart and to catch a tap that closes it. How: This covers the screen beneath the bar, transparent and hidden until the menu opens, and exists only where the menu does. */
+.navScrDiv { /* What: Navigation Scrim Div. Why: The open menu needs the page behind it dimmed, both to set the menu apart and to catch a tap that closes it. How: This covers the screen beneath the bar, transparent and hidden until the menu opens, and exists only where the menu does, fading out on the accelerating curve as the menu closes. */
 
 
 	background : oklch( from var( --scr-mai-col ) l c h / var( --cdn-pow-002-rec ) );                          /* Scrim Main Color = #080f24, Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
@@ -225,7 +225,7 @@
 
 /* #region navBraAnc */
 
-.navBraAnc { /* What: Navigation Brand Anchor. Why: The mark and the name read as one link. How: This sets the mark beside the name with a small gap. */
+.navBraAnc { /* What: Navigation Brand Anchor. Why: The mark and the name read as one link. How: This sets the mark beside the name with a small gap, and eases its press dim and focus ring. */
 
 
 	align-items : center;
@@ -279,7 +279,7 @@
 
 }
 
-.braMaiSpa { /* What: Brand Main Span. Why: The company's name is the brand's main line. How: This sets it in the display font, extra bold and uppercase, in white. */
+.braMaiSpa { /* What: Brand Main Span. Why: The company's name is the brand's main line. How: This sets it in the display font, extra bold and uppercase, in white, easing its hover color. */
 
 
 	color          : var( --bac-pag-col );                            /* Background Page Color = #ffffff */
@@ -357,7 +357,7 @@
 
 }
 
-.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section in the bar's display style. How: This sets it in spaced uppercase in light silver, positioned so its underline can sit beneath it. */
+.navLinAnc { /* What: Navigation Link Anchor. Why: Each link names a section in the bar's display style. How: This sets it in spaced uppercase in light silver, positioned so its underline can sit beneath it, and eases its hover and active color, press dim, and focus ring. */
 
 
 	color          : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
@@ -434,7 +434,7 @@
 
 }
 
-.navCtaAnc { /* What: Navigation Call-To-Action Anchor. Why: Calling is the fastest way in, so the number gets a button of its own. How: This sets it as a solid blue button in the display font. */
+.navCtaAnc { /* What: Navigation Call-To-Action Anchor. Why: Calling is the fastest way in, so the number gets a button of its own. How: This sets it as a solid blue button in the display font, and eases every change between its looks. */
 
 
 	background     : var( --acc-mai-col );                                                                           /* Accent Main Color = #1e56c8 */
@@ -485,7 +485,7 @@
 
 /* #region navTogBut */
 
-.navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon, hidden until the narrow layout shows it. */
+.navTogBut { /* What: Navigation Toggle Button. Why: Narrow screens reach the links through a menu. How: This stacks the three bars of the menu icon, hidden until the narrow layout shows it, and eases its press and focus ring. */
 
 
 	background     : none;
@@ -594,7 +594,7 @@
 
 /* #region navMenDiv */
 
-.navMenDiv { /* What: Navigation Menu Div. Why: Narrow screens show the links and contact details in a panel below the bar. How: This stacks them on the dark navy, collapsed to no height and hidden until the narrow layout shows it. */
+.navMenDiv { /* What: Navigation Menu Div. Why: Narrow screens show the links and contact details in a panel below the bar. How: This stacks them on the dark navy, collapsed to no height and hidden until the narrow layout shows it, its height shrinking on the accelerating curve as it closes. */
 
 
 	background     : var( --bac-inv-col );                                 /* Background Inverse Color = #080f24 */
@@ -607,7 +607,7 @@
 
 
 }
-.navMenDiv[data-mobile-menu-open] { /* What: Open Navigation Menu Div. Why: The panel should show its links and contact block once the menu button opens it. How: This lifts the height cap to fit them, or on a short screen to the space below the unscrolled bar, where the panel then scrolls, and adds bottom padding. */
+.navMenDiv[data-mobile-menu-open] { /* What: Open Navigation Menu Div. Why: The panel should show its links and contact block once the menu button opens it. How: This lifts the height cap to fit them, or on a short screen to the space below the unscrolled bar, where the panel then scrolls, and adds bottom padding, growing on the decelerating curve as it opens. */
 
 
 	max-height : min( calc( var( --ver-rhy-p13 ) * 1rem ), calc( 100dvh - var( --nav-bar-hei ) ) ); /* Vertical Rhythm Base Plus 13 ~= 563.794px, Navigation Bar Height ~= 83.483px */
@@ -655,7 +655,7 @@
 
 /* #region menLinAnc */
 
-.menLinAnc { /* What: Menu Link Anchor. Why: Each link fills a row of the panel. How: This sets it in spaced capitals in light silver with a faint divider below, its label at the start and its active dot at the end. */
+.menLinAnc { /* What: Menu Link Anchor. Why: Each link fills a row of the panel. How: This sets it in spaced capitals in light silver with a faint divider below, its label at the start and its active dot at the end, and eases its hover color, press dim, and focus ring. */
 
 
 	align-items     : center;
@@ -870,7 +870,7 @@
 
 }
 
-.menCtaAnc { /* What: Menu Call-To-Action Anchor. Why: Calling is the quickest way to reach the company. How: This sets the number as a filled blue button, its border matching its fill so it keeps its size when hover empties it. */
+.menCtaAnc { /* What: Menu Call-To-Action Anchor. Why: Calling is the quickest way to reach the company. How: This sets the number as a filled blue button, its border matching its fill so it keeps its size when hover empties it, and eases every change between its looks. */
 
 
 	background     : var( --acc-mai-col );                            /* Accent Main Color = #1e56c8 */
@@ -916,7 +916,7 @@
 
 }
 
-.menQuoAnc { /* What: Menu Quote Anchor. Why: The quote form is the site's main goal, offered beside the call button as its quieter partner. How: This sets an unfilled button with white text and a faint white border, the same size as the call button. */
+.menQuoAnc { /* What: Menu Quote Anchor. Why: The quote form is the site's main goal, offered beside the call button as its quieter partner. How: This sets an unfilled button with white text and a faint white border, the same size as the call button, and eases every change between its looks. */
 
 
 	background     : transparent;

@@ -763,7 +763,7 @@
 
 }
 
-.errLinAnc { /* What: Error Link Anchor. Why: The phone number in the message has to read as a link and stay in one piece. How: This underlines it and keeps it from breaking across lines. */
+.errLinAnc { /* What: Error Link Anchor. Why: The phone number in the message has to read as a link and stay in one piece. How: This underlines it and keeps it from breaking across lines, and eases its hover color, press dim, and focus ring. */
 
 
 	text-decoration : underline;
