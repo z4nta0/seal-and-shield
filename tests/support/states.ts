@@ -13,15 +13,14 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * states.ts = States
  *
  * @summary
- * The page states the accessibility, interaction, and rendering suites visit,
- * and the helper that opens one; the responsive suite opens its own widths
- * through the same helper. A state is a page at a width, sometimes with
- * something opened on it: the home page and the 404 page at phone and desktop
- * widths, and the mobile menu open on a phone. opeStaFun sizes the viewport,
- * loads the page, waits for the fonts, scrolls through the page so its
- * scroll-triggered content fades in, waits for every image to decode, runs the
- * state's own action, such as opening the menu, and then waits for the page to
- * stay still so nothing is measured mid-fade.
+ * The page states the suites visit, and the helper that opens one, which also
+ * opens pages a suite sizes for itself. A state is a page at a width,
+ * sometimes with something opened on it: the home page and the 404 page at
+ * phone and desktop widths, and the mobile menu open on a phone. opeStaFun
+ * sizes the viewport, loads the page, waits for the fonts, scrolls through the
+ * page so its scroll-triggered content fades in, waits for every image to
+ * decode, runs the state's own action, such as opening the menu, and then
+ * waits for the page to stay still so nothing is measured mid-fade.
  *
  * Sections:
  *  - Types
@@ -302,7 +301,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_REC_ARR, waiSetFun }; // What: Named Exports. Why: Both accessibility specs and the feedback and rendering specs check every state, the responsive spec opens its own pages the same way, and the axe spec settles the contact form's result states. How: This exports the state list those four specs import, the opener all five import, and the settle wait the axe spec uses.
+export { opeStaFun, STA_REC_ARR, waiSetFun }; // What: Named Exports. Why: Specs that check the page states, or open and settle a page the same way, share one list and one opener. How: This exports the state list, the opener, and the settle wait.
 
 // #endregion Exports
 

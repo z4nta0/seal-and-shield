@@ -285,36 +285,38 @@ waiting for the page to settle.
   checks each state, and the contact form's thank-you message and error (sent
   against a faked Netlify answer), against WCAG 2.2 A and AA plus best
   practices (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover
-  link and button names, a Tab walk (order, traps, focus on screen, uncovered,
-  and visible), reflow at 320px, motion under reduced motion, and the contact
-  form's announcements: its alert region waits in the page empty and gains the
-  error, focus stays on the submit button after a failed send, and focus moves
-  to the thank-you message and back to the form. axe's "needs review" results
-  are printed and attached to the report rather than failing the run.
+  link and button names, a Tab walk (no positive tabindex, order, traps, focus
+  on screen, uncovered, and visible), reflow at 320px, motion under reduced
+  motion, and the contact form's announcements: its alert region waits in the
+  page empty and gains the error, focus stays on the submit button after a
+  failed send, and focus moves to the thank-you message and back to the form.
+  axe's "needs review" results are printed and attached to the report rather
+  than failing the run.
 - `npm run test:interaction`: checks what the controls do, with
   `behavior.spec.ts` opening each page under reduced motion so scrolls land at
   once. The bar's links, brand, menu, footer links, and hero buttons land on
   their sections with a clean address, the first Tab on each page reaches the
   skip link and clicking it focuses the main content, a Ctrl or Cmd click and a
   middle click on the bar's About link each open it in a new tab, a Ctrl or Cmd
-  click on the menu's About link leaves the menu open, and the menu closes on
-  Escape, on a tap of its dimmer, and when the screen widens; the contact form
-  refuses incomplete requests, reports a faked Netlify answer honestly, clears
-  its error on a retry, and comes back after the thank-you message; and an
-  unknown address shows the 404 page with its own title and noindex tag, while
-  its buttons and links and a section address like /#about lead where they
-  should. `feedback.spec.ts`, adapted from reese-roofing's, checks that every
-  control in every state has a hover and press change, with every property each
-  change touches (on the control or anything inside it) eased by a transition,
-  and transitions its focus ring's outline (the phone link in the contact
-  form's error message included, reached after a faked failed send), that every
-  form field has a focus change that eases in, that the home page's service
-  cards and area tags have a hover change that eases in, that the focus ring
-  eases in to full width, and that feedback stays without motion under reduced
-  motion. Its two every-control probes are marked slow, since each takes about
-  28 seconds in Chromium. The open menu state parks the pointer in the bar's
-  corner after tapping the toggle, so the toggle's hover color stays out of
-  every check of it.
+  click on the menu's About link leaves the menu open, the menu button opens
+  the menu over an inert page and closes it again, and the menu closes on
+  Escape (returning focus to its button), on a tap of its dimmer, and when the
+  screen widens; the contact form refuses incomplete requests, reports a faked
+  Netlify answer honestly, clears its error on a retry, and comes back after
+  the thank-you message; and an unknown address shows the 404 page with its own
+  title and noindex tag, while its buttons and links and a section address like
+  /#about lead where they should. `feedback.spec.ts`, adapted from
+  reese-roofing's, checks that every control in every state has a hover and
+  press change, with every property each change touches (on the control or
+  anything inside it) eased by a transition, and transitions its focus ring's
+  outline (the phone link in the contact form's error message included, reached
+  after a faked failed send), that every form field has a focus change that
+  eases in, that the home page's service cards and area tags have a hover
+  change that eases in, that the focus ring eases in to full width, and that
+  feedback stays without motion under reduced motion. Its two every-control
+  probes are marked slow, since each takes about 28 seconds in Chromium. The
+  open menu state parks the pointer in the bar's corner after tapping the
+  toggle, so the toggle's hover color stays out of every check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance: no pixel
   may differ, and the per-pixel color threshold is 0 too, since Playwright's
@@ -329,15 +331,17 @@ waiting for the page to settle.
   box, two reachable controls overlapping, or a grid whose rows hold different
   counts (a lone centered last card aside).
 - `npm run test:seo`: checks each route's title, description, canonical,
-  robots, and single h1, and the author on the home page; that index.html
-  itself, fetched without a browser, carries the home page's full title and
-  description; that the structured data is a RoofingContractor with the site's
-  name and live URL, that its phone matches every call link and its city,
-  hours, founding year, legal name, and service areas all appear on the page,
-  and that it gives no street address; that the social tags are complete and
-  match the page, the theme color names the site's darkest navy, the card is a
-  1,200x630 PNG under 300 KB, and every linked icon is served at its size; and
-  that robots.txt and the sitemap say what they should.
+  robots, and single h1, and on the home page the author, the city in its
+  title, description, and h1, and a title of 60 characters or fewer and a
+  description of 120 to 125; that index.html itself, fetched without a browser,
+  carries the home page's full title and description; that the structured data
+  is a RoofingContractor with the site's name and live URL, that its phone
+  matches every call link and its city, hours, founding year, legal name, and
+  service areas all appear on the page, and that it gives no street address;
+  that the social tags are complete and match the page, the theme color names
+  the site's darkest navy, the card is a 1,200x630 PNG under 300 KB, and every
+  linked icon is served at its size; and that robots.txt and the sitemap say
+  what they should.
 - `npm test` runs every suite.
 
 ## Live checks

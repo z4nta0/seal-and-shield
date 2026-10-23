@@ -29,7 +29,7 @@
 .homConSec { /* What: Home Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands the lighter blue ring to every control inside. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands the lighter blue ring to the controls on the dark band, while the white quote panel sets its own back to the main blue. */
 
 	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
 	overflow   : hidden;

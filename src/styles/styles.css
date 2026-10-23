@@ -7,16 +7,13 @@
  * @summary
  * The site's one global stylesheet, holding only what belongs to the whole
  * site rather than to one component. Its Tokens region defines every design
- * token the modules read: the core design numbers, then the borders, colors,
- * durations, easing curves, elevation shadows, fonts, horizontal and vertical
- * rhythm, layout sizes, radii, spacing, and text widths built on them. Its
- * Base Elements region holds the reset and the bare element styles: border-box
- * sizing with no default margins or padding, the root font size and smooth
- * scrolling, the body's default text, images, links, and lists, the main
- * element's focus, and the focus ring every link and button shares. Its Body
- * State region styles the scroll reveal's role attributes, the fade-in the
- * Services, About, and Contact sections share. Each component's own styles
- * live in its CSS module instead.
+ * token the modules read, the core design numbers first and then the scales,
+ * colors, and layout sizes built on them. Its Base Elements region holds the
+ * reset and the bare element styles, such as the root font size, the body's
+ * default text, and the focus ring every link and button shares. Its Body
+ * State region styles the scroll reveal's role attributes, the fade-in
+ * sections can use. Each component's own styles live in its CSS module
+ * instead.
  *
  * Sections:
  *  - Tokens
@@ -542,7 +539,7 @@ button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard use
 
 /* #region Body State */
 
-[data-scroll-reveal-block] { /* What: Scroll Reveal Block. Why: The Services, About, and Contact sections fade their blocks in as they scroll into view, a role shared across three modules. How: This starts every block marked by the reveal hook transparent and a little low, ready to ease into place. */
+[data-scroll-reveal-block] { /* What: Scroll Reveal Block. Why: The home page's sections below the hero fade their blocks in as they scroll into view, a role shared across modules. How: This starts every block marked by the reveal hook transparent and a little low, ready to ease into place. */
 
 
 	opacity    : 0;

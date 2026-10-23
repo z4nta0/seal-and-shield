@@ -14,19 +14,20 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * section-link.ts = Section Link
  *
  * @summary
- * The one way the bar, the menu, the hero, the footer, and the 404 page reach
- * a home page section, from any page. On the home page the section is already
- * there, so the link scrolls to it in place, smoothly unless the visitor asked
- * for reduced motion. On any other page, such as the 404 page, the section
- * doesn't exist yet, so the link navigates to the home page with the section's
- * id as the hash, and the home page scrolls to it on arrival and then clears
- * the hash, so the address bar stays free of hashes either way. Each link
- * keeps its real address (/#about), so a Ctrl, Cmd, Shift, or Alt click is
- * left to the browser, and a middle click, which the browser sends as
- * auxclick, never reaches the click handler at all; a new tab or window opened
- * that way lands on the home page at that section. Copied from hair-designs'
- * own, which adds secCliFun so every section link shares one click handler.
- * Its modified click check is shared with the bar's skip link too.
+ * The one way every section link, such as the bar's, the hero's buttons, and
+ * the footer's, reaches a home page section, from any page. On the home page
+ * the section is already there, so the link scrolls to it in place, smoothly
+ * unless the visitor asked for reduced motion. On any other page, such as the
+ * 404 page, the section doesn't exist yet, so the link navigates to the home
+ * page with the section's id as the hash, and the home page scrolls to it on
+ * arrival and then clears the hash, so the address bar stays free of hashes
+ * either way. Each link keeps its real address (/#about), so a Ctrl, Cmd,
+ * Shift, or Alt click is left to the browser, and a middle click, which the
+ * browser sends as auxclick, never reaches the click handler at all; a new tab
+ * or window opened that way lands on the home page at that section. Copied
+ * from hair-designs' own, which adds secCliFun so every section link shares
+ * one click handler. Its modified click check is shared with the bar's skip
+ * link too.
  *
  * Sections:
  *  - Helpers
@@ -52,11 +53,10 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * tab, Shift for a new window, Alt to download) or with any button but the
  * main one. A middle click never arrives here in practice, since Chromium,
  * Firefox, and WebKit send it as auxclick rather than click, so the button
- * check is only a safeguard for an engine that sends it as a click. secCliFun,
- * the shared click handler, and the skip link's own handler both return early
- * when this is true, so a new tab or window opened from a link's own address
- * lands where that address points, and a section link's lands on the section,
- * where the home page scrolls to it.
+ * check is only a safeguard for an engine that sends it as a click. Every
+ * caller returns early when this is true, so a new tab or window opened from a
+ * link's own address lands where that address points, and a section link's
+ * lands on the section, where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -217,7 +217,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 
 // #region Exports
 
-export { modCliFun, useSecCliFun }; // What: Named Exports. Why: The bar, the menu, the hero, the footer, and the 404 page reach sections through useSecCliFun, and the bar's skip link leaves a modified click to the browser through modCliFun. How: This exports the modified click check and the hook that returns the shared click handler, while useSecLinFun stays inside this file.
+export { modCliFun, useSecCliFun }; // What: Named Exports. Why: Every section link reaches its section through useSecCliFun, and the bar's skip link leaves a modified click to the browser through modCliFun. How: This exports the modified click check and the hook that returns the shared click handler, while useSecLinFun stays inside this file.
 
 // #endregion Exports
 

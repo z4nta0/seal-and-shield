@@ -88,7 +88,7 @@ const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat c
 	{ // What: Hooks Config Object. Why: Hook calls in components and custom hooks follow rules of their own. How: This adds the React Hooks recommended rules for every .tsx file and the site's own .ts files.
 
 
-		files   : [ 'src/**/*.ts', '**/*.tsx' ],                    // What: Files. Why: Components live in .tsx files, but a custom hook with no JSX lives in a .ts file (section-link.ts, reveal.ts), and its calls need the same checks; the tests and configs stay out, since Playwright's test.use would read as React's use hook. How: This matches every .tsx file and the .ts files under src/.
+		files   : [ 'src/**/*.ts', '**/*.tsx' ],                    // What: Files. Why: Components live in .tsx files, but a custom hook with no JSX lives in a .ts file, and its calls need the same checks; the tests and configs stay out, since Playwright's test.use would read as React's use hook. How: This matches every .tsx file and the .ts files under src/.
 		plugins : { react : reaPluObj, 'react-hooks' : rehPluObj }, // What: Plugins. Why: The hooks rules come from the React Hooks plugin. How: This registers it beside the React plugin.
 
 		languageOptions : { // What: Language Options. Why: These files are TypeScript, the .tsx ones with JSX. How: This sets the TypeScript parser and turns on JSX parsing, which the parser applies only to .tsx files.

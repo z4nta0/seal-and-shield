@@ -15,16 +15,16 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * render.mts = Logo Renderer
  *
  * @summary
- * Rebuilds the site's two logos in src/ from the originals beside this
- * script: the full logo (4,763x4,640) at 968x943, under 3x its widest
- * drawing of about 628px, as lossy WebP at 0.95 quality, the lowest that
- * shows no difference at 3x zoom, and the simple mark (1,210x1,025) at
- * 131x111, under 3x the 44.876px box the bar and footer draw it in, as
- * lossless WebP, since lossy encoding showed on its fine detail. Each size
- * keeps the original's proportions to within about 0.01px where it's drawn.
- * The image is drawn down in halving steps with high-quality smoothing, so
- * fine edges stay crisp. Run it with npm run logos whenever a logo changes,
- * then update the images' width and height attributes if a size moved.
+ * Rebuilds the site's two logos in src/ from the originals beside this script:
+ * the full logo (4,763x4,640) at 968x943, under 3x its widest drawing of about
+ * 628px, as lossy WebP at 0.95 quality, the lowest that shows no difference at
+ * 3x zoom, and the simple mark (1,210x1,025) at 131x111, under 3x the 44.876px
+ * box it's drawn in, as lossless WebP, since lossy encoding showed on its fine
+ * detail. Each size keeps the original's proportions to within about 0.01px
+ * where it's drawn. The image is drawn down in halving steps with high-quality
+ * smoothing, so fine edges stay crisp. Run it with npm run logos whenever a
+ * logo changes, then update the images' width and height attributes if a size
+ * moved.
  *
  * Sections:
  *  - Types
@@ -86,8 +86,8 @@ type LogRecTyp = { // What: Logo Record Type. Why: Every logo is described the s
 const LOG_REC_ARR : LogRecTyp[] = [ // What: Logo Record Array. Why: Both logos are rendered from one list. How: Each row names an original, its output, its size, and its quality.
 
 
-	{ heiNum : 943, outStr : '../../src/pages/home/logo-full.webp', quaNum : 0.95, souStr : 'logo-full.png',   widNum : 968 }, // What: Full Logo Row. Why: The hero and About show the full logo, never wider than about 628px. How: This renders it at 968x943 as lossy WebP.
-	{ heiNum : 111, outStr : '../../src/assets/logo-simple.webp',   quaNum : 1,    souStr : 'logo-simple.png', widNum : 131 }  // What: Simple Logo Row. Why: The bar and footer draw the mark in a 44.876px box. How: This renders it at 131x111 as lossless WebP.
+	{ heiNum : 943, outStr : '../../src/pages/home/logo-full.webp', quaNum : 0.95, souStr : 'logo-full.png',   widNum : 968 }, // What: Full Logo Row. Why: The full logo is shown large, never wider than about 628px. How: This renders it at 968x943 as lossy WebP.
+	{ heiNum : 111, outStr : '../../src/assets/logo-simple.webp',   quaNum : 1,    souStr : 'logo-simple.png', widNum : 131 }  // What: Simple Logo Row. Why: The mark is drawn small, in a 44.876px box. How: This renders it at 131x111 as lossless WebP.
 
 
 ];

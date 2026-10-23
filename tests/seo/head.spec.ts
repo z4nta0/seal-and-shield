@@ -16,9 +16,9 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * @summary
  * Checks the site's SEO setup in whichever engine the project runs. Seal and
  * Shield is a real local business, so the home page has to be findable and
- * describe the company accurately: its title and description name the city,
- * the title runs 60 characters or fewer and the description 120 to 125
- * characters, its canonical and author tags are in place, it carries no
+ * describe the company accurately: its title, description, and single h1 name
+ * the city, the title runs 60 characters or fewer and the description 120 to
+ * 125 characters, its canonical and author tags are in place, it carries no
  * noindex, index.html itself, fetched without a browser, carries the same full
  * title and description, each route has exactly one description tag, and the
  * home page's structured data names a RoofingContractor with the site's name
@@ -78,7 +78,7 @@ const ARE_TAG_OBJ : Record< string, string > = { // What: Area Tag Object. Why: 
 
 
 
-const LIV_URL_STR = 'https://sealandshieldroof.com/'; // What: Live URL String. Why: The canonical link, structured data, sitemap, and social tags must all name the live address. How: This is the address they're compared with.
+const LIV_URL_STR = 'https://sealandshieldroof.com/'; // What: Live URL String. Why: Every tag and crawler file that names the site has to name its live address. How: This is the address they're compared with.
 
 const SOC_KEY_ARR = [ // What: Social Key Array. Why: The social preview rule lists every tag a complete card needs. How: Each entry names one Open Graph or Twitter tag the page must carry.
 

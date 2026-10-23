@@ -32,11 +32,11 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * without its required fields and reports Netlify's answer honestly, clearing
  * its error on a retry and coming back after the thank-you message, with
  * Netlify's side faked in the browser so nothing is really sent; and the 404
- * page answers an unknown address with a noindex tag and leads back to the
- * home page and its sections, as does an address that names a section
- * directly. Pages open under reduced motion, so scrolling jumps straight to
- * its target and each position can be read at once; how things move is checked
- * elsewhere.
+ * page answers an unknown address with its own heading, title, and noindex tag
+ * and leads back to the home page and its sections, as does an address that
+ * names a section directly. Pages open under reduced motion, so scrolling
+ * jumps straight to its target and each position can be read at once; how
+ * things move is checked elsewhere.
  *
  * Sections:
  *  - Constants
