@@ -143,7 +143,7 @@ test( 'the structured data matches what the page shows', async ( { page : curPag
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The structured data lives on the home page. How: This loads the root path.
 
 
-	const ldjTexStr = await curPagObj.locator( 'script[type="application/ld+json"]' ).textContent() ?? '{}';                                                           // What: Linked-Data-JSON Text String. Why: The structured data is read as written in the page. How: This reads the script's text, or an empty object if it's missing.
+	const ldjTexStr = await curPagObj.locator( 'script[type="application/ld+json"]' ).textContent() ?? '{}';                                                           // What: Linked-Data-JSON Text String. Why: The structured data is read as written in the page. How: This reads the script's text, falling back to an empty object only because textContent's type allows null, since a missing script fails the wait instead.
 	const ldjDatObj = JSON.parse( ldjTexStr ); // What: Linked-Data-JSON Data Object. Why: Each field is checked on its own. How: This parses the text into an object.
 	const pagTexStr = await curPagObj.locator( 'body' ).textContent() ?? '';                                                                                           // What: Page Text String. Why: Every claim has to appear on the page. How: This reads the page's text as written, before CSS uppercases any of it.
 	const telHreArr = await curPagObj.locator( 'a[href^="tel:"]' ).evaluateAll( ( ancEleArr ) => ancEleArr.map( ( ancCurEle ) => ancCurEle.getAttribute( 'href' ) ) ); // What: Telephone Href Array. Why: The structured data's phone has to be the number the page's call links dial. How: This collects every call link's address.
@@ -283,7 +283,7 @@ test( 'every icon the head links to is served at its size', async ( { page : cur
 		const icoBufObj = await icoResObj.body();           // What: Icon Buffer Object. Why: A PNG's size is written in its header. How: This reads the bytes.
 
 
-		expect( icoResObj.ok() ).toBe( true ); // What: Icon Served Assertion. Why: A broken path or a server error should fail at once. How: This checks the request succeeds; a missing file still answers 200 with the app's HTML, which the header checks below catch.
+		expect( icoResObj.ok() ).toBe( true ); // What: Icon Served Assertion. Why: A broken path or a server error should fail at once. How: This checks the request succeeds; a missing PNG still answers 200 with the app's HTML, which the header checks below catch, while a missing favicon.ico, which Vite's fallback skips, fails here.
 
 
 		if ( icoSizStr === 'any' ) { // What: ICO Header Guard. Why: favicon.ico isn't a PNG and has no single size. How: This checks its header marks it an icon file and moves on.
