@@ -70,7 +70,7 @@ function SitFooCom () : React.JSX.Element {
 
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Each section link takes the visitor to its section from any page. How: This scrolls to the section on the home page or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches it.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Each section link takes the visitor to its section from any page. How: This scrolls to the section on the home page or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches the handler.
 
 
 
@@ -129,7 +129,7 @@ function SitFooCom () : React.JSX.Element {
 							href={ `/#${ linRecObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This joins the root path with the section's id as the hash.
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, linRecObj.ideStr ) }
-						>{ /* What: Footer Link Anchor Element. Why: Each link takes the visitor to its section. How: This hands the click to secCliFun, which scrolls to the section or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches it. */ }
+						>{ /* What: Footer Link Anchor Element. Why: Each link takes the visitor to its section. How: This hands the click to secCliFun, which scrolls to the section or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches the handler. */ }
 							{ linRecObj.labStr }
 						</a>
 

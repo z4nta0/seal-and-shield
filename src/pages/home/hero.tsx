@@ -7,7 +7,7 @@ import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The 
 import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
-import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way every section link does. How: This returns secCliFun, which scrolls to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way every section link does. How: This returns secCliFun, which scrolls to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches the handler.
 
 // #endregion Imports
 
@@ -106,7 +106,7 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 function HerSecCom () : React.JSX.Element {
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both hero buttons take the visitor to their sections the way every section link does. How: This scrolls to the section in place and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both hero buttons take the visitor to their sections the way every section link does. How: This scrolls to the section in place and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches the handler.
 
 
 

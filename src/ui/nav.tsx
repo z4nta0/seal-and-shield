@@ -194,12 +194,12 @@ function NavBarCom () : React.JSX.Element {
 	 * @summary
 	 * Handles a click on any section link, the brand and the menu's quote
 	 * button included, by handing it to secCliFun, which leaves a Ctrl, Cmd,
-	 * Shift, or Alt click to the browser and otherwise scrolls to the
-	 * section on the home page, smoothly unless the visitor asked for
-	 * reduced motion, or navigates home to it from any other page. A middle
-	 * click, which the browser sends as auxclick, never reaches it. The
-	 * mobile menu closes only when secCliFun handled the click, so a link
-	 * opened in a new tab leaves it open.
+	 * Shift, or Alt click to the browser and otherwise scrolls to the section
+	 * on the home page, smoothly unless the visitor asked for reduced motion,
+	 * or navigates home to it from any other page. A middle click, which the
+	 * browser sends as auxclick, never reaches the handler. The mobile menu
+	 * closes only when secCliFun handled the click, so a link opened in a new
+	 * tab leaves it open.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *

@@ -155,14 +155,14 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  * useSecCliFun = Use Section Click Function
  *
  * @summary
- * Returns secCliFun, the click handler every section link shares. A Ctrl,
- * Cmd, Shift, or Alt click is left to the browser, which opens the link's
- * own address, and a middle click, which the browser sends as auxclick,
- * never reaches it. Any other click stops the browser's jump to the hash
+ * Returns secCliFun, the click handler every section link shares. A Ctrl, Cmd,
+ * Shift, or Alt click is left to the browser, which opens the link's own
+ * address, and a middle click, which the browser sends as auxclick, never
+ * reaches the handler. Any other click stops the browser's jump to the hash
  * and hands the section's id to visSecFun, which scrolls to it on the home
  * page or navigates home to it from any other page. It reports whether it
- * handled the click, so a caller such as the phone menu can close itself
- * only then.
+ * handled the click, so a caller such as the phone menu can close itself only
+ * then.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
