@@ -16,10 +16,11 @@
  * in from a zero-width outline. The columns stack at 900px wide or narrower,
  * and the form's paired fields stack and the panel's padding tightens at
  * 520px. The shared styles the section used to borrow from the global
- * stylesheet, such as the container, eyebrow label, and section title, are
- * copied in under the same names every module gives them. The phone detail is
- * an anchor that shares the value rule, and its own link rule comes after that
- * rule on purpose, so its light blue wins.
+ * stylesheet, such as the eyebrow label, section title, and divider, are
+ * copied in under the same names every module gives them, and the container's
+ * onto the inner grid's own class. The phone detail is an anchor that shares
+ * the value rule, and its own link rule comes after that rule on purpose, so
+ * its light blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

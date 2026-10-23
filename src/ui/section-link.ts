@@ -16,18 +16,17 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * @summary
  * The one way every section link, such as the bar's, the hero's buttons, and
  * the footer's, reaches a home page section, from any page. On the home page
- * the section is already there, so the link scrolls to it in place, smoothly
- * unless the visitor asked for reduced motion. On any other page, such as the
- * 404 page, the section doesn't exist yet, so the link navigates to the home
- * page with the section's id as the hash, and the home page scrolls to it on
- * arrival and then clears the hash, so the address bar stays free of hashes
- * either way. Each link keeps its real address (/#about), so a Ctrl, Cmd,
- * Shift, or Alt click is left to the browser, and a middle click, which the
- * browser sends as auxclick, never reaches the click handler at all; a new tab
- * or window opened that way lands on the home page at that section. Copied
- * from hair-designs' own, which adds secCliFun so every section link shares
- * one click handler. Its modified click check is shared with the bar's skip
- * link too.
+ * the section is already there, so the link scrolls smoothly to it in place.
+ * On any other page, such as the 404 page, the section doesn't exist yet, so
+ * the link navigates to the home page with the section's id as the hash, and
+ * the home page scrolls to it on arrival and then clears the hash, so the
+ * address bar stays free of hashes either way. Each link keeps its real
+ * address (/#about), so a Ctrl, Cmd, Shift, or Alt click is left to the
+ * browser, and a middle click, which the browser sends as auxclick, never
+ * reaches the click handler at all; a new tab or window opened that way lands
+ * on the home page at that section. Copied from hair-designs' own, which adds
+ * secCliFun so every section link shares one click handler. Its modified click
+ * check is shared with the bar's skip link too.
  *
  * Sections:
  *  - Helpers

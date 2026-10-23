@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import type { Page } from '@playwright/test'; // What: Page. Why: The fake answers a Playwright page's posts. How: This types fakNetFun's page parameter.
+import type { Page } from '@playwright/test'; // What: Page. Why: The fake answers a Playwright page's posts. How: This types the fake's page parameter.
 
 // #endregion Imports
 

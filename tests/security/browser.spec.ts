@@ -10,7 +10,7 @@ import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array
 import { test        } from '@playwright/test';      // What: Test. Why: Each state is its own test. How: This declares them.
 
 
-import type { Page } from '@playwright/test'; // What: Page. Why: The policy setup drives a Playwright page. How: This types polSetFun's and polVioFun's page parameters.
+import type { Page } from '@playwright/test'; // What: Page. Why: The policy setup drives a Playwright page. How: This types the policy helpers' page parameters.
 
 // #endregion Imports
 
