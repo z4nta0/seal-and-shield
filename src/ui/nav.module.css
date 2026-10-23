@@ -44,7 +44,7 @@
 
 
 }
-.navSkiAnc:focus { /* What: Focused Navigation Skip Anchor. Why: The link has to come into view however focus reaches it. How: This slides it down over the bar's corner on the decelerating curve, still easing its hover fill and color and its focus ring, on :focus rather than :focus-visible so a script's focus shows it too. */
+.navSkiAnc:focus { /* What: Focused Navigation Skip Anchor. Why: The link has to come into view however focus reaches it. How: This slides it down over the bar's corner on the decelerating curve, still easing its hover fill, color, and lift, its press, and its focus ring, on :focus rather than :focus-visible so a script's focus shows it too. */
 
 
 	transform  : translateY( 0 );

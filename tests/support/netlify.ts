@@ -82,7 +82,7 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 
 
-	return posCouObj; // What: Post Count Return. Why: Some tests check how many requests went out. How: This hands back the counter the route handler updates.
+	return posCouObj; // What: Post Count Return. Why: Some tests check how many posts went out. How: This hands back the counter the route handler updates.
 
 
 }
