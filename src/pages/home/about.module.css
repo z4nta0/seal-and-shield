@@ -67,7 +67,7 @@
 
 
 		grid-template-columns : 1fr;
-		row-gap               : calc( var( --spa-ver-p04 ) + var( --spa-ver-p03 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Panel-Cleared Row Gap. Why: The logo's light panel reaches below its column, and the heading under it still needs the full gap. How: This adds the panel's own reach to the stacked gap. */
+		row-gap               : calc( var( --spa-ver-p04 ) + var( --spa-ver-p03 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Vertical Base Plus 3 ~= 33.876px */ /* What: Panel-Cleared Row Gap. Why: The logo's light panel reaches below its column, and the heading under it still needs the full gap, so the gap follows the panel if its reach ever changes. How: This builds the gap from the p04 step plus the panel's own p03 reach, which together equal the base layout's p06 gap today. */
 
 
 	}
