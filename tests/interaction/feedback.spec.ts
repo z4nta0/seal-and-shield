@@ -759,7 +759,6 @@ async function hovProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		const traDurStr = await tarCurObj.evaluate( ( tarCurEle ) => `${ getComputedStyle( tarCurEle ).transitionDuration }, ${ getComputedStyle( tarCurEle, '::after' ).transitionDuration }` ); // What: Transition Duration String. Why: A card's shadow fades in on its ::after layer, so both have to ease normally and stand still under reduced motion. How: This joins the element's durations with its ::after layer's.
 
 
-
 		if ( valSigFun( resSnaArr ) === valSigFun( hovSnaArr ) ) proLisArr.push( `${ tarDesStr } looks the same hovered` ); // What: Hover Check. Why: A hovered card or tag has to respond, under reduced motion too. How: This records one that doesn't change.
 
 
