@@ -221,9 +221,9 @@
 	/* #region Easing Tokens */
 
 	--mot-acc-eas : cubic-bezier( .4, 0, 1, 1 );      /* What: Motion Accelerate Easing. Why: Things leaving the screen should speed up as they go. How: This is a curve that starts slow and leaves at full speed, read as a timing function. */
-	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for playful motion. How: This is a curve whose second control point rises well past 1, read as a timing function. */
+	--mot-bou-eas : cubic-bezier( .34, 1.56, .5, 1 ); /* What: Motion Bounce Easing. Why: The easing set includes a strong spring past the target for playful motion. How: This is a curve whose first control point rises well past 1, read as a timing function. */
 	--mot-dec-eas : cubic-bezier( .2, .7, .3, 1 );    /* What: Motion Decelerate Easing. Why: Things arriving should start fast and land softly. How: This is a curve that starts fast and eases to a stop, read as a timing function. */
-	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, for a touch of flair. How: This is a curve whose second control point rises just past 1, read as a timing function. */
+	--mot-ove-eas : cubic-bezier( .34, 1.2, .5, 1 );  /* What: Motion Overshoot Easing. Why: The easing set includes a gentle overshoot past the target, for a touch of flair. How: This is a curve whose first control point rises just past 1, read as a timing function. */
 	--mot-sta-eas : ease;                             /* What: Motion Standard Easing. Why: Ordinary motion with no arrival or exit to stress shares one smooth curve. How: This is the browser's own ease curve, read as a timing function. */
 
 	/* #endregion Easing Tokens */

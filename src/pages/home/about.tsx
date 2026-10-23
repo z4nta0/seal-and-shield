@@ -18,11 +18,11 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
  *
  * @summary
  * The page's third section. Its left column shows the full logo over an info
- * card listing when and where the company was founded, its phone number, and
- * its hours; its right column tells the company's story and lists its three
- * values. At 900px wide and below, the columns stack, with the logo and card
- * on top. Each block fades in as the section scrolls into view. Its id, about,
- * is what every About link on the site scrolls to.
+ * card listing the year the company was founded, where it's based, its phone
+ * number, and its hours; its right column tells the company's story and lists
+ * its three values. At 900px wide and below, the columns stack, with the logo
+ * and card on top. Each block fades in as the section scrolls into view. Its
+ * id, about, is what every About link on the site scrolls to.
  *
  * Sections:
  *  - Constants
