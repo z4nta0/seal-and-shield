@@ -615,10 +615,10 @@ test( 'Return Home leads to the home page', async ( { page : curPagObj } ) => { 
 
 
 
-for ( const [ conLabStr, secIdeStr, locKeyStr ] of [ [ 'Get a Free Quote', 'contact', 'main' ], [ 'About', 'about', 'bar' ], [ 'Services', 'services', 'footer' ] ] ) { // What: Way Home Loop. Why: The 404 page's own quote button, the bar's links, and the footer's links all have to reach their home page sections from it. How: This declares one test per kind of control, naming where to find it.
+for ( const [ conLabStr, secIdeStr, locKeyStr, conDesStr ] of [ [ 'Get a Free Quote', 'contact', 'main', 'Get a Free Quote button' ], [ 'About', 'about', 'bar', 'About link in the bar' ], [ 'Services', 'services', 'footer', 'Services link in the footer' ] ] ) { // What: Way Home Loop. Why: The 404 page's own quote button, the bar's links, and the footer's links all have to reach their home page sections from it. How: This declares one test per kind of control, naming where to find it and how its title describes it.
 
 
-	test( `the 404 page's ${ locKeyStr } ${ conLabStr } control leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Test. Why: A section control on the 404 page has no section to scroll to, so it has to go home first. How: This clicks it and checks where the visitor lands.
+	test( `the 404 page's ${ conDesStr } leads to its section`, async ( { page : curPagObj } ) => { // What: Not Found Section Test. Why: A section control on the 404 page has no section to scroll to, so it has to go home first. How: This clicks it and checks where the visitor lands.
 
 
 		await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: These controls are checked from the 404 page. How: This opens it.
