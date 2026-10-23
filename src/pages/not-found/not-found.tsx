@@ -9,7 +9,7 @@ import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why:
 import { Link         } from 'react-router';             // What: Link. Why: The return button should navigate home inside the site without a full page load. How: This renders it.
 import { NavBarCom    } from '../../ui/nav.tsx';         // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays within reach, in the bar's row above 768px wide or its menu at 768px and below. How: This is rendered first inside the page.
 import { SitFooCom    } from '../../ui/footer.tsx';      // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
-import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The quote button reaches the contact section the way every section link does. How: This returns secCliFun, which navigates home to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The quote button reaches the Contact section the way every section link does. How: This returns secCliFun, which navigates home to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
 
 // #endregion Imports
 
@@ -50,7 +50,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * holding a centered column with an error label, the heading, a short
  * explanation, and two buttons, then the footer. The return button navigates
  * to the home page; the quote button is a link to /#contact that goes through
- * secCliFun, navigating to the home page with the contact section's id as the
+ * secCliFun, navigating to the home page with the Contact section's id as the
  * hash, which the home page scrolls to and then clears, while a Ctrl, Cmd, or
  * middle click opens it in a new tab. app.tsx renders it for every path no
  * other route claims.
@@ -71,7 +71,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
 function NotFouCom () : React.JSX.Element {
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The quote button takes the visitor to the contact section the way every section link does. How: This navigates home to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The quote button takes the visitor to the Contact section the way every section link does. How: This navigates home to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
 
 
 
@@ -125,7 +125,7 @@ function NotFouCom () : React.JSX.Element {
 						href='/#contact'
 
 						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-					>{ /* What: Button Base Anchor Secondary Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's contact section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it. */ }
+					>{ /* What: Button Base Anchor Secondary Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's Contact section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it. */ }
 						Get a Free Quote
 					</a>
 

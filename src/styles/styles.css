@@ -7,8 +7,8 @@
  * @summary
  * The site's one global stylesheet, holding only what can't belong to a single
  * component: the design tokens every module reads, the reset and base element
- * styles every page relies on, and the scroll-reveal attributes the services,
- * about, and contact sections share. Every component's own styles are in its
+ * styles every page relies on, and the scroll-reveal attributes the Services,
+ * About, and Contact sections share. Every component's own styles are in its
  * CSS module, and each transition and animation turns itself off for reduced
  * motion there; only the page's smooth scrolling, the scroll reveal, and the
  * focus ring every link and button shares are handled here. Every length reads
@@ -529,7 +529,7 @@ button:focus-visible { /* What: Focused Focus Ring Controls. Why: A keyboard use
 
 /* #region Body State */
 
-[data-scroll-reveal-block] { /* What: Scroll Reveal Block. Why: The services, about, and contact sections fade their blocks in as they scroll into view, a role shared across three modules. How: This starts every block marked by the reveal hook transparent and a little low, ready to ease into place. */
+[data-scroll-reveal-block] { /* What: Scroll Reveal Block. Why: The Services, About, and Contact sections fade their blocks in as they scroll into view, a role shared across three modules. How: This starts every block marked by the reveal hook transparent and a little low, ready to ease into place. */
 
 
 	opacity    : 0;

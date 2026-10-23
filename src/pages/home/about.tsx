@@ -4,7 +4,7 @@
 // #region Imports
 
 import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import lofWebUrl from './logo-full.webp';   // What: Logo-Full WebP URL. Why: The about section shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import lofWebUrl from './logo-full.webp';   // What: Logo-Full WebP URL. Why: The About section shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
 import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, and its blocks reveal 100ms apart.
@@ -102,7 +102,7 @@ const ABO_VAL_ARR = [ // What: About Value Array. Why: The story closes with wha
  * AboSecCom = About Section Component
  *
  * @summary
- * Renders the about section: the logo and info card on the left, the story
+ * Renders the About section: the logo and info card on the left, the story
  * and values on the right, stacking with the logo and card on top at 900px
  * wide and below. The logo's column, each piece of the story, and each value
  * are scroll-reveal blocks, revealed 100ms apart once the section scrolls
@@ -114,7 +114,7 @@ const ABO_VAL_ARR = [ // What: About Value Array. Why: The story closes with wha
  *
  * @param props - This component does not use any props.
  *
- * @returns The about section element.
+ * @returns The About section element.
  *
  * @example
  * ```tsx
@@ -346,7 +346,7 @@ function AboSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { AboSecCom }; // What: Named Export. Why: The home page renders the about section third. How: This exports AboSecCom.
+export { AboSecCom }; // What: Named Export. Why: The home page renders the About section third. How: This exports AboSecCom.
 
 // #endregion Exports
 

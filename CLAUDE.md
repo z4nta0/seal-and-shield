@@ -88,7 +88,7 @@ so it's settled (2026-10-10).
   (`--gut-sid-pad`, reese-roofing's own), the column gaps between section
   columns, panel and button side padding, and the footer's column gap are
   each a `clamp()` of a `--hor-rhy-*` step between two `--spa-hor-*` steps.
-  The logos and the services header take `max()` of a rhythm-step floor and
+  The logos and the Services header take `max()` of a rhythm-step floor and
   a horizontal step, since their columns already cap them.
 - **Fixed (rem steps)**: everything inside a component: small gaps, card,
   field, and tag padding, the heading rules, and the menu lines. The phone
@@ -129,8 +129,8 @@ suites"), and `design/` holds source artwork that isn't served, with the
 scripts that render it into `public/`: `design/og-image/` (the social
 preview card) and `design/icons/` (the favicon set).
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
-  and a component only that page uses (the hero, services, about, and
-  contact sections) lives in that folder. The 404 page is
+  and a component only that page uses (the hero, Services, About, and
+  Contact sections) lives in that folder. The 404 page is
   `pages/not-found/`.
 - **A page's main file is named after its folder, with no prefix**
   (`pages/home/home.tsx`), the same as reese-roofing.
@@ -186,7 +186,7 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
    - **404 page: done 2026-10-09.** It has the shared bar and footer, a
-     Return Home button, a Get a Free Quote button to the contact section,
+     Return Home button, a Get a Free Quote button to the Contact section,
      and its own title and noindex tag. Every section link works from it
      through `ui/section-link.ts`, and the home page scrolls to a hash it
      arrives with and then clears it, as asked for the same day.
@@ -321,7 +321,7 @@ Done by the user on 2026-10-10, after the step 7 deploy:
   rebuilt from pasted JSX that repeated the React form's input ids.
 - **Security headers and social preview**: both graded with no problems.
 - **Contrast over the gradients**, which axe can't measure (the hero's,
-  contact section's, and footer's text): checked by eye and passed.
+  Contact section's, and footer's text): checked by eye and passed.
 - **WAVE reports** (2026-10-09): the hidden Netlify form's fields now carry
   aria-labels, and the body is dark so the transparent bar's text no longer
   measures against white. WAVE's remaining contrast flags on the About and

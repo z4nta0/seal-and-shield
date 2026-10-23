@@ -46,7 +46,7 @@ import { useNavigate } from 'react-router';        // What: Use Navigate. Why: T
  *
  * @summary
  * Renders the whole home page: NavBarCom, a main element holding the hero,
- * services, about, and contact sections in the order a visitor reads them, and
+ * Services, About, and Contact sections in the order a visitor reads them, and
  * SitFooCom. Each section's id is the target of every link to that section.
  * When the page arrives with a hash, from a section link on another page, a
  * link opened in a new tab, or an address like /#contact, it waits for the
@@ -114,15 +114,15 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-				<SerSecCom />{ /* What: Services Section Component. Why: Visitors see what the company does next. How: This renders the services second. */ }
+				<SerSecCom />{ /* What: Services Section Component. Why: Visitors see what the company does next. How: This renders the Services section second. */ }
 
 
 
-				<AboSecCom />{ /* What: About Section Component. Why: The company's story follows its services. How: This renders the about section third. */ }
+				<AboSecCom />{ /* What: About Section Component. Why: The company's story follows its services. How: This renders the About section third. */ }
 
 
 
-				<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach the company. How: This renders the contact section last. */ }
+				<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach the company. How: This renders the Contact section last. */ }
 
 
 			</main>

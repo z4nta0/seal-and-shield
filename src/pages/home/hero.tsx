@@ -82,8 +82,8 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
  * HerSecCom = Hero Section Component
  *
  * @summary
- * Renders the hero section. Its two buttons are real links to the contact and
- * services sections (/#contact, /#services), so the browser can open, copy, or
+ * Renders the hero section. Its two buttons are real links to the Contact and
+ * Services sections (/#contact, /#services), so the browser can open, copy, or
  * show their address, and they open in a new tab on a Ctrl, Cmd, or middle
  * click, while a plain click goes through secCliFun, which scrolls to the
  * section in place, smoothly unless the visitor asked for reduced motion. The
@@ -173,7 +173,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-						>{ /* What: Button Base Anchor Primary Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
+						>{ /* What: Button Base Anchor Primary Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the Contact section. */ }
 							Get a Free Quote
 						</a>
 
@@ -183,7 +183,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#services'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
-						>{ /* What: Button Base Anchor Secondary Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
+						>{ /* What: Button Base Anchor Secondary Element. Why: Some visitors want to see what's offered first. How: This scrolls to the Services section. */ }
 							Our Services
 						</a>
 

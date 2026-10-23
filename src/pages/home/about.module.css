@@ -23,7 +23,7 @@
 
 /* #region homAboSec */
 
-.homAboSec { /* What: Home About Section. Why: The company's story sits on a white band between the light services and the dark contact section. How: This fills it white with generous padding above and below. */
+.homAboSec { /* What: Home About Section. Why: The company's story sits on a white band between the light services and the dark Contact section. How: This fills it white with generous padding above and below. */
 
 
 	background : var( --bac-pag-col );   /* Background Page Color = #ffffff */

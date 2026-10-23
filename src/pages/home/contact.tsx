@@ -61,7 +61,7 @@ const EMP_FOR_OBJ = { company : '', email : '', message : '', name : '', phone :
  * ConSecCom = Contact Section Component
  *
  * @summary
- * Renders the contact section. The form's fields are controlled by forDatObj,
+ * Renders the Contact section. The form's fields are controlled by forDatObj,
  * whose keys match each field's name attribute, so one change handler serves
  * all five. The browser checks the required fields before submitting, then
  * forSubFun posts the fields to Netlify Forms and shows the thank-you message
@@ -73,7 +73,7 @@ const EMP_FOR_OBJ = { company : '', email : '', message : '', name : '', phone :
  *
  * @param props - This component does not use any props.
  *
- * @returns The contact section element.
+ * @returns The Contact section element.
  *
  * @example
  * ```tsx
@@ -812,7 +812,7 @@ function ConSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ConSecCom }; // What: Named Export. Why: The home page renders the contact section last. How: This exports ConSecCom.
+export { ConSecCom }; // What: Named Export. Why: The home page renders the Contact section last. How: This exports ConSecCom.
 
 // #endregion Exports
 

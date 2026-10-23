@@ -16,7 +16,7 @@ import { useRef    } from 'react';                 // What: Use Ref. Why: The ob
  * reveal.ts = Scroll Reveal
  *
  * @summary
- * The scroll-triggered fade-in the services, about, and contact sections
+ * The scroll-triggered fade-in the Services, About, and Contact sections
  * share. Each of them marks the blocks that should fade in with the
  * presence-only data-scroll-reveal-block attribute, which styles.css starts
  * hidden and slightly lowered, and attaches the ref this hook returns. Once a
@@ -127,7 +127,7 @@ function useRevSecFun ( staDelNum : number ) : React.RefObject< HTMLElement | nu
 
 // #region Exports
 
-export { useRevSecFun }; // What: Named Export. Why: The services, about, and contact sections share the fade-in. How: This exports useRevSecFun.
+export { useRevSecFun }; // What: Named Export. Why: The Services, About, and Contact sections share the fade-in. How: This exports useRevSecFun.
 
 // #endregion Exports
 

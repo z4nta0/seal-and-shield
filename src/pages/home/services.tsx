@@ -167,7 +167,7 @@ const SER_REC_ARR = [ // What: Service Record Array. Why: The card grid lists ev
  * SerSecCom = Services Section Component
  *
  * @summary
- * Renders the services section: the header, a card for each row of
+ * Renders the Services section: the header, a card for each row of
  * SER_REC_ARR, and the service area panel with a tag for each entry of
  * SER_ARE_ARR. Its header, each card's grid cell, and the area panel are
  * scroll-reveal blocks, revealed 80ms apart once the section scrolls into
@@ -177,7 +177,7 @@ const SER_REC_ARR = [ // What: Service Record Array. Why: The card grid lists ev
  *
  * @param props - This component does not use any props.
  *
- * @returns The services section element.
+ * @returns The Services section element.
  *
  * @example
  * ```tsx
@@ -336,7 +336,7 @@ function SerSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { SerSecCom }; // What: Named Export. Why: The home page renders the services second. How: This exports SerSecCom.
+export { SerSecCom }; // What: Named Export. Why: The home page renders the Services section second. How: This exports SerSecCom.
 
 // #endregion Exports
 
