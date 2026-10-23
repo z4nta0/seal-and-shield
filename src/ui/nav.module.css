@@ -654,7 +654,7 @@
 
 
 }
-.menLinAnc[data-section-link-active]::after { /* What: Active Menu Link Anchor Dot. Why: The dot names the section being read. How: This shows it at full size, fading in on the decelerating curve with a gentle overshoot, as something arriving. */
+.menLinAnc[data-section-link-active]::after { /* What: Active Menu Link Anchor Dot. Why: The dot names the section being read. How: This shows it at full size, fading it in on the decelerating curve as it grows with a gentle overshoot, as something arriving. */
 
 
 	opacity    : 1;

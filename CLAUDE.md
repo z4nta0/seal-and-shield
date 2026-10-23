@@ -265,16 +265,15 @@ Contact sections only fade their content in once scrolled into view, and skips
 animations that repeat forever (the hero logo's `logRinDivLoopPulse`) when
 waiting for the page to settle.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
-  checks each state, and the contact form's thank-you message and error
-  (sent against a faked Netlify answer), against WCAG 2.2 A and AA plus best
-  practices (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
-  button names, a Tab walk (order, traps, focus on screen, uncovered, and
-  visible), reflow at 320px, motion under reduced motion, and the contact
-  form's announcements: its alert region waits in the page empty and gains
-  the error, focus stays on the submit button after a failed send, and focus
-  moves to the thank-you message and back to the form. axe's "needs review"
-  results are printed and attached to the report rather than failing the
-  run.
+  checks each state, and the contact form's thank-you message and error (sent
+  against a faked Netlify answer), against WCAG 2.2 A and AA plus best
+  practices (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover
+  link and button names, a Tab walk (order, traps, focus on screen, uncovered,
+  and visible), reflow at 320px, motion under reduced motion, and the contact
+  form's announcements: its alert region waits in the page empty and gains the
+  error, focus stays on the submit button after a failed send, and focus moves
+  to the thank-you message and back to the form. axe's "needs review" results
+  are printed and attached to the report rather than failing the run.
 - `npm run test:interaction`: checks what the controls do, under reduced motion
   so scrolls land at once. The bar's links, brand, menu, footer links, and hero
   buttons land on their sections with a clean address, a Ctrl or Cmd click and
@@ -284,16 +283,17 @@ waiting for the page to settle.
   form refuses incomplete requests and reports a faked Netlify answer honestly;
   and the 404 page, its buttons, and a section address like /#about lead where
   they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
-  every control in every state has a hover, press, and focus change, with
-  every property each change touches (on the control or anything inside it)
-  eased by a transition (the phone link in the contact form's error message included,
-  reached after a faked failed send), that every form field has a focus change
-  that eases in, that the home page's service cards and area tags have a hover
-  change that eases in, that the focus ring eases in to full width, and that
-  feedback stays without motion under reduced motion. Its two every-control
-  probes are marked slow, since each takes about 28 seconds in Chromium. The
-  open menu state parks the pointer in the bar's corner after tapping the
-  toggle, so the toggle's hover color stays out of every check of it.
+  every control in every state has a hover and press change, with every
+  property each change touches (on the control or anything inside it) eased by
+  a transition, and transitions its focus ring's outline (the phone link in the
+  contact form's error message included, reached after a faked failed send),
+  that every form field has a focus change that eases in, that the home page's
+  service cards and area tags have a hover change that eases in, that the focus
+  ring eases in to full width, and that feedback stays without motion under
+  reduced motion. Its two every-control probes are marked slow, since each
+  takes about 28 seconds in Chromium. The open menu state parks the pointer in
+  the bar's corner after tapping the toggle, so the toggle's hover color stays
+  out of every check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance: no pixel
   may differ, and the per-pixel color threshold is 0 too, since Playwright's
