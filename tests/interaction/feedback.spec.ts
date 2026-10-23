@@ -133,19 +133,21 @@ function cliBloFun () : void {
  * conLisFun = Control List Function
  *
  * @summary
- * Collects every control a visitor can reach on the page as it stands: each
+ * Collects every element a visitor can reach on the page as it stands: each
  * element the selector matches that's visible, not taken out of the tab order
  * with tabindex -1, and not inside inert content (the closed mobile menu), so
- * the same list serves the links and buttons and the form fields. Handles are
- * taken once, so restyling while the checks scroll (the nav bar's scrolled
- * look) can't shift the list.
+ * the same list serves the links and buttons, the form fields, the error's
+ * phone link, and the service cards and area tags. Handles are taken once, so
+ * restyling while the checks scroll (the nav bar's scrolled look) can't shift
+ * the list.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to collect from.
- * @param conSelStr - Control Selector String: The kinds of control to collect,
- *                    'a, button' for the links and buttons or 'input, select,
- *                    textarea' for the form fields.
+ * @param conSelStr - Control Selector String: The elements to collect: 'a,
+ *                    button' for the links and buttons, 'input, select,
+ *                    textarea' for the form fields, or a narrower selector
+ *                    for the error's phone link or the cards and tags.
  *
  * @returns A promise that resolves with every reachable control.
  * @see {@link conHanArr}
