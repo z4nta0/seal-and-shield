@@ -196,7 +196,7 @@ test( 'the raw page carries the home title and description for script-free reade
 
 // #region Not Found Page Checks
 
-test( 'the 404 page stays out of search results', async ( { page : curPagObj } ) => { // What: Not Found Head Test. Why: The host answers every unknown address with a 200, so the 404 page must ask not to be indexed. How: This loads an unknown address and checks its robots tag, canonical, single description, title, and heading.
+test( 'the 404 page stays out of search results', async ( { page : curPagObj } ) => { // What: Not Found Head Test. Why: The host answers every unknown address with a 200, so the 404 page must ask not to be indexed. How: This loads an unknown address and checks its noindex robots tag, its canonical, its title, and that it has a single description and a single h1.
 
 
 	await curPagObj.goto( '/no-such-page' ); // What: Unknown Address Open Call. Why: Every unknown path shows the 404 page. How: This loads one.
@@ -304,7 +304,7 @@ test( 'every icon the head links to is served at its size', async ( { page : cur
 
 // #region Crawler File Checks
 
-test( 'robots.txt lets crawlers in and names the sitemap', async ( { request : reqCotObj } ) => { // What: Robots File Test. Why: A real business wants every page crawled and its sitemap found. How: This fetches robots.txt and checks it's served and what its rules say.
+test( 'robots.txt lets crawlers in and names the sitemap', async ( { request : reqCotObj } ) => { // What: Robots File Test. Why: A real business wants every page crawled and its sitemap found. How: This fetches robots.txt and checks it's served, that its wildcard group allows the whole site, that nothing disallows it, and that it names the sitemap's absolute address.
 
 
 	const robResObj = await reqCotObj.get( '/robots.txt' ); // What: Robots Response Object. Why: The file is read the way a crawler reads it. How: This fetches it from the site.

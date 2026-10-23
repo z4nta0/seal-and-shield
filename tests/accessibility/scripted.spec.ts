@@ -597,7 +597,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 
-test( 'a failed request fills an alert region that was in the page, empty, from the start', async ( { page : curPagObj } ) => { // What: Failure Announcement Test. Why: A live region added at the moment it speaks is often missed, so the error's region has to wait in the page, empty, and gain the message once a request fails. How: This checks the region on load, fails a request, and checks it again.
+test( 'a failed request fills an alert region that was in the page, empty, from the start', async ( { page : curPagObj } ) => { // What: Failure Announcement Test. Why: A live region added at the moment it speaks is often missed, so the error's region has to wait in the page, empty, and gain the message once a request fails. How: This checks the page holds exactly one alert region and that it's empty on load, fails a request, and checks the region then holds the error.
 
 
 	await fakNetFun( curPagObj, 500 ); // What: Netlify Error Fake Call. Why: The request has to fail for the error to show. How: This answers every post to the site's root with a server error.

@@ -654,7 +654,7 @@
 
 /* #region menLinAnc */
 
-.menLinAnc { /* What: Menu Link Anchor. Why: Each link fills a row of the panel. How: This sets it in spaced capitals in light silver with a faint divider below, its label at the start and its active dot at the end, and eases its hover color, press dim, and focus ring. */
+.menLinAnc { /* What: Menu Link Anchor. Why: Each link fills a row of the panel. How: This sets it in spaced capitals in light silver with a faint divider below, its label at the start and its active dot at the end, and eases its hover and active color, press dim, and focus ring. */
 
 
 	align-items     : center;
@@ -736,7 +736,7 @@
 
 	.menLinAnc,
 	.menLinAnc::after,
-	.menLinAnc[data-section-link-active]::after { /* What: Motionless Menu Link Anchor. Why: The hover color, press dim, focus ring, and active dot should simply switch. How: This turns the link's transition and both of its dot's transitions off, naming the active dot too since its selector outranks the base. */
+	.menLinAnc[data-section-link-active]::after { /* What: Motionless Menu Link Anchor. Why: The hover and active color, press dim, focus ring, and active dot should simply switch. How: This turns the link's transition and both of its dot's transitions off, naming the active dot too since its selector outranks the base. */
 
 
 		transition : none;
