@@ -32,8 +32,8 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers th
  * while the state opens. Forms: a failed request fills an alert region that
  * sat in the page, empty, from the start, and leaves focus on the submit
  * button, while sending moves focus to the thank-you message, then back to the
- * form's first field when the form returns. Each failure lists every problem
- * found, by element.
+ * form's first field when the form returns. The name, keyboard, and motion
+ * checks list every problem they find, by element.
  *
  * Sections:
  *  - Constants

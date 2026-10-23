@@ -304,7 +304,7 @@
 .forWraDiv { /* What: Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
 
 
-	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */ /* What: Focus Ring Color For The Panel. Why: The white panel needs the main blue ring back, since the light blue falls under 3:1 on white. How: This hands every control in the panel the main blue. */
+	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */ /* What: Focus Ring Color For The Panel. Why: The white panel takes the main blue ring back, which stands out far more there, at about 6.5:1, than the light blue does, at about 3.4:1. How: This hands every control in the panel the main blue. */
 
 	background : var( --bac-pag-col );                                                                           /* Background Page Color = #ffffff */
 	padding    : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
