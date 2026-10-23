@@ -484,16 +484,18 @@ const valSigFun = ( snaRecArr : SnaRecTyp[] ) : string => JSON.stringify( snaRec
  *
  * @summary
  * Probes every reachable control and returns a problem for each one that gives
- * no feedback. Each control is scrolled into view, read at rest with the
- * pointer away, read again while hovered, and again while the mouse button is
- * held on it, every look read once its transition has settled. A control that
- * looks the same at rest and hovered, or hovered and pressed, is a problem.
- * Normally every property that changes on hover or press, on the control or
- * anything inside it, has to be eased by a transition ({@link snaProFun}),
- * and its transition list must include the focus ring's outline-width, so the
- * ring eases in; under reduced motion every one of its transition durations
- * must be zero instead. The caller blocks real clicks first, so releasing the
- * mouse does nothing.
+ * no feedback. Each control is scrolled into view, and one that still waits
+ * above the screen until it's focused, such as the skip link, is focused so it
+ * slides in, then blurred again once it's probed. Each is read at rest with
+ * the pointer away, read again while hovered, and again while the mouse button
+ * is held on it, every look read once its transition has settled. A control
+ * that looks the same at rest and hovered, or hovered and pressed, is a
+ * problem. Normally every property that changes on hover or press, on the
+ * control or anything inside it, has to be eased by a transition ({@link
+ * snaProFun}), and its transition list must include the focus ring's
+ * outline-width, so the ring eases in; under reduced motion every one of its
+ * transition durations must be zero instead. The caller blocks real clicks
+ * first, so releasing the mouse does nothing.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

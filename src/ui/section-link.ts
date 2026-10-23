@@ -47,18 +47,20 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * modCliFun = Modified Click Function
  *
  * @summary
- * Whether a click on a section link should be left to the browser: one made
- * with a modifier key held (Ctrl or Cmd to open a new tab, Shift for a new
- * window, Alt to download) or with any button but the main one. A middle click
- * never arrives here in practice, since Chromium, Firefox, and WebKit send it
- * as auxclick rather than click, so the button check is only a safeguard for
- * an engine that sends it as a click. secCliFun, the shared click handler,
- * returns early when this is true, so a new tab or window opened from the
- * link's own address lands on the section, where the home page scrolls to it.
+ * Whether a click on a section link, or on the bar's skip link, should be left
+ * to the browser: one made with a modifier key held (Ctrl or Cmd to open a new
+ * tab, Shift for a new window, Alt to download) or with any button but the
+ * main one. A middle click never arrives here in practice, since Chromium,
+ * Firefox, and WebKit send it as auxclick rather than click, so the button
+ * check is only a safeguard for an engine that sends it as a click. secCliFun,
+ * the shared click handler, and the skip link's own handler both return early
+ * when this is true, so a new tab or window opened from a link's own address
+ * lands where that address points, and a section link's lands on the section,
+ * where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
- * @param cliEveObj - Click Event Object: The section link's click event.
+ * @param cliEveObj - Click Event Object: The link's click event.
  *
  * @returns Whether the browser should handle the click itself.
  * @see {@link modCliBoo}
