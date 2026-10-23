@@ -95,7 +95,13 @@ function NotFouCom () : React.JSX.Element {
 
 
 
-			<main className={ cssModObj.nofConMai }>{ /* What: Not-Found Content Main Element. Why: The page's one message is its main content. How: This centers a single column in the dark space between the bar and the footer. */ }
+			<main
+				id='main'
+
+				className={ cssModObj.nofConMai }
+
+				tabIndex={ -1 } // What: Main Focus Target. Why: The skip link moves focus here, and a main element can't take focus on its own. How: This makes it focusable without adding it to the Tab order.
+			>{ /* What: Not-Found Content Main Element. Why: The page's one message is its main content, and the skip link jumps here. How: This centers a single column in the dark space between the bar and the footer; its id stays the plain main, since the skip link's #main address names it as a navigation target. */ }
 
 
 				<p className={ cssModObj.eyeLabPar }>Error 404</p>{ /* What: Eyebrow Label Paragraph Element. Why: A label names the error before the heading. How: This uses the site's eyebrow style. */ }

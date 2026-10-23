@@ -5,15 +5,16 @@
  * nav.module.css = Navigation Bar Module
  *
  * @summary
- * Styles for NavBarCom: the fixed top bar, transparent at the top of the
- * page and solid once it scrolls, with the brand, the section links and
- * phone button on wide screens, and on screens 768px wide or narrower the
- * menu button and the panel it opens below the bar over a dimmed page: the
- * section links, entering one after another, and a contact block with the
- * call and quote buttons, the hours, and the service area. The shared
- * container styles the bar's inner row used to borrow from the global
- * stylesheet are copied onto its own class here. The bar's states are
- * attributes rather than classes: data-page-scroll-active on the bar,
+ * Styles for NavBarCom: the skip link, waiting above the screen until it's
+ * focused and then sliding down over the bar's corner, the fixed top bar,
+ * transparent at the top of the page and solid once it scrolls, with the
+ * brand, the section links and phone button on wide screens, and on screens
+ * 768px wide or narrower the menu button and the panel it opens below the bar
+ * over a dimmed page: the section links, entering one after another, and a
+ * contact block with the call and quote buttons, the hours, and the service
+ * area. The shared container styles the bar's inner row used to borrow from
+ * the global stylesheet are copied onto its own class here. The bar's states
+ * are attributes rather than classes: data-page-scroll-active on the bar,
  * data-section-link-active on the link for the section being read,
  * aria-expanded on the menu button, and data-mobile-menu-open on the dimmer,
  * the bar, and the panel.
@@ -23,6 +24,67 @@
 */
 
 
+
+.navSkiAnc { /* What: Navigation Skip Anchor. Why: A keyboard user should be able to jump past the bar, and the link shouldn't show until it's needed. How: This sets it as a solid blue button fixed just above the screen's top edge, at the page's side gutter, leaving on the accelerating curve. */
+
+
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Skip Link. Why: The main blue ring falls under 3:1 against the button and the bar's navy behind it. How: This hands the link the light accent, the same ring the bar's own controls draw. */
+
+	background     : var( --acc-mai-col );                               /* Accent Main Color = #1e56c8 */
+	border         : var( --bor-wid-lar ) solid var( --acc-mai-col );    /* Border Width Large ~= 2.035px, Accent Main Color = #1e56c8 */
+	color          : var( --tex-acc-col );                               /* Text Accent Color = #ffffff */
+	font-family    : var( --fon-fam-sec );                               /* Font Family Secondary = 'Barlow Condensed', sans-serif */
+	font-size      : var( --fon-siz-p01 );                               /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 700;
+	left           : var( --gut-sid-pad );                               /* Gutter Side Padding, about 19.304px - 44.876px */
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );             /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-m02 ) var( --spa-hor-bas );          /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
+	position       : fixed;
+	top            : var( --spa-ver-m02 );                               /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	transform      : translateY( calc( -100% - var( --spa-ver-m02 ) * 2 ) ); /* Spacing Vertical Base Minus 2 ~= -16.608px */ /* What: Hidden Offset. Why: The link waits just above the screen until it's focused, clear of the edge so no rounded sliver of it shows. How: This raises it by its own height plus twice its top offset, leaving its bottom edge a top offset above the screen. */
+	transition     : background var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-acc-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ), Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	z-index        : 2;                                                  /* What: Skip Link Layer. Why: The focused link has to show above the bar and the dimmer, both at 1. How: This sets it one layer higher. */
+
+
+}
+.navSkiAnc:focus { /* What: Focused Navigation Skip Anchor. Why: The link has to come into view however focus reaches it. How: This slides it down over the bar's corner on the decelerating curve, on :focus rather than :focus-visible so a script's focus shows it too. */
+
+
+	transform  : translateY( 0 );
+	transition : background var( --dur-tra-p02 ) var( --mot-sta-eas ), color var( --dur-tra-p02 ) var( --mot-sta-eas ), transform var( --dur-tra-p02 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+
+
+}
+.navSkiAnc:hover { /* What: Hovered Navigation Skip Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text and lifts it a pixel. */
+
+
+	background : transparent;
+	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+	transform  : translateY( -1px );   /* What: Hover Lift. Why: The button invites a click. How: This raises it a pixel, a literal since no spacing step lands within 10%. */
+
+
+}
+.navSkiAnc:active { /* What: Pressed Navigation Skip Anchor. Why: A press should register before focus moves. How: This presses the button in slightly. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Navigation Skip Anchor. Why: Someone who asked for less motion shouldn't see the link slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.navSkiAnc,
+	.navSkiAnc:focus { /* What: Motionless Navigation Skip Anchor. Why: The link should simply appear and its hover look switch on. How: This turns the transition off on both the hidden and the focused rule, since the focused rule outranks the base. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
 
 .navScrDiv { /* What: Navigation Scrim Div. Why: The open menu needs the page behind it dimmed, both to set the menu apart and to catch a tap that closes it. How: This covers the screen beneath the bar, transparent and hidden until the menu opens, and exists only where the menu does. */
 

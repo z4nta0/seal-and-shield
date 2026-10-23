@@ -26,6 +26,7 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * auxclick, never reaches the click handler at all; a new tab or window opened
  * that way lands on the home page at that section. Copied from hair-designs'
  * own, which adds secCliFun so every section link shares one click handler.
+ * Its modified click check is shared with the bar's skip link too.
  *
  * Sections:
  *  - Helpers
@@ -214,7 +215,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 
 // #region Exports
 
-export { useSecCliFun }; // What: Named Export. Why: The bar, the menu, the hero, the footer, and the 404 page reach sections through it. How: This exports the hook that returns the shared click handler, which uses modCliFun and useSecLinFun inside this file.
+export { modCliFun, useSecCliFun }; // What: Named Exports. Why: The bar, the menu, the hero, the footer, and the 404 page reach sections through useSecCliFun, and the bar's skip link leaves a modified click to the browser through modCliFun. How: This exports the modified click check and the hook that returns the shared click handler, while useSecLinFun stays inside this file.
 
 // #endregion Exports
 

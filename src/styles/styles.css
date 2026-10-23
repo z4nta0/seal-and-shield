@@ -489,6 +489,14 @@ ul { /* What: Unordered List. Why: Lists should start without bullets until a mo
 
 }
 
+main:focus { /* What: Focused Main. Why: The skip link moves focus to the main element, which is where the jump lands rather than a control, and a ring around the whole page would only confuse. How: This removes its focus outline. */
+
+
+	outline : none;
+
+
+}
+
 a,
 button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather than snap, in a ring that suits the section it's in. How: This gives every link and button a zero-width outline in the focus ring color, held a little away from the element, ready to grow in on focus. */
 

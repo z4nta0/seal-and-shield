@@ -23,18 +23,20 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  * runs. The bar's section links, the brand, the hero's buttons, and the
  * footer's section links land on their sections and leave the address free of
  * hashes, while a Ctrl, Cmd, or middle click opens a section in a new tab and
- * leaves the page clicked from alone; the mobile menu opens over an inert
- * page, closes on its button, Escape (which returns focus to the button), a
- * tap on the dimmed page, or a wider screen, and closes again when one of its
- * links is chosen, but not when a link opens in a new tab; the contact form
- * refuses to send without its required fields and reports Netlify's answer
- * honestly, clearing its error on a retry and coming back after the thank-you
- * message, with Netlify's side faked in the browser so nothing is really sent;
- * and the 404 page answers an unknown address with a noindex tag and leads
- * back to the home page and its sections, as does an address that names a
- * section directly. Pages open under reduced motion, so scrolling jumps
- * straight to its target and each position can be read at once; how things
- * move is checked elsewhere.
+ * leaves the page clicked from alone; the first Tab on each page reaches the
+ * skip link, on screen, and clicking it moves focus to the main content with a
+ * clean address; the mobile menu opens over an inert page, closes on its
+ * button, Escape (which returns focus to the button), a tap on the dimmed
+ * page, or a wider screen, and closes again when one of its links is chosen,
+ * but not when a link opens in a new tab; the contact form refuses to send
+ * without its required fields and reports Netlify's answer honestly, clearing
+ * its error on a retry and coming back after the thank-you message, with
+ * Netlify's side faked in the browser so nothing is really sent; and the 404
+ * page answers an unknown address with a noindex tag and leads back to the
+ * home page and its sections, as does an address that names a section
+ * directly. Pages open under reduced motion, so scrolling jumps straight to
+ * its target and each position can be read at once; how things move is checked
+ * elsewhere.
  *
  * Sections:
  *  - Constants
@@ -342,6 +344,40 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Get a Free Quote', 'contact' ], [ '
 }
 
 // #endregion Home Page Navigation Checks
+
+
+
+// #region Skip Link Checks
+
+for ( const [ pagNamStr, rouPatStr ] of [ [ 'home page', '/' ], [ '404 page', '/no-such-page' ] ] ) { // What: Skip Link Loop. Why: Every page opens with the skip link. How: This declares one check per page.
+
+
+	test( `the first Tab on the ${ pagNamStr } reaches the skip link, which moves focus to the main content`, async ( { browserName : broNamStr, page : curPagObj } ) => { // What: Skip Link Test. Why: A keyboard user has to be able to jump past the bar. How: This presses Tab once, checks the skip link holds focus on screen, then clicks it and checks focus moved to the main element with a clean address.
+
+
+		const skiLinLoc = curPagObj.getByRole( 'link', { name : 'Skip to main content' } ); // What: Skip Link Locator. Why: Each step below reaches the same link. How: This finds it by its role and name.
+
+
+
+		await opeRouFun( curPagObj, rouPatStr, DES_VIE_OBJ ); // What: Page Open Call. Why: The skip link is checked on each page. How: This opens the page at desktop size.
+
+		await curPagObj.keyboard.press( broNamStr === 'webkit' ? 'Alt+Tab' : 'Tab' ); // What: First Tab Call. Why: The skip link should be the page's first stop. How: This presses Tab, or Alt+Tab in WebKit, whose plain Tab skips links the way Safari does by default.
+
+		await expect( skiLinLoc ).toBeFocused();    // What: Skip Focus Assertion. Why: The skip link has to be the page's first stop. How: This checks it holds focus after the first Tab.
+		await expect( skiLinLoc ).toBeInViewport(); // What: Skip Shown Assertion. Why: A focused link waiting above the screen would leave a keyboard user lost. How: This checks it has slid into view.
+
+		await skiLinLoc.click(); // What: Skip Click Call. Why: This is the action under test. How: This clicks the focused skip link.
+
+		await expect( curPagObj.locator( 'main' ) ).toBeFocused();              // What: Main Focus Assertion. Why: The jump has to land past the bar, so the next Tab continues into the content. How: This checks the main element holds focus.
+		await expect( curPagObj ).toHaveURL( new RegExp( `${ rouPatStr }$` ) ); // What: Clean Address Assertion. Why: The jump shouldn't leave a hash in the address. How: This checks the address still ends with the page's own path.
+
+
+	} );
+
+
+}
+
+// #endregion Skip Link Checks
 
 
 

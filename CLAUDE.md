@@ -75,12 +75,25 @@ complexity for no real gain. For the same reason there's no back to top link
 the 404 page is too short to need one.
 
 ## Section links
-Decided 2026-10-18: `ui/section-link.ts` exports only `useSecCliFun`, where
-the user-level "## Section Links: No Hash In The Address" implementation
-bullet has the file export `modCliFun` and `useSecLinFun` as well. Every link
-here goes through the shared click handler, and with no back to top link
-nothing else needs `modCliFun`, so nothing outside the file imports either
-one, and both stay internal to it.
+Decided 2026-10-18: `ui/section-link.ts` exports `useSecCliFun` and, since
+the skip link (2026-10-23), `modCliFun`, while `useSecLinFun`, which the
+user-level "## Section Links: No Hash In The Address" implementation bullet
+also has the file export, stays internal to it: every section link goes
+through the shared click handler, and nothing else needs it.
+
+## Skip link
+Added 2026-10-23, under the user-level "## Skip Link And Modal Layers" rule.
+The main content is everything between the bar and the footer: the home
+page's four sections, and the 404 page's message and its two buttons. The
+bar's `NavBarCom` renders the link first on both pages, a blue button waiting
+above the screen that slides down over the bar's corner when focused, and
+both pages' `<main>` carry `id='main'` and `tabIndex={ -1 }` as its target.
+Before the link, axe reported `bypass` as needing review in the `menu-phone`
+state, the expected result of the open menu making the page inert, as the
+rule explains; with the link in place every state passes it outright. The
+gradient contrast review (axe's `color-contrast` needing review over the
+hero, Contact section, and footer) was checked by eye and marked done by the
+user on 2026-10-23.
 
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
@@ -276,24 +289,25 @@ waiting for the page to settle.
   are printed and attached to the report rather than failing the run.
 - `npm run test:interaction`: checks what the controls do, under reduced motion
   so scrolls land at once. The bar's links, brand, menu, footer links, and hero
-  buttons land on their sections with a clean address, a Ctrl or Cmd click and
-  a middle click on the bar's About link each open it in a new tab, a Ctrl or
-  Cmd click on the menu's About link leaves the menu open, and the menu closes
-  on Escape, on a tap of its dimmer, and when the screen widens; the contact
-  form refuses incomplete requests and reports a faked Netlify answer honestly;
-  and the 404 page, its buttons, and a section address like /#about lead where
-  they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
-  every control in every state has a hover and press change, with every
-  property each change touches (on the control or anything inside it) eased by
-  a transition, and transitions its focus ring's outline (the phone link in the
-  contact form's error message included, reached after a faked failed send),
-  that every form field has a focus change that eases in, that the home page's
-  service cards and area tags have a hover change that eases in, that the focus
-  ring eases in to full width, and that feedback stays without motion under
-  reduced motion. Its two every-control probes are marked slow, since each
-  takes about 28 seconds in Chromium. The open menu state parks the pointer in
-  the bar's corner after tapping the toggle, so the toggle's hover color stays
-  out of every check of it.
+  buttons land on their sections with a clean address, the first Tab on each
+  page reaches the skip link and clicking it focuses the main content, a Ctrl
+  or Cmd click and a middle click on the bar's About link each open it in a new
+  tab, a Ctrl or Cmd click on the menu's About link leaves the menu open, and
+  the menu closes on Escape, on a tap of its dimmer, and when the screen
+  widens; the contact form refuses incomplete requests and reports a faked
+  Netlify answer honestly; and the 404 page, its buttons, and a section address
+  like /#about lead where they should. `feedback.spec.ts`, adapted from
+  reese-roofing's, checks that every control in every state has a hover and
+  press change, with every property each change touches (on the control or
+  anything inside it) eased by a transition, and transitions its focus ring's
+  outline (the phone link in the contact form's error message included, reached
+  after a faked failed send), that every form field has a focus change that
+  eases in, that the home page's service cards and area tags have a hover
+  change that eases in, that the focus ring eases in to full width, and that
+  feedback stays without motion under reduced motion. Its two every-control
+  probes are marked slow, since each takes about 28 seconds in Chromium. The
+  open menu state parks the pointer in the bar's corner after tapping the
+  toggle, so the toggle's hover color stays out of every check of it.
 - `npm run test:rendering`: compares a full-page screenshot of every state with
   its baseline in `tests/rendering/baselines/`, with zero tolerance: no pixel
   may differ, and the per-pixel color threshold is 0 too, since Playwright's

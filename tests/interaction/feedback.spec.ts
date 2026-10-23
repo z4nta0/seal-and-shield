@@ -528,6 +528,14 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 		await conCurObj.scrollIntoViewIfNeeded(); // What: Control Scroll Call. Why: A control has to be on screen to hover or press. How: This scrolls it into view.
 
+
+		const offScrBoo = await conCurObj.evaluate( ( conCurEle ) => conCurEle.getBoundingClientRect().bottom <= 0 ); // What: Off Screen Boolean. Why: A control that waits above the screen until it's focused, such as a skip link, can't be hovered where it rests. How: This is true when its box still sits wholly above the viewport after the scroll.
+
+
+		if ( offScrBoo ) await conCurObj.focus(); // What: Hidden Control Focus Call. Why: Such a control only comes into view while focused, and is probed there. How: This focuses it, and the rest settle wait below lets it finish sliding in.
+
+
+
 		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The resting look is read with nothing hovered. How: This moves the pointer to the corner of the bar.
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
@@ -555,6 +563,9 @@ async function feeProFun ( curPagObj : Page, conSelStr : string, redMotBoo : boo
 
 
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end before the next control. How: This releases the button, whose click the caller has blocked.
+
+
+		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Hidden Control Blur Call. Why: Left focused, the control would stay in view over whatever is probed next. How: This blurs it, and the next rest settle wait lets it slide back out of view.
 
 
 

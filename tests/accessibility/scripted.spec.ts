@@ -330,14 +330,17 @@ type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges
  * border, background, color, and underline), then focusing it again so the
  * walk continues from it. Coverage is judged by asking which element sits at
  * the stop's center: anything other than the stop or one of its own
- * descendants means the stop is hidden behind it. Passed to Playwright's
- * evaluate, so it can't read anything from this file.
+ * descendants means the stop is hidden behind it. A stop that slides into view
+ * on focus is measured once its slide has finished, so it's judged where it
+ * lands. Passed to Playwright's evaluate, so it can't read anything from this
+ * file.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param void - This function takes no parameters.
  *
- * @returns The stop's description, or null when the walk has ended.
+ * @returns A promise that resolves with the stop's description, or null when
+ *          the walk has ended.
  *
  * @example
  * ```ts
@@ -346,7 +349,7 @@ type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges
  *
 */
 
-function stoInfFun () : StoInfTyp | null {
+async function stoInfFun () : Promise< StoInfTyp | null > {
 
 
 	const actCurEle = document.activeElement as HTMLElement | null; // What: Active Current Element. Why: The stop is whatever holds focus after the press. How: This reads the focused element. // What: Type Assertion Note. Why: activeElement types as Element, which has no blur or focus. How: Every element that can hold focus on this site is an HTMLElement.
@@ -385,6 +388,12 @@ function stoInfFun () : StoInfTyp | null {
 
 
 	actCurEle.focus(); // What: Stop Refocus Call. Why: The walk continues from this stop. How: This puts focus back where the Tab press left it.
+
+
+	const sliTraArr = actCurEle.getAnimations().filter( ( aniCurObj ) => aniCurObj instanceof CSSTransition && aniCurObj.transitionProperty === 'transform' ); // What: Slide Transition Array. Why: A stop that slides into view on focus, such as a skip link, has to be judged where it lands. How: This keeps the stop's running transform transitions.
+
+
+	await Promise.allSettled( sliTraArr.map( ( sliCurObj ) => sliCurObj.finished ) ); // What: Slide Settled Wait. Why: Measuring mid-slide would find the stop partly off screen. How: This waits until each slide has finished, or been cancelled.
 
 
 	const recCurObj = actCurEle.getBoundingClientRect();                                                                       // What: Rect Current Object. Why: A focused stop has to be on screen and uncovered. How: This measures the stop.

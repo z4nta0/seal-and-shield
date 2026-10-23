@@ -107,7 +107,11 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-			<main>{ /* What: Home Main Element. Why: The four sections are the page's main content. How: This wraps them in the main landmark, in reading order. */ }
+			<main
+				id='main'
+
+				tabIndex={ -1 } // What: Main Focus Target. Why: The skip link moves focus here, and a main element can't take focus on its own. How: This makes it focusable without adding it to the Tab order.
+			>{ /* What: Home Main Element. Why: The four sections are the page's main content, and the skip link jumps here. How: This wraps them in the main landmark, in reading order; its id stays the plain main, since the skip link's #main address names it as a navigation target. */ }
 
 
 				<HerSecCom />{ /* What: Hero Section Component. Why: The page opens with the headline and pitch. How: This renders the hero first. */ }

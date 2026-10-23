@@ -7,6 +7,7 @@ import cssModObj from './nav.module.css';           // What: CSS Module Object. 
 import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The bar's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
+import { modCliFun    } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl, Cmd, Shift, or Alt click on the skip link should open it the browser's own way. How: The skip link's click handler asks it before cancelling the default.
 import { SEC_LIN_ARR  } from './sections.ts';      // What: Section Link Array. Why: The bar and the mobile menu link to the home page's sections, and the bar tracks which one is being read. How: This is the one list of sections, in page order, that the links and the scroll walk read.
 import { tokPxlFun    } from '../utils/rhythm.ts'; // What: Token Pixel Function. Why: The active section's line has to clear the bar, which the stylesheet sizes. How: This reads the bar's height and a spacing step from their tokens in pixels.
 import { useEffect    } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position, and the open menu changes the page around it. How: This registers the scroll and menu listeners and removes them again.
@@ -23,14 +24,16 @@ import { useState     } from 'react';              // What: Use State. Why: The 
  * nav.tsx = Navigation
  *
  * @summary
- * The site's fixed top bar: the brand, then above 768px wide the section
- * links and the phone number in a row, and at 768px and below a menu button
- * that opens the same links and phone number in a panel below the bar. The
- * bar takes on a solid background once the page scrolls past its top, and
- * the link for whichever section the visitor is reading is marked active on
- * the home page. Every section link closes the menu and reaches its section
- * through section-link.ts: smoothly in place on the home page, or by
- * navigating home from any other page.
+ * The site's fixed top bar: the brand, then above 768px wide the section links
+ * and the phone number in a row, and at 768px and below a menu button that
+ * opens the same links and phone number in a panel below the bar. The bar
+ * takes on a solid background once the page scrolls past its top, and the link
+ * for whichever section the visitor is reading is marked active on the home
+ * page. Every section link closes the menu and reaches its section through
+ * section-link.ts: smoothly in place on the home page, or by navigating home
+ * from any other page. The bar opens with a skip link, waiting above the
+ * screen until it's focused, that moves focus past the bar to the page's main
+ * content.
  *
  * Sections:
  *  - Components
@@ -66,14 +69,17 @@ import { useState     } from 'react';              // What: Use State. Why: The 
  * navSecFun, which reaches the section from any page and closes the menu,
  * while a Ctrl, Cmd, Shift, or Alt click is left to the browser and leaves the
  * menu as it was, and a middle click, which the browser sends as auxclick,
- * never reaches navSecFun at all.
+ * never reaches navSecFun at all. A skip link comes first, waiting above the
+ * screen until it's focused, when it slides down over the bar's corner; a
+ * plain click on it focuses the page's main element without leaving a hash in
+ * the address, while a modified click is left to the browser.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.
  *
- * @returns The dimmer behind the menu and the bar's header element, which
- *          holds the bar and the mobile menu.
+ * @returns The skip link, the dimmer behind the menu, and the bar's header
+ *          element, which holds the bar and the mobile menu.
  *
  * @example
  * ```tsx
@@ -291,8 +297,28 @@ function NavBarCom () : React.JSX.Element {
 	return (
 
 
-		<>{ /* What: Navigation Fragment. Why: The dimmer and the bar render together, the dimmer first so the bar, at the same stack level, paints above it. How: This groups them without adding a wrapper element. */ }
+		<>{ /* What: Navigation Fragment. Why: The skip link, the dimmer, and the bar render together, the skip link first so it's the page's first stop, and the dimmer before the bar so the bar, at the same stack level, paints above it. How: This groups them without adding a wrapper element. */ }
 
+
+			<a
+				className={ cssModObj.navSkiAnc }
+
+				href='#main'
+
+				onClick={ ( cliEveObj ) => { // What: Skip Click Handler. Why: The jump should land in the page's content without leaving a hash in the address. How: This leaves a modified click to the browser, and otherwise cancels the default and focuses the main element.
+
+
+					if ( modCliFun( cliEveObj ) ) return; // What: Modified Click Guard. Why: A Ctrl, Cmd, Shift, or Alt click asks the browser to open the link its own way. How: This returns before the default is cancelled.
+
+
+
+					cliEveObj.preventDefault(); // What: Default Prevent Call. Why: The browser's own jump would put #main in the address. How: This cancels it.
+
+					document.getElementById( 'main' )?.focus(); // What: Main Focus Call. Why: Focus has to land past the bar, so the next Tab continues into the content. How: This focuses the page's main element, which also brings it into view.
+
+
+				} }
+			>Skip to main content</a>{ /* What: Navigation Skip Anchor Element. Why: A keyboard user shouldn't have to Tab through every link in the bar to reach the page. How: This is the page's first stop, waiting above the screen until it's focused, when it slides down over the bar's corner, and its click moves focus to the main element. */ }
 
 			<div
 				ref={ scrDivRef }
