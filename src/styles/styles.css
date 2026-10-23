@@ -143,6 +143,8 @@
 
 	/* #region Color Tokens */
 
+	/* CTRL+ALT+C to toggle color swatches on and off *Requires Extension Toggle by Peng Lv */
+
 	--acc-lig-col : oklch( from var( --acc-mai-col ) calc( l + 0.149 ) calc( c - 0.009 ) calc( h - 2.65 ) ); /* What: Accent Light Color. Why: Accents, links, and highlights on the dark bands need a lighter blue that stays readable there. How: This lightens the main accent, with a slight shift in chroma and hue, to ~= #4488f6, which clears 4.7:1 on the navy panels. */
 	--acc-mai-col : #1e56c8;                                                                                 /* What: Accent Main Color. Why: This is the brand's strong blue, for actions and accents on both the light sections and the dark bands. How: This is set to a fixed hex color, = #1e56c8. */
 	--acc-sec-col : ;                                                                                        /* What: Accent Secondary Color. Why: The standard role set includes a second accent. How: This site has no second accent, so it stays empty. */
@@ -302,10 +304,10 @@
 
 	/* #region Layout Tokens */
 
-	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                     /* What: Container Maximum Width. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: This divides a 1,920px viewport by the core design number, ~= 1,449.365px, the same cap as reese-roofing, so below that width only the gutter limits the column. */
-	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) ); /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen within sensible bounds. How: This holds horizontal step 016 between the p01 and p04 horizontal spacing steps, about 19.304px - 44.876px, the same gutter as reese-roofing. */
-	--nav-bar-hei : calc( var( --spa-ver-p01 ) * 2 + var( --ver-rhy-p04 ) * 1rem );            /* What: Navigation Bar Height. Why: The fixed bar sits over the top of every page, so content that starts below it has to clear its height. How: This adds the bar's top and bottom padding to its logo's height, ~= 83.483px, the bar's height at the top of the page. */
-	--nav-scr-hei : calc( var( --spa-ver-m01 ) * 2 + var( --ver-rhy-p04 ) * 1rem );            /* What: Navigation Scrolled Height. Why: The fixed bar sits shorter once the page has scrolled, since its padding tightens. How: This adds the scrolled bar's top and bottom padding to its logo's height, ~= 66.876px, the bar's height once the page has scrolled. */
+	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                     /* What: Container Maximum Width ~= 1,449.365px. Why: The content column should fill the screen on phones and tablets but stop widening on very large monitors. How: This divides a 1,920px viewport by the core design number, the same cap as reese-roofing, so below that width only the gutter limits the column. */
+	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) ); /* What: Gutter Side Padding, about 19.304px - 44.876px. Why: Content needs side margins that grow with the screen within sensible bounds. How: This holds horizontal step 016 between the p01 and p04 horizontal spacing steps, the same gutter as reese-roofing. */
+	--nav-bar-hei : calc( var( --spa-ver-p01 ) * 2 + var( --ver-rhy-p04 ) * 1rem );            /* What: Navigation Bar Height ~= 83.483px. Why: The fixed bar sits over the top of every page, so content that starts below it has to clear its height. How: This adds the bar's top and bottom padding to its logo's height, the bar's height at the top of the page. */
+	--nav-scr-hei : calc( var( --spa-ver-m01 ) * 2 + var( --ver-rhy-p04 ) * 1rem );            /* What: Navigation Scrolled Height ~= 66.876px. Why: The fixed bar sits shorter once the page has scrolled, since its padding tightens. How: This adds the scrolled bar's top and bottom padding to its logo's height, the bar's height once the page has scrolled. */
 
 	/* #endregion Layout Tokens */
 
