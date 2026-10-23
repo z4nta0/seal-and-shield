@@ -58,11 +58,32 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
 const ABO_VAL_ARR = [ // What: About Value Array. Why: The story closes with what the company stands for. How: Each row holds a value's title and sentence.
 
 
-	{ desStr : 'We show up, tell the truth, and do the work right. No hidden costs, no shortcuts.', titStr : 'Integrity' }, // What: Integrity Value Row. Why: Honesty is the first thing a client needs from a roofer. How: This promises no hidden costs or shortcuts.
+	{ // What: Integrity Value Row. Why: Honesty is the first thing a client needs from a roofer. How: This promises no hidden costs or shortcuts.
 
-	{ desStr : 'We use premium materials (Conklin-certified products) and back our work with professional craftsmanship.', titStr : 'Quality' }, // What: Quality Value Row. Why: Materials and workmanship decide how long a roof lasts. How: This names the Conklin-certified products.
 
-	{ desStr : 'From the first inspection to the final walk-through, Seal and Shield is there every step of the way.', titStr : 'Reliability' } // What: Reliability Value Row. Why: Clients want one company with them from start to finish. How: This promises it from inspection to walk-through.
+		desStr : 'We show up, tell the truth, and do the work right. No hidden costs, no shortcuts.',
+		titStr : 'Integrity'
+
+
+	},
+
+	{ // What: Quality Value Row. Why: Materials and workmanship decide how long a roof lasts. How: This names the Conklin-certified products.
+
+
+		desStr : 'We use premium materials (Conklin-certified products) and back our work with professional craftsmanship.',
+		titStr : 'Quality'
+
+
+	},
+
+	{ // What: Reliability Value Row. Why: Clients want one company with them from start to finish. How: This promises it from inspection to walk-through.
+
+
+		desStr : 'From the first inspection to the final walk-through, Seal and Shield is there every step of the way.',
+		titStr : 'Reliability'
+
+
+	}
 
 
 ];
