@@ -108,7 +108,7 @@
 .logBacDiv { /* What: Logo Background Div. Why: A light panel sets the logo off from the white section. How: This fills the column's area, reaching about 34px beyond it on every side, or to the screen's edges at about 493px wide and below, in the off-white behind everything else. */
 
 
-	background : var( --bac-sur-col );                                                 /* Background Surface Color = #f4f6fa */
+	background : var( --bac-sur-col );                                                /* Background Surface Color = #f4f6fa */
 	inset      : calc( var( --spa-ver-p03 ) * -1 ) calc( var( --spa-hor-p03 ) * -1 ); /* Spacing Vertical Base Plus 3 ~= -33.876px, Spacing Horizontal Base Plus 3 ~= -33.876px */
 	position   : absolute;
 
@@ -120,7 +120,7 @@
 
 	filter   : drop-shadow( 0 calc( var( --ver-rhy-m01 ) * 1rem ) calc( var( --ver-rhy-p04 ) * 1rem ) oklch( from var( --sha-mai-col ) l c h / var( --cdn-pow-007-rec ) ) ); /* Vertical Rhythm Base Minus 1 = 11px, Vertical Rhythm Base Plus 4 ~= 44.876px, Shadow Main Color = #0f1e45, Core-Design-Number to the Power of 7 Reciprocal ~= 0.140 */
 	position : relative;
-	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
+	width    : max( calc( var( --ver-rhy-p09 ) * 1rem ), var( --hor-rhy-021 ) );                                                                                             /* Vertical Rhythm Base Plus 9 ~= 183.074px, Horizontal Rhythm 21 ~= 355.272px @ 1,920px width */
 
 
 }
