@@ -15,21 +15,17 @@ import tyeEslObj from 'typescript-eslint';         // What: TypeScript ESLint Ob
  * eslint.config.ts = ESLint Config
  *
  * @summary
- * The lint config, reading every file through typescript-eslint's parser so
- * type annotations parse, with typescript-eslint's recommended rules on for
- * every file, letting a binding beside a rest element go unread and a
- * destructuring that reassigns some of its bindings stay let. Every .ts and
- * .tsx file under src/ is checked by react/jsx-no-undef, which catches a
- * component reference a rename missed. ESLint's own no-undef is left off, as
- * typescript-eslint recommends, since TypeScript already reports every
- * undefined name and no-undef can't see TypeScript's type-only names. Every
- * .tsx file, and every .ts file under src/ (where a custom hook with no JSX
- * lives), also gets the React Hooks plugin's recommended rules, minus the
- * four React Compiler readiness rules, which only matter to a site built with
- * the React Compiler, which this one isn't. Generated output (dist/ and
- * tests/output/) is ignored. npm run lint runs it across the repo, and an
- * editor integration can run it per file. Adapted from ease-my-life's own
- * config.
+ * The lint config: typescript-eslint's parser and recommended rules for every
+ * file, with a couple of their options loosened where the formatting rules
+ * rely on a pattern, plus React checks scoped to the site's own code, such as
+ * react/jsx-no-undef, which catches a component reference a rename missed, and
+ * the React Hooks plugin's recommended rules for components and custom hooks,
+ * minus the rules that only judge readiness for the React Compiler, which this
+ * site doesn't use. ESLint's own no-undef is left off, as typescript-eslint
+ * recommends, since TypeScript already reports every undefined name and
+ * no-undef can't see type-only names. Generated output is ignored. npm run
+ * lint runs it across the repo, and an editor integration can run it per file.
+ * Adapted from ease-my-life's own config.
  *
  * Sections:
  *  - Constants

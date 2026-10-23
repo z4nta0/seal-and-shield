@@ -25,13 +25,12 @@ import type { TestInfo } from '@playwright/test'; // What: Test Info. Why: The r
  * axe.spec.ts = Axe Spec
  *
  * @summary
- * Scans every page state, and the contact form's two results (its thank-you
- * message and its error), with axe-core against WCAG 2.2 A and AA plus axe's
- * best-practice rules, in whichever engine the project runs. A state passes
- * only with zero violations, and each failure names its rule, its impact,
- * and the elements it found. Anything axe can't decide on its own (its
- * "incomplete" results, such as text over an image) can't fail the run, so
- * it's printed and attached to the test as needing review by hand.
+ * Scans every page state, and the contact form's results once Netlify answers,
+ * with axe-core against WCAG 2.2 A and AA plus axe's best-practice rules, in
+ * whichever engine the project runs. A state passes only with zero violations,
+ * and each failure says which rule broke and where. Anything axe can't decide
+ * on its own (its "incomplete" results, such as text over an image) can't fail
+ * the run, so it's printed and attached to the test as needing review by hand.
  *
  * Sections:
  *  - Types

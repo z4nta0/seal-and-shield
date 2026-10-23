@@ -21,8 +21,8 @@ import { useNavigate } from 'react-router';        // What: Use Navigate. Why: T
  * home.tsx = Home Page
  *
  * @summary
- * The site's home page: the shared top bar, then the four sections in reading
- * order (the hero, Services, About, and Contact) inside the main landmark,
+ * The site's home page: the shared top bar, then its sections in reading
+ * order, from the hero down to the Contact section, inside the main landmark,
  * then the shared footer. It's the page the root path shows, and the one every
  * section link comes back to from any other page, arriving with the section's
  * id as the hash.

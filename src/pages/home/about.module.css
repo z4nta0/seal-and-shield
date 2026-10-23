@@ -5,15 +5,15 @@
  * about.module.css = About Section Module
  *
  * @summary
- * Styles for AboSecCom: the white section's two columns, the full logo on a
- * light panel above the navy info card on the left, and the story and the
- * three values on the right, which stack into one column at 900px wide or
- * narrower with the left column centered and capped. The shared container,
- * eyebrow label, section title, and divider styles the section used to borrow
- * from the global stylesheet are copied in under the same names every module
- * gives them, the label's color deepened to the main blue. The phone value is
- * an anchor that shares the value rule, and its own link rule comes after that
- * rule on purpose, so its light blue wins.
+ * Styles for AboSecCom: the white section's two columns, the logo and the
+ * company's key facts on the left and the story on the right, which stack into
+ * one column at 900px wide or narrower with the left column centered and
+ * capped. The shared styles the section used to borrow from the global
+ * stylesheet, such as the container, eyebrow label, and section title, are
+ * copied in under the same names every module gives them, the label's color
+ * deepened to the main blue. The phone value is an anchor that shares the
+ * value rule, and its own link rule comes after that rule on purpose, so its
+ * light blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -15,23 +15,13 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  *
  * @summary
  * Checks the site's SEO setup in whichever engine the project runs. Seal and
- * Shield is a real local business, so the home page has to be findable and
- * describe the company accurately: its title, description, and single h1 name
- * the city, the title runs 60 characters or fewer and the description 120 to
- * 125 characters, its canonical and author tags are in place, it carries no
- * noindex, index.html itself, fetched without a browser, carries the same full
- * title and description, each route has exactly one description tag, and the
- * home page's structured data names a RoofingContractor with the site's name
- * and live address and matches what the page itself shows, its phone number,
- * city, hours, founding year, legal name, and service areas, with no street
- * address, since the company has none to publish. The 404 page carries noindex
- * beside the home page's canonical and has its own title, and each page has
- * exactly one h1. The social preview tags are complete, use absolute
- * addresses, and match the page's title and description, and the theme color
- * names the site's darkest navy; the card they point at is a 1,200x630 PNG
- * under 300 KB; and the head links all six icons, each served at the size its
- * link promises. robots.txt lets every crawler in and names the sitemap, which
- * lists the home page alone.
+ * Shield is a real local business, so each route's head has to describe it
+ * accurately and keep only the home page in search. That covers tags such as
+ * the title, description, and canonical, the raw index.html a script-free
+ * reader sees, and the structured data, which has to match what the page
+ * itself shows. The social preview tags, the card and icons they point at, and
+ * the crawler files, such as robots.txt and the sitemap, are checked against
+ * what they promise.
  *
  * Sections:
  *  - Constants

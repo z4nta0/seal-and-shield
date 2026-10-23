@@ -5,7 +5,7 @@
 
 import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only when the policy is enforced and the page breaks none of its rules. How: This asserts on what each check collects from the page.
 import { heaAllFun   } from '../support/headers.ts'; // What: Headers All Function. Why: The pages are loaded under the policy Netlify really sends. How: This reads the /* block of public/_headers.
-import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each state is opened the way every suite opens it. How: This opens and settles the state the way every suite does.
+import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each state is opened the way every suite opens it. How: This loads the state and waits until it's settled.
 import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: The policy has to hold in every state the suites visit. How: This is the list of states to load.
 import { test        } from '@playwright/test';      // What: Test. Why: Each state is its own test. How: This declares them.
 
@@ -24,11 +24,11 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The policy set
  * engine the project runs. Each page loads from the production build, which
  * the security suite's preview server serves, since the dev server injects
  * inline scripts the policy would block. Neither server reads public/_headers,
- * so every response is given its headers here. First a check proves the
- * policy is live, by injecting an inline script and seeing it refused and
- * reported. Then every state the suites visit loads with no violation of the
- * policy at all, and every link that opens a new tab carries noopener and
- * noreferrer, so the page it opens can't reach back to this one.
+ * so every response is given its headers here. First a check proves the policy
+ * is live, by injecting an inline script and seeing it refused and reported.
+ * Then every state the suites visit is checked against the policy and its
+ * related rules, such as nothing being refused and no new tab link being able
+ * to reach back to this page.
  *
  * Sections:
  *  - Helpers

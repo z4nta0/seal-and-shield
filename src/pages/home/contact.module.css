@@ -6,21 +6,20 @@
  *
  * @summary
  * Styles for ConSecCom: the dark closing section with its soft blue glow, the
- * invitation, contact details, and call button on the left, and the white
- * quote panel on the right, holding either the request form or its thank-you
- * message. Its thank-you message and error rise in and sink out as they come
- * and go, the thank-you check popping in once, the form rises back in when it
- * returns, and the submit button's label fades in each time it changes. Its
- * buttons and links ease their hover, press, and focus changes, the buttons
- * lifting a pixel and pressing in, the links shifting color and dimming. The
- * columns stack at 900px wide or narrower, and the form's paired fields stack
- * and the panel's padding tightens at 520px. Each form control eases its focus
- * ring in from a zero-width outline. The shared eyebrow label, section title,
- * and divider styles the section used to borrow from the global stylesheet are
- * copied in under the same names every module gives them, and the shared
- * container's onto the inner row's own class. The phone detail is an anchor
- * that shares the value rule, and its own link rule comes after that rule on
- * purpose, so its light blue wins.
+ * invitation and ways to call on the left, and the white quote panel on the
+ * right, holding either the request form or its thank-you message. What the
+ * panel shows as the form is used arrives and leaves rather than snapping,
+ * such as the thank-you message and error rising in and sinking out and the
+ * thank-you check popping in once. Its buttons and links ease their hover,
+ * press, and focus changes, the buttons lifting a pixel and pressing in, the
+ * links shifting color and dimming, and each form control eases its focus ring
+ * in from a zero-width outline. The columns stack at 900px wide or narrower,
+ * and the form's paired fields stack and the panel's padding tightens at
+ * 520px. The shared styles the section used to borrow from the global
+ * stylesheet, such as the container, eyebrow label, and section title, are
+ * copied in under the same names every module gives them. The phone detail is
+ * an anchor that shares the value rule, and its own link rule comes after that
+ * rule on purpose, so its light blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

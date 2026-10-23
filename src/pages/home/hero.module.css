@@ -6,14 +6,13 @@
  *
  * @summary
  * Styles for HerSecCom: the full-height dark opening section with its faint
- * grid and blue glow, the two-column content row (the eyebrow, headline,
- * pitch, and buttons beside the full logo and its pulsing ring), and the
- * frosted stats bar along its bottom. On screens 900px wide or narrower the
- * row becomes one centered column with the logo first, and the stats wrap into
- * a two-by-two grid. The opening blocks rise and fade in once as the page
- * loads through blockEnterFadeIn, and the logo's ring pulses through
- * logRinDivLoopPulse; both keyframes live here, since only the hero plays
- * them. The two buttons ease their hover, press, and focus changes, lifting a
+ * grid and blue glow, the two-column content row, the pitch beside the full
+ * logo and its pulsing ring, and the frosted stats bar along its bottom. On
+ * screens 900px wide or narrower the row becomes one centered column with the
+ * logo first, and the stats wrap into a two-by-two grid. The opening blocks
+ * rise and fade in once as the page loads, and the logo's ring pulses on a
+ * slow loop; the keyframes behind them live here, since only the hero plays
+ * them. The buttons ease their hover, press, and focus changes, lifting a
  * pixel on hover and pressing in when held. The shared container styles the
  * content and stats rows used to borrow from the global stylesheet are copied
  * onto their own classes, which also retires the !important the content row's

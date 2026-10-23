@@ -22,23 +22,15 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  *
  * @summary
  * Checks the interaction feedback rule on every page state, in whichever
- * engine the project runs. Every visible link and button has to look different
- * while hovered than at rest, look different again while pressed, ease every
- * property each change touches, on it or anything inside it, and transition
- * its focus ring's outline, and the first keyboard stop has to draw that ring
- * at full width once it has eased in. Every visible form field has to look
- * different once keyboard focus reaches it and ease every property that
- * changes, its outline included. Under reduced motion every control keeps its
- * hover and press changes, and every field its focus change, but transitions
- * nothing.
- * The phone link inside the contact form's error message only shows once a
- * request fails, so it gets checks of its own, both ways, after a faked
- * Netlify error at desktop width. On the home page, the service cards and
- * the service area tags respond to hover too, though neither is a control, so
- * each has to look different hovered and ease every property that changes, or
- * change instantly under reduced motion.
- * Real clicks are blocked during the checks, so pressing a link or the menu's
- * links never navigates or closes anything mid-check.
+ * engine the project runs. Each kind of element a visitor interacts with, such
+ * as links and buttons, form fields, and the home page's hover-only cards and
+ * tags, has to look different in each state it responds to and ease every
+ * property that change touches, on it or anything inside it. A control's focus
+ * ring has to ease in to full width. Under reduced motion the changes stay but
+ * nothing transitions. A control that only appears after an action, such as
+ * the phone link in the contact form's error, gets checks of its own once that
+ * action is faked. Real clicks are blocked during the checks, so pressing a
+ * control never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Types

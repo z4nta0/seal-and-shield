@@ -8,10 +8,10 @@
  * Styles for SerSecCom: the light section with its header, the grid of service
  * cards that lift on hover (four across, then two at 1,024px wide or narrower,
  * then one at 580px), and the navy service area panel with its hoverable area
- * tags, which stacks into one column at 768px. The shared container, eyebrow
- * label, section title, and divider styles the section used to borrow from the
- * global stylesheet are copied in under the same names every module gives
- * them, along with the header's and panel's own adjustments to them.
+ * tags, which stacks into one column at 768px. The shared styles the section
+ * used to borrow from the global stylesheet, such as the container, eyebrow
+ * label, and section title, are copied in under the same names every module
+ * gives them, along with the header's and panel's own adjustments to them.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

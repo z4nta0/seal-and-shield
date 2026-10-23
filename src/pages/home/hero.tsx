@@ -17,15 +17,14 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * hero.tsx = Hero
  *
  * @summary
- * The page's opening section: an eyebrow, the "Built to Seal. Built to
- * Shield." headline, a short pitch, and two buttons, one scrolling to the
- * quote form and one to the Services section, beside the full logo with its
- * pulsing ring, over a background grid and glow. The opening blocks rise and
- * fade in one after another as the page loads. At 900px wide and below, the
- * text and logo become one centered column with the logo first. A stats bar
- * along the section's bottom sums up the company in four figures, set two by
- * two at 900px wide and below. The section's id, home, is what every Home link
- * and the bar's brand scroll to.
+ * The page's opening section: the headline and pitch, with buttons to the
+ * quote form and the Services section, beside the full logo and its pulsing
+ * ring, over a decorative background. The opening blocks rise and fade in one
+ * after another as the page loads. At 900px wide and below, the text and logo
+ * become one centered column with the logo first. A stats bar along the
+ * section's bottom sums up the company in a few quick figures, set two by two
+ * at 900px wide and below. The section's id, home, is what every Home link and
+ * the bar's brand scroll to.
  *
  * Sections:
  *  - Constants

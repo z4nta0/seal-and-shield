@@ -11,9 +11,9 @@
  * such as the scales, colors, and layout sizes. Its Base Elements region holds
  * the reset and the bare element styles, such as the root font size, the
  * body's default text, and the focus ring every link and button shares. Its
- * Body State region styles the scroll reveal's role attributes, the fade-in
- * sections can use. Each component's own styles live in its CSS module
- * instead.
+ * Body State region styles states and roles shared across modules, such as the
+ * scroll reveal that fades blocks in as they scroll into view. Each
+ * component's own styles live in its CSS module instead.
  *
  * Sections:
  *  - Tokens

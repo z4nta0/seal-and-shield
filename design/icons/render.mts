@@ -16,15 +16,15 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * render.mts = Favicon Set Renderer
  *
  * @summary
- * Rebuilds the site's favicon set in public/ from mark.png beside this
- * script, the 1,210px simple mark on its white badge with transparent
- * rounded corners: PNG icons at 16, 32, 192, and 512px, a favicon.ico
- * holding the 16, 32, and 48px sizes for older browsers and the request
- * browsers make for /favicon.ico on their own, and a 180px
- * apple-touch-icon.png on a solid white square, since iOS fills
- * transparency with black and rounds the corners itself. Each size is
- * drawn down in halving steps with high-quality smoothing, so even the 16px
- * icon stays crisp. Run it with npm run icons whenever the mark changes.
+ * Rebuilds the site's favicon set in public/ from mark.png beside this script,
+ * the 1,210px simple mark on its white badge with transparent rounded corners.
+ * The set is PNG icons at the sizes browsers and launchers ask for, a
+ * favicon.ico packing the small sizes older browsers use and answering the
+ * /favicon.ico request browsers make on their own, and an Apple touch icon on
+ * a solid white square, since iOS fills transparency with black and rounds the
+ * corners itself. Each size is drawn down in halving steps with high-quality
+ * smoothing, so even the smallest icon stays crisp. Run it with npm run icons
+ * whenever the mark changes.
  *
  * Sections:
  *  - Constants

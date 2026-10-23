@@ -13,16 +13,13 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening and se
  * states.ts = States
  *
  * @summary
- * The page states the suites visit, and the helper that opens one, which also
- * opens pages a suite sizes for itself. A state is a page at a width,
- * sometimes with something opened on it: the home page and the 404 page at
- * phone and desktop widths, and the mobile menu open on a phone. opeStaFun
- * sizes the viewport, loads the page, waits for the fonts, scrolls through the
- * page so its scroll-triggered content fades in, waits for every image to
- * decode, runs the state's own action, such as opening the menu, and then
- * waits for the page to stay still so nothing is measured mid-fade. Its settle
- * wait, waiSetFun, is exported too, for a check that has to wait out a change
- * it makes itself.
+ * The page states the suites visit, and the helpers that open and settle one,
+ * which also open pages a suite sizes for itself. A state is a page at a
+ * width, sometimes with something opened on it, such as the mobile menu on a
+ * phone. opeStaFun loads a state and gets it ready to measure, revealing the
+ * content that fades in on scroll and waiting out fonts, images, and motion,
+ * so nothing is measured mid-fade. Its settle wait, waiSetFun, is exported
+ * too, for a check that has to wait out a change it makes itself.
  *
  * Sections:
  *  - Types

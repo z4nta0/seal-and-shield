@@ -20,24 +20,16 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  *
  * @summary
  * Checks what the site's controls actually do, in whichever engine the project
- * runs. The bar's section links, the brand, the hero's buttons, and the
- * footer's section links land on their sections and leave the address free of
- * hashes, while a Ctrl, Cmd, or middle click opens a section in a new tab and
- * leaves the page clicked from alone; the first Tab on each page reaches the
- * skip link, on screen, and clicking it moves focus to the main content with a
- * clean address; the mobile menu opens over an inert page, closes on its
- * button, Escape (which returns focus to the button), a tap on the dimmed
- * page, or a wider screen, and closes again, landing on the section, when one
- * of its links or its Free Quote button is chosen, but not when a link opens
- * in a new tab; the contact form refuses to send without its required fields
- * and reports Netlify's answer honestly, clearing its error on a retry and
- * coming back after the thank-you message, with Netlify's side faked in the
- * browser so nothing is really sent; and the 404 page answers an unknown
- * address with its own heading, title, and noindex tag and leads back to the
- * home page and its sections, as does an address that names a section
- * directly. Pages open under reduced motion, so scrolling jumps straight to
- * its target and each position can be read at once; how things move is checked
- * elsewhere.
+ * runs. Its links and buttons, such as the bar's section links, the skip link,
+ * and the hero's buttons, have to take the visitor where they should and leave
+ * the address free of hashes, while a new tab click leaves the page clicked
+ * from alone. The mobile menu has to open over an inert page and close by
+ * every way out of it. The contact form has to refuse an incomplete request
+ * and report Netlify's answer honestly, with Netlify's side faked in the
+ * browser so nothing is really sent. An unknown address has to reach the 404
+ * page, which leads back to the home page and its sections. Pages open under
+ * reduced motion, so scrolling jumps straight to its target and each position
+ * can be read at once; how things move is checked elsewhere.
  *
  * Sections:
  *  - Constants

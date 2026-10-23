@@ -5,11 +5,11 @@
  * not-found.module.css = Not Found Page Module
  *
  * @summary
- * Styles for NotFouCom: a column at least the screen's height holding the bar,
- * the main content, and the footer, with the content centered on the hero's
- * dark navy in the space between. The title accent and buttons are copied from
- * the hero under the same names, and its eyebrow label's type onto a
- * paragraph, so the page looks like the rest of the site.
+ * Styles for NotFouCom: a page at least the screen's height whose message sits
+ * centered on the hero's dark navy between the bar and the footer. Its pieces
+ * borrow the hero's look, such as the title accent and the buttons copied
+ * under the same names and an eyebrow label matching the hero's type, so the
+ * page looks like the rest of the site.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

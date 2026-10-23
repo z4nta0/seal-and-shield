@@ -329,7 +329,7 @@ waiting for the page to settle.
   change, refresh with `npm run test:rendering -- --update-snapshots` and
   commit the baselines with it. Baselines are captured on Linux.
 - `npm run test:responsive`: measures the home page and the 404 page at 18
-  widths from 320 to 1,920px (a pixel either side of each breakpoint included),
+  widths from 320 to 1,920px (each breakpoint and the pixel past it included),
   and the open menu at each of those up to its 768px breakpoint, failing on
   sideways scrolling, an unclipped element past either edge, text spilling its
   box, two reachable controls overlapping, or a grid whose rows hold different

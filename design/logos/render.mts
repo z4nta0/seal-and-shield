@@ -15,13 +15,12 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * render.mts = Logo Renderer
  *
  * @summary
- * Rebuilds the site's two logos in src/ from the originals beside this script:
- * the full logo (4,763x4,640) at 968x943, under 3x its widest drawing of about
- * 628px, as lossy WebP at 0.95 quality, the lowest that shows no difference at
- * 3x zoom, and the simple mark (1,210x1,025) at 131x111, under 3x the 44.876px
- * box it's drawn in, as lossless WebP, since lossy encoding showed on its fine
- * detail. Each size keeps the original's proportions to within about 0.01px
- * where it's drawn. The image is drawn down in halving steps with high-quality
+ * Rebuilds the site's logos in src/ from the originals beside this script,
+ * each at no more than 3x the largest size it's drawn at and keeping its
+ * original's proportions where it's drawn. They're encoded as WebP: lossy for
+ * artwork that shows no difference at 3x zoom, at the lowest quality that
+ * holds, and lossless where lossy encoding showed on fine detail, as on the
+ * simple mark. Each image is drawn down in halving steps with high-quality
  * smoothing, so fine edges stay crisp. Run it with npm run logos whenever a
  * logo changes, then update the images' width and height attributes if a size
  * moved.

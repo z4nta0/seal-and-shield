@@ -8,13 +8,12 @@
  * The site's self-hosted fonts: Barlow Condensed for display text and Lato for
  * body text, replacing the Google Fonts stylesheet and preconnect links
  * index.html used to load, so a visit makes no requests to a third party. Each
- * file is the same Latin subset Google served, one static file per weight the
- * stylesheets use (Barlow Condensed at 400, 600, 700, and 800, and Lato at
- * 400; Google also sent Lato at 300 and 700, which nothing used), with the
- * same swap behavior, so fallback text shows until a file arrives. The Latin
- * subset covers every character the site's copy uses except its emoji and
- * check mark, which neither font has, so those keep rendering from a system
- * font as before. The files live in src/assets/fonts/ and are pulled in
+ * file is the same Latin subset Google served, one static file for each weight
+ * the stylesheets use, from the display font's regular up to its extra bold,
+ * with the same swap behavior, so fallback text shows until a file arrives.
+ * The Latin subset covers every character the site's copy uses except its
+ * emoji and check mark, which neither font has, so those keep rendering from a
+ * system font as before. The files live in src/assets/fonts/ and are pulled in
  * through url(), so Vite fingerprints them.
  *
  * @author z4nta0 <https://github.com/z4nta0>

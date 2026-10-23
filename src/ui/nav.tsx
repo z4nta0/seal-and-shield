@@ -8,13 +8,13 @@ import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP UR
 
 
 import { modCliFun    } from './section-link.ts';  // What: Modified Click Function. Why: A Ctrl, Cmd, Shift, or Alt click on the skip link should open it the browser's own way. How: The skip link's click handler asks it before cancelling the default.
-import { SEC_LIN_ARR  } from './sections.ts';      // What: Section Link Array. Why: The bar and the mobile menu link to the home page's sections, and the bar tracks which one is being read. How: This is the one list of sections, in page order, that the links and the scroll walk read.
+import { SEC_LIN_ARR  } from './sections.ts';      // What: Section Link Array. Why: The bar's links and its tracking of the section being read follow the home page's sections. How: This is the one list of sections, in page order, that the bar builds them from.
 import { tokPxlFun    } from '../utils/rhythm.ts'; // What: Token Pixel Function. Why: The active section's line has to clear the bar, which the stylesheet sizes. How: This reads the bar's height and a spacing step from their tokens in pixels.
-import { useEffect    } from 'react';              // What: Use Effect. Why: The bar listens to the page's scroll position, and the open menu changes the page around it. How: This registers the scroll and menu listeners and the open menu's inert marks, and removes them again.
+import { useEffect    } from 'react';              // What: Use Effect. Why: The bar reacts to the page around it, such as its scroll position and the open menu. How: This sets up the bar's listeners and the open menu's changes to the page, and undoes them again.
 import { useLocation  } from 'react-router';       // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
-import { useRef       } from 'react';              // What: Use Ref. Why: The open menu needs the bar, the dimmer, and the menu button. How: This creates the refs those elements attach.
+import { useRef       } from 'react';              // What: Use Ref. Why: The open menu works on elements of the bar, such as the dimmer and the menu button. How: This creates the refs those elements attach.
 import { useSecCliFun } from './section-link.ts';  // What: Use Section Click Function. Why: Section links have to work from every page, and a Ctrl, Cmd, or middle click should open them in a new tab. How: This returns secCliFun, the shared click handler, which reports whether it handled the click.
-import { useState     } from 'react';              // What: Use State. Why: The bar tracks its scrolled look, the active section, and whether the menu is open. How: This holds each of the three.
+import { useState     } from 'react';              // What: Use State. Why: The bar keeps state of its own, such as its scrolled look and whether the menu is open. How: This holds each piece.
 
 // #endregion Imports
 
@@ -26,15 +26,15 @@ import { useState     } from 'react';              // What: Use State. Why: The 
  * @summary
  * The site's fixed top bar: the brand, then above 768px wide the section links
  * and the phone number in a row, and at 768px and below a menu button that
- * opens a panel below the bar holding the same links, plus a contact block
- * with its label, the call and quote buttons, the hours, and the service area.
- * The bar takes on a solid background once the page scrolls past its top or
- * the menu opens, and the link for whichever section the visitor is reading is
- * marked active on the home page. Every section link closes the menu and
- * reaches its section through section-link.ts: smoothly in place on the home
- * page, or by navigating home from any other page. The bar opens with a skip
- * link, waiting above the screen until it's focused, that moves focus past the
- * bar to the page's main content.
+ * opens a panel below the bar holding the same links, followed by a contact
+ * block with ways to reach the company, such as the call and quote buttons and
+ * the hours. The bar takes on a solid background once the page scrolls past
+ * its top or the menu opens, and the link for whichever section the visitor is
+ * reading is marked active on the home page. Every section link closes the
+ * menu and reaches its section through section-link.ts: smoothly in place on
+ * the home page, or by navigating home from any other page. The bar opens with
+ * a skip link, waiting above the screen until it's focused, that moves focus
+ * past the bar to the page's main content.
  *
  * Sections:
  *  - Components

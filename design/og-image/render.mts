@@ -16,12 +16,11 @@ import { statSync      } from 'node:fs';          // What: Stat Sync. Why: The f
  *
  * @summary
  * Rebuilds public/og-image-2.png, the 1,200x630 card shown when a link to the
- * site is shared, from card.html beside this script. It opens the card in
- * Chromium at exactly 1,200x630, waits for the site's fonts and the logo,
- * captures it as a PNG, and fails if the file reaches 300 KB, the most
- * WhatsApp will show. Run it with npm run og-image whenever the card or the
- * site's look changes, and give a changed image a new filename, since apps
- * cache previews.
+ * site is shared, from card.html beside this script. It captures card.html in
+ * Chromium at the card's exact size once the site's fonts and logo have
+ * loaded, and fails if the file reaches 300 KB, the most WhatsApp will show.
+ * Run it with npm run og-image whenever the card or the site's look changes,
+ * and give a changed image a new filename, since apps cache previews.
  *
  * Sections:
  *  - Constants
