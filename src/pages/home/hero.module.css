@@ -26,19 +26,18 @@
 
 /* #region homHerSec */
 
-.homHerSec { /* What: Home Hero Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy, centers its content vertically below the fixed bar, and clips the background glow at its edges. */
+.homHerSec { /* What: Home Hero Section. Why: The page opens on a full-screen dark band that holds the headline. How: This fills at least the viewport's height on the dark navy as a column below the fixed bar, with the stats bar at its foot, and clips the background glow at its edges. */
 
 
 	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands the lighter blue ring to every control inside. */
 
-	background      : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
-	display         : flex;
-	flex-direction  : column;
-	justify-content : center;
-	min-height      : 100vh;
-	overflow        : hidden;
-	padding-top     : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */
-	position        : relative;
+	background     : var( --bac-inv-col ); /* Background Inverse Color = #080f24 */
+	display        : flex;
+	flex-direction : column;
+	min-height     : 100vh;
+	overflow       : hidden;
+	padding-top    : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	position       : relative;
 
 
 }
@@ -73,14 +72,14 @@
 
 /* #region herConDiv */
 
-.herConDiv { /* What: Hero Content Div. Why: The pitch and the logo sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding plus room above and below, layered above the background. */
+.herConDiv { /* What: Hero Content Div. Why: The pitch and the logo sit side by side within the page's content width. How: This centers a capped-width two-column grid with the container's side padding plus room above and below, its automatic top and bottom margins centering it in the space above the stats bar, layered above the background. */
 
 
 	align-items           : center;
 	display               : grid;
 	gap                   : var( --spa-ver-p05 ) clamp( var( --spa-hor-p04 ), var( --hor-rhy-016 ), var( --spa-hor-p07 ) ); /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 4 ~= 44.876px, Horizontal Rhythm 16 ~= 87.085px @ 1,920px width, Spacing Horizontal Base Plus 7 ~= 104.323px */
 	grid-template-columns : 1fr 1fr;
-	margin                : 0 auto;
+	margin                : auto;
 	max-width             : var( --con-max-wid );                                                                           /* Container Maximum Width ~= 1,449.365px */
 	padding               : var( --spa-ver-p06 ) var( --gut-sid-pad );                                                      /* Spacing Vertical Base Plus 6 ~= 78.751px, Gutter Side Padding, about 19.304px - 44.876px */
 	position              : relative;
