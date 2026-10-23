@@ -644,6 +644,13 @@
 
 
 }
+.menLinAnc[data-section-link-active]:hover { /* What: Hovered Active Menu Link Anchor. Why: The active row is already white, so turning white on hover would leave only the nudge, while the bar's active link still shifts color. How: This turns its text light blue, as the bar's links do on hover. */
+
+
+	color : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
+
+
+}
 .menLinAnc[data-section-link-active]::after { /* What: Active Menu Link Anchor Dot. Why: The dot names the section being read. How: This shows it at full size with a gentle overshoot. */
 
 
