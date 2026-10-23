@@ -36,7 +36,7 @@
 	flex-direction : column;
 	min-height     : 100vh;
 	overflow       : hidden;
-	padding-top    : var( --spa-ver-p06 ); /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	padding-top    : var( --nav-bar-hei ); /* Navigation Bar Height ~= 83.483px */
 	position       : relative;
 
 
