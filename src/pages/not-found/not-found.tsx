@@ -113,7 +113,7 @@ function NotFouCom () : React.JSX.Element {
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
 						to='/'
-					>{ /* What: Return Home Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
+					>{ /* What: Button Base Anchor Primary Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
 						Return Home
 					</Link>
 
