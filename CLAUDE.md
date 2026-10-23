@@ -341,7 +341,10 @@ Done by the user on 2026-10-10, after the step 7 deploy:
   readers, since the label beside each says what the row is. WAVE's five
   "redundant link" alerts on the phone numbers (the bar, About, Contact
   twice, and the footer) are kept on purpose: the check only compares
-  addresses, and each number sits where a visitor may want to call.
+  addresses, and each number sits where a visitor may want to call. Since
+  2026-10-17 the phone menu's call link adds a sixth, and the contact form's
+  error message a seventh after a failed send, both kept for the same reason
+  (recorded 2026-10-22).
 
 ## Accessibility pass
 Done 2026-10-08, before the directory move, so steps 5 and 6 run against a
