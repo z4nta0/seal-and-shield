@@ -12,7 +12,7 @@ import { SEC_LIN_ARR  } from './sections.ts';      // What: Section Link Array. 
 import { tokPxlFun    } from '../utils/rhythm.ts'; // What: Token Pixel Function. Why: The active section's line has to clear the bar, which the stylesheet sizes. How: This reads the bar's height and a spacing step from their tokens in pixels.
 import { useEffect    } from 'react';              // What: Use Effect. Why: The bar reacts to the page around it, such as its scroll position and the open menu. How: This sets up the bar's listeners and the open menu's changes to the page, and undoes them again.
 import { useLocation  } from 'react-router';       // What: Use Location. Why: Only the home page has sections to mark active. How: This reads the current path.
-import { useRef       } from 'react';              // What: Use Ref. Why: The open menu works on elements of the bar, such as the dimmer and the menu button. How: This creates the refs those elements attach.
+import { useRef       } from 'react';              // What: Use Ref. Why: The open menu works on elements this component renders, such as the bar, the dimmer, and the menu button. How: This creates the refs those elements attach.
 import { useSecCliFun } from './section-link.ts';  // What: Use Section Click Function. Why: Section links have to work from every page, and a Ctrl, Cmd, or middle click should open them in a new tab. How: This returns secCliFun, the shared click handler, which reports whether it handled the click.
 import { useState     } from 'react';              // What: Use State. Why: The bar keeps state of its own, such as its scrolled look and whether the menu is open. How: This holds each piece.
 

@@ -18,11 +18,11 @@
 # the policy doesn't restrict. The structured data script in index.html is a
 # data block that never runs, so script-src doesn't need to allow it either.
 #
-# Strict-Transport-Security keeps browsers on HTTPS for two years across
-# every subdomain, leaving out preload, which commits the domain to the
-# browsers' built-in HTTPS list and is slow to undo. Referrer-Policy sends a
-# referrer only to this same origin. Permissions-Policy turns off every
-# powerful browser feature the site never uses.
+# Strict-Transport-Security keeps browsers on HTTPS for two years across every
+# subdomain, leaving out preload, which commits the domain to the browsers'
+# built-in HTTPS list and is slow to undo. Referrer-Policy sends a referrer
+# only to this same origin. Permissions-Policy turns off powerful browser
+# features the site never uses, such as the camera, microphone, and location.
 #
 # @author z4nta0 <https://github.com/z4nta0>
 
