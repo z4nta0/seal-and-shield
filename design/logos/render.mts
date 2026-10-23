@@ -194,6 +194,7 @@ async function renWebFun ( logRecObj : LogRecTyp ) : Promise< Buffer > {
 
 		finCotObj.imageSmoothingQuality = 'high'; // What: Final Smoothing Assignment. Why: The last step should resample as cleanly as the others. How: This asks for high-quality smoothing.
 
+
 		finCotObj.drawImage( curCanObj, 0, 0, tarWidNum, tarHeiNum ); // What: Final Draw Call. Why: This draws the logo itself. How: This draws the last step at the exact size.
 
 

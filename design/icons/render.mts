@@ -248,10 +248,12 @@ for ( const [ icoIndNum, icoPngBuf ] of icoPngArr.entries() ) { // What: ICO Ent
 
 	icoHeaBuf.writeUInt8( ICO_SIZ_ARR[ icoIndNum ], entOffNum );     // What: Entry Width Write. Why: The entry names the image's width. How: This writes it.
 	icoHeaBuf.writeUInt8( ICO_SIZ_ARR[ icoIndNum ], entOffNum + 1 ); // What: Entry Height Write. Why: The entry names the image's height. How: This writes it.
-	icoHeaBuf.writeUInt16LE( 1, entOffNum + 4 );                     // What: Entry Planes Write. Why: The format expects one color plane. How: This writes it.
-	icoHeaBuf.writeUInt16LE( 32, entOffNum + 6 );                    // What: Entry Depth Write. Why: The images are full-color PNGs with alpha. How: This writes 32 bits per pixel.
-	icoHeaBuf.writeUInt32LE( icoPngBuf.length, entOffNum + 8 );      // What: Entry Size Write. Why: The entry says how many bytes its image takes. How: This writes the PNG's length.
-	icoHeaBuf.writeUInt32LE( icoOffNum, entOffNum + 12 );            // What: Entry Offset Write. Why: The entry says where its image starts. How: This writes the running offset.
+
+	icoHeaBuf.writeUInt16LE( 1, entOffNum + 4 );  // What: Entry Planes Write. Why: The format expects one color plane. How: This writes it.
+	icoHeaBuf.writeUInt16LE( 32, entOffNum + 6 ); // What: Entry Depth Write. Why: The images are full-color PNGs with alpha. How: This writes 32 bits per pixel.
+
+	icoHeaBuf.writeUInt32LE( icoPngBuf.length, entOffNum + 8 ); // What: Entry Size Write. Why: The entry says how many bytes its image takes. How: This writes the PNG's length.
+	icoHeaBuf.writeUInt32LE( icoOffNum, entOffNum + 12 );       // What: Entry Offset Write. Why: The entry says where its image starts. How: This writes the running offset.
 
 
 	icoOffNum += icoPngBuf.length; // What: Offset Advance. Why: The next image starts after this one. How: This adds its length.
