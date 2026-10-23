@@ -213,7 +213,7 @@ function HerSecCom () : React.JSX.Element {
 							src={ lofWebUrl }
 							width={ 968 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
-							alt='Seal and Shield LLC Logo'
+							alt='Seal and Shield LLC'
 						/>{ /* What: Hero Logo Image Element. Why: The full logo anchors the hero. How: Its alt text repeats the name the image shows. */ }
 
 
