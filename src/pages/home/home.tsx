@@ -118,7 +118,7 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-				<AboSecCom />{ /* What: About Section Component. Why: The company's story follows its services. How: This renders the About section third. */ }
+				<AboSecCom />{ /* What: About Section Component. Why: The company's story follows the Services section. How: This renders the About section third. */ }
 
 
 

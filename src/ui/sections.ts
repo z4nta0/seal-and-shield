@@ -44,7 +44,7 @@ const SEC_LIN_ARR = [ // What: Section Link Array. Why: The bar, the menu, and t
 
 
 	{ ideStr : 'home',     labStr : 'Home'     }, // What: Home Link Row. Why: Visitors need a way back to the top. How: This links to the hero section.
-	{ ideStr : 'services', labStr : 'Services' }, // What: Services Link Row. Why: The services are the site's main content. How: This links to the Services section.
+	{ ideStr : 'services', labStr : 'Services' }, // What: Services Link Row. Why: The Services section is the site's main content. How: This links to the Services section.
 	{ ideStr : 'about',    labStr : 'About'    }, // What: About Link Row. Why: Visitors check who they'd be hiring. How: This links to the About section.
 	{ ideStr : 'contact',  labStr : 'Contact'  }  // What: Contact Link Row. Why: The page's goal is a quote request. How: This links to the Contact section.
 
