@@ -310,7 +310,7 @@
 
 
 }
-.navLinAnc::after { /* What: Navigation Link Anchor Underline. Why: A short line marks the hovered and active links. How: This draws a 2px light blue line under the link, scaled to nothing until it's needed. */
+.navLinAnc::after { /* What: Navigation Link Anchor Underline. Why: A short line marks the hovered and active links. How: This draws a 2px light blue line under the link, scaled to nothing until it's needed, and shrinks it away on the accelerating curve as it leaves. */
 
 
 	background       : var( --acc-lig-col );                                /* Accent Light Color ~= #4488f6 */
@@ -322,7 +322,7 @@
 	right            : 0;
 	transform        : scaleX( 0 );
 	transform-origin : left;
-	transition       : transform var( --dur-tra-p02 ) var( --mot-sta-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Standard Easing = ease */
+	transition       : transform var( --dur-tra-p02 ) var( --mot-acc-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
 
 
 }
@@ -341,10 +341,11 @@
 
 }
 .navLinAnc[data-section-link-active]::after,
-.navLinAnc:hover::after { /* What: Hovered And Active Navigation Link Anchor Underline. Why: The underline completes the highlight. How: This grows the line to its full width from the left. */
+.navLinAnc:hover::after { /* What: Hovered And Active Navigation Link Anchor Underline. Why: The underline completes the highlight. How: This grows the line to its full width from the left on the decelerating curve, as something arriving. */
 
 
-	transform : scaleX( 1 );
+	transform  : scaleX( 1 );
+	transition : transform var( --dur-tra-p02 ) var( --mot-dec-eas ); /* Duration Transition Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -359,7 +360,9 @@
 
 
 	.navLinAnc,
-	.navLinAnc::after { /* What: Motionless Navigation Link Anchor. Why: The color and underline should simply switch. How: This turns both transitions off. */
+	.navLinAnc::after,
+	.navLinAnc[data-section-link-active]::after,
+	.navLinAnc:hover::after { /* What: Motionless Navigation Link Anchor. Why: The color and underline should simply switch. How: This turns both transitions off. */
 
 
 		transition : none;
@@ -609,7 +612,7 @@
 
 
 }
-.menLinAnc::after { /* What: Menu Link Anchor Active Dot. Why: The menu marks the section being read, as the bar's links do on wide screens. How: This holds a small light blue dot at the row's end, hidden until its section is active, when it pops in. */
+.menLinAnc::after { /* What: Menu Link Anchor Active Dot. Why: The menu marks the section being read, as the bar's links do on wide screens. How: This holds a small light blue dot at the row's end, hidden until its section is active, when it pops in, and shrinking it away on the accelerating curve as it leaves. */
 
 
 	background    : var( --acc-lig-col );                                                                                   /* Accent Light Color ~= #4488f6 */
@@ -618,7 +621,7 @@
 	height        : calc( var( --ver-rhy-m03 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 3 ~= 6.268px */
 	opacity       : 0;
 	transform     : scale( 0 );
-	transition    : opacity var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p01 ) var( --mot-ove-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+	transition    : opacity var( --dur-tra-p01 ) var( --mot-acc-eas ), transform var( --dur-tra-p01 ) var( --mot-acc-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
 	width         : calc( var( --ver-rhy-m03 ) * 1rem );                                                                    /* Vertical Rhythm Base Minus 3 ~= 6.268px */
 
 
@@ -651,11 +654,12 @@
 
 
 }
-.menLinAnc[data-section-link-active]::after { /* What: Active Menu Link Anchor Dot. Why: The dot names the section being read. How: This shows it at full size with a gentle overshoot. */
+.menLinAnc[data-section-link-active]::after { /* What: Active Menu Link Anchor Dot. Why: The dot names the section being read. How: This shows it at full size, fading in on the decelerating curve with a gentle overshoot, as something arriving. */
 
 
-	opacity   : 1;
-	transform : none;
+	opacity    : 1;
+	transform  : none;
+	transition : opacity var( --dur-tra-p01 ) var( --mot-dec-eas ), transform var( --dur-tra-p01 ) var( --mot-ove-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
 
 
 }
@@ -671,7 +675,8 @@
 
 
 	.menLinAnc,
-	.menLinAnc::after { /* What: Motionless Menu Link Anchor. Why: The hover color and the active dot should simply switch. How: This turns both transitions off. */
+	.menLinAnc::after,
+	.menLinAnc[data-section-link-active]::after { /* What: Motionless Menu Link Anchor. Why: The hover color and the active dot should simply switch. How: This turns both transitions off. */
 
 
 		transition : none;
