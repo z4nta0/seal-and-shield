@@ -8,13 +8,15 @@
  * Styles for ConSecCom: the dark closing section with its soft blue glow, the
  * invitation, contact details, and call button on the left, and the white
  * quote panel on the right, holding either the request form or its thank-you
- * message. The columns stack at 900px wide or narrower, and the form's paired
- * fields stack and the panel's padding tightens at 520px. Each form control
- * eases its focus ring in from a zero-width outline. The shared container,
- * eyebrow label, section title, and divider styles the section used to borrow
- * from the global stylesheet are copied in under the same names every module
- * gives them. The phone detail is an anchor that shares the value rule, and
- * its own link rule comes after that rule on purpose, so its light blue wins.
+ * message, the message rising in as it takes the panel and the form rising
+ * back in when it returns. The columns stack at 900px wide or narrower, and
+ * the form's paired fields stack and the panel's padding tightens at 520px.
+ * Each form control eases its focus ring in from a zero-width outline. The
+ * shared container, eyebrow label, section title, and divider styles the
+ * section used to borrow from the global stylesheet are copied in under the
+ * same names every module gives them. The phone detail is an anchor that
+ * shares the value rule, and its own link rule comes after that rule on
+ * purpose, so its light blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -330,7 +332,7 @@
 
 
 	align-items     : center;
-	animation       : forSucDivShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	animation       : panelShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	display         : flex;
 	flex-direction  : column;
 	gap             : var( --spa-ver-bas );                                               /* Spacing Vertical Base ~= 14.572px */
@@ -375,7 +377,7 @@
 
 
 }
-@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you message should arrive rather than snap into the form's place. How: This raises it a little from below and fades it in. */
+@keyframes panelShowFadeIn { /* What: Panel Show Fade In. Why: The thank-you message, and the form when it comes back, should arrive in the panel rather than snap into place. How: This raises the arriving content a little from below and fades it in. */
 
 
 	from {
@@ -498,6 +500,30 @@
 
 /* #endregion forSucDiv */
 
+
+
+/* #region quoReqFor */
+
+.quoReqFor--returning { /* What: Quote Request Form Returning. Why: The form comes back once the thank-you message has left, and it should arrive rather than snap into the panel. How: This plays the panel's rise and fade once, only when the form returns, never on the page's first load. */
+
+
+	animation : panelShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Quote Request Form Returning. Why: Someone who asked for less motion shouldn't see the form rise in. How: This applies only when they have. */
+
+
+	.quoReqFor--returning { /* What: Motionless Quote Request Form Returning. Why: The form should simply reappear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
 
 .forTitHea { /* What: Form Title Heading. Why: The form needs a clear heading, set off from its fields. How: This sets it in the extra bold display font, uppercase and navy, over a blue rule. */
 
@@ -887,6 +913,8 @@
 
 
 }
+
+/* #endregion quoReqFor */
 
 /* #endregion forWraDiv */
 

@@ -97,6 +97,7 @@ function ConSecCom () : React.JSX.Element {
 	const [ errLeaBoo, setErrLeaBoo ] = useState( false );       // What: Error Leaving Boolean And Setter. Why: The error message should fade out before it's removed. How: This holds whether its exit is playing.
 	const [ errCouNum, setErrCouNum ] = useState( 0 );           // What: Error Count Number And Setter. Why: Each failure has to add a fresh paragraph to the alert region, or screen readers won't announce a second one that arrives while the first is still fading. How: This counts failures, and the error paragraph takes it as its key.
 	const [ sucLeaBoo, setSucLeaBoo ] = useState( false );       // What: Success Leaving Boolean And Setter. Why: The thank-you message should fade out before the form returns. How: This holds whether its exit is playing.
+	const [ forRetBoo, setForRetBoo ] = useState( false );       // What: Form Returning Boolean And Setter. Why: The form should rise back in when the thank-you message gives way to it, but not on the page's first load. How: This holds whether the form has come back at least once, which adds its returning entrance.
 
 
 
@@ -308,8 +309,8 @@ function ConSecCom () : React.JSX.Element {
 	 * event came from the panel itself while sucLeaBoo says its exit is
 	 * playing. It then records whether the panel still holds focus, so the
 	 * form's first field takes focus back only if it did, swaps the form back
-	 * in, and clears the exit flag, so the next thank-you arrives with its
-	 * entrance.
+	 * in with its returning entrance, and clears the exit flag, so the next
+	 * thank-you arrives with its entrance.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -334,6 +335,8 @@ function ConSecCom () : React.JSX.Element {
 
 		focRetRef.current = document.activeElement === sucDivRef.current; // What: Focus Return Flag Assignment. Why: Focus should go back to the form only if the visitor hadn't moved it on. How: This records whether the panel still holds focus as it leaves.
 
+
+		setForRetBoo( true ); // What: Form Return Call. Why: The returning form should rise in rather than snap into the panel. How: This marks it as returning, which adds its entrance class.
 
 		setForSenBoo( false ); // What: Sent Message Hide Call. Why: The faded message gives way to the form. How: This swaps the form back in.
 
@@ -560,11 +563,13 @@ function ConSecCom () : React.JSX.Element {
 
 
 						<form
+							className={ forRetBoo ? cssModObj.quoReqForReturning : undefined }
+
 							data-netlify='true'
 							name='contactForm'
 
 							onSubmit={ forSubFun }
-						>{ /* What: Contact Form Element. Why: Visitors request a free quote here. How: Its name, contactForm, matches the hidden copy Netlify reads, the browser checks the required fields before submitting, and forSubFun sends it. */ }
+						>{ /* What: Quote Request Form Element. Why: Visitors request a free quote here, and the form rises back in each time it returns after a thank-you. How: Its name, contactForm, matches the hidden copy Netlify reads, the browser checks the required fields before submitting, and forSubFun sends it. */ }
 
 
 							<h3 className={ cssModObj.forTitHea }>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
