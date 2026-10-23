@@ -531,7 +531,7 @@
 
 }
 
-.togLinSpa { /* What: Toggle Line Span. Why: Three bars draw the menu icon. How: This draws each as a thin white line that eases its hover color and can turn and fade into a cross. */
+.togLinSpa { /* What: Toggle Line Span. Why: Three bars draw the menu icon. How: This draws each as a thin white line, and eases its hover color and its turn and fade into a cross. */
 
 
 	background : var( --bac-pag-col );                /* Background Page Color = #ffffff */

@@ -499,7 +499,7 @@ main:focus { /* What: Focused Main. Why: The skip link moves focus to the main e
 }
 
 a,
-button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather than snap, in a ring that suits the section it's in. How: This gives every link and button a zero-width outline in the focus ring color, held a little away from the element, ready to grow in on focus. */
+button { /* What: Focus Ring Controls. Why: Keyboard focus should ease in rather than snap, in a ring that suits the section it's in. How: This gives every link and button a zero-width outline in the focus ring color, held a little away from the element, and eases its focus ring as it grows in on focus. */
 
 
 	outline        : 0 solid var( --foc-rin-col );                                                                                      /* Focus Ring Color = #1e56c8 */ /* What: Zero Width Outline. Why: A zero width stays invisible, even in forced colors mode, until something is focused. How: The focused rule below grows it. */

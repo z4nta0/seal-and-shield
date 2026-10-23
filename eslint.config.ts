@@ -17,15 +17,15 @@ import tyeEslObj from 'typescript-eslint';         // What: TypeScript ESLint Ob
  * @summary
  * The lint config: typescript-eslint's parser and recommended rules for every
  * file, with a couple of their options loosened where the formatting rules
- * rely on a pattern, plus React checks scoped to the site's own code, such as
- * one that fails lint on a component reference a rename missed, and the React
- * Hooks plugin's recommended rules for components and custom hooks, minus the
- * rules that only judge readiness for the React Compiler, which this site
- * doesn't use. ESLint's own no-undef is left off, as typescript-eslint
- * recommends, since TypeScript already reports every undefined name and
- * no-undef can't see type-only names. Generated output is ignored. npm run
- * lint runs it across the repo, and an editor integration can run it per file.
- * Adapted from ease-my-life's own config.
+ * rely on a pattern, plus a React check scoped to the site's own code that
+ * fails lint on a component reference a rename missed, and the React Hooks
+ * plugin's recommended rules for components and custom hooks, minus the rules
+ * that only judge readiness for the React Compiler, which this site doesn't
+ * use. ESLint's own no-undef is left off, as typescript-eslint recommends,
+ * since TypeScript already reports every undefined name and no-undef can't see
+ * type-only names. Generated output is ignored. npm run lint runs it across
+ * the repo, and an editor integration can run it per file. Adapted from
+ * ease-my-life's own config.
  *
  * Sections:
  *  - Constants

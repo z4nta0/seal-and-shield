@@ -137,14 +137,14 @@ function ConSecCom () : React.JSX.Element {
 	 *
 	 * @summary
 	 * Handles the form's submit once the browser's own validation has passed
-	 * (Full Name and Phone are required, and Email has to look like an
-	 * address): stops the page-reloading submit, fades out any earlier error,
-	 * and posts the form's fields to Netlify Forms as URL-encoded data, whose
-	 * form-name field tells Netlify which form they belong to. While the
+	 * (Full Name and Phone are required, and Email, if filled in, has to look
+	 * like an address): stops the page-reloading submit, fades out any earlier
+	 * error, and posts the form's fields to Netlify Forms as URL-encoded data,
+	 * whose form-name field tells Netlify which form they belong to. While the
 	 * request is out, the submit button is marked aria-disabled, so it keeps
 	 * focus, a second submit is ignored, and its label says Sending...
-	 * instead. Only an OK answer from Netlify counts as sent: then
-	 * the thank-you message shows, the fields empty, and six seconds later the
+	 * instead. Only an OK answer from Netlify counts as sent: then the
+	 * thank-you message shows, the fields empty, and six seconds later the
 	 * message fades out and the form comes back. A request that fails
 	 * outright, or one Netlify rejects, keeps the visitor's details in place
 	 * and shows the error message instead, so they can try again or call; a

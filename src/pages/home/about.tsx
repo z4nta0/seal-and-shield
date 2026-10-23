@@ -102,13 +102,13 @@ const ABO_VAL_ARR = [ // What: About Value Array. Why: The story closes with wha
  * AboSecCom = About Section Component
  *
  * @summary
- * Renders the About section: the logo and info card on the left, the story
- * and values on the right, stacking with the logo and card on top at 900px
- * wide and below. The logo's column, each piece of the story, and each value
- * are scroll-reveal blocks, revealed 100ms apart once the section scrolls
- * into view; the values also delay their own fade by 80ms each, so they
- * settle one after another. The logo's light backdrop is decorative and
- * hidden from assistive technology.
+ * Renders the About section: the logo and info card on the left, the story and
+ * values on the right, stacking with the logo and card on top at 900px wide
+ * and below. The logo's column and each piece of the text column, from its
+ * label to each value, are scroll-reveal blocks, revealed 100ms apart once the
+ * section scrolls into view; the values also delay their own fade by 80ms
+ * each, so they settle one after another. The logo's light backdrop is
+ * decorative and hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
