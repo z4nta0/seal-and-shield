@@ -22,8 +22,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers th
  * @summary
  * The accessibility checks axe-core can't make, run on every page state in
  * whichever engine the project runs, and on the contact form once it's sent.
- * They read what a scan can't, such as how each link and button is announced,
- * a Tab walk through the page, and what plays under reduced motion. Most
+ * They read what a scan can't, such as a Tab walk through the page. Most
  * checks list every problem they find, by element.
  *
  * Sections:

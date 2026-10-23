@@ -8,9 +8,8 @@
  * The site's one global stylesheet, holding only what belongs to the whole
  * site rather than to one component. Its Tokens region defines every design
  * token the modules read, the core design numbers first and then the rest,
- * such as the scales, colors, and layout sizes. Its Base Elements region holds
- * the reset and the bare element styles, such as the root font size, the
- * body's default text, and the focus ring every link and button shares. Its
+ * such as the colors. Its Base Elements region holds the reset and the bare
+ * element styles, such as the focus ring every link and button shares. Its
  * Body State region styles states and roles shared across modules, such as the
  * scroll reveal that fades blocks in as they scroll into view. Each
  * component's own styles live in its CSS module instead.

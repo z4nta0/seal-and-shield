@@ -20,12 +20,11 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
  *
  * @summary
  * The build and dev server config, setting only what the site needs beyond
- * Vite's defaults, such as compiling React, reading CSS module class names as
- * camelCase keys, and, for production builds only, compacting index.html,
+ * Vite's defaults, such as, for production builds only, compacting index.html,
  * which Vite processes but never minifies, so the page's comments and
  * indentation stay out of what visitors download. Everything else stays at
- * Vite's default, including copying the files in public/, such as the icons
- * and crawler files, into the build untouched.
+ * Vite's default, including copying the files in public/, such as the icons,
+ * into the build untouched.
  *
  * Sections:
  *  - Helpers

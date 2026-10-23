@@ -9,13 +9,12 @@
  * focused and then sliding down over the bar's corner, and the fixed top bar,
  * transparent at the top of the page and solid once it scrolls or its menu
  * opens. On wide screens the bar holds its controls in one row, such as the
- * brand, the section links, and the call button, and on screens 768px wide or
- * narrower a menu button opens a panel below the bar over a dimmed page, its
- * links and then a contact block entering one after another. The shared
- * container styles the bar's inner row used to borrow from the global
- * stylesheet are copied onto its own class here. The bar's states are
- * attributes rather than classes, such as the scrolled bar's, the active
- * section link's, and the open menu's.
+ * section links, and on screens 768px wide or narrower a menu button opens a
+ * panel below the bar over a dimmed page, its links and then a contact block
+ * entering one after another. The shared container styles the bar's inner row
+ * used to borrow from the global stylesheet are copied onto its own class
+ * here. The bar's states are attributes rather than classes, such as the open
+ * menu's.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

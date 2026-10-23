@@ -20,14 +20,14 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * nothing about the others. Chromium runs as Chrome's full headless mode
  * rather than Playwright's lighter headless shell, which sometimes lost track
  * of a tab a click opened. Each suite lives in its own folder under tests/,
- * such as accessibility, which the pre-commit check runs, rendering, and SEO.
- * Playwright starts the Vite dev server on port 5197 for the run, and a
- * production build served by vite preview on 5198 for the security suite, and
- * stops both afterwards, so a dev server already running on the usual 5173, or
- * a sibling project's suites on 5190 through 5196, are never touched. Reports
- * and failure screenshots land in tests/output, which git ignores, while the
- * rendering suite's approved screenshots live in tests/rendering/baselines and
- * are committed.
+ * such as accessibility, which the pre-commit check runs. Playwright starts
+ * the Vite dev server on port 5197 for the run, and a production build served
+ * by vite preview on 5198 for the security suite, and stops both afterwards,
+ * so a dev server already running on the usual 5173, or a sibling project's
+ * suites on 5190 through 5196, are never touched. Reports and failure
+ * screenshots land in tests/output, which git ignores, while the rendering
+ * suite's approved screenshots live in tests/rendering/baselines and are
+ * committed.
  *
  * Sections:
  *  - Constants
@@ -68,7 +68,7 @@ const SUI_NAM_ARR = [ // What: Suite Name Array. Why: Each suite lives in its ow
 
 ];
 
-const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playwright reads its whole setup from this file's default export. How: This holds the whole run's setup, such as its output folders and worker count, along with one project per suite and engine, the reporters, the shared page settings, and the dev and preview servers.
+const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playwright reads its whole setup from this file's default export. How: This holds the whole run's setup, such as its worker count, along with one project per suite and engine, the reporters, the shared page settings, and the dev and preview servers.
 
 
 	fullyParallel        : false,                                              // What: Fully Parallel. Why: Each spec file walks its states in order. How: This keeps a file's tests running in sequence, while separate files may still run in parallel.

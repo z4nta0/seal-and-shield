@@ -19,9 +19,9 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  *
  * @summary
  * The site's footer, shown on every page: the company's details, such as its
- * brand, phone number, and hours, a link to each of the home page's sections
- * that works from any page, and a copyright line that reads the current year.
- * Its nav landmark is labelled Footer, telling it apart from the bar's.
+ * phone number, a link to each of the home page's sections that works from any
+ * page, and a copyright line that reads the current year. Its nav landmark is
+ * labelled Footer, telling it apart from the bar's.
  *
  * Sections:
  *  - Components

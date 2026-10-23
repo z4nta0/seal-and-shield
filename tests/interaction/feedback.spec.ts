@@ -23,14 +23,13 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  * @summary
  * Checks the interaction feedback rule on every page state, in whichever
  * engine the project runs. Each kind of element a visitor interacts with, such
- * as links and buttons, form fields, and the home page's hover-only cards and
- * tags, has to look different in each state it responds to and ease every
- * property that change touches, on it or anything inside it. A control's focus
- * ring has to ease in to full width. Under reduced motion the changes stay but
- * nothing transitions. A control that only appears after an action, such as
- * the phone link in the contact form's error, gets checks of its own once that
- * action is faked. Real clicks are blocked during the checks, so pressing a
- * control never navigates or closes anything mid-check.
+ * as a form field, has to look different in each state it responds to and ease
+ * every property that change touches, on it or anything inside it. A control's
+ * focus ring has to ease in to full width. Under reduced motion the changes
+ * stay but nothing transitions. A control that only appears after an action,
+ * such as the phone link in the contact form's error, gets checks of its own
+ * once that action is faked. Real clicks are blocked during the checks, so
+ * pressing a control never navigates or closes anything mid-check.
  *
  * Sections:
  *  - Types
@@ -128,16 +127,16 @@ function cliBloFun () : void {
  * Collects every element a visitor can reach on the page as it stands: each
  * element the selector matches that's visible, not taken out of the tab order
  * with tabindex -1, and not inside inert content, such as the closed mobile
- * menu or the page behind the open one, so the same list serves every kind of
- * element the checks probe, such as links and buttons, form fields, and the
- * hover-only cards. Handles are taken once, so restyling while the checks
- * scroll (the nav bar's scrolled look) can't shift the list.
+ * menu, so the same list serves every kind of element the checks probe, such
+ * as links and buttons, form fields, and the hover-only cards. Handles are
+ * taken once, so restyling while the checks scroll (the nav bar's scrolled
+ * look) can't shift the list.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to collect from.
  * @param conSelStr - Control Selector String: The elements to collect, such as
- *                    every link and button, or every form field.
+ * every form field.
  *
  * @returns A promise that resolves with every reachable control.
  * @see {@link conHanArr}

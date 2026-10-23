@@ -17,11 +17,10 @@ import { test   } from '@playwright/test'; // What: Test. Why: Each route and ea
  * Checks the site's SEO setup in whichever engine the project runs. Seal and
  * Shield is a real local business, so each route's head has to describe it
  * accurately and keep only the home page in search. That covers tags such as
- * the title, description, and canonical, the raw index.html a script-free
- * reader sees, and the structured data, which has to match what the page
- * itself shows. The social preview tags, the card and icons they point at, and
- * the crawler files, such as robots.txt and the sitemap, are checked against
- * what they promise.
+ * the canonical, the raw index.html a script-free reader sees, and the
+ * structured data, which has to match what the page itself shows. The social
+ * preview tags, the card and icons they point at, and the crawler files, such
+ * as robots.txt and the sitemap, are checked against what they promise.
  *
  * Sections:
  *  - Constants

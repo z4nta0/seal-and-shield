@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect    } from '@playwright/test';      // What: Expect. Why: Each behavior passes only when the page ends up where it should. How: This asserts on what each check reads from the page, such as its address, focus, and the position of a section.
+import { expect    } from '@playwright/test';      // What: Expect. Why: Each behavior passes only when the page ends up where it should. How: This asserts on what each check reads from the page, such as its address.
 import { fakNetFun } from '../support/netlify.ts'; // What: Fake Netlify Function. Why: The form checks need Netlify's answer without sending anything. How: This answers the form's posts in the browser with a chosen status.
 import { test      } from '@playwright/test';      // What: Test. Why: Each behavior is its own test. How: This declares them.
 
@@ -20,16 +20,16 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: Every helpe
  *
  * @summary
  * Checks what the site's controls actually do, in whichever engine the project
- * runs. Its links and buttons, such as the bar's section links, the skip link,
- * and the hero's buttons, have to take the visitor where they should and leave
- * the address free of hashes, while a new tab click leaves the page clicked
- * from alone. The mobile menu has to open over an inert page and close by
- * every way out of it. The contact form has to refuse an incomplete request
- * and report Netlify's answer honestly, with Netlify's side faked in the
- * browser so nothing is really sent. An unknown address has to reach the 404
- * page, which leads back to the home page and its sections. Pages open under
- * reduced motion, so scrolling jumps straight to its target and each position
- * can be read at once; how things move is checked elsewhere.
+ * runs. Its links and buttons, such as the bar's section links, have to take
+ * the visitor where they should and leave the address free of hashes, while a
+ * new tab click leaves the page clicked from alone. The mobile menu has to
+ * open over an inert page and close by every way out of it. The contact form
+ * has to refuse an incomplete request and report Netlify's answer honestly,
+ * with Netlify's side faked in the browser so nothing is really sent. An
+ * unknown address has to reach the 404 page, which leads back to the home page
+ * and its sections. Pages open under reduced motion, so scrolling jumps
+ * straight to its target and each position can be read at once; how things
+ * move is checked elsewhere.
  *
  * Sections:
  *  - Constants

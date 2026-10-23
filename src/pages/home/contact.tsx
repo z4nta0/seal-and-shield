@@ -9,7 +9,7 @@ import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: T
 import { useEffect    } from 'react';       // What: Use Effect. Why: Focus has to move when the form gives way to the thank-you message and when it returns. How: This runs the focus move after each render in which the sent state changes.
 import { useRef       } from 'react';       // What: Use Ref. Why: The focus move needs a few things kept between renders, such as the thank-you panel's element. How: This holds each one.
 import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, and its blocks reveal 80ms apart.
-import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's state, such as its fields, whether it was just sent, and whether a request is out. How: This holds each piece.
+import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's state, such as whether a request is out. How: This holds each piece.
 
 // #endregion Imports
 
@@ -20,19 +20,19 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  *
  * @summary
  * The page's last section, where visitors reach the company: an invitation
- * with ways to get in touch, such as the phone number and a call button, on
- * the left, and the free quote request form on the right, the form stacking
- * below the invitation at 900px wide and below. The form posts to Netlify
- * Forms as contactForm. Netlify finds the form through the hidden copy in
- * index.html, so every field's name has to match that copy. Once sent, the
- * form gives way to a thank-you message, which after six seconds sinks out a
- * little quicker than it rose in, as a failed request's error does when the
- * visitor tries again. When the thank-you message replaces the form, focus
- * moves to it, which announces the result, and moves back to the first field
- * when the form returns if the message still held it, while a failure's error
- * appears in an alert region the form carries from the start. Each block fades
- * in as the section scrolls into view. Its id, contact, is what every Contact
- * link and quote button on the site scrolls to.
+ * with ways to get in touch, such as a call button, on the left, and the free
+ * quote request form on the right, the form stacking below the invitation at
+ * 900px wide and below. The form posts to Netlify Forms as contactForm.
+ * Netlify finds the form through the hidden copy in index.html, so every
+ * field's name has to match that copy. Once sent, the form gives way to a
+ * thank-you message, which after six seconds sinks out a little quicker than
+ * it rose in, as a failed request's error does when the visitor tries again.
+ * When the thank-you message replaces the form, focus moves to it, which
+ * announces the result, and moves back to the first field when the form
+ * returns if the message still held it, while a failure's error appears in an
+ * alert region the form carries from the start. Each block fades in as the
+ * section scrolls into view. Its id, contact, is what every Contact link and
+ * quote button on the site scrolls to.
  *
  * Sections:
  *  - Constants

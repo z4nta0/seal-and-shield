@@ -17,9 +17,8 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * @summary
  * Measures the site's pages and the open mobile menu across a range of screen
  * widths, in whichever engine the project runs, and fails a width whose layout
- * breaks, such as the page scrolling sideways, text spilling out of its box,
- * or a card grid leaving uneven rows. The widths run from 320px, WCAG's
- * narrowest reflow width, to 1,920px, and include each of the site's
+ * breaks, such as text spilling out of its box. The widths run from 320px,
+ * WCAG's narrowest reflow width, to 1,920px, and include each of the site's
  * breakpoints and the pixel past it, where a layout switches and is most
  * likely to crowd. Pages open under reduced motion, which changes nothing
  * about the layout but skips the wait for entrance animations.

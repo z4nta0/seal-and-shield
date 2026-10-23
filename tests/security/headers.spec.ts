@@ -4,7 +4,7 @@
 // #region Imports
 
 import { execFileSync  } from 'node:child_process';    // What: Exec File Sync. Why: The dependency check asks npm itself. How: This runs npm audit and returns its output.
-import { expect        } from '@playwright/test';      // What: Expect. Why: Each check passes only when the policy and the build are what they should be. How: This asserts on what each check reads, such as the headers and the audit's counts.
+import { expect        } from '@playwright/test';      // What: Expect. Why: Each check passes only when the policy and the build are what they should be. How: This asserts on what each check reads, such as the audit's counts.
 import { fileURLToPath } from 'node:url';              // What: File URL To Path. Why: The repo root npm works from sits two folders above this file, with the build folder, dist/, inside it. How: This turns each one's URL into a path.
 import { heaAllFun     } from '../support/headers.ts'; // What: Headers All Function. Why: The checks test the policy Netlify really sends. How: This reads the /* block of public/_headers.
 import { join          } from 'node:path';             // What: Join. Why: A built file's path is its folder plus its name. How: This joins them with the right separator.
@@ -24,11 +24,10 @@ import { test          } from '@playwright/test';      // What: Test. Why: Each 
  * Checks the security policy and what ships rather than a page, so it runs in
  * the Chromium project only, since a file reads the same in every engine. The
  * headers public/_headers sends have to hold the site to its own strict
- * policy, such as keeping script on the site, refusing framing, and keeping
- * browsers on HTTPS. The production build, which the security suite's preview
- * server builds before the run, has to hold no private key or provider token.
- * npm audit has to find no high or critical advisory in the shipped
- * dependencies, and skips with a message when npm can't be reached.
+ * policy, such as refusing framing. The production build, which the security
+ * suite's preview server builds before the run, has to hold no private key or
+ * provider token. npm audit has to find no high or critical advisory in the
+ * shipped dependencies, and skips with a message when npm can't be reached.
  *
  * Sections:
  *  - Constants
