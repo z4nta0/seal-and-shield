@@ -92,7 +92,6 @@ async function opeMenFun ( curPagObj : Page ) : Promise< void > {
 
 	await togButObj.click(); // What: Toggle Click Call. Why: The menu opens from a tap on the button. How: This clicks it.
 
-
 	await expect( togButObj ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Wait. Why: A check should start with the menu open. How: This waits until the button reports it expanded.
 
 
@@ -246,7 +245,6 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'home' ], [ 'Services', 'ser
 
 		await curPagObj.getByRole( 'navigation', { name : 'Main' } ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Section Link Click Call. Why: This is the action under test. How: This clicks the bar's link by its label.
 
-
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 
 
@@ -265,7 +263,6 @@ test( 'the brand returns to the top', async ( { page : curPagObj } ) => { // Wha
 	await curPagObj.evaluate( () => window.scrollTo( 0, 2000 ) ); // What: Scroll Down Call. Why: Returning to the top only shows once the page has left it. How: This scrolls well down the page.
 
 	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { name : 'Seal and Shield' } ).click(); // What: Brand Click Call. Why: This is the action under test. How: This clicks the bar's brand.
-
 
 	await ariSecFun( curPagObj, 'home' ); // What: Top Arrival Check. Why: The hero is the top of the page. How: This waits for it to sit at the top with a clean address.
 
@@ -316,7 +313,6 @@ for ( const secIdeStr of [ 'home', 'services', 'about', 'contact' ] ) { // What:
 
 		await curPagObj.getByRole( 'navigation', { name : 'Footer' } ).getByRole( 'link', { name : secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) } ).click(); // What: Footer Link Click Call. Why: This is the action under test. How: This clicks the footer link labelled with the section id capitalized, which scrolls the page down to reach it.
 
-
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 
 
@@ -336,7 +332,6 @@ for ( const [ butLabStr, secIdeStr ] of [ [ 'Get a Free Quote', 'contact' ], [ '
 		await opeRouFun( curPagObj, '/', DES_VIE_OBJ ); // What: Home Open Call. Why: The hero opens the home page. How: This opens it at desktop size.
 
 		await curPagObj.getByRole( 'main' ).getByRole( 'link', { exact : true, name : butLabStr } ).click(); // What: Hero Button Click Call. Why: This is the action under test. How: This clicks the button by its label inside the main content.
-
 
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the section with a clean address. How: This waits for both.
 
@@ -359,13 +354,10 @@ test( 'the menu button opens and closes the menu', async ( { page : curPagObj } 
 
 	await opeMenFun( curPagObj ); // What: Menu Open Call. Why: The open state comes first. How: This opens the menu through its button.
 
-
 	await expect( curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Services' } ) ).toBeVisible(); // What: Menu Link Assertion. Why: An open menu should show its links. How: This checks the bar's Services link is visible, the menu's own at phone size, since the bar's row is hidden there.
 	await expect( curPagObj.locator( 'main' ) ).toHaveAttribute( 'inert', '' );                                             // What: Inert Page Assertion. Why: The page under the dimmer shouldn't take focus. How: This checks the main content is inert while the menu is open.
 
-
 	await curPagObj.getByRole( 'button', { name : 'Toggle menu' } ).click(); // What: Close Click Call. Why: The same button closes the menu. How: This clicks it again.
-
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Closed State Assertion. Why: The menu should be closed and say so. How: This checks the button reports it collapsed.
 	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' );                                            // What: Live Page Assertion. Why: The page has to be usable again. How: This checks the main content is no longer inert.
@@ -384,7 +376,6 @@ test( 'Escape closes the menu and returns focus to its button', async ( { page :
 
 	await curPagObj.keyboard.press( 'Escape' ); // What: Escape Press Call. Why: This is the action under test. How: This presses Escape.
 
-
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: Escape should close the menu. How: This checks the button reports it collapsed.
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toBeFocused();                               // What: Button Focus Assertion. Why: Focus shouldn't be left inside the closed menu. How: This checks it moved to the menu button.
 
@@ -401,7 +392,6 @@ test( 'a tap on the dimmed page closes the menu', async ( { page : curPagObj } )
 	await opeMenFun( curPagObj ); // What: Menu Open Call. Why: The dimmer shows only while the menu is open. How: This opens it.
 
 	await curPagObj.mouse.click( 195, 820 ); // What: Scrim Tap Call. Why: This is the action under test. How: This clicks near the bottom middle of the screen, below the menu, where only the dimmer sits.
-
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: The tap should close the menu. How: This checks the button reports it collapsed.
 
@@ -423,7 +413,6 @@ for ( const [ linLabStr, secIdeStr ] of [ [ 'Home', 'home' ], [ 'Services', 'ser
 		await opeMenFun( curPagObj ); // What: Menu Open Call. Why: The menu's links show only while it's open. How: This opens it.
 
 		await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : linLabStr } ).click(); // What: Menu Link Click Call. Why: This is the action under test. How: This clicks the link by its label, the only one visible at phone size, since the bar's own links are hidden there.
-
 
 		await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'false' ); // What: Menu Closed Assertion. Why: The menu should close once a section is chosen. How: This checks the button reports it collapsed.
 
@@ -450,9 +439,7 @@ test( 'a new tab click on a menu link leaves the menu open', async ( { page : cu
 
 	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'About' } ).click( { modifiers : [ 'ControlOrMeta' ] } ); // What: Modified Click Call. Why: This is the action under test. How: This clicks the menu's About link with Cmd on a Mac and Ctrl elsewhere.
 
-
 	await newTabPro; // What: New Tab Wait. Why: The click should still open the link in a new tab. How: This waits for the new page to appear.
-
 
 	await expect( curPagObj.getByRole( 'button', { name : 'Toggle menu' } ) ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Menu Open Assertion. Why: The menu should stay open on the page clicked from. How: This checks the button still reports it expanded.
 
@@ -469,7 +456,6 @@ test( 'widening the screen closes the menu', async ( { page : curPagObj } ) => {
 	await opeMenFun( curPagObj ); // What: Menu Open Call. Why: Widening only matters with the menu open. How: This opens it.
 
 	await curPagObj.setViewportSize( DES_VIE_OBJ ); // What: Widen Call. Why: This is the action under test. How: This resizes the viewport to desktop size.
-
 
 	await expect( curPagObj.locator( 'main' ) ).not.toHaveAttribute( 'inert' ); // What: Live Page Assertion. Why: The page has to stay usable once the menu button is gone. How: This checks the main content is no longer inert.
 
@@ -493,7 +479,6 @@ test( "the form won't send without its required fields", async ( { page : curPag
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Empty Submit Click Call. Why: This is the action under test. How: This clicks Submit with every field empty.
 
-
 	await expect( curPagObj.getByLabel( 'Full Name *' ) ).toHaveJSProperty( 'validity.valueMissing', true ); // What: Name Missing Assertion. Why: The browser should hold the form back for the empty name. How: This checks the field reports its required value missing.
 	expect( posCouObj.couNum ).toBe( 0 );                                                                    // What: Nothing Sent Assertion. Why: An incomplete request mustn't reach Netlify. How: This checks no post was made.
 
@@ -516,7 +501,6 @@ test( 'a sent request shows the thank-you message', async ( { page : curPagObj }
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: This is the action under test. How: This sends the request.
 
-
 	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toBeVisible(); // What: Thank-You Assertion. Why: An accepted request should say so. How: This checks the thank-you heading appears.
 	expect( posCouObj.couNum ).toBe( 1 );                                                       // What: Single Send Assertion. Why: One request should reach Netlify once. How: This checks exactly one post was made.
 
@@ -536,7 +520,6 @@ test( 'a failed request explains what to do instead', async ( { page : curPagObj
 	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: This is the action under test. How: This sends the request.
-
 
 	await expect( curPagObj.getByRole( 'alert' ) ).toContainText( "didn't go through" );           // What: Error Message Assertion. Why: The visitor should know the request failed and what to do next. How: This checks the alert appears with its explanation.
 	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toHaveCount( 0 ); // What: No Thank-You Assertion. Why: A failed request mustn't claim it was sent. How: This checks the thank-you heading never appears.
@@ -558,14 +541,11 @@ test( 'a retry after a failure clears the error and sends', async ( { page : cur
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: First Submit Click Call. Why: The first attempt shows the error. How: This sends the request.
 
-
 	await expect( curPagObj.getByRole( 'alert' ) ).toBeVisible(); // What: Error Shown Wait. Why: The retry only matters once the error is up. How: This waits for the alert.
-
 
 	await fakNetFun( curPagObj, 200 ); // What: Netlify Success Fake Call. Why: The retry should go through. How: This adds a route answering OK, which Playwright tries before the earlier one.
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Retry Click Call. Why: This is the action under test. How: This sends the request again.
-
 
 	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toBeVisible(); // What: Thank-You Assertion. Why: An accepted retry should say so. How: This checks the thank-you heading appears.
 	await expect( curPagObj.getByRole( 'alert' ) ).toHaveCount( 0 );                            // What: Error Gone Assertion. Why: The error should leave once the visitor tries again. How: This checks the alert is gone.
@@ -589,12 +569,9 @@ test( 'the form comes back after the thank-you message', async ( { page : curPag
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: The thank-you only shows once a request is sent. How: This sends the request.
 
-
 	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toBeVisible(); // What: Thank-You Wait. Why: The return is timed from the thank-you. How: This waits for it to appear.
 
-
 	await curPagObj.clock.fastForward( 6000 ); // What: Clock Fast Forward Call. Why: This is the wait under test. How: This runs the page's timers six seconds ahead, which starts the message's exit.
-
 
 	await expect( curPagObj.getByRole( 'heading', { name : 'Free Quote Request' } ) ).toBeVisible(); // What: Form Back Assertion. Why: The form should return once the message has faded out. How: This checks the form's heading is showing again.
 	await expect( curPagObj.getByRole( 'heading', { name : 'Message Sent!' } ) ).toHaveCount( 0 );   // What: Thank-You Gone Assertion. Why: The message should leave as the form returns. How: This checks it's gone.
@@ -613,7 +590,6 @@ test( 'an unknown address shows the 404 page', async ( { page : curPagObj } ) =>
 
 	await opeRouFun( curPagObj, '/no-such-page', DES_VIE_OBJ ); // What: Unknown Address Open Call. Why: Any unknown path should reach the 404 page. How: This opens one.
 
-
 	await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveText( 'Page Not Found.' );    // What: Not Found Heading Assertion. Why: The page should say plainly what happened. How: This checks its heading.
 	await expect( curPagObj ).toHaveTitle( 'Page Not Found | Seal and Shield' );                        // What: Not Found Title Assertion. Why: The tab should name the problem too. How: This checks the page's own title.
 	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' ); // What: Noindex Assertion. Why: The host answers every unknown path with a 200, so search engines must be told not to index it. How: This checks the robots tag.
@@ -629,7 +605,6 @@ test( 'Return Home leads to the home page', async ( { page : curPagObj } ) => { 
 	await opeRouFun( curPagObj, '/missing', DES_VIE_OBJ ); // What: Not Found Open Call. Why: Return Home lives on the 404 page. How: This opens it.
 
 	await curPagObj.getByRole( 'link', { name : 'Return Home' } ).click(); // What: Return Home Click Call. Why: This is the action under test. How: This clicks the button.
-
 
 	await expect( curPagObj ).toHaveURL( /^[^#]*\/$/ );                                             // What: Home Address Assertion. Why: The visitor should land on the home page. How: This checks the URL is the bare root.
 	await expect( curPagObj ).not.toHaveTitle( 'Page Not Found | Seal and Shield' );                // What: Home Title Assertion. Why: The 404 page's title should give way to the home page's. How: This checks the title changed back.
@@ -658,7 +633,6 @@ for ( const [ conLabStr, secIdeStr, locKeyStr ] of [ [ 'Get a Free Quote', 'cont
 
 		await conLocObj.click(); // What: Control Click Call. Why: This is the action under test. How: This clicks the control.
 
-
 		await ariSecFun( curPagObj, secIdeStr ); // What: Section Arrival Check. Why: The visitor should land on the home page's section with a clean address. How: This waits for both.
 
 
@@ -673,7 +647,6 @@ test( 'an address naming a section opens there', async ( { page : curPagObj } ) 
 
 
 	await opeRouFun( curPagObj, '/#about', DES_VIE_OBJ ); // What: Section Address Open Call. Why: This is the action under test. How: This loads the home page with the About section's hash.
-
 
 	await ariSecFun( curPagObj, 'about' ); // What: About Arrival Check. Why: The visitor should land on About, and the hash should leave the address. How: This waits for both.
 

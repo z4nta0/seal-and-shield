@@ -193,7 +193,6 @@ test( 'the raw page carries the home title and description for script-free reade
 
 	await curPagObj.goto( '/' ); // What: Home Open Call. Why: The raw tags are compared with what the browser shows. How: This loads the root path.
 
-
 	expect( titTexStr ).toBe( await curPagObj.title() );                                                         // What: Raw Title Assertion. Why: The raw page should name the home page in full, not a bare site name. How: This checks it matches the title the browser shows.
 	expect( desTexStr ).toBe( await curPagObj.locator( 'meta[name="description"]' ).getAttribute( 'content' ) ); // What: Raw Description Assertion. Why: Checkers and crawlers without the script need the same description visitors' browsers get. How: This checks the raw description matches the page's.
 
@@ -210,7 +209,6 @@ test( 'the 404 page stays out of search results', async ( { page : curPagObj } )
 
 
 	await curPagObj.goto( '/no-such-page' ); // What: Unknown Address Open Call. Why: Every unknown path shows the 404 page. How: This loads one.
-
 
 	await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', LIV_URL_STR ); // What: Canonical Assertion. Why: The 404 page keeps the home page's canonical from index.html, and its noindex keeps the page out of search anyway. How: This checks the canonical link names the live address.
 	await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' );  // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the robots tag.

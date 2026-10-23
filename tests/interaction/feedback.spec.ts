@@ -203,9 +203,7 @@ async function errOpeFun ( curPagObj : Page ) : Promise< void > {
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: The error only shows after a send. How: This sends the request, which the fake fails.
 
-
 	await expect( curPagObj.locator( ERR_LIN_STR ) ).toBeVisible(); // What: Error Link Shown Assertion. Why: The link is probed once the error has rendered, and an empty probe would pass without checking anything. How: This waits for the link inside the error message.
-
 
 	await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing the link shouldn't start a call. How: This cancels every click from here on.
 
@@ -617,7 +615,6 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
 
-
 		expect( await feeProFun( curPagObj, 'a, button', false ) ).toEqual( [] ); // What: No Feedback Problems Assertion. Why: The state passes only when every control responds. How: This compares the problems with an empty list, so a failure prints each one.
 		expect( await fieProFun( curPagObj, false ) ).toEqual( [] );              // What: No Field Problems Assertion. Why: The state passes only when every form field shows focus. How: This compares the problems with an empty list, so a failure prints each one.
 
@@ -638,7 +635,6 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Ring Settle Wait. Why: The ring is read once it has grown in. How: This pauses for the settle time.
 
-
 		expect( await curPagObj.evaluate( () => getComputedStyle( document.activeElement as Element ).outlineWidth ) ).toBe( '2px' ); // What: Full Ring Assertion. Why: The ring has to reach its full width. How: This reads the focused stop's outline width, which the large border width token snaps to 2px. // What: Type Assertion Note. Why: activeElement types as possibly null. How: The Tab press just put focus on a stop.
 
 
@@ -656,7 +652,6 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The controls are probed with the state settled. How: This loads and settles it.
 
 		await curPagObj.evaluate( cliBloFun ); // What: Click Block Call. Why: Pressing a control shouldn't navigate or close anything. How: This cancels every click from here on.
-
 
 		expect( await feeProFun( curPagObj, 'a, button', true ) ).toEqual( [] ); // What: No Reduced Motion Problems Assertion. Why: Every control has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
 		expect( await fieProFun( curPagObj, true ) ).toEqual( [] );              // What: No Reduced Motion Field Problems Assertion. Why: Every form field has to show focus without moving. How: This compares the problems with an empty list, so a failure prints each one.
@@ -677,7 +672,6 @@ test( "the contact form error's phone link gives hover, press, and focus feedbac
 
 	await errOpeFun( curPagObj ); // What: Error Open Call. Why: The link only exists once a send has failed. How: This fails a send and waits for the error.
 
-
 	expect( await feeProFun( curPagObj, ERR_LIN_STR, false ) ).toEqual( [] ); // What: No Error Link Problems Assertion. Why: The link has to respond like every other control. How: This compares the problems with an empty list, so a failure prints each one.
 
 
@@ -691,7 +685,6 @@ test( "the contact form error's phone link keeps feedback without motion under r
 	await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The preference has to be set before the page loads. How: This makes the page match prefers-reduced-motion: reduce.
 
 	await errOpeFun( curPagObj ); // What: Error Open Call. Why: The link only exists once a send has failed. How: This fails a send and waits for the error.
-
 
 	expect( await feeProFun( curPagObj, ERR_LIN_STR, true ) ).toEqual( [] ); // What: No Reduced Motion Error Link Problems Assertion. Why: The link has to respond without moving. How: This compares the problems with an empty list, so a failure prints each one.
 

@@ -541,7 +541,6 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The tree should be read with the state settled. How: This loads and settles it.
 
-
 		expect( await namProFun( curPagObj ) ).toEqual( [] ); // What: No Name Problems Assertion. Why: The state passes only with clean names. How: This compares the problems with an empty list, so a failure prints each one.
 
 
@@ -558,7 +557,6 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The walk should start from the state settled. How: This loads and settles it.
 
-
 		expect( await keyProFun( curPagObj, engNamStr ) ).toEqual( [] ); // What: No Keyboard Problems Assertion. Why: The state passes only when every stop is reachable, in order, on screen, uncovered, and visibly focused. How: This compares the problems with an empty list, so a failure prints each one.
 
 
@@ -570,7 +568,6 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 		await opeStaFun( curPagObj, { ...staRecObj, widNum : REF_WID_NUM } ); // What: Narrow State Open Call. Why: Reflow is judged at WCAG's narrowest width. How: This opens the state with its width replaced by the reflow width.
-
 
 		expect( await curPagObj.evaluate( () => document.documentElement.scrollWidth - document.documentElement.clientWidth ) ).toBeLessThanOrEqual( 0 ); // What: No Sideways Scroll Assertion. Why: The page passes only when nothing reaches past the viewport's width. How: This subtracts the visible width from the scrollable width, which stays at zero without sideways scrolling.
 
@@ -587,7 +584,6 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 		await curPagObj.addInitScript( motRecFun ); // What: Motion Recorder Install Call. Why: A motion that finishes before the page settles drops out of getAnimations, so reading it only at the end would miss it. How: This runs motRecFun in the page before it loads, recording every motion over 1ms from the start.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: Entrance animations and the state's own action are the motion being checked. How: This loads the state and runs its action.
-
 
 		expect( await curPagObj.evaluate( () => ( Reflect.get( window, '__motPolFun' ) as () => string[] )() ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when nothing longer than 1ms played as it opened. How: This runs the recorder's last sweep, which also covers what the page still holds and so replaces a separate check of the settled page, and compares every label it recorded with an empty list, so a failure names each motion and its element. // What: Type Assertion Note. Why: Reflect.get types the global as unknown. How: motRecFun stores its sweep there, which returns a string array.
 
@@ -613,12 +609,10 @@ test( 'a failed request fills an alert region that was in the page, empty, from 
 	await expect( aleRegObj ).toHaveCount( 1 ); // What: Region Present Assertion. Why: The region has to be in the page before anything is sent. How: This checks there's exactly one.
 	await expect( aleRegObj ).toHaveText( '' ); // What: Region Empty Assertion. Why: An empty region on load means its later message is a change a screen reader announces. How: This checks it holds no text yet.
 
-
 	await curPagObj.getByLabel( 'Full Name *' ).fill( 'Test Visitor' ); // What: Name Fill Call. Why: The name is required. How: This types a name.
 	await curPagObj.getByLabel( 'Phone *' ).fill( '(785) 555-0100' );   // What: Phone Fill Call. Why: The phone number is required. How: This types a number from the reserved 555-01xx range.
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: This is the action under test. How: This sends the request.
-
 
 	await expect( aleRegObj ).toContainText( "didn't go through" ); // What: Region Message Assertion. Why: The failure should reach screen readers. How: This checks the region now holds the error.
 
@@ -645,7 +639,6 @@ test( 'a failed request leaves focus on the submit button', async ( { page : cur
 
 	await curPagObj.keyboard.press( 'Enter' ); // What: Enter Press Call. Why: This is the action under test. How: This sends the request from the focused button.
 
-
 	await expect( curPagObj.locator( '#contact form [role="alert"]' ) ).toContainText( "didn't go through" ); // What: Error Shown Assertion. Why: Focus is checked once the failure has played out. How: This waits for the error message.
 	await expect( subButObj ).toBeFocused();                                                                  // What: Button Focus Assertion. Why: Focus must not fall to the page. How: This checks the submit button still holds it.
 
@@ -668,12 +661,9 @@ test( 'sending moves focus to the thank-you message and back to the form when it
 
 	await curPagObj.getByRole( 'button', { name : 'Submit Free Quote Request' } ).click(); // What: Submit Click Call. Why: Sending swaps the form for the thank-you message. How: This sends the request.
 
-
 	await expect( curPagObj.locator( ':focus' ) ).toContainText( 'Message Sent!' ); // What: Panel Focus Assertion. Why: Focus should land on the message that replaced the form. How: This checks the focused element holds the thank-you heading.
 
-
 	await curPagObj.clock.fastForward( 6000 ); // What: Clock Fast Forward Call. Why: The form returns after six seconds. How: This runs the page's timers six seconds ahead, which starts the message's exit.
-
 
 	await expect( curPagObj.getByLabel( 'Full Name *' ) ).toBeFocused(); // What: Name Field Focus Assertion. Why: Focus should come back to the returning form's first field. How: This checks the Full Name input holds it.
 
