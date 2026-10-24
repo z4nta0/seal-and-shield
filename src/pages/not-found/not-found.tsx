@@ -3,13 +3,13 @@
 
 // #region Imports
 
-import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page's layout, label, heading, paragraph, and buttons are styled in its own module. How: Each element reads its hashed class name from this object.
+import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The page is styled in its own module, whose class names Vite hashes. How: Each element reads its class from this object.
 
 
 import { Link         } from 'react-router';             // What: Link. Why: The return button should navigate home inside the site without a full page load. How: This renders it.
-import { NavBarCom    } from '../../ui/nav.tsx';         // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays one tap away. How: This is rendered first inside the page.
+import { NavBarCom    } from '../../ui/nav.tsx';         // What: Navigation Bar Component. Why: The 404 page keeps the site's top bar, so every section stays within reach, in the bar's row above 768px wide or its menu at 768px and below. How: This is rendered first inside the page.
 import { SitFooCom    } from '../../ui/footer.tsx';      // What: Site Footer Component. Why: The 404 page ends with the site's footer like every page. How: This is rendered last inside the page.
-import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The quote button reaches the contact section the way every section link does. How: This returns secCliFun, which navigates home to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The quote button reaches the Contact section the way every section link does. How: This returns secCliFun, which navigates home to the section and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, sent as auxclick, never reaches the handler.
 
 // #endregion Imports
 
@@ -21,7 +21,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * @summary
  * The page every unknown path falls through to. Between the shared bar and
  * footer, it says the page doesn't exist and offers two ways onward: back
- * to the home page, or straight to the quote request in the contact
+ * to the home page, or straight to the quote request in the Contact
  * section. It carries its own title and a noindex robots tag, since the
  * host answers every unknown path with a 200 and search engines shouldn't
  * index it. The page fills at least the screen's height, so the footer sits
@@ -50,7 +50,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * holding a centered column with an error label, the heading, a short
  * explanation, and two buttons, then the footer. The return button navigates
  * to the home page; the quote button is a link to /#contact that goes through
- * secCliFun, navigating to the home page with the contact section's id as the
+ * secCliFun, navigating to the home page with the Contact section's id as the
  * hash, which the home page scrolls to and then clears, while a Ctrl, Cmd, or
  * middle click opens it in a new tab. app.tsx renders it for every path no
  * other route claims.
@@ -71,7 +71,7 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
 function NotFouCom () : React.JSX.Element {
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The quote button takes the visitor to the contact section the way every section link does. How: This navigates home to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: The quote button takes the visitor to the Contact section the way every section link does. How: This navigates home to the section and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, sent as auxclick, never reaches the handler.
 
 
 
@@ -95,10 +95,16 @@ function NotFouCom () : React.JSX.Element {
 
 
 
-			<main className={ cssModObj.nofConMai }>{ /* What: Not-Found Content Main Element. Why: The page's one message is its main content. How: This centers a single column in the dark space between the bar and the footer. */ }
+			<main
+				id='main'
+
+				className={ cssModObj.nofConMai }
+
+				tabIndex={ -1 } // What: Main Focus Target. Why: The skip link moves focus here, and a main element can't take focus on its own. How: This makes it focusable without adding it to the Tab order.
+			>{ /* What: Not-Found Content Main Element. Why: The page's one message is its main content, and the skip link jumps here. How: This centers a single column in the dark space between the bar and the footer; its id stays the plain main, since the skip link's #main address names it as a navigation target. */ }
 
 
-				<p className={ cssModObj.eyeLabPar }>Error 404</p>{ /* What: Eyebrow Label Paragraph Element. Why: A small label names the error before the heading. How: This uses the site's eyebrow style. */ }
+				<p className={ cssModObj.eyeLabPar }>Error 404</p>{ /* What: Eyebrow Label Paragraph Element. Why: A label names the error before the heading. How: This uses the site's eyebrow style. */ }
 
 				<h1 className={ cssModObj.nofTitHea }>{ /* What: Not-Found Title Heading Element. Why: The page's heading states the problem plainly. How: This sets it in the display style, sized to the screen between two bounds by its module class. */ }
 					Page Not <span className={ cssModObj.titAccSpa }>Found.</span>
@@ -113,7 +119,7 @@ function NotFouCom () : React.JSX.Element {
 						className={` ${ cssModObj.butBasAnc }   ${ cssModObj.butBasAncPrimary } `}
 
 						to='/'
-					>{ /* What: Return Home Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
+					>{ /* What: Button Base Anchor Primary Link. Why: The page's main action is going back home. How: This navigates to the root path inside the site. */ }
 						Return Home
 					</Link>
 
@@ -125,7 +131,7 @@ function NotFouCom () : React.JSX.Element {
 						href='/#contact'
 
 						onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-					>{ /* What: Button Base Anchor Secondary Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's contact section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it. */ }
+					>{ /* What: Button Base Anchor Secondary Element. Why: A visitor who came looking for a roofer can still request a quote in one step, the site's main action. How: This quieter of the page's two buttons goes through secCliFun, which navigates to the home page's Contact section and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, sent as auxclick, never reaches the handler. */ }
 						Get a Free Quote
 					</a>
 

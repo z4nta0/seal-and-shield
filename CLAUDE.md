@@ -18,8 +18,14 @@ treatment. The `author` meta names the business itself.
   the legal name fits, such as the footer's copyright line and the odd
   sentence of copy. Applied 2026-10-08: the bar, About heading, Services
   intro, and Contact copy say "Seal and Shield"; "LLC" stays in the footer's
-  brand name and copyright line, the About story's founding sentence, and
-  the full logo's alt text (the image itself reads "LLC"); the bar's and
+  brand name and copyright line, the About story's founding sentence, the
+  full logo's alt text (the image itself reads "LLC"), the bar's brand,
+  which sets a small "LLC" beneath the name like the logo's own lockup, and
+  the head's `author` meta and the structured data's `legalName`, which name
+  the business legally (both recorded 2026-10-22), the social card's copy of
+  the full logo, whose alt text is the logo's own, and the opening line of
+  the README and of this file, which introduce the business itself (both
+  recorded 2026-10-23); the bar's and
   footer's small logos have empty alt text, since the brand name sits right
   beside them.
 - **No street address** (decided 2026-10-09): the company has no business
@@ -55,6 +61,14 @@ treatment. The `author` meta names the business itself.
   the canonical. The 404 page carries the home page's canonical beside its
   `noindex`, which is accepted, since the `noindex` keeps it out of search.
 
+## Label casing
+Decided 2026-10-22: the site's eyebrow labels (the small uppercase line above
+each heading, the menu's included) and its form field labels are written in
+Title Case in the source ("Get In Touch", "Tell Us About Your Roof"), even
+where CSS uppercases them on screen, since screen readers read the source.
+Buttons keep their own wording ("Get a Free Quote", "Submit Free Quote
+Request").
+
 ## Multi-page scroll position
 Decided 2026-10-17: the user-level "Multi-Page React Sites: Scroll Position"
 rule doesn't apply here. The 404 page is the only other route, and it's a
@@ -64,12 +78,25 @@ complexity for no real gain. For the same reason there's no back to top link
 the 404 page is too short to need one.
 
 ## Section links
-Decided 2026-10-18: `ui/section-link.ts` exports only `useSecCliFun`, where
-the user-level "## Section Links: No Hash In The Address" implementation
-bullet has the file export `modCliFun` and `useSecLinFun` as well. Every link
-here goes through the shared click handler, and with no back to top link
-nothing else needs `modCliFun`, so nothing outside the file imports either
-one, and both stay internal to it.
+Decided 2026-10-18: `ui/section-link.ts` exports `useSecCliFun` and, since
+the skip link (2026-10-23), `modCliFun`, while `useSecLinFun`, which the
+user-level "## Section Links: No Hash In The Address" implementation bullet
+also has the file export, stays internal to it: every section link goes
+through the shared click handler, and nothing else needs it.
+
+## Skip link
+Added 2026-10-23, under the user-level "## Skip Link And Modal Layers" rule.
+The main content is everything between the bar and the footer: the home
+page's four sections, and the 404 page's message and its two buttons. The
+bar's `NavBarCom` renders the link first on both pages, a blue button waiting
+above the screen that slides down over the bar's corner when focused, and
+both pages' `<main>` carry `id='main'` and `tabIndex={ -1 }` as its target.
+Before the link, axe reported `bypass` as needing review in the `menu-phone`
+state, the expected result of the open menu making the page inert, as the
+rule explains; with the link in place every state passes it outright. The
+gradient contrast review (axe's `color-contrast` needing review over the
+hero, Contact section, and footer) was checked by eye and marked done by the
+user on 2026-10-23.
 
 ## Horizontal layout
 Decided 2026-10-09, after comparing both options from the user-level "Width
@@ -80,11 +107,11 @@ so it's settled (2026-10-10).
   (`--gut-sid-pad`, reese-roofing's own), the column gaps between section
   columns, panel and button side padding, and the footer's column gap are
   each a `clamp()` of a `--hor-rhy-*` step between two `--spa-hor-*` steps.
-  The logos and the services header take `max()` of a rhythm-step floor and
+  The logos and the Services header take `max()` of a rhythm-step floor and
   a horizontal step, since their columns already cap them.
 - **Fixed (rem steps)**: everything inside a component: small gaps, card,
   field, and tag padding, the heading rules, and the menu lines. The phone
-  menu's Call Now and Free Quote buttons count as component padding too
+  menu's call and Free Quote buttons count as component padding too
   (decided 2026-10-18), on a fixed `--spa-hor-m01`, the same as the phone
   menu buttons in reese-roofing, hair-designs, and tonys-toppers, while the
   bar's own buttons stay fluid. The 3px
@@ -105,24 +132,27 @@ app with tabs.
 ```
 src/
   main.tsx               entry point
-  app.tsx                root component, the app container, and the routes
+  app.tsx                root component, the app container (app.module.css),
+                         and the routes
   assets/                images and fonts used by 2 or more pages
                          (logo-simple.webp, fonts/)
   pages/
-    home/                the home page, its sections, and logo-full.webp
+    home/                the home page, its sections, reveal.ts, and
+                         logo-full.webp
     not-found/           the 404 page
-  ui/                    components used by 2 or more pages (nav, footer)
-                         and section-link.ts
+  ui/                    components used by 2 or more pages (nav, footer),
+                         section-link.ts, and sections.ts
   styles/                global CSS only (fonts.css, styles.css)
   utils/                 app-agnostic helpers (motion.ts, rhythm.ts)
 ```
 Outside `src/`: `tests/` holds the Playwright suites (see "## Test
 suites"), and `design/` holds source artwork that isn't served, with the
-scripts that render it into `public/`: `design/og-image/` (the social
-preview card) and `design/icons/` (the favicon set).
+scripts that render it: `design/og-image/` (the social preview card) and
+`design/icons/` (the favicon set), into `public/`, and `design/logos/` (both
+logos), into `src/`.
 - **`pages/` takes the place of `tabs/`.** Each route gets its own folder,
-  and a component only that page uses (the hero, services, about, and
-  contact sections) lives in that folder. The 404 page is
+  and a component only that page uses (the hero, Services, About, and
+  Contact sections) lives in that folder. The 404 page is
   `pages/not-found/`.
 - **A page's main file is named after its folder, with no prefix**
   (`pages/home/home.tsx`), the same as reese-roofing.
@@ -178,42 +208,44 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
 7. **New features**: the 404 page, SEO, social previews, and interaction
    feedback.
    - **404 page: done 2026-10-09.** It has the shared bar and footer, a
-     Return Home button, a Get a Free Quote button to the contact section,
+     Return Home button, a Get a Free Quote button to the Contact section,
      and its own title and noindex tag. Every section link works from it
      through `ui/section-link.ts`, and the home page scrolls to a hash it
      arrives with and then clears it, as asked for the same day.
    - **Security headers, WebP logos, and SEO: done 2026-10-09**, as recorded
      under "Kind of site" and "Accessibility pass".
    - **Social previews: done 2026-10-09.** The 1,200x630 card
-     (`public/og-image.png`, 270 KB) shows the logo over "Commercial
-     Roofing" and "Lawrence, KS" on the hero's navy, grid, and glow, inside
-     the center square; it's rendered by `npm run og-image` from
-     `design/og-image/card.html`, which reads the site's own fonts and
-     tokens. The Open Graph and Twitter tags match the page's title and
-     description, and the favicon set (ICO, 16 to 512px PNGs, and a 180px
-     Apple touch icon on white) is rendered by `npm run icons` from
-     `design/icons/mark.png`, the old 1,210px `public/favicon.png`. A changed
-     card needs a new filename (`og-image-2.png`), since apps cache previews.
-     The user checked the live card with a preview checker on 2026-10-10,
-     and it came back with no problems.
-   - **Interaction feedback: done 2026-10-09.** Every link and button
-     changes color on hover, and the buttons also lift a pixel (the service
-     cards 3px); buttons press in to 0.97 and text links dim. Focus rings
-     ease in from a zero-width outline set once in `styles.css`, drawn in
-     `--foc-rin-col`, which the dark bar, hero, About card, contact
-     section, footer, and 404 page set to the light accent for contrast.
-     The contact form's success panel fades up with its check popping in
-     once, its error fades in, and the submit button's label fades to
-     Sending... while a request is out. Since 2026-10-18 the panel and the
-     error also leave the way they came, sinking out quicker (209ms and
-     158ms) before the form returns or a retry goes out; their exits shorten
-     to .01ms under reduced motion, since the page waits on their end to
-     remove them. Everything has a reduced-motion variant.
-     The service cards lift and the service area tags fill on hover even
-     though neither is clickable, which the user chose to keep (2026-10-18).
-     The menu's phone button draws its hover outline as an inset
-     box-shadow, which takes no space, so the closed state looks exactly as
-     before.
+     (`public/og-image-2.png` since 2026-10-23, 270 KB) shows the logo over
+     "Commercial Roofing" and "Lawrence, KS" on the hero's navy, grid, and
+     glow, inside the center square; it's rendered by `npm run og-image` from
+     `design/og-image/card.html`, which reads the site's own fonts and tokens.
+     The Open Graph and Twitter tags match the page's title and description,
+     and the favicon set (ICO, 16 to 512px PNGs, and a 180px Apple touch icon
+     on white) is rendered by `npm run icons` from `design/icons/mark.png`, the
+     old 1,210px `public/favicon.png`. A changed card needs a new filename,
+     since apps cache previews: on 2026-10-23 it was rebuilt from the
+     re-encoded full logo as `og-image-2.png`, so the next change takes
+     `og-image-3.png`. The user checked the original live card (`og-image.png`)
+     with a preview checker on 2026-10-10, and it came back with no problems;
+     `og-image-2.png` gets the same check after its deploy.
+   - **Interaction feedback: done 2026-10-09.** Every link and button changes
+     color on hover, and the buttons also lift a pixel (the service cards 3px,
+     while the bar's menu toggle only changes color); buttons press in to 0.97
+     and text links dim. Focus rings ease in from a zero-width outline set once
+     in `styles.css`, drawn in `--foc-rin-col`, which the skip link, the dark
+     bar, hero, About card, Contact section, footer, and 404 page set to the
+     light accent for contrast. The contact form's success panel fades up with
+     its check popping in once, its error fades in, and the submit button's
+     label fades to Sending... while a request is out. Since 2026-10-18 the
+     panel and the error also leave the way they came, sinking out quicker
+     (209ms and 158ms) before the form returns or a retry goes out; their exits
+     shorten to .01ms under reduced motion, since the page waits on their end
+     to remove them. Everything has a reduced-motion variant. The service cards
+     lift and the service area tags fill on hover even though neither is
+     clickable, which the user chose to keep (2026-10-18). The menu's phone
+     button carries a border the same blue as its fill, so when hover empties
+     the fill to leave a blue outline with light blue text, the button keeps
+     its size and nothing beside it moves.
    - **Reveal hooks go on a wrapper** wherever the revealed element has its
      own hover or press transform: the reveal's global rule sets
      `transition` and `transform` on the element it marks, which silently
@@ -232,15 +264,18 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      reese-roofing, it makes the page behind it inert, closes on Escape
      (returning focus to its button), and closes when the screen widens past
      the breakpoint. It also gained a staggered entrance; an active section
-     dot; a label that nudges sideways on hover; and a contact block with Call
-     Now and Free Quote side by side above the hours and service area. The
-     user may drop the Free Quote button if the menu looks crowded.
+     dot; a label that nudges sideways on hover; and a contact block with the
+     phone number and Free Quote buttons side by side above the hours and
+     service area. The user may drop the Free Quote button if the menu looks
+     crowded.
 
 ## Test suites
 Added 2026-10-08, adapted from reese-roofing's. Playwright suites live in
 `tests/`, one project per suite and engine in `tests/playwright.config.ts`,
 which starts its own dev server on port 5197 (never the usual 5173, nor the
-5190 to 5196 its sibling projects use) and stops it afterwards. Every suite
+5190 to 5196 its sibling projects use), plus a production build served by
+`vite preview` on 5198 for the security suite, and stops both afterwards. A
+temporary server of Claude's own uses 5199. Every suite
 runs in Chromium, Firefox, and WebKit. Results,
 screenshots, and traces go to `tests/output/` (git-ignored); `npx playwright
 show-report tests/output/report` opens the HTML report. The states the suites
@@ -251,58 +286,95 @@ Contact sections only fade their content in once scrolled into view, and skips
 animations that repeat forever (the hero logo's `logRinDivLoopPulse`) when
 waiting for the page to settle.
 - `npm run test:accessibility`: the pre-commit accessibility scan. axe-core
-  checks each state against WCAG 2.2 A and AA plus best practices
-  (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover link and
-  button names, a Tab walk (order, traps, focus on screen, uncovered, and
-  visible), reflow at 320px, motion under reduced motion, and the contact
-  form's announcements: its alert region waits in the page empty and gains
-  the error, focus stays on the submit button after a failed send, and focus
-  moves to the thank-you message and back to the form. axe's "needs review"
-  results are printed and attached to the report rather than failing the
-  run.
-- `npm run test:interaction`: checks what the controls do, under reduced
-  motion so scrolls land at once. The bar's links, brand, menu, footer links,
-  and hero buttons land on their sections with a clean address, a Ctrl or Cmd
-  click and a middle click open them in new tabs, and the menu closes on
-  Escape, on a tap of its dimmer, and when the screen widens; the contact form
-  refuses incomplete requests and reports a faked Netlify answer honestly; and
-  the 404 page, its buttons, and a section address like /#about lead where
-  they should. `feedback.spec.ts`, adapted from reese-roofing's, checks that
-  every control in every state has a hover, press, and focus change with a
-  transition, that the focus ring eases in to full width, and that feedback
-  stays without motion under reduced motion. Its two every-control probes are
-  marked slow, since each takes about 28 seconds in Chromium. The open menu
-  state parks the pointer in the bar's corner after tapping the toggle, so the
-  toggle's hover color stays out of every check of it.
-- `npm run test:rendering`: compares a full-page screenshot of every state
-  with its baseline in `tests/rendering/baselines/`, with zero tolerance: no
-  pixel may differ, and the per-pixel color threshold is 0 too, since
-  Playwright's default of 0.2 let a slight color change pass unnoticed
-  (reese-roofing's suite still has that gap). The footer's year is masked.
-  After an intended visual change, refresh with `npm run test:rendering --
-  --update-snapshots` and commit the baselines with it. Baselines are
-  captured on Linux.
-- `npm run test:responsive`: measures the home page, the 404 page, and the open
-  menu at 18 widths from 320 to 1,920px (a pixel either side of each breakpoint
-  included), failing on sideways scrolling, an unclipped element past either
-  edge, text spilling its box, or two reachable controls overlapping.
+  checks each state, and the contact form's thank-you message and error (sent
+  against a faked Netlify answer), against WCAG 2.2 A and AA plus best
+  practices (`axe.spec.ts`), and scripted checks (`scripted.spec.ts`) cover
+  link and button names, a Tab walk (no positive tabindex, order, traps, focus
+  on screen, uncovered, and visible), reflow at 320px, motion under reduced
+  motion, and the contact form's announcements: its alert region waits in the
+  page empty and gains the error, focus stays on the submit button after a
+  failed send, and focus moves to the thank-you message and back to the form.
+  axe's "needs review" results are printed and attached to the report rather
+  than failing the run.
+- `npm run test:interaction`: checks what the controls do, with
+  `behavior.spec.ts` opening each page under reduced motion so scrolls land at
+  once. The bar's links, brand, menu, footer links, and hero buttons land on
+  their sections with a clean address, the first Tab on each page reaches the
+  skip link and clicking it focuses the main content, a Ctrl or Cmd click and a
+  middle click on the bar's About link each open it in a new tab, a Ctrl or Cmd
+  click on the menu's About link leaves the menu open, the menu button opens
+  the menu over an inert page and closes it again, and the menu closes on
+  Escape (returning focus to its button), on a tap of its dimmer, and when the
+  screen widens; the contact form refuses incomplete requests, reports a faked
+  Netlify answer honestly, clears its error on a retry, and comes back after
+  the thank-you message; and an unknown address shows the 404 page with its own
+  title and noindex tag, while its buttons and links and a section address like
+  /#about lead where they should. `feedback.spec.ts`, adapted from
+  reese-roofing's, checks that every control in every state has a hover and
+  press change, with every property each change touches (on the control or
+  anything inside it) eased by a transition, and transitions its focus ring's
+  outline (the phone link in the contact form's error message included, reached
+  after a faked failed send), that every form field has a focus change that
+  eases in, that the home page's service cards and area tags have a hover
+  change that eases in, that the first focus ring reaches full width, and that
+  feedback stays without motion under reduced motion. Its two every-control
+  probes are marked slow, since each takes about 28 seconds in Chromium. The
+  open menu state parks the pointer in the bar's corner after tapping the
+  toggle, so the toggle's hover color stays out of every check of it.
+- `npm run test:rendering`: compares a full-page screenshot of every state with
+  its baseline in `tests/rendering/baselines/`, with zero tolerance: no pixel
+  may differ, and the per-pixel color threshold is 0 too, since Playwright's
+  default of 0.2 let a slight color change pass unnoticed. The footer's
+  copyright line is masked, since its year changes. After an intended visual
+  change, refresh with `npm run test:rendering -- --update-snapshots` and
+  commit the baselines with it. Baselines are captured on Linux.
+- `npm run test:responsive`: measures the home page and the 404 page at 18
+  widths from 320 to 1,920px (each breakpoint and the pixel past it included),
+  and the open menu at each of those up to its 768px breakpoint, failing on
+  sideways scrolling, an unclipped element past either edge, text spilling its
+  box, two reachable controls overlapping, or a grid whose rows hold different
+  counts (a lone centered last card aside).
 - `npm run test:seo`: checks each route's title, description, canonical,
-  robots, and single h1, and the author on the home page; that the structured
-  data's every claim appears on the page; that the social tags are complete
-  and match the page, the card is a 1,200x630 PNG under 300 KB, and every
+  robots, and single h1, and on the home page the author, the city in its
+  title, description, and h1, and a title of 60 characters or fewer and a
+  description of 120 to 125; that index.html itself, fetched without a browser,
+  carries the home page's full title and description; that the structured data
+  is a RoofingContractor with the site's name and live URL, that its phone
+  matches every call link and its city, hours, founding year, legal name, and
+  service areas all appear on the page, and that it gives no street address;
+  that the social tags are complete and match the page, the theme color names
+  the site's darkest navy, the card is a 1,200x630 PNG under 300 KB, and every
   linked icon is served at its size; and that robots.txt and the sitemap say
   what they should.
+- `npm run test:security` (added 2026-10-23, under the user-level "##
+  Testing: Security" baseline): the security suite. `headers.spec.ts` reads
+  the policy itself, so it runs in Chromium only: the Content-Security-Policy
+  in `public/_headers` allows only the site's own files, keeps the base
+  address and form posts on the site, refuses framing and plugins, and has no
+  `unsafe-inline`, `unsafe-eval`, or wildcard, HSTS lasts at least a year
+  across subdomains, the other hardening headers are set, the built files hold
+  no private key or provider token, and `npm audit` finds no high or critical
+  advisory in the shipped dependencies, skipping with a message when offline.
+  `browser.spec.ts` loads the production build with `_headers`' headers added
+  to every response (neither server reads that file), checks that an injected
+  inline script is refused and reported, so the policy is known to be live,
+  then that every state loads with no violation and every new tab link
+  carries noopener and noreferrer (the site has none yet). The site has no
+  accounts, so none of the rule's app checks apply.
 - `npm test` runs every suite.
 
 ## Live checks
 Done by the user on 2026-10-10, after the step 7 deploy:
 - **Contact form**: a test submission arrived in Netlify's Forms tab. The
-  hidden detection copy of the form in `index.html` is a bare form with only
-  its name and each field's `name`, rebuilt from pasted JSX that repeated
-  the React form's input ids.
-- **Security headers and social preview**: both graded with no problems.
+  hidden detection copy of the form in `index.html` carries its `name`,
+  `data-netlify`, and `hidden`, and each field carries its `name`, an
+  `aria-label` (added for WAVE, below), and, on the inputs, a `type`. It was
+  rebuilt from pasted JSX that repeated the React form's input ids.
+- **Security headers and social preview**: both graded with no problems (the
+  preview then showed the original `og-image.png`; `og-image-2.png` gets the
+  same check after its deploy, as noted under step 7).
 - **Contrast over the gradients**, which axe can't measure (the hero's,
-  contact section's, and footer's text): checked by eye and passed.
+  Contact section's, and footer's text): checked by eye and passed.
 - **WAVE reports** (2026-10-09): the hidden Netlify form's fields now carry
   aria-labels, and the body is dark so the transparent bar's text no longer
   measures against white. WAVE's remaining contrast flags on the About and
@@ -316,7 +388,10 @@ Done by the user on 2026-10-10, after the step 7 deploy:
   readers, since the label beside each says what the row is. WAVE's five
   "redundant link" alerts on the phone numbers (the bar, About, Contact
   twice, and the footer) are kept on purpose: the check only compares
-  addresses, and each number sits where a visitor may want to call.
+  addresses, and each number sits where a visitor may want to call. Since
+  2026-10-17 the phone menu's call link adds a sixth, and the contact form's
+  error message a seventh after a failed send, both kept for the same reason
+  (recorded 2026-10-22).
 
 ## Accessibility pass
 Done 2026-10-08, before the directory move, so steps 5 and 6 run against a
@@ -328,18 +403,23 @@ reports `aria-expanded`), every transition and animation got a
 reduced-motion variant (with `utils/motion.ts`'s `redMotFun` stopping the
 JavaScript smooth scrolls), the form fields got a focus ring, and the muted
 text, light blue, light-section labels, and footer copyright line were
-adjusted to clear 4.5:1. All 144 tests now pass in all three engines.
-- **To do: shrink the small logo** (recorded 2026-10-18): the Images rule
-  now allows up to 3x, but `logo-simple.webp` is 157x133 in a 44.876px
-  box, about 3.5x by width. Re-encode it near 135x114 through a render
-  script kept in `design/`, update its `width` and `height`, and refresh
-  the rendering baselines in all three engines. Deferred by the user.
+adjusted to clear 4.5:1. All 144 tests then passed in all three engines.
+- **The logos are rendered by a script** (done 2026-10-22): both originals
+  (`logo-full.png`, 4,763x4,640, and `logo-simple.png`, 1,210x1,025) were
+  restored from git history into `design/logos/`, and `npm run logos`
+  (`design/logos/render.mts`) writes both WebP copies into `src/` through
+  Chromium's canvas. The full logo stays 968x943 at 0.95 quality (57 KB),
+  under 3x its widest drawing of about 628px, and the simple mark became
+  131x111 lossless (15 KB, down from 21 KB), under 3x its 44.876px box,
+  each keeping the original's proportions to within about 0.01px where it's
+  drawn.
 - **The logos stay raster** (confirmed 2026-10-17): the company has no SVG
-  version of either logo, so the WebP copies below remain until it does.
+  version of either logo, so the WebP copies the logo script renders remain
+  until it does.
 - **The logos were resized on 2026-10-08** (at the user's go-ahead, ahead
-  of step 7): `logo-full.png` went from 4763x4640 (3.7 MB, about 88 MB
+  of step 7): `logo-full.png` went from 4,763x4,640 (3.7 MB, about 88 MB
   decoded) to 968x943 (299 KB), at least 2x its largest display and 3x the
-  phone hero, and `logo-simple.png` from 1210x1025 (705 KB) to 157x133
+  phone hero, and `logo-simple.png` from 1,210x1,025 (705 KB) to 157x133
   (24 KB), over 3x its 44px box, each at a width that keeps the original
   aspect ratio to within 0.005px so no layout moved. The oversized full logo
   had made Chromium's draw of it nondeterministic under a full test run,

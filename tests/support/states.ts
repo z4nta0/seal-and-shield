@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import type { Page } from '@playwright/test'; // What: Page. Why: Opening a state drives a Playwright page. How: This types opeStaFun's page parameter.
+import type { Page } from '@playwright/test'; // What: Page. Why: Opening and settling a state drives a Playwright page. How: This types the helpers' page parameters and a state's action.
 
 // #endregion Imports
 
@@ -13,15 +13,13 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * states.ts = States
  *
  * @summary
- * The page states the accessibility, interaction, and rendering suites visit,
- * and the helper that opens one; the responsive suite opens its own widths
- * through the same helper. A state is a page at a width, sometimes with
- * something opened on it: the home page and the 404 page at phone and desktop
- * widths, and the mobile menu open on a phone. opeStaFun sizes the viewport,
- * loads the page, waits for the fonts, scrolls through the page so its
- * scroll-triggered content fades in, runs the state's own action, such as
- * opening the menu, and then waits for the page to stay still so nothing is
- * measured mid-fade.
+ * The page states the suites visit, and the helpers that open and settle one,
+ * which also open pages a suite sizes for itself. A state is a page at a
+ * width, sometimes with something opened on it, such as the mobile menu on a
+ * phone. opeStaFun loads a state and gets it ready to measure, revealing the
+ * content that fades in on scroll and waiting until everything has loaded and
+ * stopped moving, so nothing is measured mid-fade. Its settle wait, waiSetFun,
+ * is exported too, for a check that has to wait out a change it makes itself.
  *
  * Sections:
  *  - Types
@@ -43,7 +41,7 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
 	actFun? : ( curPagObj : Page ) => Promise< void >, // What: Action Function. Why: Some states need something opened after the page loads. How: This runs against the loaded page, e.g. clicking the menu toggle.
 	heiNum  : number,                                  // What: Height Number. Why: The viewport's height decides what's on screen. How: This is the viewport height in CSS pixels.
 	ideStr  : string,                                  // What: Identifier String. Why: Each test names the state it checks. How: This becomes part of the test title.
-	patStr  : string,                                  // What: Path String. Why: Each state opens one route. How: This is the path loaded from the dev server.
+	patStr  : string,                                  // What: Path String. Why: Each state opens one route. How: This is the path loaded from the suite's server.
 	widNum  : number                                   // What: Width Number. Why: Layouts and menus change with width. How: This is the viewport width in CSS pixels.
 
 
@@ -74,7 +72,7 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  *
  * - `ideStr` (String): Identifier String, the state's name in test titles.
  *
- * - `patStr` (String): Path String, the route loaded from the dev server.
+ * - `patStr` (String): Path String, the route loaded from the suite's server.
  *
  * - `widNum` (Number): Width Number, the viewport width in CSS pixels.
  *
@@ -90,7 +88,7 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every chec
 	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing', widNum : 1440 }, // What: Not Found Desktop State. Why: Every unknown address lands on the 404 page. How: This loads an address the site doesn't have at 1,440px.
 	{ heiNum : 844, ideStr : 'not-found-phone',   patStr : '/missing', widNum : 390  }, // What: Not Found Phone State. Why: The 404 page has its own phone layout to check. How: This loads an address the site doesn't have at 390px.
 
-	{ // What: Menu Phone State. Why: The open menu holds the phone's only copy of the section links and the phone number. How: This loads the home page at 390px and opens the menu through its toggle button.
+	{ // What: Menu Phone State. Why: On a phone the open menu is the bar's only way to the section links and the phone number, since the bar's own row is hidden there. How: This loads the home page at 390px and opens the menu through its toggle button.
 
 
 		heiNum : 844,
@@ -192,7 +190,7 @@ async function revPagFun ( curPagObj : Page ) : Promise< void > {
  * motion check is what catches one that shouldn't be playing). A single
  * still moment isn't enough, since the sections reveal their items on
  * staggered timers that can start a new fade up to about 100ms after the
- * last one ends, so the page has to read as still on five checks in a row,
+ * last one starts, so the page has to read as still on five checks in a row,
  * 100ms apart. It fails after 5 seconds rather than hanging.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -228,6 +226,7 @@ async function waiSetFun ( curPagObj : Page ) : Promise< void > {
 
 
 		quiCouNum = stiPagBoo ? quiCouNum + 1 : 0; // What: Quiet Count Update. Why: Any movement restarts the count, so the page has to stay still the whole half second. How: This adds one for a still check and resets to zero otherwise.
+
 
 		await curPagObj.waitForTimeout( 100 ); // What: Check Pause Wait. Why: The checks have to span time to prove the page stays still. How: This waits 100ms before the next one.
 
@@ -275,14 +274,13 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 	await curPagObj.setViewportSize( { height : staRecObj.heiNum, width : staRecObj.widNum } ); // What: Viewport Size Call. Why: The state's layout depends on its width. How: This sizes the page before it loads, so breakpoints apply from the first paint.
 
-	await curPagObj.goto( staRecObj.patStr ); // What: Page Load Call. Why: Each state starts from a fresh load of its route. How: This opens the path on the suite's dev server.
+	await curPagObj.goto( staRecObj.patStr ); // What: Page Load Call. Why: Each state starts from a fresh load of its route. How: This opens the path on the suite's server, the dev server or, for the security suite, the preview.
 
 	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until every font face has loaded.
 
 	await revPagFun( curPagObj ); // What: Page Reveal Call. Why: Content that fades in on scroll is invisible until scrolled to. How: This scrolls through the page and back to the top.
 
 	await curPagObj.evaluate( () => Promise.all( Array.from( document.images, ( imaCurEle ) => imaCurEle.decode() ) ) ); // What: Images Decoded Wait. Why: A check shouldn't measure or capture the page before its images are drawn. How: This waits until every image on the page has finished decoding.
-
 
 
 	if ( staRecObj.actFun ) await staRecObj.actFun( curPagObj ); // What: State Action Call. Why: Some states need something opened first. How: This runs the state's action, if it has one.
@@ -302,7 +300,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_REC_ARR }; // What: Named Exports. Why: The accessibility, interaction, rendering, and responsive specs share these states and their opener. How: This exports the state list and the helper that opens one.
+export { opeStaFun, STA_REC_ARR, waiSetFun }; // What: Named Exports. Why: Specs that check the page states, or open and settle a page the same way, share one list and one opener. How: This exports the state list, the opener, and the settle wait.
 
 // #endregion Exports
 

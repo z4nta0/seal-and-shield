@@ -20,14 +20,14 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
  * baseline, in whichever engine the project runs, so a change that shifts
  * the layout or the styling anywhere on a page fails until it's looked at.
  * Each state opens under reduced motion and is captured with animations
- * stopped, so it's always caught at rest, and the footer's copyright year is
- * masked, so the baselines don't fail every January. Baselines live in
- * tests/rendering/baselines, one per state and engine, captured on Linux;
- * another system's font rendering would differ, so baselines are refreshed
- * on the machine that runs the suite. When a change is meant to alter how a
- * page looks, review the failing diff in the report, then refresh the
- * baselines with npm run test:rendering -- --update-snapshots and commit them
- * with the change.
+ * stopped, so it's always caught at rest, and the footer's copyright line is
+ * masked, so its year doesn't fail the baselines every January. Baselines
+ * live in tests/rendering/baselines, one per state and engine, captured on
+ * Linux; another system's font rendering would differ, so baselines are
+ * refreshed on the machine that runs the suite. When a change is meant to
+ * alter how a page looks, review the failing diff in the report, then
+ * refresh the baselines with npm run test:rendering -- --update-snapshots
+ * and commit them with the change.
  *
  * Sections:
  *  - Constants
@@ -60,8 +60,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
 
-
-		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright year masked, and compares it with the state's baseline pixel for pixel, color for color.
+		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and the copyright line masked, and compares it with the state's baseline pixel for pixel, color for color.
 
 
 			animations        : 'disabled',                                                // What: Animations. Why: A looping animation would never hold still for the capture. How: This finishes every finite animation and resets looping ones to their start.

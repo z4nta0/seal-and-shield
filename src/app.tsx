@@ -9,7 +9,7 @@ import cssModObj from './app.module.css'; // What: CSS Module Object. Why: The r
 import { HomPagCom } from './pages/home/home.tsx';           // What: Home Page Component. Why: The home page holds every section of the site. How: The root path's route renders it.
 import { NotFouCom } from './pages/not-found/not-found.tsx'; // What: Not Found Component. Why: Unknown paths need a page of their own. How: The catch-all route renders it.
 import { Route     } from 'react-router';                    // What: Route. Why: Each page is matched to a path. How: This declares one path and the page it renders.
-import { Routes    } from 'react-router';                    // What: Routes. Why: Only one page should render for any path. How: This renders the first route whose path matches.
+import { Routes    } from 'react-router';                    // What: Routes. Why: Only one page should render for any path. How: This renders the route whose path best matches.
 
 // #endregion Imports
 
@@ -69,7 +69,7 @@ function AppRooCom () : React.JSX.Element {
 		<div className={ cssModObj.appRooDiv }>{ /* What: App Root Div Element. Why: Every module's layout queries measure one shared container. How: This wraps the routes in the element named the app container. */ }
 
 
-			<Routes>{ /* What: Page Routes. Why: Only one page should render for any path. How: This renders the first route below whose path matches. */ }
+			<Routes>{ /* What: Page Routes. Why: Only one page should render for any path. How: This renders the route below whose path best matches, ranked by how specific each path is. */ }
 
 
 				<Route
@@ -81,7 +81,7 @@ function AppRooCom () : React.JSX.Element {
 
 				<Route
 					element={ <NotFouCom /> }
-					path='*' // What: Catch-All Path. Why: Any address the site doesn't have should land on the 404 page. How: The asterisk matches every path no earlier route claimed.
+					path='*' // What: Catch-All Path. Why: Any address the site doesn't have should land on the 404 page. How: The asterisk matches every path but ranks below any route that names its own, so it renders only when no other route matches.
 				/>{ /* What: Not Found Route. Why: Unknown paths need a page of their own. How: This renders NotFouCom for every other path. */ }
 
 

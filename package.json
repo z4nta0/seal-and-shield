@@ -1,6 +1,6 @@
 {
 	"name": "seal-and-shield",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -8,6 +8,7 @@
 		"dev": "vite",
 		"icons": "node design/icons/render.mts",
 		"lint": "eslint .",
+		"logos": "node design/logos/render.mts",
 		"og-image": "node design/og-image/render.mts",
 		"preview": "vite preview",
 		"test": "playwright test --config tests/playwright.config.ts",
@@ -15,6 +16,7 @@
 		"test:interaction": "playwright test --config tests/playwright.config.ts --project \"interaction-*\"",
 		"test:rendering": "playwright test --config tests/playwright.config.ts --project \"rendering-*\"",
 		"test:responsive": "playwright test --config tests/playwright.config.ts --project \"responsive-*\"",
+		"test:security": "playwright test --config tests/playwright.config.ts --project \"security-*\"",
 		"test:seo": "playwright test --config tests/playwright.config.ts --project \"seo-*\"",
 		"typecheck": "tsc -b"
 	},

@@ -7,7 +7,7 @@ import cssModObj from './hero.module.css'; // What: CSS Module Object. Why: The 
 import lofWebUrl from './logo-full.webp';  // What: Logo-Full WebP URL. Why: The hero shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
-import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way every section link does. How: This returns secCliFun, which scrolls to the section and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
+import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Click Function. Why: The hero's buttons reach their sections the same way every section link does. How: This returns secCliFun, which scrolls to the section and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, sent as auxclick, never reaches the handler.
 
 // #endregion Imports
 
@@ -17,14 +17,14 @@ import { useSecCliFun } from '../../ui/section-link.ts'; // What: Use Section Cl
  * hero.tsx = Hero
  *
  * @summary
- * The page's opening section: an eyebrow, the "Built to Seal. Built to
- * Shield." headline, a short pitch, and two buttons, one scrolling to the
- * quote form and one to the services, beside the full logo with its pulsing
- * ring, over a background grid and glow. At 900px wide and below, the text
- * and logo become one centered column with the logo first. A stats bar along
- * its bottom sums up the company in four figures, set two by two at 900px
- * wide and below. Its id, home, is what the bar's Home link and brand scroll
- * to.
+ * The page's opening section: the headline and pitch, with buttons to the
+ * quote form and the Services section, beside the full logo and its pulsing
+ * ring, over a decorative background. The opening blocks rise and fade in one
+ * after another as the page loads. At 900px wide and below, the text and logo
+ * become one centered column with the logo first. A stats bar along the
+ * section's bottom sums up the company in a few quick figures, set two by two
+ * at 900px wide and below. The section's id, home, is what every Home link and
+ * the bar's brand scroll to.
  *
  * Sections:
  *  - Constants
@@ -82,12 +82,12 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
  * HerSecCom = Hero Section Component
  *
  * @summary
- * Renders the hero section. Its two buttons are real links to the contact and
- * services sections (/#contact, /#services), so they work without JavaScript
- * and open in a new tab on a Ctrl, Cmd, or middle click, while a plain click
- * goes through secCliFun, which scrolls to the section in place, smoothly
- * unless the visitor asked for reduced motion. The background grid, glow, and
- * the logo's ring are decorative and hidden from assistive technology.
+ * Renders the hero section. Its two buttons are real links to the Contact and
+ * Services sections (/#contact, /#services), so the browser can open, copy, or
+ * show their address, and they open in a new tab on a Ctrl, Cmd, or middle
+ * click, while a plain click goes through secCliFun, which scrolls smoothly to
+ * the section in place. The background grid, glow, and the logo's ring are
+ * decorative and hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -105,7 +105,7 @@ const HER_STA_ARR = [ // What: Hero Stat Array. Why: The stats bar sums the comp
 function HerSecCom () : React.JSX.Element {
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both hero buttons take the visitor to their sections the way every section link does. How: This scrolls to the section in place and leaves a Ctrl or Cmd click to the browser, while a middle click, sent as auxclick, never reaches it.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Both hero buttons take the visitor to their sections the way every section link does. How: This scrolls to the section in place and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, sent as auxclick, never reaches the handler.
 
 
 
@@ -116,7 +116,7 @@ function HerSecCom () : React.JSX.Element {
 			id='home'
 
 			className={ cssModObj.homHerSec }
-		>{ /* What: Home Hero Section Element. Why: The page opens with the headline, pitch, and logo. How: Its id, kept as is because it's the bar's link target, is where the Home link and brand scroll to. */ }
+		>{ /* What: Home Hero Section Element. Why: The page opens with the headline, pitch, and logo. How: Its id, kept as is because it's a link target, is where every Home link and the bar's brand scroll to. */ }
 
 
 			<div
@@ -139,10 +139,10 @@ function HerSecCom () : React.JSX.Element {
 				<div>{ /* What: Hero Text Div Element. Why: The pitch is the hero's message. How: This stacks the eyebrow, headline, pitch, and buttons as the content grid's first column, or below the logo at 900px wide and below, with no styling of its own. */ }
 
 
-					<h1>{ /* What: Hero Title Heading Element. Why: The page's main heading should carry what the company does and where, the words local searches look for, as well as its promise. How: This holds the two-line eyebrow and the slogan, each styled as its own block, so the heading reads as one while looking as it always has. */ }
+					<h1>{ /* What: Hero Title Heading Element. Why: The page's main heading should carry what the company does and where, the words local searches look for, as well as its promise. How: This holds the eyebrow, which sets the specialty over the city, and the slogan, each styled as its own block, so the heading reads as one while looking as it always has. */ }
 
 
-						<span className={ cssModObj.eyeLabSpa }>{ /* What: Eyebrow Label Span Element. Why: A short label says what the company is and where before the slogan. How: This sets the specialty and the city on two lines in small capitals. */ }
+						<span className={ cssModObj.eyeLabSpa }>{ /* What: Eyebrow Label Span Element. Why: A short label says what the company is and where before the slogan. How: This sets the specialty and the city on two lines in uppercase, the specialty wrapping onto a second line of its own at about 360px wide and below. */ }
 							Commercial Roofing Specialists<br />
 							Lawrence, KS
 						</span>
@@ -172,7 +172,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#contact'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'contact' ) }
-						>{ /* What: Button Base Anchor Primary Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the contact section. */ }
+						>{ /* What: Button Base Anchor Primary Element. Why: Requesting a quote is the page's main goal. How: This scrolls to the Contact section. */ }
 							Get a Free Quote
 						</a>
 
@@ -182,7 +182,7 @@ function HerSecCom () : React.JSX.Element {
 							href='/#services'
 
 							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, 'services' ) }
-						>{ /* What: Button Base Anchor Secondary Element. Why: Some visitors want to see what's offered first. How: This scrolls to the services section. */ }
+						>{ /* What: Button Base Anchor Secondary Element. Why: Some visitors want to see what's offered first. How: This scrolls to the Services section. */ }
 							Our Services
 						</a>
 
@@ -203,7 +203,7 @@ function HerSecCom () : React.JSX.Element {
 							className={ cssModObj.logRinDiv }
 
 							aria-hidden='true'
-						/>{ /* What: Logo Ring Div Element. Why: A slow pulse around the logo adds a little life. How: This is decorative, hidden from assistive technology, and still under reduced motion. */ }
+						/>{ /* What: Logo Ring Div Element. Why: A slow pulse around the logo adds a little life. How: This is decorative and hidden from assistive technology. */ }
 
 						<img
 							className={ cssModObj.herLogIma }
@@ -212,7 +212,7 @@ function HerSecCom () : React.JSX.Element {
 							src={ lofWebUrl }
 							width={ 968 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
-							alt='Seal and Shield LLC Logo'
+							alt='Seal and Shield LLC'
 						/>{ /* What: Hero Logo Image Element. Why: The full logo anchors the hero. How: Its alt text repeats the name the image shows. */ }
 
 

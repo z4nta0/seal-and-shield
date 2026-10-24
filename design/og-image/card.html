@@ -25,7 +25,7 @@
 
 
 			@import url( '../../src/styles/fonts.css' );  /* What: Site Fonts Import. Why: The card should be set in the site's own typefaces. How: This loads the site's font faces, whose file paths resolve from fonts.css itself. */
-			@import url( '../../src/styles/styles.css' ); /* What: Site Styles Import. Why: The card should read the site's colors and scale rather than copies of them. How: This loads the global tokens and base element styles, which also make 1rem the site's 11px base. */
+			@import url( '../../src/styles/styles.css' ); /* What: Site Styles Import. Why: The card should read the site's colors and scale rather than copies of them. How: This loads the site's global stylesheet, whose base element styles also make 1rem the site's 11px base. */
 
 
 
@@ -88,7 +88,7 @@
 
 				display : block;
 				filter  : drop-shadow( 0 calc( var( --ver-rhy-p01 ) * 1rem ) calc( var( --ver-rhy-p05 ) * 1rem ) oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-003-rec ) ) ); /* Vertical Rhythm Base Plus 1 ~= 19.304px, Vertical Rhythm Base Plus 5 ~= 59.447px, Accent Main Color = #1e56c8, Core-Design-Number to the Power of 3 Reciprocal ~= 0.430 */
-				height  : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.517px */
+				height  : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.522px */
 				width   : auto;
 
 
@@ -137,7 +137,7 @@
 
 
 
-	<body class='carBodBod'><!-- What: Card Body Body Element. Why: This is the card itself. How: Its single column holds everything the image shows. -->
+	<body class='carBodBod'><!-- What: Card Body Body Element. Why: This is the card itself. How: Its own layers draw the grid and glow behind its single column, which holds the logo and the title. -->
 
 
 		<div class='carColDiv'><!-- What: Card Column Div Element. Why: The card's content sits in one centered column. How: This stacks the logo and the title. -->

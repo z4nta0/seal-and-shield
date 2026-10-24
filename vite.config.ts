@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import react from '@vitejs/plugin-react'; // What: React. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
+import reaPluFun from '@vitejs/plugin-react'; // What: React Plugin Function. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
 
 
 import { defineConfig } from 'vite'; // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps VIT_CON_OBJ.
@@ -19,13 +19,12 @@ import type { Plugin } from 'vite'; // What: Plugin. Why: The page minifier is a
  * vite.config.ts = Vite Config
  *
  * @summary
- * The build and dev server config. It compiles React, reads CSS module class
- * names as camelCase keys, and, for production builds only, compacts
- * index.html, which Vite processes but never minifies, so the page's comments,
- * indentation, and JSON-LD whitespace stay out of what visitors download.
- * Every other setting stays at Vite's default, including copying the files in
- * public/ (icons, the social card, crawler files, and Netlify's _headers and
- * _redirects) into the build untouched.
+ * The build and dev server config, setting only what the site needs beyond
+ * Vite's defaults, such as, for production builds only, compacting index.html,
+ * which Vite processes but never minifies, so the page's comments and
+ * indentation stay out of what visitors download. Everything else stays at
+ * Vite's default, including copying the files in public/, such as the icons,
+ * into the build untouched.
  *
  * Sections:
  *  - Helpers
@@ -80,7 +79,7 @@ const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.ht
 
 		order : 'post', // What: Order. Why: The page should be compacted only after Vite has injected the bundle's script and stylesheet tags. How: This runs after Vite's own transforms.
 
-		handler : ( htmTexStr ) => { // What: Handler. Why: This is the plugin's actual work. How: This strips comments, then drops indentation and blank lines.
+		handler : ( htmTexStr ) => { // What: Handler. Why: This is the plugin's actual work. How: This rewrites each JSON-LD script on one line, strips comments, then drops indentation and blank lines.
 
 
 			return htmTexStr                                                                               // What: Compacted Page Return. Why: Vite writes whatever this returns as the shipped page. How: This chains each compaction over the page's text.
@@ -104,12 +103,11 @@ const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.ht
 // #endregion minHtmFun
 
 
-
 const VIT_CON_OBJ = defineConfig({ // What: Vite Config Object. Why: Vite reads its whole configuration from this file's default export. How: This builds the config, including the minHtmFun plugin above.
 
 
 	css     : { modules : { localsConvention : 'camelCaseOnly' } }, // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so a modifier class such as .forFieDiv--full is read as cssModObj.forFieDivFull, per the CSS modules rules. How: This sets the locals convention.
-	plugins : [ react(), minHtmFun() ]                              // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React and the page minifier.
+	plugins : [ reaPluFun(), minHtmFun() ]                          // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React and the page minifier.
 
 
 });

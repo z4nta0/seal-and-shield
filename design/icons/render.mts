@@ -4,7 +4,7 @@
 // #region Imports
 
 import { chromium      } from '@playwright/test'; // What: Chromium. Why: The icons are resized in a real browser's canvas, the one image tool every machine running the tests already has. How: This launches Playwright's Chromium.
-import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why: The source and output paths are resolved from this script's own location. How: This turns a file URL into a path.
+import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why: The output folder is resolved from this script's own location. How: This turns a file URL into a path.
 import { readFileSync  } from 'node:fs';          // What: Read File Sync. Why: The source mark is handed to the browser as data. How: This reads it from design/icons.
 import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why: Each finished icon is saved into public/. How: This writes its bytes.
 
@@ -16,18 +16,19 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * render.mts = Favicon Set Renderer
  *
  * @summary
- * Rebuilds the site's favicon set in public/ from mark.png beside this
- * script, the 1,210px simple mark on its white badge with transparent
- * rounded corners: PNG icons at 16, 32, 192, and 512px, a favicon.ico
- * holding the 16, 32, and 48px sizes for older browsers and the request
- * browsers make for /favicon.ico on their own, and a 180px
- * apple-touch-icon.png on a solid white square, since iOS fills
- * transparency with black and rounds the corners itself. Each size is
- * drawn down in halving steps with high-quality smoothing, so even the 16px
- * icon stays crisp. Run it with npm run icons whenever the mark changes.
+ * Rebuilds the site's favicon set in public/ from mark.png beside this script,
+ * the 1,210px simple mark on its white badge with transparent rounded corners.
+ * The set is PNG icons at the sizes browsers and launchers ask for, a
+ * favicon.ico packing the small sizes older browsers use and answering the
+ * /favicon.ico request browsers make on their own, and an Apple touch icon on
+ * a solid white square, since iOS fills transparency with black and rounds the
+ * corners itself. Each size is drawn down in halving steps with high-quality
+ * smoothing, so even the smallest icon stays crisp. Run it with npm run icons
+ * whenever the mark changes.
  *
  * Sections:
  *  - Constants
+ *  - Module State
  *  - Module Init
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -68,7 +69,7 @@ type IcoRecTyp = { // What: Icon Record Type. Why: Every PNG icon is described t
  *
 */
 
-const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
+const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: Every PNG icon the head links to, the one iOS reads among them, is rendered from one list. How: Each row names a file, its size, and whether it's drawn on solid white.
 
 
 	{ filStr : 'favicon-16x16.png',    opaBoo : false, sizNum : 16  }, // What: Small Icon Row. Why: Tabs draw small icons crisper at their own size. How: This renders the 16px icon.
@@ -84,14 +85,18 @@ const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG ico
 
 
 
-const ICO_SIZ_ARR = [ 16, 32, 48 ]; // What: ICO Size Array. Why: favicon.ico should hold the sizes older browsers and Windows pick from. How: Each entry is one square size packed into the file.
-
-
-
-const OUT_DIR_STR = fileURLToPath( new URL( '../../public/', import.meta.url ) );                  // What: Output Directory String. Why: Browsers request icons from the site's root. How: This resolves public/ from this script's folder.
-const SOU_B64_STR = readFileSync( new URL( './mark.png', import.meta.url ) ).toString( 'base64' ); // What: Source Base64 String. Why: The browser draws the mark from data rather than a file path. How: This reads mark.png and encodes it.
+const ICO_SIZ_ARR = [ 16, 32, 48 ];                                               // What: ICO Size Array. Why: favicon.ico should hold the sizes older browsers and Windows pick from. How: Each entry is one square size packed into the file.
+const OUT_DIR_STR = fileURLToPath( new URL( '../../public/', import.meta.url ) ); // What: Output Directory String. Why: Browsers request icons from the site's root. How: This resolves public/ from this script's folder.
 
 // #endregion Constants
+
+
+
+// #region Module State
+
+const SOU_B64_STR = readFileSync( new URL( './mark.png', import.meta.url ) ).toString( 'base64' ); // What: Source Base64 String. Why: The browser draws the mark from data rather than a file path. How: This reads mark.png and encodes it.
+
+// #endregion Module State
 
 
 
@@ -99,7 +104,6 @@ const SOU_B64_STR = readFileSync( new URL( './mark.png', import.meta.url ) ).toS
 
 const broInsObj = await chromium.launch();   // What: Browser Instance Object. Why: The icons are drawn in a real browser's canvas. How: This launches Chromium.
 const draPagObj = await broInsObj.newPage(); // What: Draw Page Object. Why: The canvas work runs inside a page. How: This opens a blank one.
-
 
 
 // #region renPngFun
@@ -119,7 +123,7 @@ const draPagObj = await broInsObj.newPage(); // What: Draw Page Object. Why: The
  * @param icoSizNum - Icon Size Number: The icon's width and height in pixels.
  * @param icoOpaBoo - Icon Opaque Boolean: Whether to draw on solid white.
  *
- * @returns The finished PNG's bytes.
+ * @returns A promise that resolves with the finished PNG's bytes.
  *
  * @example
  * ```ts
@@ -139,6 +143,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 		souImaObj.src = `data:image/png;base64,${ souB64Str }`; // What: Source Address Assignment. Why: The image loads from the data handed in. How: This sets it as a data URL.
 
+
 		await souImaObj.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
 
 
@@ -152,6 +157,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 			const halCanObj = document.createElement( 'canvas' ); // What: Half Canvas Object. Why: Each step draws into a fresh canvas half the size. How: This creates it.
 
+
 			curSizNum = Math.round( curSizNum / 2 ); // What: Halved Size Update. Why: The step is half the previous size. How: This halves and rounds it.
 
 			halCanObj.width  = curSizNum; // What: Half Width Assignment. Why: The canvas is square at the step's size. How: This sets its width.
@@ -163,7 +169,9 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 			halCotObj.imageSmoothingQuality = 'high'; // What: Smoothing Quality Assignment. Why: The best resampling keeps edges clean. How: This asks for high-quality smoothing.
 
+
 			halCotObj.drawImage( curCanObj, 0, 0, curSizNum, curSizNum ); // What: Half Draw Call. Why: This is the step itself. How: This draws the previous step at half size.
+
 
 			curCanObj = halCanObj; // What: Step Advance Assignment. Why: The next step draws from this one. How: This makes it the current image.
 
@@ -189,6 +197,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 
 			finCotObj.fillStyle = '#ffffff'; // What: White Fill Assignment. Why: The background has to be solid white. How: This sets the fill color.
+
 
 			finCotObj.fillRect( 0, 0, tarSizNum, tarSizNum ); // What: Background Fill Call. Why: Every pixel under the mark has to be opaque. How: This paints the whole square.
 
@@ -216,7 +225,6 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 // #endregion renPngFun
 
 
-
 for ( const icoRecObj of ICO_REC_ARR ) writeFileSync( OUT_DIR_STR + icoRecObj.filStr, await renPngFun( icoRecObj.sizNum, icoRecObj.opaBoo ) ); // What: PNG Icon Loop. Why: Each PNG icon is saved under its own name. How: This renders every row and writes it into public/.
 
 
@@ -240,10 +248,12 @@ for ( const [ icoIndNum, icoPngBuf ] of icoPngArr.entries() ) { // What: ICO Ent
 
 	icoHeaBuf.writeUInt8( ICO_SIZ_ARR[ icoIndNum ], entOffNum );     // What: Entry Width Write. Why: The entry names the image's width. How: This writes it.
 	icoHeaBuf.writeUInt8( ICO_SIZ_ARR[ icoIndNum ], entOffNum + 1 ); // What: Entry Height Write. Why: The entry names the image's height. How: This writes it.
-	icoHeaBuf.writeUInt16LE( 1, entOffNum + 4 );                     // What: Entry Planes Write. Why: The format expects one color plane. How: This writes it.
-	icoHeaBuf.writeUInt16LE( 32, entOffNum + 6 );                    // What: Entry Depth Write. Why: The images are full-color PNGs with alpha. How: This writes 32 bits per pixel.
-	icoHeaBuf.writeUInt32LE( icoPngBuf.length, entOffNum + 8 );      // What: Entry Size Write. Why: The entry says how many bytes its image takes. How: This writes the PNG's length.
-	icoHeaBuf.writeUInt32LE( icoOffNum, entOffNum + 12 );            // What: Entry Offset Write. Why: The entry says where its image starts. How: This writes the running offset.
+
+	icoHeaBuf.writeUInt16LE( 1, entOffNum + 4 );  // What: Entry Planes Write. Why: The format expects one color plane. How: This writes it.
+	icoHeaBuf.writeUInt16LE( 32, entOffNum + 6 ); // What: Entry Depth Write. Why: The images are full-color PNGs with alpha. How: This writes 32 bits per pixel.
+
+	icoHeaBuf.writeUInt32LE( icoPngBuf.length, entOffNum + 8 ); // What: Entry Size Write. Why: The entry says how many bytes its image takes. How: This writes the PNG's length.
+	icoHeaBuf.writeUInt32LE( icoOffNum, entOffNum + 12 );       // What: Entry Offset Write. Why: The entry says where its image starts. How: This writes the running offset.
 
 
 	icoOffNum += icoPngBuf.length; // What: Offset Advance. Why: The next image starts after this one. How: This adds its length.

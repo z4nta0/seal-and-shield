@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import type { Page } from '@playwright/test'; // What: Page. Why: The fake answers a Playwright page's posts. How: This types fakNetFun's page parameter.
+import type { Page } from '@playwright/test'; // What: Page. Why: The fake answers a Playwright page's posts. How: This types the fake's page parameter.
 
 // #endregion Imports
 
@@ -13,11 +13,10 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The fake answe
  * netlify.ts = Netlify
  *
  * @summary
- * The stand-in for Netlify Forms that the interaction and accessibility
- * suites share, so a form check can see the page react to Netlify's answer
- * without sending anything. fakNetFun answers every post to the site's root
- * address in the browser with a chosen status and counts them, and lets every
- * other request through.
+ * The stand-in for Netlify Forms that the form checks share, so a form check
+ * can see the page react to Netlify's answer without sending anything.
+ * fakNetFun answers every post to the site's root address in the browser with
+ * a chosen status and counts each one, and lets every other request through.
  *
  * Sections:
  *  - Helpers
@@ -47,9 +46,10 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The fake answe
  *
  * @param curPagObj - Current Page Object: The page whose posts to answer.
  * @param staCodNum - Status Code Number: The HTTP status Netlify should
- *                    seem to answer with, e.g. 200 or 500.
+ *                    seem to answer with, such as 500.
  *
- * @returns An object whose couNum field counts the posts answered so far.
+ * @returns A promise that resolves with an object whose couNum field counts
+ *          the posts answered so far.
  * @see {@link posCouObj}
  *
  * @example
@@ -74,6 +74,7 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 		posCouObj.couNum += 1; // What: Post Count Increment. Why: The check reads how many posts were sent. How: This counts this one.
 
+
 		await curRouObj.fulfill( { body : '', status : staCodNum } ); // What: Fake Answer Call. Why: The form should see Netlify's answer without anything really being sent. How: This answers the post with the given status and an empty body.
 
 
@@ -81,7 +82,7 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 
 
-	return posCouObj; // What: Post Count Return. Why: Each test checks how many requests went out. How: This hands back the counter the route handler updates.
+	return posCouObj; // What: Post Count Return. Why: Some tests check how many posts went out. How: This hands back the counter the route handler updates.
 
 
 }
@@ -94,7 +95,7 @@ async function fakNetFun ( curPagObj : Page, staCodNum : number ) : Promise< { c
 
 // #region Exports
 
-export { fakNetFun }; // What: Named Export. Why: The interaction and accessibility suites both fake Netlify's answer. How: This exports the helper that does it.
+export { fakNetFun }; // What: Named Export. Why: Form checks in more than one suite fake Netlify's answer. How: This exports the helper that does it.
 
 // #endregion Exports
 

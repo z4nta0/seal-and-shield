@@ -33,14 +33,15 @@ npm run typecheck  # TypeScript across src/, the configs, tests/, and the design
 
 ```bash
 npm test                    # every suite
-npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, motion, and form announcement checks
-npm run test:interaction    # what the section links, menu, contact form, and 404 page do, and that every control gives feedback
+npm run test:accessibility  # axe-core plus scripted keyboard, naming, reflow, motion, and form announcement and focus checks
+npm run test:interaction    # what the section links, skip link, menu, contact form, and 404 page do, and that every control, form field, service card, and area tag gives feedback
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
-npm run test:responsive     # the pages and the mobile menu from 320 to 1,920px: no sideways scroll, spill, or overlap
-npm run test:seo            # titles, descriptions, canonical, robots, and social tags, structured data, the preview card, icons, robots.txt, and the sitemap
+npm run test:responsive     # the pages from 320 to 1,920px and the mobile menu up to 768px: no sideways scroll, spill, overlap, or uneven grid rows
+npm run test:security       # the security headers, a check that the policy refuses an injected script, the production build under its policy in every state, new tab links, shipped secrets, and the dependency audit
+npm run test:seo            # titles, descriptions, author, canonical, robots, single h1s, the raw index.html head, structured data, social tags and theme color, the preview card, icons, robots.txt, and the sitemap
 ```
 
-Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5197, so a dev server already running on 5173 is left alone. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how the page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
+Each suite runs in Chromium, Firefox, and WebKit against a dev server Playwright starts on port 5197 for the run, so a dev server already running on 5173 is left alone. The security suite instead loads a fresh production build, which Playwright builds and serves with `vite preview` on port 5198, since the dev server's inline scripts would break the site's strict policy. Its checks of the headers file, the build's secrets, and `npm audit` read files that are the same in every engine, so they run in Chromium only. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report. The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how the page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
 ## Build
 
@@ -55,11 +56,11 @@ npm run preview
 src/
 ├── assets/            Images and fonts shared by 2+ pages (logo-simple.webp, fonts/)
 ├── pages/
-│   ├── home/          Home page and its sections (hero, services, about, contact), each with its own .module.css, plus reveal.ts and logo-full.webp
+│   ├── home/          Home page and its sections (the hero, Services, About, and Contact), each with its own .module.css, plus reveal.ts and logo-full.webp
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
-├── ui/                Shared components (nav, footer), each with its own .module.css, and section-link.ts (section links that work from any page)
+├── ui/                Shared components (nav, footer), each with its own .module.css, section-link.ts (section links that work from any page), and sections.ts (the one list of the home page's sections)
 ├── styles/            fonts.css (@font-face) + styles.css (design tokens, base element styles, the shared focus ring, and the shared scroll-reveal attributes)
-├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling and the scroll reveal) and rhythm.ts (powers of the core design number for JavaScript)
+├── utils/             motion.ts (the reduced-motion check for JavaScript scrolling and the scroll reveal) and rhythm.ts (powers of the core design number, and a length token's size in pixels, for JavaScript)
 ├── app.tsx            Root component and the route table, with app.module.css (the app container)
 └── main.tsx           Entry point
 public/                Files served at fixed addresses: the icons, the social card, robots.txt, sitemap.xml, and Netlify's _headers and _redirects
@@ -68,21 +69,23 @@ tests/
 ├── interaction/       behavior checks for links, the menu, the form, and the 404 page, plus hover, press, and focus feedback
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout checks across screen widths
+├── security/          header policy, build, and dependency checks, and every page state under the policy
 ├── seo/               head tags, structured data, preview card, icon, and crawler file checks
-├── support/           states.ts (the page states the suites visit) and netlify.ts (the Netlify Forms fake the interaction and accessibility suites share)
+├── support/           states.ts (the page states the suites visit), netlify.ts (the Netlify Forms fake the interaction and accessibility suites share), and headers.ts (reads the security headers from public/_headers)
 └── playwright.config.ts
 
 design/                Source artwork, not served
 ├── icons/             mark.png and render.mts, which builds the favicon set in public/ (npm run icons)
-└── og-image/          card.html and render.mts, which builds public/og-image.png (npm run og-image)
+├── logos/             logo-full.png, logo-simple.png, and render.mts, which builds both WebP logos in src/ (npm run logos)
+└── og-image/          card.html and render.mts, which builds public/og-image-2.png (npm run og-image)
 ```
 
 ## Design notes
 
 - **Type pairing:** Barlow Condensed for headings, labels, and buttons, with Lato for body text, both self-hosted (`src/assets/fonts/`, declared in `src/styles/fonts.css`), so a visit makes no third-party requests.
-- **Palette:** Deep navy (`#0f1e45`, with a darker `#080f24` for the bar, hero, contact section, and footer), a strong blue (`#1e56c8`) for buttons and labels on light sections, a lighter blue (`#4488f6`) for accents on dark sections, and an off-white (`#f4f6fa`) behind the services.
+- **Palette:** Deep navy (`#0f1e45`, with a darker `#080f24` for the dark bands, such as the bar, hero, and footer), a strong blue (`#1e56c8`) for buttons and labels on light sections, a lighter blue (`#4488f6`) for accents on dark sections, and an off-white (`#f4f6fa`) for light surfaces that stand off the white page, such as the Services section.
 - **Logo usage:** The **full logo** (`src/pages/home/logo-full.webp`) anchors the hero and sits above the company details in the About section. The **simple mark** (`src/assets/logo-simple.webp`) is used in the nav bar and the footer.
-- **Motion:** The hero fades in on load, the other sections fade in as they scroll into view, and the hero logo's ring pulses. Links and buttons respond to hover, press, and keyboard focus with a color shift, a small lift or press-in, and a focus ring that eases in. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion, leaving only the instant color and position changes.
+- **Motion:** Content enters on its own: the hero fades in on load, the other sections fade in as they scroll into view, and the hero logo's ring pulses. Layers open and close with motion, such as the phone menu sliding open with its rows arriving one after another, the skip link sliding down, and the contact form's messages fading in and out. Links and buttons respond to hover, press, and keyboard focus: buttons shift color, lift a pixel (the menu toggle only shifts color), and press in, text links shift color and dim slightly when pressed, and a focus ring eases in on all of them. All of it, along with the smooth section scrolling, turns off when a visitor's system asks for reduced motion, leaving only the instant color and position changes.
 
 ## Contact form
 

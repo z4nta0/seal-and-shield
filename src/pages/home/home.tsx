@@ -3,13 +3,13 @@
 
 // #region Imports
 
-import { AboSecCom   } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the services.
+import { AboSecCom   } from './about.tsx';         // What: About Section Component. Why: The page tells the company's story third. How: This is rendered inside main, after the Services section.
 import { ConSecCom   } from './contact.tsx';       // What: Contact Section Component. Why: The page ends where visitors reach the company. How: This is rendered last inside main.
 import { HerSecCom   } from './hero.tsx';          // What: Hero Section Component. Why: The page opens with the headline and pitch. How: This is rendered first inside main.
 import { NavBarCom   } from '../../ui/nav.tsx';    // What: Navigation Bar Component. Why: Every page starts with the shared top bar. How: This is rendered above main.
 import { SerSecCom   } from './services.tsx';      // What: Services Section Component. Why: The page lists what the company does second. How: This is rendered inside main, after the hero.
 import { SitFooCom   } from '../../ui/footer.tsx'; // What: Site Footer Component. Why: Every page ends with the shared footer. How: This is rendered below main.
-import { useEffect   } from 'react';               // What: Use Effect. Why: Arriving with a section's hash has to scroll there once the sections render. How: This runs the arrival scroll after each render the hash changes.
+import { useEffect   } from 'react';               // What: Use Effect. Why: Arriving with a section's hash has to scroll there once the sections render. How: This runs the arrival scroll after each render in which the hash changes.
 import { useLocation } from 'react-router';        // What: Use Location. Why: The page needs the hash a section link arrived with. How: This reads the current location.
 import { useNavigate } from 'react-router';        // What: Use Navigate. Why: The hash should leave the address once the page has scrolled to it. How: This returns the router's navigate function.
 
@@ -21,11 +21,11 @@ import { useNavigate } from 'react-router';        // What: Use Navigate. Why: T
  * home.tsx = Home Page
  *
  * @summary
- * The site's home page: the shared top bar, then the four sections in
- * reading order (the hero, services, about, and contact) inside the main
- * landmark, then the shared footer. It's the page the root path shows, and
- * the one the bar's and footer's section links come back to from any other
- * page, arriving with the section's id as the hash.
+ * The site's home page: the shared top bar, then its sections in reading
+ * order, from the hero down to the Contact section, inside the main landmark,
+ * then the shared footer. It's the page the root path shows, and the one every
+ * section link comes back to from any other page, arriving with the section's
+ * id as the hash.
  *
  * Sections:
  *  - Components
@@ -46,14 +46,13 @@ import { useNavigate } from 'react-router';        // What: Use Navigate. Why: T
  *
  * @summary
  * Renders the whole home page: NavBarCom, a main element holding the hero,
- * services, about, and contact sections in the order a visitor reads them,
- * and SitFooCom. Each section's id is the target of the bar's and footer's
- * section links. When the page arrives with a hash, from a section link on
- * another page, a link opened in a new tab, or an address like /#contact, it
- * waits for the fonts to load, since they reflow the page above the
- * section, jumps straight to that section, and then replaces the address
- * with one without the hash, so the address bar stays as clean as it does
- * when the links scroll in place.
+ * Services, About, and Contact sections in the order a visitor reads them, and
+ * SitFooCom. Each section's id is the target of every link to that section.
+ * When the page arrives with a hash, from a section link on another page, a
+ * link opened in a new tab, or an address like /#contact, it waits for the
+ * fonts to load, since they reflow the page above the section, jumps straight
+ * to that section, and then replaces the address with one without the hash, so
+ * the address bar stays as clean as it does when the links scroll in place.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -108,22 +107,26 @@ function HomPagCom () : React.JSX.Element {
 
 
 
-			<main>{ /* What: Home Main Element. Why: The four sections are the page's main content. How: This wraps them in the main landmark, in reading order. */ }
+			<main
+				id='main'
+
+				tabIndex={ -1 } // What: Main Focus Target. Why: The skip link moves focus here, and a main element can't take focus on its own. How: This makes it focusable without adding it to the Tab order.
+			>{ /* What: Home Main Element. Why: The four sections are the page's main content, and the skip link jumps here. How: This wraps them in the main landmark, in reading order; its id stays the plain main, since the skip link's #main address names it as a navigation target. */ }
 
 
 				<HerSecCom />{ /* What: Hero Section Component. Why: The page opens with the headline and pitch. How: This renders the hero first. */ }
 
 
 
-				<SerSecCom />{ /* What: Services Section Component. Why: Visitors see what the company does next. How: This renders the services second. */ }
+				<SerSecCom />{ /* What: Services Section Component. Why: Visitors see what the company does next. How: This renders the Services section second. */ }
 
 
 
-				<AboSecCom />{ /* What: About Section Component. Why: The company's story follows its services. How: This renders the about section third. */ }
+				<AboSecCom />{ /* What: About Section Component. Why: The company's story follows the Services section. How: This renders the About section third. */ }
 
 
 
-				<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach the company. How: This renders the contact section last. */ }
+				<ConSecCom />{ /* What: Contact Section Component. Why: The page ends where visitors reach the company. How: This renders the Contact section last. */ }
 
 
 			</main>

@@ -5,13 +5,13 @@
  * footer.module.css = Site Footer Module
  *
  * @summary
- * Styles for SitFooCom: the dark footer's row of columns (the brand and
- * tagline, the section links, and the phone number and hours), which wraps
- * at about 776px wide and below and stacks into one centered column on
- * screens 768px wide or narrower, and the copyright line below a hairline. The shared container styles the
- * columns' row used to borrow from the global stylesheet are copied onto its
- * own class here, which also retires the !important its vertical padding
- * needed to beat the container's.
+ * Styles for SitFooCom: the dark footer's row of columns, the section links
+ * among them, which wraps at about 776px wide and below and stacks into one
+ * centered column on screens 768px wide or narrower, and the copyright line
+ * below a hairline. The shared container styles the columns' row used to
+ * borrow from the global stylesheet are copied onto its own class here, which
+ * also retires the !important its vertical padding needed to beat the
+ * container's.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -24,7 +24,7 @@
 .sitFooFoo { /* What: Site Footer Footer. Why: The page ends on a dark band set apart from the content above. How: This fills it with the dark navy and draws a faint line along its top. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Footer. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Footer. Why: The main blue ring falls under 3:1 on this navy. How: This hands the lighter blue ring to every control inside. */
 
 	background : var( --bac-inv-col );                                                       /* Background Inverse Color = #080f24 */
 	border-top : var( --bor-wid-bas ) solid oklch( from var( --bac-pag-col ) l c h / 0.07 ); /* Border Width Base ~= 1.160px, Background Page Color = #ffffff @ 0.07 opacity */
@@ -127,7 +127,7 @@
 
 }
 
-.fooLinAnc { /* What: Footer Link Anchor. Why: Each section link should read in the footer's display style. How: This sets its label in small, spaced capitals in light silver. */
+.fooLinAnc { /* What: Footer Link Anchor. Why: Each section link should read in the footer's display style. How: This sets its label in spaced uppercase in light silver, and eases its hover color, press dim, and focus ring. */
 
 
 	color          : var( --tex-inv-col ); /* Text Inverse Color = #c8d0e0 */
@@ -147,7 +147,7 @@
 
 
 }
-.fooLinAnc:active { /* What: Pressed Footer Link Anchor. Why: A press should register before the page scrolls. How: This dims it slightly while it's held, as every text link does on press. */
+.fooLinAnc:active { /* What: Pressed Footer Link Anchor. Why: A press should register before the page scrolls or heads home. How: This dims it slightly while it's held, as every text link does on press. */
 
 
 	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
@@ -157,7 +157,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Link Anchor. Why: Someone who asked for less motion shouldn't see the links animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.fooLinAnc { /* What: Motionless Footer Link Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.fooLinAnc { /* What: Motionless Footer Link Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -174,7 +174,7 @@
 
 /* #region fooConDiv */
 
-.fooConDiv { /* What: Footer Contact Div. Why: The phone number and hours close the row on the right. How: This right-aligns the two. */
+.fooConDiv { /* What: Footer Contact Div. Why: The phone number and hours end the footer's row of columns. How: This right-aligns the two, which end the row on the right from about 777px wide up and start a wrapped second line on the left between 769px and 776px wide. */
 
 
 	text-align : right;
@@ -195,7 +195,7 @@
 
 }
 
-.fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number is the footer's main call to action. How: This sets it on its own line in the bold display font, in light blue. */
+.fooPhoAnc { /* What: Footer Phone Anchor. Why: The phone number is the footer's main call to action. How: This sets it on its own line in the bold display font, in light blue, and eases its hover color, press dim, and focus ring. */
 
 
 	color          : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
@@ -225,7 +225,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Footer Phone Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.fooPhoAnc { /* What: Motionless Footer Phone Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.fooPhoAnc { /* What: Motionless Footer Phone Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;

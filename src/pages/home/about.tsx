@@ -4,10 +4,10 @@
 // #region Imports
 
 import cssModObj from './about.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
-import lofWebUrl from './logo-full.webp';   // What: Logo-Full WebP URL. Why: The about section shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
+import lofWebUrl from './logo-full.webp';   // What: Logo-Full WebP URL. Why: The About section shows the full logo. How: Vite resolves this to the image's fingerprinted URL, which the logo's img element loads.
 
 
-import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 100ms per block.
+import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in once the section scrolls into view. How: This returns the ref the section attaches, and its blocks reveal 100ms apart.
 
 // #endregion Imports
 
@@ -17,12 +17,12 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
  * about.tsx = About
  *
  * @summary
- * The page's third section. Its left column shows the full logo over an
- * info card listing when and where the company was founded, its phone
- * number, and its hours; its right column tells the company's story and
- * lists its three values. At 900px wide and below, the columns stack, with
- * the logo and card on top. Each block fades in as the section scrolls into
- * view. Its id, about, is what the bar's About link scrolls to.
+ * The page's third section. Its left column shows the full logo over an info
+ * card of the company's key facts, such as its phone number; its right column
+ * tells the company's story and closes with the values it stands for. At 900px
+ * wide and below, the columns stack, with the logo and card on top. Each block
+ * fades in as the section scrolls into view. Its id, about, is what every
+ * About link on the site scrolls to.
  *
  * Sections:
  *  - Constants
@@ -58,11 +58,32 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
 const ABO_VAL_ARR = [ // What: About Value Array. Why: The story closes with what the company stands for. How: Each row holds a value's title and sentence.
 
 
-	{ desStr : 'We show up, tell the truth, and do the work right. No hidden costs, no shortcuts.', titStr : 'Integrity' }, // What: Integrity Value Row. Why: Honesty is the first thing a client needs from a roofer. How: This promises no hidden costs or shortcuts.
+	{ // What: Integrity Value Row. Why: Honesty is the first thing a client needs from a roofer. How: This promises no hidden costs or shortcuts.
 
-	{ desStr : 'We use premium materials (Conklin-certified products) and back our work with professional craftsmanship.', titStr : 'Quality' }, // What: Quality Value Row. Why: Materials and workmanship decide how long a roof lasts. How: This names the Conklin-certified products.
 
-	{ desStr : 'From the first inspection to the final walk-through, Seal and Shield is there every step of the way.', titStr : 'Reliability' } // What: Reliability Value Row. Why: Clients want one company with them from start to finish. How: This promises it from inspection to walk-through.
+		desStr : 'We show up, tell the truth, and do the work right. No hidden costs, no shortcuts.',
+		titStr : 'Integrity'
+
+
+	},
+
+	{ // What: Quality Value Row. Why: Materials and workmanship decide how long a roof lasts. How: This names the Conklin-certified products.
+
+
+		desStr : 'We use premium materials (Conklin-certified products) and back our work with professional craftsmanship.',
+		titStr : 'Quality'
+
+
+	},
+
+	{ // What: Reliability Value Row. Why: Clients want one company with them from start to finish. How: This promises it from inspection to walk-through.
+
+
+		desStr : 'From the first inspection to the final walk-through, Seal and Shield is there every step of the way.',
+		titStr : 'Reliability'
+
+
+	}
 
 
 ];
@@ -81,19 +102,19 @@ const ABO_VAL_ARR = [ // What: About Value Array. Why: The story closes with wha
  * AboSecCom = About Section Component
  *
  * @summary
- * Renders the about section: the logo and info card on the left, the story
- * and values on the right, stacking with the logo and card on top at 900px
- * wide and below. The logo's column, each piece of the story, and each value
- * are scroll-reveal blocks, revealed 100ms apart once the section scrolls
- * into view; the values also delay their own fade by 80ms each, so they
- * settle one after another. The logo's light backdrop is decorative and
- * hidden from assistive technology.
+ * Renders the About section: the logo and info card on the left, the story and
+ * values on the right, stacking with the logo and card on top at 900px wide
+ * and below. The logo's column and each piece of the text column, from its
+ * label to each value, are scroll-reveal blocks, revealed 100ms apart once the
+ * section scrolls into view; the values also delay their own fade by 80ms
+ * each, so they settle one after another. The logo's light backdrop is
+ * decorative and hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.
  *
- * @returns The about section element.
+ * @returns The About section element.
  *
  * @example
  * ```tsx
@@ -118,10 +139,10 @@ function AboSecCom () : React.JSX.Element {
 			id='about'
 
 			className={ cssModObj.homAboSec }
-		>{ /* What: Home About Section Element. Why: The page's third section introduces the company. How: Its id, kept as is because it's a link target, is where the About link scrolls to. */ }
+		>{ /* What: Home About Section Element. Why: The page's third section introduces the company. How: Its id, kept as is because it's a link target, is where every About link on the site scrolls to. */ }
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with the page's side padding. */ }
 
 
 				<div className={ cssModObj.aboLayDiv }>{ /* What: About Layout Div Element. Why: The logo and details sit beside the story. How: This lays them out in two columns, stacking them with the logo and details on top at 900px wide and below. */ }
@@ -209,14 +230,14 @@ function AboSecCom () : React.JSX.Element {
 
 
 
-					<div className={ cssModObj.aboTexDiv }>{ /* What: About Text Div Element. Why: The second column tells the company's story. How: This stacks the label, heading, story, and values beside the logo, or below it at 900px wide and below. */ }
+					<div className={ cssModObj.aboTexDiv }>{ /* What: About Text Div Element. Why: The second column tells the company's story. How: This stacks the label, heading, divider, story, and values beside the logo, or below it at 900px wide and below. */ }
 
 
 						<p
 							className={ cssModObj.eyeLabPar }
 
 							data-scroll-reveal-block
-						>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+						>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in uppercase, and fades in right after the logo's column. */ }
 							Who We Are
 						</p>
 
@@ -325,7 +346,7 @@ function AboSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { AboSecCom }; // What: Named Export. Why: The home page renders the about section third. How: This exports AboSecCom.
+export { AboSecCom }; // What: Named Export. Why: The home page renders the About section third. How: This exports AboSecCom.
 
 // #endregion Exports
 

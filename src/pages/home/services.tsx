@@ -6,7 +6,7 @@
 import cssModObj from './services.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's header, cards, and service area fade in as they scroll into view. How: This returns the ref the section attaches, staggered 80ms per block.
+import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks, such as its cards, fade in once the section scrolls into view. How: This returns the ref the section attaches, and its blocks reveal 80ms apart.
 
 // #endregion Imports
 
@@ -16,11 +16,10 @@ import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function
  * services.tsx = Services
  *
  * @summary
- * The page's second section: a header introducing the company, a grid of
- * cards for the eight services it offers, and a service area panel naming
- * where it works, with a tag for each area. Each block fades in as the
- * section scrolls into view. Its id, services, is what the bar's Services
- * link and the hero's Our Services button scroll to.
+ * The page's second section, showing what the company does and where it works,
+ * through blocks such as a grid with a card for each service. Each block fades
+ * in as the section scrolls into view. Its id, services, is what every
+ * Services link and button on the site scrolls to.
  *
  * Sections:
  *  - Constants
@@ -167,7 +166,7 @@ const SER_REC_ARR = [ // What: Service Record Array. Why: The card grid lists ev
  * SerSecCom = Services Section Component
  *
  * @summary
- * Renders the services section: the header, a card for each row of
+ * Renders the Services section: the header, a card for each row of
  * SER_REC_ARR, and the service area panel with a tag for each entry of
  * SER_ARE_ARR. Its header, each card's grid cell, and the area panel are
  * scroll-reveal blocks, revealed 80ms apart once the section scrolls into
@@ -177,7 +176,7 @@ const SER_REC_ARR = [ // What: Service Record Array. Why: The card grid lists ev
  *
  * @param props - This component does not use any props.
  *
- * @returns The services section element.
+ * @returns The Services section element.
  *
  * @example
  * ```tsx
@@ -202,10 +201,10 @@ function SerSecCom () : React.JSX.Element {
 			id='services'
 
 			className={ cssModObj.homSerSec }
-		>{ /* What: Home Services Section Element. Why: The page's second section shows what the company does. How: Its id, kept as is because it's a link target, is where the Services link and the hero's button scroll to. */ }
+		>{ /* What: Home Services Section Element. Why: The page's second section shows what the company does. How: Its id, kept as is because it's a link target, is where every Services link and button on the site scrolls to. */ }
 
 
-			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers it within the container. */ }
+			<div className={ cssModObj.pagConDiv }>{ /* What: Page Container Div Element. Why: The section's content lines up with the page's content width. How: This centers a capped-width column with the page's side padding. */ }
 
 
 				<div
@@ -215,7 +214,7 @@ function SerSecCom () : React.JSX.Element {
 				>{ /* What: Services Header Div Element. Why: The section opens by saying what it covers. How: This holds the label, heading, divider, and intro, and fades in first. */ }
 
 
-					<p className={ cssModObj.eyeLabPar }>What We Do</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals. */ }
+					<p className={ cssModObj.eyeLabPar }>What We Do</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in uppercase. */ }
 
 					<h2 className={ cssModObj.secTitHea }>Our Services</h2>{ /* What: Section Title Heading Element. Why: The section needs its own heading. How: This is the section's h2. */ }
 
@@ -242,7 +241,7 @@ function SerSecCom () : React.JSX.Element {
 							key={ serRecObj.titStr }
 
 							data-scroll-reveal-block
-						>{ /* What: Card Reveal Div Element. Why: Each card fades in in turn, but the reveal's own transition and transform would override the card's hover lift and shadow. How: This grid cell carries the reveal hook around the card instead of on it. */ }
+						>{ /* What: Card Reveal Div Element. Why: Each card fades in in turn, but the reveal's own transition and transform would override the card's hover lift. How: This grid cell carries the reveal hook around the card instead of on it. */ }
 
 
 							<div className={ cssModObj.serCarDiv }>{ /* What: Services Card Div Element. Why: Each service reads as its own block. How: This stacks the icon, title, and description, filling its grid cell. */ }
@@ -278,7 +277,7 @@ function SerSecCom () : React.JSX.Element {
 					<div>{ /* What: Area Text Div Element. Why: The panel explains its tags. How: This holds the label, heading, divider, and description as the panel's first column, or above the tags at 768px wide and below, with no styling of its own. */ }
 
 
-						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in small capitals. */ }
+						<p className={ cssModObj.eyeLabPar }>Where We Work</p>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above the panel's heading. How: This names it in uppercase. */ }
 
 						<h3 className={ cssModObj.secTitHea }>Service Area</h3>{ /* What: Section Title Heading Element. Why: The panel needs its own heading. How: This is the panel's h3. */ }
 
@@ -293,7 +292,7 @@ function SerSecCom () : React.JSX.Element {
 
 					</div>
 
-					<div className={ cssModObj.areTagDiv }>{ /* What: Area Tags Div Element. Why: Each place the company works gets a quick tag. How: This wraps the tags in rows. */ }
+					<div className={ cssModObj.areTagDiv }>{ /* What: Area Tags Div Element. Why: Each place the company works gets a quick tag. How: This wraps the tags onto two or three rows from the top left, never one, and onto four or five on the narrowest screens below about 403px. */ }
 
 
 						{ SER_ARE_ARR.map( ( areNamStr ) => ( // What: Area Tag Map. Why: Each area gets a tag. How: This renders one span per entry.
@@ -336,7 +335,7 @@ function SerSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { SerSecCom }; // What: Named Export. Why: The home page renders the services second. How: This exports SerSecCom.
+export { SerSecCom }; // What: Named Export. Why: The home page renders the Services section second. How: This exports SerSecCom.
 
 // #endregion Exports
 

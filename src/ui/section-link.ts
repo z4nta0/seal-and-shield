@@ -14,18 +14,19 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * section-link.ts = Section Link
  *
  * @summary
- * The one way the bar, the menu, the hero, the footer, and the 404 page reach
- * a home page section, from any page. On the home page the section is already
- * there, so the link scrolls to it in place, smoothly unless the visitor asked
- * for reduced motion. On any other page, such as the 404 page, the section
- * doesn't exist yet, so the link navigates to the home page with the section's
- * id as the hash, and the home page scrolls to it on arrival and then clears
- * the hash, so the address bar stays free of hashes either way. Each link
- * keeps its real address (/#about), so a Ctrl, Cmd, Shift, or Alt click is
- * left to the browser, and a middle click, which the browser sends as
- * auxclick, never reaches the click handler at all; either way the browser
- * opens the home page at that section. Copied from hair-designs' own, which
- * adds secCliFun so every section link shares one click handler.
+ * The one way every section link, such as the bar's, reaches a home page
+ * section, from any page. On the home page the section is already there, so
+ * the link scrolls smoothly to it in place. On any other page, such as the 404
+ * page, the section doesn't exist yet, so the link navigates to the home page
+ * with the section's id as the hash, and the home page scrolls to it on
+ * arrival and then clears the hash, so the address bar stays free of hashes
+ * either way. Each link keeps its real address (/#about), so a Ctrl, Cmd,
+ * Shift, or Alt click is left to the browser, and a middle click, which the
+ * browser sends as auxclick, never reaches the click handler at all; a new tab
+ * or window opened that way lands on the home page at that section. Copied
+ * from hair-designs' own, which adds secCliFun so every section link shares
+ * one click handler. Its modified click check is shared with the bar's skip
+ * link too.
  *
  * Sections:
  *  - Helpers
@@ -46,18 +47,19 @@ import { useNavigate } from 'react-router';       // What: Use Navigate. Why: A 
  * modCliFun = Modified Click Function
  *
  * @summary
- * Whether a click on a section link should be left to the browser: one made
- * with a modifier key held (Ctrl or Cmd to open a new tab, Shift for a new
- * window, Alt to download) or with any button but the main one. A middle
- * click never arrives here in practice, since Chromium, Firefox, and WebKit
- * send it as auxclick rather than click, so the button check is only a
- * safeguard for an engine that does. secCliFun, the shared click handler,
- * returns early when this is true, so the link's own address opens the home
- * page at the section, where the home page scrolls to it.
+ * Whether a click on a section link, or on the bar's skip link, should be left
+ * to the browser: one made with a modifier key held (Ctrl or Cmd to open a new
+ * tab, Shift for a new window, Alt to download) or with any button but the
+ * main one. A middle click never arrives here in practice, since Chromium,
+ * Firefox, and WebKit send it as auxclick rather than click, so the button
+ * check is only a safeguard for an engine that sends it as a click. Every
+ * caller returns early when this is true, so a new tab or window opened from a
+ * link's own address lands where that address points, and a section link's
+ * lands on the section, where the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
- * @param cliEveObj - Click Event Object: The section link's click event.
+ * @param cliEveObj - Click Event Object: The link's click event.
  *
  * @returns Whether the browser should handle the click itself.
  * @see {@link modCliBoo}
@@ -104,8 +106,8 @@ function modCliFun ( cliEveObj : React.MouseEvent< HTMLAnchorElement > ) : boole
  * Returns visSecFun, the function secCliFun calls with a section link's id.
  * When an element with that id is on the page, visSecFun scrolls it into view,
  * jumping instead of gliding under reduced motion. When there isn't one,
- * visSecFun navigates to the home page with the id as the hash, inside the
- * site without a full page load, where the home page scrolls to it.
+ * visSecFun navigates, inside the site and without a full page load, to the
+ * home page with the id as the hash, and the home page scrolls to it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -155,14 +157,14 @@ function useSecLinFun () : ( secIdeStr : string ) => void {
  * useSecCliFun = Use Section Click Function
  *
  * @summary
- * Returns secCliFun, the click handler every section link shares. A Ctrl,
- * Cmd, Shift, or Alt click is left to the browser, which opens the link's
- * own address, and a middle click, which the browser sends as auxclick,
- * never reaches it. Any other click stops the browser's jump to the hash
+ * Returns secCliFun, the click handler every section link shares. A Ctrl, Cmd,
+ * Shift, or Alt click is left to the browser, which opens the link's own
+ * address, and a middle click, which the browser sends as auxclick, never
+ * reaches the handler. Any other click stops the browser's jump to the hash
  * and hands the section's id to visSecFun, which scrolls to it on the home
  * page or navigates home to it from any other page. It reports whether it
- * handled the click, so a caller such as the phone menu can close itself
- * only then.
+ * handled the click, so a caller such as the phone menu can close itself only
+ * then.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -214,7 +216,7 @@ function useSecCliFun () : ( cliEveObj : React.MouseEvent< HTMLAnchorElement >, 
 
 // #region Exports
 
-export { useSecCliFun }; // What: Named Export. Why: The bar, the menu, the hero, the footer, and the 404 page reach sections through it. How: This exports the hook that returns the shared click handler, which uses modCliFun and useSecLinFun inside this file.
+export { modCliFun, useSecCliFun }; // What: Named Exports. Why: Every section link reaches its section through useSecCliFun, and the bar's skip link leaves a modified click to the browser through modCliFun. How: This exports the modified click check and the hook that returns the shared click handler, while useSecLinFun stays inside this file.
 
 // #endregion Exports
 

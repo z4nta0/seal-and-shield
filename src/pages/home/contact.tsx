@@ -6,10 +6,10 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The section is styled in its own module, whose class names Vite hashes. How: Every element reads its class from this object.
 
 
-import { useEffect    } from 'react';       // What: Use Effect. Why: Focus has to move when the form gives way to the thank-you message and when it returns. How: This runs the focus move after each render the sent state changes.
-import { useRef       } from 'react';       // What: Use Ref. Why: The focus move needs the thank-you panel and the name field. How: This holds both elements, and whether focus should return to the form.
-import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in as they scroll into view. How: This returns the ref the section attaches, staggered 80ms per block.
-import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's fields and whether it was just sent. How: This holds both.
+import { useEffect    } from 'react';       // What: Use Effect. Why: Focus has to move when the form gives way to the thank-you message and when it returns. How: This runs the focus move after each render in which the sent state changes.
+import { useRef       } from 'react';       // What: Use Ref. Why: The focus move needs a few things kept between renders, such as the thank-you panel's element. How: This holds each one.
+import { useRevSecFun } from './reveal.ts'; // What: Use Reveal Section Function. Why: The section's blocks fade in once the section scrolls into view. How: This returns the ref the section attaches, and its blocks reveal 80ms apart.
+import { useState     } from 'react';       // What: Use State. Why: The section tracks the form's state, such as whether a request is out. How: This holds each piece.
 
 // #endregion Imports
 
@@ -20,19 +20,19 @@ import { useState     } from 'react';       // What: Use State. Why: The section
  *
  * @summary
  * The page's last section, where visitors reach the company: an invitation
- * with the company's location, phone number, and hours and a call button on
- * the left, and the free quote request form on the right, the form stacking
- * below the invitation at 900px wide and below. The form posts to Netlify
- * Forms as contactForm, which finds the form through the hidden copy in
- * index.html, so every field's name has to match that copy. Once sent, the
- * form gives way to a thank-you message for six seconds, which then sinks out
- * a little quicker than it rose in, as a failed request's error does when the
- * visitor tries again. Focus moves to the thank-you message when it replaces
- * the form, which announces it, and back to the first field when the form
- * returns, while a failure's error appears in an alert region the form carries
- * from the start. Each block fades in as the section scrolls into view. Its
- * id, contact, is what the bar's Contact link and the hero's quote button
- * scroll to.
+ * with ways to get in touch, such as a call button, on the left, and the free
+ * quote request form on the right, the form stacking below the invitation at
+ * 900px wide and below. The form posts to Netlify Forms as contactForm.
+ * Netlify finds the form through the hidden copy in index.html, so every
+ * field's name has to match that copy. Once sent, the form gives way to a
+ * thank-you message, which after six seconds sinks out a little quicker than
+ * it rose in, as a failed request's error does when the visitor tries again.
+ * When the thank-you message replaces the form, focus moves to it, which
+ * announces the result, and moves back to the first field when the form
+ * returns if the message still held it, while a failure's error appears in an
+ * alert region the form carries from the start. Each block fades in as the
+ * section scrolls into view. Its id, contact, is what every Contact link and
+ * quote button on the site scrolls to.
  *
  * Sections:
  *  - Constants
@@ -61,19 +61,19 @@ const EMP_FOR_OBJ = { company : '', email : '', message : '', name : '', phone :
  * ConSecCom = Contact Section Component
  *
  * @summary
- * Renders the contact section. The form's fields are controlled by
- * forDatObj, whose keys match each field's name attribute, so one change
- * handler serves all five. The browser checks the required fields before
- * submitting, then forSubFun posts the fields to Netlify Forms and shows the
- * thank-you message only once Netlify confirms it, or an error message that
- * keeps the fields filled in if it doesn't. The background accent is
- * decorative and hidden from assistive technology.
+ * Renders the Contact section. The form's fields are controlled by forDatObj,
+ * whose keys match each field's name attribute, so one change handler serves
+ * all five. The browser checks the required fields before submitting, then
+ * forSubFun posts the fields to Netlify Forms and shows the thank-you message
+ * only once Netlify confirms the submission, or an error message that keeps
+ * the fields filled in if it doesn't. The background accent is decorative and
+ * hidden from assistive technology.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.
  *
- * @returns The contact section element.
+ * @returns The Contact section element.
  *
  * @example
  * ```tsx
@@ -97,6 +97,8 @@ function ConSecCom () : React.JSX.Element {
 	const [ errLeaBoo, setErrLeaBoo ] = useState( false );       // What: Error Leaving Boolean And Setter. Why: The error message should fade out before it's removed. How: This holds whether its exit is playing.
 	const [ errCouNum, setErrCouNum ] = useState( 0 );           // What: Error Count Number And Setter. Why: Each failure has to add a fresh paragraph to the alert region, or screen readers won't announce a second one that arrives while the first is still fading. How: This counts failures, and the error paragraph takes it as its key.
 	const [ sucLeaBoo, setSucLeaBoo ] = useState( false );       // What: Success Leaving Boolean And Setter. Why: The thank-you message should fade out before the form returns. How: This holds whether its exit is playing.
+	const [ forRetBoo, setForRetBoo ] = useState( false );       // What: Form Returning Boolean And Setter. Why: The form should rise back in when the thank-you message gives way to it, but not on the page's first load. How: This holds whether the form has come back at least once, which adds its returning entrance.
+
 
 
 	// #region fieChaFun
@@ -127,6 +129,7 @@ function ConSecCom () : React.JSX.Element {
 	// #endregion fieChaFun
 
 
+
 	// #region forSubFun
 
 	/**
@@ -134,14 +137,14 @@ function ConSecCom () : React.JSX.Element {
 	 *
 	 * @summary
 	 * Handles the form's submit once the browser's own validation has passed
-	 * (Full Name and Phone are required, and Email has to look like an
-	 * address): stops the page-reloading submit, fades out any earlier error,
-	 * and posts the form's fields to Netlify Forms as URL-encoded data, whose
-	 * form-name field tells Netlify which form they belong to. While the
+	 * (Full Name and Phone are required, and Email, if filled in, has to look
+	 * like an address): stops the page-reloading submit, fades out any earlier
+	 * error, and posts the form's fields to Netlify Forms as URL-encoded data,
+	 * whose form-name field tells Netlify which form they belong to. While the
 	 * request is out, the submit button is marked aria-disabled, so it keeps
-	 * focus, a second submit returns at once, and its label says Sending...
-	 * instead. Only an OK answer from Netlify counts as sent: then
-	 * the thank-you message shows, the fields empty, and six seconds later the
+	 * focus, a second submit is ignored, and its label says Sending...
+	 * instead. Only an OK answer from Netlify counts as sent: then the
+	 * thank-you message shows, the fields empty, and six seconds later the
 	 * message fades out and the form comes back. A request that fails
 	 * outright, or one Netlify rejects, keeps the visitor's details in place
 	 * and shows the error message instead, so they can try again or call; a
@@ -161,7 +164,7 @@ function ConSecCom () : React.JSX.Element {
 	 *
 	*/
 
-	const forSubFun = async ( subEveObj : React.SubmitEvent< HTMLFormElement > ) => { // What: Form Submit Function. Why: The form sends its fields without leaving the page, and only reports success once Netlify confirms it. How: This posts them to Netlify Forms, then shows the thank-you message or the error message depending on the answer.
+	const forSubFun = async ( subEveObj : React.SubmitEvent< HTMLFormElement > ) => { // What: Form Submit Function. Why: The form sends its fields without leaving the page, and only reports success once Netlify confirms the submission. How: This posts them to Netlify Forms, then shows the thank-you message or the error message depending on the answer.
 
 
 		subEveObj.preventDefault(); // What: Default Submit Cancel. Why: A normal submit would reload the page. How: This stops it, so the fetch below sends the fields instead.
@@ -187,7 +190,7 @@ function ConSecCom () : React.JSX.Element {
 
 
 
-		try {
+		try { // What: Netlify Post Try. Why: The post can fail outright, such as when the visitor is offline, and that failure should leave the form as it was rather than break the handler. How: This wraps the post and its answer check, so a failure falls through to the catch with senOkaBoo still false.
 
 
 			const netResObj = await fetch( '/', { // What: Netlify Response Object. Why: Netlify Forms records a post to the site's own address carrying the form's name, and its answer says whether it did. How: This posts the fields URL-encoded and waits for the answer.
@@ -225,13 +228,12 @@ function ConSecCom () : React.JSX.Element {
 
 			setErrLeaBoo( false ); // What: Error Exit Reset Call. Why: The next error should arrive with its entrance, not its exit. How: This clears the exit flag.
 
-
 			window.setTimeout( () => setSucLeaBoo( true ), 6000 ); // What: Form Return Timer. Why: A visitor may want to send another request. How: This starts the thank-you message's exit after six seconds, and sucEndFun brings the form back once it ends.
 
 
 		}
 
-		else {
+		else { // What: Failed Send Branch. Why: A request that never went out, or one Netlify rejected, must not look sent. How: This shows a fresh error in the alert region and keeps every field as the visitor filled it in.
 
 
 			setErrCouNum( ( preCouNum ) => preCouNum + 1 ); // What: Error Count Increment Call. Why: A screen reader announces an alert region's content only when it's added, so each failure needs a new paragraph. How: This changes the error paragraph's key, which mounts it afresh in the region and replays its entrance.
@@ -247,6 +249,7 @@ function ConSecCom () : React.JSX.Element {
 	};
 
 	// #endregion forSubFun
+
 
 
 	// #region errEndFun
@@ -293,6 +296,7 @@ function ConSecCom () : React.JSX.Element {
 	// #endregion errEndFun
 
 
+
 	// #region sucEndFun
 
 	/**
@@ -303,8 +307,10 @@ function ConSecCom () : React.JSX.Element {
 	 * only once the panel's own exit has played: the panel's entrance and its
 	 * check mark's pop end here too, so the handler does nothing unless the
 	 * event came from the panel itself while sucLeaBoo says its exit is
-	 * playing. It then swaps the form back in and clears the exit flag, so the
-	 * next thank-you arrives with its entrance.
+	 * playing. It then records whether the panel still holds focus, so the
+	 * form's first field takes focus back only if it did, swaps the form back
+	 * in with its returning entrance, and clears the exit flag, so the next
+	 * thank-you arrives with its entrance.
 	 *
 	 * @author z4nta0 <https://github.com/z4nta0>
 	 *
@@ -329,6 +335,8 @@ function ConSecCom () : React.JSX.Element {
 
 		focRetRef.current = document.activeElement === sucDivRef.current; // What: Focus Return Flag Assignment. Why: Focus should go back to the form only if the visitor hadn't moved it on. How: This records whether the panel still holds focus as it leaves.
 
+
+		setForRetBoo( true ); // What: Form Return Call. Why: The returning form should rise in rather than snap into the panel. How: This marks it as returning, which adds its entrance class.
 
 		setForSenBoo( false ); // What: Sent Message Hide Call. Why: The faded message gives way to the form. How: This swaps the form back in.
 
@@ -362,7 +370,7 @@ function ConSecCom () : React.JSX.Element {
 			id='contact'
 
 			className={ cssModObj.homConSec }
-		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach the company. How: Its id, kept as is because it's a link target, is where the Contact link and the hero's quote button scroll to. */ }
+		>{ /* What: Home Contact Section Element. Why: The page ends where visitors reach the company. How: Its id, kept as is because it's a link target, is where every Contact link and quote button on the site scrolls to. */ }
 
 
 			<div
@@ -376,14 +384,14 @@ function ConSecCom () : React.JSX.Element {
 			<div className={ cssModObj.conInnDiv }>{ /* What: Contact Inner Div Element. Why: The invitation and the form sit side by side. How: This lays them out in two columns within the content width, stacking the form below the invitation at 900px wide and below. */ }
 
 
-				<div>{ /* What: Contact Info Div Element. Why: The first column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, invitation, details, and call button beside the form, or above it at 900px wide and below. */ }
+				<div>{ /* What: Contact Info Div Element. Why: The first column invites the visitor and lists every way to get in touch. How: This stacks the label, heading, divider, invitation, details, and call button beside the form, or above it at 900px wide and below. */ }
 
 
 					<p
 						className={ cssModObj.eyeLabPar }
 
 						data-scroll-reveal-block
-					>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in small capitals, and fades in first. */ }
+					>{ /* What: Eyebrow Label Paragraph Element. Why: A short label sits above each section's heading. How: This names the section in uppercase, and fades in first. */ }
 						Get In Touch
 					</p>
 
@@ -391,7 +399,7 @@ function ConSecCom () : React.JSX.Element {
 						className={` ${ cssModObj.secTitHea }   ${ cssModObj.secTitHeaLight } `}
 
 						data-scroll-reveal-block
-					>{ /* What: Section Title Heading Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
+					>{ /* What: Section Title Heading Light Element. Why: The section's heading states the goal. How: This is the section's h2, broken across two lines. */ }
 						Request a Free<br />Quote Today
 					</h2>
 
@@ -555,11 +563,13 @@ function ConSecCom () : React.JSX.Element {
 
 
 						<form
+							className={ forRetBoo ? cssModObj.quoReqForReturning : undefined }
+
 							data-netlify='true'
 							name='contactForm'
 
 							onSubmit={ forSubFun }
-						>{ /* What: Contact Form Element. Why: Visitors request a free quote here. How: Its name, contactForm, matches the hidden copy Netlify reads, the browser checks the required fields before submitting, and forSubFun sends it. */ }
+						>{ /* What: Quote Request Form Element. Why: Visitors request a free quote here, and the form rises back in each time it returns after a thank-you. How: Its name, contactForm, matches the hidden copy Netlify reads, the browser checks the required fields before submitting, and forSubFun sends it. */ }
 
 
 							<h3 className={ cssModObj.forTitHea }>Free Quote Request</h3>{ /* What: Form Title Heading Element. Why: The form needs a clear heading. How: This is the panel's h3. */ }
@@ -695,7 +705,7 @@ function ConSecCom () : React.JSX.Element {
 							</div>
 
 
-							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Element. Why: The message needs the form's full width. How: This holds the message field across the form's full width. */ }
+							<div className={` ${ cssModObj.forFieDiv }   ${ cssModObj.forFieDivFull } `}>{ /* What: Form Field Div Full Element. Why: The message field sits directly in the form rather than in a row, so it spans the form's full width. How: This holds the message field, and its modifier gives it the space below a row. */ }
 
 
 								<label
@@ -703,7 +713,7 @@ function ConSecCom () : React.JSX.Element {
 
 									htmlFor='conMesTex'
 								>{ /* What: Form Field Label Element. Why: Every field needs a visible label. How: This invites the visitor to describe the job. */ }
-									Tell us about your roof
+									Tell Us About Your Roof
 								</label>
 
 								<textarea
@@ -767,8 +777,8 @@ function ConSecCom () : React.JSX.Element {
 									key={ senProBoo ? 'sending' : 'ready' } // What: Label Key. Why: A new key remounts the label, which replays its fade-in. How: This changes whenever the button switches between ready and sending.
 
 									className={ cssModObj.subLabSpa }
-								>{ /* What: Submit Label Span Element. Why: The label fades to its new text when a request goes out. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
-									{ senProBoo ? 'Sending...' : 'Submit Free Quote Request' }{ /* What: Submit Label Expression. Why: The button should say when it's busy. How: This reads Sending... while a submission is out. */ }
+								>{ /* What: Submit Label Span Element. Why: The label fades to its new text whenever the button switches between ready and sending. How: Its key changes with the sending state, so each new label mounts fresh and fades in. */ }
+									{ senProBoo ? 'Sending...' : 'Submit Free Quote Request' }{ /* What: Submit Label Expression. Why: The button should say when it's busy. How: This reads Sending... while a submission is out, and Submit Free Quote Request otherwise. */ }
 								</span>
 
 
@@ -807,7 +817,7 @@ function ConSecCom () : React.JSX.Element {
 
 // #region Exports
 
-export { ConSecCom }; // What: Named Export. Why: The home page renders the contact section last. How: This exports ConSecCom.
+export { ConSecCom }; // What: Named Export. Why: The home page renders the Contact section last. How: This exports ConSecCom.
 
 // #endregion Exports
 

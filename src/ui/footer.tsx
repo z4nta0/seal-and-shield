@@ -7,7 +7,8 @@ import cssModObj from './footer.module.css';        // What: CSS Module Object. 
 import losWebUrl from '../assets/logo-simple.webp'; // What: Logo-Simple WebP URL. Why: The footer's brand opens with the simple mark. How: Vite resolves this to the image's fingerprinted URL, which the brand's img element loads.
 
 
-import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns the function that scrolls to a section or navigates home to it.
+import { SEC_LIN_ARR  } from './sections.ts';     // What: Section Link Array. Why: The footer offers a link for each of the home page's sections. How: This is the one list of sections, in page order, whose ids the links go to and whose labels they show.
+import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Function. Why: Section links have to work from every page, not only the home page. How: This returns secCliFun, which scrolls to the section or navigates home to it and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, sent as auxclick, never reaches the handler.
 
 // #endregion Imports
 
@@ -17,27 +18,18 @@ import { useSecCliFun } from './section-link.ts'; // What: Use Section Click Fun
  * footer.tsx = Footer
  *
  * @summary
- * The site's footer: the brand and tagline, a link for each section that
- * takes the visitor to it from any page, the phone number and business
- * hours, and the copyright line with the current year. Its nav landmark is
+ * The site's footer, shown on every page: the company's details, such as its
+ * phone number, a link to each of the home page's sections that works from any
+ * page, and a copyright line that reads the current year. Its nav landmark is
  * labelled Footer, telling it apart from the bar's.
  *
  * Sections:
- *  - Constants
  *  - Components
  *  - Exports
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
-
-
-
-// #region Constants
-
-const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer Section Array. Why: The footer offers a link for each section, in page order. How: Each entry is a section's id, which its link goes to and capitalizes as its label.
-
-// #endregion Constants
 
 
 
@@ -50,13 +42,13 @@ const FOO_SEC_ARR = [ 'home', 'services', 'about', 'contact' ]; // What: Footer 
  *
  * @summary
  * Renders the footer. Each section link reaches its section through
- * section-link.ts, scrolling in place on the home page, smoothly unless the
- * visitor asked for reduced motion, or navigating home from any other page,
- * and is labelled with the section's id capitalized. A Ctrl, Cmd, Shift, or
- * Alt click is left to the browser, and a middle click, which the browser
- * sends as auxclick, never reaches the handler, so a Ctrl or Cmd click or a
- * middle click opens the section in a new tab. The copyright line reads the
- * current year each time the footer renders, so it never goes stale.
+ * section-link.ts, scrolling smoothly in place on the home page, or navigating
+ * home from any other page, and shows its row's label from the shared section
+ * list. A Ctrl, Cmd, Shift, or Alt click is left to the browser, and a middle
+ * click, which the browser sends as auxclick, never reaches the handler, so a
+ * Ctrl or Cmd click or a middle click opens the section in a new tab. The
+ * copyright line reads the current year each time the footer renders, so it
+ * never goes stale.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -78,7 +70,7 @@ function SitFooCom () : React.JSX.Element {
 
 
 
-	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Each section link takes the visitor to its section from any page. How: This scrolls to the section on the home page or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches it.
+	const secCliFun = useSecCliFun(); // What: Section Click Function. Why: Each section link takes the visitor to its section from any page. How: This scrolls to the section on the home page or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches the handler.
 
 
 
@@ -97,10 +89,10 @@ function SitFooCom () : React.JSX.Element {
 					<img
 						className={ cssModObj.fooLogIma }
 
-						height={ 133 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
+						height={ 111 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 						loading='lazy'
 						src={ losWebUrl }
-						width={ 157 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
+						width={ 131 } // What: Intrinsic Image Size. Why: The browser should hold the image's space before it loads, so nothing below it shifts. How: The width and height give its aspect ratio, while the CSS still sets its displayed size.
 
 						alt=''
 					/>{ /* What: Footer Logo Image Element. Why: The footer's brand opens with the simple mark. How: Its alt text is empty, since the brand name sits right beside it. */ }
@@ -126,19 +118,19 @@ function SitFooCom () : React.JSX.Element {
 				>{ /* What: Footer Links Nav Element. Why: Visitors at the bottom of the page can jump back to any section. How: This labels the landmark Footer, telling it apart from the bar's. */ }
 
 
-					{ FOO_SEC_ARR.map( ( secIdeStr ) => ( // What: Section Link Map. Why: Each section gets a link. How: This renders one link per section id.
+					{ SEC_LIN_ARR.map( ( linRecObj ) => ( // What: Section Link Map. Why: Each section gets a link. How: This renders one link per row of the section list.
 
 
 						<a
-							key={ secIdeStr }
+							key={ linRecObj.ideStr }
 
 							className={ cssModObj.fooLinAnc }
 
-							href={ `/#${ secIdeStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This joins the root path with the section's id as the hash.
+							href={ `/#${ linRecObj.ideStr }` } // What: Section Address. Why: The link has to name the home page's path so it works from any page, and so a new tab opened from it lands on the section. How: This joins the root path with the section's id as the hash.
 
-							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, secIdeStr ) }
-						>{ /* What: Footer Link Anchor Element. Why: Each link takes the visitor to its section. How: This hands the click to secCliFun, which scrolls to the section or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches it. */ }
-							{ secIdeStr.charAt( 0 ).toUpperCase() + secIdeStr.slice( 1 ) }{ /* What: Section Label Expression. Why: The link names its section. How: This capitalizes the section id's first letter. */ }
+							onClick={ ( cliEveObj ) => secCliFun( cliEveObj, linRecObj.ideStr ) }
+						>{ /* What: Footer Link Anchor Element. Why: Each link takes the visitor to its section. How: This hands the click to secCliFun, which scrolls to the section or navigates home to it, and leaves a Ctrl, Cmd, Shift, or Alt click to the browser, while a middle click, which the browser sends as auxclick, never reaches the handler. */ }
+							{ linRecObj.labStr }
 						</a>
 
 
@@ -147,7 +139,7 @@ function SitFooCom () : React.JSX.Element {
 
 				</nav>
 
-				<div className={ cssModObj.fooConDiv }>{ /* What: Footer Contact Div Element. Why: The phone number and hours close the footer's columns. How: This stacks the two, right-aligned above 768px wide and centered once the columns stack at 768px and below. */ }
+				<div className={ cssModObj.fooConDiv }>{ /* What: Footer Contact Div Element. Why: The phone number and hours end the footer's row of columns. How: This stacks the two, right-aligned and ending the row on the right from about 777px wide up, starting a wrapped second line on the left between 769px and 776px wide, and centered once the columns stack at 768px and below. */ }
 
 
 					<a

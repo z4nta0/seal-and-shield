@@ -6,15 +6,20 @@
  *
  * @summary
  * Styles for ConSecCom: the dark closing section with its soft blue glow, the
- * invitation, contact details, and call button on the left, and the white
- * quote panel on the right, holding either the request form or its thank-you
- * message. The columns stack at 900px wide or narrower, and the form's paired
- * fields stack and the panel's padding tightens at 520px. Each form control
- * eases its focus ring in from a zero-width outline. The shared container,
- * eyebrow label, section title, and divider styles the section used to borrow
- * from the global stylesheet are copied in under the same names every module
- * gives them. The phone detail is an anchor that shares the value rule, and
- * its own link rule comes after that rule on purpose, so its light blue wins.
+ * invitation and ways to call on the left, and the white quote panel on the
+ * right, holding either the request form or its thank-you message. What the
+ * panel shows as the form is used arrives and leaves rather than snapping,
+ * such as the thank-you message rising in and sinking out. Its buttons and
+ * links ease their hover, press, and focus changes, the buttons lifting a
+ * pixel and pressing in, the links shifting color and dimming, and each form
+ * control eases its focus ring in from a zero-width outline. The columns stack
+ * at 900px wide or narrower, and the form's paired fields stack and the
+ * panel's padding tightens at 520px. The shared styles the section used to
+ * borrow from the global stylesheet, such as the eyebrow label, are copied in
+ * under the same names every module gives them, and the container's onto the
+ * inner grid's own class. The phone detail is an anchor that shares the value
+ * rule, and its own link rule comes after that rule on purpose, so its light
+ * blue wins.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -27,7 +32,7 @@
 .homConSec { /* What: Home Contact Section. Why: The page ends on a dark band where visitors reach the company. How: This fills it with the dark navy, pads it above and below, and clips the background glow at its edges. */
 
 
-	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands every control inside the lighter blue ring. */
+	--foc-rin-col : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */ /* What: Focus Ring Color For The Section. Why: The main blue ring falls under 3:1 on this navy. How: This hands the lighter blue ring to the controls on the dark band, while the white quote panel sets its own back to the main blue. */
 
 	background : var( --bac-inv-col );   /* Background Inverse Color = #080f24 */
 	overflow   : hidden;
@@ -37,7 +42,7 @@
 
 }
 
-.conBacDiv { /* What: Contact Background Div. Why: A soft blue glow sets the section off from the white one above. How: This places an oversized radial glow off the bottom left corner that ignores the pointer. */
+.conBacDiv { /* What: Contact Background Div. Why: A soft blue glow sets the section off from the white one above. How: This places an oversized radial glow, which ignores the pointer, off the bottom left corner. */
 
 
 	background     : radial-gradient( ellipse at 30% 70%, oklch( from var( --acc-mai-col ) l c h / var( --cdn-pow-006-rec ) ) 0%, transparent 60% ); /* Accent Main Color = #1e56c8, Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
@@ -66,7 +71,6 @@
 	max-width             : var( --con-max-wid );                                                                           /* Container Maximum Width ~= 1,449.365px */
 	padding               : 0 var( --gut-sid-pad );                                                                         /* Gutter Side Padding, about 19.304px - 44.876px */
 	position              : relative;
-	z-index               : 1;
 
 
 }
@@ -85,7 +89,7 @@
 
 }
 
-.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading. How: This sets it small, widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
+.eyeLabPar { /* What: Eyebrow Label Paragraph. Why: A short label sits above the section's heading. How: This sets it widely spaced, uppercase, and light blue, copied from the shared eyebrow label. */
 
 
 	color          : var( --acc-lig-col );                   /* Accent Light Color ~= #4488f6 */
@@ -119,7 +123,7 @@
 
 }
 
-.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the invitation. How: This draws an about 45px by about 2.7px blue bar with room above and below, copied from the shared divider. */
+.secDivDiv { /* What: Section Divider Div. Why: A short rule separates the heading from the invitation. How: This draws a blue bar about 45px wide and 2.7px tall with room above and below, copied from the shared divider. */
 
 
 	background : var( --acc-mai-col );                        /* Accent Main Color = #1e56c8 */
@@ -207,7 +211,7 @@
 
 }
 
-.detValAnc { /* What: Detail Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color. */
+.detValAnc { /* What: Detail Value Anchor. Why: The phone value is a link and should look like one. How: This colors it light blue, winning over the value's white by coming after it, and eases its hover color, press dim, and focus ring. */
 
 
 	color      : var( --acc-lig-col ); /* Accent Light Color ~= #4488f6 */
@@ -232,7 +236,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Detail Value Anchor. Why: Someone who asked for less motion shouldn't see the link animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.detValAnc { /* What: Motionless Detail Value Anchor. Why: The hover color should simply switch. How: This turns the transition off. */
+	.detValAnc { /* What: Motionless Detail Value Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -266,7 +270,7 @@
 
 
 }
-.conPhoAnc:hover { /* What: Hovered Contact Phone Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text. */
+.conPhoAnc:hover { /* What: Hovered Contact Phone Anchor. Why: The button should respond to the pointer. How: This empties its fill to leave a blue outline with light blue text and lifts it a pixel. */
 
 
 	background : transparent;
@@ -285,7 +289,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Contact Phone Anchor. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.conPhoAnc { /* What: Motionless Contact Phone Anchor. Why: The hover look should simply switch. How: This turns the transition off. */
+	.conPhoAnc { /* What: Motionless Contact Phone Anchor. Why: The hover, press, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -303,7 +307,7 @@
 .forWraDiv { /* What: Form Wrap Div. Why: The form and its thank-you message share one white panel on the dark band. How: This fills a padded white panel. */
 
 
-	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */ /* What: Focus Ring Color For The Panel. Why: The white panel needs the main blue ring back, since the light blue falls under 3:1 on white. How: This hands every control in the panel the main blue. */
+	--foc-rin-col : var( --acc-mai-col ); /* Accent Main Color = #1e56c8 */ /* What: Focus Ring Color For The Panel. Why: The white panel takes the main blue ring back, which stands out far more there, at about 6.5:1, than the light blue does, at about 3.4:1. How: This hands every control in the panel the main blue. */
 
 	background : var( --bac-pag-col );                                                                           /* Background Page Color = #ffffff */
 	padding    : var( --spa-ver-p04 ) clamp( var( --spa-hor-p02 ), var( --hor-rhy-015 ), var( --spa-hor-p04 ) ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 2 ~= 25.572px, Horizontal Rhythm 15 ~= 65.739px @ 1,920px width, Spacing Horizontal Base Plus 4 ~= 44.876px */
@@ -331,18 +335,18 @@
 
 
 	align-items     : center;
-	animation       : forSucDivShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	animation       : panelShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 	display         : flex;
 	flex-direction  : column;
-	gap             : var( --spa-ver-bas );                                               /* Spacing Vertical Base ~= 14.572px */
+	gap             : var( --spa-ver-bas );                                           /* Spacing Vertical Base ~= 14.572px */
 	justify-content : center;
-	min-height      : calc( var( --ver-rhy-p11 ) * 1rem );                                /* Vertical Rhythm Base Plus 11 ~= 321.273px */
-	padding         : var( --spa-ver-p05 ) var( --spa-hor-p03 );                          /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	min-height      : calc( var( --ver-rhy-p11 ) * 1rem );                            /* Vertical Rhythm Base Plus 11 ~= 321.273px */
+	padding         : var( --spa-ver-p05 ) var( --spa-hor-p03 );                      /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-align      : center;
 
 
 }
-.forSucDiv.forSucDiv--leaving { /* What: Form Success Div Leaving. Why: The message should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
+.forSucDiv.forSucDiv--leaving { /* What: Form Success Div Leaving. Why: The message should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule. */
 
 
 	animation : forSucDivHideFadeOut var( --dur-ani-p01 ) var( --mot-acc-eas ) both; /* Duration Animation Base Plus 1 ~= 209.1ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
@@ -366,7 +370,6 @@
 
 
 	}
-
 	.forSucDiv.forSucDiv--leaving { /* What: Instant Form Success Div Leaving. Why: The page waits on this animation's end to remove the thank-you message, and an animation turned off never ends. How: This shortens it to almost nothing, so the form comes back at once. */
 
 
@@ -377,7 +380,7 @@
 
 
 }
-@keyframes forSucDivShowFadeIn { /* What: Form Success Div Show Fade In. Why: The thank-you message should arrive rather than snap into the form's place. How: This rises it a little from below and fades it in. */
+@keyframes panelShowFadeIn { /* What: Panel Show Fade In. Why: The thank-you message, and the form when it comes back, should arrive in the panel rather than snap into place. How: This raises the arriving content a little from below and fades it in. */
 
 
 	from {
@@ -424,7 +427,7 @@
 
 }
 
-.sucIcoSpa { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the check in a blue circle about 59px across in white, popping it in once as the message appears. */
+.sucIcoSpa { /* What: Success Icon Span. Why: A check mark signals success at a glance. How: This centers the white check in a blue circle about 59px across, popping it in once from about half size as the message appears. */
 
 
 	align-items     : center;
@@ -453,7 +456,7 @@
 
 
 }
-@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the request as sent. How: This grows the check from a little smaller to full size with a gentle overshoot, once. */
+@keyframes sucIcoSpaShowPop { /* What: Success Icon Span Show Pop. Why: One small flourish marks the request as sent. How: This grows the check from about half size to full size with a gentle overshoot, once. */
 
 
 	from {
@@ -500,6 +503,30 @@
 
 /* #endregion forSucDiv */
 
+
+
+/* #region quoReqFor */
+
+.quoReqFor--returning { /* What: Quote Request Form Returning. Why: The form comes back once the thank-you message has left, and it should arrive rather than snap into the panel. How: This plays the panel's rise and fade once, only when the form returns, never on the page's first load. */
+
+
+	animation : panelShowFadeIn var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Quote Request Form Returning. Why: Someone who asked for less motion shouldn't see the form rise in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.quoReqFor--returning { /* What: Motionless Quote Request Form Returning. Why: The form should simply reappear. How: This turns the animation off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
 
 .forTitHea { /* What: Form Title Heading. Why: The form needs a clear heading, set off from its fields. How: This sets it in the extra bold display font, uppercase and navy, over a blue rule. */
 
@@ -606,7 +633,7 @@
 
 
 }
-@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Field Input And Textarea. Why: Someone who asked for less motion should see the focus ring simply appear. How: This applies only when the reduced-motion preference is set. */
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Field Input And Textarea. Why: Someone who asked for less motion should see the border and focus ring simply switch. How: This applies only when the reduced-motion preference is set. */
 
 
 	.forFieInp,
@@ -629,7 +656,7 @@
 
 /* #region forFieDiv */
 
-/* What: Form Field Div. Why: The message field stacks its label over its box like the other fields, but sits directly in the form rather than in a row. How: Its rule sits in the forRowDiv region, where the class first appears, and the modifier below gives it the row's space. */
+/* What: Form Field Div Pointer. Why: The message field stacks its label over its box like the other fields, but sits directly in the form rather than in a row. How: Its rule sits in the forRowDiv region, where the class first appears, and the modifier below gives it the row's space. */
 .forFieDiv--full { /* What: Form Field Div Full. Why: The message field spans the form and isn't in a row, so it carries its own space below. How: This adds the row's bottom margin to it. */
 
 
@@ -638,9 +665,9 @@
 
 }
 
-/* What: Form Field Label. Why: The message field's label matches the others. How: Its rule sits in the forRowDiv region, where the class first appears. */
+/* What: Form Field Label Pointer. Why: The message field's label matches the others. How: Its rule sits in the forRowDiv region, where the class first appears. */
 
-/* What: Form Field Textarea. Why: The message box shares the inputs' look and focus ring. How: Its rule, shared with the inputs, sits in the forRowDiv region, where the class first appears. */
+/* What: Form Field Textarea Pointer. Why: The message box shares the inputs' look and focus ring. How: Its rule, shared with the inputs, sits in the forRowDiv region, where the inputs first appear. */
 
 /* #endregion forFieDiv */
 
@@ -648,7 +675,7 @@
 
 /* #region forErrPar */
 
-.forErrPar { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel, with the same space below it as above, between the message field and the button. */
+.forErrPar { /* What: Form Error Paragraph. Why: A failed submission has to be explained where the visitor is looking. How: This centers the message in a red that clears 6.5:1 on the white panel, with the same space below it as above, between the message field and the button, capped at about 68 characters a line. */
 
 
 	animation     : forErrParShowFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -661,7 +688,7 @@
 
 
 }
-.forErrPar.forErrPar--leaving { /* What: Form Error Paragraph Leaving. Why: The error should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule, whose own variant below shortens it instead. */
+.forErrPar.forErrPar--leaving { /* What: Form Error Paragraph Leaving. Why: The error should leave the way it arrived, only quicker, rather than vanish. How: This sinks it a little and fades it out, chained to the base class so it outranks the base's reduced-motion rule. */
 
 
 	animation : forErrParHideFadeOut var( --dur-ani-bas ) var( --mot-acc-eas ) both; /* Duration Animation Base ~= 157.8ms, Motion Accelerate Easing = cubic-bezier( .4, 0, 1, 1 ) */
@@ -678,7 +705,6 @@
 
 
 	}
-
 	.forErrPar.forErrPar--leaving { /* What: Instant Form Error Paragraph Leaving. Why: The page waits on this animation's end to remove the error, and an animation turned off never ends. How: This shortens it to almost nothing, so it leaves the page at once. */
 
 
@@ -689,7 +715,7 @@
 
 
 }
-@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This rises it a little from below and fades it in. */
+@keyframes forErrParShowFadeIn { /* What: Form Error Paragraph Show Fade In. Why: The error should arrive noticeably where the visitor is looking. How: This raises it a little from below and fades it in. */
 
 
 	from {
@@ -736,7 +762,7 @@
 
 }
 
-.errLinAnc { /* What: Error Link Anchor. Why: The phone number in the message has to read as a link and stay in one piece. How: This underlines it and keeps it from breaking across lines. */
+.errLinAnc { /* What: Error Link Anchor. Why: The phone number in the message has to read as a link and stay in one piece. How: This underlines it and keeps it from breaking across lines, and eases its hover color, press dim, and focus ring. */
 
 
 	text-decoration : underline;
@@ -825,7 +851,7 @@
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Submit Button. Why: Someone who asked for less motion shouldn't see the button animate. How: This applies only when the reduced-motion preference is set. */
 
 
-	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover look should simply switch. How: This turns the transition off. */
+	.forSubBut { /* What: Motionless Form Submit Button. Why: The hover, press, sending, and focus changes should appear at once. How: This turns the transition off. */
 
 
 		transition : none;
@@ -836,7 +862,7 @@
 
 }
 
-.subLabSpa { /* What: Submit Label Span. Why: The button's label should change visibly when a request goes out, not just swap. How: This fades each new label in once, as the label remounts under a new key. */
+.subLabSpa { /* What: Submit Label Span. Why: The button's label should change visibly, not just swap, whenever it switches between ready and sending. How: This fades each new label in once, as the label remounts under a new key. */
 
 
 	animation : subLabSpaSwapFadeIn var( --dur-ani-p02 ) var( --mot-dec-eas ); /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
@@ -856,7 +882,7 @@
 
 
 }
-@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that cross-fades reads as a response to the press. How: This fades the new label up from transparent. */
+@keyframes subLabSpaSwapFadeIn { /* What: Submit Label Span Swap Fade In. Why: A label that fades in reads as the button's state changing, whether a request has just gone out or the button is ready again. How: This fades the new label up from transparent. */
 
 
 	from {
@@ -890,6 +916,8 @@
 
 
 }
+
+/* #endregion quoReqFor */
 
 /* #endregion forWraDiv */
 
