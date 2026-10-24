@@ -500,7 +500,7 @@
 .navTogBut:active { /* What: Pressed Navigation Toggle Button. Why: A press should register before the menu opens or closes. How: This presses the button in slightly. */
 
 
-	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, which also undoes any hover lift, a literal since no scale step lands within 10%. */
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the toggle by 3%, a literal since no scale step lands within 10%. */
 
 
 }
