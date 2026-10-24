@@ -226,8 +226,8 @@ Decided 2026-10-08, on the `code-cleanup` branch, which holds steps 1 through
      since apps cache previews: on 2026-10-23 it was rebuilt from the
      re-encoded full logo as `og-image-2.png`, so the next change takes
      `og-image-3.png`. The user checked the original live card (`og-image.png`)
-     with a preview checker on 2026-10-10, and it came back with no problems;
-     `og-image-2.png` gets the same check after its deploy.
+     with a preview checker on 2026-10-10, and it came back with no problems,
+     as did `og-image-2.png` after its deploy on 2026-10-23.
    - **Interaction feedback: done 2026-10-09.** Every link and button changes
      color on hover, and the buttons also lift a pixel (the service cards 3px,
      while the bar's menu toggle only changes color); buttons press in to 0.97
@@ -371,8 +371,8 @@ Done by the user on 2026-10-10, after the step 7 deploy:
   `aria-label` (added for WAVE, below), and, on the inputs, a `type`. It was
   rebuilt from pasted JSX that repeated the React form's input ids.
 - **Security headers and social preview**: both graded with no problems (the
-  preview then showed the original `og-image.png`; `og-image-2.png` gets the
-  same check after its deploy, as noted under step 7).
+  preview then showed the original `og-image.png`; `og-image-2.png` passed the
+  same check after its deploy on 2026-10-23, as noted under step 7).
 - **Contrast over the gradients**, which axe can't measure (the hero's,
   Contact section's, and footer's text): checked by eye and passed.
 - **WAVE reports** (2026-10-09): the hidden Netlify form's fields now carry
